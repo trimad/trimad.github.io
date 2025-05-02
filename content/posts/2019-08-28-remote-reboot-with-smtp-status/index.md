@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [PowerShell]
 tags: [smtp]
 date: 2019-08-28
+summary: "A PowerShell script that performs batch reboots of remote computers and sends email notifications with their post-reboot status using SMTP."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

@@ -3,6 +3,7 @@ author: Tristan Madden
 categories: [Shell]
 date: 2023-02-06
 lastmod: 2023-02-17
+summary: "A guide to uninstalling third-party drivers from Windows systems using the pnputil.exe command-line utility."
 tags: [drivers]
 title: Uninstall Third-Party Drivers with CMD
 usePageBundles: true

@@ -7,6 +7,7 @@ lastmod: 2023-03-16
 tags: [audio, video]
 title: ffmpeg
 toc: true
+summary: "A comprehensive guide to ffmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---
@@ -43,10 +44,10 @@ ffmpeg -i video.mp4 -i music.mp3 -codec copy -shortest output.mp4
 ```
 
 -i video.mp4
-: Select “video.mp4” as an input file from the same directory.
+: Select "video.mp4" as an input file from the same directory.
 
 -i music.mp3
-: Select “music.mp4” as an input file from the same directory.
+: Select "music.mp4" as an input file from the same directory.
 
 -codec copy
 : Specifies that we are not re-encoding anything.

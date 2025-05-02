@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [Shell, PowerShell]
 date: 2023-03-09
 lastmod: 2023-03-09
-summary: "Useful tools for when that got dang Windows just ain't acting right. 😤"
+summary: "A comprehensive collection of Windows troubleshooting and repair tools including DISM, SFC, DLL registration commands, and PowerShell scripts for reinstalling Windows apps."
 tags: [shell, PowerShell]
 thumbnail: "thumbnail.png"
 title: Windows Remediation

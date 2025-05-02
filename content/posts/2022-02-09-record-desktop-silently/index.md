@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [Shell]
 tags: [ffmpeg, VBScript, bat]
 date: 2022-02-09
+summary: "A stealth desktop recording solution combining ffmpeg, batch scripting, and VBScript to capture Windows sessions without visible indicators, featuring configurable frame rates and recording durations."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

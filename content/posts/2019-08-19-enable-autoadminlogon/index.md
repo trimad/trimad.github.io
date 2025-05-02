@@ -5,7 +5,7 @@ categories: [PowerShell]
 tags: [regedit, domain]
 date: 2019-08-19
 lastmod: 2025-04-09
-summary: "This script was written to satisfy a niche case where I temporarily needed a PoS (Point of Sale) to automatically login upon startup using AD credentials."
+summary: "A PowerShell script that configures Windows registry settings to enable automatic login using Active Directory credentials, with optional screen locking via scheduled tasks."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

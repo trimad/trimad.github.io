@@ -5,7 +5,7 @@ date: 2023-12-14
 #lastmod: 2023-10-17
 draft: false
 featured: true
-summary: "This is a work in progress exploration of generating knowledge graphs with LLMs, inspired by a post I read on towardsdatascience.com."
+summary: "An experimental approach to extracting structured knowledge graphs from literary text using Mistral-7B LLM, demonstrated with the opening passage of The Hobbit and visualized as connected node-edge relationships."
 tags: [Python]
 thumbnail: "thumbnail.png"
 title: "Generate Knowledge Graphs with LLMs"

@@ -6,7 +6,7 @@ tags: [kruskal's algorithm, minimum spanning tree]
 date: 2018-04-11
 featureImage: "kruskal.png"
 thumbnail: "kruskal.png"
-summary: "Kruskal's algorithm is a greedy algorithm used to find the minimum spanning tree of a connected, weighted graph. The algorithm works by sorting the edges of the graph by weight, and then adding the edges to the minimum spanning tree one by one, making sure to avoid creating cycles. Kruskal's algorithm has a time complexity of O(E log E) where E is the number of edges in the graph, and is widely used in network design and optimization problems."
+summary: "A Processing implementation of Kruskal's algorithm for finding minimum spanning trees in weighted graphs, demonstrating the O(E log E) greedy approach to network optimization."
 usePageBundles: true
 ---
 

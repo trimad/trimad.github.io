@@ -7,7 +7,7 @@ date: 2018-02-05
 usePageBundles: true
 thumbnail: "thumbnail.png"
 draft: false 
-summary: This is a (perhaps overkill) 3D WEBGL visualization of Merge Sort using the WEBGL rendering mode. 
+summary: "An interactive 3D visualization of the Merge Sort algorithm using p5.js and WEBGL, featuring step-by-step animation with camera controls and real-time sorting visualization."
 ---
 
 This is a (perhaps overkill) 3D WEBGL visualization of <a href="https://en.wikipedia.org/wiki/Merge_sort">Merge Sort</a> using the WEBGL rendering mode. 

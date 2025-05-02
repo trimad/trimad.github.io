@@ -6,6 +6,7 @@ categories: [JavaScript, p5.js]
 tags: [spiral, interactive]
 thumbnail: "thumbnail.png"
 usePageBundles: true
+summary: "An interactive p5.js sketch that generates Archimedean spirals using polar coordinates, with the ability to export SVG files for physical fabrication."
 ---
 
  <iframe width=100% height=1024px src="https://editor.p5js.org/Berkanan/full/LjPig4gu_"></iframe>

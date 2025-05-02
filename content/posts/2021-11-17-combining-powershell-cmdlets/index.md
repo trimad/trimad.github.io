@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [PowerShell]
 tags: [azure, reports, active directory, ExchangeOnlineManagement]
 date: 2021-11-17
+summary: "A PowerShell script demonstrating the integration of ExchangeOnlineManagement and AzureAD modules to generate comprehensive email troubleshooting reports by correlating data through UserPrincipalName matching."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

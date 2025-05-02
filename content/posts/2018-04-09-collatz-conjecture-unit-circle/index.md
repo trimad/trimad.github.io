@@ -8,7 +8,7 @@ thumbnail: "thumbnail.png"
 draft: false
 thumbnail: "thumbnail.png"
 usePageBundles: true
-summary: I created my own Collatz Conjecture visualization, experimenting with a unit circle design that resulted in 360 distinct "branches". While it may not offer groundbreaking insights, the process was enjoyable and yielded interesting results, particularly for the number 327.
+summary: "A Processing visualization of the Collatz Conjecture mapped onto a unit circle, creating 360 distinct branches with 1-degree turns, featuring an interactive exploration of number paths."
 ---
 
 Inspired by <a href="https://www.bradyharanblog.com/blog/the-collatz-conjecture-in-colour">this cool page</a>, I decided to make my own Collatz Conjecture visualization. My first try looked a lot like what I saw in the Numberphile video, which was pretty good. But then I thought of trying something new by keeping the original rules and wrapping everything around a unit circle. This created 360 "branches", each showing a 1-degree turn.

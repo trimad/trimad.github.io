@@ -5,7 +5,7 @@ date: 2022-04-20
 lastmod: 2023-02-25
 categories: [Shell]
 tags: [audio, sound, SDK]
-summary: This is my tentative workflow for cleaning-up poor audio using the NVIDIA Maxine Windows Audio Effects SDK.
+summary: "A step-by-step workflow for cleaning poor audio recordings using NVIDIA Maxine Windows Audio Effects SDK with different sample rate configurations."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

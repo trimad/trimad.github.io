@@ -6,7 +6,7 @@ featured: true
 lastmod: 2023-12-28
 tags: [email security, hacked accounts, M365, ExchangeOnlineManagement]
 title: Handling Hacked Accounts and Purging Emails in M365
-summary: This blog post is an evolving work flow for managing hacked accounts using the ExchangeOnlineManagement PowerShell module. I'll share my personal experiences using PowerShell, particularly focusing on remediation techniques like purging phishing emails and securing compromised accounts.
+summary: "A comprehensive guide to managing compromised Microsoft 365 accounts using PowerShell's ExchangeOnlineManagement module, with specific techniques for reviewing suspicious activity, purging malicious emails, and checking inbox rules."
 usePageBundles: true
 thumbnail: "security_thumbnail.png"
 toc: true

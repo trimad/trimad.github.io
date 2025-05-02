@@ -4,7 +4,7 @@ categories: [shell, powershell]
 date: 2023-06-24
 lastmod: 2023-07-21
 featured: false
-summary: "This post presents one-liner commands using Shell and PowerShell to add a workstation to Active Directory."
+summary: "A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality."
 tags: [ai, images, video]
 thumbnail: "thumbnail.png"
 title: Join a Workstation to Active Directory with Shell and PowerShell

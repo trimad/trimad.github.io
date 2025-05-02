@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [JavaScript]
 tags: [google forms, gsuite, reports]
 date: 2019-08-25
+summary: "A Google Apps Script that automates the collection and distribution of Google Forms data by aggregating submissions, converting them to XLSX format, and sending formatted HTML email reports."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

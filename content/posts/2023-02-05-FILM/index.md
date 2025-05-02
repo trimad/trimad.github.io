@@ -5,7 +5,7 @@ date: 2023-02-05
 featured: true
 featureImage: interpolated.gif
 lastmod: 2023-09-11
-summary: "*\"The official Tensorflow 2 implementation of our high quality frame interpolation neural network. We present a unified single-network approach that doesn't use additional pre-trained networks, like optical flow or depth, and yet achieve state-of-the-art results. We use a multi-scale feature extractor that shares the same convolution weights across the scales. Our model is trainable from frame triplets alone.\"*"
+summary: "A step-by-step guide for setting up and using Google's Frame Interpolation Large Motion (FILM) TensorFlow implementation to create smooth animations by generating intermediate frames between existing images."
 tags: [ai, video]
 toc: true
 title: Frame Interpolation Large Motion (FILM)

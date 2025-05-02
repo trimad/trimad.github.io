@@ -8,6 +8,7 @@ usePageBundles: true
 thumbnail: "thumbnail.jpg"
 featureImage: "thumbnail.jpg"
 draft: false
+summary: "A reflection on participating in the AT&T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions."
 ---
 
 So I participated in the AT&T Hackathon this year. I approached it as R&D for developing 3D games that run on Android. I

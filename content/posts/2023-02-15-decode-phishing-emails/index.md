@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [JavaScript, Python]
 date: 2023-02-15
 lastmod: 2023-04-14
-summary: I've notice that a lot of phishing emails use hexadecimal strings to obfuscate their JavaScript. These are some Python scripts useful for identifying where form actions are POSTing to. 
+summary: "A collection of JavaScript and Python scripts for decoding various obfuscation techniques used in phishing emails, including base64 encoding, hexadecimal strings, and URI encoding."
 tags: [phishing]
 title: Decode Phishing Emails
 thumbnail: "thumbnail.png"

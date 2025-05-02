@@ -7,7 +7,7 @@ date: 2018-01-02
 usePageBundles: true
 thumbnail: "thumbnail.png"
 draft: false
-summary: So, I was on the hunt for a simpler way to make cool looped animations and stumbled upon this thing called 4D Simplex Noise. I found a super helpful tutorial on necessarydisorder's WordPress page called "Drawing from noise, and then making animated loopy GIFs from there". It was really informative, got me inspired, and had a spot-on title.
+summary: "A Processing implementation exploring 4D Simplex Noise to create smooth, organic looping animations through a 2D grid of pixel objects with variable noise scaling."
 ---
 
 {{< youtube iux8QU8PXaA >}}

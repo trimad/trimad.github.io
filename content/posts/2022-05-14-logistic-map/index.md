@@ -7,7 +7,7 @@ tags: [animation, fractal]
 title: Logistic Map
 thumbnail: "logbasehighest.png"
 featureImage: "logbasehighest.png"
-summary: "The logistic map is a mathematical model used to describe the population growth of a species over time. It is a simple equation that takes into account the effects of limited resources and environmental factors on population growth. The logistic map produces a pattern of population growth that exhibits chaotic behavior as the values of the model's parameters change, making it a valuable tool for studying complex systems."
+summary: "A C# implementation of the logistic map that visualizes how this simple mathematical model produces complex chaotic behavior when modeling population growth under resource constraints."
 usePageBundles: true
 ---
 

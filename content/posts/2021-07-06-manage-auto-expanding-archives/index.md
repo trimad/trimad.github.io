@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [PowerShell]
 tags: [office, reports, ExchangeOnlineManagement]
 date: 2021-07-06
+summary: "A collection of PowerShell scripts utilizing the ExchangeOnlineManagement module to automate and streamline the administration of auto-expanding archives in Exchange Online."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

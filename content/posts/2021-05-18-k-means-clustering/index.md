@@ -5,7 +5,7 @@ date: 2021-05-18
 categories: [Java, Processing]
 tags: [animation, k-means]
 thumbnail: "ZWxy72b.gif"
-summary: "_k-means clustering_ is a method of vector quantization, originally from signal processing, that aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean (cluster centers or cluster centroid), serving as a prototype of the cluster. This results in a partitioning of the data space into Voronoi cells."
+summary: "A Processing visualization of the k-means clustering algorithm, demonstrating iterative centroid-based data partitioning and Voronoi cell formation for different values of k."
 usePageBundles: true
 ---
 

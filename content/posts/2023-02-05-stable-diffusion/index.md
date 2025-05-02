@@ -5,7 +5,7 @@ date: 2023-02-05
 featured: true
 featureImage: "thumbnail.gif"
 lastmod: 2023-03-16
-summary: "Stable Diffusion is an image generation technique that uses a diffusion process to iteratively generate images. It starts with a noise image and applies a series of transformations to it, where each transformation adds a little bit of noise to the image. These transformations are repeated over multiple time steps, and the amount of noise added is gradually decreased over time. This process smooths out the noise and generates a high-quality image. The stability of the diffusion process is maintained by scaling the added noise based on the image's current state, preventing the image from diverging or collapsing into a uniform color. Stable Diffusion is a powerful and versatile image generation technique that can produce realistic, high-resolution images with fine details and a wide range of styles."
+summary: "A collection of Python and JavaScript utility scripts for processing, enhancing, and manipulating images generated with Stable Diffusion, including file renaming, sorting, color grading, and special effects tools."
 tags: [ai, images, video]
 thumbnail: "thumbnail.gif"
 title: Stable Diffusion Scripts

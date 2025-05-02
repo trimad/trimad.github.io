@@ -4,7 +4,7 @@ categories: [JavaScript]
 date: 2023-03-22
 draft: false
 featured: true
-summary: "Randomly generated passwords. Refresh the page for new passwords."
+summary: "An interactive tool that generates three sets of random passwords with varying complexity levels (including special characters, alphanumeric, and alphabetic only) and automatically refreshes with new passwords on page reload."
 tags: [passwords]
 thumbnail: "thumbnail.png"
 title: "Random Password Generator"

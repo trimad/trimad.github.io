@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [PowerShell]
 tags: [appx]
 date: 2019-08-28
+summary: "A PowerShell script demonstrating how to bulk remove Windows Store applications (AppX packages) from the current user account or system-wide."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

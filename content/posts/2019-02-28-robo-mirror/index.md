@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [Shell]
 tags: [robocopy, bat]
 date: 2019-02-28
+summary: "A batch script that leverages robocopy to perform automated file mirroring based on a predefined list of target paths."
 usePageBundles: true
 thumbnail: "thumbnail.png"
 ---

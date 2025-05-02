@@ -8,7 +8,7 @@ usePageBundles: true
 thumbnail: "thumbnail.jpg"
 featureImage: "thumbnail.jpg"
 draft: false
-summary: "Expanding on last night's work with Open Simplex Noise. I figured the next logical step was to make a Minecraftian terrain generator, so here it is. If I ever felt compelled to build a game from the ground up, this would probably be my starting point."
+summary: "A Processing implementation of a Minecraft-style terrain generator using Open Simplex Noise, featuring 3D voxel-based terrain with performance analysis of random walker agents."
 ---
 
 Expanding on last night's work with <a href="https://en.wikipedia.org/wiki/OpenSimplex_noise">Open Simplex Noise</a>. I

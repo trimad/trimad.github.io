@@ -5,6 +5,7 @@ categories: [PowerShell]
 tags: [calendars, M365, ExchangeOnlineManagement]
 date: 2021-09-16
 lastmod: 2023-02-08
+summary: "A collection of PowerShell scripts using ExchangeOnlineManagement module to manage calendar permissions in Exchange Online, including bulk operations for granting, modifying, and viewing access rights across multiple mailboxes."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

@@ -6,7 +6,7 @@ tags: [animation, open simplex noise]
 date: 2019-08-18
 thumbnail: "a.gif"
 featureImage: "a.gif"
-summary: "This Processing sketch loads two images and creates an image mask that blends them together. The transparency of the image mask is determined by 4D Open Simplex Noise, which loops perfectly."
+summary: "A Processing sketch that creates seamlessly looping animations by using 4D Open Simplex Noise to generate dynamic alpha masks for blending between two textures."
 usePageBundles: true
 ---
 
@@ -1512,7 +1512,7 @@ public class OpenSimplexNoise {
           }
           
         }
-      } else { //One point on each "side"
+      } else { //One point on (0,0,0) side, one point on (1,1,1) side
         byte c1, c2;
         if (aIsBiggerSide) {
           c1 = aPoint;
@@ -1596,7 +1596,7 @@ public class OpenSimplexNoise {
           dw_ext2 -= 2;
         }
       }
-      
+
       //Contribution (1,0,0,0)
       double dx1 = dx0 - 1 - SQUISH_CONSTANT_4D;
       double dy1 = dy0 - 0 - SQUISH_CONSTANT_4D;

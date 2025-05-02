@@ -4,6 +4,7 @@ author: Tristan Madden
 categories: [PowerShell]
 tags: [netsh, passwords, reports]
 date: 2022-04-11
+summary: "A PowerShell script that leverages netsh commands to extract and export stored WiFi network profiles and their corresponding passwords to a CSV file, automating wireless network credential retrieval."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

@@ -4,6 +4,7 @@ categories: [python]
 date: 2023-02-06
 featured: true
 lastmod: 2023-02-06
+summary: "A guide to installing and using MiDaS, a powerful tool for generating depth maps from images with various model options and troubleshooting CUDA installation issues."
 tags: [ai, video, depth map]
 title: MiDaS
 usePageBundles: true

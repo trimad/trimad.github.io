@@ -6,6 +6,7 @@ tags: [prime numbers, processing, interactive]
 date: 2018-05-17
 thumbnail: "thumbnail.png"
 usePageBundles: true
+summary: "An interactive p5.js implementation of the Ulam Spiral, featuring adjustable grid size, animation controls, and the ability to search for diagonal prime number patterns in the spiral."
 ---
 
 <div class="iframe-wrapper-1-1">

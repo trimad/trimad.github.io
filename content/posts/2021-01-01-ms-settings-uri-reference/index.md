@@ -5,6 +5,7 @@ categories: [Windows, reference]
 draft: true
 tags: []
 date: 2021-01-01
+summary: "A comprehensive reference guide for Windows 10/11 ms-settings URI schemes, enabling direct access to specific Windows Settings pages through command-line or scripting interfaces."
 thumbnail: "thumbnail.png"
 usePageBundles: true
 ---

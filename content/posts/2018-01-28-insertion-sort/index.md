@@ -6,7 +6,7 @@ tags: [sorting, insertion sort, interactive]
 date: 2018-01-28
 usePageBundles: true
 thumbnail: "thumbnail.png"
-summary: This is a (perhaps overkill) 3D WEBGL visualization of Insertion Sort using the WEBGL rendering mode.
+summary: "An interactive 3D visualization of the Insertion Sort algorithm using p5.js and WEBGL, featuring real-time sorting animation with camera controls and step-by-step progression."
 draft: false
 ---
 This is a (perhaps overkill) 3D WEBGL visualization of Insertion Sort using the WEBGL rendering mode.

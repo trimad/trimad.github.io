@@ -5,7 +5,7 @@ date: 2024-02-05
 #lastmod: 2023-10-17
 draft: false
 featured: true
-summary: "Short scripts for image-to-text, text-to-sound, etc."
+summary: "A practical collection of Python Flask API implementations for running various AI models locally, including image-to-text using Moondream, text-to-speech with Coqui TTS, and text generation via local LLMs with OpenAI-compatible interfaces."
 tags: [Python]
 thumbnail: "thumbnail.png"
 title: "Local AI API"

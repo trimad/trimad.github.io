@@ -6,6 +6,7 @@ tags: [download, ffmpeg]
 title: Download Streams
 thumbnail: "thumbnail.png"
 usePageBundles: true
+summary: "A guide to downloading HTTP Live Streams (HLS) by locating and using .m3u8 playlists with ffmpeg, including browser developer tools techniques for finding stream sources."
 ---
 
 This is my tentative work flow for downloading movie streams online. The gist of what I've learned about this process is that every HTTP Live Stream (HLS) begins with an `.m3u8` playlist with a MIME type of `x-mpegURL` or `vnd.apple.mpegURL`. This playlist lists a series of .ts files that are streamed one at a time and decoded so your browser is not burdened with downloading the entire movie every time you refresh the page. These .ts files can also be aggregated and assembled into a video. 

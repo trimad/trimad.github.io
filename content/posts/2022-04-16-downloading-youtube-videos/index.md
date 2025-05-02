@@ -7,6 +7,7 @@ date: 2022-04-16
 lastmod: 2023-03-03
 thumbnail: "thumbnail.png"
 usePageBundles: true
+summary: "A guide to downloading YouTube videos and audio using yt-dlp and youtube-dl command-line tools, including various options for format selection and quality settings."
 ---
 
 

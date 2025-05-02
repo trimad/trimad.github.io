@@ -4,7 +4,7 @@ categories: [Python]
 date: 2023-08-14
 lastmod: 2023-08-14
 featured: false
-summary: "A Python script for visualizing nodes with the networkx library."
+summary: "A comprehensive guide to creating visually appealing network graphs with Python's networkx library, including node positioning, custom coloring, edge labeling, and group visualization with ellipses."
 tags: [images]
 thumbnail: "thumbnail.png"
 title: "Python networkx Library"

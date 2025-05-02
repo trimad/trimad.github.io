@@ -7,7 +7,7 @@ date: 2018-11-16
 usePageBundles: true
 thumbnail: "thumbnail.png"
 draft: false
-summary: This is a virtual simulation of the magnets on my girlfriend's fridge.
+summary: "An interactive p5.js simulation recreating a collection of fridge magnets with realistic physics, allowing users to drag and arrange virtual magnets on a digital refrigerator."
 ---
 
 This is a virtual simulation of the magnets on my girlfriend's fridge.
