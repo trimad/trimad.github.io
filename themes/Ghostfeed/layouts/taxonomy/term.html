@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article>
+    <h1>Posts tagged with "{{ .Title }}"</h1>
+    {{ .Content }}
+
+    <section>
+        {{ range .Pages }}
+            <article class="post-preview">
+                <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                <p>{{ .Description | default .Summary }}</p>
+                <small>
+                    Published: {{ .Date.Format "January 2, 2006" }}
+                    {{ with .GitInfo }}
+                        {{ if ne $.Date .AuthorDate }}
+                            | Last Modified: {{ .AuthorDate.Format "January 2, 2006" }}
+                        {{ end }}
+                    {{ end }}
+                </small>
+            </article>
+            <hr>
+        {{ else }}
+            <p>No posts found with this tag/category.</p>
+        {{ end }}
+    </section>
+</article>
+{{ end }} 

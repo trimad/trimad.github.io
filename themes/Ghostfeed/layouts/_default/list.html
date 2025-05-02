@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article>
+    {{/* <h1>{{ .Title }}</h1> */}}
+    {{ .Content }}
+
+    <section>
+        {{ range .Pages }}
+            {{ partial "post_preview.html" . }}
+        {{ else }}
+            <p>Nothing in this section yet.</p>
+        {{ end }}
+    </section>
+</article>
+{{ end }}

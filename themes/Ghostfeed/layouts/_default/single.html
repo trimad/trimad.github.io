@@ -1,0 +1,32 @@
+{{ define "main" }}
+<article class="post">
+    <header>
+        <h2>{{ .Title }}</h2>
+        <p>
+            Published: {{ .Date.Format "January 2, 2006" }}
+            {{ with .GitInfo }}
+                {{ if ne $.Date .AuthorDate }}
+                    | Last Modified: {{ .AuthorDate.Format "January 2, 2006" }}
+                {{ end }}
+            {{ end }}
+        </p>
+        {{ with .Params.tags }}
+            <p>Tags: 
+            {{ range . }}
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> 
+            {{ end }}
+            </p>
+        {{ end }}
+        {{ with .Params.categories }}
+            <p>Categories: 
+            {{ range . }}
+                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> 
+            {{ end }}
+            </p>
+        {{ end }}
+    </header>
+    <section>
+        {{ .Content }}
+    </section>
+</article>
+{{ end }}

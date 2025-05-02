@@ -1,44 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>CMD on Clarity</title>
-    <link>https://trimad.github.io/categories/cmd/</link>
-    <description>Recent content in CMD on Clarity</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 16 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://trimad.github.io/categories/cmd/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>youtube-dl</title>
-      <link>https://trimad.github.io/post/2022-04-16-youtube-dl/</link>
-      <pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://trimad.github.io/post/2022-04-16-youtube-dl/</guid>
-      <description>
-        
-          
-            youtube-dl is a command-line program to download videos from www.youtube.com and a few other sites.
-ExamplesDownload a YouTube video with the best available audio quality:```consoleyoutube-dl -f bestaudio &#34;https://www.youtube.com/watch?v=iik25wqIuFo&#34;```Download an entire YouTube playlist:```consoleyoutube-dl --yes-playlist &#34;https://www.youtube.com/playlist?list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd&#34;```Begin downloading from a playlist at a specific position:```consoleyoutube-dl --yes-playlist --playlist-start 22 &#34;https://www.youtube.com/watch?v=M5c9HdaQqh0&amp;list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd&#34;```Download the Windows executable
-          
-          
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>ffmpeg</title>
-      <link>https://trimad.github.io/post/2022-04-16-ffmpeg/</link>
-      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://trimad.github.io/post/2022-04-16-ffmpeg/</guid>
-      <description>
-        
-          
-            ffmpeg is a complete, cross-platform solution to record, convert and stream audio and video.
-ffmpeg Downloadffmpeg DocumentationAudio ProcessingConvert to 8kHz, single-channel PCM```consoleffmpeg -i &#34;input.mp3&#34; -ar 8000 -ac 1 output.wav```Convert to 16kHz, single-channel PCM```consoleffmpeg -i &#34;input.mp3&#34; -ar 16000 -ac 1 output.wav```Convert to 48kHz, single-channel PCM```consoleffmpeg -i input.mp3 -ar 48000 -ac 1 output.wav```Video ProcessingAdd Music to a Video```consoleffmpeg -i video.
-          
-          
-        
-      </description>
-    </item>
-    
-  </channel>
-</rss>

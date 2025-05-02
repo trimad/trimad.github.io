@@ -1,0 +1,46 @@
+<p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+<!-- Additional footer content can go here -->
+
+<footer>
+    <!-- Footer content -->
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); // Corrected class selector
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); // Corrected title selector
+                const summaryElement = post.querySelector('p'); // Selector for the summary/description
+                const tagsElement = post.querySelector('.tags'); // Corrected tags selector (added previously)
+                const hrElement = post.nextElementSibling; // Get the next element sibling (potential <hr>)
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; // Add summary text
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; // Show/hide post
+
+                // Also show/hide the following hr if it exists
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>

@@ -1,0 +1,27 @@
+baseURL = 'https://trimad.github.io/Ghostfeed/'
+languageCode = 'en-us'
+title = 'Ghostfeed'
+
+theme = "Ghostfeed"
+
+relativeURLs = false
+canonifyURLs = true
+
+enableGitInfo = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[params]
+  description = "Your site description goes here."
+  # Add other site-wide parameters here
+
+# Enable robots.txt and sitemap generation (usually enabled by default)
+enableRobotsTXT = true

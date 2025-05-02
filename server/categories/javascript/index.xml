@@ -1,42 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>JavaScript on Clarity</title>
-    <link>https://trimad.github.io/categories/javascript/</link>
-    <description>Recent content in JavaScript on Clarity</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 16 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://trimad.github.io/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Simple 2D Terrain Generation Using Perlin Noise</title>
-      <link>https://trimad.github.io/post/2017-07-16-simple-2d-perlin-noise/</link>
-      <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://trimad.github.io/post/2017-07-16-simple-2d-perlin-noise/</guid>
-      <description>
-        
-          
-            click mouse in iframe to generate a new mapThis sketch maps perlin noise between a value of 0 and 255 across a grid. Values greater than or equal to 100 are&#34;grass&#34;, values between 75 and 100 are &#34;sand&#34;, and values less than or equal to 75 are &#34;water&#34;.Click here to render a fullscreen mapLaunch the p5.js editor
-          
-          
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Arrays</title>
-      <link>https://trimad.github.io/post/2016-12-13-arrays/</link>
-      <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://trimad.github.io/post/2016-12-13-arrays/</guid>
-      <description>
-        
-          
-            View FullscreenView In p5.js EditorClick on them circles homes
-          
-          
-        
-      </description>
-    </item>
-    
-  </channel>
-</rss>

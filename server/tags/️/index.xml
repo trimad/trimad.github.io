@@ -1,27 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>🏴‍☠️ on Clarity</title>
-    <link>https://trimad.github.io/tags/%EF%B8%8F/</link>
-    <description>Recent content in 🏴‍☠️ on Clarity</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 16 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://trimad.github.io/tags/%EF%B8%8F/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>youtube-dl</title>
-      <link>https://trimad.github.io/post/2022-04-16-youtube-dl/</link>
-      <pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://trimad.github.io/post/2022-04-16-youtube-dl/</guid>
-      <description>
-        
-          
-            youtube-dl is a command-line program to download videos from www.youtube.com and a few other sites.
-ExamplesDownload a YouTube video with the best available audio quality:```consoleyoutube-dl -f bestaudio &#34;https://www.youtube.com/watch?v=iik25wqIuFo&#34;```Download an entire YouTube playlist:```consoleyoutube-dl --yes-playlist &#34;https://www.youtube.com/playlist?list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd&#34;```Begin downloading from a playlist at a specific position:```consoleyoutube-dl --yes-playlist --playlist-start 22 &#34;https://www.youtube.com/watch?v=M5c9HdaQqh0&amp;list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd&#34;```Download the Windows executable
-          
-          
-        
-      </description>
-    </item>
-    
-  </channel>
-</rss>

@@ -1,0 +1,5 @@
+{{/* notice shortcode */}}
+{{ $type := .Get "type" | default "info" }}
+<aside class="notice notice-{{ $type | lower }}">
+  {{ .Inner | markdownify }}
+</aside> 
