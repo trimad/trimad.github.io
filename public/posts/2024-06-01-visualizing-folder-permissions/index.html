@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate a treemap of user permissions for a given folder and all subfolders.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/">
+    
+    <title>Visualizing Folder Permissions | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+        <h2>BTC</h2>
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Visualizing Folder Permissions</h2>
+        <p>
+            Published: June 1, 2024
+            
+                
+                    | Last Modified: May 2, 2025
+                
+            
+        </p>
+        
+            <p>Tags: 
+            
+                <a href="http://localhost:1313/tags/permissions">permissions</a> 
+            
+                <a href="http://localhost:1313/tags/security">security</a> 
+            
+            </p>
+        
+        
+            <p>Categories: 
+            
+                <a href="http://localhost:1313/categories/powershell">PowerShell</a> 
+            
+                <a href="http://localhost:1313/categories/python">Python</a> 
+            
+            </p>
+        
+    </header>
+    <section>
+        <p>This blog post provides a comprehensive guide to exporting folder permissions to a JSON file using PowerShell and visualizing these permissions using Python. The process involves two main scripts:</p>
+<h2 id="exporting-folder-permissions-with-powershell">Exporting Folder Permissions with PowerShell</h2>
+<p>This script retrieves and exports folder permissions from a specified directory and its subdirectories. It uses the Get-Acl cmdlet to gather access control information and stores this data in a custom PowerShell object. The collected permissions are then converted to JSON format and saved to a file. A limitation of this script to be aware of is that it won&rsquo;t work on paths greater than 260 characters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Define the folder path and output file path as variables</span>
+</span></span><span style="display:flex;"><span>$FolderPath = <span style="color:#e6db74">&#34;C:\Users\&#34;</span>
+</span></span><span style="display:flex;"><span>$OutputFile = <span style="color:#e6db74">&#34;C:\Users\output.json&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> ConvertTo-Binary {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>        [<span style="color:#66d9ef">int</span>]$decimal
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [<span style="color:#66d9ef">Convert</span>]::ToString($decimal, <span style="color:#ae81ff">2</span>).PadLeft(<span style="color:#ae81ff">32</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-FolderPermissions {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>        [<span style="color:#66d9ef">string</span>]$Path
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-Not</span> (Test-Path -Path $Path)) {
+</span></span><span style="display:flex;"><span>        Write-Warning <span style="color:#e6db74">&#34;Path &#39;</span>$Path<span style="color:#e6db74">&#39; does not exist.&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $null
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $acl = Get-Acl -Path $Path
+</span></span><span style="display:flex;"><span>    $permissions = @()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> ($access <span style="color:#66d9ef">in</span> $acl.Access) {
+</span></span><span style="display:flex;"><span>        $rights = [<span style="color:#66d9ef">int</span>]$access.FileSystemRights
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $bitWisePermissions = [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>            ReadData = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># 2^0</span>
+</span></span><span style="display:flex;"><span>            CreateFiles = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e"># 2^1</span>
+</span></span><span style="display:flex;"><span>            AppendData = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">4</span> <span style="color:#75715e"># 2^2</span>
+</span></span><span style="display:flex;"><span>            ReadExtendedAttributes = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">8</span> <span style="color:#75715e"># 2^3</span>
+</span></span><span style="display:flex;"><span>            WriteExtendedAttributes = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">16</span> <span style="color:#75715e"># 2^4</span>
+</span></span><span style="display:flex;"><span>            ExecuteFile = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">32</span> <span style="color:#75715e"># 2^5</span>
+</span></span><span style="display:flex;"><span>            DeleteSubfoldersAndFiles = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">64</span> <span style="color:#75715e"># 2^6</span>
+</span></span><span style="display:flex;"><span>            ReadAttributes = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">128</span> <span style="color:#75715e"># 2^7</span>
+</span></span><span style="display:flex;"><span>            WriteAttributes = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">256</span> <span style="color:#75715e"># 2^8</span>
+</span></span><span style="display:flex;"><span>            Write = <span style="color:#66d9ef">if</span> (($rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">278</span>) <span style="color:#f92672">-eq</span> <span style="color:#ae81ff">278</span>) { $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">278</span> } <span style="color:#66d9ef">else</span> { <span style="color:#ae81ff">0</span> } <span style="color:#75715e"># Is a combination of other permissions</span>
+</span></span><span style="display:flex;"><span>            Delete = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">65536</span> <span style="color:#75715e"># 2^16</span>
+</span></span><span style="display:flex;"><span>            ReadPermissions = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">131072</span> <span style="color:#75715e"># 2^17</span>
+</span></span><span style="display:flex;"><span>            Read = <span style="color:#66d9ef">if</span> (($rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">131209</span>) <span style="color:#f92672">-eq</span> <span style="color:#ae81ff">131209</span>) { $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">131209</span> } <span style="color:#66d9ef">else</span> { <span style="color:#ae81ff">0</span> } <span style="color:#75715e"># Is a combination of other permissions</span>
+</span></span><span style="display:flex;"><span>            ReadAndExecute = <span style="color:#66d9ef">if</span> (($rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">131231</span>) <span style="color:#f92672">-eq</span> <span style="color:#ae81ff">131231</span>) { $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">131231</span> } <span style="color:#66d9ef">else</span> { <span style="color:#ae81ff">0</span> } <span style="color:#75715e"># Is a combination of other permissions</span>
+</span></span><span style="display:flex;"><span>            Modify = <span style="color:#66d9ef">if</span> (($rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">197055</span>) <span style="color:#f92672">-eq</span> <span style="color:#ae81ff">197055</span>) { $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">197055</span> } <span style="color:#66d9ef">else</span> { <span style="color:#ae81ff">0</span> } <span style="color:#75715e"># Is a combination of other permissions</span>
+</span></span><span style="display:flex;"><span>            ChangePermissions = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">262144</span> <span style="color:#75715e"># 2^18</span>
+</span></span><span style="display:flex;"><span>            TakeOwnership = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">524288</span> <span style="color:#75715e"># 2^19</span>
+</span></span><span style="display:flex;"><span>            Synchronize = $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">1048576</span> <span style="color:#75715e"># 2^20</span>
+</span></span><span style="display:flex;"><span>            FullControl = <span style="color:#66d9ef">if</span> (($rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">2032127</span>) <span style="color:#f92672">-eq</span> <span style="color:#ae81ff">2032127</span>) { $rights <span style="color:#f92672">-band</span> <span style="color:#ae81ff">2032127</span> } <span style="color:#66d9ef">else</span> { <span style="color:#ae81ff">0</span> } <span style="color:#75715e"># Is a combination of other permissions</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $permissions += [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>            AccessControlType = $access.AccessControlType
+</span></span><span style="display:flex;"><span>            BitWisePermissionsBinary = ConvertTo-Binary($rights)
+</span></span><span style="display:flex;"><span>            BitWisePermissions = $bitWisePermissions
+</span></span><span style="display:flex;"><span>            BitwisePermissionsDecimal = $rights
+</span></span><span style="display:flex;"><span>            IdentityReference = $access.IdentityReference
+</span></span><span style="display:flex;"><span>            InheritanceFlags = $access.InheritanceFlags
+</span></span><span style="display:flex;"><span>            IsInherited = $access.IsInherited
+</span></span><span style="display:flex;"><span>            PropagationFlags = $access.PropagationFlags
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>        Path = $Path
+</span></span><span style="display:flex;"><span>        Permissions = $permissions
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AllFolderPermissions {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>        [<span style="color:#66d9ef">string</span>]$RootPath
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    $result = @()
+</span></span><span style="display:flex;"><span>    $folders = Get-ChildItem -Path $RootPath -Recurse -Directory
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> ($folder <span style="color:#66d9ef">in</span> $folders) {
+</span></span><span style="display:flex;"><span>        $folderPermissions = Get-FolderPermissions -Path $folder.FullName
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($folderPermissions <span style="color:#f92672">-ne</span> $null) {
+</span></span><span style="display:flex;"><span>            $result += $folderPermissions
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $rootPermissions = Get-FolderPermissions -Path $RootPath
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($rootPermissions <span style="color:#f92672">-ne</span> $null) {
+</span></span><span style="display:flex;"><span>        $result += $rootPermissions
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $result
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$allPermissions = Get-AllFolderPermissions -RootPath $FolderPath
+</span></span><span style="display:flex;"><span>$json = $allPermissions | ConvertTo-Json -Depth <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save JSON without BOM</span>
+</span></span><span style="display:flex;"><span>$json | Out-File -FilePath $OutputFile -Encoding ascii
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Permissions saved to </span>$OutputFile<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>This is where I got the decimal values for ACL permissions from:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>[<span style="color:#66d9ef">System.Enum</span>]::GetValues([<span style="color:#66d9ef">System.Security.AccessControl.FileSystemRights</span>]) | ForEach-Object {
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>        Name = $_
+</span></span><span style="display:flex;"><span>        Value = [<span style="color:#66d9ef">int</span>]$_
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>} | Format-Table -AutoSize
+</span></span></code></pre></div><p>The result is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>                    ReadData       <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                    ReadData       <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                 CreateFiles       <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>                 CreateFiles       <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>                  AppendData       <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>                  AppendData       <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>      ReadExtendedAttributes       <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>     WriteExtendedAttributes      <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>                 ExecuteFile      <span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>                 ExecuteFile      <span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>DeleteSubdirectoriesAndFiles      <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span>              ReadAttributes     <span style="color:#ae81ff">128</span>
+</span></span><span style="display:flex;"><span>             WriteAttributes     <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span>                       Write     <span style="color:#ae81ff">278</span>
+</span></span><span style="display:flex;"><span>                      Delete   <span style="color:#ae81ff">65536</span>
+</span></span><span style="display:flex;"><span>             ReadPermissions  <span style="color:#ae81ff">131072</span>
+</span></span><span style="display:flex;"><span>                        Read  <span style="color:#ae81ff">131209</span>
+</span></span><span style="display:flex;"><span>              ReadAndExecute  <span style="color:#ae81ff">131241</span>
+</span></span><span style="display:flex;"><span>                      Modify  <span style="color:#ae81ff">197055</span>
+</span></span><span style="display:flex;"><span>           ChangePermissions  <span style="color:#ae81ff">262144</span>
+</span></span><span style="display:flex;"><span>               TakeOwnership  <span style="color:#ae81ff">524288</span>
+</span></span><span style="display:flex;"><span>                 Synchronize <span style="color:#ae81ff">1048576</span>
+</span></span><span style="display:flex;"><span>                 FullControl <span style="color:#ae81ff">2032127</span>
+</span></span></code></pre></div><p>where each decimal represents a 32-bit binary integer.</p>
+<h2 id="acl-permissions-table">ACL Permissions Table</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Permission</th>
+          <th>Decimal Value</th>
+          <th>Binary Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ReadData</td>
+          <td>1</td>
+          <td>0000 0000 0000 0000 0000 0000 0000 0001</td>
+      </tr>
+      <tr>
+          <td>CreateFiles</td>
+          <td>2</td>
+          <td>0000 0000 0000 0000 0000 0000 0000 0010</td>
+      </tr>
+      <tr>
+          <td>AppendData</td>
+          <td>4</td>
+          <td>0000 0000 0000 0000 0000 0000 0000 0100</td>
+      </tr>
+      <tr>
+          <td>ReadExtendedAttributes</td>
+          <td>8</td>
+          <td>0000 0000 0000 0000 0000 0000 0000 1000</td>
+      </tr>
+      <tr>
+          <td>WriteExtendedAttributes</td>
+          <td>16</td>
+          <td>0000 0000 0000 0000 0000 0000 0001 0000</td>
+      </tr>
+      <tr>
+          <td>ExecuteFile</td>
+          <td>32</td>
+          <td>0000 0000 0000 0000 0000 0000 0010 0000</td>
+      </tr>
+      <tr>
+          <td>DeleteSubdirectoriesAndFiles</td>
+          <td>64</td>
+          <td>0000 0000 0000 0000 0000 0000 0100 0000</td>
+      </tr>
+      <tr>
+          <td>ReadAttributes</td>
+          <td>128</td>
+          <td>0000 0000 0000 0000 0000 0000 1000 0000</td>
+      </tr>
+      <tr>
+          <td>WriteAttributes</td>
+          <td>256</td>
+          <td>0000 0000 0000 0000 0000 0001 0000 0000</td>
+      </tr>
+      <tr>
+          <td>Write</td>
+          <td>278</td>
+          <td>0000 0000 0000 0000 0000 0001 0001 0110</td>
+      </tr>
+      <tr>
+          <td>Delete</td>
+          <td>65536</td>
+          <td>0000 0000 0000 0001 0000 0000 0000 0000</td>
+      </tr>
+      <tr>
+          <td>ReadPermissions</td>
+          <td>131072</td>
+          <td>0000 0000 0000 0010 0000 0000 0000 0000</td>
+      </tr>
+      <tr>
+          <td>Read</td>
+          <td>131209</td>
+          <td>0000 0000 0000 0010 0000 0000 1000 1001</td>
+      </tr>
+      <tr>
+          <td>ReadAndExecute</td>
+          <td>131241</td>
+          <td>0000 0000 0000 0010 0000 0000 1010 0001</td>
+      </tr>
+      <tr>
+          <td>Modify</td>
+          <td>197055</td>
+          <td>0000 0000 0000 0011 0000 1000 1011 0111</td>
+      </tr>
+      <tr>
+          <td>ChangePermissions</td>
+          <td>262144</td>
+          <td>0000 0000 0000 0100 0000 0000 0000 0000</td>
+      </tr>
+      <tr>
+          <td>TakeOwnership</td>
+          <td>524288</td>
+          <td>0000 0000 0000 1000 0000 0000 0000 0000</td>
+      </tr>
+      <tr>
+          <td>Synchronize</td>
+          <td>1048576</td>
+          <td>0000 0000 0001 0000 0000 0000 0000 0000</td>
+      </tr>
+      <tr>
+          <td>FullControl</td>
+          <td>2032127</td>
+          <td>0000 0000 0001 1111 1111 1111 1111 1111</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="understanding-bitwise-permissions">Understanding Bitwise Permissions</h2>
+<p>Bitwise permissions allow for efficient storage and manipulation of permissions using binary arithmetic. Each permission is represented by a specific bit in an integer, allowing multiple permissions to be combined into a single value. Here&rsquo;s a breakdown of the bitwise permissions used in the PowerShell script:</p>
+<ul>
+<li>ReadData (2^0): Allows reading of file data.</li>
+<li>CreateFiles (2^1): Allows creating files in a directory.</li>
+<li>AppendData (2^2): Allows appending data to a file.</li>
+<li>ReadExtendedAttributes (2^3): Allows reading extended file attributes.</li>
+<li>WriteExtendedAttributes (2^4): Allows writing extended file attributes.</li>
+<li>ExecuteFile (2^5): Allows executing a file.</li>
+<li>DeleteSubfoldersAndFiles (2^6): Allows deleting subfolders and files.</li>
+<li>ReadAttributes (2^7): Allows reading file attributes.</li>
+<li>WriteAttributes (2^8): Allows writing file attributes.</li>
+<li>Delete (2^16): Allows deleting a file or folder.</li>
+<li>ReadPermissions (2^17): Allows reading file or folder permissions.</li>
+<li>ChangePermissions (2^18): Allows changing file or folder permissions.</li>
+<li>TakeOwnership (2^19): Allows taking ownership of a file or folder.</li>
+<li>Synchronize (2^20): Synchronizes access to a file or folder.</li>
+</ul>
+<p>These permissions are combined using bitwise OR operations and can be checked using bitwise AND operations, allowing for efficient permission management.</p>
+<h2 id="combined-permissions-breakdown">Combined Permissions Breakdown</h2>
+<h3 id="write-278">Write (278)</h3>
+<p>The <code>Write</code> permission is a combination of the following:</p>
+<ul>
+<li>WriteData (2^1) = 2</li>
+<li>AppendData (2^2) = 4</li>
+<li>WriteExtendedAttributes (2^4) = 16</li>
+<li>WriteAttributes (2^8) = 256</li>
+</ul>
+<p>Combining these with bitwise OR:
+[ 2 , | , 4 , | , 16 , | , 256 = 278 ]</p>
+<h3 id="read-131209">Read (131209)</h3>
+<p>The <code>Read</code> permission is a combination of the following:</p>
+<ul>
+<li>ReadData (2^0) = 1</li>
+<li>ReadExtendedAttributes (2^3) = 8</li>
+<li>ReadAttributes (2^7) = 128</li>
+<li>ReadPermissions (2^17) = 131072</li>
+</ul>
+<p>Combining these with bitwise OR:
+[ 1 , | , 8 , | , 128 , | , 131072 = 131209 ]</p>
+<h3 id="readandexecute-131241">ReadAndExecute (131241)</h3>
+<p>The <code>ReadAndExecute</code> permission is a combination of <code>Read</code> and <code>ExecuteFile</code>:</p>
+<ul>
+<li>Read (131209)</li>
+<li>ExecuteFile (2^5) = 32</li>
+</ul>
+<p>Combining these with bitwise OR:
+[ 131209 , | , 32 = 131241 ]</p>
+<h3 id="modify-197055">Modify (197055)</h3>
+<p>The <code>Modify</code> permission is a combination of <code>ReadAndExecute</code>, <code>Write</code>, and <code>Delete</code>:</p>
+<ul>
+<li>ReadAndExecute (131241)</li>
+<li>Write (278)</li>
+<li>Delete (2^16) = 65536</li>
+</ul>
+<p>Combining these with bitwise OR:
+[ 131241 , | , 278 , | , 65536 = 197055 ]</p>
+<h3 id="fullcontrol-2032127">FullControl (2032127)</h3>
+<p>The <code>FullControl</code> permission includes all possible permissions:</p>
+<ul>
+<li>ReadData (2^0) = 1</li>
+<li>CreateFiles (2^1) = 2</li>
+<li>AppendData (2^2) = 4</li>
+<li>ReadExtendedAttributes (2^3) = 8</li>
+<li>WriteExtendedAttributes (2^4) = 16</li>
+<li>ExecuteFile (2^5) = 32</li>
+<li>DeleteSubdirectoriesAndFiles (2^6) = 64</li>
+<li>ReadAttributes (2^7) = 128</li>
+<li>WriteAttributes (2^8) = 256</li>
+<li>Delete (2^16) = 65536</li>
+<li>ReadPermissions (2^17) = 131072</li>
+<li>ChangePermissions (2^18) = 262144</li>
+<li>TakeOwnership (2^19) = 524288</li>
+<li>Synchronize (2^20) = 1048576</li>
+</ul>
+<p>Combining these with bitwise OR:
+[ 1 , | , 2 , | , 4 , | , 8 , | , 16 , | , 32 , | , 64 , | , 128 , | , 256 , | , 65536 , | , 131072 , | , 262144 , | , 524288 , | , 1048576 = 2032127 ]</p>
+<h2 id="visualizing-permissions-with-python-and-plotly">Visualizing Permissions with Python and Plotly</h2>
+<p>Once the permissions have been exported to a JSON file, we can use Python and Plotly to visualize this data. Plotly is a powerful visualization library that allows for the creation of interactive plots and charts.</p>
+<p>The following Python script reads the JSON file generated by the PowerShell script and creates a treemap visualization of the folder permissions. The script uses Plotly&rsquo;s go.Treemap to create the treemap and applies a default theme for better aesthetics. <a href="https://plotly.com/python/templates/">Other themes can be found here.</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.graph_objects <span style="color:#66d9ef">as</span> go
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to replace backslashes in the username</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">replace_backslashes</span>(username):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> username<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;_&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to create the folder structure visualization for each user</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_user_visualization</span>(user_permissions, user_name, permission_types, output_dir):
+</span></span><span style="display:flex;"><span>    access_control_type <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;Deny&#34;</span>}
+</span></span><span style="display:flex;"><span>    inheritance_flags <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;None&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;ContainerInherit&#34;</span>, <span style="color:#ae81ff">2</span>: <span style="color:#e6db74">&#34;ObjectInherit&#34;</span>, <span style="color:#ae81ff">3</span>: <span style="color:#e6db74">&#34;ContainerInherit + ObjectInherit&#34;</span>}
+</span></span><span style="display:flex;"><span>    propagation_flags <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;None&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;InheritOnly&#34;</span>, <span style="color:#ae81ff">2</span>: <span style="color:#e6db74">&#34;NoPropagateInherit&#34;</span>}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    figs <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    theme <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;seaborn&#34;</span>  <span style="color:#75715e"># Choose the theme you want to apply</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> permission_type <span style="color:#f92672">in</span> permission_types:
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        parents <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        texts <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        display_labels <span style="color:#f92672">=</span> {}  <span style="color:#75715e"># Map original labels to display labels</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> path, permissions <span style="color:#f92672">in</span> user_permissions<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> permissions<span style="color:#f92672">.</span>get(permission_type, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:  <span style="color:#75715e"># Only include paths with the specified permission type</span>
+</span></span><span style="display:flex;"><span>                parts <span style="color:#f92672">=</span> path<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(parts)):
+</span></span><span style="display:flex;"><span>                    original_label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(parts[:i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>                    display_label <span style="color:#f92672">=</span> parts[i]
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                        display_label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> display_label  <span style="color:#75715e"># Prefix with .\ if it has a parent node</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> len(parts) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>                        display_label <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span>  <span style="color:#75715e"># Append \ if it has a child node</span>
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    display_labels[original_label] <span style="color:#f92672">=</span> display_label
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> display_label <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> labels:
+</span></span><span style="display:flex;"><span>                        labels<span style="color:#f92672">.</span>append(display_label)
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                            parents<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                            parent_label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(parts[:i])
+</span></span><span style="display:flex;"><span>                            parent_display_label <span style="color:#f92672">=</span> display_labels[parent_label]
+</span></span><span style="display:flex;"><span>                            parents<span style="color:#f92672">.</span>append(parent_display_label)
+</span></span><span style="display:flex;"><span>                        
+</span></span><span style="display:flex;"><span>                        access_control_type_value <span style="color:#f92672">=</span> permissions<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;AccessControlType&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>)
+</span></span><span style="display:flex;"><span>                        inheritance_flags_value <span style="color:#f92672">=</span> permissions<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;InheritanceFlags&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>)
+</span></span><span style="display:flex;"><span>                        propagation_flags_value <span style="color:#f92672">=</span> permissions<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;PropagationFlags&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>)
+</span></span><span style="display:flex;"><span>                        is_inherited <span style="color:#f92672">=</span> permissions<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;IsInherited&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>)
+</span></span><span style="display:flex;"><span>                        bitwise_permissions_decimal <span style="color:#f92672">=</span> permissions<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;BitwisePermissionsDecimal&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>)
+</span></span><span style="display:flex;"><span>                        bitwise_permissions_binary <span style="color:#f92672">=</span> permissions<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;BitWisePermissionsBinary&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>)<span style="color:#f92672">.</span>lstrip(<span style="color:#e6db74">&#39;0&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        texts<span style="color:#f92672">.</span>append(
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;AccessControlType: </span><span style="color:#e6db74">{</span>access_control_type<span style="color:#f92672">.</span>get(access_control_type_value, <span style="color:#e6db74">&#39;Unknown&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;br&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;InheritanceFlags: </span><span style="color:#e6db74">{</span>inheritance_flags<span style="color:#f92672">.</span>get(inheritance_flags_value, <span style="color:#e6db74">&#39;Unknown&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;br&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;PropagationFlags: </span><span style="color:#e6db74">{</span>propagation_flags<span style="color:#f92672">.</span>get(propagation_flags_value, <span style="color:#e6db74">&#39;Unknown&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;br&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;IsInherited: </span><span style="color:#e6db74">{</span>is_inherited<span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;br&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;BitwisePermissions (Decimal): </span><span style="color:#e6db74">{</span>bitwise_permissions_decimal<span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;br&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;BitwisePermissions (Binary): </span><span style="color:#e6db74">{</span>bitwise_permissions_binary<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>                        )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> labels:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        fig <span style="color:#f92672">=</span> go<span style="color:#f92672">.</span>Figure(go<span style="color:#f92672">.</span>Treemap(
+</span></span><span style="display:flex;"><span>            labels<span style="color:#f92672">=</span>labels,
+</span></span><span style="display:flex;"><span>            parents<span style="color:#f92672">=</span>parents,
+</span></span><span style="display:flex;"><span>            text<span style="color:#f92672">=</span>texts,
+</span></span><span style="display:flex;"><span>            hoverinfo<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;label+text&#34;</span>
+</span></span><span style="display:flex;"><span>        ))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        fig<span style="color:#f92672">.</span>update_layout(title_text<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>permission_type<span style="color:#e6db74">}</span><span style="color:#e6db74"> Permissions for </span><span style="color:#e6db74">{</span>user_name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>, template<span style="color:#f92672">=</span>theme)
+</span></span><span style="display:flex;"><span>        figs[permission_type] <span style="color:#f92672">=</span> fig
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a dropdown menu to select graphs</span>
+</span></span><span style="display:flex;"><span>    dropdown_buttons <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        {<span style="color:#e6db74">&#39;label&#39;</span>: perm, <span style="color:#e6db74">&#39;method&#39;</span>: <span style="color:#e6db74">&#39;update&#39;</span>, <span style="color:#e6db74">&#39;args&#39;</span>: [{<span style="color:#e6db74">&#39;visible&#39;</span>: [perm <span style="color:#f92672">==</span> p <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> permission_types]}, {<span style="color:#e6db74">&#39;title&#39;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>perm<span style="color:#e6db74">}</span><span style="color:#e6db74"> Permissions for </span><span style="color:#e6db74">{</span>user_name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>}]}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> perm <span style="color:#f92672">in</span> permission_types
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> figs:
+</span></span><span style="display:flex;"><span>        final_fig <span style="color:#f92672">=</span> go<span style="color:#f92672">.</span>Figure()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> perm <span style="color:#f92672">in</span> permission_types:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> perm <span style="color:#f92672">in</span> figs:
+</span></span><span style="display:flex;"><span>                final_fig<span style="color:#f92672">.</span>add_traces(figs[perm]<span style="color:#f92672">.</span>data)
+</span></span><span style="display:flex;"><span>                final_fig<span style="color:#f92672">.</span>update_traces(visible<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>        final_fig<span style="color:#f92672">.</span>data[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>visible <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        final_fig<span style="color:#f92672">.</span>update_layout(
+</span></span><span style="display:flex;"><span>            updatemenus<span style="color:#f92672">=</span>[
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;buttons&#39;</span>: dropdown_buttons,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;direction&#39;</span>: <span style="color:#e6db74">&#39;down&#39;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;showactive&#39;</span>: <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            title_text<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Permissions for </span><span style="color:#e6db74">{</span>user_name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>            template<span style="color:#f92672">=</span>theme
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        os<span style="color:#f92672">.</span>makedirs(output_dir, exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>        sanitized_user_name <span style="color:#f92672">=</span> replace_backslashes(user_name)
+</span></span><span style="display:flex;"><span>        final_fig<span style="color:#f92672">.</span>write_html(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(output_dir, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>sanitized_user_name<span style="color:#e6db74">}</span><span style="color:#e6db74">.html&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Main function to process the JSON data and generate visualizations</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    input_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;permissions.json&#39;</span>
+</span></span><span style="display:flex;"><span>    output_dir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;folder_permissions_treemap&#39;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Load the JSON data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(input_file, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(file)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Extract permission types</span>
+</span></span><span style="display:flex;"><span>    sample_permission <span style="color:#f92672">=</span> data[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;Permissions&#39;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;BitWisePermissions&#39;</span>]
+</span></span><span style="display:flex;"><span>    permission_types <span style="color:#f92672">=</span> list(sample_permission<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Process the data to group permissions by user</span>
+</span></span><span style="display:flex;"><span>    user_permissions <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> data:
+</span></span><span style="display:flex;"><span>        path <span style="color:#f92672">=</span> entry[<span style="color:#e6db74">&#39;Path&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> permission <span style="color:#f92672">in</span> entry[<span style="color:#e6db74">&#39;Permissions&#39;</span>]:
+</span></span><span style="display:flex;"><span>            user <span style="color:#f92672">=</span> permission[<span style="color:#e6db74">&#39;IdentityReference&#39;</span>][<span style="color:#e6db74">&#39;Value&#39;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> user <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> user_permissions:
+</span></span><span style="display:flex;"><span>                user_permissions[user] <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>            user_permissions[user][path] <span style="color:#f92672">=</span> permission[<span style="color:#e6db74">&#39;BitWisePermissions&#39;</span>]
+</span></span><span style="display:flex;"><span>            user_permissions[user][path]<span style="color:#f92672">.</span>update({
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;AccessControlType&#39;</span>: permission[<span style="color:#e6db74">&#39;AccessControlType&#39;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;InheritanceFlags&#39;</span>: permission[<span style="color:#e6db74">&#39;InheritanceFlags&#39;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;PropagationFlags&#39;</span>: permission[<span style="color:#e6db74">&#39;PropagationFlags&#39;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;IsInherited&#39;</span>: permission[<span style="color:#e6db74">&#39;IsInherited&#39;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;BitwisePermissionsDecimal&#39;</span>: permission<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;BitwisePermissionsDecimal&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;BitWisePermissionsBinary&#39;</span>: permission<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;BitWisePermissionsBinary&#39;</span>, <span style="color:#e6db74">&#39;Unknown&#39;</span>)
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create visualizations for each user</span>
+</span></span><span style="display:flex;"><span>    total_users <span style="color:#f92672">=</span> len(user_permissions)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> idx, (user, permissions) <span style="color:#f92672">in</span> enumerate(user_permissions<span style="color:#f92672">.</span>items(), start<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Processing user </span><span style="color:#e6db74">{</span>idx<span style="color:#e6db74">}</span><span style="color:#e6db74"> of </span><span style="color:#e6db74">{</span>total_users<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>user<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        create_user_visualization(permissions, user, permission_types, output_dir)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Finished processing user </span><span style="color:#e6db74">{</span>idx<span style="color:#e6db74">}</span><span style="color:#e6db74"> of </span><span style="color:#e6db74">{</span>total_users<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>user<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><p>This approach provides a clear and structured method for administrators to audit and visualize folder permissions in their environment.</p>
+
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (18)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/genesys-cloud/">Genesys Cloud (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>

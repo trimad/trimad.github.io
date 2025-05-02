@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a work in progress exploration of generating knowledge graphs with LLMs, inspired by a post I read on towardsdatascience.com.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/">
+    
+    <title>Generate Knowledge Graphs with LLMs | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+        <h2>BTC</h2>
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Generate Knowledge Graphs with LLMs</h2>
+        <p>
+            Published: December 14, 2023
+            
+                
+                    | Last Modified: May 2, 2025
+                
+            
+        </p>
+        
+            <p>Tags: 
+            
+                <a href="http://localhost:1313/tags/python">Python</a> 
+            
+            </p>
+        
+        
+            <p>Categories: 
+            
+                <a href="http://localhost:1313/categories/python">Python</a> 
+            
+            </p>
+        
+    </header>
+    <section>
+        <ul>
+<li>
+<p>The <!-- raw HTML omitted -->original post<!-- raw HTML omitted -->.</p>
+</li>
+<li>
+<p>The model being used is <!-- raw HTML omitted -->mistralai/Mistral-7B-Instruct-v0.2<!-- raw HTML omitted -->.</p>
+</li>
+<li>
+<p>The UI I&rsquo;m using for inference is oobabooga&rsquo;s <!-- raw HTML omitted -->text-generation-webui<!-- raw HTML omitted -->.</p>
+</li>
+</ul>
+<h2 id="input">Input</h2>
+<p>I am using the first page of The Hobbit as a test input.</p>
+<pre tabindex="0"><code>In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the
+ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down
+on or to eat: it was a hobbit­hole, and that means comfort.
+It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob
+in the exact middle. The door opened on to a tube­shaped hall like a tunnel: a very comfortable
+tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished
+chairs, and lots and lots of pegs for hats and coats ­ the hobbit was fond of visitors. The tunnel
+wound on and on, going fairly but not quite straight into the side of the hill ­ The Hill, as all the
+people for many miles round called it ­ and many little round doors opened out of it, first on
+one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars,
+pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens,
+dining­rooms, all were on the same floor, and indeed on the same passage. The best rooms
+were all on the left­hand side (going in), for these were the only ones to have windows,
+deep­set round windows looking over his garden and meadows beyond, sloping down to the
+river.
+This hobbit was a very well­to­do hobbit, and his name was Baggins. The Bagginses had
+lived in the neighbourhood of The Hill for time out of mind, and people considered them very
+respectable, not only because most of them were rich, but also because they never had any
+adventures or did anything unexpected: you could tell what a Baggins would say on any
+question without the bother of asking him. This is a story of how a Baggins had an adventure,
+found himself doing and saying things altogether unexpected. He may have lost the
+neighbours&#39; respect, but he gained­well, you will see whether he gained anything in the end.
+The mother of our particular hobbit … what is a hobbit? I suppose hobbits need some
+description nowadays, since they have become rare and shy of the Big People, as they call us.
+They are (or were) a little people, about half our height, and smaller than the bearded Dwarves.
+Hobbits have no beards. There is little or no magic about them, except the ordinary everyday
+sort which helps them to disappear quietly and quickly when large stupid folk like you and me
+come blundering along, making a noise like elephants which they can hear a mile off. They are
+inclined to be at in the stomach; they dress in bright colours (chiefly green and yellow); wear
+no shoes, because their feet grow natural leathery soles and thick warm brown hair like the
+stuff on their heads (which is curly); have long clever brown fingers, good­natured faces, and
+laugh deep fruity laughs (especially after dinner, which they have twice a day when they can
+get it). Now you know enough to go on with. As I was saying, the mother of this hobbit ­ of
+Bilbo Baggins, that is ­ was the fabulous Belladonna Took, one of the three remarkable
+daughters of the Old Took, head of the hobbits who lived across The Water, the small river that
+ran at the foot of The Hill. It was often said (in other families) that long ago one of the Took
+ancestors must have taken a fairy wife. That was, of course, absurd, but certainly there was
+still something not entirely hobbit­like about them, ­ and once in a while members of the
+Took­clan would go and have adventures. They discreetly disappeared, and the family hushed
+it up; but the fact remained that the Tooks were not as respectable as the Bagginses, though
+they were undoubtedly richer. Not that Belladonna Took ever had any adventures after she
+became Mrs. Bungo Baggins. Bungo, that was Bilbo&#39;s father, built the most luxurious
+hobbit­hole for her (and partly with her money) that was to be found either under The Hill or
+over The Hill or across The Water, and there they remained to the end of their days. Still it is
+probable that Bilbo, her only son, although he looked and behaved exactly like a second edition
+of his solid and comfortable father, got something a bit queer in his makeup from the Took
+side, something that only waited for a chance to come out. The chance never arrived, until
+Bilbo Baggins was grown up, being about fifty years old or so, and living in the beautiful
+hobbit­hole built by his father, which I have just described for you, until he had in fact
+apparently settled down immovably.
+By some curious chance one morning long ago in the quiet of the world, when there was
+less noise and more green, and the hobbits were still numerous and prosperous, and Bilbo
+Baggins was standing at his door after breakfast smoking an enormous long wooden pipe that
+reached nearly down to his woolly toes (neatly brushed) ­ Gandalf came by. Gandalf! If you had
+heard only a quarter of what I have heard about him, and I have only heard very little of all
+there is to hear, you would be prepared for any sort I of remarkable tale. Tales and adventures
+sprouted up all over the place wherever he went, in the most extraordinary fashion. He had not
+been down that way under The Hill for ages and ages, not since his friend the Old Took died, in
+fact, and the hobbits had almost forgotten what he looked like. He had been away over The Hill
+and across The Water on business of his own since they were all small hobbit­boys and
+hobbit­girls.
+</code></pre><h2 id="output">Output</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;A hobbit lives in a hobbit-hole.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;tunnel-shaped hall&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;A hobbit-hole has a tunnel-shaped hall.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;The Hill&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;A hobbit-hole is located in The Hill.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins is a hobbit.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Bungo Baggins&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bungo Baggins is a hobbit and Bilbo Baggins&#39; father.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Belladonna Took&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; mother is Belladonna Took.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Gandalf&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Gandalf meets Bilbo Baggins.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Old Took&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Tooks are hobbits and ancestors of Bilbo Baggins.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Bagginses&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Bagginses are a hobbit family.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Tooks&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Tooks are a hobbit family.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;luxurious&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole is luxurious.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;comfortable&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole is comfortable.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;panelled walls&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has panelled walls.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;tiled and carpeted floors&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has tiled and carpeted floors.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;polished chairs&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has polished chairs.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;lots of pegs&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has lots of pegs.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;round doors&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has round doors.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;porthole-shaped door&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has a porthole-shaped door.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;green door&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has a green door.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;yellow brass knob&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has a yellow brass knob.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;tube-shaped hall&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has a tube-shaped hall.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;passage&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has a passage.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;bedrooms&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has bedrooms.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;bathrooms&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has bathrooms.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;cellars&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has cellars.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;pantries&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has pantries.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;wardrobes&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has wardrobes.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;kitchens&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has kitchens.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit-hole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;dining-rooms&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins&#39; hobbit-hole has dining-rooms.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;well-to-do&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins is well-to-do.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;respectable&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins is considered respectable.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;adventures&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins has adventures.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;unexpected things&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins does unexpected things.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Gandalf&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Bilbo Baggins meets Gandalf.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Big People&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits consider Big People as large and stupid.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;elephants&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits can hear elephants coming from a mile away.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;green and yellow&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits dress in bright green and yellow colors.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;no shoes&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits do not wear shoes.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;natural leathery soles&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have natural leathery soles.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;thick warm brown hair&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have thick warm brown hair.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;long clever brown fingers&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have long clever brown fingers.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;good-natured faces&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have good-natured faces.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;deep fruity laughs&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits laugh deeply and fruitily.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Bagginses&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Bagginses are a hobbit family.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Tooks&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Tooks are a hobbit family.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;Old Took&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Old Took is a hobbit and ancestor of Bilbo Baggins.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;fairy wife&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;It is said that one of the Took ancestors took a fairy wife.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;adventures&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Tooks have adventures.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;disappear quietly and quickly&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits can disappear quietly and quickly.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;stupid folk&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits consider Big People as stupid.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;elephants&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits can hear elephants coming from a mile away.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;green and yellow&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits dress in bright green and yellow colors.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;no shoes&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits do not wear shoes.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;natural leathery soles&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have natural leathery soles.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;thick warm brown hair&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have thick warm brown hair.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;long clever brown fingers&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have long clever brown fingers.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;good-natured faces&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits have good-natured faces.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;deep fruity laughs&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits laugh deeply and fruitily.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;The Hill&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The Hill is the location of Bilbo Baggins&#39; hobbit-hole.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;quiet of the world&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The world was quieter in the past.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;less noise&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;There was less noise in the world in the past.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;more green&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;The world was greener in the past.&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_1&#34;</span>: <span style="color:#e6db74">&#34;hobbit&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;node_2&#34;</span>: <span style="color:#e6db74">&#34;hobbits were numerous and prosperous&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;edge&#34;</span>: <span style="color:#e6db74">&#34;Hobbits were numerous and prosperous in the past.&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><h2 id="visualize-graph">Visualize Graph</h2>
+<p>This script assumes <code>graph.json</code> exists in the same directory.</p>
+<h3 id="install-dependencies">Install dependencies</h3>
+<pre tabindex="0"><code>pip install networkx
+</code></pre><pre tabindex="0"><code>pip install pyvis
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pyvis.network <span style="color:#f92672">import</span> Network
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> networkx <span style="color:#66d9ef">as</span> nx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_random_color</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Generate a random hex color.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;#</span><span style="color:#e6db74">{:06x}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0xFFFFFF</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Path to the JSON file</span>
+</span></span><span style="display:flex;"><span>file_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(__file__), <span style="color:#e6db74">&#39;graph.json&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load data from JSON file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(file_path, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(file)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a NetworkX graph</span>
+</span></span><span style="display:flex;"><span>G <span style="color:#f92672">=</span> nx<span style="color:#f92672">.</span>Graph()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add nodes and edges from the data</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> data:
+</span></span><span style="display:flex;"><span>    G<span style="color:#f92672">.</span>add_node(item[<span style="color:#e6db74">&#34;node_1&#34;</span>])
+</span></span><span style="display:flex;"><span>    G<span style="color:#f92672">.</span>add_node(item[<span style="color:#e6db74">&#34;node_2&#34;</span>])
+</span></span><span style="display:flex;"><span>    G<span style="color:#f92672">.</span>add_edge(item[<span style="color:#e6db74">&#34;node_1&#34;</span>], item[<span style="color:#e6db74">&#34;node_2&#34;</span>], title<span style="color:#f92672">=</span>item[<span style="color:#e6db74">&#34;edge&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Detect communities</span>
+</span></span><span style="display:flex;"><span>communities_generator <span style="color:#f92672">=</span> nx<span style="color:#f92672">.</span>community<span style="color:#f92672">.</span>girvan_newman(G)
+</span></span><span style="display:flex;"><span>top_level_communities <span style="color:#f92672">=</span> next(communities_generator)
+</span></span><span style="display:flex;"><span>next_level_communities <span style="color:#f92672">=</span> next(communities_generator)
+</span></span><span style="display:flex;"><span>communities <span style="color:#f92672">=</span> sorted(map(sorted, next_level_communities))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a PyVis network from the NetworkX graph</span>
+</span></span><span style="display:flex;"><span>net <span style="color:#f92672">=</span> Network(height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1100px&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;100%&#39;</span>, notebook<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, select_menu<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Assign different random colors to different communities</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> community <span style="color:#f92672">in</span> communities:
+</span></span><span style="display:flex;"><span>    color <span style="color:#f92672">=</span> generate_random_color()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> community:
+</span></span><span style="display:flex;"><span>        net<span style="color:#f92672">.</span>add_node(node, node, color<span style="color:#f92672">=</span>color)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add edges</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> edge <span style="color:#f92672">in</span> G<span style="color:#f92672">.</span>edges(data<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>    net<span style="color:#f92672">.</span>add_edge(edge[<span style="color:#ae81ff">0</span>], edge[<span style="color:#ae81ff">1</span>], title<span style="color:#f92672">=</span>edge[<span style="color:#ae81ff">2</span>][<span style="color:#e6db74">&#39;title&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add additional options for better visualization</span>
+</span></span><span style="display:flex;"><span>net<span style="color:#f92672">.</span>set_options(<span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">var options = {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;nodes&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;font&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;size&#34;: 14
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;edges&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;color&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;inherit&#34;: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;smooth&#34;: false
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;physics&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;barnesHut&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;gravitationalConstant&#34;: -80000,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;centralGravity&#34;: 0.3,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;springLength&#34;: 200,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;springConstant&#34;: 0.04,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;damping&#34;: 0.09,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;avoidOverlap&#34;: 0.1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;minVelocity&#34;: 0.75
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save the network</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#net.show(&#34;network.html&#34;)</span>
+</span></span><span style="display:flex;"><span>net<span style="color:#f92672">.</span>write_html(<span style="color:#e6db74">&#34;network.html&#34;</span>, local<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, notebook<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, open_browser<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div>
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (18)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/genesys-cloud/">Genesys Cloud (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>

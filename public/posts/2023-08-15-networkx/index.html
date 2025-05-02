@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Python script for visualizing nodes with the networkx library.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/posts/2023-08-15-networkx/">
+    
+    <title>Python networkx Library | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+        <h2>BTC</h2>
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Python networkx Library</h2>
+        <p>
+            Published: August 14, 2023
+            
+                
+                    | Last Modified: May 2, 2025
+                
+            
+        </p>
+        
+            <p>Tags: 
+            
+                <a href="http://localhost:1313/tags/images">images</a> 
+            
+            </p>
+        
+        
+            <p>Categories: 
+            
+                <a href="http://localhost:1313/categories/python">Python</a> 
+            
+            </p>
+        
+    </header>
+    <section>
+        <h2 id="environment-setup">Environment Setup</h2>
+<p>I ran into an issue when running <code>pip install networkx</code>. I had to CD to the path where I had Python installed. To find out where Python is installed, use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>where Python
+</span></span></code></pre></div><p>and the output should resemble:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\&lt;</span>you&gt;<span style="color:#ae81ff">\A</span>ppData<span style="color:#ae81ff">\L</span>ocal<span style="color:#ae81ff">\a</span>naconda3<span style="color:#ae81ff">\p</span>ython.exe
+</span></span><span style="display:flex;"><span>C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\&lt;</span>you&gt;<span style="color:#ae81ff">\A</span>ppData<span style="color:#ae81ff">\L</span>ocal<span style="color:#ae81ff">\P</span>rograms<span style="color:#ae81ff">\P</span>ython<span style="color:#ae81ff">\P</span>ython311<span style="color:#ae81ff">\p</span>ython.exe
+</span></span><span style="display:flex;"><span>C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\&lt;</span>you&gt;<span style="color:#ae81ff">\A</span>ppData<span style="color:#ae81ff">\L</span>ocal<span style="color:#ae81ff">\M</span>icrosoft<span style="color:#ae81ff">\W</span>indowsApps<span style="color:#ae81ff">\p</span>ython.exe
+</span></span></code></pre></div><p>followed by:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>cd C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\&lt;</span>you&gt;<span style="color:#ae81ff">\A</span>ppData<span style="color:#ae81ff">\L</span>ocal<span style="color:#ae81ff">\P</span>rograms<span style="color:#ae81ff">\P</span>ython<span style="color:#ae81ff">\P</span>ython311<span style="color:#ae81ff">\p</span>ython.exe
+</span></span><span style="display:flex;"><span>pip install networkx
+</span></span></code></pre></div><h2 id="python-script">Python Script</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> networkx <span style="color:#66d9ef">as</span> nx
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib.patches <span style="color:#f92672">import</span> Ellipse
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load the JSON data</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;dummy-data.json&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(file)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a graph</span>
+</span></span><span style="display:flex;"><span>G <span style="color:#f92672">=</span> nx<span style="color:#f92672">.</span>DiGraph()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add nodes and edges to the graph from the JSON data</span>
+</span></span><span style="display:flex;"><span>node_colors <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>group_nodes <span style="color:#f92672">=</span> {}  <span style="color:#75715e"># {group: [node1, node2, ...]}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> group, details <span style="color:#f92672">in</span> data[<span style="color:#e6db74">&#34;groups&#34;</span>]<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> group <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> group_nodes:
+</span></span><span style="display:flex;"><span>        group_nodes[group] <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> edge <span style="color:#f92672">in</span> details[<span style="color:#e6db74">&#34;edges&#34;</span>]:
+</span></span><span style="display:flex;"><span>        G<span style="color:#f92672">.</span>add_edge(edge[<span style="color:#e6db74">&#34;source&#34;</span>], edge[<span style="color:#e6db74">&#34;target&#34;</span>], color<span style="color:#f92672">=</span>details[<span style="color:#e6db74">&#34;color&#34;</span>], label<span style="color:#f92672">=</span>edge[<span style="color:#e6db74">&#34;label&#34;</span>])
+</span></span><span style="display:flex;"><span>        node_colors[edge[<span style="color:#e6db74">&#34;source&#34;</span>]] <span style="color:#f92672">=</span> details[<span style="color:#e6db74">&#34;color&#34;</span>]
+</span></span><span style="display:flex;"><span>        group_nodes[group]<span style="color:#f92672">.</span>append(edge[<span style="color:#e6db74">&#34;source&#34;</span>])
+</span></span><span style="display:flex;"><span>        group_nodes[group]<span style="color:#f92672">.</span>append(edge[<span style="color:#e6db74">&#34;target&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compute node positions</span>
+</span></span><span style="display:flex;"><span>width, height <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>pos <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>center_node <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;source-node&#34;</span>
+</span></span><span style="display:flex;"><span>pos[center_node] <span style="color:#f92672">=</span> (width <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>, height <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>node_colors[center_node] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#8888FF&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Positioning nodes around a circle</span>
+</span></span><span style="display:flex;"><span>shell_nodes <span style="color:#f92672">=</span> [node <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> G<span style="color:#f92672">.</span>nodes() <span style="color:#66d9ef">if</span> node <span style="color:#f92672">!=</span> center_node]
+</span></span><span style="display:flex;"><span>angle_step <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">/</span> len(shell_nodes)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> index, node <span style="color:#f92672">in</span> enumerate(shell_nodes):
+</span></span><span style="display:flex;"><span>    angle <span style="color:#f92672">=</span> index <span style="color:#f92672">*</span> angle_step
+</span></span><span style="display:flex;"><span>    pos[node] <span style="color:#f92672">=</span> (width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.75</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(angle), height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.75</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(angle))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set DPI for the desired resolution</span>
+</span></span><span style="display:flex;"><span>dpi <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span>fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">24</span>), dpi<span style="color:#f92672">=</span>dpi)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Legend proxy artists</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib.patches <span style="color:#f92672">import</span> Patch
+</span></span><span style="display:flex;"><span>legend_handles <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    Patch(facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;#FF8888&#39;</span>, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;group-01&#39;</span>),
+</span></span><span style="display:flex;"><span>    Patch(facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;#88FF88&#39;</span>, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;group-02&#39;</span>)
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>colors <span style="color:#f92672">=</span> [node_colors[node] <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> G<span style="color:#f92672">.</span>nodes()]
+</span></span><span style="display:flex;"><span>nx<span style="color:#f92672">.</span>draw_networkx_nodes(G, pos, node_color<span style="color:#f92672">=</span>colors, node_size<span style="color:#f92672">=</span><span style="color:#ae81ff">20000</span>, ax<span style="color:#f92672">=</span>ax)
+</span></span><span style="display:flex;"><span>nx<span style="color:#f92672">.</span>draw_networkx_labels(G, pos, ax<span style="color:#f92672">=</span>ax, font_size<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> edge <span style="color:#f92672">in</span> G<span style="color:#f92672">.</span>edges(data<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>    nx<span style="color:#f92672">.</span>draw_networkx_edges(G, pos, edgelist<span style="color:#f92672">=</span>[(edge[<span style="color:#ae81ff">0</span>], edge[<span style="color:#ae81ff">1</span>])], ax<span style="color:#f92672">=</span>ax, edge_color<span style="color:#f92672">=</span>edge[<span style="color:#ae81ff">2</span>][<span style="color:#e6db74">&#34;color&#34;</span>], width<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>edge_labels <span style="color:#f92672">=</span> nx<span style="color:#f92672">.</span>get_edge_attributes(G, <span style="color:#e6db74">&#39;label&#39;</span>)
+</span></span><span style="display:flex;"><span>nx<span style="color:#f92672">.</span>draw_networkx_edge_labels(G, pos, edge_labels<span style="color:#f92672">=</span>edge_labels, font_size<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Draw ellipses around groups of nodes</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> group, nodes <span style="color:#f92672">in</span> group_nodes<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>    unique_nodes <span style="color:#f92672">=</span> list(set(nodes))
+</span></span><span style="display:flex;"><span>    coords <span style="color:#f92672">=</span> [pos[node] <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> unique_nodes]
+</span></span><span style="display:flex;"><span>    x_coords, y_coords <span style="color:#f92672">=</span> zip(<span style="color:#f92672">*</span>coords)
+</span></span><span style="display:flex;"><span>    center <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(x_coords), np<span style="color:#f92672">.</span>mean(y_coords)
+</span></span><span style="display:flex;"><span>    distances <span style="color:#f92672">=</span> [np<span style="color:#f92672">.</span>sqrt((x <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (y <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> coords]
+</span></span><span style="display:flex;"><span>    max_distance <span style="color:#f92672">=</span> max(distances)
+</span></span><span style="display:flex;"><span>    ellipse <span style="color:#f92672">=</span> Ellipse(center, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>max_distance, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>max_distance, fill<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, edgecolor<span style="color:#f92672">=</span>node_colors[unique_nodes[<span style="color:#ae81ff">0</span>]], linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>add_patch(ellipse)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Adding the legend to the plot</span>
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>legend(handles<span style="color:#f92672">=</span>legend_handles, loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper right&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#34;off&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#34;graph.png&#34;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;png&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h2 id="json-schema">JSON Schema</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;nodes&#34;</span>: [],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;groups&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;group-01&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;color&#34;</span>: <span style="color:#e6db74">&#34;#FF8888&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;edges&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-01-node-01&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-02-node-02&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-03-node-03&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-03-node-04&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-04-node-05&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-05-node-06&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-06-node-07&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-07-node-08&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;group 02&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;color&#34;</span>: <span style="color:#e6db74">&#34;#88FF88&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;edges&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-02-node-01&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-02-node-02&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-02-node-03&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-02-node-04&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;group-02-node-05&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;source-node&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;label&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="graph-output">Graph Output</h2>
+<figure><img src="http://localhost:1313/posts/2023-08-15-networkx/graph.png">
+</figure>
+
+
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (18)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/genesys-cloud/">Genesys Cloud (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>
