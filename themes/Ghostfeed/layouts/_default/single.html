@@ -5,27 +5,32 @@
         <p>
             Published: {{ .Date.Format "January 2, 2006" }}
             {{ with .GitInfo }}
-                {{ if ne $.Date .AuthorDate }}
-                    | Last Modified: {{ .AuthorDate.Format "January 2, 2006" }}
-                {{ end }}
+            {{ if ne $.Date .AuthorDate }}
+            | Last Modified: {{ .AuthorDate.Format "January 2, 2006" }}
+            {{ end }}
             {{ end }}
         </p>
         {{ with .Params.tags }}
-            <p>Tags: 
+        <p>Tags:
             {{ range . }}
-                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> 
+            <a href="{{ " /tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
             {{ end }}
-            </p>
+        </p>
         {{ end }}
         {{ with .Params.categories }}
-            <p>Categories: 
+        <p>Categories:
             {{ range . }}
-                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> 
+            <a href="{{ " /categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
             {{ end }}
-            </p>
+        </p>
         {{ end }}
     </header>
     <section>
+        {{ if .Params.toc }}
+        <hr>
+        {{ .TableOfContents }}
+        <hr>
+        {{ end }}
         {{ .Content }}
     </section>
 </article>
