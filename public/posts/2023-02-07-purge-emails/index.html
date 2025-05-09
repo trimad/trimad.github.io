@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A comprehensive guide to managing compromised Microsoft 365 accounts using PowerShell&rsquo;s ExchangeOnlineManagement module, with specific techniques for reviewing suspicious activity, purging malicious emails, and checking inbox rules.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/posts/2023-02-07-purge-emails/">
+    
+    <title>Handling Hacked Accounts and Purging Emails in M365 | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <h2>BTC</h2>
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Handling Hacked Accounts and Purging Emails in M365</h2>
+        <p>
+            Published: February 7, 2023
+            
+            
+            | Last Modified: May 2, 2025
+            
+            
+        </p>
+        
+        <p>Tags:
+            
+            <a href="http://localhost:1313/%20/tags/email-security">email security</a>
+            
+            <a href="http://localhost:1313/%20/tags/hacked-accounts">hacked accounts</a>
+            
+            <a href="http://localhost:1313/%20/tags/m365">M365</a>
+            
+            <a href="http://localhost:1313/%20/tags/exchangeonlinemanagement">ExchangeOnlineManagement</a>
+            
+        </p>
+        
+        
+        <p>Categories:
+            
+            <a href="http://localhost:1313/%20/categories/powershell">PowerShell</a>
+            
+        </p>
+        
+    </header>
+    <section>
+        
+        <hr>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#block-unwanted-emails">Block Unwanted Emails</a></li>
+    <li><a href="#review-past-week-of-sign-in-history">Review Past Week of Sign-In History</a></li>
+    <li><a href="#define-content-search-criteria">Define Content Search Criteria</a></li>
+    <li><a href="#connect-to-exchange-online-management">Connect to Exchange Online Management</a></li>
+    <li><a href="#purge-unwanted-content">Purge Unwanted Content</a></li>
+    <li><a href="#check-inbox-rules">Check Inbox Rules</a></li>
+  </ul>
+</nav>
+        <hr>
+        
+        <h2 id="block-unwanted-emails">Block Unwanted Emails</h2>
+<p><strong>Objective:</strong> Prevent sending or receiving emails from specific external email addresses or domains.</p>
+<p><strong>Action:</strong> Navigate to the Tenant Allow/Block List in the Microsoft Security Center. Configure the settings to block specific email addresses or domains. For direct access, use this link: <a href="https://security.microsoft.com/tenantAllowBlockList">Tenant Allow/Block List</a>.</p>
+<h2 id="review-past-week-of-sign-in-history">Review Past Week of Sign-In History</h2>
+<p><strong>Objective:</strong> Review sign-in history to identify any unusual user activity.</p>
+<p><strong>Action:</strong> Access the Azure portal&rsquo;s sign-in history section. Specify the user of interest and examine their sign-in locations and activities. Access the portal here: <a href="https://portal.azure.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/SignIns">Azure Sign-In History</a>.</p>
+<h2 id="define-content-search-criteria">Define Content Search Criteria</h2>
+<p><strong>Objective:</strong> Search and identify specific emails that need to be removed from your organization.</p>
+<p><strong>Action:</strong> Utilize the Content Search feature in the Microsoft Compliance center. Define your search criteria to target specific emails. Access Content Search here: <a href="https://compliance.microsoft.com/contentsearchv2?viewid=search">Content Search in Compliance Center</a>.</p>
+<h2 id="connect-to-exchange-online-management">Connect to Exchange Online Management</h2>
+<p><strong>Preparation:</strong> The following steps require PowerShell. Ensure you launch <code>powershell_ise</code> with administrative privileges.</p>
+<p><strong>Action:</strong> Establish a connection to Exchange Online Management using an elevated PowerShell session.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned <span style="color:#75715e"># If not already set.</span>
+</span></span><span style="display:flex;"><span>Install-Module -Name ExchangeOnlineManagement <span style="color:#75715e"># If not installed.</span>
+</span></span><span style="display:flex;"><span>Import-Module ExchangeOnlineManagement <span style="color:#75715e"># This is a necessary step.</span>
+</span></span><span style="display:flex;"><span>Connect-IPPSSession <span style="color:#75715e"># Launches a Modern Authentication Window.</span>
+</span></span></code></pre></div><h2 id="purge-unwanted-content">Purge Unwanted Content</h2>
+<p><strong>Confirmation:</strong> Ensure that your content search in the Compliance Center is valid. If the search name isn&rsquo;t visible, it might still be processing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-ComplianceSearch | Sort-Object JobEndTime <span style="color:#75715e"># Retrieve and sort all compliance searches by job end time.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or</span>
+</span></span><span style="display:flex;"><span>Get-ComplianceSearch -Identity <span style="color:#e6db74">&#34;05297487&#34;</span> | Select-Object * <span style="color:#75715e"># Retrieveall stats of only one content search that you know the name of.</span>
+</span></span></code></pre></div><p><strong>Action:</strong> Execute a &ldquo;hard delete&rdquo; on the identified content based on your search.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>New-ComplianceSearchAction -SearchName <span style="color:#e6db74">&#34;name_of_content_search&#34;</span> -Purge -PurgeType HardDelete <span style="color:#75715e"># Perform a hard delete of the search results.</span>
+</span></span></code></pre></div><p><strong>Status Check:</strong> Monitor the progress of the hard delete operation. The names of purge actions are typically appended with <code>_Purge</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-ComplianceSearchAction -Identity <span style="color:#e6db74">&#34;name_of_content_search_Purge&#34;</span> | Format-List <span style="color:#75715e"># Check the status of the purge operation.</span>
+</span></span></code></pre></div><p><strong>Disconnect:</strong> End your session with Exchange Online Management.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Disconnect-ExchangeOnline <span style="color:#75715e"># Disconnect from Exchange Online Management.</span>
+</span></span></code></pre></div><h2 id="check-inbox-rules">Check Inbox Rules</h2>
+<p><strong>Objective:</strong> Review and analyze inbox rules for each user to detect any unusual or unauthorized rules.</p>
+<p><strong>Action:</strong> Run the following PowerShell script to extract inbox rules for a list of specified user email addresses.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-Module ExchangeOnlineManagement
+</span></span><span style="display:flex;"><span>Connect-ExchangeOnline <span style="color:#75715e"># Launches a Modern Authentication Window.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define an array of user email addresses</span>
+</span></span><span style="display:flex;"><span>$userEmails = @(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;example-one@contoso.com&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;example-two@contoso.com&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;example-three@contoso.com&#39;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through each user and retrieve their inbox rules</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($userEmail <span style="color:#66d9ef">in</span> $userEmails) {
+</span></span><span style="display:flex;"><span>    Write-Host (<span style="color:#e6db74">&#34;Getting inbox rules for: &#34;</span> + $userEmail)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Attempt to fetch inbox rules for each user</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        $inboxRules = Get-InboxRule -Mailbox $userEmail
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($inboxRules) {
+</span></span><span style="display:flex;"><span>            Write-Host (<span style="color:#e6db74">&#34;Inbox rules for &#34;</span> + $userEmail + <span style="color:#e6db74">&#34;:&#34;</span>)
+</span></span><span style="display:flex;"><span>            $inboxRules | Format-List *  <span style="color:#75715e"># Display all properties of the inbox rules</span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            Write-Host (<span style="color:#e6db74">&#34;No inbox rules found for &#34;</span> + $userEmail + <span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>        Write-Host (<span style="color:#e6db74">&#34;Error retrieving inbox rules for &#34;</span> + $userEmail + <span style="color:#e6db74">&#34;: &#34;</span> + $_.Exception.Message)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/xml/">XML (1)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/cisco/">Cisco (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/procdump/">Procdump (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sysinternals/">Sysinternals (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/troubleshooting/">Troubleshooting (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vpn/">VPN (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windbg/">Windbg (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>

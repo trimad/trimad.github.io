@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A collection of Python and JavaScript utility scripts for processing, enhancing, and manipulating images generated with Stable Diffusion, including file renaming, sorting, color grading, and special effects tools.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/posts/2023-02-05-stable-diffusion/">
+    
+    <title>Stable Diffusion Scripts | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <h2>BTC</h2>
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Stable Diffusion Scripts</h2>
+        <p>
+            Published: February 5, 2023
+            
+            
+            | Last Modified: May 2, 2025
+            
+            
+        </p>
+        
+        <p>Tags:
+            
+            <a href="http://localhost:1313/%20/tags/ai">ai</a>
+            
+            <a href="http://localhost:1313/%20/tags/images">images</a>
+            
+            <a href="http://localhost:1313/%20/tags/video">video</a>
+            
+        </p>
+        
+        
+        <p>Categories:
+            
+            <a href="http://localhost:1313/%20/categories/javascript">JavaScript</a>
+            
+            <a href="http://localhost:1313/%20/categories/python">Python</a>
+            
+        </p>
+        
+    </header>
+    <section>
+        
+        <hr>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#data-grooming">Data Grooming</a>
+      <ul>
+        <li><a href="#numbering-png-files-in-a-folder-in-sequence">Numbering PNG files in a folder in sequence</a></li>
+      </ul>
+    </li>
+    <li><a href="#delete-every-other-image-in-a-folder">Delete every other image in a folder</a>
+      <ul>
+        <li><a href="#distance-sort">Distance Sort</a></li>
+      </ul>
+    </li>
+    <li><a href="#color-grading">Color Grading</a>
+      <ul>
+        <li><a href="#by-mean">By Mean</a></li>
+      </ul>
+    </li>
+    <li><a href="#generate-cfg-values-for-xy-plot">Generate CFG values for X/Y plot</a></li>
+    <li><a href="#add-a-vignette-fade">Add a vignette fade</a></li>
+    <li><a href="#pixelate">Pixelate</a></li>
+  </ul>
+</nav>
+        <hr>
+        
+        <h2 id="data-grooming">Data Grooming</h2>
+<h3 id="numbering-png-files-in-a-folder-in-sequence">Numbering PNG files in a folder in sequence</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pathlib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    collection <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getcwd()
+</span></span><span style="display:flex;"><span>    num_files_renamed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, filename <span style="color:#f92672">in</span> enumerate(os<span style="color:#f92672">.</span>listdir(collection)):
+</span></span><span style="display:flex;"><span>        file_extension <span style="color:#f92672">=</span> pathlib<span style="color:#f92672">.</span>Path(filename)<span style="color:#f92672">.</span>suffix
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> file_extension <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.png&#34;</span> <span style="color:#f92672">or</span> file_extension <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.jpg&#34;</span>:
+</span></span><span style="display:flex;"><span>            new_filename <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>str(i)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">5</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">.png&#34;</span>
+</span></span><span style="display:flex;"><span>            old_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(collection, filename)
+</span></span><span style="display:flex;"><span>            new_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(collection, new_filename)
+</span></span><span style="display:flex;"><span>            os<span style="color:#f92672">.</span>rename(old_path, new_path)
+</span></span><span style="display:flex;"><span>            num_files_renamed <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Renamed file </span><span style="color:#e6db74">{</span>filename<span style="color:#e6db74">}</span><span style="color:#e6db74"> to </span><span style="color:#e6db74">{</span>new_filename<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Renamed </span><span style="color:#e6db74">{</span>num_files_renamed<span style="color:#e6db74">}</span><span style="color:#e6db74"> files.&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Error occurred: </span><span style="color:#e6db74">{</span>e<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>This Python script renames all PNG and JPG files in the current working directory by adding a sequential number to the beginning of the filename, padded with leading zeros, and changing the file extension to PNG. It uses the os and pathlib modules to access the file system and the try-except block to catch any errors that may occur during file renaming. The script also prints progress messages to the console, showing the original and new filenames of each file that is renamed.</p>
+<h2 id="delete-every-other-image-in-a-folder">Delete every other image in a folder</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get the current working directory</span>
+</span></span><span style="display:flex;"><span>cwd <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getcwd()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get a list of all the files in the directory</span>
+</span></span><span style="display:flex;"><span>files <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(cwd)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># loop through the list of files</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, file <span style="color:#f92672">in</span> enumerate(files):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># check if the file is an image file</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.jpg&#39;</span>) <span style="color:#f92672">or</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.jpeg&#39;</span>) <span style="color:#f92672">or</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.png&#39;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># delete every other image file</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            os<span style="color:#f92672">.</span>remove(file)
+</span></span></code></pre></div><h3 id="distance-sort">Distance Sort</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>folder_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:/Users/trima/FILM/photos&#39;</span>
+</span></span><span style="display:flex;"><span>image_files <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(folder_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Open the first image and get its RGB values</span>
+</span></span><span style="display:flex;"><span>first_image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path, image_files[<span style="color:#ae81ff">0</span>]))
+</span></span><span style="display:flex;"><span>first_image_rgb <span style="color:#f92672">=</span> first_image<span style="color:#f92672">.</span>getdata()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a list to store the distances</span>
+</span></span><span style="display:flex;"><span>distances <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate over the remaining images in the folder</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> image_file <span style="color:#f92672">in</span> image_files[<span style="color:#ae81ff">1</span>:]:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> image_file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.png&#39;</span>):
+</span></span><span style="display:flex;"><span>        image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path, image_file))
+</span></span><span style="display:flex;"><span>        image_rgb <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>getdata()
+</span></span><span style="display:flex;"><span>        distance <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(first_image_rgb)):
+</span></span><span style="display:flex;"><span>            distance <span style="color:#f92672">+=</span> sqrt((first_image_rgb[i][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span>image_rgb[i][<span style="color:#ae81ff">0</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (first_image_rgb[i][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span>image_rgb[i][<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (first_image_rgb[i][<span style="color:#ae81ff">2</span>]<span style="color:#f92672">-</span>image_rgb[i][<span style="color:#ae81ff">2</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        print((distance, image_file))
+</span></span><span style="display:flex;"><span>        distances<span style="color:#f92672">.</span>append((distance, image_file))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sort the distances list by distance</span>
+</span></span><span style="display:flex;"><span>distances<span style="color:#f92672">.</span>sort()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Rename the first image to &#34;0000.png&#34;</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>rename(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path, image_files[<span style="color:#ae81ff">0</span>]), os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path, <span style="color:#e6db74">&#34;0000.png&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Rename each image to the next number in the sequence</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(distances)):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>rename(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path, distances[i][<span style="color:#ae81ff">1</span>]), os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path, str(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">4</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.png&#39;</span>))
+</span></span></code></pre></div><p>This script is a Python script that renames a sequence of PNG images in a folder based on the distance of their RGB values from the RGB values of the first image in the sequence. The script imports the os, PIL and math modules, it sets the folder path where the images are located and get the list of all files in that folder. It opens the first image and gets its RGB values, then creates an empty list to store the distances. It iterates over the remaining images in the folder, if the file is a png it opens the image and gets its RGB values. Then it calculates the distance between the RGB values of the current image and the first image using the Euclidean distance formula, appends the distance and the image name to the distance list. The script then sorts the distance list by the distance, renames the first image to &ldquo;0000.png&rdquo; and renames each image to the next number in the sequence using the os.rename() function, and 4 digits zero-padded number followed by the extension.</p>
+<h2 id="color-grading">Color Grading</h2>
+<h3 id="by-mean">By Mean</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">average_color_grading</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get all image filenames in the same directory as the script</span>
+</span></span><span style="display:flex;"><span>    filenames <span style="color:#f92672">=</span> [f <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir() <span style="color:#66d9ef">if</span> f<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.jpg&#39;</span>) <span style="color:#f92672">or</span> f<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.png&#39;</span>)]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Initialize a sum of color grading for all images</span>
+</span></span><span style="display:flex;"><span>    color_grading_sum <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Iterate through all images, adding each image&#39;s color grading to the sum</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> filename <span style="color:#f92672">in</span> filenames:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;averaging &#34;</span> <span style="color:#f92672">+</span> filename)
+</span></span><span style="display:flex;"><span>        image_path <span style="color:#f92672">=</span> filename
+</span></span><span style="display:flex;"><span>        image <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(image_path)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Average color grading of an image is computed as mean of its pixels</span>
+</span></span><span style="display:flex;"><span>        color_grading <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(image, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Add the color grading of the current image to the sum</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> color_grading_sum <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>            color_grading_sum <span style="color:#f92672">=</span> color_grading
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            color_grading_sum <span style="color:#f92672">+=</span> color_grading
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Divide the sum of color grading by the number of images to get the average color grading</span>
+</span></span><span style="display:flex;"><span>    average_color_grading <span style="color:#f92672">=</span> color_grading_sum <span style="color:#f92672">/</span> len(filenames)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> average_color_grading
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">apply_color_grading</span>(average_color_grading):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get all image filenames in the same directory as the script</span>
+</span></span><span style="display:flex;"><span>    filenames <span style="color:#f92672">=</span> [f <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir() <span style="color:#66d9ef">if</span> f<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.jpg&#39;</span>) <span style="color:#f92672">or</span> f<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.png&#39;</span>)]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a new folder to save the color graded frames</span>
+</span></span><span style="display:flex;"><span>    color_graded_folder <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(os<span style="color:#f92672">.</span>getcwd(), <span style="color:#e6db74">&#39;color_graded&#39;</span>)
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>makedirs(color_graded_folder, exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Iterate through all images, applying the average color grading to each frame</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, filename <span style="color:#f92672">in</span> enumerate(filenames):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;color grading &#34;</span> <span style="color:#f92672">+</span> filename)
+</span></span><span style="display:flex;"><span>        image_path <span style="color:#f92672">=</span> filename
+</span></span><span style="display:flex;"><span>        image <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(image_path)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Subtract the average color grading from each pixel to apply the color grading</span>
+</span></span><span style="display:flex;"><span>        color_graded_image <span style="color:#f92672">=</span> image <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>mean(image, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">+</span> average_color_grading
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Zero-pad the sequential number and save the color graded image with the zero-padded sequential number</span>
+</span></span><span style="display:flex;"><span>        color_graded_image_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(color_graded_folder, str(i)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">5</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.png&#39;</span>)
+</span></span><span style="display:flex;"><span>        cv2<span style="color:#f92672">.</span>imwrite(color_graded_image_path, color_graded_image)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>average_color_grading <span style="color:#f92672">=</span> average_color_grading()
+</span></span><span style="display:flex;"><span>apply_color_grading(average_color_grading)
+</span></span></code></pre></div><p>This program applies color grading to a set of images stored in the &ldquo;images&rdquo; folder. It does so by first computing the average color grading of all the images and then subtracting the average color grading from each pixel of each image and adding the average color grading. The resulting color graded images are saved in a new folder called &ldquo;color_graded&rdquo; within the &ldquo;images&rdquo; folder. It applies the average color grading to each frame by subtracting the mean of each frame&rsquo;s pixels from each pixel and adding the average color grading.</p>
+<h2 id="generate-cfg-values-for-xy-plot">Generate CFG values for X/Y plot</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">frames</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setup</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">noLoop</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">frames</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">i</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">frames</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">9</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">str</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">nf</span>(<span style="color:#a6e22e">x</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">str</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">frames</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">str</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="add-a-vignette-fade">Add a vignette fade</h2>
+<p>Fades from bottom to top. Great for hiding mistakes and artifacts.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>from PIL import Image
+</span></span><span style="display:flex;"><span>import os
+</span></span><span style="display:flex;"><span>import threading
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the directory where the script is located</span>
+</span></span><span style="display:flex;"><span>script_dir <span style="color:#f92672">=</span> os.path.dirname<span style="color:#f92672">(</span>os.path.abspath<span style="color:#f92672">(</span>__file__<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>class VignetteThread<span style="color:#f92672">(</span>threading.Thread<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    def __init__<span style="color:#f92672">(</span>self, filename<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        threading.Thread.__init__<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        self.filename <span style="color:#f92672">=</span> filename
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    def run<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Open the image file</span>
+</span></span><span style="display:flex;"><span>        image <span style="color:#f92672">=</span> Image.open<span style="color:#f92672">(</span>os.path.join<span style="color:#f92672">(</span>script_dir, self.filename<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Define the size of the vignette black fade</span>
+</span></span><span style="display:flex;"><span>        fade_height <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Create a black mask with the same size as the image</span>
+</span></span><span style="display:flex;"><span>        mask <span style="color:#f92672">=</span> Image.new<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;L&#34;</span>, image.size, 255<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Draw a linear gradient from white to black on the mask</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> y in range<span style="color:#f92672">(</span>image.size<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> - fade_height, image.size<span style="color:#f92672">[</span>1<span style="color:#f92672">])</span>:
+</span></span><span style="display:flex;"><span>            alpha <span style="color:#f92672">=</span> int<span style="color:#f92672">(</span><span style="color:#ae81ff">255</span> * <span style="color:#f92672">(</span>y - <span style="color:#f92672">(</span>image.size<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> - fade_height<span style="color:#f92672">))</span> / fade_height<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            mask.paste<span style="color:#f92672">(</span><span style="color:#ae81ff">255</span> - alpha, <span style="color:#f92672">(</span>0, y, image.size<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>, y+1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Apply the mask to the image</span>
+</span></span><span style="display:flex;"><span>        image.putalpha<span style="color:#f92672">(</span>mask<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Save the modified image with a new filename</span>
+</span></span><span style="display:flex;"><span>        new_filename <span style="color:#f92672">=</span> os.path.splitext<span style="color:#f92672">(</span>self.filename<span style="color:#f92672">)[</span>0<span style="color:#f92672">]</span> + <span style="color:#e6db74">&#34;_vignette.png&#34;</span>
+</span></span><span style="display:flex;"><span>        image.save<span style="color:#f92672">(</span>os.path.join<span style="color:#f92672">(</span>script_dir, new_filename<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loop through each file in the directory and create a thread for each image</span>
+</span></span><span style="display:flex;"><span>threads <span style="color:#f92672">=</span> <span style="color:#f92672">[]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> filename in os.listdir<span style="color:#f92672">(</span>script_dir<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> filename.endswith<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.jpg&#34;</span><span style="color:#f92672">)</span> or filename.endswith<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.png&#34;</span><span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        thread <span style="color:#f92672">=</span> VignetteThread<span style="color:#f92672">(</span>filename<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        threads.append<span style="color:#f92672">(</span>thread<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        thread.start<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Wait for all threads to complete</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> thread in threads:
+</span></span><span style="display:flex;"><span>    thread.join<span style="color:#f92672">()</span>
+</span></span></code></pre></div><h2 id="pixelate">Pixelate</h2>
+<p>Stable Diffusion is pretty bad at making convincing looking pixel art. This script post-processes images by average 4x4 clusters of pixels as well as rounding RGB values to MOD4 to reduce the color palette.
+<img src="animooted.gif" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the pixel size of the grid</span>
+</span></span><span style="display:flex;"><span>GRID_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Helper function to round a color channel to the nearest multiple of 4</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">round_to_mod4</span>(value):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> round(value <span style="color:#f92672">/</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create the output directory if it doesn&#39;t exist</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;output&#39;</span>):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>makedirs(<span style="color:#e6db74">&#39;output&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through all files in the current directory</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> filename <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;.&#39;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> filename<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.png&#39;</span>) <span style="color:#f92672">or</span> filename<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.jpg&#39;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Open the image and get its size</span>
+</span></span><span style="display:flex;"><span>        image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(filename)
+</span></span><span style="display:flex;"><span>        width, height <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>size
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Create a new blank image to hold the pixelated version</span>
+</span></span><span style="display:flex;"><span>        pixelated <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#39;RGB&#39;</span>, (width, height), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;white&#39;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Loop through each 2x2 pixel grid in the image</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, width, GRID_SIZE):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, height, GRID_SIZE):
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Get the colors of the 4 pixels in the grid</span>
+</span></span><span style="display:flex;"><span>                colors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(GRID_SIZE):
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(GRID_SIZE):
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> x<span style="color:#f92672">+</span>i <span style="color:#f92672">&lt;</span> width <span style="color:#f92672">and</span> y<span style="color:#f92672">+</span>j <span style="color:#f92672">&lt;</span> height:
+</span></span><span style="display:flex;"><span>                            colors<span style="color:#f92672">.</span>append(image<span style="color:#f92672">.</span>getpixel((x<span style="color:#f92672">+</span>i, y<span style="color:#f92672">+</span>j)))
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Calculate the average color of the grid, rounding each channel to the nearest multiple of 4</span>
+</span></span><span style="display:flex;"><span>                avg_color <span style="color:#f92672">=</span> tuple(round_to_mod4(sum(c)<span style="color:#f92672">/</span>len(c)) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> zip(<span style="color:#f92672">*</span>colors))
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Set all 4 pixels in the grid to the average color</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(GRID_SIZE):
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(GRID_SIZE):
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> x<span style="color:#f92672">+</span>i <span style="color:#f92672">&lt;</span> width <span style="color:#f92672">and</span> y<span style="color:#f92672">+</span>j <span style="color:#f92672">&lt;</span> height:
+</span></span><span style="display:flex;"><span>                            pixelated<span style="color:#f92672">.</span>putpixel((x<span style="color:#f92672">+</span>i, y<span style="color:#f92672">+</span>j), avg_color)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Save the pixelated image with a new filename in the output directory</span>
+</span></span><span style="display:flex;"><span>        new_filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pixelated_&#39;</span> <span style="color:#f92672">+</span> filename
+</span></span><span style="display:flex;"><span>        output_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;output&#39;</span>, new_filename)
+</span></span><span style="display:flex;"><span>        pixelated<span style="color:#f92672">.</span>save(output_path)
+</span></span></code></pre></div>
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/xml/">XML (1)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/cisco/">Cisco (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/procdump/">Procdump (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sysinternals/">Sysinternals (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/troubleshooting/">Troubleshooting (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vpn/">VPN (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windbg/">Windbg (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>

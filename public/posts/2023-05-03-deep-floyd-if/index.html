@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My tentative work flow for running Deep Floyd IF locally for image generation.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">
+    
+    <title>Deep Floyd IF | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <h2>BTC</h2>
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Deep Floyd IF</h2>
+        <p>
+            Published: May 3, 2023
+            
+            
+            | Last Modified: May 2, 2025
+            
+            
+        </p>
+        
+        <p>Tags:
+            
+            <a href="http://localhost:1313/%20/tags/ai">ai</a>
+            
+            <a href="http://localhost:1313/%20/tags/images">images</a>
+            
+        </p>
+        
+        
+        <p>Categories:
+            
+            <a href="http://localhost:1313/%20/categories/python">Python</a>
+            
+            <a href="http://localhost:1313/%20/categories/shell">Shell</a>
+            
+        </p>
+        
+    </header>
+    <section>
+        
+        <hr>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#download-prerequisites">Download prerequisites</a></li>
+    <li><a href="#setup-environment">Setup Environment</a>
+      <ul>
+        <li><a href="#clone-the-git-repo">Clone the git repo</a></li>
+        <li><a href="#cd-to-the-repo-folder">cd to the repo folder</a></li>
+        <li><a href="#create-the-conda-environment">Create the conda environment</a></li>
+        <li><a href="#activate-the-environment">Activate the environment</a></li>
+        <li><a href="#install-requirements">Install requirements</a></li>
+      </ul>
+    </li>
+    <li><a href="#setup-program">Setup Program</a>
+      <ul>
+        <li><a href="#download-the-model-weights-from-hugging-face">Download the model weights from Hugging Face</a></li>
+      </ul>
+    </li>
+    <li><a href="#run-deep-floyd-if">Run Deep Floyd IF</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+        <hr>
+        
+        <h2 id="download-prerequisites">Download prerequisites</h2>
+<ol>
+<li><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a></li>
+<li><a href="https://git-scm.com/download/win">Git</a></li>
+</ol>
+<h2 id="setup-environment">Setup Environment</h2>
+<h3 id="clone-the-git-repo">Clone the git repo</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>git clone https://github.com/deep-floyd/IF.git
+</span></span></code></pre></div><h3 id="cd-to-the-repo-folder">cd to the repo folder</h3>
+<p><em>In my case:</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>cd C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\t</span>rima<span style="color:#ae81ff">\D</span>ocuments<span style="color:#ae81ff">\G</span>itHub<span style="color:#ae81ff">\I</span>F
+</span></span></code></pre></div><h3 id="create-the-conda-environment">Create the conda environment</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>conda create --name IF python<span style="color:#f92672">=</span>3.10.10
+</span></span></code></pre></div><h3 id="activate-the-environment">Activate the environment</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>conda activate IF
+</span></span></code></pre></div><h3 id="install-requirements">Install requirements</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>pip install -r requirements.txt --upgrade
+</span></span><span style="display:flex;"><span>pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
+</span></span></code></pre></div><h2 id="setup-program">Setup Program</h2>
+<h3 id="download-the-model-weights-from-hugging-face">Download the model weights from Hugging Face</h3>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="run-deep-floyd-if">Run Deep Floyd IF</h2>
+<p>Put the code below in a file called run.py. Run it in Anaconda Prompt with <code>python run.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> gc
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>set_per_process_memory_fraction(<span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flush</span>():
+</span></span><span style="display:flex;"><span>    gc<span style="color:#f92672">.</span>collect()
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>empty_cache()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> diffusers <span style="color:#f92672">import</span> DiffusionPipeline
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> diffusers.utils <span style="color:#f92672">import</span> pt_to_pil
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># stage 1</span>
+</span></span><span style="display:flex;"><span>stage_1 <span style="color:#f92672">=</span> DiffusionPipeline<span style="color:#f92672">.</span>from_pretrained(<span style="color:#e6db74">&#34;./IF-I-XL-v1.0&#34;</span>, variant<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fp16&#34;</span>, torch_dtype<span style="color:#f92672">=</span>torch<span style="color:#f92672">.</span>float16, safety_checker<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># stage 2</span>
+</span></span><span style="display:flex;"><span>stage_2 <span style="color:#f92672">=</span> DiffusionPipeline<span style="color:#f92672">.</span>from_pretrained(<span style="color:#e6db74">&#39;./IF-II-L-v1.0&#39;</span>, text_encoder<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, variant<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fp16&#34;</span>, torch_dtype<span style="color:#f92672">=</span>torch<span style="color:#f92672">.</span>float16, safety_checker<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># stage 3</span>
+</span></span><span style="display:flex;"><span>stage_3 <span style="color:#f92672">=</span> DiffusionPipeline<span style="color:#f92672">.</span>from_pretrained(<span style="color:#e6db74">&#39;./stable-diffusion-x4-upscaler&#39;</span>, torch_dtype<span style="color:#f92672">=</span>torch<span style="color:#f92672">.</span>float16, safety_checker<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Memory management</span>
+</span></span><span style="display:flex;"><span>stage_1<span style="color:#f92672">.</span>enable_sequential_cpu_offload()
+</span></span><span style="display:flex;"><span>stage_2<span style="color:#f92672">.</span>enable_model_cpu_offload()
+</span></span><span style="display:flex;"><span>stage_3<span style="color:#f92672">.</span>enable_model_cpu_offload()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># prompt</span>
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;an anime girl wearing a shirt that says &#34;hello world&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># text embeds</span>
+</span></span><span style="display:flex;"><span>prompt_embeds, negative_embeds <span style="color:#f92672">=</span> stage_1<span style="color:#f92672">.</span>encode_prompt(prompt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># seed settings</span>
+</span></span><span style="display:flex;"><span>time_seed <span style="color:#f92672">=</span> int(time<span style="color:#f92672">.</span>time())
+</span></span><span style="display:flex;"><span>generator <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>manual_seed(time_seed)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># stage 1</span>
+</span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> stage_1(prompt_embeds<span style="color:#f92672">=</span>prompt_embeds, negative_prompt_embeds<span style="color:#f92672">=</span>negative_embeds, generator<span style="color:#f92672">=</span>generator, output_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pt&#34;</span>)<span style="color:#f92672">.</span>images
+</span></span><span style="display:flex;"><span>pt_to_pil(image)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;./if_stage_I.png&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">del</span> stage_1
+</span></span><span style="display:flex;"><span>flush()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># stage 2</span>
+</span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> stage_2(
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>image, prompt_embeds<span style="color:#f92672">=</span>prompt_embeds, negative_prompt_embeds<span style="color:#f92672">=</span>negative_embeds, generator<span style="color:#f92672">=</span>generator, output_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pt&#34;</span>
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">.</span>images
+</span></span><span style="display:flex;"><span>pt_to_pil(image)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;./if_stage_II.png&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">del</span> stage_2
+</span></span><span style="display:flex;"><span>flush()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># stage 3</span>
+</span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> stage_3(prompt<span style="color:#f92672">=</span>prompt, image<span style="color:#f92672">=</span>image, generator<span style="color:#f92672">=</span>generator, noise_level<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)<span style="color:#f92672">.</span>images
+</span></span><span style="display:flex;"><span>image[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;./if_stage_III.png&#34;</span>)
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>My takeaways from Deep Floyd IF:</p>
+<ul>
+<li>The 16GB of VRAM in my RTX 4080 isn&rsquo;t enough to run the third stage, so the largest output this implementation can make is 256x256</li>
+<li>Deep Floyd IF has extremely slow inference times, upwards of two mintues per 256x256 image. I&rsquo;ve played around a bit with memory management but don&rsquo;t know enough about Pytorch to get VRAM usage under 16GB. I got stage 3 working in CPU mode only, which sent inference times soaring over 40 minutes per 1024x1024 image.</li>
+<li>Community adoption has been slow, probably because of slow inference times</li>
+<li>Not really seeing an advantage of this over Stable Diffusion + ControlNet</li>
+</ul>
+
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/xml/">XML (1)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/cisco/">Cisco (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/procdump/">Procdump (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sysinternals/">Sysinternals (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/troubleshooting/">Troubleshooting (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vpn/">VPN (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windbg/">Windbg (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>

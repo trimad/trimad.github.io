@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="&ldquo;An eccentric coach asks players on the team to line up alphabetically at the start of practice. The coach does not tell the players whether they need to line up in increasing or decreasing order, so they guess. If they guess wrong, the coach makes them run laps before practice. Given a list of names, you are to determine if the list is in increasing alphabetical order, decreasing alphabetical order or neither.&rdquo;">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/archive/2017-08-18-kattis-line-them-up/">
+    
+    <title>Kattis Challenge &#34;Line Them Up&#34; | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <h2>BTC</h2>
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Kattis Challenge &#34;Line Them Up&#34;</h2>
+        <p>
+            Published: August 18, 2017
+            
+            
+            | Last Modified: May 2, 2025
+            
+            
+        </p>
+        
+        <p>Tags:
+            
+            <a href="http://localhost:1313/%20/tags/kattis">kattis</a>
+            
+            <a href="http://localhost:1313/%20/tags/coding-challenge">coding challenge</a>
+            
+        </p>
+        
+        
+        <p>Categories:
+            
+            <a href="http://localhost:1313/%20/categories/java">Java</a>
+            
+        </p>
+        
+    </header>
+    <section>
+        
+        <h2 id="problem">Problem</h2>
+<!-- raw HTML omitted -->
+<h2 id="my-solution">My solution</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.ArrayList;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Scanner;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KattisA</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Scanner sc <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner(System.<span style="color:#a6e22e">in</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> N <span style="color:#f92672">=</span> sc.<span style="color:#a6e22e">nextInt</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> incr <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> decr <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ArrayList<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> al <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;=</span> N; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            al.<span style="color:#a6e22e">add</span>(sc.<span style="color:#a6e22e">nextLine</span>());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1; i <span style="color:#f92672">&lt;</span> al.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> 1; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//Increasing</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (al.<span style="color:#a6e22e">get</span>(i).<span style="color:#a6e22e">charAt</span>(0) <span style="color:#f92672">&lt;</span> al.<span style="color:#a6e22e">get</span>(i <span style="color:#f92672">+</span> 1).<span style="color:#a6e22e">charAt</span>(0)) {
+</span></span><span style="display:flex;"><span>                incr <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//Decreasing</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (al.<span style="color:#a6e22e">get</span>(i).<span style="color:#a6e22e">charAt</span>(0) <span style="color:#f92672">&gt;</span> al.<span style="color:#a6e22e">get</span>(i <span style="color:#f92672">+</span> 1).<span style="color:#a6e22e">charAt</span>(0)) {
+</span></span><span style="display:flex;"><span>                decr <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//If the first characters are equal, check the next character</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (al.<span style="color:#a6e22e">get</span>(i).<span style="color:#a6e22e">charAt</span>(0) <span style="color:#f92672">==</span> al.<span style="color:#a6e22e">get</span>(i <span style="color:#f92672">+</span> 1).<span style="color:#a6e22e">charAt</span>(0)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//Increasing</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (al.<span style="color:#a6e22e">get</span>(i).<span style="color:#a6e22e">charAt</span>(1) <span style="color:#f92672">&lt;</span> al.<span style="color:#a6e22e">get</span>(i <span style="color:#f92672">+</span> 1).<span style="color:#a6e22e">charAt</span>(1)) {
+</span></span><span style="display:flex;"><span>                    incr <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//Decreasing</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (al.<span style="color:#a6e22e">get</span>(i).<span style="color:#a6e22e">charAt</span>(1) <span style="color:#f92672">&gt;</span> al.<span style="color:#a6e22e">get</span>(i <span style="color:#f92672">+</span> 1).<span style="color:#a6e22e">charAt</span>(1)) {
+</span></span><span style="display:flex;"><span>                    decr <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (decr <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>incr) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;DECREASING&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>decr <span style="color:#f92672">&amp;&amp;</span> incr) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;INCREASING&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> ((incr <span style="color:#f92672">&amp;&amp;</span> decr) <span style="color:#f92672">||</span> (<span style="color:#f92672">!</span>incr <span style="color:#f92672">&amp;</span> <span style="color:#f92672">!</span>decr)) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;NEITHER&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/xml/">XML (1)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/cisco/">Cisco (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/procdump/">Procdump (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sysinternals/">Sysinternals (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/troubleshooting/">Troubleshooting (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vpn/">VPN (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windbg/">Windbg (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>

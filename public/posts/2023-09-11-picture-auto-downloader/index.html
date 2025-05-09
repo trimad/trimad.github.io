@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a Google Apps Script I wrote that automatically downloads pictures embedded in a daily email I receive from my son&rsquo;s daycare to a Google Drive folder.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">
+    
+    <title>Gmail Photo Downloader | Ghostfeed</title>
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+</head>
+<body class="page">
+
+    
+    <div class="container">
+
+        
+        <div class="nav-left">
+            <nav>
+                
+                    <section>
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="http://localhost:1313/">Home</a></li>
+        
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        
+    </ul>
+
+    <h2>BTC</h2>
+    <div class="qr-code-container">
+        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+    </div>
+</section>
+                
+            </nav>
+        </div>
+
+        
+        <nav class="search">
+            <input
+            type="search"
+                id="post-search"
+                placeholder="Search posts…"
+                aria-label="Search posts">
+        </nav>
+
+        
+        <main>
+            
+<article class="post">
+    <header>
+        <h2>Gmail Photo Downloader</h2>
+        <p>
+            Published: September 11, 2023
+            
+            
+            | Last Modified: May 2, 2025
+            
+            
+        </p>
+        
+        <p>Tags:
+            
+            <a href="http://localhost:1313/%20/tags/google-apps-script">Google Apps Script</a>
+            
+        </p>
+        
+        
+        <p>Categories:
+            
+            <a href="http://localhost:1313/%20/categories/javascript">JavaScript</a>
+            
+        </p>
+        
+    </header>
+    <section>
+        
+        <p>This is a Google Apps Script I wrote that automatically downloads pictures embedded in a daily email I receive from my son&rsquo;s daycare to a Google Drive folder.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">saveLatestExternalImagesFromEmail</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;from:connect-notification@constoso.com&#39;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">threads</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">GmailApp</span>.<span style="color:#a6e22e">search</span>(<span style="color:#a6e22e">query</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Get only the most recent thread
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">threads</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;No new threads found.&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Processing the latest thread.&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">folderName</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Daycare&#39;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">folders</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">DriveApp</span>.<span style="color:#a6e22e">getFoldersByName</span>(<span style="color:#a6e22e">folderName</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">folder</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">folders</span>.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">folder</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">folders</span>.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">folder</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">DriveApp</span>.<span style="color:#a6e22e">createFolder</span>(<span style="color:#a6e22e">folderName</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">messages</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">threads</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">getMessages</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">j</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">messages</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">messages</span>[<span style="color:#a6e22e">j</span>].<span style="color:#a6e22e">getBody</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Extracting and formatting the date from the Gmail message
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">date</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">messages</span>[<span style="color:#a6e22e">j</span>].<span style="color:#a6e22e">getDate</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">formattedDate</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Utilities</span>.<span style="color:#a6e22e">formatDate</span>(<span style="color:#a6e22e">date</span>, <span style="color:#a6e22e">Session</span>.<span style="color:#a6e22e">getScriptTimeZone</span>(), <span style="color:#e6db74">&#39;yyyy-MM-dd&#39;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Using the HTML service to parse
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">HtmlService</span>.<span style="color:#a6e22e">createHtmlOutput</span>(<span style="color:#a6e22e">body</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">imgs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">output</span>.<span style="color:#a6e22e">getContent</span>().<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/&lt;img [^&gt;]*src=&#34;[^&#34;]*&#34;[^&gt;]*&gt;/g</span>) <span style="color:#f92672">||</span> [];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">imgs</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">imgTag</span>, <span style="color:#a6e22e">index</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">imgTag</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;alt=&#34;Photo&#34;&#39;</span>)) {  <span style="color:#75715e">// Check for the desired attribute
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">match</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">imgTag</span>.<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/src=&#34;([^&#34;]*)&#34;/</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">match</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">imageUrl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>          
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Found Image URL: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">imageUrl</span>);
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">blob</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">UrlFetchApp</span>.<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">imageUrl</span>).<span style="color:#a6e22e">getBlob</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">blob</span>.<span style="color:#a6e22e">setName</span>(<span style="color:#a6e22e">formattedDate</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_Image_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_0_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.jpg&#34;</span>);  <span style="color:#75715e">// As it&#39;s the latest thread, we&#39;re considering the index as 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#a6e22e">folder</span>.<span style="color:#a6e22e">createFile</span>(<span style="color:#a6e22e">blob</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Saved Image: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">imageUrl</span>);
+</span></span><span style="display:flex;"><span>          } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Error fetching &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">imageUrl</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;. Error: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="example-image-tag">Example Image tag</h2>
+<p>For context, here&rsquo;s how the image tag looks in the daycare email:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Photo&#34;</span> <span style="color:#a6e22e">border</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Photo&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100%&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://ci3.googleusercontent.com/proxy/L1Bhkyu1CzMzbd_mVCr3YwEPxKZhmzyce3uAkFuwTq1Fco1msKzwi270_a4_gnUBGJCl_1Yx9ZL4E7I76YQXE_xqbKjepm0AGiPbcT4HxYatKGdluYUqZehMEly5Y_cLpQylyC_YWORwY-pOhXa28n0Vsztq_XxMTuuj1PlXLc_N8UiBnW1JfT5Ydm6VofcibFcZhDqzwfdof9XXRRL7AA585lrxnpMU_8xpXFcVY61syua5YzBGkU7XMDtheRVpbysYLzvf1jTeMg7V4NaBVhf-ac4fNqkfiKdYhcCZC_0oNY-i_rvZmqUboioMK-yJcQKjmwVmUgNnLbfeTwNXbOE=s0-d-e1-ft#https://private.kinderlime.com/profile_pics/files/2f791232-d5f1-44c3-ab14-437643988c23/profilepic_1997707fb0462088434fe6e1b5c79a7f03d85ae0fe669997a2ca0dd912bb85d841/main/img_cropped7753123271202479858.jpg_1694105215459_photo.jpg?1694109217&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;CToWUd a6T&#34;</span> <span style="color:#a6e22e">data-bit</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;iit&#34;</span> <span style="color:#a6e22e">tabindex</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>&gt;
+</span></span></code></pre></div><p>The script specifically looks for image tags with alt=&ldquo;Photo&rdquo; to ensure we&rsquo;re only downloading relevant images.</p>
+
+    </section>
+</article>
+
+        </main>
+
+        
+        <div class="nav-right">
+            
+                
+<section>
+    <h2>Categories</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (23)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
+        
+        <li><a href="http://localhost:1313/categories/xml/">XML (1)</a></li>
+        
+    </ul>
+</section>
+
+
+<section>
+    <h2>Tags</h2>
+    <ul>
+        
+        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/active-directory/">Active Directory (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/activedirectory/">ActiveDirectory (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/animation/">Animation (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/appx/">Appx (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azure/">Azure (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/cisco/">Cisco (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/command-line/">Command Line (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/depth-map/">Depth Map (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/dns/">DNS (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/domain/">Domain (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/email-security/">Email Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-apps-script/">Google Apps Script (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/images/">Images (7)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/ip/">Ip (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/it-admin/">IT Admin (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/javascript/">JavaScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/msexchhidefromaddresslists/">MsExchHideFromAddressLists (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/networking/">Networking (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/office/">Office (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/officec2rclient/">OfficeC2RClient (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/passwords/">Passwords (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/pil/">PIL (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/procdump/">Procdump (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/python/">Python (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/regedit/">Regedit (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/reports/">Reports (5)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/security/">Security (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/shell/">Shell (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/sysinternals/">Sysinternals (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/troubleshooting/">Troubleshooting (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/vpn/">VPN (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windbg/">Windbg (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/windows/">Windows (2)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        
+    </ul>
+</section>
+ 
+            
+        </div>
+
+    </div> 
+
+    <footer>
+        
+            <p>&copy; 2025 Ghostfeed. All rights reserved.</p>
+
+
+<footer>
+    
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('post-search');
+    const posts = document.querySelectorAll('.post-preview'); 
+
+    if (searchInput && posts.length > 0) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            posts.forEach(function(post) {
+                const titleElement = post.querySelector('h3 a'); 
+                const summaryElement = post.querySelector('p'); 
+                const tagsElement = post.querySelector('.tags'); 
+                const hrElement = post.nextElementSibling; 
+
+                let textToSearch = '';
+
+                if (titleElement) {
+                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
+                }
+                if (summaryElement) {
+                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
+                }
+                if (tagsElement) {
+                    textToSearch += tagsElement.textContent.toLowerCase();
+                }
+
+                const shouldShow = textToSearch.includes(searchTerm);
+                post.style.display = shouldShow ? '' : 'none'; 
+
+                
+                if (hrElement && hrElement.tagName === 'HR') {
+                    hrElement.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }
+});
+</script>
+
+        
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <script src="http://localhost:1313/js/snow.js"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 title: "Managing Microsoft Office Versions with OfficeC2RClient"
 date: 2024-09-10
 draft: false
+summary: "Instructions on how to manually manage the installed version of Microsoft Office."
 tags: ["Microsoft Office", "OfficeC2RClient", "Version Management", "IT Admin"]
 toc: true
 thumbnail: "thumbnail.png"
