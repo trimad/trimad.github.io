@@ -1,14 +1,13 @@
 ---
 author: Tristan Madden
-categories: [JavaScript, Python]
+categories: [JavaScript, Python, Security]
 date: 2023-02-15
-lastmod: 2023-04-14
-summary: "A collection of JavaScript and Python scripts for decoding various obfuscation techniques used in phishing emails, including base64 encoding, hexadecimal strings, and URI encoding."
-tags: [phishing]
-title: Decode Phishing Emails
+draft: false
+tags: [phishing, email security, base64, hex encoding, uri encoding, obfuscation, decoding, security analysis, cybersecurity]
+title: Phishing Email Decoding Tools
+usePageBundles: true
 thumbnail: "thumbnail.png"
 toc: true
-usePageBundles: true
 ---
 
 ## atob() obfuscation

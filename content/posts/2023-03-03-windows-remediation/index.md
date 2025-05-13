@@ -1,11 +1,10 @@
 ---
 author: Tristan Madden
 categories: [Shell, PowerShell]
-date: 2023-03-09
-lastmod: 2023-03-09
+date: 2023-03-03
+draft: false
 summary: "A comprehensive collection of Windows troubleshooting and repair tools including DISM, SFC, DLL registration commands, and PowerShell scripts for reinstalling Windows apps."
 tags: [shell, PowerShell]
-thumbnail: "thumbnail.png"
 title: Windows Remediation
 toc: true
 usePageBundles: true

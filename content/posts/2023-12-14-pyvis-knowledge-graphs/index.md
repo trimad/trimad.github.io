@@ -2,13 +2,10 @@
 author: Tristan Madden
 categories: [Python]
 date: 2023-12-14
-#lastmod: 2023-10-17
 draft: false
-featured: true
 summary: "An experimental approach to extracting structured knowledge graphs from literary text using Mistral-7B LLM, demonstrated with the opening passage of The Hobbit and visualized as connected node-edge relationships."
-tags: [Python]
-thumbnail: "thumbnail.png"
-title: "Generate Knowledge Graphs with LLMs"
+tags: [python, knowledge-graphs, llm, nlp, data-visualization, mistral-7b]
+title: "Generating Knowledge Graphs with LLMs and PyVis"
 toc: true
 usePageBundles: true
 ---

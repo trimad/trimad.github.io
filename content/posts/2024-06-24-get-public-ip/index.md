@@ -1,13 +1,11 @@
 ---
 author: Tristan Madden
-categories: [Shell, PowerShell]
-date: 2024-06-25
+categories: [Networking, Shell, PowerShell]
+date: 2024-06-24
 draft: false
-featured: false
-summary: "Different methods of obtaining the public IP address of a computer."
-tags: [ip]
-thumbnail: "thumbnail.png"
-title: "Get Public IP"
+summary: "A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions."
+tags: [networking, ip-address, command-line, powershell, curl, nslookup]
+title: "How to Find Your Public IP Address"
 toc: true
 usePageBundles: true
 ---

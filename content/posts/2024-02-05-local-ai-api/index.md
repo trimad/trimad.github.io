@@ -2,13 +2,10 @@
 author: Tristan Madden
 categories: [Python]
 date: 2024-02-05
-#lastmod: 2023-10-17
 draft: false
-featured: true
 summary: "A practical collection of Python Flask API implementations for running various AI models locally, including image-to-text using Moondream, text-to-speech with Coqui TTS, and text generation via local LLMs with OpenAI-compatible interfaces."
-tags: [Python]
-thumbnail: "thumbnail.png"
-title: "Local AI API"
+tags: [python, ai, machine-learning, api, flask, local-ai, moondream, coqui-tts]
+title: "Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs"
 toc: true
 usePageBundles: true
 ---

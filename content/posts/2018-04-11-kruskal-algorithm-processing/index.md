@@ -1,12 +1,12 @@
 ---
 title: Kruskal's Algorithm Visualized With Processing
 author: Tristan Madden
-categories: [Java, Processing]
-tags: [kruskal's algorithm, minimum spanning tree]
 date: 2018-04-11
-featureImage: "kruskal.png"
-thumbnail: "kruskal.png"
+draft: false
+tags: [kruskal's algorithm, minimum spanning tree]
+categories: [Java, Processing]
 summary: "A Processing implementation of Kruskal's algorithm for finding minimum spanning trees in weighted graphs, demonstrating the O(E log E) greedy approach to network optimization."
+toc: true
 usePageBundles: true
 ---
 

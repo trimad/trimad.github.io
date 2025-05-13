@@ -1,15 +1,13 @@
 ---
 title: Download YouTube Videos
 author: Tristan Madden
-categories: [Shell]
-tags: [download, youtube-dl, yt-dlp]
 date: 2022-04-16
-lastmod: 2023-03-03
-thumbnail: "thumbnail.png"
-usePageBundles: true
+draft: false
+tags: [download, youtube-dl, yt-dlp]
+categories: [Shell]
 summary: "A guide to downloading YouTube videos and audio using yt-dlp and youtube-dl command-line tools, including various options for format selection and quality settings."
+usePageBundles: true
 ---
-
 
 <h2>yt-dlp</h2>
 yt-dlp is a free and open-source command-line tool for downloading videos and audio from YouTube and other video hosting sites. It is a fork of youtube-dl with additional features and improvements, including better performance and more frequent updates. Unlike youtube-dl, which has faced various legal challenges and takedowns, yt-dlp is actively maintained and regularly updated to ensure compatibility with the latest changes in video hosting sites.

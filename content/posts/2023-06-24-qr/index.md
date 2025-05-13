@@ -1,13 +1,12 @@
 ---
 author: Tristan Madden
-categories: [Python]
+categories: [Python, Programming, Web Development]
 date: 2023-06-24
-lastmod: 2023-07-13
-featured: false
-summary: "Python script for generating a QR code."
-tags: [images]
-thumbnail: "thumbnail.png"
-title: QR Codes
+draft: false
+summary: "A Python script using the qrcode library to generate customizable QR codes with error correction, including options for masking specific areas of the code."
+tags: [python, qr-code, programming, automation, image-processing, python-script]
+title: "QR Code Generator with Python"
+toc: true
 usePageBundles: true
 ---
 

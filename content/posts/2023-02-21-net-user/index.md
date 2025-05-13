@@ -1,13 +1,11 @@
 
 ---
 author: Tristan Madden
-categories: [Shell]
+categories: [Shell, Windows, System Administration]
 date: 2023-02-22
-lastmod: 2024-06-12
-tags: [net]
-title: net user
-thumbnail: "thumbnail.png"
-summary: The "net user" command is a Command Prompt (Shell) command used to manage user accounts on a Windows operating system. It can be used to create, modify, or delete user accounts, as well as to change passwords and manage group memberships.
+draft: false
+tags: [net, windows, user management, security, command line, system administration, account management, password management, group management]
+title: Managing Windows User Accounts with net user Command
 usePageBundles: true
 toc: true
 ---

@@ -1,13 +1,12 @@
 ---
 author: Tristan Madden
-categories: [Shell]
+categories: [Windows, Security, System Administration]
 date: 2023-03-03
-lastmod: 2023-03-07
-tags: [netsh, firewall]
-thumbnail: "thumbnail.png"
-title: Windows Defender Firewall
-summary: "A practical guide to managing Windows Defender Firewall through the command line, including commands for turning the firewall on/off and creating exceptions for programs, Remote Desktop, and specific ports."
-ShowReadingTime: true
+draft: false
+summary: "A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding."
+tags: [windows, security, firewall, netsh, system-administration, windows-defender, network-security, command-line, rdp, port-management]
+title: "Windows Defender Firewall Management Guide"
+toc: true
 usePageBundles: true
 ---
 

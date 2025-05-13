@@ -1,14 +1,11 @@
 ---
+title: FFmpeg Command Reference
 author: Tristan Madden
-categories: [Shell]
 date: 2022-01-27
-featured: true
-lastmod: 2023-03-16
-tags: [audio, video]
-title: ffmpeg
-toc: true
-summary: "A comprehensive guide to ffmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations."
-thumbnail: "thumbnail.png"
+draft: false
+tags: [audio, video, ffmpeg, shell, media processing, video conversion, audio conversion, screen recording, filtering]
+categories: [Shell, Media Processing]
+summary: "A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples."
 usePageBundles: true
 ---
 

@@ -2,12 +2,10 @@
 author: Tristan Madden
 categories: [Python, Shell]
 date: 2023-05-03
-lastmod: 2023-05-09
 draft: false
 tags: [ai, images]
-title: Deep Floyd IF
-thumbnail: "thumbnail.png"
-summary: My tentative work flow for running Deep Floyd IF locally for image generation.
+title: "Deep Floyd IF"
+summary: "My tentative work flow for running Deep Floyd IF locally for image generation."
 usePageBundles: true
 toc: true
 ---

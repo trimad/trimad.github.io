@@ -1,11 +1,13 @@
 ---
 title: "Cisco AnyConnect VPN Profile"
+author: Tristan Madden
 date: 2025-05-08
+draft: false
 tags: ["Cisco","VPN"]
 categories: ["XML"]
-description: "This contains the full XML profile schema and a tentative \"God Mode\" profile that includes all \"UserControllable\" tags."
+summary: "This contains the full XML profile schema and a tentative \"God Mode\" profile that includes all \"UserControllable\" tags."
 toc: true
-usePageBundles: false
+usePageBundles: true
 ---
 
 ## (WIP) God Mode Profile

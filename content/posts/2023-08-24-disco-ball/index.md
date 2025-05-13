@@ -1,13 +1,13 @@
 ---
-title: Disco Ball
+title: "Disco Ball"
 author: Tristan Madden
 categories: [JavaScript]
-tags: [p5.js]
 date: 2023-08-24
+draft: false
+summary: "A JavaScript implementation using p5.js to generate a black and white disco ball visualization."
+tags: [p5js, javascript, creative-coding, visualization]
+toc: true
 usePageBundles: true
-featureImage: "thumbnail.png"
-thumbnail: "thumbnail.png"
-summary: Wife needed a black and white PNG/SVG of a Disco Ball. Yep.
 ---
 
 Wife needed a black and white PNG/SVG of a Disco Ball. Yep.

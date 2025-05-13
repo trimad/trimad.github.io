@@ -1,15 +1,12 @@
 
 ---
 author: Tristan Madden
-categories: [Shell]
-date: 2024-03-22
-#lastmod: 2024-07-03
+categories: [Shell, Networking]
+date: 2024-03-21
 draft: false
-featured: true
-summary: "Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management."
-tags: [Networking, DNS, Windows, PowerShell, Command Line]
-thumbnail: "thumbnail.png"
-title: "Mastering DNS Configuration: Remote and Local Techniques"
+summary: "Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management using WMIC and PowerShell."
+tags: [windows, dns, networking, powershell, command-line, system-administration]
+title: "Remote and Local DNS Configuration Guide"
 toc: true
 usePageBundles: true
 ---

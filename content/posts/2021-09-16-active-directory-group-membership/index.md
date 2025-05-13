@@ -1,14 +1,12 @@
 ---
 title: Get Group Membership
 author: Tristan Madden
-categories: [PowerShell]
-tags: [active directory, azure, domain, reports, group]
 date: 2021-09-16
-lastmod: 2023-05-19
+draft: false
+tags: [active directory, azure, domain, reports, group]
+categories: [PowerShell]
 summary: "PowerShell scripts for extracting and reporting group membership information from both on-premises Active Directory and Azure AD, featuring progress tracking and CSV export functionality."
-thumbnail: "thumbnail.png"
 usePageBundles: true
-toc: true
 ---
 
 Scripts useful for getting group membership. Run them from an admin-elevated Windows PowerShell ISE script pane. 

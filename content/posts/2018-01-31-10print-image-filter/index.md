@@ -1,13 +1,13 @@
 ---
 title: 10PRINT Image Filter
 author: Tristan Madden
-categories: [JavaScript, p5.js]
 date: 2018-01-31
 draft: false
-usePageBundles: true
 tags: [10PRINT, interactive]
-thumbnail: "thumbnail.png"
+categories: [JavaScript, p5.js]
 summary: "An interactive p5.js implementation of the classic 10PRINT algorithm, offering customizable image filtering with options for both precise and hand-drawn style maze patterns."
+toc: true
+usePageBundles: true
 ---
 
 This sketch is a browser-based image filtering utility inspired by <a href="https://10print.org/">10PRINT</a>. The UI allows users to produce faithful looking interpretations of 10PRINT, 10PRINT patterns that look hand-drawn, and users can even create an explosive shit-mess of scribbles, if they so wish.

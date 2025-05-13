@@ -1,13 +1,11 @@
 ---
 author: Tristan Madden
-categories: [DNS]
+categories: [Networking, DNS]
 date: 2024-06-06
 draft: false
-featured: false
-summary: "A cheat sheet with a comprehensive list of options for DNS records."
-tags: [DNS]
-thumbnail: "thumbnail.png"
-title: "DNS Records"
+summary: "A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices."
+tags: [dns, networking, email, domain-management, system-administration, dmarc, spf, dkim, mx]
+title: "Complete DNS Records Reference Guide"
 toc: true
 usePageBundles: true
 ---

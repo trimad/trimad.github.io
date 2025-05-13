@@ -3,11 +3,9 @@ author: Tristan Madden
 categories: [Shell]
 date: 2023-05-17
 draft: true
-lastmod: 2023-05-17
-tags: [tracert]
-title: tracert
-thumbnail: "thumbnail.png"
-summary: 
+tags: [tracert, networking, powershell]
+title: "Tracert"
+summary: "A PowerShell script to run tracert for multiple computers listed in a text file"
 usePageBundles: true
 toc: true
 ---

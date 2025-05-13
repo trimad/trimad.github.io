@@ -1,14 +1,12 @@
 ---
 title: Generating Terrain with Open Simplex Noise
 author: Tristan Madden
-categories: [Java, Processing]
-tags: [open simplex noise]
 date: 2018-01-03
-usePageBundles: true
-thumbnail: "thumbnail.jpg"
-featureImage: "thumbnail.jpg"
 draft: false
+tags: [open simplex noise]
+categories: [Java, Processing]
 summary: "A Processing implementation of a Minecraft-style terrain generator using Open Simplex Noise, featuring 3D voxel-based terrain with performance analysis of random walker agents."
+usePageBundles: true
 ---
 
 Expanding on last night's work with <a href="https://en.wikipedia.org/wiki/OpenSimplex_noise">Open Simplex Noise</a>. I

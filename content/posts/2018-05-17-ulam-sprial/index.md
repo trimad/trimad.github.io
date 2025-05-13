@@ -1,12 +1,12 @@
 ---
 title: Ulam Spiral
 author: Tristan Madden
-categories: [Javascript, p5.js]
-tags: [prime numbers, processing, interactive]
 date: 2018-05-17
-thumbnail: "thumbnail.png"
-usePageBundles: true
+draft: false
+tags: [prime numbers, processing, interactive]
+categories: [Javascript, p5.js]
 summary: "An interactive p5.js implementation of the Ulam Spiral, featuring adjustable grid size, animation controls, and the ability to search for diagonal prime number patterns in the spiral."
+usePageBundles: true
 ---
 
 <div class="iframe-wrapper-1-1">

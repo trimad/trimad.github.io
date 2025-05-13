@@ -1,13 +1,10 @@
 ---
 author: Tristan Madden
 categories: [shell, powershell]
-date: 2023-06-24
-lastmod: 2023-07-21
-featured: false
+date: 2023-07-13
 summary: "A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality."
-tags: [ai, images, video]
-thumbnail: "thumbnail.png"
-title: Join a Workstation to Active Directory with Shell and PowerShell
+tags: [active-directory, powershell, shell, windows, automation]
+title: "Join a Workstation to Active Directory with Shell and PowerShell"
 toc: true
 usePageBundles: true
 ---

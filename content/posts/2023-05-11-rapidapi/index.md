@@ -3,10 +3,9 @@ author: Tristan Madden
 categories: [JavaScript, nodejs]
 date: 2023-05-11
 draft: false
-summary: This program loads comma-separated stock symbols from a file named `symbols.txt` and then queries the Yahoo Finance API using a RapidAPI endpoint. It retrieves prices for every 60 minutes on a max time window. 
-tags: [stocks, finance]
-thumbnail: "thumbnail.png"
-title: Yahoo Finance API via RapidAPI 
+summary: "This program loads comma-separated stock symbols from a file named `symbols.txt` and then queries the Yahoo Finance API using a RapidAPI endpoint. It retrieves prices for every 60 minutes on a max time window."
+tags: [stocks, finance, api]
+title: "Yahoo Finance API via RapidAPI"
 toc: true
 usePageBundles: true
 ---

@@ -2,11 +2,9 @@
 author: Tristan Madden
 categories: [Python]
 date: 2023-04-12
-lastmod: 2023-04-13
 draft: false
 summary: "A practical guide to using the Thin Plate Spline Motion Model for animating static images by transferring motion from a driving video, with setup instructions and observations about optimal video dimensions and motion tracking limitations."
 tags: [animation, ai, video]
-thumbnail: "thumbnail.gif"
 title: "Thin Plate Spline Motion Model"
 toc: true
 usePageBundles: true

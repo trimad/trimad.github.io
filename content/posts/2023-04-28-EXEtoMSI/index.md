@@ -3,13 +3,10 @@ author: Tristan Madden
 categories: [python]
 date: 2023-04-28
 draft: true
-featured: true
-lastmod: 2023-04-28
-summery: 
-tags: [EXE,MSI]
+summary: "A guide for converting EXE files to MSI format using Python 2.7 and WiX Toolset"
+tags: [EXE, MSI]
 toc: true
-title: EXEtoMSI
-thumbnail: "thumbnail.png"
+title: "EXEtoMSI"
 usePageBundles: true
 ---
 

@@ -1,13 +1,13 @@
 ---
 title: Fridge Magnet Simulator
 author: Tristan Madden
-categories: [JavaScript,p5.js]
-tags: [processing, interactive]
 date: 2018-11-16
-usePageBundles: true
-thumbnail: "thumbnail.png"
 draft: false
+tags: [processing, interactive]
+categories: [JavaScript,p5.js]
 summary: "An interactive p5.js simulation recreating a collection of fridge magnets with realistic physics, allowing users to drag and arrange virtual magnets on a digital refrigerator."
+toc: true
+usePageBundles: true
 ---
 
 This is a virtual simulation of the magnets on my girlfriend's fridge.

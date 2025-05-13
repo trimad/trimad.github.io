@@ -1,14 +1,11 @@
 ---
 author: Tristan Madden
-categories: [PowerShell]
+categories: [PowerShell, Active Directory]
 date: 2024-05-30
-lastmod: 2024-06-28
 draft: false
-featured: false
-summary: "This PowerShell script generates an HTML diagnostics report for user lockouts in the Active Directory. The script imports the Active Directory module and retrieves all user accounts that are not disabled. It fetches password-related properties and calculates the password age and expiration details for each user. The results are filtered, sorted, and converted into an HTML report with CSS styling for better readability. The final HTML report is saved to a file and opened in the default web browser."
-tags: [PowerShell]
-thumbnail: "thumbnail.png"
-title: "User Lockout Report"
+summary: "A PowerShell script that generates an HTML diagnostics report for user lockouts in Active Directory, including password age, expiration details, and account status."
+tags: [powershell, active-directory, security, automation, reporting, user-management]
+title: "Active Directory User Lockout and Password Report"
 toc: true
 usePageBundles: true
 ---

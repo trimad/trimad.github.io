@@ -1,12 +1,11 @@
 ---
 title: Blending Textures With Open Simplex Noise
 author: Tristan Madden
-categories: [Java, Processing]
-tags: [animation, open simplex noise]
 date: 2019-08-18
-thumbnail: "a.gif"
-featureImage: "a.gif"
-summary: "A Processing sketch that creates seamlessly looping animations by using 4D Open Simplex Noise to generate dynamic alpha masks for blending between two textures."
+draft: false
+tags: [animation, open simplex noise]
+categories: [Java, Processing]
+summary: "A Processing implementation that combines Open Simplex Noise with image blending techniques to create smooth, organic animations of texture transitions."
 usePageBundles: true
 ---
 
