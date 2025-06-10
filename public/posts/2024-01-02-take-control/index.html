@@ -12,8 +12,8 @@
     
     <link rel="stylesheet" href="http://localhost:1313/css/style.css">
 
-    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
-    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
 </head>
 <body class="page">
 
@@ -88,6 +88,7 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#restart-services">Restart Services</a></li>
+    <li><a href="#clean-reinstall">Clean Reinstall</a></li>
   </ul>
 </nav>
         <hr>
@@ -105,7 +106,19 @@
 SERVICE_NAME: BASupportExpressStandaloneService_N_Central
 </code></pre><p>Then restart the services:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>powershell.exe <span style="color:#e6db74">&#34;Restart-Service -Name BASupportExpressSrvcUpdater_N_Central; Restart-Service -Name BASupportExpressStandaloneService_N_Central&#34;</span>
-</span></span></code></pre></div>
+</span></span></code></pre></div><h2 id="clean-reinstall">Clean Reinstall</h2>
+<p>If the aforementioned services do not exist, a clean reinstall is appropriate.</p>
+<ol>
+<li>In the NCentral interface, click on the device. Then click Remote Control Settings and uncheck the box next to &ldquo;Install Take Control&rdquo;.</li>
+<li>Delete every folder in <code>%programdata%</code> that looks like: <code>GetSupportService_N-Central</code></li>
+<li>Delete every folder in <code>C:\Program Files (x86)</code> that looks like <code>BeAnywhere Support Express</code></li>
+<li>
+<ol start="4">
+<li></li>
+</ol>
+</li>
+</ol>
+
     </section>
 </article>
 
@@ -142,8 +155,6 @@ SERVICE_NAME: BASupportExpressStandaloneService_N_Central
         <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
         
         <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/xml/">XML (1)</a></li>
         
     </ul>
 </section>
@@ -186,8 +197,6 @@ SERVICE_NAME: BASupportExpressStandaloneService_N_Central
         <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/cisco/">Cisco (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
         
@@ -368,8 +377,6 @@ SERVICE_NAME: BASupportExpressStandaloneService_N_Central
         <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/vpn/">VPN (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
         

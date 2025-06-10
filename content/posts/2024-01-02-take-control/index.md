@@ -33,3 +33,12 @@ Then restart the services:
 ```shell
 powershell.exe "Restart-Service -Name BASupportExpressSrvcUpdater_N_Central; Restart-Service -Name BASupportExpressStandaloneService_N_Central"
 ```
+
+## Clean Reinstall
+
+If the aforementioned services do not exist, a clean reinstall is appropriate. 
+
+1. In the NCentral interface, click on the device. Then click Remote Control Settings and uncheck the box next to "Install Take Control". 
+2. Delete every folder in `%programdata%` that looks like: `GetSupportService_N-Central`
+3. Delete every folder in `C:\Program Files (x86)` that looks like `BeAnywhere Support Express`
+4. 4. 

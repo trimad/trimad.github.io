@@ -12,8 +12,8 @@
     
     <link rel="stylesheet" href="http://localhost:1313/css/style.css">
 
-    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
-    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
 </head>
 <body class="page">
 
@@ -97,7 +97,6 @@
     <li><a href="#6-dig-deeper">6. Dig Deeper</a></li>
     <li><a href="#7-fix-or-escalate">7. Fix or Escalate</a></li>
     <li><a href="#cheat-sheet">Cheat Sheet</a></li>
-    <li><a href="#wrapping-up">Wrapping Up</a></li>
   </ul>
 </nav>
         <hr>
@@ -105,8 +104,6 @@
         <blockquote>
 <p><em>“Logs tell you something broke; a crash dump tells you <strong>why</strong>.”</em></p>
 </blockquote>
-<p>When an application decides to face‑plant—looking at you, Excel—the fastest route to answers is a controlled dump capture followed by a forensic stroll through WinDbg.<br>
-Below is my go‑to workflow, polished from countless “Why did this crash at 4 p.m. on quarter‑close day?!” moments.</p>
 <hr>
 <h2 id="1-set-the-stage">1. Set the Stage</h2>
 <ol>
@@ -203,14 +200,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
 </span></span><span style="display:flex;"><span>kb / kH            # Short / long stack
 </span></span><span style="display:flex;"><span>u address          # Disassemble around address
 </span></span><span style="display:flex;"><span>.dt nt!_EXCEPTION_RECORD -r @$exr  # Decode exception record
-</span></span></code></pre></div><hr>
-<h2 id="wrapping-up">Wrapping Up</h2>
-<p>With ProcDump in one hand and WinDbg in the other, you can turn “Excel crashed again” into a root‑cause timeline your CTO can actually act on. Collect, analyze, verify, repeat.</p>
-<p><em>Discover something gnarly? Ping me—troubleshooting war stories fuel this blog.</em></p>
-<hr>
-<p><em>Happy hunting,<br>
-Tristan</em></p>
-
+</span></span></code></pre></div>
     </section>
 </article>
 
@@ -247,8 +237,6 @@ Tristan</em></p>
         <li><a href="http://localhost:1313/categories/python/">Python (15)</a></li>
         
         <li><a href="http://localhost:1313/categories/shell/">Shell (17)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/xml/">XML (1)</a></li>
         
     </ul>
 </section>
@@ -291,8 +279,6 @@ Tristan</em></p>
         <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/cisco/">Cisco (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
         
@@ -473,8 +459,6 @@ Tristan</em></p>
         <li><a href="http://localhost:1313/tags/version-management/">Version Management (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/video/">Video (8)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/vpn/">VPN (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
         

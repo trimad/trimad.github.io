@@ -9,9 +9,6 @@ usePageBundles: false
 
 > _“Logs tell you something broke; a crash dump tells you **why**.”_
 
-When an application decides to face‑plant—looking at you, Excel—the fastest route to answers is a controlled dump capture followed by a forensic stroll through WinDbg.  
-Below is my go‑to workflow, polished from countless “Why did this crash at 4 p.m. on quarter‑close day?!” moments.
-
 ---
 
 ## 1. Set the Stage
@@ -109,16 +106,3 @@ kb / kH            # Short / long stack
 u address          # Disassemble around address
 .dt nt!_EXCEPTION_RECORD -r @$exr  # Decode exception record
 ```
-
----
-
-## Wrapping Up
-
-With ProcDump in one hand and WinDbg in the other, you can turn “Excel crashed again” into a root‑cause timeline your CTO can actually act on. Collect, analyze, verify, repeat.
-
-_Discover something gnarly? Ping me—troubleshooting war stories fuel this blog._
-
----
-
-*Happy hunting,  
-Tristan*  
