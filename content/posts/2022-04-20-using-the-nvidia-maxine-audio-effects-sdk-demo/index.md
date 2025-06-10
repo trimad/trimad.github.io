@@ -2,11 +2,10 @@
 title: NVIDIA Maxine Windows Audio Effects SDK
 author: Tristan Madden
 date: 2022-04-20
-lastmod: 2023-02-25
-categories: [Shell]
+draft: false
 tags: [audio, sound, SDK]
+categories: [Shell]
 summary: "A step-by-step workflow for cleaning poor audio recordings using NVIDIA Maxine Windows Audio Effects SDK with different sample rate configurations."
-thumbnail: "thumbnail.png"
 usePageBundles: true
 ---
 

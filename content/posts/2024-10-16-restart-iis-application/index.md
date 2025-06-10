@@ -1,12 +1,12 @@
 ---
 author: Tristan Madden
-categories: [PowerShell]
+categories: [Windows, PowerShell, Web Administration]
 date: 2024-10-16
-draft: true
-tags: [IIS]
-title: Restart IIS Application Pools with PowerShell
-thumbnail: "thumbnail.png"
-summary: A PowerShell script I put together to stop and start an IIS application pool, with logging.
+draft: false
+summary: "A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling."
+tags: [iis, powershell, windows-server, web-administration, automation, logging, system-administration]
+title: "Automated IIS Application Pool Restart with PowerShell"
+toc: true
 usePageBundles: true
 ---
 

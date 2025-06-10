@@ -1,15 +1,11 @@
 ---
-author: Tristan Madden
-categories: [python]
-date: 2023-02-05
-featured: true
-featureImage: interpolated.gif
-lastmod: 2023-09-11
-summary: "A step-by-step guide for setting up and using Google's Frame Interpolation Large Motion (FILM) TensorFlow implementation to create smooth animations by generating intermediate frames between existing images."
-tags: [ai, video]
-toc: true
 title: Frame Interpolation Large Motion (FILM)
-thumbnail: interpolated.gif
+author: Tristan Madden
+date: 2023-02-05
+draft: false
+tags: [ai, video, film, frame interpolation, tensorflow, animation, python, machine learning]
+categories: [Python, Machine Learning]
+summary: "A comprehensive guide to setting up and using Google's Frame Interpolation Large Motion (FILM) TensorFlow implementation, enabling the creation of smooth animations by generating intermediate frames between existing images using deep learning techniques."
 usePageBundles: true
 ---
 

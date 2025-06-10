@@ -1,11 +1,11 @@
 ---
 title: Record Desktop Silently
 author: Tristan Madden
-categories: [Shell]
-tags: [ffmpeg, VBScript, bat]
 date: 2022-02-09
+draft: false
+tags: [ffmpeg, VBScript, bat]
+categories: [Shell]
 summary: "A stealth desktop recording solution combining ffmpeg, batch scripting, and VBScript to capture Windows sessions without visible indicators, featuring configurable frame rates and recording durations."
-thumbnail: "thumbnail.png"
 usePageBundles: true
 ---
 

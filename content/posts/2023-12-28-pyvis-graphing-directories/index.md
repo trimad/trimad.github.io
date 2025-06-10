@@ -2,13 +2,10 @@
 author: Tristan Madden
 categories: [Python]
 date: 2023-12-28
-#lastmod: 2023-10-17
-draft: true
-featured: true
-summary: ""
-tags: [Python]
-thumbnail: "thumbnail.png"
-title: "Graphing a Windows directory with pyvis"
+draft: false
+summary: "A guide to visualizing Windows directory structures using Python and pyvis for interactive network graphs."
+tags: [python, file-system, data-visualization, pyvis, windows]
+title: "Visualizing Directory Structures with PyVis"
 toc: true
 usePageBundles: true
 ---

@@ -1,11 +1,10 @@
 ---
 title: Buddhabrot
 author: Tristan Madden
-categories: [C#, Java]
-tags: [animation, buddhabrot, fractal]
 date: 2019-08-25
-thumbnail: "buddhabrot.jpg"
-featureImage: "buddhabrot.jpg"
+draft: false
+tags: [animation, buddhabrot, fractal]
+categories: [C#, Java]
 summary: "An implementation of the Buddhabrot fractal rendering technique, which visualizes escape-time trajectories of points outside the Mandelbrot set, creating intricate patterns that resemble a seated Buddha figure."
 usePageBundles: true
 ---

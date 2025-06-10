@@ -2,13 +2,10 @@
 author: Tristan Madden
 categories: [Python]
 date: 2023-10-17
-lastmod: 2023-10-17
-draft: true
-featured: true
-summary: ""
-tags: [Python]
-thumbnail: "thumbnail.png"
-title: "local-llm"
+draft: false
+summary: "A guide to setting up a local large language model (LLM) environment for TheraFit, a project focused on matching clients with therapists."
+tags: [python, llm, machine-learning, local-ai, therafit]
+title: "Setting Up a Local Large Language Model (LLM) Environment"
 toc: true
 usePageBundles: true
 ---

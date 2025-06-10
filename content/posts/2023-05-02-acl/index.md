@@ -1,14 +1,13 @@
 ---
 author: Tristan Madden
-categories: [PowerShell]
+categories: [Windows, PowerShell, Security]
 date: 2023-05-02
 draft: false
-tags: [acl, permissions]
-title: ACL
-thumbnail: "thumbnail.png"
-summary: A collection of PowerShell scripts useful for managing the Access Control List (ACL)
-usePageBundles: true
+summary: "A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions."
+tags: [windows, powershell, security, permissions, acl, system-administration, active-directory, file-permissions]
+title: "Windows ACL Management with PowerShell"
 toc: true
+usePageBundles: true
 ---
 
 ## Get ACL permissions

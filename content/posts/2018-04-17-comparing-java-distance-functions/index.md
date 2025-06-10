@@ -1,12 +1,12 @@
 ---
 title: Comparing Java Distance Functions
 author: Tristan Madden
+date: 2018-04-17
+draft: false
+tags: [java, distance]
 categories: [Java]
-tags: [distance]
-date: 2018-06-28
-thumbnail: "thumbnail.png"
+summary: "A Java program that compares various distance calculation methods, including Manhattan, Euclidean, and Chebyshev distances, and visualizes their differences using Processing."
 usePageBundles: true
-summary: "A performance comparison of three different Java implementations for calculating distances between points, demonstrating significant differences in execution time from 2224ms to 3ms."
 ---
 - Distance formula 1 execution time: 2224ms
 - Distance formula 2 execution time: 4ms

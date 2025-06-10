@@ -1,15 +1,11 @@
 ---
-author: Tristan Madden
-categories: [JavaScript, Python]
-date: 2023-02-05
-featured: true
-featureImage: "thumbnail.gif"
-lastmod: 2023-03-16
-summary: "A collection of Python and JavaScript utility scripts for processing, enhancing, and manipulating images generated with Stable Diffusion, including file renaming, sorting, color grading, and special effects tools."
-tags: [ai, images, video]
-thumbnail: "thumbnail.gif"
 title: Stable Diffusion Scripts
-toc: true
+author: Tristan Madden
+date: 2023-02-05
+draft: false
+tags: [ai, images, video, stable diffusion, python, javascript, automation, image processing]
+categories: [JavaScript, Python]
+summary: "A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools."
 usePageBundles: true
 ---
 

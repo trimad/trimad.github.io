@@ -1,13 +1,11 @@
 ---
-title: Arrays
+title: Interactive Array Visualization
 author: Tristan Madden
 date: 2016-12-13
-lastmod: 2023-03-09
+draft: false
 categories: [JavaScript, p5.js]
-tags: [interactive]
-summary: "Click on them circles homes"
-thumbnail: "thumbnail.jpg"
-summary: "This is something I made when I was learning about Arrays of Objects."
+tags: [interactive, arrays, visualization, p5.js, programming, education]
+summary: "An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface."
 usePageBundles: true
 ---
 

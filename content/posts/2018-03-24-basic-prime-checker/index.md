@@ -1,12 +1,12 @@
 ---
 title: Basic Prime Checker, C++
 author: Tristan Madden
-categories: [C++]
-tags: [prime numbers]
 date: 2018-03-24
-thumbnail: "thumbnail.png"
 draft: false
+tags: [prime numbers]
+categories: [C++]
 summary: "A C++ program that efficiently checks for prime numbers using optimized division tests and square root-based factorization."
+toc: true
 usePageBundles: true
 ---
 Exactly what it sounds like.

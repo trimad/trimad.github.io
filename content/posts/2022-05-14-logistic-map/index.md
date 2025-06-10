@@ -1,12 +1,10 @@
 ---
-
-author: Tristan Madden
-categories: [C#]
-date: 2022-05-14
-tags: [animation, fractal]
 title: Logistic Map
-thumbnail: "logbasehighest.png"
-featureImage: "logbasehighest.png"
+author: Tristan Madden
+date: 2022-05-14
+draft: false
+tags: [animation, fractal]
+categories: [C#]
 summary: "A C# implementation of the logistic map that visualizes how this simple mathematical model produces complex chaotic behavior when modeling population growth under resource constraints."
 usePageBundles: true
 ---

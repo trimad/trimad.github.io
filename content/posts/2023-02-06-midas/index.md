@@ -1,12 +1,10 @@
 ---
 author: Tristan Madden
-categories: [python]
+categories: [Python, AI, Computer Vision]
 date: 2023-02-06
-featured: true
-lastmod: 2023-02-06
-summary: "A guide to installing and using MiDaS, a powerful tool for generating depth maps from images with various model options and troubleshooting CUDA installation issues."
-tags: [ai, video, depth map]
-title: MiDaS
+draft: false
+tags: [ai, computer vision, depth estimation, midas, python, cuda, installation]
+title: MiDaS Depth Estimation Guide
 usePageBundles: true
 thumbnail: "thumbnail.png"
 ---

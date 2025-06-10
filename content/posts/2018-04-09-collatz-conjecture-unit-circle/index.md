@@ -1,14 +1,13 @@
 ---
 title: Collatz Conjecture + Unit Circle
 author: Tristan Madden
-categories: [Java, Processing]
-tags: [collatz conjecture, 3n+1]
 date: 2018-04-09
-thumbnail: "thumbnail.png"
 draft: false
-thumbnail: "thumbnail.png"
-usePageBundles: true
+tags: [collatz conjecture, 3n+1]
+categories: [Java, Processing]
 summary: "A Processing visualization of the Collatz Conjecture mapped onto a unit circle, creating 360 distinct branches with 1-degree turns, featuring an interactive exploration of number paths."
+toc: true
+usePageBundles: true
 ---
 
 Inspired by <a href="https://www.bradyharanblog.com/blog/the-collatz-conjecture-in-colour">this cool page</a>, I decided to make my own Collatz Conjecture visualization. My first try looked a lot like what I saw in the Numberphile video, which was pretty good. But then I thought of trying something new by keeping the original rules and wrapping everything around a unit circle. This created 360 "branches", each showing a 1-degree turn.

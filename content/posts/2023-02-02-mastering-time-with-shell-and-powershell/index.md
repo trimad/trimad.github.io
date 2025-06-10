@@ -1,13 +1,11 @@
 ---
 title: Mastering Time with Shell and PowerShell
 author: Tristan Madden
-categories: [Shell, PowerShell]
-summary: "Discover an array of shell and PowerShell commands related to time management, such as checking the last boot-up time, system boot time, and changing the time zone."
-tags: [time, systeminfo, wmic, Win32_OperatingSystem, tzutil]
 date: 2023-02-02
-lastmod: 2023-03-14
-toc: true
-thumbnail: "thumbnail.png"
+draft: false
+tags: [time, shell, powershell, windows, systeminfo, wmic, Win32_OperatingSystem, tzutil]
+categories: [Shell, PowerShell]
+summary: "A comprehensive guide to Windows time management using shell and PowerShell commands, covering system uptime, boot times, time synchronization, and timezone configuration."
 usePageBundles: true
 ---
 

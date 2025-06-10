@@ -1,11 +1,11 @@
 ---
-title: Remove-AppxPackage
+title: Remove-AppxPackages
 author: Tristan Madden
-categories: [PowerShell]
-tags: [appx]
 date: 2019-08-28
-summary: "A PowerShell script demonstrating how to bulk remove Windows Store applications (AppX packages) from the current user account or system-wide."
-thumbnail: "thumbnail.png"
+draft: false
+tags: [powershell, windows]
+categories: [PowerShell]
+summary: "A PowerShell script that removes unwanted Windows Store apps (AppX packages) while preserving essential system apps, using a list of package names to exclude from removal."
 usePageBundles: true
 ---
 <h2><a href = "https://docs.microsoft.com/en-us/powershell/module/appx/remove-appxpackage?view=windowsserver2022-ps">Microsoft Reference</a></h2>

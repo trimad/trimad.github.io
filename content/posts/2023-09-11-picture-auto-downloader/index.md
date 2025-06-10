@@ -1,12 +1,13 @@
 ---
-title: Gmail Photo Downloader
+title: "Gmail Photo Downloader"
 author: Tristan Madden
 categories: [JavaScript]
-tags: [Google Apps Script]
 date: 2023-09-11
+draft: false
+summary: "A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder."
+tags: [google-apps-script, gmail, google-drive, automation, javascript]
+toc: true
 usePageBundles: true
-thumbnail: "thumbnail.png"
-summary: This is a Google Apps Script I wrote that automatically downloads pictures embedded in a daily email I receive from my son's daycare to a Google Drive folder.
 ---
 
 This is a Google Apps Script I wrote that automatically downloads pictures embedded in a daily email I receive from my son's daycare to a Google Drive folder. 

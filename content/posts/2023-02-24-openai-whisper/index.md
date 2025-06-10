@@ -1,13 +1,10 @@
 ---
 author: Tristan Madden
-categories: [Python]
+categories: [Python, AI, Machine Learning]
 date: 2023-02-24
-featured: true
-tags: [AI, audio]
-thumbnail: "thumbnail.png"
-title: OpenAI Whisper
-ShowReadingTime: true
-summary: "Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification."
+draft: false
+tags: [ai, audio, speech recognition, machine learning, natural language processing, openai, python, cuda, gpu, multilingual]
+title: OpenAI Whisper Speech Recognition Guide
 usePageBundles: true
 ---
 

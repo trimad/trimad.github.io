@@ -1,12 +1,13 @@
 ---
 title: Robo Mirror
 author: Tristan Madden
-categories: [Shell]
-tags: [robocopy, bat]
 date: 2019-02-28
+draft: false
+tags: [robocopy, bat]
+categories: [Shell]
 summary: "A batch script that leverages robocopy to perform automated file mirroring based on a predefined list of target paths."
+toc: true
 usePageBundles: true
-thumbnail: "thumbnail.png"
 ---
 
 This batch file utilizes robocopy to mirror a list of files contained within "targets.txt" in the same directory. 

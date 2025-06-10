@@ -1,13 +1,11 @@
 ---
 author: Tristan Madden
-categories: [PowerShell]
+categories: [Windows, PowerShell, Active Directory, Exchange]
 date: 2023-04-05
-lastmod: 2023-04-06
 draft: false
-summary: "A collection of PowerShell scripts for hiding users and contacts from the Global Address List (GAL) in both on-premises Active Directory and Exchange Online environments, with detailed explanations for checking and modifying the msExchHideFromAddressLists attribute."
-tags: [msExchHideFromAddressLists, ActiveDirectory, ExchangeOnlineManagement]
-thumbnail: "thumbnail.png"
-title: "Hiding users from GAL"
+summary: "A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute."
+tags: [active-directory, exchange, powershell, gal, system-administration, office-365, exchange-online, user-management, directory-services]
+title: "Managing Global Address List (GAL) Visibility with PowerShell"
 toc: true
 usePageBundles: true
 ---

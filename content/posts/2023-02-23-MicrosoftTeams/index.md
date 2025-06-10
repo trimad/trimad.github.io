@@ -1,11 +1,10 @@
 ---
 author: Tristan Madden
-categories: [PowerShell]
+categories: [PowerShell, Microsoft 365, Teams]
 date: 2023-02-23
-tags: [microsoft teams]
-title: MicrosoftTeams PowerShell module
-thumbnail: "thumbnail.png"
-summary: "A collection of useful PowerShell scripts for managing Microsoft Teams, including how to install the MicrosoftTeams module and extract team ownership, membership, and channel information."
+draft: false
+tags: [microsoft teams, powershell, team management, collaboration, automation, team ownership, channel management, user management]
+title: Microsoft Teams PowerShell Management Guide
 usePageBundles: true
 ---
 

@@ -1,11 +1,11 @@
 ---
-title: Dump WiFi Passwords
+title: PowerShell Script to Export WiFi Network Credentials
 author: Tristan Madden
-categories: [PowerShell]
-tags: [netsh, passwords, reports]
 date: 2022-04-11
-summary: "A PowerShell script that leverages netsh commands to extract and export stored WiFi network profiles and their corresponding passwords to a CSV file, automating wireless network credential retrieval."
-thumbnail: "thumbnail.png"
+draft: false
+tags: [powershell, netsh, wifi, passwords, automation, security, network, windows]
+categories: [PowerShell, Security]
+summary: "A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting."
 usePageBundles: true
 ---
 

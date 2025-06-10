@@ -1,14 +1,11 @@
 ---
 author: Tristan Madden
-categories: [PowerShell, Python]
+categories: [PowerShell, Python, Security]
 date: 2024-06-01
-lastmod: 2024-06-20
 draft: false
-featured: true
-summary: "Generate a treemap of user permissions for a given folder and all subfolders."
-tags: [permissions, security]
-thumbnail: "thumbnail.png"
-title: "Visualizing Folder Permissions"
+summary: "A comprehensive guide to exporting and visualizing Windows folder permissions using PowerShell and Python, including treemap visualizations of user access rights."
+tags: [windows, powershell, python, security, permissions, data-visualization, active-directory]
+title: "Visualizing and Analyzing Windows Folder Permissions"
 toc: true
 usePageBundles: true
 ---

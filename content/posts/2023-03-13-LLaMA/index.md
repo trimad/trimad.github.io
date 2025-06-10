@@ -3,9 +3,9 @@ author: Tristan Madden
 categories: [python]
 date: 2023-03-13
 draft: true
+layout: single
 summary: "This is my tentative workflow for getting Facebook's LLaMA working with text-generation-webui."
 tags: [LLaMA]
-thumbnail: "thumbnail.png"
 title: "LLaMA"
 toc: true
 usePageBundles: true
