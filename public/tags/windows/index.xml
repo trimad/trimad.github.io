@@ -8,17 +8,8 @@
     
     
     
-    <lastBuildDate>Tue, 10 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/windows/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>UDM Parameters for Google Search</title>
-      <link>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</link>
-      <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</guid>
-      <description>Detailed guide to Google Search UDM (Universal Display Mode) parameters, each with descriptions and example searches.</description>
-    </item>
     
     <item>
       <title>UDM Parameters for Google Search</title>
@@ -26,7 +17,59 @@
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2025-06-17-udm-arguments/</guid>
-      <description>A comprehensive table of known UDM (Universal Display Mode) parameters for Google Search, describing their effects on search result layout and behavior, including lesser-known modes for cleaner interfaces, videos, forums, and more.</description>
+      <description>Detailed guide to Google Search UDM (Universal Display Mode) parameters, each with descriptions and example searches.</description>
+    </item>
+    
+    <item>
+      <title>Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</title>
+      <link>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</link>
+      <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“Logs tell you something broke; a crash dump tells you &lt;strong&gt;why&lt;/strong&gt;.”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-set-the-stage&#34;&gt;1. Set the Stage&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Grab ProcDump&lt;/strong&gt; if it’s not already on your toolbox machine.&lt;br&gt;
+👉 &lt;a href=&#34;https://learn.microsoft.com/sysinternals/downloads/procdump&#34;&gt;ProcDump — Sysinternals&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Create a home for dumps&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;New-Item -ItemType Directory C:\Dumps -Force
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Clean the slate:&lt;/strong&gt; Close every stray instance of the app you’re chasing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-capture-the-crash&#34;&gt;2. Capture the Crash&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;procdump.exe -e -h -ma excel.exe C:\Dumps
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Switch&lt;/th&gt;
+          &lt;th&gt;Why it matters&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-e&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Breaks on an unhandled &lt;strong&gt;e&lt;/strong&gt;xception (a real crash, not a polite exit)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-h&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Also triggers on a user‑mode &lt;strong&gt;h&lt;/strong&gt;ang (useful when the UI just freezes)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;-ma&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Creates a &lt;strong&gt;m&lt;/strong&gt;ini‑dump &lt;strong&gt;a&lt;/strong&gt;nd &lt;em&gt;all&lt;/em&gt; process memory (full dump)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;ProcDump parks the dump as &lt;code&gt;excel.exe_YYMMDD_HHMM.dmp&lt;/code&gt; in &lt;code&gt;C:\Dumps&lt;/code&gt;. Reproduce the crash and wait for &lt;em&gt;Dump written&lt;/em&gt; to show.&lt;/p&gt;</description>
     </item>
     
     <item>

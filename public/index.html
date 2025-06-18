@@ -71,6 +71,8 @@
         Published: June 18, 2025
         
             
+                | Last Modified: June 18, 2025
+            
         
     </small>
 
@@ -108,14 +110,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -180,14 +184,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -281,14 +287,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -377,14 +385,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -468,14 +478,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -564,14 +576,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -670,14 +684,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -756,14 +772,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -857,14 +875,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -943,14 +963,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1034,14 +1056,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1120,14 +1144,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1211,14 +1237,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1307,14 +1335,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1388,14 +1418,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1469,14 +1501,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1550,14 +1584,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1636,14 +1672,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1717,14 +1755,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1793,14 +1833,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1874,14 +1916,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -1950,14 +1994,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2031,14 +2077,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2112,14 +2160,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2198,14 +2248,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2294,14 +2346,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2375,14 +2429,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2476,14 +2532,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2552,14 +2610,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2623,14 +2683,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2694,14 +2756,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2800,14 +2864,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2871,14 +2937,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -2942,14 +3010,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3058,14 +3128,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3149,14 +3221,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3265,14 +3339,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3336,14 +3412,16 @@
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3466,14 +3544,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3572,14 +3652,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3720,14 +3802,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3839,14 +3923,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -3951,14 +4037,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4064,14 +4152,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4216,14 +4306,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4337,14 +4429,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4456,14 +4550,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4557,14 +4653,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4658,14 +4756,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4759,14 +4859,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4825,14 +4927,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4889,14 +4993,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -4960,14 +5066,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5031,14 +5139,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5102,14 +5212,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5203,14 +5315,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5274,14 +5388,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5380,14 +5496,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5456,14 +5574,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5537,14 +5657,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5608,14 +5730,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5709,14 +5833,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5780,14 +5906,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5886,14 +6014,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -5952,14 +6082,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6018,14 +6150,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6092,14 +6226,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6163,14 +6299,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6229,14 +6367,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6300,14 +6440,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6366,14 +6508,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6432,14 +6576,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6503,14 +6649,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6574,14 +6722,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6640,14 +6790,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6711,14 +6863,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6787,14 +6941,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6863,14 +7019,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -6929,14 +7087,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7015,14 +7175,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7086,14 +7248,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7152,14 +7316,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7213,14 +7379,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7282,14 +7450,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7353,14 +7523,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7419,14 +7591,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7488,14 +7662,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7549,14 +7725,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7615,14 +7793,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7691,14 +7871,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7762,14 +7944,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7838,14 +8022,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7904,14 +8090,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -7970,14 +8158,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8036,14 +8226,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8112,14 +8304,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8178,14 +8372,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8239,14 +8435,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8305,14 +8503,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8371,14 +8571,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8437,14 +8639,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8503,14 +8707,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8569,14 +8775,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8635,14 +8843,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8704,14 +8914,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8770,14 +8982,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8836,14 +9050,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8902,14 +9118,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -8968,14 +9186,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -9039,14 +9259,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -9115,14 +9337,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
@@ -9206,14 +9430,16 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         button.className = 'copy-button';
         button.textContent = 'Copy';
         button.addEventListener('click', () => {
-          const range = document.createRange();
-          range.selectNodeContents(block);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          document.execCommand('copy');
-          button.textContent = 'Copied!';
-          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
         });
         block.parentNode.insertBefore(button, block);
       });
