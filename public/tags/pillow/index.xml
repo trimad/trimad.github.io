@@ -1184,17 +1184,4 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://trimad.github.io/posts/2017-07-16-simple-2d-perlin-noise/</guid>
-      <description>An interactive p5.js sketch that generates 2D terrain using Perlin noise, with different colors representing water, sand, and grass based on elevation values.</description>
-    </item>
-    
-    <item>
-      <title>Interactive Array Visualization</title>
-      <link>https://trimad.github.io/posts/2016-12-13-arrays/</link>
-      <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://trimad.github.io/posts/2016-12-13-arrays/</guid>
-      <description>An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface.</description>
-    </item>
-    
-  </channel>
-</rss> 
+      <description>An in
