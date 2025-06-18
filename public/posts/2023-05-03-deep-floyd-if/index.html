@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="My tentative work flow for running Deep Floyd IF locally for image generation.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">
+    <link rel="canonical" href="https://trimad.github.io/posts/2023-05-03-deep-floyd-if/">
     
     <title>Deep Floyd IF | Ghostfeed</title>
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
+    <link rel="stylesheet" href="https://trimad.github.io/css/style.css">
 
-    <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
-    <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+    <link href="https://trimad.github.io/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="https://trimad.github.io/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
 </head>
 <body class="page">
 
@@ -27,31 +27,22 @@
                     <section>
     <h2>Sections</h2>
     <ul>
-        <li><a href="http://localhost:1313/">Home</a></li>
+        <li><a href="https://trimad.github.io/">Home</a></li>
         
-        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        <li><a href="https://trimad.github.io/posts/">Posts</a></li>
         
-        <li><a href="http://localhost:1313/archive/">Archive</a></li>
+        <li><a href="https://trimad.github.io/archive/">Archive</a></li>
         
     </ul>
 
     <h2>BTC</h2>
     <div class="qr-code-container">
-        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+        <img src="https://trimad.github.io/images/BTC.svg" alt="Bitcoin QR Code">
     </div>
 </section>
                 
             </nav>
         </div>
-
-        
-        <nav class="search">
-            <input
-            type="search"
-                id="post-search"
-                placeholder="Search posts…"
-                aria-label="Search posts">
-        </nav>
 
         
         <main>
@@ -70,18 +61,18 @@
         
         <p>Tags:
             
-            <a href="http://localhost:1313/%20/tags/ai">ai</a>
+            <a href="https://trimad.github.io/%20/tags/ai">ai</a>
             
-            <a href="http://localhost:1313/%20/tags/images">images</a>
+            <a href="https://trimad.github.io/%20/tags/images">images</a>
             
         </p>
         
         
         <p>Categories:
             
-            <a href="http://localhost:1313/%20/categories/python">Python</a>
+            <a href="https://trimad.github.io/%20/categories/python">Python</a>
             
-            <a href="http://localhost:1313/%20/categories/shell">Shell</a>
+            <a href="https://trimad.github.io/%20/categories/shell">Shell</a>
             
         </p>
         
@@ -221,6 +212,29 @@ git clone https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler.git
     </section>
 </article>
 
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre code').forEach((block) => {
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(block.textContent)
+          .then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          })
+          .catch(err => {
+            console.error('Copy failed', err);
+            button.textContent = 'Error';
+            setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+          });
+      });
+      block.parentNode.insertBefore(button, block);
+    });
+  });
+</script>
+
         </main>
 
         
@@ -231,73 +245,73 @@ git clone https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler.git
     <h2>Categories</h2>
     <ul>
         
-        <li><a href="http://localhost:1313/categories/active-directory/">Active Directory (4)</a></li>
+        <li><a href="https://trimad.github.io/categories/active-directory/">Active Directory (4)</a></li>
         
-        <li><a href="http://localhost:1313/categories/ai/">AI (3)</a></li>
+        <li><a href="https://trimad.github.io/categories/ai/">AI (3)</a></li>
         
-        <li><a href="http://localhost:1313/categories/azure-ad/">Azure AD (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/azure-ad/">Azure AD (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
+        <li><a href="https://trimad.github.io/categories/c%23/">C# (2)</a></li>
         
-        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/computer-vision/">Computer Vision (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/computer-vision/">Computer Vision (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/dns/">DNS (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/exchange/">Exchange (2)</a></li>
+        <li><a href="https://trimad.github.io/categories/exchange/">Exchange (2)</a></li>
         
-        <li><a href="http://localhost:1313/categories/google/">Google (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/google/">Google (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/image-processing/">Image Processing (2)</a></li>
+        <li><a href="https://trimad.github.io/categories/image-processing/">Image Processing (2)</a></li>
         
-        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
+        <li><a href="https://trimad.github.io/categories/java/">Java (32)</a></li>
         
-        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (17)</a></li>
+        <li><a href="https://trimad.github.io/categories/javascript/">JavaScript (17)</a></li>
         
-        <li><a href="http://localhost:1313/categories/machine-learning/">Machine Learning (3)</a></li>
+        <li><a href="https://trimad.github.io/categories/machine-learning/">Machine Learning (3)</a></li>
         
-        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
+        <li><a href="https://trimad.github.io/categories/masm/">MASM (3)</a></li>
         
-        <li><a href="http://localhost:1313/categories/media-processing/">Media Processing (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/media-processing/">Media Processing (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/microsoft-365/">Microsoft 365 (2)</a></li>
+        <li><a href="https://trimad.github.io/categories/microsoft-365/">Microsoft 365 (2)</a></li>
         
-        <li><a href="http://localhost:1313/categories/microsoft-office/">Microsoft Office (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/microsoft-office/">Microsoft Office (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/networking/">Networking (4)</a></li>
+        <li><a href="https://trimad.github.io/categories/networking/">Networking (4)</a></li>
         
-        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/nodejs/">Nodejs (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/office-365/">Office 365 (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/office-365/">Office 365 (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
+        <li><a href="https://trimad.github.io/categories/p5.js/">P5.js (9)</a></li>
         
-        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (24)</a></li>
+        <li><a href="https://trimad.github.io/categories/powershell/">PowerShell (24)</a></li>
         
-        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
+        <li><a href="https://trimad.github.io/categories/processing/">Processing (14)</a></li>
         
-        <li><a href="http://localhost:1313/categories/programming/">Programming (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/programming/">Programming (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/python/">Python (19)</a></li>
+        <li><a href="https://trimad.github.io/categories/python/">Python (19)</a></li>
         
-        <li><a href="http://localhost:1313/categories/reference/">Reference (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/reference/">Reference (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/security/">Security (8)</a></li>
+        <li><a href="https://trimad.github.io/categories/security/">Security (8)</a></li>
         
-        <li><a href="http://localhost:1313/categories/shell/">Shell (16)</a></li>
+        <li><a href="https://trimad.github.io/categories/shell/">Shell (16)</a></li>
         
-        <li><a href="http://localhost:1313/categories/system-administration/">System Administration (4)</a></li>
+        <li><a href="https://trimad.github.io/categories/system-administration/">System Administration (4)</a></li>
         
-        <li><a href="http://localhost:1313/categories/teams/">Teams (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/teams/">Teams (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/visualization/">Visualization (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/visualization/">Visualization (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/web-administration/">Web Administration (1)</a></li>
+        <li><a href="https://trimad.github.io/categories/web-administration/">Web Administration (1)</a></li>
         
-        <li><a href="http://localhost:1313/categories/web-development/">Web Development (2)</a></li>
+        <li><a href="https://trimad.github.io/categories/web-development/">Web Development (2)</a></li>
         
-        <li><a href="http://localhost:1313/categories/windows/">Windows (9)</a></li>
+        <li><a href="https://trimad.github.io/categories/windows/">Windows (9)</a></li>
         
     </ul>
 </section>
@@ -307,481 +321,481 @@ git clone https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler.git
     <h2>Tags</h2>
     <ul>
         
-        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/10print/">10PRINT (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/3d-modeling/">3d-Modeling (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/3d-modeling/">3d-Modeling (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/account-management/">Account Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/account-management/">Account Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/acl/">Acl (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/active-directory/">Active-Directory (10)</a></li>
+        <li><a href="https://trimad.github.io/tags/active-directory/">Active-Directory (10)</a></li>
         
-        <li><a href="http://localhost:1313/tags/ad-sync/">Ad Sync (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/ad-sync/">Ad Sync (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
+        <li><a href="https://trimad.github.io/tags/ai/">Ai (9)</a></li>
         
-        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/android/">Android (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/animation/">Animation (10)</a></li>
+        <li><a href="https://trimad.github.io/tags/animation/">Animation (10)</a></li>
         
-        <li><a href="http://localhost:1313/tags/api/">Api (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/api/">Api (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/arrays/">Arrays (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/arrays/">Arrays (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/assembly/">Assembly (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/audio/">Audio (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/audio-conversion/">Audio Conversion (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/audio-conversion/">Audio Conversion (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/automation/">Automation (13)</a></li>
+        <li><a href="https://trimad.github.io/tags/automation/">Automation (13)</a></li>
         
-        <li><a href="http://localhost:1313/tags/azure/">Azure (4)</a></li>
+        <li><a href="https://trimad.github.io/tags/azure/">Azure (4)</a></li>
         
-        <li><a href="http://localhost:1313/tags/azure-ad-connect/">Azure Ad Connect (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/azure-ad-connect/">Azure Ad Connect (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/base64/">Base64 (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/base64/">Base64 (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/bat/">Bat (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/batch-processing/">Batch-Processing (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/batch-processing/">Batch-Processing (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/bitset/">Bitset (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/buddhabrot/">Buddhabrot (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/calendars/">Calendars (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/channel-management/">Channel Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/channel-management/">Channel Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/client-side/">Client-Side (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/client-side/">Client-Side (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/cmd/">Cmd (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/cmd/">Cmd (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
+        <li><a href="https://trimad.github.io/tags/coding-challenge/">Coding Challenge (15)</a></li>
         
-        <li><a href="http://localhost:1313/tags/collaboration/">Collaboration (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/collaboration/">Collaboration (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/command-line/">Command-Line (6)</a></li>
+        <li><a href="https://trimad.github.io/tags/command-line/">Command-Line (6)</a></li>
         
-        <li><a href="http://localhost:1313/tags/compliance/">Compliance (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/compliance/">Compliance (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/computer-vision/">Computer-Vision (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/computer-vision/">Computer-Vision (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/coqui-tts/">Coqui-Tts (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/coqui-tts/">Coqui-Tts (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/counting-sort/">Counting Sort (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/creative-coding/">Creative-Coding (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/creative-coding/">Creative-Coding (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/cuda/">Cuda (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/cuda/">Cuda (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/curl/">Curl (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/curl/">Curl (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/cybersecurity/">Cybersecurity (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/cybersecurity/">Cybersecurity (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/dag/">Dag (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/data-visualization/">Data-Visualization (5)</a></li>
+        <li><a href="https://trimad.github.io/tags/data-visualization/">Data-Visualization (5)</a></li>
         
-        <li><a href="http://localhost:1313/tags/debugging/">Debugging (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/debugging/">Debugging (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/decoding/">Decoding (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/decoding/">Decoding (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/depth-estimation/">Depth Estimation (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/depth-estimation/">Depth Estimation (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/device-management/">Device Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/device-management/">Device Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/directory-services/">Directory-Services (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/directory-services/">Directory-Services (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/disjoint-set/">Disjoint Set (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/distance/">Distance (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/dkim/">Dkim (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/dkim/">Dkim (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/dmarc/">Dmarc (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/dmarc/">Dmarc (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/dns/">Dns (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/dns/">Dns (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/domain/">Domain (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/domain/">Domain (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/domain-controller/">Domain Controller (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/domain-controller/">Domain Controller (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/domain-security/">Domain Security (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/domain-security/">Domain Security (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/domain-management/">Domain-Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/domain-management/">Domain-Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/download/">Download (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/drivers/">Drivers (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/drives/">Drives (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/education/">Education (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/education/">Education (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/email/">Email (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/email/">Email (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/email-management/">Email Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/email-management/">Email Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/email-security/">Email Security (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/email-security/">Email Security (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/email-archiving/">Email-Archiving (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/email-archiving/">Email-Archiving (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/events/">Events (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/events/">Events (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/exchange/">Exchange (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/exchange/">Exchange (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/exchange-management/">Exchange-Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/exchange-management/">Exchange-Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/exchange-online/">Exchange-Online (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/exchange-online/">Exchange-Online (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/ffmpeg/">Ffmpeg (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/fibonacci/">Fibonacci (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/file-permissions/">File-Permissions (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/file-permissions/">File-Permissions (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/file-system/">File-System (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/file-system/">File-System (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/film/">Film (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/film/">Film (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/filtering/">Filtering (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/filtering/">Filtering (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/finance/">Finance (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/firewall/">Firewall (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/flask/">Flask (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/flask/">Flask (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/fractal/">Fractal (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/frame-interpolation/">Frame Interpolation (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/frame-interpolation/">Frame Interpolation (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/gal/">Gal (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/gal/">Gal (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/gmail/">Gmail (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/gmail/">Gmail (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/google-forms/">Google Forms (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/google-apps-script/">Google-Apps-Script (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/google-apps-script/">Google-Apps-Script (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/google-drive/">Google-Drive (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/google-drive/">Google-Drive (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/gpu/">Gpu (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/gpu/">Gpu (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/graphs/">Graphs (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/graphs/">Graphs (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/group/">Group (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/group-management/">Group Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/group-management/">Group Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/group-policy/">Group-Policy (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/group-policy/">Group-Policy (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/gsuite/">Gsuite (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/hardware/">Hardware (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/hardware/">Hardware (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/hex-encoding/">Hex Encoding (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/hex-encoding/">Hex Encoding (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/iis/">Iis (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/iis/">Iis (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/image-processing/">Image-Processing (4)</a></li>
+        <li><a href="https://trimad.github.io/tags/image-processing/">Image-Processing (4)</a></li>
         
-        <li><a href="http://localhost:1313/tags/images/">Images (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/images/">Images (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/incident-response/">Incident Response (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/incident-response/">Incident Response (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/insertion-sort/">Insertion Sort (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/installation/">Installation (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/installation/">Installation (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
+        <li><a href="https://trimad.github.io/tags/interactive/">Interactive (9)</a></li>
         
-        <li><a href="http://localhost:1313/tags/ip-address/">Ip-Address (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/ip-address/">Ip-Address (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/ip-addressing/">Ip-Addressing (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/ip-addressing/">Ip-Addressing (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/java/">Java (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/java/">Java (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/javascript/">Javascript (5)</a></li>
+        <li><a href="https://trimad.github.io/tags/javascript/">Javascript (5)</a></li>
         
-        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/juno/">Juno (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/jupiter/">Jupiter (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/k-means/">K-Means (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
+        <li><a href="https://trimad.github.io/tags/kattis/">Kattis (6)</a></li>
         
-        <li><a href="http://localhost:1313/tags/keyboard/">Keyboard (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/keyboard/">Keyboard (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/knowledge-graphs/">Knowledge-Graphs (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/knowledge-graphs/">Knowledge-Graphs (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/lan/">Lan (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/lan/">Lan (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/llm/">Llm (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/llm/">Llm (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/local-administrator/">Local Administrator (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/local-administrator/">Local Administrator (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/local-ai/">Local-Ai (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/local-ai/">Local-Ai (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/logging/">Logging (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/logging/">Logging (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/lorenz-system/">Lorenz System (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/m365/">M365 (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/machine-learning/">Machine-Learning (6)</a></li>
+        <li><a href="https://trimad.github.io/tags/machine-learning/">Machine-Learning (6)</a></li>
         
-        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/maximum-flow/">Maximum Flow (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/media-processing/">Media Processing (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/media-processing/">Media Processing (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/merge-sort/">Merge Sort (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft-Office (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/microsoft-office/">Microsoft-Office (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/midas/">Midas (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/midas/">Midas (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/mistral-7b/">Mistral-7b (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/mistral-7b/">Mistral-7b (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/monitoring/">Monitoring (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/monitoring/">Monitoring (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/moondream/">Moondream (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/moondream/">Moondream (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/multilingual/">Multilingual (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/multilingual/">Multilingual (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/mx/">Mx (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/mx/">Mx (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/n-central/">N-Central (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/n-central/">N-Central (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/natural-language-processing/">Natural Language Processing (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/natural-language-processing/">Natural Language Processing (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/net/">Net (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/netsh/">Netsh (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/network/">Network (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/network/">Network (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/network-drives/">Network Drives (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/network-analysis/">Network-Analysis (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/network-analysis/">Network-Analysis (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/network-security/">Network-Security (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/network-security/">Network-Security (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/networking/">Networking (5)</a></li>
+        <li><a href="https://trimad.github.io/tags/networking/">Networking (5)</a></li>
         
-        <li><a href="http://localhost:1313/tags/networkx/">Networkx (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/networkx/">Networkx (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/nlp/">Nlp (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/nlp/">Nlp (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/nslookup/">Nslookup (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/nslookup/">Nslookup (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/obfuscation/">Obfuscation (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/obfuscation/">Obfuscation (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/office-365/">Office-365 (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/office-365/">Office-365 (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/office365/">Office365 (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/office365/">Office365 (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/officec2rclient/">Officec2rclient (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/officec2rclient/">Officec2rclient (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/openai/">Openai (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/openai/">Openai (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/optimization/">Optimization (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/optimization/">Optimization (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/p5.js/">P5.js (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/p5js/">P5js (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/p5js/">P5js (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/password-management/">Password Management (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/password-management/">Password Management (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/password-generator/">Password-Generator (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/password-generator/">Password-Generator (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/passwords/">Passwords (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/passwords/">Passwords (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/perlin-noise/">Perlin Noise (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/permissions/">Permissions (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/phishing/">Phishing (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/photo-editing/">Photo-Editing (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/photo-editing/">Photo-Editing (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/pil/">Pil (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/pil/">Pil (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/pillow/">Pillow (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/pillow/">Pillow (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/port-management/">Port-Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/port-management/">Port-Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/powershell/">Powershell (22)</a></li>
+        <li><a href="https://trimad.github.io/tags/powershell/">Powershell (22)</a></li>
         
-        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/prime-numbers/">Prime Numbers (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/printers/">Printers (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/procdump/">Procdump (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/procdump/">Procdump (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/processing/">Processing (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/programming/">Programming (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/programming/">Programming (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/python/">Python (15)</a></li>
+        <li><a href="https://trimad.github.io/tags/python/">Python (15)</a></li>
         
-        <li><a href="http://localhost:1313/tags/python-script/">Python-Script (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/python-script/">Python-Script (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/pyvis/">Pyvis (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/pyvis/">Pyvis (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/qr-code/">Qr-Code (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/qr-code/">Qr-Code (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/rdp/">Rdp (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/rdp/">Rdp (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/reference/">Reference (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/reference/">Reference (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/registry-modification/">Registry Modification (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/remote-access/">Remote-Access (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/remote-access/">Remote-Access (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/reporting/">Reporting (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/reporting/">Reporting (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/reports/">Reports (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/reports/">Reports (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/robocopy/">Robocopy (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/screen-recording/">Screen Recording (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/screen-recording/">Screen Recording (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/scripting/">Scripting (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/scripting/">Scripting (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/sdk/">SDK (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/security/">Security (9)</a></li>
+        <li><a href="https://trimad.github.io/tags/security/">Security (9)</a></li>
         
-        <li><a href="http://localhost:1313/tags/security-analysis/">Security Analysis (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/security-analysis/">Security Analysis (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/security-management/">Security Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/security-management/">Security Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/settings/">Settings (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/settings/">Settings (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/shell/">Shell (4)</a></li>
+        <li><a href="https://trimad.github.io/tags/shell/">Shell (4)</a></li>
         
-        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/sid/">SID (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/smtp/">Smtp (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/smtp/">Smtp (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/sorting/">Sorting (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/sound/">Sound (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/space/">Space (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/speech-recognition/">Speech Recognition (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/speech-recognition/">Speech Recognition (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/spf/">Spf (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/spf/">Spf (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/spiral/">Spiral (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/stable-diffusion/">Stable-Diffusion (2)</a></li>
+        <li><a href="https://trimad.github.io/tags/stable-diffusion/">Stable-Diffusion (2)</a></li>
         
-        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/stocks/">Stocks (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/string/">String (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/subnets/">Subnets (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/subnets/">Subnets (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/synchronization/">Synchronization (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/synchronization/">Synchronization (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/sysinternals/">Sysinternals (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/sysinternals/">Sysinternals (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/system-administration/">System-Administration (13)</a></li>
+        <li><a href="https://trimad.github.io/tags/system-administration/">System-Administration (13)</a></li>
         
-        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/systeminfo/">Systeminfo (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/team-management/">Team Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/team-management/">Team Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/team-ownership/">Team Ownership (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/team-ownership/">Team Ownership (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/tensorflow/">Tensorflow (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/tensorflow/">Tensorflow (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/therafit/">Therafit (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/therafit/">Therafit (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/time/">Time (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/topological-sort/">Topological Sort (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/troubleshooting/">Troubleshooting (4)</a></li>
+        <li><a href="https://trimad.github.io/tags/troubleshooting/">Troubleshooting (4)</a></li>
         
-        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/tzutil/">Tzutil (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/udm/">UDM (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/udm/">UDM (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/uri/">Uri (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/uri/">Uri (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/uri-encoding/">Uri Encoding (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/uri-encoding/">Uri Encoding (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/user-management/">User-Management (4)</a></li>
+        <li><a href="https://trimad.github.io/tags/user-management/">User-Management (4)</a></li>
         
-        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
+        <li><a href="https://trimad.github.io/tags/uva/">Uva (9)</a></li>
         
-        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/vbscript/">VBScript (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/version-management/">Version-Management (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/version-management/">Version-Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/video/">Video (5)</a></li>
+        <li><a href="https://trimad.github.io/tags/video/">Video (5)</a></li>
         
-        <li><a href="http://localhost:1313/tags/video-conversion/">Video Conversion (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/video-conversion/">Video Conversion (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/visualization/">Visualization (3)</a></li>
+        <li><a href="https://trimad.github.io/tags/visualization/">Visualization (3)</a></li>
         
-        <li><a href="http://localhost:1313/tags/web-administration/">Web-Administration (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/web-administration/">Web-Administration (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/web-development/">Web-Development (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/web-development/">Web-Development (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/wifi/">Wifi (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/wifi/">Wifi (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/windbg/">Windbg (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/windbg/">Windbg (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/windows/">Windows (17)</a></li>
+        <li><a href="https://trimad.github.io/tags/windows/">Windows (17)</a></li>
         
-        <li><a href="http://localhost:1313/tags/windows-10/">Windows 10 (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/windows-10/">Windows 10 (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/windows-11/">Windows 11 (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/windows-11/">Windows 11 (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/windows-defender/">Windows-Defender (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/windows-defender/">Windows-Defender (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/windows-server/">Windows-Server (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/windows-server/">Windows-Server (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/windows-update/">Windows-Update (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/windows-update/">Windows-Update (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/wmic/">Wmic (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/youtube-dl/">Youtube-Dl (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (1)</a></li>
+        <li><a href="https://trimad.github.io/tags/yt-dlp/">Yt-Dlp (1)</a></li>
         
     </ul>
 </section>
@@ -845,6 +859,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
-    <script src="http://localhost:1313/js/snow.js"></script>
+    <script src="https://trimad.github.io/js/bg.js"></script>
 </body>
 </html>

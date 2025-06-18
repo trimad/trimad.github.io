@@ -6,7 +6,7 @@ draft: false
 summary: "A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library)."
 tags: [python, image-processing, optimization, pil, pillow, batch-processing]
 title: "Automated Batch Image Compression with Python"
-toc: true
+toc: false
 usePageBundles: true
 ---
 

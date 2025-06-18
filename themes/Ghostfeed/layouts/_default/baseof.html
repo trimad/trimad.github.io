@@ -29,15 +29,6 @@
             </nav>
         </div>
 
-        <!-- top-centre: search bar -->
-        <nav class="search">
-            <input
-            type="search"
-                id="post-search"
-                placeholder="Search posts…"
-                aria-label="Search posts">
-        </nav>
-
         <!-- centre: main content (second row) -->
         <main>
             {{ block "main" . }}{{ end }}
@@ -60,6 +51,6 @@
 
     <!-- scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
-    <script src="{{ "js/snow.js" | relURL }}"></script>
+    <script src="{{ "js/bg.js" | relURL }}"></script>
 </body>
 </html>

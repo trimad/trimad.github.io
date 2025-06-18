@@ -1,7 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ghostfeed</title>
-    <link>http://localhost:1313/tags/web-development/</link>
+    <link>https://trimad.github.io/tags/web-development/</link>
     <description>Recent content on Ghostfeed</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -9,23 +9,23 @@
     
     
     <lastBuildDate>Wed, 22 Mar 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/web-development/" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/web-development/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>UDM Parameters for Google Search</title>
-      <link>http://localhost:1313/posts/2025-06-17-udm-arguments/</link>
+      <link>https://trimad.github.io/posts/2025-06-17-udm-arguments/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2025-06-17-udm-arguments/</guid>
+      <guid>https://trimad.github.io/posts/2025-06-17-udm-arguments/</guid>
       <description>Detailed guide to Google Search UDM (Universal Display Mode) parameters, each with descriptions and example searches.</description>
     </item>
     
     <item>
       <title>Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</title>
-      <link>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</link>
+      <link>https://trimad.github.io/posts/2025-05-02-procdump-and-windbg/</link>
       <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</guid>
+      <guid>https://trimad.github.io/posts/2025-05-02-procdump-and-windbg/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;“Logs tell you something broke; a crash dump tells you &lt;strong&gt;why&lt;/strong&gt;.”&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -74,334 +74,334 @@
     
     <item>
       <title>Automated IIS Application Pool Restart with PowerShell</title>
-      <link>http://localhost:1313/posts/2024-10-16-restart-iis-application/</link>
+      <link>https://trimad.github.io/posts/2024-10-16-restart-iis-application/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-10-16-restart-iis-application/</guid>
+      <guid>https://trimad.github.io/posts/2024-10-16-restart-iis-application/</guid>
       <description>A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling.</description>
     </item>
     
     <item>
       <title>Managing Microsoft Office Versions with OfficeC2RClient</title>
-      <link>http://localhost:1313/posts/2024-09-10-officec2rclient/</link>
+      <link>https://trimad.github.io/posts/2024-09-10-officec2rclient/</link>
       <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-09-10-officec2rclient/</guid>
+      <guid>https://trimad.github.io/posts/2024-09-10-officec2rclient/</guid>
       <description>A comprehensive guide to managing Microsoft 365 versions using OfficeC2RClient, including checking current builds, consulting version history, and rolling back or updating Office installations.</description>
     </item>
     
     <item>
       <title>Automated Batch Image Compression with Python</title>
-      <link>http://localhost:1313/posts/2024-07-30-batch-compress-images/</link>
+      <link>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-07-30-batch-compress-images/</guid>
+      <guid>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</guid>
       <description>A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library).</description>
     </item>
     
     <item>
       <title>How to Find Your Public IP Address</title>
-      <link>http://localhost:1313/posts/2024-06-24-get-public-ip/</link>
+      <link>https://trimad.github.io/posts/2024-06-24-get-public-ip/</link>
       <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-06-24-get-public-ip/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-24-get-public-ip/</guid>
       <description>A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions.</description>
     </item>
     
     <item>
       <title>Complete DNS Records Reference Guide</title>
-      <link>http://localhost:1313/posts/2024-06-06-dns-records/</link>
+      <link>https://trimad.github.io/posts/2024-06-06-dns-records/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-06-dns-records/</guid>
       <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
     </item>
     
     <item>
       <title>Network Subnet Visualization Tools</title>
-      <link>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</link>
+      <link>https://trimad.github.io/posts/2024-06-01-visualizing-subnets/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-01-visualizing-subnets/</guid>
       <description>Tools and scripts for visualizing and analyzing network subnets, including IP address ranges and network topologies.</description>
     </item>
     
     <item>
       <title>Visualizing and Analyzing Windows Folder Permissions</title>
-      <link>http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/</link>
+      <link>https://trimad.github.io/posts/2024-06-01-visualizing-folder-permissions/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-01-visualizing-folder-permissions/</guid>
       <description>A comprehensive guide to exporting and visualizing Windows folder permissions using PowerShell and Python, including treemap visualizations of user access rights.</description>
     </item>
     
     <item>
       <title>Troubleshooting Group Policy Objects (GPOs)</title>
-      <link>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</link>
+      <link>https://trimad.github.io/posts/2024-05-31-troubleshooting-group-policy/</link>
       <pubDate>Fri, 31 May 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</guid>
+      <guid>https://trimad.github.io/posts/2024-05-31-troubleshooting-group-policy/</guid>
       <description>A collection of useful commands and steps for troubleshooting Group Policy Objects (GPOs) in a Windows Active Directory environment.</description>
     </item>
     
     <item>
       <title>Active Directory User Lockout and Password Report</title>
-      <link>http://localhost:1313/posts/2024-05-30-user-lockout-report/</link>
+      <link>https://trimad.github.io/posts/2024-05-30-user-lockout-report/</link>
       <pubDate>Thu, 30 May 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-05-30-user-lockout-report/</guid>
+      <guid>https://trimad.github.io/posts/2024-05-30-user-lockout-report/</guid>
       <description>A PowerShell script that generates an HTML diagnostics report for user lockouts in Active Directory, including password age, expiration details, and account status.</description>
     </item>
     
     <item>
       <title>Window Monitoring with Machine Vision</title>
-      <link>http://localhost:1313/posts/2024-03-25-window-watcher/</link>
+      <link>https://trimad.github.io/posts/2024-03-25-window-watcher/</link>
       <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-03-25-window-watcher/</guid>
+      <guid>https://trimad.github.io/posts/2024-03-25-window-watcher/</guid>
       <description>A guide to setting up a window monitoring system using the Moondream2 machine vision model for real-time window content analysis.</description>
     </item>
     
     <item>
       <title>Remote and Local DNS Configuration Guide</title>
-      <link>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</link>
+      <link>https://trimad.github.io/posts/2024-03-21-change-dns-remotely/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</guid>
+      <guid>https://trimad.github.io/posts/2024-03-21-change-dns-remotely/</guid>
       <description>Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management using WMIC and PowerShell.</description>
     </item>
     
     <item>
       <title>Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs</title>
-      <link>http://localhost:1313/posts/2024-02-05-local-ai-api/</link>
+      <link>https://trimad.github.io/posts/2024-02-05-local-ai-api/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-02-05-local-ai-api/</guid>
+      <guid>https://trimad.github.io/posts/2024-02-05-local-ai-api/</guid>
       <description>A practical collection of Python Flask API implementations for running various AI models locally, including image-to-text using Moondream, text-to-speech with Coqui TTS, and text generation via local LLMs with OpenAI-compatible interfaces.</description>
     </item>
     
     <item>
       <title>Troubleshooting N-Central Take Control</title>
-      <link>http://localhost:1313/posts/2024-01-02-take-control/</link>
+      <link>https://trimad.github.io/posts/2024-01-02-take-control/</link>
       <pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2024-01-02-take-control/</guid>
+      <guid>https://trimad.github.io/posts/2024-01-02-take-control/</guid>
       <description>Steps to take when N-Central&amp;rsquo;s Take Control remote access feature isn&amp;rsquo;t working, including how to restart the necessary services.</description>
     </item>
     
     <item>
       <title>Graphing a LAN with PyVis</title>
-      <link>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</link>
+      <link>https://trimad.github.io/posts/2023-12-28-pyvis-graphing-lan/</link>
       <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</guid>
+      <guid>https://trimad.github.io/posts/2023-12-28-pyvis-graphing-lan/</guid>
       <description>A guide to visualizing Local Area Network (LAN) topologies using Python and pyvis for interactive network graphs.</description>
     </item>
     
     <item>
       <title>Visualizing Directory Structures with PyVis</title>
-      <link>http://localhost:1313/posts/2023-12-28-pyvis-graphing-directories/</link>
+      <link>https://trimad.github.io/posts/2023-12-28-pyvis-graphing-directories/</link>
       <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-12-28-pyvis-graphing-directories/</guid>
+      <guid>https://trimad.github.io/posts/2023-12-28-pyvis-graphing-directories/</guid>
       <description>A guide to visualizing Windows directory structures using Python and pyvis for interactive network graphs.</description>
     </item>
     
     <item>
       <title>Generating Knowledge Graphs with LLMs and PyVis</title>
-      <link>http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/</link>
+      <link>https://trimad.github.io/posts/2023-12-14-pyvis-knowledge-graphs/</link>
       <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/</guid>
+      <guid>https://trimad.github.io/posts/2023-12-14-pyvis-knowledge-graphs/</guid>
       <description>An experimental approach to extracting structured knowledge graphs from literary text using Mistral-7B LLM, demonstrated with the opening passage of The Hobbit and visualized as connected node-edge relationships.</description>
     </item>
     
     <item>
       <title>Setting Up a Local Large Language Model (LLM) Environment</title>
-      <link>http://localhost:1313/posts/2023-10-17-local-llm/</link>
+      <link>https://trimad.github.io/posts/2023-10-17-local-llm/</link>
       <pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-10-17-local-llm/</guid>
+      <guid>https://trimad.github.io/posts/2023-10-17-local-llm/</guid>
       <description>A guide to setting up a local large language model (LLM) environment for TheraFit, a project focused on matching clients with therapists.</description>
     </item>
     
     <item>
       <title>PSWindowsUpdate: Managing Windows Updates with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-10-10-pswindowsupdate/</link>
+      <link>https://trimad.github.io/posts/2023-10-10-pswindowsupdate/</link>
       <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-10-10-pswindowsupdate/</guid>
+      <guid>https://trimad.github.io/posts/2023-10-10-pswindowsupdate/</guid>
       <description>Install Windows Updates with the PSWindowsUpdate PowerShell module.</description>
     </item>
     
     <item>
       <title>Gmail Photo Downloader</title>
-      <link>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</link>
+      <link>https://trimad.github.io/posts/2023-09-11-picture-auto-downloader/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</guid>
+      <guid>https://trimad.github.io/posts/2023-09-11-picture-auto-downloader/</guid>
       <description>A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder.</description>
     </item>
     
     <item>
       <title>Disco Ball</title>
-      <link>http://localhost:1313/posts/2023-08-24-disco-ball/</link>
+      <link>https://trimad.github.io/posts/2023-08-24-disco-ball/</link>
       <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-08-24-disco-ball/</guid>
+      <guid>https://trimad.github.io/posts/2023-08-24-disco-ball/</guid>
       <description>A JavaScript implementation using p5.js to generate a black and white disco ball visualization.</description>
     </item>
     
     <item>
       <title>Python NetworkX Library for Network Graph Visualization</title>
-      <link>http://localhost:1313/posts/2023-08-15-networkx/</link>
+      <link>https://trimad.github.io/posts/2023-08-15-networkx/</link>
       <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-08-15-networkx/</guid>
+      <guid>https://trimad.github.io/posts/2023-08-15-networkx/</guid>
       <description>A comprehensive guide to creating visually appealing network graphs with Python&amp;rsquo;s networkx library, including node positioning, custom coloring, edge labeling, and group visualization with ellipses.</description>
     </item>
     
     <item>
       <title>Mapping Network Drives Using PowerShell and SID</title>
-      <link>http://localhost:1313/posts/2023-07-20-mapped-drives/</link>
+      <link>https://trimad.github.io/posts/2023-07-20-mapped-drives/</link>
       <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-07-20-mapped-drives/</guid>
+      <guid>https://trimad.github.io/posts/2023-07-20-mapped-drives/</guid>
       <description>This blog post discusses a PowerShell script that can map a network drive using a Security Identifier (SID), even without being logged in as that user.</description>
     </item>
     
     <item>
       <title>Join a Workstation to Active Directory with Shell and PowerShell</title>
-      <link>http://localhost:1313/posts/2023-07-13-join-active-directory/</link>
+      <link>https://trimad.github.io/posts/2023-07-13-join-active-directory/</link>
       <pubDate>Thu, 13 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-07-13-join-active-directory/</guid>
+      <guid>https://trimad.github.io/posts/2023-07-13-join-active-directory/</guid>
       <description>A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality.</description>
     </item>
     
     <item>
       <title>QR Code Generator with Python</title>
-      <link>http://localhost:1313/posts/2023-06-24-qr/</link>
+      <link>https://trimad.github.io/posts/2023-06-24-qr/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-06-24-qr/</guid>
+      <guid>https://trimad.github.io/posts/2023-06-24-qr/</guid>
       <description>A Python script using the qrcode library to generate customizable QR codes with error correction, including options for masking specific areas of the code.</description>
     </item>
     
     <item>
       <title>Deforum Cheat Sheet</title>
-      <link>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</link>
+      <link>https://trimad.github.io/posts/2023-05-24-deforum-cheat-sheet/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-24-deforum-cheat-sheet/</guid>
       <description>This is a cheat sheet of animations showing what the various 3D translation and rotation settings do in Deforum Stable Diffusion.</description>
     </item>
     
     <item>
       <title>3D Photo Inpainting with Python and PyTorch</title>
-      <link>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</link>
+      <link>https://trimad.github.io/posts/2023-05-12-3d-photo-inpainting/</link>
       <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-12-3d-photo-inpainting/</guid>
       <description>A comprehensive guide to setting up and using 3D Photo Inpainting on Windows, including Miniconda environment setup, dependency installation, and usage instructions.</description>
     </item>
     
     <item>
       <title>Yahoo Finance API via RapidAPI</title>
-      <link>http://localhost:1313/posts/2023-05-11-rapidapi/</link>
+      <link>https://trimad.github.io/posts/2023-05-11-rapidapi/</link>
       <pubDate>Thu, 11 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-05-11-rapidapi/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-11-rapidapi/</guid>
       <description>This program loads comma-separated stock symbols from a file named &lt;code&gt;symbols.txt&lt;/code&gt; and then queries the Yahoo Finance API using a RapidAPI endpoint. It retrieves prices for every 60 minutes on a max time window.</description>
     </item>
     
     <item>
       <title>Key Event Tester</title>
-      <link>http://localhost:1313/posts/2023-05-08-keycode-event-test/</link>
+      <link>https://trimad.github.io/posts/2023-05-08-keycode-event-test/</link>
       <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-05-08-keycode-event-test/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-08-keycode-event-test/</guid>
       <description>This diagnostic tool allows you to type into a text area and logs keyboard events, providing valuable information such as key codes, key names, and modifier keys (Alt, Ctrl, Shift, Meta). As you interact with the text area, the captured event data will be displayed in real-time. This can be particularly useful for debugging and understanding the nuances of keyboard events in your application.</description>
     </item>
     
     <item>
       <title>Deep Floyd IF</title>
-      <link>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</link>
+      <link>https://trimad.github.io/posts/2023-05-03-deep-floyd-if/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-03-deep-floyd-if/</guid>
       <description>My tentative work flow for running Deep Floyd IF locally for image generation.</description>
     </item>
     
     <item>
       <title>Windows ACL Management with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-05-02-acl/</link>
+      <link>https://trimad.github.io/posts/2023-05-02-acl/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-05-02-acl/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-02-acl/</guid>
       <description>A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions.</description>
     </item>
     
     <item>
       <title>net use</title>
-      <link>http://localhost:1313/posts/2023-04-13-net-use/</link>
+      <link>https://trimad.github.io/posts/2023-04-13-net-use/</link>
       <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-04-13-net-use/</guid>
+      <guid>https://trimad.github.io/posts/2023-04-13-net-use/</guid>
       <description>Connects a computer to or disconnects a computer from a shared resource, or displays information about computer connections. The command also controls persistent net connections. Used without parameters, net use retrieves a list of network connections.</description>
     </item>
     
     <item>
       <title>Thin Plate Spline Motion Model</title>
-      <link>http://localhost:1313/posts/2023-04-12-thin-plate-spline-motion-model/</link>
+      <link>https://trimad.github.io/posts/2023-04-12-thin-plate-spline-motion-model/</link>
       <pubDate>Wed, 12 Apr 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-04-12-thin-plate-spline-motion-model/</guid>
+      <guid>https://trimad.github.io/posts/2023-04-12-thin-plate-spline-motion-model/</guid>
       <description>A practical guide to using the Thin Plate Spline Motion Model for animating static images by transferring motion from a driving video, with setup instructions and observations about optimal video dimensions and motion tracking limitations.</description>
     </item>
     
     <item>
       <title>Managing Global Address List (GAL) Visibility with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</link>
+      <link>https://trimad.github.io/posts/2023-04-05-hiding-users-from-gal/</link>
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</guid>
+      <guid>https://trimad.github.io/posts/2023-04-05-hiding-users-from-gal/</guid>
       <description>A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute.</description>
     </item>
     
     <item>
       <title>Random Password Generator</title>
-      <link>http://localhost:1313/posts/2023-03-22-random-password-generator/</link>
+      <link>https://trimad.github.io/posts/2023-03-22-random-password-generator/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-03-22-random-password-generator/</guid>
+      <guid>https://trimad.github.io/posts/2023-03-22-random-password-generator/</guid>
       <description>A client-side JavaScript tool that generates secure random passwords with three complexity levels: special characters, alphanumeric, and alphabetic only. Passwords automatically refresh on page load.</description>
     </item>
     
     <item>
       <title>Windows Defender Firewall Management Guide</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
+      <link>https://trimad.github.io/posts/2023-03-03-windows-defender-firewall/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
+      <guid>https://trimad.github.io/posts/2023-03-03-windows-defender-firewall/</guid>
       <description>A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding.</description>
     </item>
     
     <item>
       <title>Windows Remediation</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-remediation/</link>
+      <link>https://trimad.github.io/posts/2023-03-03-windows-remediation/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-03-03-windows-remediation/</guid>
+      <guid>https://trimad.github.io/posts/2023-03-03-windows-remediation/</guid>
       <description>A comprehensive collection of Windows troubleshooting and repair tools including DISM, SFC, DLL registration commands, and PowerShell scripts for reinstalling Windows apps.</description>
     </item>
     
     <item>
       <title>OpenAI Whisper Speech Recognition Guide</title>
-      <link>http://localhost:1313/posts/2023-02-24-openai-whisper/</link>
+      <link>https://trimad.github.io/posts/2023-02-24-openai-whisper/</link>
       <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-24-openai-whisper/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-24-openai-whisper/</guid>
       <description>&lt;p&gt;Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&#34;https://github.com/openai/whisper&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/h3&gt;
 &lt;h3&gt;Installation&lt;/h3&gt;
@@ -421,19 +421,19 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>Microsoft LAPS (Local Administrator Password Solution) Guide</title>
-      <link>http://localhost:1313/posts/2023-02-22-laps/</link>
+      <link>https://trimad.github.io/posts/2023-02-22-laps/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-22-laps/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-22-laps/</guid>
       <description>Microsoft LAPS (Local Administrator Password Solution) is a tool designed to securely manage local administrator account passwords on Windows domain-joined computers. It automates password generation and rotation, and stores passwords in a secure manner, providing greater control and security over local accounts.</description>
     </item>
     
     <item>
       <title>Microsoft Teams PowerShell Management Guide</title>
-      <link>http://localhost:1313/posts/2023-02-23-microsoftteams/</link>
+      <link>https://trimad.github.io/posts/2023-02-23-microsoftteams/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-23-microsoftteams/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-23-microsoftteams/</guid>
       <description>&lt;p&gt;PowerShell scripts for Microsoft Teams stuff.&lt;/p&gt;
 &lt;h3&gt;Get all owners of all teams and team channels&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Documentation: https://learn.microsoft.com/en-us/powershell/module/teams/?view=teams-ps&lt;/span&gt;
@@ -481,10 +481,10 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>Managing Windows User Accounts with net user Command</title>
-      <link>http://localhost:1313/posts/2023-02-21-net-user/</link>
+      <link>https://trimad.github.io/posts/2023-02-21-net-user/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-21-net-user/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-21-net-user/</guid>
       <description>&lt;p&gt;The &amp;ldquo;net user&amp;rdquo; command is a Command Prompt (Shell) command used to manage user accounts on a Windows operating system. It can be used to create, modify, or delete user accounts, as well as to change passwords and manage group memberships.&lt;/p&gt;
 &lt;h2 id=&#34;syntax&#34;&gt;Syntax&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
@@ -498,10 +498,10 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>Windows Driver Management with pnputil</title>
-      <link>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</link>
+      <link>https://trimad.github.io/posts/2023-02-17-uninstall-drivers/</link>
       <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-17-uninstall-drivers/</guid>
       <description>&lt;p&gt;You can uninstall third-party drivers (such as the WAVES MaxxAudio Pro driver) from the Command Prompt (CMD) by using the &amp;ldquo;pnputil.exe&amp;rdquo; utility. Here&amp;rsquo;s the basic process:&lt;/p&gt;
 &lt;p&gt;Open Command Prompt as administrator: Press the Windows key + X, and then select &amp;ldquo;Command Prompt (Admin)&amp;rdquo;.&lt;/p&gt;
 &lt;p&gt;Type the following command and press Enter:&lt;/p&gt;
@@ -513,10 +513,10 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>Phishing Email Decoding Tools</title>
-      <link>http://localhost:1313/posts/2023-02-15-decode-phishing-emails/</link>
+      <link>https://trimad.github.io/posts/2023-02-15-decode-phishing-emails/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-15-decode-phishing-emails/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-15-decode-phishing-emails/</guid>
       <description>&lt;h2 id=&#34;atob-obfuscation&#34;&gt;atob() obfuscation&lt;/h2&gt;
 &lt;p&gt;This p5.js script is designed to find and decode base64-encoded strings that are nested within one another. The script has several functions that work together to achieve this goal:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;isBase64(str)&lt;/code&gt;: This function checks if a given string str is a valid base64-encoded string. It uses a regular expression to test the string and the &lt;code&gt;atob()&lt;/code&gt; function to try decoding the string. If the decoding is successful, the function returns true; otherwise, it returns false.&lt;/p&gt;</description>
@@ -524,10 +524,10 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>PowerShell Script for Azure AD Synchronization Management</title>
-      <link>http://localhost:1313/posts/2023-02-09-force-ad-sync/</link>
+      <link>https://trimad.github.io/posts/2023-02-09-force-ad-sync/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-09-force-ad-sync/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-09-force-ad-sync/</guid>
       <description>&lt;p&gt;This PowerShell script performs the following actions:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;It retrieves the Windows identity and security principal of the current user account.&lt;/li&gt;
@@ -569,10 +569,10 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>Microsoft 365 Email Security Management Guide</title>
-      <link>http://localhost:1313/posts/2023-02-07-purge-emails/</link>
+      <link>https://trimad.github.io/posts/2023-02-07-purge-emails/</link>
       <pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-07-purge-emails/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-07-purge-emails/</guid>
       <description>&lt;h2 id=&#34;block-unwanted-emails&#34;&gt;Block Unwanted Emails&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Prevent sending or receiving emails from specific external email addresses or domains.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Navigate to the Tenant Allow/Block List in the Microsoft Security Center. Configure the settings to block specific email addresses or domains. For direct access, use this link: &lt;a href=&#34;https://security.microsoft.com/tenantAllowBlockList&#34;&gt;Tenant Allow/Block List&lt;/a&gt;.&lt;/p&gt;
@@ -583,10 +583,10 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>MiDaS Depth Estimation Guide</title>
-      <link>http://localhost:1313/posts/2023-02-06-midas/</link>
+      <link>https://trimad.github.io/posts/2023-02-06-midas/</link>
       <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-06-midas/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-06-midas/</guid>
       <description>&lt;h3&gt;&lt;a href=&#34;https://github.com/isl-org/MiDaS&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;During installation, I ran into an issue where the CUDA package wasn&amp;rsquo;t found. Had to modify environment.yaml to:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;name: midas-py310
@@ -610,523 +610,523 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>Frame Interpolation Large Motion (FILM)</title>
-      <link>http://localhost:1313/posts/2023-02-05-film/</link>
+      <link>https://trimad.github.io/posts/2023-02-05-film/</link>
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-05-film/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-05-film/</guid>
       <description>A comprehensive guide to setting up and using Google&amp;rsquo;s Frame Interpolation Large Motion (FILM) TensorFlow implementation, enabling the creation of smooth animations by generating intermediate frames between existing images using deep learning techniques.</description>
     </item>
     
     <item>
       <title>Stable Diffusion Scripts</title>
-      <link>http://localhost:1313/posts/2023-02-05-stable-diffusion/</link>
+      <link>https://trimad.github.io/posts/2023-02-05-stable-diffusion/</link>
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-05-stable-diffusion/</guid>
       <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
     </item>
     
     <item>
       <title>Mastering Time with Shell and PowerShell</title>
-      <link>http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/</link>
+      <link>https://trimad.github.io/posts/2023-02-02-mastering-time-with-shell-and-powershell/</link>
       <pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-02-mastering-time-with-shell-and-powershell/</guid>
       <description>A comprehensive guide to Windows time management using shell and PowerShell commands, covering system uptime, boot times, time synchronization, and timezone configuration.</description>
     </item>
     
     <item>
       <title>Download Streams</title>
-      <link>http://localhost:1313/posts/2022-06-09-download-streams/</link>
+      <link>https://trimad.github.io/posts/2022-06-09-download-streams/</link>
       <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-06-09-download-streams/</guid>
+      <guid>https://trimad.github.io/posts/2022-06-09-download-streams/</guid>
       <description>A guide to downloading HTTP Live Streams (HLS) by locating and using .m3u8 playlists with ffmpeg, including browser developer tools techniques for finding stream sources.</description>
     </item>
     
     <item>
       <title>Logistic Map</title>
-      <link>http://localhost:1313/posts/2022-05-14-logistic-map/</link>
+      <link>https://trimad.github.io/posts/2022-05-14-logistic-map/</link>
       <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-05-14-logistic-map/</guid>
+      <guid>https://trimad.github.io/posts/2022-05-14-logistic-map/</guid>
       <description>A C# implementation of the logistic map that visualizes how this simple mathematical model produces complex chaotic behavior when modeling population growth under resource constraints.</description>
     </item>
     
     <item>
       <title>Archimedean Spiral</title>
-      <link>http://localhost:1313/posts/2022-05-04-archimedean-spiral/</link>
+      <link>https://trimad.github.io/posts/2022-05-04-archimedean-spiral/</link>
       <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-05-04-archimedean-spiral/</guid>
+      <guid>https://trimad.github.io/posts/2022-05-04-archimedean-spiral/</guid>
       <description>An interactive p5.js sketch that generates Archimedean spirals using polar coordinates, with the ability to export SVG files for physical fabrication.</description>
     </item>
     
     <item>
       <title>NVIDIA Maxine Windows Audio Effects SDK</title>
-      <link>http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</link>
+      <link>https://trimad.github.io/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</link>
       <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</guid>
+      <guid>https://trimad.github.io/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</guid>
       <description>A step-by-step workflow for cleaning poor audio recordings using NVIDIA Maxine Windows Audio Effects SDK with different sample rate configurations.</description>
     </item>
     
     <item>
       <title>Download YouTube Videos</title>
-      <link>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</link>
+      <link>https://trimad.github.io/posts/2022-04-16-downloading-youtube-videos/</link>
       <pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</guid>
+      <guid>https://trimad.github.io/posts/2022-04-16-downloading-youtube-videos/</guid>
       <description>A guide to downloading YouTube videos and audio using yt-dlp and youtube-dl command-line tools, including various options for format selection and quality settings.</description>
     </item>
     
     <item>
       <title>PowerShell Script to Export WiFi Network Credentials</title>
-      <link>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</link>
+      <link>https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</guid>
+      <guid>https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/</guid>
       <description>A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.</description>
     </item>
     
     <item>
       <title>Record Desktop Silently</title>
-      <link>http://localhost:1313/posts/2022-02-09-record-desktop-silently/</link>
+      <link>https://trimad.github.io/posts/2022-02-09-record-desktop-silently/</link>
       <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-02-09-record-desktop-silently/</guid>
+      <guid>https://trimad.github.io/posts/2022-02-09-record-desktop-silently/</guid>
       <description>A stealth desktop recording solution combining ffmpeg, batch scripting, and VBScript to capture Windows sessions without visible indicators, featuring configurable frame rates and recording durations.</description>
     </item>
     
     <item>
       <title>FFmpeg Command Reference</title>
-      <link>http://localhost:1313/posts/2022-01-27-ffmpeg/</link>
+      <link>https://trimad.github.io/posts/2022-01-27-ffmpeg/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2022-01-27-ffmpeg/</guid>
+      <guid>https://trimad.github.io/posts/2022-01-27-ffmpeg/</guid>
       <description>A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples.</description>
     </item>
     
     <item>
       <title>Combining PowerShell Cmdlets</title>
-      <link>http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/</link>
+      <link>https://trimad.github.io/posts/2021-11-17-combining-powershell-cmdlets/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/</guid>
+      <guid>https://trimad.github.io/posts/2021-11-17-combining-powershell-cmdlets/</guid>
       <description>A PowerShell script demonstrating the integration of ExchangeOnlineManagement and AzureAD modules to generate comprehensive email troubleshooting reports by correlating data through UserPrincipalName matching.</description>
     </item>
     
     <item>
       <title>Get Group Membership</title>
-      <link>http://localhost:1313/posts/2021-09-16-active-directory-group-membership/</link>
+      <link>https://trimad.github.io/posts/2021-09-16-active-directory-group-membership/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2021-09-16-active-directory-group-membership/</guid>
+      <guid>https://trimad.github.io/posts/2021-09-16-active-directory-group-membership/</guid>
       <description>PowerShell scripts for extracting and reporting group membership information from both on-premises Active Directory and Azure AD, featuring progress tracking and CSV export functionality.</description>
     </item>
     
     <item>
       <title>Managing Exchange Calendars</title>
-      <link>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</link>
+      <link>https://trimad.github.io/posts/2021-09-16-manage-exchange-online-calendars/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</guid>
+      <guid>https://trimad.github.io/posts/2021-09-16-manage-exchange-online-calendars/</guid>
       <description>A collection of PowerShell scripts using ExchangeOnlineManagement module to manage calendar permissions in Exchange Online, including bulk operations for granting, modifying, and viewing access rights across multiple mailboxes.</description>
     </item>
     
     <item>
       <title>Managing Exchange Online Auto-Expanding Archives with PowerShell</title>
-      <link>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</link>
+      <link>https://trimad.github.io/posts/2021-07-06-manage-auto-expanding-archives/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</guid>
+      <guid>https://trimad.github.io/posts/2021-07-06-manage-auto-expanding-archives/</guid>
       <description>A comprehensive collection of PowerShell scripts for managing Exchange Online auto-expanding archives, including monitoring, configuration, and reporting tools using the ExchangeOnlineManagement module.</description>
     </item>
     
     <item>
       <title>k-means Clustering</title>
-      <link>http://localhost:1313/posts/2021-05-18-k-means-clustering/</link>
+      <link>https://trimad.github.io/posts/2021-05-18-k-means-clustering/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2021-05-18-k-means-clustering/</guid>
+      <guid>https://trimad.github.io/posts/2021-05-18-k-means-clustering/</guid>
       <description>A Processing visualization of the k-means clustering algorithm, demonstrating iterative centroid-based data partitioning and Voronoi cell formation for different values of k.</description>
     </item>
     
     <item>
       <title>Windows Settings URI Reference</title>
-      <link>http://localhost:1313/posts/2021-01-01-ms-settings-uri-reference/</link>
+      <link>https://trimad.github.io/posts/2021-01-01-ms-settings-uri-reference/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2021-01-01-ms-settings-uri-reference/</guid>
+      <guid>https://trimad.github.io/posts/2021-01-01-ms-settings-uri-reference/</guid>
       <description>A comprehensive reference guide to Windows ms-settings URI schemes, enabling direct access to specific Windows Settings pages through command-line or scripting interfaces.</description>
     </item>
     
     <item>
       <title>Remote Reboot With SMTP Status</title>
-      <link>http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/</link>
+      <link>https://trimad.github.io/posts/2019-08-28-remote-reboot-with-smtp-status/</link>
       <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-28-remote-reboot-with-smtp-status/</guid>
       <description>A PowerShell script that remotely reboots a specified computer and sends an email notification about the reboot status using SMTP.</description>
     </item>
     
     <item>
       <title>Remove-AppxPackages</title>
-      <link>http://localhost:1313/posts/2019-08-28-remove-appx-packages/</link>
+      <link>https://trimad.github.io/posts/2019-08-28-remove-appx-packages/</link>
       <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2019-08-28-remove-appx-packages/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-28-remove-appx-packages/</guid>
       <description>A PowerShell script that removes unwanted Windows Store apps (AppX packages) while preserving essential system apps, using a list of package names to exclude from removal.</description>
     </item>
     
     <item>
       <title>Buddhabrot</title>
-      <link>http://localhost:1313/posts/2019-08-25-buddhabrot/</link>
+      <link>https://trimad.github.io/posts/2019-08-25-buddhabrot/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2019-08-25-buddhabrot/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-25-buddhabrot/</guid>
       <description>An implementation of the Buddhabrot fractal rendering technique, which visualizes escape-time trajectories of points outside the Mandelbrot set, creating intricate patterns that resemble a seated Buddha figure.</description>
     </item>
     
     <item>
       <title>Daily Donation Report</title>
-      <link>http://localhost:1313/posts/2019-08-25-daily-donation-report/</link>
+      <link>https://trimad.github.io/posts/2019-08-25-daily-donation-report/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2019-08-25-daily-donation-report/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-25-daily-donation-report/</guid>
       <description>A Google Apps Script that automates the collection and distribution of Google Forms data by aggregating submissions, converting them to XLSX format, and sending formatted HTML email reports.</description>
     </item>
     
     <item>
       <title>Enable AutoAdminLogon with PowerShell</title>
-      <link>http://localhost:1313/posts/2019-08-19-enable-autoadminlogon/</link>
+      <link>https://trimad.github.io/posts/2019-08-19-enable-autoadminlogon/</link>
       <pubDate>Mon, 19 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2019-08-19-enable-autoadminlogon/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-19-enable-autoadminlogon/</guid>
       <description>A PowerShell script that enables AutoAdminLogon by configuring registry settings to automatically log in a specified user without prompting for credentials.</description>
     </item>
     
     <item>
       <title>Blending Textures With Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/</link>
+      <link>https://trimad.github.io/posts/2019-08-18-blending-textures-with-open-simplex-noise/</link>
       <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-18-blending-textures-with-open-simplex-noise/</guid>
       <description>A Processing implementation that combines Open Simplex Noise with image blending techniques to create smooth, organic animations of texture transitions.</description>
     </item>
     
     <item>
       <title>Robo Mirror</title>
-      <link>http://localhost:1313/posts/2019-02-28-robo-mirror/</link>
+      <link>https://trimad.github.io/posts/2019-02-28-robo-mirror/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2019-02-28-robo-mirror/</guid>
+      <guid>https://trimad.github.io/posts/2019-02-28-robo-mirror/</guid>
       <description>A batch script that leverages robocopy to perform automated file mirroring based on a predefined list of target paths.</description>
     </item>
     
     <item>
       <title>Cube Wave</title>
-      <link>http://localhost:1313/posts/2018-12-30-cube-wave/</link>
+      <link>https://trimad.github.io/posts/2018-12-30-cube-wave/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-12-30-cube-wave/</guid>
+      <guid>https://trimad.github.io/posts/2018-12-30-cube-wave/</guid>
       <description>A Processing implementation of a 3D cube wave animation using PeasyCam for camera control, featuring dynamic lighting and orthographic projection for a mesmerizing visual effect.</description>
     </item>
     
     <item>
       <title>Lorenz Doll</title>
-      <link>http://localhost:1313/posts/2018-11-21-lorenz-doll/</link>
+      <link>https://trimad.github.io/posts/2018-11-21-lorenz-doll/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-11-21-lorenz-doll/</guid>
+      <guid>https://trimad.github.io/posts/2018-11-21-lorenz-doll/</guid>
       <description>A Processing visualization where each pixel of an image is transformed into a Lorenz System, with the system&amp;rsquo;s velocity mapped to the original pixel&amp;rsquo;s brightness values.</description>
     </item>
     
     <item>
       <title>Fridge Magnet Simulator</title>
-      <link>http://localhost:1313/posts/2018-11-16-fridge-magnet-simulator/</link>
+      <link>https://trimad.github.io/posts/2018-11-16-fridge-magnet-simulator/</link>
       <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-11-16-fridge-magnet-simulator/</guid>
+      <guid>https://trimad.github.io/posts/2018-11-16-fridge-magnet-simulator/</guid>
       <description>An interactive p5.js simulation recreating a collection of fridge magnets with realistic physics, allowing users to drag and arrange virtual magnets on a digital refrigerator.</description>
     </item>
     
     <item>
       <title>Orbiting Pixels Utility</title>
-      <link>http://localhost:1313/posts/2018-11-12-orbiting-pixels-utility/</link>
+      <link>https://trimad.github.io/posts/2018-11-12-orbiting-pixels-utility/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-11-12-orbiting-pixels-utility/</guid>
+      <guid>https://trimad.github.io/posts/2018-11-12-orbiting-pixels-utility/</guid>
       <description>A p5.js interactive visualization that transforms images into dynamic grids of orbiting objects, where each object&amp;rsquo;s rotation phase and characteristics are mapped to pixel brightness values.</description>
     </item>
     
     <item>
       <title>Barnsley Fern</title>
-      <link>http://localhost:1313/posts/2018-06-28-barnsley-fern/</link>
+      <link>https://trimad.github.io/posts/2018-06-28-barnsley-fern/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
+      <guid>https://trimad.github.io/posts/2018-06-28-barnsley-fern/</guid>
       <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
     </item>
     
     <item>
       <title>Ulam Spiral</title>
-      <link>http://localhost:1313/posts/2018-05-17-ulam-sprial/</link>
+      <link>https://trimad.github.io/posts/2018-05-17-ulam-sprial/</link>
       <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-05-17-ulam-sprial/</guid>
+      <guid>https://trimad.github.io/posts/2018-05-17-ulam-sprial/</guid>
       <description>An interactive p5.js implementation of the Ulam Spiral, featuring adjustable grid size, animation controls, and the ability to search for diagonal prime number patterns in the spiral.</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;11045&#34;</title>
-      <link>http://localhost:1313/archive/2018-05-01-uva-11045/</link>
+      <link>https://trimad.github.io/archive/2018-05-01-uva-11045/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2018-05-01-uva-11045/</guid>
+      <guid>https://trimad.github.io/archive/2018-05-01-uva-11045/</guid>
       <description>This is a maximum flow problem on a bipartite graph. I created the flow chart above to visualize the 3 test cases. The virtual judge run time was 0.18s.</description>
     </item>
     
     <item>
       <title>Kattis Challenge &#34;Grid&#34;</title>
-      <link>http://localhost:1313/archive/2018-04-20-kattis-grid/</link>
+      <link>https://trimad.github.io/archive/2018-04-20-kattis-grid/</link>
       <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2018-04-20-kattis-grid/</guid>
+      <guid>https://trimad.github.io/archive/2018-04-20-kattis-grid/</guid>
       <description>Solved using a non-recursive version of BFS. Runs in pretty good time.</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;10305&#34;</title>
-      <link>http://localhost:1313/archive/2018-04-26-uva-10305/</link>
+      <link>https://trimad.github.io/archive/2018-04-26-uva-10305/</link>
       <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2018-04-26-uva-10305/</guid>
+      <guid>https://trimad.github.io/archive/2018-04-26-uva-10305/</guid>
       <description>This problem presents a DAG and the solution requires implementing a topological sort. I noticed that a topological sort can be implemented using only boolean arrays so I used this as an opportunity to finally get around to using Java&amp;rsquo;s BitSet class. The virtual judge run time was 0.050s.</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;572&#34;</title>
-      <link>http://localhost:1313/archive/2018-04-23-uva-572/</link>
+      <link>https://trimad.github.io/archive/2018-04-23-uva-572/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2018-04-23-uva-572/</guid>
+      <guid>https://trimad.github.io/archive/2018-04-23-uva-572/</guid>
       <description>Although BFS and DFS were recommended solutions to the problem, I saw an opportunity to solve this problem using Disjoint Sets. The virtual judge run time was 0.050s.</description>
     </item>
     
     <item>
       <title>Comparing Java Distance Functions</title>
-      <link>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</link>
+      <link>https://trimad.github.io/posts/2018-04-17-comparing-java-distance-functions/</link>
       <pubDate>Tue, 17 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-17-comparing-java-distance-functions/</guid>
       <description>A Java program that compares various distance calculation methods, including Manhattan, Euclidean, and Chebyshev distances, and visualizes their differences using Processing.</description>
     </item>
     
     <item>
       <title>Faster Java String Inputs</title>
-      <link>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</link>
+      <link>https://trimad.github.io/posts/2018-04-11-java-turbo-reader/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-11-java-turbo-reader/</guid>
       <description>A high-performance Java input reader class optimized for programming contests, providing fast integer and double parsing with automatic tokenization and buffering options.</description>
     </item>
     
     <item>
       <title>Kruskal&#39;s Algorithm Visualized With Processing</title>
-      <link>http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/</link>
+      <link>https://trimad.github.io/posts/2018-04-11-kruskal-algorithm-processing/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-11-kruskal-algorithm-processing/</guid>
       <description>A Processing implementation of Kruskal&amp;rsquo;s algorithm for finding minimum spanning trees in weighted graphs, demonstrating the O(E log E) greedy approach to network optimization.</description>
     </item>
     
     <item>
       <title>Collatz Conjecture &#43; Unit Circle</title>
-      <link>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</link>
+      <link>https://trimad.github.io/posts/2018-04-09-collatz-conjecture-unit-circle/</link>
       <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-09-collatz-conjecture-unit-circle/</guid>
       <description>A Processing visualization of the Collatz Conjecture mapped onto a unit circle, creating 360 distinct branches with 1-degree turns, featuring an interactive exploration of number paths.</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;1112&#34;</title>
-      <link>http://localhost:1313/archive/2018-04-09-uva-1112/</link>
+      <link>https://trimad.github.io/archive/2018-04-09-uva-1112/</link>
       <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2018-04-09-uva-1112/</guid>
+      <guid>https://trimad.github.io/archive/2018-04-09-uva-1112/</guid>
       <description>&lt;p&gt;This problem involves a relatively small graph, so I opted to implement the &lt;a href=&#34;https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm&#34;&gt;Floyd-Warshall Algorithm&lt;/a&gt; instead of &lt;a href=&#34;https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&#34;&gt;Dijkstra&amp;rsquo;s Algorithm&lt;/a&gt; for the sake of simplicity. This algorithm finds the shortest path between every pair of vertices in a graph, running in O(n^3) time. Although this might sound inefficient, the UVA judge accepted this program with a runtime of 0.12 seconds, which is well within the 3-second threshold. I designed this algorithm using an object-oriented approach and avoided arrays, so that if I ever have enough free time, I can easily integrate it into Processing and visualize it in 3D.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Minimum Spanning Tree Visualized</title>
-      <link>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</link>
+      <link>https://trimad.github.io/posts/2018-04-07-minimum-spanning-tree-visualized/</link>
       <pubDate>Sat, 07 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-07-minimum-spanning-tree-visualized/</guid>
       <description>A Processing visualization of Prim&amp;rsquo;s Algorithm creating a minimum spanning tree on procedurally generated terrain using Perlin noise height maps and orthographic projection.</description>
     </item>
     
     <item>
       <title>Basic Prime Checker, C&#43;&#43;</title>
-      <link>http://localhost:1313/posts/2018-03-24-basic-prime-checker/</link>
+      <link>https://trimad.github.io/posts/2018-03-24-basic-prime-checker/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-03-24-basic-prime-checker/</guid>
+      <guid>https://trimad.github.io/posts/2018-03-24-basic-prime-checker/</guid>
       <description>A C++ program that efficiently checks for prime numbers using optimized division tests and square root-based factorization.</description>
     </item>
     
     <item>
       <title>AT&amp;T Hackathon</title>
-      <link>http://localhost:1313/posts/2018-03-12-att-hackathon/</link>
+      <link>https://trimad.github.io/posts/2018-03-12-att-hackathon/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-03-12-att-hackathon/</guid>
+      <guid>https://trimad.github.io/posts/2018-03-12-att-hackathon/</guid>
       <description>A reflection on participating in the AT&amp;amp;T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions.</description>
     </item>
     
     <item>
       <title>Merge Sort using WEBGL</title>
-      <link>http://localhost:1313/posts/2018-02-05-merge-sort/</link>
+      <link>https://trimad.github.io/posts/2018-02-05-merge-sort/</link>
       <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-02-05-merge-sort/</guid>
+      <guid>https://trimad.github.io/posts/2018-02-05-merge-sort/</guid>
       <description>An interactive 3D visualization of the Merge Sort algorithm using p5.js and WEBGL, featuring step-by-step animation with camera controls and real-time sorting visualization.</description>
     </item>
     
     <item>
       <title>10PRINT Image Filter</title>
-      <link>http://localhost:1313/posts/2018-01-31-10print-image-filter/</link>
+      <link>https://trimad.github.io/posts/2018-01-31-10print-image-filter/</link>
       <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-01-31-10print-image-filter/</guid>
+      <guid>https://trimad.github.io/posts/2018-01-31-10print-image-filter/</guid>
       <description>An interactive p5.js implementation of the classic 10PRINT algorithm, offering customizable image filtering with options for both precise and hand-drawn style maze patterns.</description>
     </item>
     
     <item>
       <title>Insertion Sort using WEBGL</title>
-      <link>http://localhost:1313/posts/2018-01-28-insertion-sort/</link>
+      <link>https://trimad.github.io/posts/2018-01-28-insertion-sort/</link>
       <pubDate>Sun, 28 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-01-28-insertion-sort/</guid>
+      <guid>https://trimad.github.io/posts/2018-01-28-insertion-sort/</guid>
       <description>An interactive 3D visualization of the Insertion Sort algorithm using p5.js and WEBGL, featuring real-time sorting animation with camera controls and step-by-step progression.</description>
     </item>
     
     <item>
       <title>Generating Terrain with Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</link>
+      <link>https://trimad.github.io/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</link>
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</guid>
+      <guid>https://trimad.github.io/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</guid>
       <description>A Processing implementation of a Minecraft-style terrain generator using Open Simplex Noise, featuring 3D voxel-based terrain with performance analysis of random walker agents.</description>
     </item>
     
     <item>
       <title>Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</link>
+      <link>https://trimad.github.io/posts/2018-01-02-open-simplex-noise/</link>
       <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</guid>
+      <guid>https://trimad.github.io/posts/2018-01-02-open-simplex-noise/</guid>
       <description>A Processing implementation exploring 4D Simplex Noise to create smooth, organic looping animations through a 2D grid of pixel objects with variable noise scaling.</description>
     </item>
     
     <item>
       <title>Flipping Tiles</title>
-      <link>http://localhost:1313/posts/2017-11-18-flippy-tiles/</link>
+      <link>https://trimad.github.io/posts/2017-11-18-flippy-tiles/</link>
       <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-11-18-flippy-tiles/</guid>
+      <guid>https://trimad.github.io/posts/2017-11-18-flippy-tiles/</guid>
       <description>A Processing sketch creating mesmerizing animations of tiles that flip based on either random patterns or Perlin noise algorithms, demonstrating creative uses of procedural animation.</description>
     </item>
     
     <item>
       <title>Juno Cam Image Processing</title>
-      <link>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</link>
+      <link>https://trimad.github.io/posts/2017-11-12-juno-cam-image-processing/</link>
       <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</guid>
+      <guid>https://trimad.github.io/posts/2017-11-12-juno-cam-image-processing/</guid>
       <description>A Java program that reconstructs and processes raw image data from NASA&amp;rsquo;s Juno spacecraft&amp;rsquo;s pushframe camera, combining multiple filter strips to create high-resolution composite images of Jupiter.</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;10550&#34;</title>
-      <link>http://localhost:1313/archive/2017-11-09-uva-10550/</link>
+      <link>https://trimad.github.io/archive/2017-11-09-uva-10550/</link>
       <pubDate>Thu, 09 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-11-09-uva-10550/</guid>
+      <guid>https://trimad.github.io/archive/2017-11-09-uva-10550/</guid>
       <description>&amp;ldquo;Now that you’re back to school for another term, you need to remember how to work the combination lock on your locker. A common design is that of the Master Brand, shown at right. The lock has a dial with 40 calibration marks numbered 0 to 39. A combination consists of 3 of these numbers; for example: 15-25-8. To open the lock, the following steps are taken&amp;hellip;&amp;rdquo;</description>
     </item>
     
     <item>
       <title>Demonstrating Procedures and Console Output</title>
-      <link>http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/</link>
+      <link>https://trimad.github.io/posts/2017-10-24-demonstrating-procedures-and-console-output/</link>
       <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/</guid>
+      <guid>https://trimad.github.io/posts/2017-10-24-demonstrating-procedures-and-console-output/</guid>
       <description>An x86 MASM assembly program showcasing procedure implementation and colored console output manipulation through low-level system calls.</description>
     </item>
     
     <item>
       <title>Sieve of Eratosthenes</title>
-      <link>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</link>
+      <link>https://trimad.github.io/posts/2017-10-17-sieve-of-eratosthenes/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</guid>
+      <guid>https://trimad.github.io/posts/2017-10-17-sieve-of-eratosthenes/</guid>
       <description>An x86 MASM implementation of the Sieve of Eratosthenes algorithm that finds and counts prime numbers up to a given value n, translated from Java to assembly language.</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;272&#34;</title>
-      <link>http://localhost:1313/archive/2017-10-17-uva-272/</link>
+      <link>https://trimad.github.io/archive/2017-10-17-uva-272/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-10-17-uva-272/</guid>
+      <guid>https://trimad.github.io/archive/2017-10-17-uva-272/</guid>
       <description>&amp;ldquo;TEX is a typesetting language developed by Donald Knuth. It takes source text together with a few typesetting instructions and produces, one hopes, a beautiful document. Beautiful documents use&amp;hellip;&amp;rdquo;</description>
     </item>
     
     <item>
       <title>Nth Fibonacci Number</title>
-      <link>http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/</link>
+      <link>https://trimad.github.io/posts/2017-10-07-nth-fibonacci-number/</link>
       <pubDate>Sat, 07 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/</guid>
+      <guid>https://trimad.github.io/posts/2017-10-07-nth-fibonacci-number/</guid>
       <description>An x86 MASM assembly program that calculates and displays the nth Fibonacci number, demonstrating basic assembly programming concepts and memory management.</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;100&#34;</title>
-      <link>http://localhost:1313/archive/2017-10-05-uva-100/</link>
+      <link>https://trimad.github.io/archive/2017-10-05-uva-100/</link>
       <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-10-05-uva-100/</guid>
+      <guid>https://trimad.github.io/archive/2017-10-05-uva-100/</guid>
       <description>&amp;ldquo;Problems in Computer Science are often classified as belonging to a certain class of problems (e.g., NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose classification is not known for all possible inputs. Consider the following algorithm&amp;hellip;&amp;rdquo;</description>
     </item>
     
     <item>
       <title>UVa Online Judge Challenge &#34;10110&#34;</title>
-      <link>http://localhost:1313/archive/2017-10-05-uva-10110/</link>
+      <link>https://trimad.github.io/archive/2017-10-05-uva-10110/</link>
       <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-10-05-uva-10110/</guid>
+      <guid>https://trimad.github.io/archive/2017-10-05-uva-10110/</guid>
       <description>&amp;ldquo;There is man named ”mabu” for switching on-off light in our University. He switches on-off the lights in a corridor. Every bulb has its own toggle switch. That is, if it is pressed then the bulb turns on. Another press will turn it off. To save power consumption (or may be he is mad or something else) he does a peculiar thing. If in a corridor there is n bulbs, he walks along the corridor back and forth n times and in i-th walk he toggles only the switches whose serial is divisable by i. He does not press any switch when coming back to his initial position. A i-th walk is defined as going down the corridor (while doing the peculiar thing) and coming back again. Now you have to determine what is the final condition of the last bulb. Is it on or off?&amp;rdquo;</description>
     </item>
     
     <item>
       <title>Kattis Challenge &#34;Parking&#34;</title>
-      <link>http://localhost:1313/archive/2017-09-15-kattis-parking2/</link>
+      <link>https://trimad.github.io/archive/2017-09-15-kattis-parking2/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-09-15-kattis-parking2/</guid>
+      <guid>https://trimad.github.io/archive/2017-09-15-kattis-parking2/</guid>
       <description>&amp;ldquo;When shopping on Long Street, Michael usually parks his car at some random location, and then walks to the stores he needs. Can you help Michael choose a place to park which minimises the distance he needs to walk on his shopping round? Long Street is a straight line, where all positions are integer. You pay for parking in a specific slot, which is an integer position on Long Street. Michael does not want to pay for more than one parking though. He is very strong, and does not mind carrying all the bags around.&amp;rdquo;</description>
     </item>
     
     <item>
       <title>Kattis Challenge &#34;Sum of Others&#34;</title>
-      <link>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</link>
+      <link>https://trimad.github.io/archive/2017-09-15-kattis-sum-of-others/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</guid>
+      <guid>https://trimad.github.io/archive/2017-09-15-kattis-sum-of-others/</guid>
       <description>&lt;p&gt;&amp;ldquo;Every day, your job requires you to add up long lists of integers, like the following:&lt;/p&gt;
 &lt;p&gt;3 + 2 + -4 + 8 + 3 + -6 + 1 + 4 + 6 + -1 + -6 = 10&lt;/p&gt;
 &lt;p&gt;That is, a sum of positive and negative integers, followed by an equals sign, followed by a single integer. To save yourself some time, you normally leave out the and signs as you write down your work, so the previous example would be&amp;hellip;&amp;rdquo;&lt;/p&gt;
@@ -1135,64 +1135,64 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     
     <item>
       <title>UVa Online Judge Challenge &#34;11172&#34;</title>
-      <link>http://localhost:1313/archive/2017-08-24-uva-11172/</link>
+      <link>https://trimad.github.io/archive/2017-08-24-uva-11172/</link>
       <pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-08-24-uva-11172/</guid>
+      <guid>https://trimad.github.io/archive/2017-08-24-uva-11172/</guid>
       <description>&amp;ldquo;Some operators checks about the relationship between two values and these operators are called relational operators. Given two numerical values your job is just to find out the relationship between them that is (i) First one is greater than the second (ii) First one is less than the second or (iii) First and second one is equal.&amp;rdquo;</description>
     </item>
     
     <item>
       <title>Kattis Challenge &#34;Line Them Up&#34;</title>
-      <link>http://localhost:1313/archive/2017-08-18-kattis-line-them-up/</link>
+      <link>https://trimad.github.io/archive/2017-08-18-kattis-line-them-up/</link>
       <pubDate>Fri, 18 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-08-18-kattis-line-them-up/</guid>
+      <guid>https://trimad.github.io/archive/2017-08-18-kattis-line-them-up/</guid>
       <description>&amp;ldquo;An eccentric coach asks players on the team to line up alphabetically at the start of practice. The coach does not tell the players whether they need to line up in increasing or decreasing order, so they guess. If they guess wrong, the coach makes them run laps before practice. Given a list of names, you are to determine if the list is in increasing alphabetical order, decreasing alphabetical order or neither.&amp;rdquo;</description>
     </item>
     
     <item>
       <title>Kattis Challenge &#34;Server&#34;</title>
-      <link>http://localhost:1313/archive/2017-08-18-kattis-server/</link>
+      <link>https://trimad.github.io/archive/2017-08-18-kattis-server/</link>
       <pubDate>Fri, 18 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-08-18-kattis-server/</guid>
+      <guid>https://trimad.github.io/archive/2017-08-18-kattis-server/</guid>
       <description>&amp;ldquo;You are in charge of a server that needs to run some submitted tasks on a first-come, first-served basis. Each day, you can dedicate the server to run these tasks for at most minutes. Given the time each task takes, you want to know how many of them will be finished today.&amp;rdquo;</description>
     </item>
     
     <item>
       <title>Kattis Challenge &#34;A Different Problem&#34;</title>
-      <link>http://localhost:1313/archive/2017-08-15-kattis-different/</link>
+      <link>https://trimad.github.io/archive/2017-08-15-kattis-different/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/archive/2017-08-15-kattis-different/</guid>
+      <guid>https://trimad.github.io/archive/2017-08-15-kattis-different/</guid>
       <description>&amp;ldquo;Write a program that computes the difference between non-negative integers.&amp;rdquo;</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://localhost:1313/posts/2017-07-18-counting-sort/</link>
+      <link>https://trimad.github.io/posts/2017-07-18-counting-sort/</link>
       <pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-07-18-counting-sort/</guid>
+      <guid>https://trimad.github.io/posts/2017-07-18-counting-sort/</guid>
       <description>A Java implementation of the counting sort algorithm, a non-comparison based sorting method with O(n+k) time complexity, demonstrated using Processing.</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</link>
+      <link>https://trimad.github.io/posts/2017-07-16-simple-2d-perlin-noise/</link>
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</guid>
+      <guid>https://trimad.github.io/posts/2017-07-16-simple-2d-perlin-noise/</guid>
       <description>An interactive p5.js sketch that generates 2D terrain using Perlin noise, with different colors representing water, sand, and grass based on elevation values.</description>
     </item>
     
     <item>
       <title>Interactive Array Visualization</title>
-      <link>http://localhost:1313/posts/2016-12-13-arrays/</link>
+      <link>https://trimad.github.io/posts/2016-12-13-arrays/</link>
       <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2016-12-13-arrays/</guid>
+      <guid>https://trimad.github.io/posts/2016-12-13-arrays/</guid>
       <description>An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface.</description>
     </item>
     
