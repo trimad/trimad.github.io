@@ -12,128 +12,30 @@
     <atom:link href="http://localhost:1313/tags/open-simplex-noise/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Cisco AnyConnect VPN Profile</title>
-      <link>http://localhost:1313/posts/2025-05-08-cisco-anyconnect-vpn-profile/</link>
-      <pubDate>Thu, 08 May 2025 00:00:00 +0000</pubDate>
+      <title>UDM Parameters for Google Search</title>
+      <link>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</link>
+      <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2025-05-08-cisco-anyconnect-vpn-profile/</guid>
-      <description>&lt;h2 id=&#34;wip-god-mode-profile&#34;&gt;(WIP) God Mode Profile&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-XML&#34; data-lang=&#34;XML&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;  God Mode AnyConnect profile
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;  All tags that possess a UserControllable attribute are present and set to &amp;#34;true&amp;#34;.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;  Replace CHANGEME placeholders with production values before deployment.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;--&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AnyConnectProfile&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://schemas.xmlsoap.org/encoding/&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                   &lt;span style=&#34;color:#a6e22e&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                   &lt;span style=&#34;color:#a6e22e&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://schemas.xmlsoap.org/encoding/ AnyConnectProfile.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;ClientInitialization&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Start‑Before‑Logon --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;UseStartBeforeLogon&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/UseStartBeforeLogon&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Certificate handling --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AutomaticCertSelection&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AutomaticCertSelection&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;ShowPreConnectMessage&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/ShowPreConnectMessage&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;CertificateStore&amp;gt;&lt;/span&gt;All&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/CertificateStore&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;CertificateStoreMac&amp;gt;&lt;/span&gt;All&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/CertificateStoreMac&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;CertificateStoreLinux&amp;gt;&lt;/span&gt;All&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/CertificateStoreLinux&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;CertificateStoreOverride&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/CertificateStoreOverride&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Proxy behaviour (all user‑tweakable) --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;ProxySettings&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;Native
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;PublicProxyServerAddress&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;CHANGEME.proxy.local:8080&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/PublicProxyServerAddress&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/ProxySettings&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AllowLocalProxyConnections&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AllowLocalProxyConnections&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Connection workflow --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AutoConnectOnStart&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AutoConnectOnStart&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;MinimizeOnConnect&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/MinimizeOnConnect&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;LocalLanAccess&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/LocalLanAccess&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;DisableCaptivePortalDetection&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/DisableCaptivePortalDetection&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AuthenticationTimeout&amp;gt;&lt;/span&gt;30&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AuthenticationTimeout&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Re‑connect logic --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AutoReconnect&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AutoReconnectBehavior&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;ReconnectAfterResume&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AutoReconnectBehavior&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AutoReconnect&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;SuspendOnConnectedStandby&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/SuspendOnConnectedStandby&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Updates &amp;amp; tokens --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AutoUpdate&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AutoUpdate&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;RSASecurIDIntegration&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;Automatic&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/RSASecurIDIntegration&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- OS‑specific policies (not user‑controllable in schema) --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;WindowsLogonEnforcement&amp;gt;&lt;/span&gt;SingleLocalLogon&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/WindowsLogonEnforcement&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;LinuxLogonEnforcement&amp;gt;&lt;/span&gt;SingleLocalLogon&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/LinuxLogonEnforcement&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;WindowsVPNEstablishment&amp;gt;&lt;/span&gt;AllowRemoteUsers&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/WindowsVPNEstablishment&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;LinuxVPNEstablishment&amp;gt;&lt;/span&gt;AllowRemoteUsers&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/LinuxVPNEstablishment&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Retain VPN on logoff (no UC attribute) --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;RetainVpnOnLogoff&amp;gt;&lt;/span&gt;true
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;UserEnforcement&amp;gt;&lt;/span&gt;AnyUser&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/UserEnforcement&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/RetainVpnOnLogoff&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- PPP exclusion control --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;PPPExclusion&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;Override
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;PPPExclusionServerIP&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;10.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/PPPExclusionServerIP&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/PPPExclusion&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Scripting hooks --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;EnableScripting&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;TerminateScriptOnNextEvent&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/TerminateScriptOnNextEvent&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;EnablePostSBLOnConnectScript&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/EnablePostSBLOnConnectScript&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/EnableScripting&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Auto server selection --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;EnableAutomaticServerSelection&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AutoServerSelectionImprovement&amp;gt;&lt;/span&gt;25&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AutoServerSelectionImprovement&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AutoServerSelectionSuspendTime&amp;gt;&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AutoServerSelectionSuspendTime&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/EnableAutomaticServerSelection&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Smartcard &amp;amp; token options --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;ClearSmartcardPin&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/ClearSmartcardPin&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;SafeWordSofTokenIntegration&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserControllable=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/SafeWordSofTokenIntegration&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Misc --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;IPProtocolSupport&amp;gt;&lt;/span&gt;IPv4,IPv6&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/IPProtocolSupport&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;CaptivePortalRemediationBrowserFailover&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/CaptivePortalRemediationBrowserFailover&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;AllowManualHostInput&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AllowManualHostInput&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/ClientInitialization&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Headend list – obfuscated --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;ServerList&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;HostEntry&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;HostName&amp;gt;&lt;/span&gt;Primary VPN&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/HostName&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;HostAddress&amp;gt;&lt;/span&gt;CHANGEME.vpn.example.com:443&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/HostAddress&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;UserGroup&amp;gt;&lt;/span&gt;CHANGEME‑GROUP&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/UserGroup&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;BackupServerList&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;HostAddress&amp;gt;&lt;/span&gt;backup1.CHANGEME.example.com&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/HostAddress&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;HostAddress&amp;gt;&lt;/span&gt;backup2.CHANGEME.example.com&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/HostAddress&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/BackupServerList&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/HostEntry&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/ServerList&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/AnyConnectProfile&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;full-xml-schema&#34;&gt;Full XML Schema&lt;/h2&gt;
-&lt;p&gt;Next to every CiscoAnyConnect VPN profile.xml is a profile.xsd containing the full schema of acceptable tags. This is usually found in: &lt;code&gt;C:\ProgramData\Cisco\Cisco Secure Client\VPN\Profile&lt;/code&gt;&lt;/p&gt;</description>
+      <guid>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</guid>
+      <description>Detailed guide to Google Search UDM (Universal Display Mode) parameters, each with descriptions and example searches.</description>
     </item>
     
     <item>
-      <title>Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</title>
-      <link>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</link>
-      <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
+      <title>UDM Parameters for Google Search</title>
+      <link>http://localhost:1313/posts/2025-06-17-udm-arguments/</link>
+      <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;“Logs tell you something broke; a crash dump tells you &lt;strong&gt;why&lt;/strong&gt;.”&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;When an application decides to face‑plant—looking at you, Excel—the fastest route to answers is a controlled dump capture followed by a forensic stroll through WinDbg.&lt;br&gt;
-Below is my go‑to workflow, polished from countless “Why did this crash at 4 p.m. on quarter‑close day?!” moments.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;1-set-the-stage&#34;&gt;1. Set the Stage&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Grab ProcDump&lt;/strong&gt; if it’s not already on your toolbox machine.&lt;br&gt;
-👉 &lt;a href=&#34;https://learn.microsoft.com/sysinternals/downloads/procdump&#34;&gt;ProcDump — Sysinternals&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>http://localhost:1313/posts/2025-06-17-udm-arguments/</guid>
+      <description>A comprehensive table of known UDM (Universal Display Mode) parameters for Google Search, describing their effects on search result layout and behavior, including lesser-known modes for cleaner interfaces, videos, forums, and more.</description>
+    </item>
+    
+    <item>
+      <title>Automated IIS Application Pool Restart with PowerShell</title>
+      <link>http://localhost:1313/posts/2024-10-16-restart-iis-application/</link>
+      <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2024-10-16-restart-iis-application/</guid>
+      <description>A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling.</description>
     </item>
     
     <item>
@@ -142,83 +44,92 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-09-10-officec2rclient/</guid>
-      <description>Instructions on how to manually manage the installed version of Microsoft Office.</description>
+      <description>A comprehensive guide to managing Microsoft 365 versions using OfficeC2RClient, including checking current builds, consulting version history, and rolling back or updating Office installations.</description>
     </item>
     
     <item>
-      <title>Batch Compress Images</title>
+      <title>Automated Batch Image Compression with Python</title>
       <link>http://localhost:1313/posts/2024-07-30-batch-compress-images/</link>
-      <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-07-30-batch-compress-images/</guid>
-      <description>This Python script gradually reduces the quality and colors of all .png&amp;rsquo;s in the same directory until a target size is reached.</description>
+      <description>A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library).</description>
     </item>
     
     <item>
-      <title>Get Public IP</title>
+      <title>How to Find Your Public IP Address</title>
       <link>http://localhost:1313/posts/2024-06-24-get-public-ip/</link>
-      <pubDate>Tue, 25 Jun 2024 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-06-24-get-public-ip/</guid>
-      <description>Different methods of obtaining the public IP address of a computer.</description>
+      <description>A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions.</description>
     </item>
     
     <item>
-      <title>DNS Records</title>
+      <title>Complete DNS Records Reference Guide</title>
       <link>http://localhost:1313/posts/2024-06-06-dns-records/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
-      <description>A cheat sheet with a comprehensive list of options for DNS records.</description>
+      <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
     </item>
     
     <item>
-      <title>Visualizing Folder Permissions</title>
+      <title>Network Subnet Visualization Tools</title>
+      <link>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</guid>
+      <description>Tools and scripts for visualizing and analyzing network subnets, including IP address ranges and network topologies.</description>
+    </item>
+    
+    <item>
+      <title>Visualizing and Analyzing Windows Folder Permissions</title>
       <link>http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/</guid>
-      <description>Generate a treemap of user permissions for a given folder and all subfolders.</description>
+      <description>A comprehensive guide to exporting and visualizing Windows folder permissions using PowerShell and Python, including treemap visualizations of user access rights.</description>
     </item>
     
     <item>
-      <title>User Lockout Report</title>
+      <title>Troubleshooting Group Policy Objects (GPOs)</title>
+      <link>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</link>
+      <pubDate>Fri, 31 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</guid>
+      <description>A collection of useful commands and steps for troubleshooting Group Policy Objects (GPOs) in a Windows Active Directory environment.</description>
+    </item>
+    
+    <item>
+      <title>Active Directory User Lockout and Password Report</title>
       <link>http://localhost:1313/posts/2024-05-30-user-lockout-report/</link>
       <pubDate>Thu, 30 May 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-05-30-user-lockout-report/</guid>
-      <description>This PowerShell script generates an HTML diagnostics report for user lockouts in the Active Directory. The script imports the Active Directory module and retrieves all user accounts that are not disabled. It fetches password-related properties and calculates the password age and expiration details for each user. The results are filtered, sorted, and converted into an HTML report with CSS styling for better readability. The final HTML report is saved to a file and opened in the default web browser.</description>
+      <description>A PowerShell script that generates an HTML diagnostics report for user lockouts in Active Directory, including password age, expiration details, and account status.</description>
     </item>
     
     <item>
-      <title>Window Watcher</title>
+      <title>Window Monitoring with Machine Vision</title>
       <link>http://localhost:1313/posts/2024-03-25-window-watcher/</link>
       <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-03-25-window-watcher/</guid>
-      <description>Use a machine vision model to watch a window.</description>
+      <description>A guide to setting up a window monitoring system using the Moondream2 machine vision model for real-time window content analysis.</description>
     </item>
     
     <item>
-      <title>Mastering DNS Configuration: Remote and Local Techniques</title>
+      <title>Remote and Local DNS Configuration Guide</title>
       <link>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</link>
-      <pubDate>Fri, 22 Mar 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</guid>
-      <description>Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management.</description>
+      <description>Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management using WMIC and PowerShell.</description>
     </item>
     
     <item>
-      <title>Take Control</title>
-      <link>http://localhost:1313/posts/2024-01-02-take-control/</link>
-      <pubDate>Mon, 12 Feb 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2024-01-02-take-control/</guid>
-      <description>Steps to take when Take Control isn&amp;rsquo;t working.</description>
-    </item>
-    
-    <item>
-      <title>Local AI API</title>
+      <title>Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs</title>
       <link>http://localhost:1313/posts/2024-02-05-local-ai-api/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
       
@@ -227,7 +138,34 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Generate Knowledge Graphs with LLMs</title>
+      <title>Troubleshooting N-Central Take Control</title>
+      <link>http://localhost:1313/posts/2024-01-02-take-control/</link>
+      <pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2024-01-02-take-control/</guid>
+      <description>Steps to take when N-Central&amp;rsquo;s Take Control remote access feature isn&amp;rsquo;t working, including how to restart the necessary services.</description>
+    </item>
+    
+    <item>
+      <title>Graphing a LAN with PyVis</title>
+      <link>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</link>
+      <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</guid>
+      <description>A guide to visualizing Local Area Network (LAN) topologies using Python and pyvis for interactive network graphs.</description>
+    </item>
+    
+    <item>
+      <title>Visualizing Directory Structures with PyVis</title>
+      <link>http://localhost:1313/posts/2023-12-28-pyvis-graphing-directories/</link>
+      <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023-12-28-pyvis-graphing-directories/</guid>
+      <description>A guide to visualizing Windows directory structures using Python and pyvis for interactive network graphs.</description>
+    </item>
+    
+    <item>
+      <title>Generating Knowledge Graphs with LLMs and PyVis</title>
       <link>http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/</link>
       <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
       
@@ -236,7 +174,16 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>PSWindowsUpdate</title>
+      <title>Setting Up a Local Large Language Model (LLM) Environment</title>
+      <link>http://localhost:1313/posts/2023-10-17-local-llm/</link>
+      <pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023-10-17-local-llm/</guid>
+      <description>A guide to setting up a local large language model (LLM) environment for TheraFit, a project focused on matching clients with therapists.</description>
+    </item>
+    
+    <item>
+      <title>PSWindowsUpdate: Managing Windows Updates with PowerShell</title>
       <link>http://localhost:1313/posts/2023-10-10-pswindowsupdate/</link>
       <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
       
@@ -250,7 +197,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</guid>
-      <description>This is a Google Apps Script I wrote that automatically downloads pictures embedded in a daily email I receive from my son&amp;rsquo;s daycare to a Google Drive folder.</description>
+      <description>A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder.</description>
     </item>
     
     <item>
@@ -259,13 +206,13 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-08-24-disco-ball/</guid>
-      <description>Wife needed a black and white PNG/SVG of a Disco Ball. Yep.</description>
+      <description>A JavaScript implementation using p5.js to generate a black and white disco ball visualization.</description>
     </item>
     
     <item>
-      <title>Python networkx Library</title>
+      <title>Python NetworkX Library for Network Graph Visualization</title>
       <link>http://localhost:1313/posts/2023-08-15-networkx/</link>
-      <pubDate>Mon, 14 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-08-15-networkx/</guid>
       <description>A comprehensive guide to creating visually appealing network graphs with Python&amp;rsquo;s networkx library, including node positioning, custom coloring, edge labeling, and group visualization with ellipses.</description>
@@ -283,19 +230,19 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     <item>
       <title>Join a Workstation to Active Directory with Shell and PowerShell</title>
       <link>http://localhost:1313/posts/2023-07-13-join-active-directory/</link>
-      <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 13 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-07-13-join-active-directory/</guid>
       <description>A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality.</description>
     </item>
     
     <item>
-      <title>QR Codes</title>
+      <title>QR Code Generator with Python</title>
       <link>http://localhost:1313/posts/2023-06-24-qr/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-06-24-qr/</guid>
-      <description>Python script for generating a QR code.</description>
+      <description>A Python script using the qrcode library to generate customizable QR codes with error correction, including options for masking specific areas of the code.</description>
     </item>
     
     <item>
@@ -305,6 +252,15 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       
       <guid>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</guid>
       <description>This is a cheat sheet of animations showing what the various 3D translation and rotation settings do in Deforum Stable Diffusion.</description>
+    </item>
+    
+    <item>
+      <title>3D Photo Inpainting with Python and PyTorch</title>
+      <link>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</link>
+      <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</guid>
+      <description>A comprehensive guide to setting up and using 3D Photo Inpainting on Windows, including Miniconda environment setup, dependency installation, and usage instructions.</description>
     </item>
     
     <item>
@@ -335,12 +291,12 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>ACL</title>
+      <title>Windows ACL Management with PowerShell</title>
       <link>http://localhost:1313/posts/2023-05-02-acl/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-05-02-acl/</guid>
-      <description>A collection of PowerShell scripts useful for managing the Access Control List (ACL)</description>
+      <description>A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions.</description>
     </item>
     
     <item>
@@ -362,12 +318,12 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Hiding users from GAL</title>
+      <title>Managing Global Address List (GAL) Visibility with PowerShell</title>
       <link>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</link>
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</guid>
-      <description>A collection of PowerShell scripts for hiding users and contacts from the Global Address List (GAL) in both on-premises Active Directory and Exchange Online environments, with detailed explanations for checking and modifying the msExchHideFromAddressLists attribute.</description>
+      <description>A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute.</description>
     </item>
     
     <item>
@@ -376,38 +332,52 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-03-22-random-password-generator/</guid>
-      <description>An interactive tool that generates three sets of random passwords with varying complexity levels (including special characters, alphanumeric, and alphabetic only) and automatically refreshes with new passwords on page reload.</description>
+      <description>A client-side JavaScript tool that generates secure random passwords with three complexity levels: special characters, alphanumeric, and alphabetic only. Passwords automatically refresh on page load.</description>
+    </item>
+    
+    <item>
+      <title>Windows Defender Firewall Management Guide</title>
+      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
+      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
+      <description>A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding.</description>
     </item>
     
     <item>
       <title>Windows Remediation</title>
       <link>http://localhost:1313/posts/2023-03-03-windows-remediation/</link>
-      <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-03-03-windows-remediation/</guid>
       <description>A comprehensive collection of Windows troubleshooting and repair tools including DISM, SFC, DLL registration commands, and PowerShell scripts for reinstalling Windows apps.</description>
     </item>
     
     <item>
-      <title>Windows Defender Firewall</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
-      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
-      <description>A practical guide to managing Windows Defender Firewall through the command line, including commands for turning the firewall on/off and creating exceptions for programs, Remote Desktop, and specific ports.</description>
-    </item>
-    
-    <item>
-      <title>OpenAI Whisper</title>
+      <title>OpenAI Whisper Speech Recognition Guide</title>
       <link>http://localhost:1313/posts/2023-02-24-openai-whisper/</link>
       <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-24-openai-whisper/</guid>
-      <description>Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.</description>
+      <description>&lt;p&gt;Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&#34;https://github.com/openai/whisper&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install git+https://github.com/openai/whisper.git 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Fix CUDA not detecting GPU&lt;/h3&gt;
+Whisper will default to the CPU if a GPU is not detected, which is considerably slower.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip uninstall torch
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Example usage&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Transcribe&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;whisper input.mp3 --model medium.en --language en --task transcribe
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Translate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;whisper japanese.wav --model large --language Japanese --task translate
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Available models and languages&lt;/h3&gt;
+&lt;p&gt;There are five model sizes, four with English-only versions, offering speed and accuracy tradeoffs. Below are the names of the available models and their approximate memory requirements and relative speed.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Microsoft LAPS (Local Administrator Password Solution)</title>
+      <title>Microsoft LAPS (Local Administrator Password Solution) Guide</title>
       <link>http://localhost:1313/posts/2023-02-22-laps/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
       
@@ -416,66 +386,183 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>MicrosoftTeams PowerShell module</title>
+      <title>Microsoft Teams PowerShell Management Guide</title>
       <link>http://localhost:1313/posts/2023-02-23-microsoftteams/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-23-microsoftteams/</guid>
-      <description>A collection of useful PowerShell scripts for managing Microsoft Teams, including how to install the MicrosoftTeams module and extract team ownership, membership, and channel information.</description>
+      <description>&lt;p&gt;PowerShell scripts for Microsoft Teams stuff.&lt;/p&gt;
+&lt;h3&gt;Get all owners of all teams and team channels&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Documentation: https://learn.microsoft.com/en-us/powershell/module/teams/?view=teams-ps&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Run the following command to install the latest PowerShellGet:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Install-Module -Name PowerShellGet -Force -AllowClobber
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Install the Teams PowerShell Module.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Install-Module -Name MicrosoftTeams -Force -AllowClobber
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# To start working with Microsoft Teams PowerShell module, sign in with your Azure credentials.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connect-MicrosoftTeams
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$user =Read-Host -Prompt &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Input the user name&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teams = Get-Team -User $user
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teamMemberships=@()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teamChannels=@()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teamChannelMemberships=@()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$i = &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teamMemberships = &lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt; ($team &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; $teams) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $GroupId = $team.GroupId   
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Get-TeamUser -GroupId $GroupId | Select-Object *,@{Name=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GroupId&amp;#34;&lt;/span&gt;;Expression={$GroupId}}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $channels = Get-TeamAllChannel -GroupId $GroupId | Select-Object *,@{Name=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GroupId&amp;#34;&lt;/span&gt;;Expression={$GroupId}}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $teamChannels += $channels
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $teamChannelMemberships += &lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt; ($channel &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; $channels) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        $channelDisplayName = $channel.DisplayName
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Get-TeamChannelUser -GroupId $GroupId -DisplayName $channelDisplayName | Select-Object *,@{Name=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GroupId&amp;#34;&lt;/span&gt;;Expression={$GroupId}}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $percent = [&lt;span style=&#34;color:#66d9ef&#34;&gt;Math&lt;/span&gt;]::Round((&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; * $i) / $teams.Length)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Write-Progress -Activity &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Search in Progress&amp;#34;&lt;/span&gt; -Status &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$percent&lt;span style=&#34;color:#e6db74&#34;&gt;% complete&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $i++
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teams | Export-Csv -Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;teams.csv&amp;#34;&lt;/span&gt; -NoTypeInformation
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teamMemberships | Export-Csv -Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;team-memberships.csv&amp;#34;&lt;/span&gt; -NoTypeInformation
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teamChannels | Export-Csv -Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;team-channels.csv&amp;#34;&lt;/span&gt; -NoTypeInformation
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$teamChannelMemberShips | Export-Csv -Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;team-channel-memberships.csv&amp;#34;&lt;/span&gt; -NoTypeInformation
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
-      <title>net user</title>
+      <title>Managing Windows User Accounts with net user Command</title>
       <link>http://localhost:1313/posts/2023-02-21-net-user/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-21-net-user/</guid>
-      <description>The &amp;ldquo;net user&amp;rdquo; command is a Command Prompt (Shell) command used to manage user accounts on a Windows operating system. It can be used to create, modify, or delete user accounts, as well as to change passwords and manage group memberships.</description>
+      <description>&lt;p&gt;The &amp;ldquo;net user&amp;rdquo; command is a Command Prompt (Shell) command used to manage user accounts on a Windows operating system. It can be used to create, modify, or delete user accounts, as well as to change passwords and manage group memberships.&lt;/p&gt;
+&lt;h2 id=&#34;syntax&#34;&gt;Syntax&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; /ADD &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DELETE&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/TIMES:&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;times | ALL&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/ACTIVE: &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;YES | NO&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;add-a-user&#34;&gt;Add a user&lt;/h2&gt;
+&lt;p&gt;To add a new user account:&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Decode Phishing Emails</title>
+      <title>Windows Driver Management with pnputil</title>
+      <link>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</guid>
+      <description>&lt;p&gt;You can uninstall third-party drivers (such as the WAVES MaxxAudio Pro driver) from the Command Prompt (CMD) by using the &amp;ldquo;pnputil.exe&amp;rdquo; utility. Here&amp;rsquo;s the basic process:&lt;/p&gt;
+&lt;p&gt;Open Command Prompt as administrator: Press the Windows key + X, and then select &amp;ldquo;Command Prompt (Admin)&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Type the following command and press Enter:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pnputil.exe -e
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# or export the list to a file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pnputil.exe -e &amp;gt; !drivers.csv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This command lists all the third-party drivers installed on your system.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Phishing Email Decoding Tools</title>
       <link>http://localhost:1313/posts/2023-02-15-decode-phishing-emails/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-15-decode-phishing-emails/</guid>
-      <description>A collection of JavaScript and Python scripts for decoding various obfuscation techniques used in phishing emails, including base64 encoding, hexadecimal strings, and URI encoding.</description>
+      <description>&lt;h2 id=&#34;atob-obfuscation&#34;&gt;atob() obfuscation&lt;/h2&gt;
+&lt;p&gt;This p5.js script is designed to find and decode base64-encoded strings that are nested within one another. The script has several functions that work together to achieve this goal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;isBase64(str)&lt;/code&gt;: This function checks if a given string str is a valid base64-encoded string. It uses a regular expression to test the string and the &lt;code&gt;atob()&lt;/code&gt; function to try decoding the string. If the decoding is successful, the function returns true; otherwise, it returns false.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Force domain controller to sync with AzureAD</title>
+      <title>PowerShell Script for Azure AD Synchronization Management</title>
       <link>http://localhost:1313/posts/2023-02-09-force-ad-sync/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-09-force-ad-sync/</guid>
-      <description>A self-elevating PowerShell script that provides a menu-driven interface for forcing either a delta or full synchronization between on-premises Active Directory and Azure AD.</description>
+      <description>&lt;p&gt;This PowerShell script performs the following actions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It retrieves the Windows identity and security principal of the current user account.&lt;/li&gt;
+&lt;li&gt;It then retrieves the security principal for the Administrator role.&lt;/li&gt;
+&lt;li&gt;It checks if the current user is running as an administrator. If the user is not running as an administrator, the script relaunches itself as an elevated process.&lt;/li&gt;
+&lt;li&gt;If the user is running as an administrator, the script displays a menu with three options: &amp;ldquo;Delta Sync&amp;rdquo;, &amp;ldquo;Full Sync&amp;rdquo;, and &amp;ldquo;Exit&amp;rdquo;. The user is prompted to select an option by entering the corresponding number.&lt;/li&gt;
+&lt;li&gt;Based on the user&amp;rsquo;s selection, the script runs the appropriate command using the Start-ADSyncSyncCycle cmdlet with either the Delta or Initial policy type. If the user selects &amp;ldquo;Exit&amp;rdquo;, the script exits.&lt;/li&gt;
+&lt;li&gt;Finally, the script displays a message indicating that it is running and to check the &amp;ldquo;miisclient&amp;rdquo; to confirm. It then pauses for 10 seconds using the Start-Sleep cmdlet.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$myWindowsID = [&lt;span style=&#34;color:#66d9ef&#34;&gt;System.Security.Principal.WindowsIdentity&lt;/span&gt;]::GetCurrent()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$myWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($myWindowsID)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$adminRole = [&lt;span style=&#34;color:#66d9ef&#34;&gt;System.Security.Principal.WindowsBuiltInRole&lt;/span&gt;]::Administrator
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-not&lt;/span&gt; $myWindowsPrincipal.IsInRole($adminRole)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $newProcess = New-Object System.Diagnostics.ProcessStartInfo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PowerShell&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $newProcess.Arguments = $myInvocation.MyCommand.Definition
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $newProcess.Verb = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;runas&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [&lt;span style=&#34;color:#66d9ef&#34;&gt;System.Diagnostics.Process&lt;/span&gt;]::Start($newProcess)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    exit
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1) Delta Sync (Recommended, unless told to do a full sync)&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2) Full Sync&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;3) Exit&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$selected_menu_item = Read-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Which number would you like to run (1 or 2)? (Enter Number and Press Enter)&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt; ($selected_menu_item) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; { Start-ADSyncSyncCycle -PolicyType Delta }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; { Start-ADSyncSyncCycle -PolicyType Initial }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; { Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Exit&amp;#39;&lt;/span&gt;; exit }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt; { Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Incorrect Input&amp;#39;&lt;/span&gt; -ForegroundColor Red }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Running Now.... Check miisclient to confirm&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Start-Sleep -s &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
-      <title>Handling Hacked Accounts and Purging Emails in M365</title>
+      <title>Microsoft 365 Email Security Management Guide</title>
       <link>http://localhost:1313/posts/2023-02-07-purge-emails/</link>
       <pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-07-purge-emails/</guid>
-      <description>A comprehensive guide to managing compromised Microsoft 365 accounts using PowerShell&amp;rsquo;s ExchangeOnlineManagement module, with specific techniques for reviewing suspicious activity, purging malicious emails, and checking inbox rules.</description>
+      <description>&lt;h2 id=&#34;block-unwanted-emails&#34;&gt;Block Unwanted Emails&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Prevent sending or receiving emails from specific external email addresses or domains.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Navigate to the Tenant Allow/Block List in the Microsoft Security Center. Configure the settings to block specific email addresses or domains. For direct access, use this link: &lt;a href=&#34;https://security.microsoft.com/tenantAllowBlockList&#34;&gt;Tenant Allow/Block List&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;review-past-week-of-sign-in-history&#34;&gt;Review Past Week of Sign-In History&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Review sign-in history to identify any unusual user activity.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Access the Azure portal&amp;rsquo;s sign-in history section. Specify the user of interest and examine their sign-in locations and activities. Access the portal here: &lt;a href=&#34;https://portal.azure.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/SignIns&#34;&gt;Azure Sign-In History&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>MiDaS</title>
+      <title>MiDaS Depth Estimation Guide</title>
       <link>http://localhost:1313/posts/2023-02-06-midas/</link>
       <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-06-midas/</guid>
-      <description>A guide to installing and using MiDaS, a powerful tool for generating depth maps from images with various model options and troubleshooting CUDA installation issues.</description>
-    </item>
-    
-    <item>
-      <title>Uninstall Third-Party Drivers with CMD</title>
-      <link>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</link>
-      <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</guid>
-      <description>A guide to uninstalling third-party drivers from Windows systems using the pnputil.exe command-line utility.</description>
+      <description>&lt;h3&gt;&lt;a href=&#34;https://github.com/isl-org/MiDaS&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;During installation, I ran into an issue where the CUDA package wasn&amp;rsquo;t found. Had to modify environment.yaml to:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;name: midas-py310
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;channels:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pytorch
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - defaults
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dependencies:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - nvidia::cuda-toolkit&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;11.7.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - python&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;3.10.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pytorch::pytorch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.13.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - torchvision&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;0.14.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;22.3.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - numpy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.23.4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pip:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - opencv-python&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;4.6.0.66
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - imutils&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.5.4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - timm&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.6.12
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - einops&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.6.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Commands that were helpful for troubleshooting CUDA:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -484,7 +571,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-05-film/</guid>
-      <description>A step-by-step guide for setting up and using Google&amp;rsquo;s Frame Interpolation Large Motion (FILM) TensorFlow implementation to create smooth animations by generating intermediate frames between existing images.</description>
+      <description>A comprehensive guide to setting up and using Google&amp;rsquo;s Frame Interpolation Large Motion (FILM) TensorFlow implementation, enabling the creation of smooth animations by generating intermediate frames between existing images using deep learning techniques.</description>
     </item>
     
     <item>
@@ -493,7 +580,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
-      <description>A collection of Python and JavaScript utility scripts for processing, enhancing, and manipulating images generated with Stable Diffusion, including file renaming, sorting, color grading, and special effects tools.</description>
+      <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
     </item>
     
     <item>
@@ -502,7 +589,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/</guid>
-      <description>Discover an array of shell and PowerShell commands related to time management, such as checking the last boot-up time, system boot time, and changing the time zone.</description>
+      <description>A comprehensive guide to Windows time management using shell and PowerShell commands, covering system uptime, boot times, time synchronization, and timezone configuration.</description>
     </item>
     
     <item>
@@ -551,12 +638,12 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Dump WiFi Passwords</title>
+      <title>PowerShell Script to Export WiFi Network Credentials</title>
       <link>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</guid>
-      <description>A PowerShell script that leverages netsh commands to extract and export stored WiFi network profiles and their corresponding passwords to a CSV file, automating wireless network credential retrieval.</description>
+      <description>A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.</description>
     </item>
     
     <item>
@@ -569,12 +656,12 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>ffmpeg</title>
+      <title>FFmpeg Command Reference</title>
       <link>http://localhost:1313/posts/2022-01-27-ffmpeg/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2022-01-27-ffmpeg/</guid>
-      <description>A comprehensive guide to ffmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations.</description>
+      <description>A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples.</description>
     </item>
     
     <item>
@@ -605,12 +692,12 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Managing Auto-Expanding Archives</title>
+      <title>Managing Exchange Online Auto-Expanding Archives with PowerShell</title>
       <link>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</guid>
-      <description>A collection of PowerShell scripts utilizing the ExchangeOnlineManagement module to automate and streamline the administration of auto-expanding archives in Exchange Online.</description>
+      <description>A comprehensive collection of PowerShell scripts for managing Exchange Online auto-expanding archives, including monitoring, configuration, and reporting tools using the ExchangeOnlineManagement module.</description>
     </item>
     
     <item>
@@ -623,21 +710,30 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
+      <title>Windows Settings URI Reference</title>
+      <link>http://localhost:1313/posts/2021-01-01-ms-settings-uri-reference/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2021-01-01-ms-settings-uri-reference/</guid>
+      <description>A comprehensive reference guide to Windows ms-settings URI schemes, enabling direct access to specific Windows Settings pages through command-line or scripting interfaces.</description>
+    </item>
+    
+    <item>
       <title>Remote Reboot With SMTP Status</title>
       <link>http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/</link>
       <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/</guid>
-      <description>A PowerShell script that performs batch reboots of remote computers and sends email notifications with their post-reboot status using SMTP.</description>
+      <description>A PowerShell script that remotely reboots a specified computer and sends an email notification about the reboot status using SMTP.</description>
     </item>
     
     <item>
-      <title>Remove-AppxPackage</title>
+      <title>Remove-AppxPackages</title>
       <link>http://localhost:1313/posts/2019-08-28-remove-appx-packages/</link>
       <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2019-08-28-remove-appx-packages/</guid>
-      <description>A PowerShell script demonstrating how to bulk remove Windows Store applications (AppX packages) from the current user account or system-wide.</description>
+      <description>A PowerShell script that removes unwanted Windows Store apps (AppX packages) while preserving essential system apps, using a list of package names to exclude from removal.</description>
     </item>
     
     <item>
@@ -664,7 +760,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Mon, 19 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2019-08-19-enable-autoadminlogon/</guid>
-      <description>A PowerShell script that configures Windows registry settings to enable automatic login using Active Directory credentials, with optional screen locking via scheduled tasks.</description>
+      <description>A PowerShell script that enables AutoAdminLogon by configuring registry settings to automatically log in a specified user without prompting for credentials.</description>
     </item>
     
     <item>
@@ -673,7 +769,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/</guid>
-      <description>A Processing sketch that creates seamlessly looping animations by using 4D Open Simplex Noise to generate dynamic alpha masks for blending between two textures.</description>
+      <description>A Processing implementation that combines Open Simplex Noise with image blending techniques to create smooth, organic animations of texture transitions.</description>
     </item>
     
     <item>
@@ -731,15 +827,6 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Comparing Java Distance Functions</title>
-      <link>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</guid>
-      <description>A performance comparison of three different Java implementations for calculating distances between points, demonstrating significant differences in execution time from 2224ms to 3ms.</description>
-    </item>
-    
-    <item>
       <title>Ulam Spiral</title>
       <link>http://localhost:1313/posts/2018-05-17-ulam-sprial/</link>
       <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>
@@ -785,6 +872,15 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
+      <title>Comparing Java Distance Functions</title>
+      <link>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</link>
+      <pubDate>Tue, 17 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</guid>
+      <description>A Java program that compares various distance calculation methods, including Manhattan, Euclidean, and Chebyshev distances, and visualizes their differences using Processing.</description>
+    </item>
+    
+    <item>
       <title>Faster Java String Inputs</title>
       <link>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
@@ -817,7 +913,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
       <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/archive/2018-04-09-uva-1112/</guid>
-      <description>&lt;p&gt;This problem involves a relatively small graph, so I opted to implement the &lt;!-- raw HTML omitted --&gt;Floyd-Warshall Algorithm&lt;!-- raw HTML omitted --&gt; instead of &lt;!-- raw HTML omitted --&gt;Dijkstra&amp;rsquo;s Algorithm&lt;!-- raw HTML omitted --&gt; for the sake of simplicity. This algorithm finds the shortest path between every pair of vertices in a graph, running in O(n^3) time. Although this might sound inefficient, the UVA judge accepted this program with a runtime of 0.12 seconds, which is well within the 3-second threshold. I designed this algorithm using an object-oriented approach and avoided arrays, so that if I ever have enough free time, I can easily integrate it into Processing and visualize it in 3D.&lt;/p&gt;</description>
+      <description>&lt;p&gt;This problem involves a relatively small graph, so I opted to implement the &lt;a href=&#34;https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm&#34;&gt;Floyd-Warshall Algorithm&lt;/a&gt; instead of &lt;a href=&#34;https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&#34;&gt;Dijkstra&amp;rsquo;s Algorithm&lt;/a&gt; for the sake of simplicity. This algorithm finds the shortest path between every pair of vertices in a graph, running in O(n^3) time. Although this might sound inefficient, the UVA judge accepted this program with a runtime of 0.12 seconds, which is well within the 3-second threshold. I designed this algorithm using an object-oriented approach and avoided arrays, so that if I ever have enough free time, I can easily integrate it into Processing and visualize it in 3D.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1031,7 +1127,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Counting Sort</title>
+      <title></title>
       <link>http://localhost:1313/posts/2017-07-18-counting-sort/</link>
       <pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate>
       
@@ -1040,7 +1136,7 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Simple 2D Terrain Generation Using Perlin Noise</title>
+      <title></title>
       <link>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</link>
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       
@@ -1049,12 +1145,12 @@ Below is my go‑to workflow, polished from countless “Why did this crash at 4
     </item>
     
     <item>
-      <title>Arrays</title>
+      <title>Interactive Array Visualization</title>
       <link>http://localhost:1313/posts/2016-12-13-arrays/</link>
       <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/2016-12-13-arrays/</guid>
-      <description>This is something I made when I was learning about Arrays of Objects.</description>
+      <description>An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface.</description>
     </item>
     
   </channel>

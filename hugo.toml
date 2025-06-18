@@ -14,7 +14,7 @@ enableGitInfo = true
   tag = "tags"
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
@@ -25,3 +25,8 @@ enableGitInfo = true
 
 # Enable robots.txt and sitemap generation (usually enabled by default)
 enableRobotsTXT = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
