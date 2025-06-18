@@ -1,0 +1,9 @@
+{{/* layouts/partials/post_list.html */}}
+{{ $none := .noneMsg | default "No posts yet." }}
+<section>
+    {{ range .pages }}
+        {{ partial "post_preview.html" . }}
+    {{ else }}
+        <p>{{ $none }}</p>
+    {{ end }}
+</section>

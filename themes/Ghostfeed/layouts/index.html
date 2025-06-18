@@ -1,14 +1,6 @@
 {{ define "main" }}
 <article>
-    {{/* <h1>{{ .Title }}</h1> */}}
     {{ .Content }}
-
-    <section id="posts">
-        {{ range .Site.RegularPages }}
-            {{ partial "post_preview.html" . }}
-        {{ else }}
-            <p>No posts yet.</p>
-        {{ end }}
-    </section>
+    {{ partial "post_list.html" (dict "pages" .Site.RegularPages) }}
 </article>
-{{ end }} 
+{{ end }}

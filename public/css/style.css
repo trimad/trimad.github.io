@@ -78,7 +78,7 @@ canvas.p5Canvas {
      grid-template-areas:
        "nav-left search nav-right"
        "nav-left main   nav-right";
-     grid-template-columns: var(19.1%) var(68.2%) var(19.1%);
+     grid-template-columns: 256px auto 256px;
      grid-template-rows: auto 1fr;
      gap: var(--pad-md) var(--pad-md);
      width: 100%;
