@@ -111,7 +111,7 @@ body.page .search {
 
 main {
   grid-area: main;
-  overflow-x: scroll;
+  overflow-x: hidden;
 
 
 }
