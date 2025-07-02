@@ -20,7 +20,7 @@
     <!-- single grid that holds everything -->
     <div class="container">
 
-        <!-- left column (spans both rows) -->
+        <!-- left column top -->
         <div class="nav-left">
             <nav>
                 {{ block "nav-left" . }}
@@ -29,14 +29,11 @@
             </nav>
         </div>
 
+        <!-- left column recent activity -->
         <div class="recent-activity">
-            <nav>
-                {{ block "recent-activity" . }}
-                {{ partial "recent_activity.html" . }}
-                {{ end }}
-            </nav>
+            {{ partial "recent_activity.html" . }}
         </div>
-        
+ 
         <!-- top-centre: search bar -->
         <nav class="search">
             <input
