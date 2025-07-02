@@ -70,14 +70,14 @@ canvas.p5Canvas {
          4 ▸ Main CSS Grid layout
             - 3-column desktop grid
             - Row 1 : nav-left | search | nav-right
-            - Row 2 : nav-left |  main  | nav-right
+            - Row 2 : recent-activity | main | nav-right
          ─────────────────────────────────────────────────────────────── */
   .container {
      box-sizing: border-box;
      display: grid;
      grid-template-areas:
        "nav-left search nav-right"
-       "nav-left main   nav-right";
+       "recent-activity main nav-right";
      grid-template-columns: 256px auto 256px;
      grid-template-rows: auto 1fr;
      gap: var(--pad-md) var(--pad-md);
@@ -91,7 +91,7 @@ body.page .container {
 /* ────────────────────────────────────────────────────────────────
          5 ▸ Generic “panel” appearance shared by many modules
          ─────────────────────────────────────────────────────────────── */
-:is(.main, .nav-left, .nav-right, .post-preview, .search, .post) {
+:is(.main, .nav-left, .nav-right, .recent-activity, .post-preview, .search, .post) {
   background: var(--background-panel);
   border: 1px solid var(--border-color-grid);
   border-radius: var(--radius-sm);
@@ -116,8 +116,14 @@ main {
 
 }
 
+
 .nav-left {
   grid-area: nav-left;
+  align-self: start;
+}
+
+.recent-activity {
+  grid-area: recent-activity;
   align-self: start;
 }
 
@@ -131,7 +137,8 @@ main {
          6 ▸ Sidebar navigation formatting
          ─────────────────────────────────────────────────────────────── */
 .nav-left h2,
-.nav-right h2 {
+.nav-right h2,
+.recent-activity h2 {
   border-bottom: 1px solid var(--border-color-grid);
   color: var(--primary-accent);
   font: 1.3rem var(--font-headings);
@@ -145,19 +152,22 @@ main {
 }
 
 .nav-left ul,
-.nav-right ul {
+.nav-right ul,
+.recent-activity ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .nav-left li,
-.nav-right li {
+.nav-right li,
+.recent-activity li {
   margin-bottom: var(--pad-sm);
 }
 
 .nav-left li a,
-.nav-right li a {
+.nav-right li a,
+.recent-activity li a {
   border-left: 3px solid transparent;
   color: var(--text-color-secondary);
   display: block;
@@ -167,7 +177,8 @@ main {
 }
 
 .nav-left li a:hover,
-.nav-right li a:hover {
+.nav-right li a:hover,
+.recent-activity li a:hover {
   background: rgba(0, 255, 255, .1);
   border-left-color: var(--primary-accent);
   color: var(--link-hover-color);
