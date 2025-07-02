@@ -12,6 +12,15 @@
     <atom:link href="https://trimad.github.io/tags/reporting/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Videos as Teams Backgrounds</title>
+      <link>https://trimad.github.io/posts/2025-07-02-videos-as-teams-backgrounds/</link>
+      <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://trimad.github.io/posts/2025-07-02-videos-as-teams-backgrounds/</guid>
+      <description>How to turn any YouTube video into your Microsoft Teams background.</description>
+    </item>
+    
+    <item>
       <title>UDM Parameters for Google Search</title>
       <link>https://trimad.github.io/posts/2025-06-17-udm-arguments/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>

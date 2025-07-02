@@ -29,6 +29,14 @@
             </nav>
         </div>
 
+        <div class="recent-activity">
+            <nav>
+                {{ block "recent-activity" . }}
+                {{ partial "recent_activity.html" . }}
+                {{ end }}
+            </nav>
+        </div>
+        
         <!-- top-centre: search bar -->
         <nav class="search">
             <input

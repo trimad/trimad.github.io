@@ -1,0 +1,8 @@
+<section>
+    <h2>Recent Activity</h2>
+    <ul>
+        {{ range first 10 (.Site.RegularPages.ByLastmod.Reverse) }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</section>
