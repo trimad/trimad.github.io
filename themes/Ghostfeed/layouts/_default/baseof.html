@@ -15,6 +15,7 @@
     {{ block "head" . }}{{ end }}
     {{- partialCached "rss_feed_link.html" . -}}
 </head>
+
 <body class="{{ .Kind | lower }}">
 
     <!-- single grid that holds everything -->

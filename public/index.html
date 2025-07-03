@@ -7,15 +7,16 @@
     <meta name="description" content="Your site description goes here.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="http://localhost:1313/">
-    
+    <meta name="keywords" content="blog, tech blog, documentation">
     <title>Ghostfeed</title>
 
     
     <link rel="stylesheet" href="http://localhost:1313/css/style.css">
 
-    <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
-    <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/categories/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/categories/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
 </head>
+
 <body class="home">
 
     
@@ -30,6 +31,8 @@
         <li><a href="http://localhost:1313/">Home</a></li>
         
         <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
+        <li><a href="http://localhost:1313/prompts/">LLM Prompts</a></li>
         
         <li><a href="http://localhost:1313/archive/">Archive</a></li>
         
@@ -57,6 +60,8 @@
         
         <li><a href="http://localhost:1313/posts/2025-05-02-procdump-and-windbg/">Troubleshoot Crashing Apps with ProcDump &amp; WinDbg on 2025-05-01</a></li>
         
+        <li><a href="http://localhost:1313/prompts/2025-07-03-stub/">Stub Title on 2025-03-07</a></li>
+        
         <li><a href="http://localhost:1313/posts/2024-10-16-restart-iis-application/">Automated IIS Application Pool Restart with PowerShell on 2024-10-16</a></li>
         
         <li><a href="http://localhost:1313/posts/2024-09-10-officec2rclient/">Managing Microsoft Office Versions with OfficeC2RClient on 2024-09-10</a></li>
@@ -66,8 +71,6 @@
         <li><a href="http://localhost:1313/posts/2024-06-24-get-public-ip/">How to Find Your Public IP Address on 2024-06-24</a></li>
         
         <li><a href="http://localhost:1313/posts/2024-06-06-dns-records/">Complete DNS Records Reference Guide on 2024-06-06</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2024-06-01-visualizing-subnets/">Network Subnet Visualization Tools on 2024-06-01</a></li>
         
     </ul>
 </section>
@@ -99,6 +102,8 @@
     <small>
         Published: July 2, 2025
         
+            
+                | Last Modified: July 3, 2025
             
         
     </small>
@@ -329,6 +334,67 @@
                     
                 </div>
             
+            
+        </div>
+    
+
+</article>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+    </script>
+    
+        <article class="post-preview">
+    <h3><a href="http://localhost:1313/prompts/2025-07-03-stub/">Stub Title</a></h3>
+    <p>Stub Summary</p>
+
+    <small>
+        Published: March 7, 2025
+        
+            
+        
+    </small>
+
+    
+        <div class="terms">
+            
+                <div class="term-group tags">
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/tags/stub/">stub</a>
+                        
+                    
+                </div>
+            
+            
+                <div class="term-group categories">
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/categories/stub/">stub</a>
+                        
+                    
+                </div>
             
         </div>
     
@@ -9678,6 +9744,8 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         
         <li><a href="http://localhost:1313/categories/shell/">Shell (16)</a></li>
         
+        <li><a href="http://localhost:1313/categories/stub/">Stub (1)</a></li>
+        
         <li><a href="http://localhost:1313/categories/system-administration/">System Administration (4)</a></li>
         
         <li><a href="http://localhost:1313/categories/teams/">Teams (1)</a></li>
@@ -10082,7 +10150,7 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         
         <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/smtp/">Smtp (2)</a></li>
+        <li><a href="http://localhost:1313/tags/smtp/">SMTP (2)</a></li>
         
         <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
         
@@ -10101,6 +10169,8 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
         <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/stub/">Stub (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/subnets/">Subnets (1)</a></li>
         

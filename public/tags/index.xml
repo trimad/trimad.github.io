@@ -12,6 +12,15 @@
     <atom:link href="http://localhost:1313/tags/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>SMTP Test With PowerShell</title>
+      <link>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</link>
+      <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</guid>
+      <description>Test Microsoft365 credentials for SMTP scan using TLS 1.2</description>
+    </item>
+    
+    <item>
       <title>Videos as Teams Backgrounds</title>
       <link>http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
@@ -79,6 +88,15 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;ProcDump parks the dump as &lt;code&gt;excel.exe_YYMMDD_HHMM.dmp&lt;/code&gt; in &lt;code&gt;C:\Dumps&lt;/code&gt;. Reproduce the crash and wait for &lt;em&gt;Dump written&lt;/em&gt; to show.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Stub Title</title>
+      <link>http://localhost:1313/prompts/2025-07-03-stub/</link>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/prompts/2025-07-03-stub/</guid>
+      <description>Stub Summary</description>
     </item>
     
     <item>

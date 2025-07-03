@@ -12,6 +12,15 @@
     <atom:link href="http://localhost:1313/tags/file-permissions/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>SMTP Test With PowerShell</title>
+      <link>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</link>
+      <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</guid>
+      <description>Test Microsoft365 credentials for SMTP scan using TLS 1.2</description>
+    </item>
+    
+    <item>
       <title>Videos as Teams Backgrounds</title>
       <link>http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
@@ -1203,6 +1212,15 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
       
       <guid>http://localhost:1313/posts/2016-12-13-arrays/</guid>
       <description>An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface.</description>
+    </item>
+    
+    <item>
+      <title>LLM Prompts</title>
+      <link>http://localhost:1313/prompts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/prompts/</guid>
+      <description></description>
     </item>
     
   </channel>
