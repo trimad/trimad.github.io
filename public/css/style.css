@@ -102,7 +102,7 @@ body.page .container {
 /* ───────── Grid-area assignments ───────── */
 
 main {
-  /* grid-area: main; */
+  grid-area: main;
   overflow-x: hidden;
 }
 
