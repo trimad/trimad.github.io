@@ -74,12 +74,12 @@ canvas.p5Canvas {
          ─────────────────────────────────────────────────────────────── */
   .container {
      box-sizing: border-box;
-     display: grid;
+     display:grid;
      grid-template-areas:
        "nav-left search nav-right"
        "recent-activity main nav-right";
      grid-template-columns: 256px auto 256px;
-     grid-template-rows: auto 1fr;
+     grid-template-rows: auto auto; /* change from auto 1fr */
      gap: var(--pad-md) var(--pad-md);
      width: 100%;
      overflow-x: auto;
@@ -100,31 +100,30 @@ body.page .container {
 }
 
 /* ───────── Grid-area assignments ───────── */
-.search {
-  grid-area: search;
-}
-
-body.page .search {
-  display: none;
-}
-
 
 main {
-  grid-area: main;
+  /* grid-area: main; */
   overflow-x: hidden;
-
-
 }
-
 
 .nav-left {
   grid-area: nav-left;
   align-self: start;
 }
 
+.search {
+  grid-area: search;
+  align-self: start;
+}
+
+/* Hide the search bar on blog posts*/
+body.page .search {
+  display: none;
+}
+
 .recent-activity {
   grid-area: recent-activity;
-  align-self: start;
+  /* align-self: start; */
 }
 
 .nav-right {

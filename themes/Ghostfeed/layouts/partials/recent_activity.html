@@ -1,8 +1,8 @@
 <section>
-    <h2>Recent Activity</h2>
+    <h2>Recently Modified</h2>
     <ul>
-        {{ range first 5 (sort .Site.RegularPages "Date" "desc") }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ range first 10 (sort .Site.RegularPages "Date" "desc") }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }} on {{ .Date.Format "2006-01-02" }}</a></li>
         {{ end }}
     </ul>
 </section>

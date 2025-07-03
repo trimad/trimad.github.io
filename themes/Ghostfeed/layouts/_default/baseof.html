@@ -22,11 +22,11 @@
 
         <!-- left column top -->
         <div class="nav-left">
-            <nav>
+            <div>
                 {{ block "nav-left" . }}
                     {{ partial "nav_left.html" . }}
                 {{ end }}
-            </nav>
+            </div>
         </div>
 
         <!-- left column recent activity -->
@@ -35,13 +35,13 @@
         </div>
  
         <!-- top-centre: search bar -->
-        <nav class="search">
+        <div class="search">
             <input
             type="search"
                 id="post-search"
                 placeholder="Search posts…"
                 aria-label="Search posts">
-        </nav>
+        </div>
 
         <!-- centre: main content (second row) -->
         <main>
