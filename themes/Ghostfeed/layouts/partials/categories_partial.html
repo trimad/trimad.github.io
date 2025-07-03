@@ -1,0 +1,10 @@
+{{ with .Site.Taxonomies.categories }}
+<section>
+    <h2>Categories</h2>
+    <ul>
+        {{ range . }}
+        <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} ({{ .Count }})</a></li>
+        {{ end }}
+    </ul>
+</section>
+{{ end }}

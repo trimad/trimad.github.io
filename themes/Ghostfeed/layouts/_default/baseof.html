@@ -20,40 +20,38 @@
     <!-- single grid that holds everything -->
     <div class="container">
 
-        <!-- left column top -->
-        <div class="nav-left">
-            <div>
-                {{ block "nav-left" . }}
-                    {{ partial "nav_left.html" . }}
-                {{ end }}
-            </div>
+    <!-- entire left sidebar -->
+    <aside class="left-flex-column">
+    <div class="sections-partial">
+        {{ partial "sections_partial.html" . }}
+      </div>
+    <div class="btc-partial">
+            {{ partial "btc_partial.html" . }}
         </div>
+    <div class="recent-activity">
+        {{ partial "recent_activity.html" . }}
+      </div>
+    </aside>
 
-        <!-- left column recent activity -->
-        <div class="recent-activity">
-            {{ partial "recent_activity.html" . }}
-        </div>
- 
-        <!-- top-centre: search bar -->
-        <div class="search">
-            <input
-            type="search"
-                id="post-search"
-                placeholder="Search posts…"
-                aria-label="Search posts">
-        </div>
-
-        <!-- centre: main content (second row) -->
+    <aside class="middle-flex-column">
+    <div class="search-partial">
+        {{ partial "search_partial.html" . }}
+      </div>
         <main>
             {{ block "main" . }}{{ end }}
         </main>
+    </aside>
 
-        <!-- right column (spans both rows) -->
-        <div class="nav-right">
-            {{ block "nav-right" . }}
-                {{ partial "nav_right.html" . }}
-            {{ end }}
+
+    <!-- entire left sidebar -->
+    <aside class="right-flex-column">
+    <div class="categories-partial">
+        {{ partial "categories_partial.html" . }}
+      </div>
+    <div class="tags-partial">
+            {{ partial "tags_partial.html" . }}
         </div>
+    </aside>
 
     </div> <!-- /container -->
 

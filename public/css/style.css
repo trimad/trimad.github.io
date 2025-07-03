@@ -41,15 +41,17 @@
          2 ▸ Global reset + layout skeleton
             - Full-viewport flex column centred horizontally
          ─────────────────────────────────────────────────────────────── */
-body {
+body,html {
   align-items: center;
   color: var(--text-color-primary);
   display: flex;
   flex-direction: column;
   font: 16px/1.6 var(--font-body);
-  margin: var(--pad-md);
   min-height: 100vh;
-  overflow-x: auto;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin:0;
+  padding:0;
 }
 
 /* ────────────────────────────────────────────────────────────────
@@ -66,78 +68,70 @@ canvas.p5Canvas {
   z-index: -1;
 }
 
-/* ────────────────────────────────────────────────────────────────
-         4 ▸ Main CSS Grid layout
-            - 3-column desktop grid
-            - Row 1 : nav-left | search | nav-right
-            - Row 2 : recent-activity | main | nav-right
-         ─────────────────────────────────────────────────────────────── */
-  .container {
-     box-sizing: border-box;
-     display:grid;
-     grid-template-areas:
-       "nav-left search nav-right"
-       "recent-activity main nav-right";
-     grid-template-columns: 256px auto 256px;
-     grid-template-rows: auto auto; /* change from auto 1fr */
-     gap: var(--pad-md) var(--pad-md);
-     width: 100%;
-     overflow-x: auto;
-   }
-
-body.page .container {
-  row-gap: 0;
+.container {
+  display: grid;
+  grid-template-columns: 256px auto 256px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "left-flex-column middle-flex-column  right-flex-column"
+    "left-flex-column middle-flex-column  right-flex-column";
+  gap: var(--pad-md);
+  margin: var(--pad-md);
+  overflow-x: auto;
 }
-/* ────────────────────────────────────────────────────────────────
-         5 ▸ Generic “panel” appearance shared by many modules
-         ─────────────────────────────────────────────────────────────── */
-:is(.main, .nav-left, .nav-right, .recent-activity, .post-preview, .search, .post) {
+
+.left-flex-column {
+  grid-area: left-flex-column;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-md);
+  align-self: start;
+}
+
+.middle-flex-column {
+  grid-area: middle-flex-column;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-md);
+  align-self: start;
+  min-width: 0;
+
+}
+
+.right-flex-column {
+  grid-area: right-flex-column;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-md);
+  align-self: start;
+}
+
+.sections-partial,
+.btc-partial,
+.recent-activity,
+.search-partial,
+.post-preview,
+.post,
+.categories-partial,
+.tags-partial {
   background: var(--background-panel);
   border: 1px solid var(--border-color-grid);
   border-radius: var(--radius-sm);
-  box-shadow: 0 0 8px rgba(0, 255, 255, .5);
+  /* box-shadow: 0px 0px 4px 8px rgba(0, 255, 255, .9); */
   padding: var(--pad-md);
 }
 
-/* ───────── Grid-area assignments ───────── */
-
-main {
-  grid-area: main;
-  overflow-x: hidden;
-}
-
-.nav-left {
-  grid-area: nav-left;
-  align-self: start;
-}
-
-.search {
-  grid-area: search;
-  align-self: start;
-}
-
-/* Hide the search bar on blog posts*/
-body.page .search {
+/* Hide the search bar when viewing a blog post*/
+body.page .search-partial {
   display: none;
 }
 
-.recent-activity {
-  grid-area: recent-activity;
-  /* align-self: start; */
+/* Hide the scroll bar*/
+main {
+  overflow-x: hidden;
 }
 
-.nav-right {
-  grid-area: nav-right;
-  align-self: start;
-}
-
-
-/* ────────────────────────────────────────────────────────────────
-         6 ▸ Sidebar navigation formatting
-         ─────────────────────────────────────────────────────────────── */
-.nav-left h2,
-.nav-right h2,
-.recent-activity h2 {
+h2 {
   border-bottom: 1px solid var(--border-color-grid);
   color: var(--primary-accent);
   font: 1.3rem var(--font-headings);
@@ -150,23 +144,13 @@ body.page .search {
   justify-content: center;
 }
 
-.nav-left ul,
-.nav-right ul,
-.recent-activity ul {
+ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.nav-left li,
-.nav-right li,
-.recent-activity li {
-  margin-bottom: var(--pad-sm);
-}
-
-.nav-left li a,
-.nav-right li a,
-.recent-activity li a {
+li a {
   border-left: 3px solid transparent;
   color: var(--text-color-secondary);
   display: block;
@@ -175,9 +159,7 @@ body.page .search {
   transition: background-color .2s, color .2s, border-left-color .2s;
 }
 
-.nav-left li a:hover,
-.nav-right li a:hover,
-.recent-activity li a:hover {
+li a:hover {
   background: rgba(0, 255, 255, .1);
   border-left-color: var(--primary-accent);
   color: var(--link-hover-color);
@@ -185,17 +167,11 @@ body.page .search {
 }
 
 
-/* ────────────────────────────────────────────────────────────────
-         7 ▸ Post preview card
-         ─────────────────────────────────────────────────────────────── */
 .post-preview {
   margin-bottom: var(--pad-md);
+  padding-top: 0;
 }
 
-
-/* ────────────────────────────────────────────────────────────────
-         8 ▸ Heading typography & flicker interaction
-         ─────────────────────────────────────────────────────────────── */
 h1,
 h2,
 h3,
@@ -214,7 +190,10 @@ h6 {
 
 h1:hover,
 h2:hover,
-h3:hover {
+h3:hover,
+h4:hover,
+h5:hover,
+h6:hover {
   animation: flicker 1s infinite alternate;
   text-shadow: var(--glow-effect);
 }
@@ -264,33 +243,6 @@ a:hover {
   color: var(--background-deep);
 }
 
-
-/* ────────────────────────────────────────────────────────────────
-        13 ▸ QR-code callout box
-         ─────────────────────────────────────────────────────────────── */
-.qr-code-container {
-  align-items: center;
-  border-top: 1px solid var(--border-color-grid);
-  display: flex;
-  flex-direction: column;
-
-  margin-top: var(--pad-md);
-  text-align: center;
-}
-
-.qr-code-container img {
-  height: auto;
-  margin-bottom: var(--pad-md);
-  max-width: 100%;
-}
-
-.qr-code-container p {
-  color: var(--primary-accent);
-  font: 700 1rem var(--font-headings);
-  letter-spacing: 1px;
-  margin: 0;
-  text-transform: uppercase;
-}
 
 
 /* ────────────────────────────────────────────────────────────────
