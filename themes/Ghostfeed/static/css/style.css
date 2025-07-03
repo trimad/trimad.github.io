@@ -1,111 +1,122 @@
 /* ────────────────────────────────────────────────────────────────
-   1 ▸ Font import + CSS Custom Properties (design tokens)
-      - Central palette, fonts, spacing, radii & effects
+   0 ▸ Google Fonts
    ─────────────────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
+
+/* ────────────────────────────────────────────────────────────────
+   1 ▸ CSS Custom Properties (Design Tokens)
+   ─────────────────────────────────────────────────────────────── */
 :root {
-  /* === Color palette === */
-  --alert-red: #FF3366;
+  /* — Color palette — */
   --background-deep: #0A0C11;
   --background-panel: #161B25;
   --border-color-grid: #2A2F40;
-  --code-bg-color: #20242F;
-  --link-hover-color: #FFF;
+  --alert-red: #FF3366;
   --primary-accent: #00FFF7;
   --secondary-accent: #B000E0;
+  --link-hover-color: #FFF;
   --text-color-primary: #D0D0D0;
   --text-color-secondary: #7A7A7A;
+  --code-bg-color: #20242F;
 
-  /* === Typography === */
+  /* — Typography — */
   --font-body: 'Share Tech Mono', monospace;
   --font-headings: 'Orbitron', sans-serif;
 
-  /* === Effects === */
+  /* — Effects — */
   --glow-effect: 0 0 5px #00FFF7, 0 0 10px #00FFF7;
   --text-shadow-subtle: 0 0 3px rgba(0, 255, 255, .2);
 
-  /* === Sizing & spacing === */
-  --pad-lg: 24px;
-  --pad-md: 16px;
+  /* — Spacing & sizing — */
   --pad-sm: 8px;
+  --pad-md: 16px;
+  --pad-lg: 24px;
   --radius-sm: 8px;
-
-  /* === Decorative scan-line overlay === */
-  --scanline-bg: repeating-linear-gradient(to bottom,
-      rgba(255, 255, 255, .02) 0 1px,
-      transparent 1px 2px);
 }
 
+
 /* ────────────────────────────────────────────────────────────────
-         2 ▸ Global reset + layout skeleton
-            - Full-viewport flex column centred horizontally
-         ─────────────────────────────────────────────────────────────── */
-body,html {
-  align-items: center;
+   2 ▸ Global Reset & Base Layout
+   ─────────────────────────────────────────────────────────────── */
+html,
+body {
+  /* reset default margins/padding */
+  margin: 0;
+  padding: 0;
+
+  /* base typography & centering */
+  font: 16px/1.6 var(--font-body);
   color: var(--text-color-primary);
   display: flex;
   flex-direction: column;
-  font: 16px/1.6 var(--font-body);
+  align-items: center;
+
+  /* constrain to viewport */
   min-height: 100vh;
   max-width: 100vw;
   overflow-x: hidden;
-  margin:0;
-  padding:0;
 }
 
+
 /* ────────────────────────────────────────────────────────────────
-         3 ▸ p5.js canvas backdrop
-            - Fixed position, fills viewport, sits behind content
-         ─────────────────────────────────────────────────────────────── */
+   3 ▸ p5.js Canvas Backdrop
+   ─────────────────────────────────────────────────────────────── */
 canvas.p5Canvas {
-  background: transparent !important;
-  height: 100vh !important;
-  inset: 0;
-  pointer-events: none;
   position: fixed;
+  inset: 0;
   width: 100vw !important;
+  height: 100vh !important;
+  background: transparent !important;
+  pointer-events: none;
   z-index: -1;
 }
 
+
+/* ────────────────────────────────────────────────────────────────
+   4 ▸ Grid Container & Columns
+   ─────────────────────────────────────────────────────────────── */
 .container {
   display: grid;
-  grid-template-columns: 256px auto 256px;
+  grid-template-columns: 256px 1fr 256px;
+  /* left, middle, right */
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "left-flex-column middle-flex-column  right-flex-column"
-    "left-flex-column middle-flex-column  right-flex-column";
+    "left-flex-column middle-flex-column right-flex-column"
+    "left-flex-column middle-flex-column right-flex-column";
   gap: var(--pad-md);
   margin: var(--pad-md);
   overflow-x: auto;
+  /* allow horizontal if needed */
 }
 
-.left-flex-column {
-  grid-area: left-flex-column;
-  display: flex;
-  flex-direction: column;
-  gap: var(--pad-md);
-  align-self: start;
-}
-
-.middle-flex-column {
-  grid-area: middle-flex-column;
+.left-flex-column,
+.middle-flex-column,
+.right-flex-column {
   display: flex;
   flex-direction: column;
   gap: var(--pad-md);
   align-self: start;
   min-width: 0;
+  /* allow shrinking */
+}
 
+.left-flex-column {
+  grid-area: left-flex-column;
+}
+
+.middle-flex-column {
+  grid-area: middle-flex-column;
 }
 
 .right-flex-column {
   grid-area: right-flex-column;
-  display: flex;
-  flex-direction: column;
-  gap: var(--pad-md);
-  align-self: start;
 }
 
+
+/* ────────────────────────────────────────────────────────────────
+   5 ▸ Panel & Section Styling
+   ─────────────────────────────────────────────────────────────── */
 .sections-partial,
 .btc-partial,
 .recent-activity,
@@ -115,77 +126,50 @@ canvas.p5Canvas {
 .categories-partial,
 .tags-partial {
   background: var(--background-panel);
-  border: 1px solid var(--border-color-grid);
+  border: 1px solid var(--secondary-accent);
   border-radius: var(--radius-sm);
-  /* box-shadow: 0px 0px 4px 8px rgba(0, 255, 255, .9); */
   padding: var(--pad-md);
+  /* box-shadow: var(--glow-effect); */
+  /* optional glow */
+  position: relative;
+  overflow: hidden;
 }
 
-/* Hide the search bar when viewing a blog post*/
 body.page .search-partial {
+  /* hide search bar on post pages */
   display: none;
 }
 
-/* Hide the scroll bar*/
-main {
-  overflow-x: hidden;
-}
-
-h2 {
-  border-bottom: 1px solid var(--border-color-grid);
-  color: var(--primary-accent);
-  font: 1.3rem var(--font-headings);
-  letter-spacing: 1.5px;
-  margin: 0 0 var(--pad-md);
-  padding-bottom: var(--pad-md);
-  text-align: center;
-  text-shadow: var(--glow-effect);
-  text-transform: uppercase;
-  justify-content: center;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-li a {
-  border-left: 3px solid transparent;
-  color: var(--text-color-secondary);
-  display: block;
-  font-size: .9rem;
-  padding: var(--pad-sm) var(--pad-md);
-  transition: background-color .2s, color .2s, border-left-color .2s;
-}
-
-li a:hover {
-  background: rgba(0, 255, 255, .1);
-  border-left-color: var(--primary-accent);
-  color: var(--link-hover-color);
-  text-decoration: none;
-}
-
-
 .post-preview {
-  margin-bottom: var(--pad-md);
-  padding-top: 0;
+  margin-bottom: var(--pad-md); /* Otherwise there's no gap between post-previews */
 }
 
+/* ────────────────────────────────────────────────────────────────
+   6 ▸ Typography & Headings
+   ─────────────────────────────────────────────────────────────── */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-
-  color: var(--primary-accent);
   font-family: var(--font-headings);
+  color: var(--primary-accent);
   letter-spacing: 1px;
+  text-transform: uppercase;
   position: relative;
   text-shadow: var(--text-shadow-subtle);
-  text-transform: uppercase;
+}
 
+h2 {
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color-grid);
+  margin: 0 0 var(--pad-md);
+  padding-bottom: var(--pad-md);
+  justify-content: center;
+  text-shadow: var(--glow-effect);
 }
 
 h1:hover,
@@ -194,14 +178,37 @@ h3:hover,
 h4:hover,
 h5:hover,
 h6:hover {
+  /* flicker animation on hover */
   animation: flicker 1s infinite alternate;
   text-shadow: var(--glow-effect);
 }
 
 
 /* ────────────────────────────────────────────────────────────────
-         9 ▸ Anchor styling
-         ─────────────────────────────────────────────────────────────── */
+   7 ▸ Lists & Links
+   ─────────────────────────────────────────────────────────────── */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li a {
+  display: block;
+  font-size: .9rem;
+  color: var(--text-color-primary);
+  padding: var(--pad-sm) var(--pad-md);
+  border-left: 3px solid transparent;
+  transition: background-color .2s, color .2s, border-left-color .2s;
+}
+
+li a:hover {
+  background: rgba(0, 255, 255, .1);
+  border-left-color: var(--secondary-accent);
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+
 a {
   color: var(--primary-accent);
   text-decoration: none;
@@ -215,41 +222,74 @@ a:hover {
 
 
 /* ────────────────────────────────────────────────────────────────
-        11 ▸ Search input inside the <nav class="search">
-         ─────────────────────────────────────────────────────────────── */
+   8 ▸ Interactive Elements & Forms
+   ─────────────────────────────────────────────────────────────── */
 #post-search {
+  display: block;
+  width: 100%;
+  padding: var(--pad-md);
   background: var(--background-deep);
   border: 1px solid var(--border-color-grid);
   border-radius: var(--radius-sm);
   color: var(--text-color-primary);
   font-family: var(--font-body);
-  padding: var(--pad-md);
-  width: 100%;
 }
 
 #post-search:focus {
+  outline: none;
   border-color: var(--primary-accent);
   box-shadow: var(--glow-effect);
-  outline: 0;
+  animation: flicker 1s infinite alternate;
 }
 
-
-/* ────────────────────────────────────────────────────────────────
-        12 ▸ Tag / category pill hover state
-         ─────────────────────────────────────────────────────────────── */
 .term-group .term-link:hover {
+  /* pill hover state */
   background: var(--primary-accent);
   border-color: var(--primary-accent);
   color: var(--background-deep);
 }
 
+.copy-button {
+  /* copy-to-clipboard button */
+  position: absolute;
+  top: var(--pad-sm);
+  right: var(--pad-sm);
+  padding: 4px var(--pad-sm);
+  font: .875rem var(--font-body);
+  background: var(--primary-accent);
+  color: var(--background-deep);
+  border: 1px solid var(--border-color-grid);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: var(--glow-effect);
+  transition: background-color .2s, color .2s, box-shadow .2s;
+}
+
+.copy-button:hover {
+  animation: flicker 1s infinite alternate;
+  text-shadow: var(--glow-effect);
+}
 
 
 /* ────────────────────────────────────────────────────────────────
-        14 ▸ “Flicker” keyframes for headings
-         ─────────────────────────────────────────────────────────────── */
+   9 ▸ Code Blocks & Preformatted Text
+   ─────────────────────────────────────────────────────────────── */
+pre {
+  position: relative;
+  background: #f8f9fa;
+  border: 1px solid #e1e1e1;
+  padding: 16px;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+  10 ▸ Animations & Keyframes
+   ─────────────────────────────────────────────────────────────── */
 @keyframes flicker {
 
+  /* subtle opacity flicker */
   0%,
   19%,
   21%,
@@ -266,36 +306,4 @@ a:hover {
   55% {
     opacity: .4;
   }
-}
-
-.copy-button {
-  position: absolute;
-  right: var(--pad-sm);
-  top: var(--pad-sm);
-  padding: 4px var(--pad-sm);
-  border: 1px solid var(--border-color-grid);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  background: var(--primary-accent);
-  color: var(--background-deep);
-  font: 0.875rem var(--font-body);
-  box-shadow: var(--glow-effect);
-  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-}
-
-.copy-button:hover {
-  background: var(--primary-accent);
-  border-color: var(--primary-accent);
-  color: var(--background-deep);
-  animation: flicker 1s infinite alternate;
-  text-shadow: var(--glow-effect);
-}
-
-pre {
-  position: relative;
-  background-color: #f8f9fa;
-  border: 1px solid #e1e1e1;
-  padding: 16px;
-  border-radius: 4px;
-  overflow: auto;
 }
