@@ -29,11 +29,11 @@ This post documents a simple PowerShell script to verify SMTP connectivity again
  
 $smtpServer = "smtp.office365.com"
 $smtpPort = 587
-$fromAddress = "scans@prairiecityiowa.us"
-$toAddress = "scans@prairiecityiowa.us"
+$fromAddress = "user@domain.com"
+$toAddress = "user@domain.com"
 $subject = "SMTP Test Email"
 $body = "This is a test email sent from PowerShell SMTP test script using Microsoft 365."
-$username = "scans@prairiecityiowa.us"
+$username = "user@domain.com"
 $password = ""
  
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force

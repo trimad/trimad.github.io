@@ -126,13 +126,14 @@ canvas.p5Canvas {
 .categories-partial,
 .tags-partial {
   background: var(--background-panel);
-  border: 1px solid var(--secondary-accent);
+  border: 1px solid var(--primary-accent);
   border-radius: var(--radius-sm);
   padding: var(--pad-md);
   /* box-shadow: var(--glow-effect); */
   /* optional glow */
   position: relative;
   overflow: hidden;
+  opacity: 0.95;
 }
 
 body.page .search-partial {
@@ -141,6 +142,7 @@ body.page .search-partial {
 }
 
 .post-preview {
+  padding-top:0;
   margin-bottom: var(--pad-md); /* Otherwise there's no gap between post-previews */
 }
 
