@@ -102,7 +102,7 @@
         Published: July 2, 2025
         
             
-                | Last Modified: July 3, 2025
+                | Last Modified: July 16, 2025
             
         
     </small>
@@ -8523,6 +8523,75 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
                 </div>
             
         </div>
+    
+
+</article>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+    </script>
+    
+        <article class="post-preview">
+    <h3><a href="http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/"></a></h3>
+    <p><h1 id="connect-to-exchange-online-if-not-already-connected">Connect to Exchange Online (if not already connected)</h1>
+<p>Connect-ExchangeOnline</p>
+<h1 id="get-all-mailboxes-for-iretaorg">Get all mailboxes for ireta.org</h1>
+<p>$mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {$_.PrimarySmtpAddress -like &ldquo;*@ireta.org&rdquo;}</p>
+<h1 id="create-a-list-to-store-all-inbox-rules">Create a list to store all inbox rules</h1>
+<p>$allRules = @()</p>
+<p>foreach ($mbx in $mailboxes) {
+Write-Host &ldquo;Checking rules for $($mbx.PrimarySmtpAddress)&hellip;&rdquo;
+try {
+$rules = Get-InboxRule -Mailbox $mbx.PrimarySmtpAddress
+foreach ($rule in $rules) {
+$filtered = [PSCustomObject]@{
+Mailbox             = $mbx.PrimarySmtpAddress
+Name                = $rule.Name
+Enabled             = $rule.Enabled
+Priority            = $rule.Priority
+Description         = $rule.Description
+From                = ($rule.From | ForEach-Object { $<em>.Address }) -join &lsquo;, &rsquo;
+FromAddressContains = ($rule.FromAddressContainsWords -join &lsquo;, &lsquo;)
+SubjectContains     = ($rule.SubjectContainsWords -join &lsquo;, &lsquo;)
+SubjectOrBodyContains = ($rule.SubjectOrBodyContainsWords -join &lsquo;, &lsquo;)
+SentTo              = ($rule.SentTo | ForEach-Object { $</em>.Address }) -join &lsquo;, &rsquo;
+MoveToFolder        = $rule.MoveToFolder
+MarkAsRead          = $rule.MarkAsRead
+ForwardTo           = ($rule.ForwardTo | ForEach-Object { $<em>.Address }) -join &lsquo;, &rsquo;
+RedirectTo          = ($rule.RedirectTo | ForEach-Object { $</em>.Address }) -join &lsquo;, &rsquo;
+StopProcessingRules = $rule.StopProcessingRules
+}
+$allRules += $filtered
+}
+} catch {
+Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdquo;
+}
+}</p></p>
+
+    <small>
+        Published: January 1, 0001
+        
+    </small>
+
     
 
 </article>
