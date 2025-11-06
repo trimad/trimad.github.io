@@ -1,53 +1,107 @@
 ---
 author: Tristan Madden
 categories: [PowerShell]
-date: 2025-07-31
+date: 2025-07-30
 draft: false
-tags: [Exchange]
-title: Exchange Inbox Rules
-summary: "This PowerShell script connects to Exchange Online, collects inbox rules for all mailboxes in a specific domain, and exports the data in JSON format for audit or reporting purposes."
+tags: [Exchange, Security, Audit]
+title: Exchange Online Inbox Rule Collector
+summary: "This enhanced PowerShell script connects to Exchange Online, iterates through all accepted domains, collects inbox rules from every mailbox, and exports a well-formatted JSON report for compliance and threat hunting."
 usePageBundles: true
 toc: true
 ---
 
-# Exchange Inbox Rules Export Script
+# Exchange Online Inbox Rule Collector
 
-This PowerShell script connects to Exchange Online, retrieves all inbox rules for every mailbox in the `domain.com` tenant, filters and formats the output into a structured list, and saves the data to a JSON file. It's useful for auditing inbox rules across all user mailboxes for compliance, troubleshooting, or analysis.
+This improved PowerShell script automates a full audit of inbox rules across all accepted domains in your Exchange Online tenant. It identifies rules that may forward, redirect, or move emails — common indicators of malicious inbox compromise — and exports the findings to a formatted JSON file.
+
+## Key Improvements
+
+The updated script includes several major upgrades over the previous version:
+
+- **Domain-Aware Enumeration** — Automatically loops through all *accepted domains* instead of hardcoding one.
+- **Smart Filtering** — Only scans mailboxes with primary SMTP addresses in valid tenant domains.
+- **Structured Output** — Saves results in `FilteredInboxRules.json` with a clean, hierarchical JSON structure.
+- **Automatic File Launch** — Opens the JSON file automatically at completion.
+- **Built-In Error Handling** — Gracefully skips inaccessible mailboxes and continues processing.
+- **Readable Console Output** — Displays progress with color-coded feedback for visibility.
+
+---
 
 ## Prerequisites
 
-- Exchange Online PowerShell module (`Connect-ExchangeOnline`)
-- Global admin or delegated permission to read all mailboxes
-- PowerShell 5.1+ or PowerShell Core
+Before running the script, ensure:
+
+- You have the **Exchange Online PowerShell module** (`Connect-ExchangeOnline`)
+- You’re a **Global Admin** or have delegated permissions to read all mailboxes
+- You’re running **PowerShell 5.1+** or **PowerShell Core**
 
 ---
 
 ## Script Overview
 
 ```powershell
-# Connect to Exchange Online (if not already connected)
-Connect-ExchangeOnline
-```
+<#
+.SYNOPSIS
+Collects inbox rules from all mailboxes across all accepted domains
+and exports them to a formatted JSON file.
 
-```powershell
-# Get all mailboxes with a primary SMTP address ending in @domain.com
-$mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {
-    $_.PrimarySmtpAddress -like "*@domain.com"
+.DESCRIPTION
+This script connects to Exchange Online, enumerates all accepted domains,
+retrieves all mailboxes for each, and exports their inbox rules to
+FilteredInboxRules.json for review or auditing.
+#>
+
+Write-Host "`n=== Exchange Online Inbox Rule Collector ===`n" -ForegroundColor Cyan
+
+# --- STEP 1: Connect to Exchange Online ---
+try {
+    Write-Host "Connecting to Exchange Online..." -ForegroundColor Yellow
+    Connect-ExchangeOnline -ErrorAction Stop
+    Write-Host "✅ Connected successfully.`n" -ForegroundColor Green
+} catch {
+    Write-Host "❌ Failed to connect to Exchange Online: $_" -ForegroundColor Red
+    exit
 }
-```
 
-```powershell
-# Create a collection to store all rules
+# --- STEP 2: Get all accepted domains ---
+Write-Host "Retrieving accepted domains..." -ForegroundColor Yellow
+$acceptedDomains = Get-AcceptedDomain | Select-Object DomainName, DomainType, Default
+
+if (-not $acceptedDomains) {
+    Write-Host "❌ No accepted domains found. Exiting." -ForegroundColor Red
+    Disconnect-ExchangeOnline -Confirm:$false
+    exit
+}
+
+Write-Host "`n=== Accepted Domains ===" -ForegroundColor Cyan
+$acceptedDomains | Format-Table DomainName, DomainType, Default
+$domainPattern = ($acceptedDomains.DomainName -join '|')
+
+# --- STEP 3: Gather all mailboxes in valid domains ---
+Write-Host "`nEnumerating mailboxes..." -ForegroundColor Yellow
+$mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {
+    $_.PrimarySmtpAddress -match "@($domainPattern)$"
+}
+
+if (-not $mailboxes) {
+    Write-Host "❌ No mailboxes found for the accepted domains." -ForegroundColor Red
+    Disconnect-ExchangeOnline -Confirm:$false
+    exit
+}
+
+Write-Host ("Found {0} mailboxes across {1} accepted domains.`n" -f $mailboxes.Count, $acceptedDomains.Count) -ForegroundColor Green
+
+# --- STEP 4: Collect inbox rules ---
 $allRules = @()
+$counter = 1
 
-# Iterate through each mailbox to collect inbox rules
 foreach ($mbx in $mailboxes) {
-    Write-Host "Checking rules for $($mbx.PrimarySmtpAddress)..."
+    Write-Host ("[{0}/{1}] Checking rules for {2}..." -f $counter, $mailboxes.Count, $mbx.PrimarySmtpAddress) -ForegroundColor Cyan
+    $counter++
+
     try {
-        # Fetch all inbox rules for the mailbox
-        $rules = Get-InboxRule -Mailbox $mbx.PrimarySmtpAddress
+        $rules = Get-InboxRule -Mailbox $mbx.PrimarySmtpAddress -ErrorAction Stop
         foreach ($rule in $rules) {
-            # Construct a filtered rule object with relevant fields
             $filtered = [PSCustomObject]@{
                 Mailbox               = $mbx.PrimarySmtpAddress
                 Name                  = $rule.Name
@@ -68,28 +122,46 @@ foreach ($mbx in $mailboxes) {
             $allRules += $filtered
         }
     } catch {
-        # Log if fetching inbox rules fails
-        Write-Warning "Failed to get rules for $($mbx.PrimarySmtpAddress): $_"
+        Write-Warning "Failed to retrieve rules for $($mbx.PrimarySmtpAddress): $_"
     }
 }
-```
 
-```powershell
-# Export the aggregated inbox rules to JSON
-$allRules | ConvertTo-Json -Depth 5 | Out-File -FilePath ".\FilteredInboxRules.json" -Encoding utf8
+# --- STEP 5: Export results to JSON ---
+$outputFile = Join-Path (Get-Location) "FilteredInboxRules.json"
+if ($allRules.Count -eq 0) {
+    Write-Warning "No inbox rules were found for any mailbox."
+    "[]" | Out-File -FilePath $outputFile -Encoding utf8
+} else {
+    $allRules | ConvertTo-Json -Depth 5 | Out-File -FilePath $outputFile -Encoding utf8
+    Write-Host ("`n✅ Exported {0} inbox rules to {1}" -f $allRules.Count, $outputFile) -ForegroundColor Green
+}
 
-Write-Host "Export complete. File saved to FilteredInboxRules.json"
+# --- STEP 6: Open the file automatically ---
+Start-Process $outputFile
+
+# --- STEP 7: Clean up session ---
+Disconnect-ExchangeOnline -Confirm:$false
+Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan
 ```
 
 ---
 
-## Output
+## Example Output
 
-- A JSON file named `FilteredInboxRules.json` will be created in the current directory.
-- This file contains structured inbox rule data for all applicable mailboxes.
+When the script completes, it will produce a JSON file similar to this:
 
-## Notes
-
-- To change the domain filter, modify the `*@domain.com` condition.
-- JSON depth of 5 ensures nested objects (e.g., ForwardTo, RedirectTo) are not truncated.
-- Exported data is suitable for ingestion by reporting tools or audits.
+```json
+[
+  {
+    "Mailbox": "john.doe@domain.com",
+    "Name": "Auto-Forward External",
+    "Enabled": true,
+    "Priority": 1,
+    "From": "",
+    "SubjectContains": "",
+    "MoveToFolder": "",
+    "ForwardTo": "externaluser@gmail.com",
+    "StopProcessingRules": true
+  }
+]
+```

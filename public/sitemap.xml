@@ -3,8 +3,63 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://localhost:1313/tags/automation/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/azuread/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2025-07-16T15:02:21-04:00</lastmod>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/conditional-access/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/2025-11-06-exporting-conditional-access-policies/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/microsoft-graph/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/powershell/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/powershell/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/exchange/</loc>
+    <lastmod>2025-07-31T14:18:26-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/</loc>
+    <lastmod>2025-07-31T14:18:26-04:00</lastmod>
   </url>
   
   <url>
@@ -18,17 +73,7 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/powershell/</loc>
-    <lastmod>2025-07-16T15:02:21-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/smtp/</loc>
-    <lastmod>2025-07-16T15:02:21-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-07-16T15:02:21-04:00</lastmod>
   </url>
   
@@ -113,11 +158,6 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/automation/</loc>
-    <lastmod>2025-05-13T16:05:13-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/iis/</loc>
     <lastmod>2025-05-13T16:05:13-04:00</lastmod>
   </url>
@@ -125,11 +165,6 @@
   <url>
     <loc>http://localhost:1313/tags/logging/</loc>
     <lastmod>2025-05-13T16:05:13-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/powershell/</loc>
-    <lastmod>2025-06-10T14:39:45-04:00</lastmod>
   </url>
   
   <url>
@@ -819,11 +854,6 @@
   
   <url>
     <loc>http://localhost:1313/tags/directory-services/</loc>
-    <lastmod>2025-05-13T16:05:13-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/exchange/</loc>
     <lastmod>2025-05-13T16:05:13-04:00</lastmod>
   </url>
   
@@ -1963,10 +1993,6 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/</loc>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/archive/</loc>
     <lastmod>2025-05-02T11:58:43-04:00</lastmod>
   </url>
@@ -1978,11 +2004,6 @@
   
   <url>
     <loc>http://localhost:1313/prompts/</loc>
-    <lastmod>2025-07-03T16:55:21-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-07-03T16:55:21-04:00</lastmod>
   </url>
   

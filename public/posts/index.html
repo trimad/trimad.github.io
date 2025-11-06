@@ -3,17 +3,17 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="N/A">
+    <meta name="description" content="">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="http://localhost:1313/posts/">
-    <meta name="keywords" content="blog, tech blog, documentation">
+    
     <title>Posts | Ghostfeed</title>
 
     
     <link rel="stylesheet" href="http://localhost:1313/css/style.css">
 
-    <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
-    <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
 </head>
 
 <body class="section">
@@ -29,11 +29,11 @@
     <ul>
         <li><a href="http://localhost:1313/">Home</a></li>
         
+        <li><a href="http://localhost:1313/posts/">Posts</a></li>
+        
         <li><a href="http://localhost:1313/archive/">Archive</a></li>
         
         <li><a href="http://localhost:1313/prompts/">LLM Prompts</a></li>
-        
-        <li><a href="http://localhost:1313/posts/">Posts</a></li>
         
     </ul>
 </section>
@@ -50,6 +50,8 @@
         <section>
     <h2>Recently Modified</h2>
     <ul>
+        
+        <li><a href="http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/">Exchange Inbox Rules on 2025-07-31</a></li>
         
         <li><a href="http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/">Test SMTP on 2025-07-02</a></li>
         
@@ -68,8 +70,6 @@
         <li><a href="http://localhost:1313/posts/2024-07-30-batch-compress-images/">Automated Batch Image Compression with Python on 2024-07-30</a></li>
         
         <li><a href="http://localhost:1313/posts/2024-06-24-get-public-ip/">How to Find Your Public IP Address on 2024-06-24</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2024-06-06-dns-records/">Complete DNS Records Reference Guide on 2024-06-06</a></li>
         
     </ul>
 </section>
@@ -93,6 +93,150 @@
     
 
 <section>
+    
+        <article class="post-preview">
+    <h3><a href="http://localhost:1313/posts/2025-11-06-exporting-conditional-access-policies/">Exporting Conditional Access Policies</a></h3>
+    <p>A clean PowerShell approach to export Azure AD Conditional Access policies using the Microsoft Graph SDK.</p>
+
+    <small>
+        Published: November 6, 2025
+        
+            
+        
+    </small>
+
+    
+        <div class="terms">
+            
+                <div class="term-group tags">
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/tags/powershell/">PowerShell</a>
+                        
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/tags/microsoft-graph/">Microsoft Graph</a>
+                        
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/tags/azuread/">AzureAD</a>
+                        
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/tags/conditional-access/">Conditional Access</a>
+                        
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/tags/automation/">Automation</a>
+                        
+                    
+                </div>
+            
+            
+                <div class="term-group categories">
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/categories/powershell/">PowerShell</a>
+                        
+                    
+                </div>
+            
+        </div>
+    
+
+</article>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+    </script>
+    
+        <article class="post-preview">
+    <h3><a href="http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/">Exchange Inbox Rules</a></h3>
+    <p>This PowerShell script connects to Exchange Online, collects inbox rules for all mailboxes in a specific domain, and exports the data in JSON format for audit or reporting purposes.</p>
+
+    <small>
+        Published: July 31, 2025
+        
+            
+                | Last Modified: July 31, 2025
+            
+        
+    </small>
+
+    
+        <div class="terms">
+            
+                <div class="term-group tags">
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/tags/exchange/">Exchange</a>
+                        
+                    
+                </div>
+            
+            
+                <div class="term-group categories">
+                    
+                        
+                        
+                            <a class="term-link" href="http://localhost:1313/categories/powershell/">PowerShell</a>
+                        
+                    
+                </div>
+            
+        </div>
+    
+
+</article>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent)
+            .then(() => {
+              button.textContent = 'Copied!';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            })
+            .catch(err => {
+              console.error('Copy failed', err);
+              button.textContent = 'Error';
+              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+    </script>
     
         <article class="post-preview">
     <h3><a href="http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/">Test SMTP</a></h3>
@@ -8550,75 +8694,6 @@ Whisper will default to the CPU if a GPU is not detected, which is considerably 
     });
     </script>
     
-        <article class="post-preview">
-    <h3><a href="http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/"></a></h3>
-    <p><h1 id="connect-to-exchange-online-if-not-already-connected">Connect to Exchange Online (if not already connected)</h1>
-<p>Connect-ExchangeOnline</p>
-<h1 id="get-all-mailboxes-for-iretaorg">Get all mailboxes for ireta.org</h1>
-<p>$mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {$_.PrimarySmtpAddress -like &ldquo;*@ireta.org&rdquo;}</p>
-<h1 id="create-a-list-to-store-all-inbox-rules">Create a list to store all inbox rules</h1>
-<p>$allRules = @()</p>
-<p>foreach ($mbx in $mailboxes) {
-Write-Host &ldquo;Checking rules for $($mbx.PrimarySmtpAddress)&hellip;&rdquo;
-try {
-$rules = Get-InboxRule -Mailbox $mbx.PrimarySmtpAddress
-foreach ($rule in $rules) {
-$filtered = [PSCustomObject]@{
-Mailbox             = $mbx.PrimarySmtpAddress
-Name                = $rule.Name
-Enabled             = $rule.Enabled
-Priority            = $rule.Priority
-Description         = $rule.Description
-From                = ($rule.From | ForEach-Object { $<em>.Address }) -join &lsquo;, &rsquo;
-FromAddressContains = ($rule.FromAddressContainsWords -join &lsquo;, &lsquo;)
-SubjectContains     = ($rule.SubjectContainsWords -join &lsquo;, &lsquo;)
-SubjectOrBodyContains = ($rule.SubjectOrBodyContainsWords -join &lsquo;, &lsquo;)
-SentTo              = ($rule.SentTo | ForEach-Object { $</em>.Address }) -join &lsquo;, &rsquo;
-MoveToFolder        = $rule.MoveToFolder
-MarkAsRead          = $rule.MarkAsRead
-ForwardTo           = ($rule.ForwardTo | ForEach-Object { $<em>.Address }) -join &lsquo;, &rsquo;
-RedirectTo          = ($rule.RedirectTo | ForEach-Object { $</em>.Address }) -join &lsquo;, &rsquo;
-StopProcessingRules = $rule.StopProcessingRules
-}
-$allRules += $filtered
-}
-} catch {
-Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdquo;
-}
-}</p></p>
-
-    <small>
-        Published: January 1, 0001
-        
-    </small>
-
-    
-
-</article>
-
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      document.querySelectorAll('pre code').forEach((block) => {
-        const button = document.createElement('button');
-        button.className = 'copy-button';
-        button.textContent = 'Copy';
-        button.addEventListener('click', () => {
-          navigator.clipboard.writeText(block.textContent)
-            .then(() => {
-              button.textContent = 'Copied!';
-              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
-            })
-            .catch(err => {
-              console.error('Copy failed', err);
-              button.textContent = 'Error';
-              setTimeout(() => { button.textContent = 'Copy'; }, 2000);
-            });
-        });
-        block.parentNode.insertBefore(button, block);
-      });
-    });
-    </script>
-    
 </section>
 
 </article>
@@ -8679,7 +8754,7 @@ Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdqu
         
         <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
         
-        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (25)</a></li>
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (27)</a></li>
         
         <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
         
@@ -8747,11 +8822,13 @@ Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdqu
         
         <li><a href="http://localhost:1313/tags/audio-conversion/">Audio Conversion (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/automation/">Automation (13)</a></li>
+        <li><a href="http://localhost:1313/tags/automation/">Automation (14)</a></li>
         
         <li><a href="http://localhost:1313/tags/azure/">Azure (4)</a></li>
         
         <li><a href="http://localhost:1313/tags/azure-ad-connect/">Azure Ad Connect (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/azuread/">AzureAD (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/base64/">Base64 (1)</a></li>
         
@@ -8784,6 +8861,8 @@ Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdqu
         <li><a href="http://localhost:1313/tags/compliance/">Compliance (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/computer-vision/">Computer-Vision (3)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/conditional-access/">Conditional Access (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/coqui-tts/">Coqui-Tts (1)</a></li>
         
@@ -8849,7 +8928,7 @@ Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdqu
         
         <li><a href="http://localhost:1313/tags/events/">Events (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/exchange/">Exchange (1)</a></li>
+        <li><a href="http://localhost:1313/tags/exchange/">Exchange (2)</a></li>
         
         <li><a href="http://localhost:1313/tags/exchange-management/">Exchange-Management (1)</a></li>
         
@@ -8965,6 +9044,8 @@ Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdqu
         
         <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
         
+        <li><a href="http://localhost:1313/tags/microsoft-graph/">Microsoft Graph (1)</a></li>
+        
         <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft-Office (1)</a></li>
@@ -9045,7 +9126,7 @@ Write-Warning &ldquo;Failed to get rules for $($mbx.PrimarySmtpAddress): $_&rdqu
         
         <li><a href="http://localhost:1313/tags/port-management/">Port-Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/powershell/">Powershell (22)</a></li>
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (23)</a></li>
         
         <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
         
