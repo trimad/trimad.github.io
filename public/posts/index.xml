@@ -8,17 +8,8 @@
     
     
     
-    <lastBuildDate>Thu, 06 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Exchange Inbox Rules</title>
-      <link>http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/</link>
-      <pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/</guid>
-      <description>This PowerShell script connects to Exchange Online, collects inbox rules for all mailboxes in a specific domain, and exports the data in JSON format for audit or reporting purposes.</description>
-    </item>
     
     <item>
       <title>Test SMTP</title>

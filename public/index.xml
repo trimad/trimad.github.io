@@ -12,24 +12,6 @@
     <atom:link href="http://localhost:1313/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Exporting Conditional Access Policies</title>
-      <link>http://localhost:1313/posts/2025-11-06-exporting-conditional-access-policies/</link>
-      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2025-11-06-exporting-conditional-access-policies/</guid>
-      <description>A clean PowerShell approach to export Azure AD Conditional Access policies using the Microsoft Graph SDK.</description>
-    </item>
-    
-    <item>
-      <title>Exchange Online Inbox Rule Collector</title>
-      <link>http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/</link>
-      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/</guid>
-      <description>This enhanced PowerShell script connects to Exchange Online, iterates through all accepted domains, collects inbox rules from every mailbox, and exports a well-formatted JSON report for compliance and threat hunting.</description>
-    </item>
-    
-    <item>
       <title>Test SMTP</title>
       <link>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>

