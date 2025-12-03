@@ -125,15 +125,18 @@ canvas.p5Canvas {
 .post,
 .categories-partial,
 .tags-partial {
-  background: var(--background-panel);
-  border: 1px solid var(--primary-accent);
+  background: linear-gradient(145deg, rgba(22, 27, 37, .92), rgba(14, 18, 32, .96));
+  border: 1px solid var(--border-color-grid);
   border-radius: var(--radius-sm);
   padding: var(--pad-md);
-  /* box-shadow: var(--glow-effect); */
-  /* optional glow */
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, .35),
+    inset 0 1px 0 rgba(255, 255, 255, .03),
+    0 0 0 1px rgba(0, 255, 247, .08);
+  backdrop-filter: blur(4px);
   position: relative;
   overflow: hidden;
-  opacity: 0.95;
+  opacity: 1;
 }
 
 body.page .search-partial {
@@ -308,6 +311,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: var(--pad-md);
+  max-width: 1200px;
 }
 
 footer {
