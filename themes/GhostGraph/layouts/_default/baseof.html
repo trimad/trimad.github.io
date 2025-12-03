@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}{{ end }}</title>
+  <link rel="stylesheet" href="{{ "css/ghostgraph.css" | relURL }}">
+</head>
+<body class="gg-body">
+  {{ block "main" . }}{{ end }}
+
+  <script src="{{ "js/ghostgraph.js" | relURL }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+  <script src="{{ "js/bg.js" | relURL }}"></script>
+  <script>
+    // add copy buttons to code blocks
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          }).catch(() => {
+            button.textContent = 'Error';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+  </script>
+</body>
+</html>

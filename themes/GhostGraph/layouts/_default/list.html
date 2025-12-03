@@ -1,0 +1,41 @@
+{{ define "main" }}
+<header class="gg-topbar">
+  <div class="gg-brand">
+    <span class="gg-logo">◎</span>
+    <div>
+      <div class="gg-title">{{ .Site.Title }}</div>
+      <div class="gg-subtitle">Graph view: posts linked by tags & categories</div>
+    </div>
+  </div>
+  <div class="gg-search">
+    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" />
+  </div>
+</header>
+
+<main class="gg-shell">
+  <canvas id="gg-canvas"></canvas>
+  <div class="gg-legend">
+    <div class="gg-legend-title">Categories</div>
+    <div id="gg-legend-list" class="gg-legend-list"></div>
+    <div class="gg-legend-hint">Click a node to open the post.</div>
+  </div>
+</main>
+
+<script id="gg-data" type="application/json">
+{
+  "nodes": [
+    {{- $pages := .Site.RegularPages -}}
+    {{- range $index, $p := $pages -}}
+      {{- if $index }},{{ end -}}
+      {
+        "id": {{ printf "post-%d" $index | jsonify }},
+        "title": {{ $p.Title | jsonify }},
+        "url": {{ $p.RelPermalink | jsonify }},
+        "tags": {{ $p.Params.tags | default (slice) | jsonify }},
+        "categories": {{ $p.Params.categories | default (slice) | jsonify }}
+      }
+    {{- end -}}
+  ]
+}
+</script>
+{{ end }}

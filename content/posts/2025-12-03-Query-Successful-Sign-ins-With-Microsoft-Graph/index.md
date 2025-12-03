@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [powershell]
 date: 2025-12-03
 draft: false
-tags: [entra, microsoft graph, signin, security]
+tags: [entra, microsoft-graph, signin, security]
 title: "Query Successful Sign-ins With Microsoft Graph"
 summary: "A quick PowerShell script that pulls successful sign-ins from Entra ID using Microsoft Graph."
 usePageBundles: true

@@ -1,0 +1,27 @@
+{{ define "main" }}
+<header class="gg-topbar gg-article-topbar">
+  <div class="gg-brand">
+    <span class="gg-logo">◎</span>
+    <div>
+      <div class="gg-title">{{ .Site.Title }}</div>
+      <div class="gg-subtitle">Reading: {{ .Title }}</div>
+    </div>
+  </div>
+  <div class="gg-search">
+    <a class="gg-back" href="{{ "/" | relURL }}">← Back to graph</a>
+  </div>
+</header>
+
+<main class="gg-article">
+  <article>
+    <h1>{{ .Title }}</h1>
+    <p class="gg-meta">
+      Published {{ .Date.Format "January 2, 2006" }}
+      {{ with .Lastmod }} • Updated {{ .Format "January 2, 2006" }}{{ end }}
+    </p>
+    <div class="gg-content">
+      {{ .Content }}
+    </div>
+  </article>
+</main>
+{{ end }}

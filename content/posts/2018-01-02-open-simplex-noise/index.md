@@ -3,7 +3,7 @@ title: Open Simplex Noise
 author: Tristan Madden
 date: 2018-01-02
 draft: false
-tags: [open simplex noise]
+tags: [open-simplex-noise]
 categories: [Java, Processing]
 summary: "A Processing implementation exploring 4D Simplex Noise to create smooth, organic looping animations through a 2D grid of pixel objects with variable noise scaling."
 usePageBundles: true

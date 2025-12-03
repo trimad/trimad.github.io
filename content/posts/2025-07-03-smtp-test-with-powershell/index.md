@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [PowerShell]
 date: 2025-07-02
 draft: false
-tags: [SMTP]
+tags: [SMTP, spoofing, Gmail, GSuite, Outlook]
 title: Test SMTP
 summary: "PowerShell scripts for testing SMTP, with and without authentication."
 usePageBundles: true

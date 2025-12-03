@@ -3,7 +3,7 @@ title: Remote Reboot With SMTP Status
 author: Tristan Madden
 date: 2019-08-28
 draft: false
-tags: [powershell, smtp]
+tags: [smtp]
 categories: [PowerShell]
 summary: "A PowerShell script that remotely reboots a specified computer and sends an email notification about the reboot status using SMTP."
 usePageBundles: true

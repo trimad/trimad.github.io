@@ -1,784 +1,784 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="http://localhost:1313/tags/speech-recognition/">
-    
-    <title>Speech Recognition | Ghostfeed</title>
-
-    
-    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
-
-    <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Ghostfeed" />
-    <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Ghostfeed" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech Recognition | Ghostfeed</title>
+  <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
 </head>
-
-<body class="term">
-
-    
-    <div class="container">
-
-    
-    <aside class="left-flex-column">
-    <div class="sections-partial">
-        <section>
-    <h2>Sections</h2>
-    <ul>
-        <li><a href="http://localhost:1313/">Home</a></li>
-        
-        <li><a href="http://localhost:1313/posts/">Posts</a></li>
-        
-        <li><a href="http://localhost:1313/archive/">Archive</a></li>
-        
-        <li><a href="http://localhost:1313/prompts/">LLM Prompts</a></li>
-        
-    </ul>
-</section>
-      </div>
-    <div class="btc-partial">
-            <section>
-    <h2>BTC</h2>
-    <div class="qr-code-container">
-        <img src="http://localhost:1313/images/BTC.svg" alt="Bitcoin QR Code">
+<body class="gg-body">
+  
+<header class="gg-topbar">
+  <div class="gg-brand">
+    <span class="gg-logo">◎</span>
+    <div>
+      <div class="gg-title">Ghostfeed</div>
+      <div class="gg-subtitle">Graph view: posts linked by tags & categories</div>
     </div>
-</section>
-        </div>
-    <div class="recent-activity">
-        <section>
-    <h2>Recently Modified</h2>
-    <ul>
-        
-        <li><a href="http://localhost:1313/posts/2025-12-03-query-successful-sign-ins-with-microsoft-graph/">Query Successful Sign-ins With Microsoft Graph on 2025-12-03</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-12-02-hp-bloatware-uninstall/">HP Bloatware Uninstaller on 2025-12-02</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-11-14-champ-va/">ChampVA Claims on 2025-11-14</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/">Query Conditional Access Policies With Microsoft Graph on 2025-11-06</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/">Query Exchange Inbox Rules with Exchange Online PowerShell on 2025-07-30</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/">Test SMTP on 2025-07-02</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/">Videos as Teams Backgrounds on 2025-07-02</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-06-17-udm-arguments/">UDM Parameters for Google Search on 2025-06-18</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2025-05-02-procdump-and-windbg/">Troubleshoot Crashing Apps with ProcDump &amp; WinDbg on 2025-05-01</a></li>
-        
-        <li><a href="http://localhost:1313/prompts/2025-07-03-stub/">Stub Title on 2025-03-07</a></li>
-        
-    </ul>
-</section>
+  </div>
+  <div class="gg-search">
+    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" />
+  </div>
+</header>
 
+<main class="gg-shell">
+  <canvas id="gg-canvas"></canvas>
+  <div class="gg-legend">
+    <div class="gg-legend-title">Categories</div>
+    <div id="gg-legend-list" class="gg-legend-list"></div>
+    <div class="gg-legend-hint">Click a node to open the post.</div>
+  </div>
+</main>
 
-      </div>
-    </aside>
-
-    <aside class="middle-flex-column">
-    <div class="search-partial">
-        <section>
-    <div class="search">
-        <input type="search" id="post-search" placeholder="Search posts…" aria-label="Search posts">
-    </div>
-</section>
-      </div>
-        <main>
-            
-<article>
-    <h1>Posts tagged with "Speech Recognition"</h1>
-    
-
-    <section>
-        
-            <article class="post-preview">
-                <h3><a href="http://localhost:1313/posts/2023-02-24-openai-whisper/">OpenAI Whisper Speech Recognition Guide</a></h3>
-                <p><p>Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.</p>
-<h3><a href="https://github.com/openai/whisper">GitHub Repository</a></h3>
-<h3>Installation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>pip install git+https://github.com/openai/whisper.git 
-</span></span></code></pre></div><h3>Fix CUDA not detecting GPU</h3>
-Whisper will default to the CPU if a GPU is not detected, which is considerably slower.
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>pip uninstall torch
-</span></span><span style="display:flex;"><span>pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
-</span></span></code></pre></div><h3>Example usage</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span><span style="color:#75715e"># Transcribe</span>
-</span></span><span style="display:flex;"><span>whisper input.mp3 --model medium.en --language en --task transcribe
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Translate</span>
-</span></span><span style="display:flex;"><span>whisper japanese.wav --model large --language Japanese --task translate
-</span></span></code></pre></div><h3>Available models and languages</h3>
-<p>There are five model sizes, four with English-only versions, offering speed and accuracy tradeoffs. Below are the names of the available models and their approximate memory requirements and relative speed.</p></p>
-                <small>
-                    Published: February 24, 2023
-                    
-                        
-                            | Last Modified: May 13, 2025
-                        
-                    
-                </small>
-            </article>
-            <hr>
-        
-    </section>
-</article>
-
-        </main>
-    </aside>
-
-
-    
-    <aside class="right-flex-column">
-    <div class="categories-partial">
-        
-<section>
-    <h2>Categories</h2>
-    <ul>
-        
-        <li><a href="http://localhost:1313/categories/active-directory/">Active Directory (4)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/ai/">AI (3)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/azure-ad/">Azure AD (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/c%23/">C# (2)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/c&#43;&#43;/">C&#43;&#43; (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/champva/">Champva (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/computer-vision/">Computer Vision (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/dns/">DNS (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/exchange/">Exchange (2)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/google/">Google (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/image-processing/">Image Processing (2)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/java/">Java (32)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/javascript/">JavaScript (17)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/machine-learning/">Machine Learning (3)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/masm/">MASM (3)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/media-processing/">Media Processing (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/microsoft-365/">Microsoft 365 (2)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/microsoft-office/">Microsoft Office (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/microsoft-teams/">Microsoft Teams (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/networking/">Networking (4)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/nodejs/">Nodejs (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/office-365/">Office 365 (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/powershell/">Powershell (29)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/programming/">Programming (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/python/">Python (19)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/reference/">Reference (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/security/">Security (8)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/shell/">Shell (16)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/stub/">Stub (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/system-administration/">System Administration (4)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/teams/">Teams (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/visualization/">Visualization (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/web-administration/">Web Administration (1)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/web-development/">Web Development (2)</a></li>
-        
-        <li><a href="http://localhost:1313/categories/windows/">Windows (9)</a></li>
-        
-    </ul>
-</section>
-
-      </div>
-    <div class="tags-partial">
-            
-<section>
-    <h2>Tags</h2>
-    <ul>
-        
-        <li><a href="http://localhost:1313/tags/10print/">10PRINT (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/3d-modeling/">3d-Modeling (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/3n&#43;1/">3n&#43;1 (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/account-management/">Account Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/acl/">Acl (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/active-directory/">Active-Directory (10)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/ad-sync/">Ad Sync (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/ai/">Ai (9)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/android/">Android (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/animation/">Animation (10)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/api/">Api (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/arrays/">Arrays (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/assembly/">Assembly (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/audio/">Audio (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/audio-conversion/">Audio Conversion (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/audit/">Audit (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/automation/">Automation (14)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/azure/">Azure (4)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/azure-ad-connect/">Azure Ad Connect (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/azuread/">AzureAD (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/base64/">Base64 (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/bat/">Bat (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/batch-processing/">Batch-Processing (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/bipartite-graph/">Bipartite Graph (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/bloatware/">Bloatware (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/channel-management/">Channel Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/client-side/">Client-Side (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/cmd/">Cmd (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/coding-challenge/">Coding Challenge (15)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/collaboration/">Collaboration (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/collatz-conjecture/">Collatz Conjecture (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/command-line/">Command-Line (6)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/compliance/">Compliance (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/computer-vision/">Computer-Vision (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/conditional-access/">Conditional Access (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/coqui-tts/">Coqui-Tts (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/counting-sort/">Counting Sort (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/creative-coding/">Creative-Coding (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/cuda/">Cuda (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/curl/">Curl (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/cybersecurity/">Cybersecurity (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/dag/">Dag (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/data-visualization/">Data-Visualization (5)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/debugging/">Debugging (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/decoding/">Decoding (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/depth-estimation/">Depth Estimation (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/device-management/">Device Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/directed-acyclic-graph/">Directed Acyclic Graph (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/directory-services/">Directory-Services (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/disjoint-set/">Disjoint Set (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/distance/">Distance (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/dkim/">Dkim (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/dmarc/">Dmarc (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/dns/">Dns (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/domain/">Domain (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/domain-controller/">Domain Controller (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/domain-security/">Domain Security (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/domain-management/">Domain-Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/download/">Download (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/drivers/">Drivers (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/drives/">Drives (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/education/">Education (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/email/">Email (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/email-management/">Email Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/email-security/">Email Security (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/email-archiving/">Email-Archiving (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/entra/">Entra (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/events/">Events (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/exchange/">Exchange (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/exchange-management/">Exchange-Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/exchange-online/">Exchange-Online (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/exchangeonlinemanagement/">ExchangeOnlineManagement (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/ffmpeg/">Ffmpeg (4)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/fibonacci/">Fibonacci (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/file-permissions/">File-Permissions (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/file-system/">File-System (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/film/">Film (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/filtering/">Filtering (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/finance/">Finance (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/firewall/">Firewall (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/flask/">Flask (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/fractal/">Fractal (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/frame-interpolation/">Frame Interpolation (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/gal/">Gal (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/gmail/">Gmail (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/google-forms/">Google Forms (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/google-apps-script/">Google-Apps-Script (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/google-drive/">Google-Drive (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/gpu/">Gpu (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/graphs/">Graphs (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/group/">Group (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/group-management/">Group Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/group-policy/">Group-Policy (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/gsuite/">Gsuite (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/hacked-accounts/">Hacked Accounts (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/hardware/">Hardware (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/hex-encoding/">Hex Encoding (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/hp/">HP (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/iis/">Iis (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/image-processing/">Image-Processing (4)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/images/">Images (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/incident-response/">Incident Response (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/insertion-sort/">Insertion Sort (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/installation/">Installation (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/insurance/">Insurance (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/interactive/">Interactive (9)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/ip-address/">Ip-Address (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/ip-addressing/">Ip-Addressing (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/java/">Java (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/javascript/">Javascript (5)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/juno/">Juno (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/jupiter/">Jupiter (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/k-means/">K-Means (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/kattis/">Kattis (6)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/keyboard/">Keyboard (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/knowledge-graphs/">Knowledge-Graphs (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/kruskals-algorithm/">Kruskal&#39;s Algorithm (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/lan/">Lan (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/llm/">Llm (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/local-administrator/">Local Administrator (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/local-ai/">Local-Ai (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/logging/">Logging (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/lorenz-system/">Lorenz System (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/m365/">M365 (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/machine-learning/">Machine-Learning (6)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/maximum-flow/">Maximum Flow (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/media-processing/">Media Processing (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/microsoft-graph/">Microsoft Graph (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/microsoft-office/">Microsoft-Office (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/midas/">Midas (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/minimum-spanning-tree/">Minimum Spanning Tree (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/mistral-7b/">Mistral-7b (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/monitoring/">Monitoring (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/moondream/">Moondream (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/multilingual/">Multilingual (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/mx/">Mx (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/n-central/">N-Central (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/natural-language-processing/">Natural Language Processing (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/net/">Net (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/netsh/">Netsh (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/network/">Network (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/network-drives/">Network Drives (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/network-analysis/">Network-Analysis (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/network-security/">Network-Security (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/networking/">Networking (5)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/networkx/">Networkx (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/nlp/">Nlp (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/nslookup/">Nslookup (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/obfuscation/">Obfuscation (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/office-365/">Office-365 (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/office365/">Office365 (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/officec2rclient/">Officec2rclient (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/open-simplex-noise/">Open Simplex Noise (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/openai/">Openai (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/optimization/">Optimization (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/p5.js/">P5.js (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/p5js/">P5js (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/password-management/">Password Management (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/password-generator/">Password-Generator (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/passwords/">Passwords (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/perlin-noise/">Perlin Noise (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/permissions/">Permissions (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/phishing/">Phishing (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/photo-editing/">Photo-Editing (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/pil/">Pil (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/pillow/">Pillow (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/port-management/">Port-Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/powershell/">PowerShell (23)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/prims-algorithm/">Prim&#39;s Algorithm (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/prime-numbers/">Prime Numbers (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/printers/">Printers (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/procdump/">Procdump (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/processing/">Processing (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/programming/">Programming (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/python/">Python (15)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/python-script/">Python-Script (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/pyvis/">Pyvis (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/qr-code/">Qr-Code (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/rdp/">Rdp (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/reference/">Reference (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/registry-modification/">Registry Modification (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/remote-access/">Remote-Access (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/reporting/">Reporting (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/reports/">Reports (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/robocopy/">Robocopy (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/screen-recording/">Screen Recording (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/scripting/">Scripting (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/security/">Security (11)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/security-analysis/">Security Analysis (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/security-management/">Security Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/settings/">Settings (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/shell/">Shell (4)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/signin/">Signin (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/smtp/">SMTP (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/sorting/">Sorting (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/sound/">Sound (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/space/">Space (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/speech-recognition/">Speech Recognition (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/spf/">Spf (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/spiral/">Spiral (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/stable-diffusion/">Stable-Diffusion (2)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/stocks/">Stocks (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/string/">String (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/stub/">Stub (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/subnets/">Subnets (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/synchronization/">Synchronization (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/sysinternals/">Sysinternals (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/system-administration/">System-Administration (13)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/systeminfo/">Systeminfo (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/team-management/">Team Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/team-ownership/">Team Ownership (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/tensorflow/">Tensorflow (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/therafit/">Therafit (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/time/">Time (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/topological-sort/">Topological Sort (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/troubleshooting/">Troubleshooting (4)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/tzutil/">Tzutil (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/udm/">UDM (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/uri/">Uri (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/uri-encoding/">Uri Encoding (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/user-management/">User-Management (4)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/uva/">Uva (9)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/vbscript/">VBScript (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/version-management/">Version-Management (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/video/">Video (5)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/video-conversion/">Video Conversion (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/visualization/">Visualization (3)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/web-administration/">Web-Administration (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/web-development/">Web-Development (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/wifi/">Wifi (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/win32_operatingsystem/">Win32_OperatingSystem (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/windbg/">Windbg (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/windows/">Windows (17)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/windows-10/">Windows 10 (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/windows-11/">Windows 11 (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/windows-defender/">Windows-Defender (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/windows-server/">Windows-Server (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/windows-update/">Windows-Update (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/wmic/">Wmic (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/youtube-dl/">Youtube-Dl (1)</a></li>
-        
-        <li><a href="http://localhost:1313/tags/yt-dlp/">Yt-Dlp (2)</a></li>
-        
-    </ul>
-</section>
- 
-        </div>
-    </aside>
-
-    </div> 
-
-    <footer>
-        
-            <p>&copy; 2025 Ghostfeed theme by Tristan Madden. All rights reserved.</p>
-
-
-<footer>
-    
-</footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('post-search');
-    const posts = document.querySelectorAll('.post-preview'); 
-
-    if (searchInput && posts.length > 0) {
-        searchInput.addEventListener('keyup', function() {
-            const searchTerm = searchInput.value.toLowerCase();
-
-            posts.forEach(function(post) {
-                const titleElement = post.querySelector('h3 a'); 
-                const summaryElement = post.querySelector('p'); 
-                const tagsElement = post.querySelector('.tags'); 
-                const hrElement = post.nextElementSibling; 
-
-                let textToSearch = '';
-
-                if (titleElement) {
-                    textToSearch += titleElement.textContent.toLowerCase() + ' ';
-                }
-                if (summaryElement) {
-                    textToSearch += summaryElement.textContent.toLowerCase() + ' '; 
-                }
-                if (tagsElement) {
-                    textToSearch += tagsElement.textContent.toLowerCase();
-                }
-
-                const shouldShow = textToSearch.includes(searchTerm);
-                post.style.display = shouldShow ? '' : 'none'; 
-
-                
-                if (hrElement && hrElement.tagName === 'HR') {
-                    hrElement.style.display = shouldShow ? '' : 'none';
-                }
-            });
-        });
-    }
-});
+<script id="gg-data" type="application/json">
+{
+  "nodes": [{
+        "id": "\"post-0\"",
+        "title": "\"Query Successful Sign-ins With Microsoft Graph\"",
+        "url": "\"/posts/2025-12-03-query-successful-sign-ins-with-microsoft-graph/\"",
+        "tags": "[\"entra\",\"microsoft-graph\",\"signin\",\"security\"]",
+        "categories": "[\"powershell\"]"
+      },{
+        "id": "\"post-1\"",
+        "title": "\"HP Bloatware Uninstaller\"",
+        "url": "\"/posts/2025-12-02-hp-bloatware-uninstall/\"",
+        "tags": "[\"HP\",\"bloatware\"]",
+        "categories": "[\"powershell\"]"
+      },{
+        "id": "\"post-2\"",
+        "title": "\"ChampVA Claims\"",
+        "url": "\"/posts/2025-11-14-champ-va/\"",
+        "tags": "[\"insurance\"]",
+        "categories": "[\"champva\"]"
+      },{
+        "id": "\"post-3\"",
+        "title": "\"Query Conditional Access Policies With Microsoft Graph\"",
+        "url": "\"/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/\"",
+        "tags": "[\"PowerShell\",\"Microsoft Graph\",\"AzureAD\",\"Conditional Access\",\"Automation\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-4\"",
+        "title": "\"Query Exchange Inbox Rules with Exchange Online PowerShell\"",
+        "url": "\"/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/\"",
+        "tags": "[\"Exchange\",\"Security\",\"Audit\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-5\"",
+        "title": "\"Test SMTP\"",
+        "url": "\"/posts/2025-07-03-smtp-test-with-powershell/\"",
+        "tags": "[\"SMTP\",\"spoofing\",\"Gmail\",\"GSuite\",\"Outlook\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-6\"",
+        "title": "\"Videos as Teams Backgrounds\"",
+        "url": "\"/posts/2025-07-02-videos-as-teams-backgrounds/\"",
+        "tags": "[\"ffmpeg\",\"yt-dlp\"]",
+        "categories": "[\"Microsoft Teams\"]"
+      },{
+        "id": "\"post-7\"",
+        "title": "\"UDM Parameters for Google Search\"",
+        "url": "\"/posts/2025-06-17-udm-arguments/\"",
+        "tags": "[\"UDM\"]",
+        "categories": "[\"Google\"]"
+      },{
+        "id": "\"post-8\"",
+        "title": "\"Troubleshoot Crashing Apps with ProcDump \\u0026 WinDbg\"",
+        "url": "\"/posts/2025-05-02-procdump-and-windbg/\"",
+        "tags": "[\"windows\",\"troubleshooting\",\"procdump\",\"windbg\",\"sysinternals\"]",
+        "categories": "[]"
+      },{
+        "id": "\"post-9\"",
+        "title": "\"Stub Title\"",
+        "url": "\"/prompts/2025-07-03-stub/\"",
+        "tags": "[\"stub\"]",
+        "categories": "[\"stub\"]"
+      },{
+        "id": "\"post-10\"",
+        "title": "\"Automated IIS Application Pool Restart with PowerShell\"",
+        "url": "\"/posts/2024-10-16-restart-iis-application/\"",
+        "tags": "[\"iis\",\"powershell\",\"windows-server\",\"web-administration\",\"automation\",\"logging\",\"system-administration\"]",
+        "categories": "[\"Windows\",\"PowerShell\",\"Web Administration\"]"
+      },{
+        "id": "\"post-11\"",
+        "title": "\"Managing Microsoft Office Versions with OfficeC2RClient\"",
+        "url": "\"/posts/2024-09-10-officec2rclient/\"",
+        "tags": "[\"microsoft-office\",\"office365\",\"version-management\",\"system-administration\",\"windows\",\"powershell\",\"officec2rclient\"]",
+        "categories": "[\"Microsoft Office\",\"System Administration\"]"
+      },{
+        "id": "\"post-12\"",
+        "title": "\"Automated Batch Image Compression with Python\"",
+        "url": "\"/posts/2024-07-30-batch-compress-images/\"",
+        "tags": "[\"python\",\"image-processing\",\"optimization\",\"pil\",\"pillow\",\"batch-processing\"]",
+        "categories": "[\"Python\",\"Image Processing\"]"
+      },{
+        "id": "\"post-13\"",
+        "title": "\"How to Find Your Public IP Address\"",
+        "url": "\"/posts/2024-06-24-get-public-ip/\"",
+        "tags": "[\"networking\",\"ip-address\",\"command-line\",\"powershell\",\"curl\",\"nslookup\"]",
+        "categories": "[\"Networking\",\"Shell\",\"PowerShell\"]"
+      },{
+        "id": "\"post-14\"",
+        "title": "\"Complete DNS Records Reference Guide\"",
+        "url": "\"/posts/2024-06-06-dns-records/\"",
+        "tags": "[\"dns\",\"networking\",\"email\",\"domain-management\",\"system-administration\",\"dmarc\",\"spf\",\"dkim\",\"mx\"]",
+        "categories": "[\"Networking\",\"DNS\"]"
+      },{
+        "id": "\"post-15\"",
+        "title": "\"Network Subnet Visualization Tools\"",
+        "url": "\"/posts/2024-06-01-visualizing-subnets/\"",
+        "tags": "[\"networking\",\"ip-addressing\",\"subnets\",\"visualization\",\"network-security\"]",
+        "categories": "[\"Networking\",\"Visualization\"]"
+      },{
+        "id": "\"post-16\"",
+        "title": "\"Visualizing and Analyzing Windows Folder Permissions\"",
+        "url": "\"/posts/2024-06-01-visualizing-folder-permissions/\"",
+        "tags": "[\"windows\",\"powershell\",\"python\",\"security\",\"permissions\",\"data-visualization\",\"active-directory\"]",
+        "categories": "[\"PowerShell\",\"Python\",\"Security\"]"
+      },{
+        "id": "\"post-17\"",
+        "title": "\"Troubleshooting Group Policy Objects (GPOs)\"",
+        "url": "\"/posts/2024-05-31-troubleshooting-group-policy/\"",
+        "tags": "[\"windows\",\"active-directory\",\"group-policy\",\"troubleshooting\",\"system-administration\"]",
+        "categories": "[\"Windows\",\"Active Directory\"]"
+      },{
+        "id": "\"post-18\"",
+        "title": "\"Active Directory User Lockout and Password Report\"",
+        "url": "\"/posts/2024-05-30-user-lockout-report/\"",
+        "tags": "[\"powershell\",\"active-directory\",\"security\",\"automation\",\"reporting\",\"user-management\"]",
+        "categories": "[\"PowerShell\",\"Active Directory\"]"
+      },{
+        "id": "\"post-19\"",
+        "title": "\"Window Monitoring with Machine Vision\"",
+        "url": "\"/posts/2024-03-25-window-watcher/\"",
+        "tags": "[\"python\",\"machine-learning\",\"computer-vision\",\"monitoring\",\"moondream\"]",
+        "categories": "[\"Python\",\"Machine Learning\"]"
+      },{
+        "id": "\"post-20\"",
+        "title": "\"Remote and Local DNS Configuration Guide\"",
+        "url": "\"/posts/2024-03-21-change-dns-remotely/\"",
+        "tags": "[\"windows\",\"dns\",\"networking\",\"powershell\",\"command-line\",\"system-administration\"]",
+        "categories": "[\"Shell\",\"Networking\"]"
+      },{
+        "id": "\"post-21\"",
+        "title": "\"Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs\"",
+        "url": "\"/posts/2024-02-05-local-ai-api/\"",
+        "tags": "[\"python\",\"ai\",\"machine-learning\",\"api\",\"flask\",\"local-ai\",\"moondream\",\"coqui-tts\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-22\"",
+        "title": "\"Troubleshooting N-Central Take Control\"",
+        "url": "\"/posts/2024-01-02-take-control/\"",
+        "tags": "[\"powershell\",\"n-central\",\"remote-access\",\"troubleshooting\",\"system-administration\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-23\"",
+        "title": "\"Graphing a LAN with PyVis\"",
+        "url": "\"/posts/2023-12-28-pyvis-graphing-lan/\"",
+        "tags": "[\"python\",\"networking\",\"data-visualization\",\"pyvis\",\"lan\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-24\"",
+        "title": "\"Visualizing Directory Structures with PyVis\"",
+        "url": "\"/posts/2023-12-28-pyvis-graphing-directories/\"",
+        "tags": "[\"python\",\"file-system\",\"data-visualization\",\"pyvis\",\"windows\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-25\"",
+        "title": "\"Generating Knowledge Graphs with LLMs and PyVis\"",
+        "url": "\"/posts/2023-12-14-pyvis-knowledge-graphs/\"",
+        "tags": "[\"python\",\"knowledge-graphs\",\"llm\",\"nlp\",\"data-visualization\",\"mistral-7b\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-26\"",
+        "title": "\"Setting Up a Local Large Language Model (LLM) Environment\"",
+        "url": "\"/posts/2023-10-17-local-llm/\"",
+        "tags": "[\"python\",\"llm\",\"machine-learning\",\"local-ai\",\"therafit\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-27\"",
+        "title": "\"PSWindowsUpdate: Managing Windows Updates with PowerShell\"",
+        "url": "\"/posts/2023-10-10-pswindowsupdate/\"",
+        "tags": "[\"powershell\",\"windows-update\",\"automation\",\"system-administration\"]",
+        "categories": "[\"powershell\"]"
+      },{
+        "id": "\"post-28\"",
+        "title": "\"Gmail Photo Downloader\"",
+        "url": "\"/posts/2023-09-11-picture-auto-downloader/\"",
+        "tags": "[\"google-apps-script\",\"gmail\",\"google-drive\",\"automation\",\"javascript\"]",
+        "categories": "[\"JavaScript\"]"
+      },{
+        "id": "\"post-29\"",
+        "title": "\"Disco Ball\"",
+        "url": "\"/posts/2023-08-24-disco-ball/\"",
+        "tags": "[\"p5js\",\"javascript\",\"creative-coding\",\"visualization\"]",
+        "categories": "[\"JavaScript\"]"
+      },{
+        "id": "\"post-30\"",
+        "title": "\"Python NetworkX Library for Network Graph Visualization\"",
+        "url": "\"/posts/2023-08-15-networkx/\"",
+        "tags": "[\"python\",\"networkx\",\"data-visualization\",\"graphs\",\"network-analysis\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-31\"",
+        "title": "\"Mapping Network Drives Using PowerShell and SID\"",
+        "url": "\"/posts/2023-07-20-mapped-drives/\"",
+        "tags": "[\"PowerShell\",\"network drives\",\"SID\",\"registry modification\"]",
+        "categories": "[\"shell\",\"powershell\"]"
+      },{
+        "id": "\"post-32\"",
+        "title": "\"Join a Workstation to Active Directory with Shell and PowerShell\"",
+        "url": "\"/posts/2023-07-13-join-active-directory/\"",
+        "tags": "[\"active-directory\",\"powershell\",\"shell\",\"windows\",\"automation\"]",
+        "categories": "[\"shell\",\"powershell\"]"
+      },{
+        "id": "\"post-33\"",
+        "title": "\"QR Code Generator with Python\"",
+        "url": "\"/posts/2023-06-24-qr/\"",
+        "tags": "[\"python\",\"qr-code\",\"programming\",\"automation\",\"image-processing\",\"python-script\"]",
+        "categories": "[\"Python\",\"Programming\",\"Web Development\"]"
+      },{
+        "id": "\"post-34\"",
+        "title": "\"Deforum Cheat Sheet\"",
+        "url": "\"/posts/2023-05-24-deforum-cheat-sheet/\"",
+        "tags": "[\"ai\",\"images\",\"video\",\"animation\",\"stable-diffusion\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-35\"",
+        "title": "\"3D Photo Inpainting with Python and PyTorch\"",
+        "url": "\"/posts/2023-05-12-3d-photo-inpainting/\"",
+        "tags": "[\"python\",\"ai\",\"3d-modeling\",\"photo-editing\",\"computer-vision\",\"machine-learning\",\"image-processing\"]",
+        "categories": "[\"Python\",\"AI\",\"Image Processing\"]"
+      },{
+        "id": "\"post-36\"",
+        "title": "\"Yahoo Finance API via RapidAPI\"",
+        "url": "\"/posts/2023-05-11-rapidapi/\"",
+        "tags": "[\"stocks\",\"finance\",\"api\"]",
+        "categories": "[\"JavaScript\",\"nodejs\"]"
+      },{
+        "id": "\"post-37\"",
+        "title": "\"Key Event Tester\"",
+        "url": "\"/posts/2023-05-08-keycode-event-test/\"",
+        "tags": "[\"keyboard\",\"events\",\"debugging\"]",
+        "categories": "[\"JavaScript\"]"
+      },{
+        "id": "\"post-38\"",
+        "title": "\"Deep Floyd IF\"",
+        "url": "\"/posts/2023-05-03-deep-floyd-if/\"",
+        "tags": "[\"ai\",\"images\"]",
+        "categories": "[\"Python\",\"Shell\"]"
+      },{
+        "id": "\"post-39\"",
+        "title": "\"Windows ACL Management with PowerShell\"",
+        "url": "\"/posts/2023-05-02-acl/\"",
+        "tags": "[\"windows\",\"powershell\",\"security\",\"permissions\",\"acl\",\"system-administration\",\"active-directory\",\"file-permissions\"]",
+        "categories": "[\"Windows\",\"PowerShell\",\"Security\"]"
+      },{
+        "id": "\"post-40\"",
+        "title": "\"net use\"",
+        "url": "\"/posts/2023-04-13-net-use/\"",
+        "tags": "[\"net\",\"drives\",\"printers\"]",
+        "categories": "[\"Shell\"]"
+      },{
+        "id": "\"post-41\"",
+        "title": "\"Thin Plate Spline Motion Model\"",
+        "url": "\"/posts/2023-04-12-thin-plate-spline-motion-model/\"",
+        "tags": "[\"animation\",\"ai\",\"video\"]",
+        "categories": "[\"Python\"]"
+      },{
+        "id": "\"post-42\"",
+        "title": "\"Managing Global Address List (GAL) Visibility with PowerShell\"",
+        "url": "\"/posts/2023-04-05-hiding-users-from-gal/\"",
+        "tags": "[\"active-directory\",\"exchange\",\"powershell\",\"gal\",\"system-administration\",\"office-365\",\"exchange-online\",\"user-management\",\"directory-services\"]",
+        "categories": "[\"Windows\",\"PowerShell\",\"Active Directory\",\"Exchange\"]"
+      },{
+        "id": "\"post-43\"",
+        "title": "\"Random Password Generator\"",
+        "url": "\"/posts/2023-03-22-random-password-generator/\"",
+        "tags": "[\"javascript\",\"security\",\"web-development\",\"password-generator\",\"client-side\"]",
+        "categories": "[\"JavaScript\",\"Web Development\",\"Security\"]"
+      },{
+        "id": "\"post-44\"",
+        "title": "\"Windows Defender Firewall Management Guide\"",
+        "url": "\"/posts/2023-03-03-windows-defender-firewall/\"",
+        "tags": "[\"windows\",\"security\",\"firewall\",\"netsh\",\"system-administration\",\"windows-defender\",\"network-security\",\"command-line\",\"rdp\",\"port-management\"]",
+        "categories": "[\"Windows\",\"Security\",\"System Administration\"]"
+      },{
+        "id": "\"post-45\"",
+        "title": "\"Windows Remediation\"",
+        "url": "\"/posts/2023-03-03-windows-remediation/\"",
+        "tags": "[\"shell\",\"PowerShell\"]",
+        "categories": "[\"Shell\",\"PowerShell\"]"
+      },{
+        "id": "\"post-46\"",
+        "title": "\"OpenAI Whisper Speech Recognition Guide\"",
+        "url": "\"/posts/2023-02-24-openai-whisper/\"",
+        "tags": "[\"ai\",\"audio\",\"speech recognition\",\"machine learning\",\"natural language processing\",\"openai\",\"python\",\"cuda\",\"gpu\",\"multilingual\"]",
+        "categories": "[\"Python\",\"AI\",\"Machine Learning\"]"
+      },{
+        "id": "\"post-47\"",
+        "title": "\"Microsoft LAPS (Local Administrator Password Solution) Guide\"",
+        "url": "\"/posts/2023-02-22-laps/\"",
+        "tags": "[\"passwords\",\"security\",\"windows\",\"active directory\",\"password management\",\"automation\",\"local administrator\",\"domain security\"]",
+        "categories": "[\"PowerShell\",\"Security\",\"Windows\"]"
+      },{
+        "id": "\"post-48\"",
+        "title": "\"Microsoft Teams PowerShell Management Guide\"",
+        "url": "\"/posts/2023-02-23-microsoftteams/\"",
+        "tags": "[\"microsoft teams\",\"powershell\",\"team management\",\"collaboration\",\"automation\",\"team ownership\",\"channel management\",\"user management\"]",
+        "categories": "[\"PowerShell\",\"Microsoft 365\",\"Teams\"]"
+      },{
+        "id": "\"post-49\"",
+        "title": "\"Managing Windows User Accounts with net user Command\"",
+        "url": "\"/posts/2023-02-21-net-user/\"",
+        "tags": "[\"net\",\"windows\",\"user management\",\"security\",\"command line\",\"system administration\",\"account management\",\"password management\",\"group management\"]",
+        "categories": "[\"Shell\",\"Windows\",\"System Administration\"]"
+      },{
+        "id": "\"post-50\"",
+        "title": "\"Windows Driver Management with pnputil\"",
+        "url": "\"/posts/2023-02-17-uninstall-drivers/\"",
+        "tags": "[\"drivers\",\"windows\",\"system administration\",\"hardware\",\"device management\",\"cmd\",\"command line\",\"troubleshooting\"]",
+        "categories": "[\"Shell\",\"Windows\",\"System Administration\"]"
+      },{
+        "id": "\"post-51\"",
+        "title": "\"Phishing Email Decoding Tools\"",
+        "url": "\"/posts/2023-02-15-decode-phishing-emails/\"",
+        "tags": "[\"phishing\",\"email security\",\"base64\",\"hex encoding\",\"uri encoding\",\"obfuscation\",\"decoding\",\"security analysis\",\"cybersecurity\"]",
+        "categories": "[\"JavaScript\",\"Python\",\"Security\"]"
+      },{
+        "id": "\"post-52\"",
+        "title": "\"PowerShell Script for Azure AD Synchronization Management\"",
+        "url": "\"/posts/2023-02-09-force-ad-sync/\"",
+        "tags": "[\"powershell\",\"azure\",\"m365\",\"active directory\",\"ad sync\",\"azure ad connect\",\"domain controller\",\"synchronization\",\"automation\",\"security\"]",
+        "categories": "[\"PowerShell\",\"Active Directory\",\"Azure AD\"]"
+      },{
+        "id": "\"post-53\"",
+        "title": "\"Microsoft 365 Email Security Management Guide\"",
+        "url": "\"/posts/2023-02-07-purge-emails/\"",
+        "tags": "[\"email security\",\"hacked accounts\",\"M365\",\"ExchangeOnlineManagement\",\"powershell\",\"azure\",\"compliance\",\"security management\",\"email management\",\"incident response\"]",
+        "categories": "[\"PowerShell\",\"Security\",\"Microsoft 365\"]"
+      },{
+        "id": "\"post-54\"",
+        "title": "\"MiDaS Depth Estimation Guide\"",
+        "url": "\"/posts/2023-02-06-midas/\"",
+        "tags": "[\"ai\",\"computer vision\",\"depth estimation\",\"midas\",\"python\",\"cuda\",\"installation\"]",
+        "categories": "[\"Python\",\"AI\",\"Computer Vision\"]"
+      },{
+        "id": "\"post-55\"",
+        "title": "\"Frame Interpolation Large Motion (FILM)\"",
+        "url": "\"/posts/2023-02-05-film/\"",
+        "tags": "[\"ai\",\"video\",\"film\",\"frame interpolation\",\"tensorflow\",\"animation\",\"python\",\"machine learning\"]",
+        "categories": "[\"Python\",\"Machine Learning\"]"
+      },{
+        "id": "\"post-56\"",
+        "title": "\"Stable Diffusion Scripts\"",
+        "url": "\"/posts/2023-02-05-stable-diffusion/\"",
+        "tags": "[\"ai\",\"images\",\"video\",\"stable diffusion\",\"python\",\"javascript\",\"automation\",\"image processing\"]",
+        "categories": "[\"JavaScript\",\"Python\"]"
+      },{
+        "id": "\"post-57\"",
+        "title": "\"Mastering Time with Shell and PowerShell\"",
+        "url": "\"/posts/2023-02-02-mastering-time-with-shell-and-powershell/\"",
+        "tags": "[\"time\",\"shell\",\"powershell\",\"windows\",\"systeminfo\",\"wmic\",\"Win32_OperatingSystem\",\"tzutil\"]",
+        "categories": "[\"Shell\",\"PowerShell\"]"
+      },{
+        "id": "\"post-58\"",
+        "title": "\"Download Streams\"",
+        "url": "\"/posts/2022-06-09-download-streams/\"",
+        "tags": "[\"download\",\"ffmpeg\"]",
+        "categories": "[\"Shell\"]"
+      },{
+        "id": "\"post-59\"",
+        "title": "\"Logistic Map\"",
+        "url": "\"/posts/2022-05-14-logistic-map/\"",
+        "tags": "[\"animation\",\"fractal\"]",
+        "categories": "[\"C#\"]"
+      },{
+        "id": "\"post-60\"",
+        "title": "\"Archimedean Spiral\"",
+        "url": "\"/posts/2022-05-04-archimedean-spiral/\"",
+        "tags": "[\"spiral\",\"interactive\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      },{
+        "id": "\"post-61\"",
+        "title": "\"NVIDIA Maxine Windows Audio Effects SDK\"",
+        "url": "\"/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/\"",
+        "tags": "[\"audio\",\"sound\",\"SDK\"]",
+        "categories": "[\"Shell\"]"
+      },{
+        "id": "\"post-62\"",
+        "title": "\"Download YouTube Videos\"",
+        "url": "\"/posts/2022-04-16-downloading-youtube-videos/\"",
+        "tags": "[\"download\",\"youtube-dl\",\"yt-dlp\"]",
+        "categories": "[\"Shell\"]"
+      },{
+        "id": "\"post-63\"",
+        "title": "\"PowerShell Script to Export WiFi Network Credentials\"",
+        "url": "\"/posts/2022-04-11-dump-wifi-passwords/\"",
+        "tags": "[\"powershell\",\"netsh\",\"wifi\",\"passwords\",\"automation\",\"security\",\"network\",\"windows\"]",
+        "categories": "[\"PowerShell\",\"Security\"]"
+      },{
+        "id": "\"post-64\"",
+        "title": "\"Record Desktop Silently\"",
+        "url": "\"/posts/2022-02-09-record-desktop-silently/\"",
+        "tags": "[\"ffmpeg\",\"VBScript\",\"bat\"]",
+        "categories": "[\"Shell\"]"
+      },{
+        "id": "\"post-65\"",
+        "title": "\"FFmpeg Command Reference\"",
+        "url": "\"/posts/2022-01-27-ffmpeg/\"",
+        "tags": "[\"audio\",\"video\",\"ffmpeg\",\"shell\",\"media processing\",\"video conversion\",\"audio conversion\",\"screen recording\",\"filtering\"]",
+        "categories": "[\"Shell\",\"Media Processing\"]"
+      },{
+        "id": "\"post-66\"",
+        "title": "\"Combining PowerShell Cmdlets\"",
+        "url": "\"/posts/2021-11-17-combining-powershell-cmdlets/\"",
+        "tags": "[\"azure\",\"reports\",\"active directory\",\"ExchangeOnlineManagement\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-67\"",
+        "title": "\"Get Group Membership\"",
+        "url": "\"/posts/2021-09-16-active-directory-group-membership/\"",
+        "tags": "[\"active directory\",\"azure\",\"domain\",\"reports\",\"group\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-68\"",
+        "title": "\"Managing Exchange Calendars\"",
+        "url": "\"/posts/2021-09-16-manage-exchange-online-calendars/\"",
+        "tags": "[\"calendars\",\"M365\",\"ExchangeOnlineManagement\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-69\"",
+        "title": "\"Managing Exchange Online Auto-Expanding Archives with PowerShell\"",
+        "url": "\"/posts/2021-07-06-manage-auto-expanding-archives/\"",
+        "tags": "[\"exchange-online\",\"office-365\",\"powershell\",\"email-archiving\",\"exchange-management\",\"automation\",\"system-administration\"]",
+        "categories": "[\"Exchange\",\"PowerShell\",\"Office 365\"]"
+      },{
+        "id": "\"post-70\"",
+        "title": "\"k-means Clustering\"",
+        "url": "\"/posts/2021-05-18-k-means-clustering/\"",
+        "tags": "[\"animation\",\"k-means\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-71\"",
+        "title": "\"Windows Settings URI Reference\"",
+        "url": "\"/posts/2021-01-01-ms-settings-uri-reference/\"",
+        "tags": "[\"windows\",\"settings\",\"uri\",\"reference\",\"automation\",\"command line\",\"scripting\",\"windows 10\",\"windows 11\"]",
+        "categories": "[\"Windows\",\"Reference\"]"
+      },{
+        "id": "\"post-72\"",
+        "title": "\"Remote Reboot With SMTP Status\"",
+        "url": "\"/posts/2019-08-28-remote-reboot-with-smtp-status/\"",
+        "tags": "[\"smtp\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-73\"",
+        "title": "\"Remove-AppxPackages\"",
+        "url": "\"/posts/2019-08-28-remove-appx-packages/\"",
+        "tags": "[\"powershell\",\"windows\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-74\"",
+        "title": "\"Buddhabrot\"",
+        "url": "\"/posts/2019-08-25-buddhabrot/\"",
+        "tags": "[\"animation\",\"buddhabrot\",\"fractal\"]",
+        "categories": "[\"C#\",\"Java\"]"
+      },{
+        "id": "\"post-75\"",
+        "title": "\"Daily Donation Report\"",
+        "url": "\"/posts/2019-08-25-daily-donation-report/\"",
+        "tags": "[\"google forms\",\"gsuite\",\"reports\"]",
+        "categories": "[\"JavaScript\"]"
+      },{
+        "id": "\"post-76\"",
+        "title": "\"Enable AutoAdminLogon with PowerShell\"",
+        "url": "\"/posts/2019-08-19-enable-autoadminlogon/\"",
+        "tags": "[\"powershell\",\"windows\"]",
+        "categories": "[\"PowerShell\"]"
+      },{
+        "id": "\"post-77\"",
+        "title": "\"Blending Textures With Open Simplex Noise\"",
+        "url": "\"/posts/2019-08-18-blending-textures-with-open-simplex-noise/\"",
+        "tags": "[\"animation\",\"open simplex noise\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-78\"",
+        "title": "\"Robo Mirror\"",
+        "url": "\"/posts/2019-02-28-robo-mirror/\"",
+        "tags": "[\"robocopy\",\"bat\"]",
+        "categories": "[\"Shell\"]"
+      },{
+        "id": "\"post-79\"",
+        "title": "\"Cube Wave\"",
+        "url": "\"/posts/2018-12-30-cube-wave/\"",
+        "tags": "[\"animation\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-80\"",
+        "title": "\"Lorenz Doll\"",
+        "url": "\"/posts/2018-11-21-lorenz-doll/\"",
+        "tags": "[\"animation\",\"lorenz system\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-81\"",
+        "title": "\"Fridge Magnet Simulator\"",
+        "url": "\"/posts/2018-11-16-fridge-magnet-simulator/\"",
+        "tags": "[\"processing\",\"interactive\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      },{
+        "id": "\"post-82\"",
+        "title": "\"Orbiting Pixels Utility\"",
+        "url": "\"/posts/2018-11-12-orbiting-pixels-utility/\"",
+        "tags": "[\"interactive\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      },{
+        "id": "\"post-83\"",
+        "title": "\"Barnsley Fern\"",
+        "url": "\"/posts/2018-06-28-barnsley-fern/\"",
+        "tags": "[\"animation\",\"fractal\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-84\"",
+        "title": "\"Ulam Spiral\"",
+        "url": "\"/posts/2018-05-17-ulam-sprial/\"",
+        "tags": "[\"prime numbers\",\"processing\",\"interactive\"]",
+        "categories": "[\"Javascript\",\"p5.js\"]"
+      },{
+        "id": "\"post-85\"",
+        "title": "\"UVa Online Judge Challenge \\\"11045\\\"\"",
+        "url": "\"/archive/2018-05-01-uva-11045/\"",
+        "tags": "[\"uva\",\"maximum flow\",\"bipartite graph\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-86\"",
+        "title": "\"Kattis Challenge \\\"Grid\\\"\"",
+        "url": "\"/archive/2018-04-20-kattis-grid/\"",
+        "tags": "[\"kattis\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-87\"",
+        "title": "\"UVa Online Judge Challenge \\\"10305\\\"\"",
+        "url": "\"/archive/2018-04-26-uva-10305/\"",
+        "tags": "[\"uva\",\"dag\",\"directed acyclic graph\",\"topological sort\",\"bitset\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-88\"",
+        "title": "\"UVa Online Judge Challenge \\\"572\\\"\"",
+        "url": "\"/archive/2018-04-23-uva-572/\"",
+        "tags": "[\"uva\",\"coding challenge\",\"disjoint set\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-89\"",
+        "title": "\"Comparing Java Distance Functions\"",
+        "url": "\"/posts/2018-04-17-comparing-java-distance-functions/\"",
+        "tags": "[\"java\",\"distance\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-90\"",
+        "title": "\"Faster Java String Inputs\"",
+        "url": "\"/posts/2018-04-11-java-turbo-reader/\"",
+        "tags": "[\"string\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-91\"",
+        "title": "\"Kruskal's Algorithm Visualized With Processing\"",
+        "url": "\"/posts/2018-04-11-kruskal-algorithm-processing/\"",
+        "tags": "[\"kruskal's algorithm\",\"minimum spanning tree\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-92\"",
+        "title": "\"Collatz Conjecture + Unit Circle\"",
+        "url": "\"/posts/2018-04-09-collatz-conjecture-unit-circle/\"",
+        "tags": "[\"collatz conjecture\",\"3n+1\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-93\"",
+        "title": "\"UVa Online Judge Challenge \\\"1112\\\"\"",
+        "url": "\"/archive/2018-04-09-uva-1112/\"",
+        "tags": "[\"uva\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-94\"",
+        "title": "\"Minimum Spanning Tree Visualized\"",
+        "url": "\"/posts/2018-04-07-minimum-spanning-tree-visualized/\"",
+        "tags": "[\"prim's algorithm\",\"minimum spanning tree\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-95\"",
+        "title": "\"Basic Prime Checker, C++\"",
+        "url": "\"/posts/2018-03-24-basic-prime-checker/\"",
+        "tags": "[\"prime numbers\"]",
+        "categories": "[\"C++\"]"
+      },{
+        "id": "\"post-96\"",
+        "title": "\"AT\\u0026T Hackathon\"",
+        "url": "\"/posts/2018-03-12-att-hackathon/\"",
+        "tags": "[\"android\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-97\"",
+        "title": "\"Merge Sort using WEBGL\"",
+        "url": "\"/posts/2018-02-05-merge-sort/\"",
+        "tags": "[\"sorting\",\"merge sort\",\"interactive\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      },{
+        "id": "\"post-98\"",
+        "title": "\"10PRINT Image Filter\"",
+        "url": "\"/posts/2018-01-31-10print-image-filter/\"",
+        "tags": "[\"10PRINT\",\"interactive\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      },{
+        "id": "\"post-99\"",
+        "title": "\"Insertion Sort using WEBGL\"",
+        "url": "\"/posts/2018-01-28-insertion-sort/\"",
+        "tags": "[\"sorting\",\"insertion sort\",\"interactive\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      },{
+        "id": "\"post-100\"",
+        "title": "\"Generating Terrain with Open Simplex Noise\"",
+        "url": "\"/posts/2018-01-03-generating-terrain-with-open-simplex-noise/\"",
+        "tags": "[\"open simplex noise\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-101\"",
+        "title": "\"Open Simplex Noise\"",
+        "url": "\"/posts/2018-01-02-open-simplex-noise/\"",
+        "tags": "[\"open-simplex-noise\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-102\"",
+        "title": "\"Flipping Tiles\"",
+        "url": "\"/posts/2017-11-18-flippy-tiles/\"",
+        "tags": "[\"perlin noise\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-103\"",
+        "title": "\"Juno Cam Image Processing\"",
+        "url": "\"/posts/2017-11-12-juno-cam-image-processing/\"",
+        "tags": "[\"juno\",\"jupiter\",\"space\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-104\"",
+        "title": "\"UVa Online Judge Challenge \\\"10550\\\"\"",
+        "url": "\"/archive/2017-11-09-uva-10550/\"",
+        "tags": "[\"uva\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-105\"",
+        "title": "\"Demonstrating Procedures and Console Output\"",
+        "url": "\"/posts/2017-10-24-demonstrating-procedures-and-console-output/\"",
+        "tags": "[\"assembly\"]",
+        "categories": "[\"MASM\"]"
+      },{
+        "id": "\"post-106\"",
+        "title": "\"Sieve of Eratosthenes\"",
+        "url": "\"/posts/2017-10-17-sieve-of-eratosthenes/\"",
+        "tags": "[\"assembly\",\"prime numbers\"]",
+        "categories": "[\"MASM\"]"
+      },{
+        "id": "\"post-107\"",
+        "title": "\"UVa Online Judge Challenge \\\"272\\\"\"",
+        "url": "\"/archive/2017-10-17-uva-272/\"",
+        "tags": "[\"uva\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-108\"",
+        "title": "\"Nth Fibonacci Number\"",
+        "url": "\"/posts/2017-10-07-nth-fibonacci-number/\"",
+        "tags": "[\"fibonacci\",\"assembly\"]",
+        "categories": "[\"MASM\"]"
+      },{
+        "id": "\"post-109\"",
+        "title": "\"UVa Online Judge Challenge \\\"100\\\"\"",
+        "url": "\"/archive/2017-10-05-uva-100/\"",
+        "tags": "[\"uva\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-110\"",
+        "title": "\"UVa Online Judge Challenge \\\"10110\\\"\"",
+        "url": "\"/archive/2017-10-05-uva-10110/\"",
+        "tags": "[\"uva\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-111\"",
+        "title": "\"Kattis Challenge \\\"Parking\\\"\"",
+        "url": "\"/archive/2017-09-15-kattis-parking2/\"",
+        "tags": "[\"kattis\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-112\"",
+        "title": "\"Kattis Challenge \\\"Sum of Others\\\"\"",
+        "url": "\"/archive/2017-09-15-kattis-sum-of-others/\"",
+        "tags": "[\"kattis\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-113\"",
+        "title": "\"UVa Online Judge Challenge \\\"11172\\\"\"",
+        "url": "\"/archive/2017-08-24-uva-11172/\"",
+        "tags": "[\"uva\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-114\"",
+        "title": "\"Kattis Challenge \\\"Line Them Up\\\"\"",
+        "url": "\"/archive/2017-08-18-kattis-line-them-up/\"",
+        "tags": "[\"kattis\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-115\"",
+        "title": "\"Kattis Challenge \\\"Server\\\"\"",
+        "url": "\"/archive/2017-08-18-kattis-server/\"",
+        "tags": "[\"kattis\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-116\"",
+        "title": "\"Kattis Challenge \\\"A Different Problem\\\"\"",
+        "url": "\"/archive/2017-08-15-kattis-different/\"",
+        "tags": "[\"kattis\",\"coding challenge\"]",
+        "categories": "[\"Java\"]"
+      },{
+        "id": "\"post-117\"",
+        "title": "\"\"",
+        "url": "\"/posts/2017-07-18-counting-sort/\"",
+        "tags": "[\"sorting\",\"counting sort\"]",
+        "categories": "[\"Java\",\"Processing\"]"
+      },{
+        "id": "\"post-118\"",
+        "title": "\"\"",
+        "url": "\"/posts/2017-07-16-simple-2d-perlin-noise/\"",
+        "tags": "[\"interactive\",\"JavaScript\",\"p5.js\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      },{
+        "id": "\"post-119\"",
+        "title": "\"Interactive Array Visualization\"",
+        "url": "\"/posts/2016-12-13-arrays/\"",
+        "tags": "[\"interactive\",\"arrays\",\"visualization\",\"p5.js\",\"programming\",\"education\"]",
+        "categories": "[\"JavaScript\",\"p5.js\"]"
+      }]
+}
 </script>
 
-        
-    </footer>
 
+  <script src="http://localhost:1313/js/ghostgraph.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+  <script src="http://localhost:1313/js/bg.js"></script>
+  <script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
-    <script src="http://localhost:1313/js/bg.js"></script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          }).catch(() => {
+            button.textContent = 'Error';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+  </script>
 </body>
 </html>

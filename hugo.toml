@@ -2,7 +2,7 @@ baseURL = 'https://trimad.github.io'
 languageCode = 'en-us'
 title = 'Ghostfeed'
 
-theme = "Ghostfeed"
+theme = "GhostGraph"
 
 relativeURLs = false
 canonifyURLs = true
