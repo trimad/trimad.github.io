@@ -4,7 +4,7 @@ categories: [PowerShell]
 date: 2025-07-30
 draft: false
 tags: [Exchange, Security, Audit]
-title: Exchange Online Inbox Rule Collector
+title: "Query Exchange Inbox Rules with Exchange Online PowerShell"
 summary: "This enhanced PowerShell script connects to Exchange Online, iterates through all accepted domains, collects inbox rules from every mailbox, and exports a well-formatted JSON report for compliance and threat hunting."
 usePageBundles: true
 toc: true

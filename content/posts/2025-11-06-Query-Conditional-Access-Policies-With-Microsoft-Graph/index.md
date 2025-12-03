@@ -5,7 +5,7 @@ date: 2025-11-06
 draft: false
 summary: "A clean PowerShell approach to export Azure AD Conditional Access policies using the Microsoft Graph SDK."
 tags: [PowerShell, Microsoft Graph, AzureAD, Conditional Access, Automation]
-title: "Exporting Conditional Access Policies"
+title: "Query Conditional Access Policies With Microsoft Graph"
 toc: true
 usePageBundles: true
 ---

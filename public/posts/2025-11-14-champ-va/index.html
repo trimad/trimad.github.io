@@ -51,11 +51,15 @@
     <h2>Recently Modified</h2>
     <ul>
         
+        <li><a href="http://localhost:1313/posts/2025-12-03-query-successful-sign-ins-with-microsoft-graph/">Query Successful Sign-ins With Microsoft Graph on 2025-12-03</a></li>
+        
+        <li><a href="http://localhost:1313/posts/2025-12-02-hp-bloatware-uninstall/">HP Bloatware Uninstaller on 2025-12-02</a></li>
+        
         <li><a href="http://localhost:1313/posts/2025-11-14-champ-va/">ChampVA Claims on 2025-11-14</a></li>
         
-        <li><a href="http://localhost:1313/posts/2025-11-06-exporting-conditional-access-policies/">Exporting Conditional Access Policies on 2025-11-06</a></li>
+        <li><a href="http://localhost:1313/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/">Query Conditional Access Policies With Microsoft Graph on 2025-11-06</a></li>
         
-        <li><a href="http://localhost:1313/posts/2025-07-30-exchange-inbox-rules/">Exchange Online Inbox Rule Collector on 2025-07-30</a></li>
+        <li><a href="http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/">Query Exchange Inbox Rules with Exchange Online PowerShell on 2025-07-30</a></li>
         
         <li><a href="http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/">Test SMTP on 2025-07-02</a></li>
         
@@ -66,10 +70,6 @@
         <li><a href="http://localhost:1313/posts/2025-05-02-procdump-and-windbg/">Troubleshoot Crashing Apps with ProcDump &amp; WinDbg on 2025-05-01</a></li>
         
         <li><a href="http://localhost:1313/prompts/2025-07-03-stub/">Stub Title on 2025-03-07</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2024-10-16-restart-iis-application/">Automated IIS Application Pool Restart with PowerShell on 2024-10-16</a></li>
-        
-        <li><a href="http://localhost:1313/posts/2024-09-10-officec2rclient/">Managing Microsoft Office Versions with OfficeC2RClient on 2024-09-10</a></li>
         
     </ul>
 </section>
@@ -93,6 +93,10 @@
         <h2>ChampVA Claims</h2>
         <p>
             Published: November 14, 2025
+            
+            
+            | Last Modified: December 2, 2025
+            
             
         </p>
         
@@ -118,7 +122,7 @@
   <ul>
     <li><a href="#download-itemized-billing-statements">Download Itemized Billing Statements:</a></li>
     <li><a href="#download-eobs">Download EOB&rsquo;s</a></li>
-    <li><a href="#sort-eobs">Sort EOB&rsquo;s</a></li>
+    <li><a href="#sort-eobs-into-separate-folders">Sort EOB&rsquo;s into separate folders</a></li>
     <li><a href="#submit-claim">Submit Claim</a></li>
   </ul>
 </nav>
@@ -151,59 +155,194 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">clickNext</span>();
 </span></span><span style="display:flex;"><span>})();
-</span></span></code></pre></div><h2 id="sort-eobs">Sort EOB&rsquo;s</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> PyPDF2
+</span></span></code></pre></div><h2 id="sort-eobs-into-separate-folders">Sort EOB&rsquo;s into separate folders</h2>
+<p>This script uses a QWEN 3 vision model running in LM Studio to sort the EOB&rsquo;s into their respective folders.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>import os
+</span></span><span style="display:flex;"><span>import shutil
+</span></span><span style="display:flex;"><span>import requests
+</span></span><span style="display:flex;"><span>import json
+</span></span><span style="display:flex;"><span>import pypdfium2 as pdfium
+</span></span><span style="display:flex;"><span>import base64
+</span></span><span style="display:flex;"><span>from PIL import Image
+</span></span><span style="display:flex;"><span>from io import BytesIO
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use the folder where this script is located</span>
-</span></span><span style="display:flex;"><span>SOURCE_FOLDER <span style="color:#f92672">=</span> Path(__file__)<span style="color:#f92672">.</span>parent
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>TARGETS <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Theo&#34;</span>: <span style="color:#e6db74">&#34;Theo&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Liam&#34;</span>: <span style="color:#e6db74">&#34;Liam&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Michelle&#34;</span>: <span style="color:#e6db74">&#34;Michelle&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Names to detect and folder names to move into</span>
+</span></span><span style="display:flex;"><span>SEARCH_CRITERIA = {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;first m last&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;name 1&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;first m last&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;name 2&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;first m last&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;name 3&#34;</span>,
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract_text_from_pdf</span>(pdf_path):
-</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(pdf_path, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>            reader <span style="color:#f92672">=</span> PyPDF2<span style="color:#f92672">.</span>PdfReader(f)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> page <span style="color:#f92672">in</span> reader<span style="color:#f92672">.</span>pages:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>                    text <span style="color:#f92672">+=</span> page<span style="color:#f92672">.</span>extract_text() <span style="color:#f92672">or</span> <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">except</span>:
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">pass</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> text
+</span></span><span style="display:flex;"><span>QWEN_ENDPOINT = <span style="color:#e6db74">&#34;http://192.168.1.3:1234/v1/chat/completions&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
-</span></span><span style="display:flex;"><span>    source <span style="color:#f92672">=</span> SOURCE_FOLDER
+</span></span><span style="display:flex;"><span>DEBUG_MODE = False
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def qwen_extract_text(image_bytes)<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Uses Qwen to extract raw text from a page image.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    No classification, no guessing. Pure OCR-like output.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    encoded = base64.b64encode(image_bytes).decode(<span style="color:#e6db74">&#34;utf8&#34;</span>)
+</span></span><span style="display:flex;"><span>    data_uri = <span style="color:#e6db74">&#34;data:image/png;base64,&#34;</span> + encoded
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    prompt = (
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Extract all visible text from the provided image. &#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Return only the extracted text. Do not add explanations. &#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Do not classify. Do not guess. Do not summarize. &#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Only output the raw text you see.&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    payload = {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;model&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;qwen3-vl-8b-thinking&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;messages&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+</span></span><span style="display:flex;"><span>            {<span style="color:#e6db74">&#34;role&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;system&#34;</span>, <span style="color:#e6db74">&#34;content&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> prompt},
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;role&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;user&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;content&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;type&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;image_url&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;image_url&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {<span style="color:#e6db74">&#34;url&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> data_uri}
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                ]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    response = requests.post(QWEN_ENDPOINT, json=payload, headers={<span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span><span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>        result = response.json()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> DEBUG_MODE<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;\nQwen OCR Raw JSON:\n&#34;</span>, json.dumps(result, indent=<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        text = result[<span style="color:#e6db74">&#34;choices&#34;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#34;message&#34;</span>][<span style="color:#e6db74">&#34;content&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> not text<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> text.lower()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    except Exception as e:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Error extracting text from Qwen:&#34;</span>, e)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def extract_pdf_text_direct(pdf_path)<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Extracts text directly from text-based PDFs.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    This is the fastest and most accurate when available.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    pdf = pdfium.PdfDocument(pdf_path)
+</span></span><span style="display:flex;"><span>    texts = []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> range(len(pdf))<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>        page = pdf.get_page(i)
+</span></span><span style="display:flex;"><span>        textpage = page.get_textpage()
+</span></span><span style="display:flex;"><span>        count = textpage.count_chars()
+</span></span><span style="display:flex;"><span>        page_text = textpage.get_text_range(<span style="color:#ae81ff">0</span>, count)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> page_text<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            texts.append(page_text.lower())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pdf.close()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;\n&#34;</span>.join(texts)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def render_pdf_to_images(pdf_path)<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>    images = []
+</span></span><span style="display:flex;"><span>    pdf = pdfium.PdfDocument(pdf_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> range(len(pdf))<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>        page = pdf.get_page(i)
+</span></span><span style="display:flex;"><span>        bitmap = page.render(scale=<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>        pil_img = bitmap.to_pil()
+</span></span><span style="display:flex;"><span>        images.append(pil_img)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pdf.close()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> images
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def classify_text(text)<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Checks text for exact name matches, returns folder name or None.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> full_name_lower, folder <span style="color:#66d9ef">in</span> SEARCH_CRITERIA.items()<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> full_name_lower <span style="color:#66d9ef">in</span> text<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> folder
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> None
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def organize_pdfs()<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>    current_dir = os.getcwd()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Starting Qwen OCR-based PDF organization in:&#34;</span>, current_dir)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create destination folders</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> folder <span style="color:#f92672">in</span> TARGETS<span style="color:#f92672">.</span>values():
-</span></span><span style="display:flex;"><span>        (source <span style="color:#f92672">/</span> folder)<span style="color:#f92672">.</span>mkdir(exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> folder <span style="color:#66d9ef">in</span> SEARCH_CRITERIA.values()<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>        os.makedirs(folder, exist_ok=True)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Loop through PDFs</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> source<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;*.pdf&#34;</span>):
-</span></span><span style="display:flex;"><span>        text <span style="color:#f92672">=</span> extract_text_from_pdf(file)<span style="color:#f92672">.</span>lower()
-</span></span><span style="display:flex;"><span>        placed <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    pdf_files = [f <span style="color:#66d9ef">for</span> f <span style="color:#66d9ef">in</span> os.listdir(current_dir) <span style="color:#66d9ef">if</span> f.lower().endswith(<span style="color:#e6db74">&#34;.pdf&#34;</span>)]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> word, folder <span style="color:#f92672">in</span> TARGETS<span style="color:#f92672">.</span>items():
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> word<span style="color:#f92672">.</span>lower() <span style="color:#f92672">in</span> text:
-</span></span><span style="display:flex;"><span>                shutil<span style="color:#f92672">.</span>move(str(file), str(source <span style="color:#f92672">/</span> folder <span style="color:#f92672">/</span> file<span style="color:#f92672">.</span>name))
-</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Moved </span><span style="color:#e6db74">{</span>file<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74"> to </span><span style="color:#e6db74">{</span>folder<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>                placed <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Found&#34;</span>, len(pdf_files), <span style="color:#e6db74">&#34;PDF files.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> filename <span style="color:#66d9ef">in</span> pdf_files<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;\nProcessing:&#34;</span>, filename)
+</span></span><span style="display:flex;"><span>        full_path = os.path.join(current_dir, filename)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Step 1: Try direct PDF text extraction</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span><span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            direct_text = extract_pdf_text_direct(full_path)
+</span></span><span style="display:flex;"><span>        except<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            direct_text = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        folder_match = classify_text(direct_text)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> folder_match<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            dest = os.path.join(current_dir, folder_match, filename)
+</span></span><span style="display:flex;"><span>            shutil.move(full_path, dest)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Moved by direct PDF text match:&#34;</span>, folder_match)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Step 2: Use image rendering + Qwen OCR fallback</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span><span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            pages = render_pdf_to_images(full_path)
+</span></span><span style="display:flex;"><span>        except Exception as e:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Could not render PDF:&#34;</span>, e)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        folder_match = None
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> page_index, img <span style="color:#66d9ef">in</span> enumerate(pages)<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;  OCR page&#34;</span>, page_index + <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            buffer = BytesIO()
+</span></span><span style="display:flex;"><span>            img.save(buffer, format=<span style="color:#e6db74">&#34;PNG&#34;</span>)
+</span></span><span style="display:flex;"><span>            buffer.seek(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            text = qwen_extract_text(buffer.read())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> DEBUG_MODE<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;\nExtracted text from page&#34;</span>, page_index + <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                print(text)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            detected = classify_text(text)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> detected<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>                folder_match = detected
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;  Match found:&#34;</span>, detected)
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> placed:
-</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;No match found in </span><span style="color:#e6db74">{</span>file<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> not folder_match<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;  No match found. Leaving file in place.&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    main()
+</span></span><span style="display:flex;"><span>        dest = os.path.join(current_dir, folder_match, filename)
+</span></span><span style="display:flex;"><span>        shutil.move(full_path, dest)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Moved by OCR match:&#34;</span>, folder_match)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;\nOrganization complete.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ == <span style="color:#e6db74">&#34;__main__&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>    organize_pdfs()
 </span></span></code></pre></div><h2 id="submit-claim">Submit Claim</h2>
 <p><a href="https://www.va.gov/family-and-caregiver-benefits/health-and-disability/champva/file-champva-claim-10-7959a/introduction">https://www.va.gov/family-and-caregiver-benefits/health-and-disability/champva/file-champva-claim-10-7959a/introduction</a></p>
 
@@ -291,7 +430,7 @@
         
         <li><a href="http://localhost:1313/categories/p5.js/">P5.js (9)</a></li>
         
-        <li><a href="http://localhost:1313/categories/powershell/">PowerShell (27)</a></li>
+        <li><a href="http://localhost:1313/categories/powershell/">Powershell (29)</a></li>
         
         <li><a href="http://localhost:1313/categories/processing/">Processing (14)</a></li>
         
@@ -379,6 +518,8 @@
         
         <li><a href="http://localhost:1313/tags/bitset/">Bitset (1)</a></li>
         
+        <li><a href="http://localhost:1313/tags/bloatware/">Bloatware (1)</a></li>
+        
         <li><a href="http://localhost:1313/tags/buddhabrot/">Buddhabrot (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/calendars/">Calendars (1)</a></li>
@@ -465,6 +606,8 @@
         
         <li><a href="http://localhost:1313/tags/email-archiving/">Email-Archiving (1)</a></li>
         
+        <li><a href="http://localhost:1313/tags/entra/">Entra (1)</a></li>
+        
         <li><a href="http://localhost:1313/tags/events/">Events (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/exchange/">Exchange (2)</a></li>
@@ -524,6 +667,8 @@
         <li><a href="http://localhost:1313/tags/hardware/">Hardware (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/hex-encoding/">Hex Encoding (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/hp/">HP (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/iis/">Iis (1)</a></li>
         
@@ -585,7 +730,7 @@
         
         <li><a href="http://localhost:1313/tags/merge-sort/">Merge Sort (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/microsoft-graph/">Microsoft Graph (1)</a></li>
+        <li><a href="http://localhost:1313/tags/microsoft-graph/">Microsoft Graph (2)</a></li>
         
         <li><a href="http://localhost:1313/tags/microsoft-teams/">Microsoft Teams (1)</a></li>
         
@@ -709,7 +854,7 @@
         
         <li><a href="http://localhost:1313/tags/sdk/">SDK (1)</a></li>
         
-        <li><a href="http://localhost:1313/tags/security/">Security (10)</a></li>
+        <li><a href="http://localhost:1313/tags/security/">Security (11)</a></li>
         
         <li><a href="http://localhost:1313/tags/security-analysis/">Security Analysis (1)</a></li>
         
@@ -720,6 +865,8 @@
         <li><a href="http://localhost:1313/tags/shell/">Shell (4)</a></li>
         
         <li><a href="http://localhost:1313/tags/sid/">SID (1)</a></li>
+        
+        <li><a href="http://localhost:1313/tags/signin/">Signin (1)</a></li>
         
         <li><a href="http://localhost:1313/tags/smtp/">SMTP (2)</a></li>
         
