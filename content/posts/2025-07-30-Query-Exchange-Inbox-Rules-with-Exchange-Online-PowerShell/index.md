@@ -5,39 +5,39 @@ date: 2025-07-30
 draft: false
 tags: [Exchange, Security, Audit]
 title: "Query Exchange Inbox Rules with Exchange Online PowerShell"
-summary: "This enhanced PowerShell script connects to Exchange Online, iterates through all accepted domains, collects inbox rules from every mailbox, and exports a well-formatted JSON report for compliance and threat hunting."
+summary: "Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox—perfect for threat hunting, compliance, and incident response."
 usePageBundles: true
 toc: true
 ---
 
-# Exchange Online Inbox Rule Collector
+# Exchange Online Inbox Rule Auditing
 
-This improved PowerShell script automates a full audit of inbox rules across all accepted domains in your Exchange Online tenant. It identifies rules that may forward, redirect, or move emails — common indicators of malicious inbox compromise — and exports the findings to a formatted JSON file.
+Monitoring inbox rules is one of the most effective ways to detect compromised accounts in Microsoft 365. Attackers commonly create forwarding or redirect rules to exfiltrate mail or hide activity.
 
-## Key Improvements
+This post provides **two complementary PowerShell scripts**:
 
-The updated script includes several major upgrades over the previous version:
+1. **Tenant-wide inbox rule collector** – audits every mailbox across all accepted domains  
+2. **Single-user inbox rule collector** – ideal for incident response and targeted investigations  
 
-- **Domain-Aware Enumeration** — Automatically loops through all *accepted domains* instead of hardcoding one.
-- **Smart Filtering** — Only scans mailboxes with primary SMTP addresses in valid tenant domains.
-- **Structured Output** — Saves results in `FilteredInboxRules.json` with a clean, hierarchical JSON structure.
-- **Automatic File Launch** — Opens the JSON file automatically at completion.
-- **Built-In Error Handling** — Gracefully skips inaccessible mailboxes and continues processing.
-- **Readable Console Output** — Displays progress with color-coded feedback for visibility.
+Both scripts export results into clean JSON files suitable for SOC review or automated detection pipelines.
 
 ---
 
-## Prerequisites
+# Query All Users (Organization-Wide)
 
-Before running the script, ensure:
+This script enumerates all accepted domains, collects inbox rules from every mailbox in the tenant, and exports a unified JSON report. It's ideal for scheduled audits, compromise assessment, or large-scale security reviews.
 
-- You have the **Exchange Online PowerShell module** (`Connect-ExchangeOnline`)
-- You’re a **Global Admin** or have delegated permissions to read all mailboxes
-- You’re running **PowerShell 5.1+** or **PowerShell Core**
+## Key Capabilities
+
+- **Domain-aware enumeration** — Automatically detects all accepted domains in the tenant  
+- **Mailbox filtering** — Only scans relevant SMTP domains  
+- **Color-coded progress output** — Useful for long-running audits  
+- **Graceful error handling** — Skips inaccessible mailboxes  
+- **Structured JSON output** — Saves as `FilteredInboxRules.json` and opens automatically  
 
 ---
 
-## Script Overview
+## Script: Query All Users
 
 ```powershell
 <#
@@ -142,26 +142,110 @@ Start-Process $outputFile
 # --- STEP 7: Clean up session ---
 Disconnect-ExchangeOnline -Confirm:$false
 Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan
+
 ```
 
----
+# Query a Single User (Targeted Audit)
 
-## Example Output
+This companion script focuses on **one mailbox at a time**.
 
-When the script completes, it will produce a JSON file similar to this:
+## Key Capabilities
 
-```json
-[
-  {
-    "Mailbox": "john.doe@domain.com",
-    "Name": "Auto-Forward External",
-    "Enabled": true,
-    "Priority": 1,
-    "From": "",
-    "SubjectContains": "",
-    "MoveToFolder": "",
-    "ForwardTo": "externaluser@gmail.com",
-    "StopProcessingRules": true
-  }
-]
+- Mailbox validation — Confirms the mailbox exists before running any queries
+- Targeted rule inspection — Retrieves inbox rules for only one specified mailbox
+- Ideal for incident response — Quickly exposes forwarding, redirect, or exfiltration rules linked to suspicious activity
+- Lightweight execution — Much faster than tenant-wide enumeration; minimal data collection
+- Structured JSON export — Outputs to `SingleMailboxInboxRules.json` for easy sharing, auditing, or investigation
+- Safe error handling — Gracefully handles missing mailboxes or permission issues without halting your session
+
+## Script: Query a Single User
+
+```powershell
+<#
+.SYNOPSIS
+Collects inbox rules for a single mailbox and exports them to a formatted JSON file.
+
+.DESCRIPTION
+This script connects to Exchange Online and retrieves all inbox rules for a
+specified mailbox, then exports the results to SingleMailboxInboxRules.json.
+#>
+
+Write-Host "`n=== Single Mailbox Inbox Rule Collector ===`n" -ForegroundColor Cyan
+
+# --- STEP 1: Prompt for mailbox ---
+$mailbox = Read-Host "Enter the mailbox (UPN or SMTP address)"
+
+if (-not $mailbox) {
+    Write-Host "❌ No mailbox provided. Exiting." -ForegroundColor Red
+    exit
+}
+
+# --- STEP 2: Connect to Exchange Online ---
+try {
+    Write-Host "Connecting to Exchange Online..." -ForegroundColor Yellow
+    Connect-ExchangeOnline -ErrorAction Stop
+    Write-Host "✅ Connected successfully.`n" -ForegroundColor Green
+} catch {
+    Write-Host "❌ Failed to connect to Exchange Online: $_" -ForegroundColor Red
+    exit
+}
+
+# --- STEP 3: Validate mailbox existence ---
+try {
+    $mbx = Get-Mailbox -Identity $mailbox -ErrorAction Stop
+    Write-Host "Mailbox found: $($mbx.PrimarySmtpAddress)`n" -ForegroundColor Green
+} catch {
+    Write-Host "❌ Mailbox not found or inaccessible: $_" -ForegroundColor Red
+    Disconnect-ExchangeOnline -Confirm:$false
+    exit
+}
+
+# --- STEP 4: Retrieve inbox rules ---
+Write-Host "Retrieving inbox rules for $($mbx.PrimarySmtpAddress)...`n" -ForegroundColor Yellow
+
+$rules = @()
+
+try {
+    $inboxRules = Get-InboxRule -Mailbox $mbx.PrimarySmtpAddress -ErrorAction Stop
+
+    foreach ($rule in $inboxRules) {
+        $rules += [PSCustomObject]@{
+            Mailbox               = $mbx.PrimarySmtpAddress
+            Name                  = $rule.Name
+            Enabled               = $rule.Enabled
+            Priority              = $rule.Priority
+            Description           = $rule.Description
+            From                  = ($rule.From | ForEach-Object { $_.Address }) -join ', '
+            FromAddressContains   = ($rule.FromAddressContainsWords -join ', ')
+            SubjectContains       = ($rule.SubjectContainsWords -join ', ')
+            SubjectOrBodyContains = ($rule.SubjectOrBodyContainsWords -join ', ')
+            SentTo                = ($rule.SentTo | ForEach-Object { $_.Address }) -join ', '
+            MoveToFolder          = $rule.MoveToFolder
+            MarkAsRead            = $rule.MarkAsRead
+            ForwardTo             = ($rule.ForwardTo | ForEach-Object { $_.Address }) -join ', '
+            RedirectTo            = ($rule.RedirectTo | ForEach-Object { $_.Address }) -join ', '
+            StopProcessingRules   = $rule.StopProcessingRules
+        }
+    }
+} catch {
+    Write-Host "❌ Failed to retrieve inbox rules: $_" -ForegroundColor Red
+}
+
+# --- STEP 5: Export results to JSON ---
+$outputFile = Join-Path (Get-Location) "SingleMailboxInboxRules.json"
+
+if ($rules.Count -eq 0) {
+    Write-Warning "No inbox rules found for this mailbox."
+    "[]" | Out-File -FilePath $outputFile -Encoding utf8
+} else {
+    $rules | ConvertTo-Json -Depth 5 | Out-File -FilePath $outputFile -Encoding utf8
+    Write-Host ("`n✅ Exported {0} inbox rules to {1}" -f $rules.Count, $outputFile) -ForegroundColor Green
+}
+
+# --- STEP 6: Open the output file ---
+Start-Process $outputFile
+
+# --- STEP 7: Clean up session ---
+Disconnect-ExchangeOnline -Confirm:$false
+Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan
 ```

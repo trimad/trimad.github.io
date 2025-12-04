@@ -6,7 +6,7 @@
     <description>Recent content in Powershell on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Dec 2025 17:05:51 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 04 Dec 2025 11:16:24 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/powershell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Query Successful Sign-ins With Microsoft Graph</title>
@@ -34,7 +34,7 @@
       <link>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</link>
       <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</guid>
-      <description>This enhanced PowerShell script connects to Exchange Online, iterates through all accepted domains, collects inbox rules from every mailbox, and exports a well-formatted JSON report for compliance and threat hunting.</description>
+      <description>Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox—perfect for threat hunting, compliance, and incident response.</description>
     </item>
     <item>
       <title>Test SMTP</title>
