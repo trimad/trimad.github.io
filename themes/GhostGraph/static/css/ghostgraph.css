@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --bg: #04070d;
-  --panel: rgba(11, 16, 27, 0.9);
-  --line: rgba(0, 255, 247, 0.18);
-  --accent: #00fff7;
-  --accent-2: #b000e0;
-  --text: #d8e2ff;
-  --muted: #7a8ba8;
+  --bg: #0a0b10;
+  --panel: rgba(19, 22, 34, 0.9);
+  --line: rgba(255, 61, 179, 0.2);
+  --accent: #ff3db3;
+  --accent-2: #ffb347;
+  --text: #ededf5;
+  --muted: #9aa0b5;
   --radius: 10px;
   --pad: 14px;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
@@ -19,8 +19,8 @@ body.gg-body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 20% 20%, rgba(0, 255, 247, 0.12), transparent 28%),
-    radial-gradient(circle at 80% 0%, rgba(176, 0, 224, 0.10), transparent 32%),
+    radial-gradient(circle at 20% 20%, rgba(255, 61, 179, 0.12), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(255, 179, 71, 0.10), transparent 32%),
     var(--bg);
   color: var(--text);
   font-family: 'Share Tech Mono', monospace;
@@ -34,9 +34,9 @@ body.gg-body {
   align-items: center;
   justify-content: space-between;
   padding: calc(var(--pad) + 2px);
-  background: linear-gradient(145deg, rgba(8, 12, 22, 0.92), rgba(6, 10, 18, 0.95));
+  background: linear-gradient(145deg, rgba(13, 15, 25, 0.92), rgba(10, 12, 20, 0.95));
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 255, 247, 0.12);
+  border-bottom: 1px solid rgba(255, 61, 179, 0.18);
   box-shadow: var(--shadow);
 }
 
@@ -52,11 +52,11 @@ body.gg-body {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle, rgba(0, 255, 247, 0.6), rgba(0, 255, 247, 0.12));
-  color: #031a1a;
+  background: radial-gradient(circle, rgba(255, 61, 179, 0.6), rgba(255, 179, 71, 0.2));
+  color: #1a0a15;
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
-  box-shadow: 0 0 0 1px rgba(0, 255, 247, 0.4);
+  box-shadow: 0 0 0 1px rgba(255, 61, 179, 0.4);
 }
 
 .gg-title {
@@ -74,8 +74,8 @@ body.gg-body {
   width: min(520px, 60vw);
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(0, 255, 247, 0.2);
-  background: rgba(10, 15, 26, 0.85);
+  border: 1px solid rgba(255, 61, 179, 0.25);
+  background: rgba(12, 14, 22, 0.88);
   color: var(--text);
   font-family: 'Share Tech Mono', monospace;
   outline: none;
@@ -84,7 +84,7 @@ body.gg-body {
 
 .gg-search input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 12px rgba(0, 255, 247, 0.4);
+  box-shadow: 0 0 12px rgba(255, 61, 179, 0.4);
 }
 
 .gg-shell {
@@ -99,8 +99,8 @@ body.gg-body {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(0, 255, 247, 0.04), transparent),
-              radial-gradient(circle at 80% 30%, rgba(176, 0, 224, 0.04), transparent 40%),
+  background: linear-gradient(120deg, rgba(255, 61, 179, 0.05), transparent),
+              radial-gradient(circle at 80% 30%, rgba(255, 179, 71, 0.05), transparent 40%),
               transparent;
 }
 
@@ -158,21 +158,21 @@ body.gg-body {
 
 pre {
   position: relative;
-  background: #0f1624;
-  border: 1px solid rgba(0, 255, 247, 0.2);
-  color: #e8f7ff;
+  background: #111421;
+  border: 1px solid rgba(255, 61, 179, 0.24);
+  color: #ffd479;
   padding: 14px;
   border-radius: 8px;
   overflow: auto;
-  box-shadow: inset 0 0 0 1px rgba(0, 255, 247, 0.1), 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(255, 61, 179, 0.12), 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 code {
-  background: #0f1624;
-  color: #7df2ff;
+  background: #111421;
+  color: #ffd479;
   padding: 2px 6px;
   border-radius: 4px;
-  border: 1px solid rgba(0, 255, 247, 0.12);
+  border: 1px solid rgba(255, 61, 179, 0.15);
 }
 
 pre code {
@@ -189,19 +189,19 @@ pre code {
   padding: 4px 12px;
   font: 12px 'Share Tech Mono', monospace;
   letter-spacing: .05em;
-  background: rgba(0, 255, 247, 0.12);
-  color: #e8f7ff;
-  border: 1px solid rgba(0, 255, 247, 0.5);
+  background: rgba(255, 61, 179, 0.12);
+  color: #ededf5;
+  border: 1px solid rgba(255, 61, 179, 0.4);
   border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 0 0 1px rgba(0, 255, 247, 0.08), 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 61, 179, 0.08), 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: background-color .2s, color .2s, box-shadow .2s, transform .1s;
   backdrop-filter: blur(3px);
 }
 
 .copy-button:hover {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: var(--bg);
+  color: #1a0a15;
   box-shadow: var(--shadow);
 }
 

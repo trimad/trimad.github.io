@@ -1,4 +1,46 @@
 let c,ctx,w,h,sn,fc,a,b,d,e,f,g;
+let noiseData;
+
+function drawPhosphorMask() {
+  const stripeWidth = 3;
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  for (let x = 0; x < w; x += stripeWidth) {
+    ctx.fillStyle = 'rgba(255,0,0,0.4)';
+    ctx.fillRect(x, 0, 1, h);
+    ctx.fillStyle = 'rgba(0,255,0,0.3)';
+    ctx.fillRect(x + 1, 0, 1, h);
+    ctx.fillStyle = 'rgba(0,0,255,0.4)';
+    ctx.fillRect(x + 2, 0, 1, h);
+  }
+  ctx.restore();
+}
+
+function drawVignette() {
+  const grad = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.2, w / 2, h / 2, Math.max(w, h) * 0.65);
+  grad.addColorStop(0, 'rgba(0,0,0,0)');
+  grad.addColorStop(1, 'rgba(0,0,0,0.22)');
+  ctx.save();
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+  ctx.restore();
+}
+
+function drawNoise() {
+  if (!noiseData || noiseData.width !== w || noiseData.height !== h) {
+    const imgData = ctx.createImageData(w, h);
+    noiseData = imgData;
+  }
+  const data = noiseData.data;
+  for (let i = 0; i < data.length; i += 4) {
+    const n = Math.random() * 18;
+    data[i] = 255;
+    data[i + 1] = 255;
+    data[i + 2] = 255;
+    data[i + 3] = n;
+  }
+  ctx.putImageData(noiseData, 0, 0);
+}
 
 function setup(){
   pixelDensity(1);
@@ -39,6 +81,15 @@ function draw(){
     ctx.lineTo(w,g);
     ctx.stroke();
   }
+
+  // phosphor mask (toggleable)
+  //drawPhosphorMask();
+
+  // vignette/curvature darkening
+  drawVignette();
+
+  // subtle noise overlay
+  //drawNoise();
 }
 
 function windowResized(){
