@@ -19,6 +19,26 @@
       Published {{ .Date.Format "January 2, 2006" }}
       {{ with .Lastmod }} • Updated {{ .Format "January 2, 2006" }}{{ end }}
     </p>
+    {{ if or .Params.tags .Params.categories }}
+    <div class="gg-terms">
+      {{ with .Params.tags }}
+        <div class="gg-term-row">
+          <span class="gg-term-label">Tags:</span>
+          {{ range . }}
+            <a class="gg-term-pill" href="{{ "/" | relURL }}?q={{ . | urlquery }}">{{ . }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+      {{ with .Params.categories }}
+        <div class="gg-term-row">
+          <span class="gg-term-label">Categories:</span>
+          {{ range . }}
+            <a class="gg-term-pill" href="{{ "/" | relURL }}?q={{ . | urlquery }}">{{ . }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+    {{ end }}
     <div class="gg-content">
       {{ .Content }}
     </div>

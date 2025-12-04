@@ -114,7 +114,7 @@
       <description>An interactive 3D visualization of the Insertion Sort algorithm using p5.js and WEBGL, featuring real-time sorting animation with camera controls and step-by-step progression.</description>
     </item>
     <item>
-      <title></title>
+      <title>Simple Perlin Noise Map</title>
       <link>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</link>
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</guid>

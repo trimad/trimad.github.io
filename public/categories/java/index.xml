@@ -6,8 +6,15 @@
     <description>Recent content in Java on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 03 Dec 2025 17:05:51 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stub Title</title>
+      <link>http://localhost:1313/prompts/2025-07-03-stub/</link>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/prompts/2025-07-03-stub/</guid>
+      <description>Stub Summary</description>
+    </item>
     <item>
       <title>k-means Clustering</title>
       <link>http://localhost:1313/posts/2021-05-18-k-means-clustering/</link>

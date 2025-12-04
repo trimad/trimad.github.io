@@ -3,7 +3,7 @@ title: Interactive Array Visualization
 author: Tristan Madden
 date: 2016-12-13
 draft: false
-categories: [JavaScript, p5.js]
+categories: ["JavaScript"]
 tags: [interactive, arrays, visualization, p5.js, programming, education]
 summary: "An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface."
 usePageBundles: true

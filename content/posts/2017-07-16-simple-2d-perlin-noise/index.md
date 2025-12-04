@@ -3,9 +3,10 @@ author: Tristan Madden
 date: 2017-07-16
 draft: false
 tags: ["interactive","JavaScript","p5.js"]
-categories: ["JavaScript","p5.js"]
+categories: ["JavaScript"]
 summary: "An interactive p5.js sketch that generates 2D terrain using Perlin noise, with different colors representing water, sand, and grass based on elevation values."
 toc: true
+title: Simple Perlin Noise Map
 usePageBundles: true
 ---
 

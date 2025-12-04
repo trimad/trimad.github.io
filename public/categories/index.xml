@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Dec 2025 13:26:16 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 03 Dec 2025 17:05:51 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Powershell</title>
@@ -34,6 +34,20 @@
       <link>http://localhost:1313/categories/google/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/google/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C#</title>
+      <link>http://localhost:1313/categories/c%23/</link>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/c%23/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/categories/java/</link>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/java/</guid>
       <description></description>
     </item>
     <item>
@@ -205,20 +219,6 @@
       <description></description>
     </item>
     <item>
-      <title>C#</title>
-      <link>http://localhost:1313/categories/c%23/</link>
-      <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/c%23/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>P5.js</title>
-      <link>http://localhost:1313/categories/p5.js/</link>
-      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/p5.js/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Media Processing</title>
       <link>http://localhost:1313/categories/media-processing/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
@@ -230,13 +230,6 @@
       <link>http://localhost:1313/categories/office-365/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/office-365/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Java</title>
-      <link>http://localhost:1313/categories/java/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/java/</guid>
       <description></description>
     </item>
     <item>

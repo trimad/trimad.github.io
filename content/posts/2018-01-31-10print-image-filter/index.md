@@ -3,8 +3,8 @@ title: 10PRINT Image Filter
 author: Tristan Madden
 date: 2018-01-31
 draft: false
-tags: [10PRINT, interactive]
-categories: [JavaScript, p5.js]
+tags: [10PRINT, interactive, p5.js]
+categories: ["JavaScript"]
 summary: "An interactive p5.js implementation of the classic 10PRINT algorithm, offering customizable image filtering with options for both precise and hand-drawn style maze patterns."
 toc: true
 usePageBundles: true

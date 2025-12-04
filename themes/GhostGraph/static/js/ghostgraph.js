@@ -498,14 +498,23 @@ function rebuildEdges() {
     for (const n of nodes) {
       if (!n.visible) continue;
       const palette = nodePalette(n);
-      const baseColor = mixColors(palette);
+      const baseColor = palette.length === 1 ? palette[0] : mixColors(palette);
       const isHover = hoveredNode === n;
       const isActive = activeNode === n;
       const rBase = n.renderRadius || 8.5;
       const r = isActive ? rBase * 1.25 : isHover ? rBase * 1.12 : rBase;
       const grad = ctx.createRadialGradient(n.x - r * 0.4, n.y - r * 0.4, r * 0.2, n.x, n.y, r);
-      grad.addColorStop(0, baseColor);
-      grad.addColorStop(1, 'rgba(0,0,0,0.4)');
+      if (palette.length === 1) {
+        grad.addColorStop(0, baseColor);
+        grad.addColorStop(1, 'rgba(0,0,0,0.4)');
+      } else {
+        const steps = palette.length;
+        palette.forEach((c, idx) => {
+          const t = idx / Math.max(1, steps - 1);
+          grad.addColorStop(t, c);
+        });
+        grad.addColorStop(1, 'rgba(0,0,0,0.35)');
+      }
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);

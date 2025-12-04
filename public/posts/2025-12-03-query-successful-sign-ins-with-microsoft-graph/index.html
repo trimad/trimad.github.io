@@ -28,6 +28,34 @@
       Published December 3, 2025
        • Updated December 3, 2025
     </p>
+    
+    <div class="gg-terms">
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Tags:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=entra">entra</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=powershell">powershell</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=microsoft-graph">microsoft-graph</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=signin">signin</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=security">security</a>
+          
+        </div>
+      
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Categories:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=powershell">powershell</a>
+          
+        </div>
+      
+    </div>
+    
     <div class="gg-content">
       <p>I threw together a small script for quickly auditing successful sign-ins originating from New York. It uses the Microsoft Graph PowerShell SDK, pulls the last X days of logs, filters for success (<code>errorCode 0</code>), then narrows the results down to New York by city or state.</p>
 <p>The output is shaped into a cleaner object and exported to <code>NewYorkSuccessfulSignIns.json</code> in the working directory. If nothing matches, it still writes an empty JSON array so downstream tooling doesn&rsquo;t explode.</p>

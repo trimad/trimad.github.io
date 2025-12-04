@@ -28,6 +28,28 @@
       Published June 9, 2022
        • Updated May 13, 2025
     </p>
+    
+    <div class="gg-terms">
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Tags:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=download">download</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=ffmpeg">ffmpeg</a>
+          
+        </div>
+      
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Categories:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=Shell">Shell</a>
+          
+        </div>
+      
+    </div>
+    
     <div class="gg-content">
       <p>This is my tentative work flow for downloading movie streams online. The gist of what I&rsquo;ve learned about this process is that every HTTP Live Stream (HLS) begins with an <code>.m3u8</code> playlist with a MIME type of <code>x-mpegURL</code> or <code>vnd.apple.mpegURL</code>. This playlist lists a series of .ts files that are streamed one at a time and decoded so your browser is not burdened with downloading the entire movie every time you refresh the page. These .ts files can also be aggregated and assembled into a video.</p>
 <h2>Finding the Playlist</h2>

@@ -20,7 +20,7 @@
     if (typeof categories !== 'undefined' && categories.length) seedCategoryCenters();
   }
 
-  let parsed = { nodes: [] };
+let parsed = { nodes: [] };
   try {
     parsed = JSON.parse(dataEl.textContent || '{}');
   } catch (err) {
@@ -39,7 +39,7 @@
   const tokenize = (str) => (str || '')
     .toLowerCase()
     .split(/[^a-z0-9]+/)
-    .filter(t => t && t.length >= 3);
+    .filter(t => t && t.length >= 2);
 
   const nodes = (parsed.nodes || []).map((n) => {
     const tags = normalizeList(n.tags);
@@ -71,21 +71,34 @@
     return;
   }
 
-  const palette = [
-    '#00fff7', '#b000e0', '#ff6fb7', '#7df2ff', '#aaf96d',
-    '#ffcc66', '#7cc7ff', '#f196f0', '#8ef0ff', '#ff9f43'
-  ];
+  const hashHue = (str, offset = 0, span = 360) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0;
+    }
+    const hue = (Math.abs(hash) % span) + offset;
+    return hue % 360;
+  };
+
+  const categoryColorMap = new Map();
+  const tagColorMap = new Map();
 
   const categories = Array.from(new Set(nodes.flatMap(n => (n.categories && n.categories.length) ? n.categories : ['uncategorized'])));
   const colorByCategory = new Map();
-  categories.forEach((cat, i) => colorByCategory.set(cat, palette[i % palette.length]));
+  categories.forEach(cat => {
+    const hue = hashHue(cat || 'uncategorized');
+    const color = `hsl(${hue}, 75%, 60%)`;
+    colorByCategory.set(cat, color);
+    categoryColorMap.set(cat, color);
+  });
   let queryActive = false;
 
   // category cluster centers on a ring
   const catCenters = new Map();
   function seedCategoryCenters() {
     catCenters.clear();
-    const radius = Math.min(width, height) * 0.35;
+    const radius = Math.min(width, height) * 0.45;
     const cx = width / 2;
     const cy = height / 2;
     categories.forEach((cat, idx) => {
@@ -122,19 +135,73 @@
   }
 
   function tagColor(tag) {
-    if (!tag) return 'rgba(0, 255, 247, 0.26)';
-    // lightweight hash to hue
-    let hash = 0;
-    for (let i = 0; i < tag.length; i++) {
-      hash = (hash << 5) - hash + tag.charCodeAt(i);
-      hash |= 0;
-    }
-    const hue = Math.abs(hash) % 360;
-    return `hsla(${hue}, 70%, 60%, 0.5)`;
+    if (!tag) return 'rgba(72, 242, 227, 0.26)';
+    if (tagColorMap.has(tag)) return tagColorMap.get(tag);
+    const hue = hashHue(tag);
+    const color = `hsl(${hue}, 80%, 62%)`;
+    tagColorMap.set(tag, color);
+    return color;
   }
 
-  let edges = [];
-  function rebuildEdges() {
+  function hslToRgb(str) {
+    const m = /hsl\s*\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*\)/i.exec(str || '');
+    if (!m) return { r: 0, g: 255, b: 247 };
+    let h = parseFloat(m[1]);
+    const s = parseFloat(m[2]) / 100;
+    const l = parseFloat(m[3]) / 100;
+    h = ((h % 360) + 360) % 360;
+    if (s === 0) {
+      const v = Math.round(l * 255);
+      return { r: v, g: v, b: v };
+    }
+    const c = (1 - Math.abs(2 * l - 1)) * s;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const mVal = l - c / 2;
+    let r1 = 0, g1 = 0, b1 = 0;
+    if (h < 60) { r1 = c; g1 = x; b1 = 0; }
+    else if (h < 120) { r1 = x; g1 = c; b1 = 0; }
+    else if (h < 180) { r1 = 0; g1 = c; b1 = x; }
+    else if (h < 240) { r1 = 0; g1 = x; b1 = c; }
+    else if (h < 300) { r1 = x; g1 = 0; b1 = c; }
+    else { r1 = c; g1 = 0; b1 = x; }
+    return {
+      r: Math.round((r1 + mVal) * 255),
+      g: Math.round((g1 + mVal) * 255),
+      b: Math.round((b1 + mVal) * 255)
+    };
+  }
+
+  function mixColors(colors) {
+    if (!colors || !colors.length) return '#00fff7';
+    if (colors.length === 1) return colors[0];
+    let r = 0, g = 0, b = 0;
+    colors.forEach(c => {
+      const { r: rr, g: gg, b: bb } = hslToRgb(c);
+      r += rr; g += gg; b += bb;
+    });
+    const n = colors.length;
+    r = Math.round(r / n);
+    g = Math.round(g / n);
+    b = Math.round(b / n);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  function nodePalette(node) {
+    const cats = (node.categories && node.categories.length) ? node.categories : [node.primary];
+    const unique = Array.from(new Set(cats));
+    const palette = unique.map(c => colorByCategory.get(c) || '#00fff7');
+    return palette.length ? palette : ['#00fff7'];
+  }
+
+let edges = [];
+let hoveredNode = null;
+let activeNode = null;
+let dragNode = null;
+let dragOffset = { x: 0, y: 0 };
+let dragStart = null;
+let dragMoved = false;
+
+function rebuildEdges() {
     edges = [];
     const tagMap = new Map();
     nodes.forEach(n => {
@@ -145,19 +212,18 @@
       });
     });
 
-    const maxPerTag = 120;
     for (const [tag, list] of tagMap) {
       if (list.length < 2) continue;
       // shuffle lightly to vary hubs
       const shuffled = [...list].sort(() => Math.random() - 0.5);
       const hub = shuffled[0];
       let count = 0;
-      for (let i = 1; i < shuffled.length && count < maxPerTag; i++) {
+      for (let i = 1; i < shuffled.length; i++) {
         edges.push({ source: hub, target: shuffled[i], tag });
         count++;
       }
       // connect a few neighbor pairs for shape
-      for (let i = 1; i < shuffled.length - 1 && count < maxPerTag; i++) {
+      for (let i = 1; i < shuffled.length - 1; i++) {
         edges.push({ source: shuffled[i], target: shuffled[i + 1], tag });
         count++;
       }
@@ -215,12 +281,8 @@
           matched = true;
           break;
         }
-        // allow prefix matches only when the shorter term is reasonably long to avoid "ai" matching "gmail"
-        if (qt.length >= 3 && nt.startsWith(qt)) {
-          matched = true;
-          break;
-        }
-        if (nt.length >= 3 && qt.startsWith(nt)) {
+        // allow prefix matches to respond on every keystroke without over-matching substrings
+        if (nt.startsWith(qt)) {
           matched = true;
           break;
         }
@@ -231,12 +293,12 @@
   }
 
   function applyForces() {
-    const repulsion = 1200;
-    const spring = 0.01;
-    const linkDistance = 240;
-    const damping = 0.9;
-    const maxVel = 2.8;
-    const margin = 24;
+    const repulsion = 1200;      // node-to-node push strength
+    const spring = 0.0085;       // edge pull strength
+    const linkDistance = 260;    // preferred edge length
+    const damping = 0.9;         // velocity decay per tick
+    const maxVel = 3.0;          // clamp node speed
+    const margin = 24;           // padding from canvas edges
     const minX = margin;
     const maxX = width - margin;
     const minY = margin;
@@ -282,6 +344,11 @@
     // center gravity and move within golden box
     for (const n of nodes) {
       if (!n.visible) continue;
+      if (dragNode === n || hoveredNode === n) {
+        n.vx = 0;
+        n.vy = 0;
+        continue;
+      }
       const center = catCenters.get(n.primary) || { x: width / 2, y: height / 2 };
       n.vx += (center.x - n.x) * 0.001;
       n.vy += (center.y - n.y) * 0.001;
@@ -300,7 +367,7 @@
       n.y = Math.max(minY, Math.min(maxY, n.y));
     }
 
-    // recenter & rescale visible nodes to occupy ~61.8% of viewport
+    // recenter & rescale visible nodes to occupy ~80% of viewport
     const visibleNodes = nodes.filter(n => n.visible);
     if (visibleNodes.length) {
       let minVX = Infinity, maxVX = -Infinity, minVY = Infinity, maxVY = -Infinity;
@@ -329,8 +396,8 @@
       const pad = 20;
       const spanX = Math.max(1, maxVX - minVX);
       const spanY = Math.max(1, maxVY - minVY);
-      const targetW = width * 0.618;
-      const targetH = height * 0.618;
+      const targetW = width * 0.9;
+      const targetH = height * 0.9;
       const scale = Math.min(targetW / (spanX + pad), targetH / (spanY + pad), 2.0);
 
       const cx = (minVX + maxVX) / 2;
@@ -339,6 +406,7 @@
       const targetCY = height / 2;
 
       visibleNodes.forEach(n => {
+        if (hoveredNode && hoveredNode === n) return;
         const nx = (n.x - cx) * scale + targetCX;
         const ny = (n.y - cy) * scale + targetCY;
         n.x = Math.max(minX, Math.min(maxX, nx));
@@ -352,12 +420,12 @@
     const cx = width / 2;
     const cy = height / 2;
 
-    ctx.lineWidth = 1.2;
+    ctx.lineWidth = 1.1;
     for (const e of edges) {
       if (!e.source.visible || !e.target.visible) continue;
       ctx.strokeStyle = tagColor(e.tag);
       ctx.shadowColor = ctx.strokeStyle;
-      ctx.shadowBlur = 4;
+      ctx.shadowBlur = 2;
       const sx = e.source.x, sy = e.source.y;
       const tx = e.target.x, ty = e.target.y;
       const dx = tx - sx;
@@ -383,17 +451,19 @@
       ctx.shadowBlur = 0;
 
       // edge label at curve mid
-      const tagLabel = String(e.tag || '').replace(/^cat:/, '').replace(/["']/g, '');
-      if (tagLabel) {
-        const qx = 0.25 * sx + 0.5 * cx + 0.25 * tx;
-        const qy = 0.25 * sy + 0.5 * cy + 0.25 * ty;
-        ctx.save();
-        ctx.font = '10px "Share Tech Mono", monospace';
-        ctx.fillStyle = 'rgba(216, 226, 255, 0.7)';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(tagLabel, qx, qy);
-        ctx.restore();
+      if (queryActive) {
+        const tagLabel = String(e.tag || '').replace(/^cat:/, '').replace(/["']/g, '');
+        if (tagLabel) {
+          const qx = 0.25 * sx + 0.5 * cx + 0.25 * tx;
+          const qy = 0.25 * sy + 0.5 * cy + 0.25 * ty;
+          ctx.save();
+          ctx.font = '10px "Share Tech Mono", monospace';
+          ctx.fillStyle = 'rgba(216, 226, 255, 0.7)';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(tagLabel, qx, qy);
+          ctx.restore();
+        }
       }
     }
 
@@ -416,40 +486,61 @@
       if (!count) return; // skip labels when a category has been fully pruned
       const center = { x: sumX / count, y: sumY / count };
       const label = String(cat || '').replace(/["']/g, '').toUpperCase();
+      const baseColor = colorByCategory.get(cat) || '#00fff7';
+      ctx.save();
+      ctx.fillStyle = baseColor;
+      ctx.globalAlpha = 0.08;
       ctx.fillText(label, center.x, center.y);
+      ctx.restore();
     });
     ctx.restore();
 
     for (const n of nodes) {
       if (!n.visible) continue;
-      const color = colorByCategory.get(n.primary) || '#00fff7';
-      const r = n.renderRadius || 8.5;
-      ctx.fillStyle = color;
+      const palette = nodePalette(n);
+      const baseColor = palette.length === 1 ? palette[0] : mixColors(palette);
+      const isHover = hoveredNode === n;
+      const isActive = activeNode === n;
+      const rBase = n.renderRadius || 8.5;
+      const r = isActive ? rBase * 1.25 : isHover ? rBase * 1.12 : rBase;
+      const grad = ctx.createRadialGradient(n.x - r * 0.4, n.y - r * 0.4, r * 0.2, n.x, n.y, r);
+      if (palette.length === 1) {
+        grad.addColorStop(0, baseColor);
+        grad.addColorStop(1, 'rgba(0,0,0,0.4)');
+      } else {
+        const steps = palette.length;
+        palette.forEach((c, idx) => {
+          const t = idx / Math.max(1, steps - 1);
+          grad.addColorStop(t, c);
+        });
+        grad.addColorStop(1, 'rgba(0,0,0,0.35)');
+      }
+      ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.45)';
-      ctx.stroke();
 
       // label
       ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
-      ctx.shadowBlur = 4;
+      ctx.shadowBlur = 2;
       const title = (n.title || '').replace(/["']/g, '');
       const angle = Math.atan2(n.y - cy, n.x - cx);
       const dx = Math.cos(angle);
       const dy = Math.sin(angle);
       const baseOffset = r + 8;
 
-      ctx.font = '14px "Share Tech Mono", monospace';
-      ctx.fillStyle = 'rgba(216, 226, 255, 0.92)';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      const metrics = ctx.measureText(title);
-      const w = metrics.width;
-      const h = 14; // approximate line height
-      const labelX = n.x + dx * (baseOffset + w / 2 + 4);
-      const labelY = n.y + dy * (baseOffset + h / 2 + 4);
-      ctx.fillText(title, labelX, labelY);
+      if (queryActive) {
+        ctx.font = '14px "Share Tech Mono", monospace';
+        ctx.fillStyle = 'rgba(216, 226, 255, 0.92)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const metrics = ctx.measureText(title);
+        const w = metrics.width;
+        const h = 14; // approximate line height
+        const labelX = n.x + dx * (baseOffset + w / 2 + 4);
+        const labelY = n.y + dy * (baseOffset + h / 2 + 4);
+        ctx.fillText(title, labelX, labelY);
+      }
 
       ctx.shadowBlur = 0;
     }
@@ -490,7 +581,85 @@
     });
   }
 
+  // prefill search from ?q= query param
+  (function prefillSearch() {
+    if (!searchEl) return;
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q) {
+      searchEl.value = q;
+      const evt = new Event('input', { bubbles: true });
+      searchEl.dispatchEvent(evt);
+    }
+  })();
+
+  function findNodeAt(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    let closest = null;
+    let minDist = Infinity;
+    for (const n of nodes) {
+      if (!n.visible) continue;
+      const r = (n.renderRadius || 8.5) * 1.3;
+      const dx = n.x - x;
+      const dy = n.y - y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < r && dist < minDist) {
+        minDist = dist;
+        closest = n;
+      }
+    }
+    return closest;
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    if (dragNode) {
+      const rect = canvas.getBoundingClientRect();
+      dragNode.x = (e.clientX - rect.left) + dragOffset.x;
+      dragNode.y = (e.clientY - rect.top) + dragOffset.y;
+      if (dragStart) {
+        const dx = e.clientX - dragStart.x;
+        const dy = e.clientY - dragStart.y;
+        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+          dragMoved = true;
+        }
+      }
+      return;
+    }
+    hoveredNode = findNodeAt(e.clientX, e.clientY);
+    canvas.style.cursor = hoveredNode ? 'pointer' : 'default';
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    hoveredNode = null;
+    activeNode = null;
+    canvas.style.cursor = 'default';
+  });
+
+  canvas.addEventListener('mousedown', (e) => {
+    activeNode = findNodeAt(e.clientX, e.clientY);
+    if (activeNode) {
+      dragNode = activeNode;
+      const rect = canvas.getBoundingClientRect();
+      dragOffset.x = activeNode.x - (e.clientX - rect.left);
+      dragOffset.y = activeNode.y - (e.clientY - rect.top);
+      dragStart = { x: e.clientX, y: e.clientY };
+      dragMoved = false;
+    }
+  });
+
+  canvas.addEventListener('mouseup', () => {
+    activeNode = null;
+    dragNode = null;
+    dragStart = null;
+  });
+
   canvas.addEventListener('click', (e) => {
+    if (dragMoved) {
+      dragMoved = false;
+      return;
+    }
     const rect = canvas.getBoundingClientRect();
     const x = (e.clientX - rect.left);
     const y = (e.clientY - rect.top);
@@ -508,6 +677,15 @@
     }
     if (closest && minDist < 14 && closest.url) {
       window.location.href = closest.url;
+    }
+  });
+
+  canvas.addEventListener('auxclick', (e) => {
+    if (e.button !== 1) return;
+    const node = findNodeAt(e.clientX, e.clientY);
+    if (node && node.url) {
+      e.preventDefault();
+      window.open(node.url, '_blank');
     }
   });
 

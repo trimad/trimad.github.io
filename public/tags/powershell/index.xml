@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>PowerShell on Ghostfeed</title>
+    <title>Powershell on Ghostfeed</title>
     <link>http://localhost:1313/tags/powershell/</link>
-    <description>Recent content in PowerShell on Ghostfeed</description>
+    <description>Recent content in Powershell on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Dec 2025 13:26:16 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 03 Dec 2025 17:05:51 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Query Successful Sign-ins With Microsoft Graph</title>
+      <link>http://localhost:1313/posts/2025-12-03-query-successful-sign-ins-with-microsoft-graph/</link>
+      <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-12-03-query-successful-sign-ins-with-microsoft-graph/</guid>
+      <description>A quick PowerShell script that pulls successful sign-ins from Entra ID using Microsoft Graph.</description>
+    </item>
     <item>
       <title>Query Conditional Access Policies With Microsoft Graph</title>
       <link>http://localhost:1313/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/</link>

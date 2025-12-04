@@ -15,5 +15,12 @@
       <guid>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</guid>
       <description>A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder.</description>
     </item>
+    <item>
+      <title>Daily Donation Report</title>
+      <link>http://localhost:1313/posts/2019-08-25-daily-donation-report/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2019-08-25-daily-donation-report/</guid>
+      <description>A Google Apps Script that automates the collection and distribution of Google Forms data by aggregating submissions, converting them to XLSX format, and sending formatted HTML email reports.</description>
+    </item>
   </channel>
 </rss>

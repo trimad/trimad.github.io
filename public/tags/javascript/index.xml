@@ -37,7 +37,7 @@
       <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
     </item>
     <item>
-      <title></title>
+      <title>Simple Perlin Noise Map</title>
       <link>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</link>
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</guid>

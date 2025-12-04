@@ -3,8 +3,8 @@ title: Orbiting Pixels Utility
 author: Tristan Madden
 date: 2018-11-12
 draft: false
-tags: [interactive]
-categories: [JavaScript, p5.js]
+tags: ["interactive", "p5.js"]
+categories: ["JavaScript"]
 summary: "A p5.js interactive visualization that transforms images into dynamic grids of orbiting objects, where each object's rotation phase and characteristics are mapped to pixel brightness values."
 toc: true
 usePageBundles: true
@@ -21,3 +21,4 @@ This program works by creating a grid of evenly-spaced points. Each points has a
 {{< youtube wScbpI7JfZ0 >}}
 
 {{< youtube -dvcPju6q5o >}}
+

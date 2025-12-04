@@ -28,6 +28,28 @@
       Published December 2, 2025
        • Updated December 3, 2025
     </p>
+    
+    <div class="gg-terms">
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Tags:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=HP">HP</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=bloatware">bloatware</a>
+          
+        </div>
+      
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Categories:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=powershell">powershell</a>
+          
+        </div>
+      
+    </div>
+    
     <div class="gg-content">
       <p>I put together a quick script to purge all HP software (including Wolf Security junk) by scraping the registry’s uninstall keys. It grabs both 64-bit and WOW6432Node entries, filters anything with HP or Wolf in the name, and silently uninstalls each one.</p>
 <p>The tricky part is normalizing the uninstall commands—HP mixes MSI GUID calls with random EXE installers, sometimes wrapped in quotes, sometimes not. The script fixes all of that and calls each uninstall silently with <code>/quiet</code> and <code>/norestart</code>.</p>

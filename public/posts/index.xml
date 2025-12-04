@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Dec 2025 13:26:16 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 03 Dec 2025 17:05:51 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Query Successful Sign-ins With Microsoft Graph</title>
@@ -723,7 +723,7 @@
       <description>A Java implementation of the counting sort algorithm, a non-comparison based sorting method with O(n+k) time complexity, demonstrated using Processing.</description>
     </item>
     <item>
-      <title></title>
+      <title>Simple Perlin Noise Map</title>
       <link>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</link>
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</guid>

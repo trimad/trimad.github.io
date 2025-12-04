@@ -3,8 +3,8 @@ title: Archimedean Spiral
 author: Tristan Madden
 date: 2022-05-04
 draft: false
-tags: [spiral, interactive]
-categories: [JavaScript, p5.js]
+tags: ["spiral", "interactive", "p5.js"]
+categories: ["JavaScript"]
 summary: "An interactive p5.js sketch that generates Archimedean spirals using polar coordinates, with the ability to export SVG files for physical fabrication."
 usePageBundles: true
 ---
@@ -22,3 +22,4 @@ This sketch draws an <a href="https://en.wikipedia.org/wiki/Archimedean_spiral">
 ![Desktop View](/assets/img/2022-05-04/archimedes2.svg){: width="auto" height="auto" }
 
 ![Desktop View](/assets/img/2022-05-04/archimedes1.svg){: width="auto" height="auto" }
+

@@ -1,6 +1,6 @@
 ---
 author: Tristan Madden
-categories: [Python, Programming, Web Development]
+categories: [Python]
 date: 2023-06-24
 draft: false
 summary: "A Python script using the qrcode library to generate customizable QR codes with error correction, including options for masking specific areas of the code."

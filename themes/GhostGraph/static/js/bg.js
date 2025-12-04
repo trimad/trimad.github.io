@@ -6,11 +6,11 @@ function drawPhosphorMask() {
   ctx.save();
   ctx.globalAlpha = 0.08;
   for (let x = 0; x < w; x += stripeWidth) {
-    ctx.fillStyle = 'rgba(255,0,0,0.4)';
+    ctx.fillStyle = 'rgba(255,90,60,0.35)';
     ctx.fillRect(x, 0, 1, h);
-    ctx.fillStyle = 'rgba(0,255,0,0.3)';
+    ctx.fillStyle = 'rgba(255,180,60,0.25)';
     ctx.fillRect(x + 1, 0, 1, h);
-    ctx.fillStyle = 'rgba(0,0,255,0.4)';
+    ctx.fillStyle = 'rgba(255,120,60,0.35)';
     ctx.fillRect(x + 2, 0, 1, h);
   }
   ctx.restore();
@@ -63,7 +63,7 @@ function setup(){
 
 function draw(){
   // manual background (faster than background())
-  ctx.fillStyle="rgba(8,18,28,0.70)";
+  ctx.fillStyle="rgba(5,10,18,0.75)";
   ctx.fillRect(0,0,w,h);
 
   fc=frameCount;
