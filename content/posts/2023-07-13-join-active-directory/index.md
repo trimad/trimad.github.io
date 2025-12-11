@@ -1,6 +1,6 @@
 ---
 author: Tristan Madden
-categories: [shell, powershell]
+categories: [System Administration, PowerShell]
 date: 2023-07-13
 summary: "A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality."
 tags: [active-directory, powershell, shell, windows, automation]
@@ -33,3 +33,4 @@ Like with the Shell command, you need to replace 'thepassword', 'domain\username
 {{% notice warning "WARNING" %}}
 Remember, while these one-liner commands are convenient, they also involve handling sensitive information such as usernames and passwords in plain text. Ensure to run these commands in a secure environment, and do not leave the sensitive information in your scripts or command history.
 {{% /notice %}}
+

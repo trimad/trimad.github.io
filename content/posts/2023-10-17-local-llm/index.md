@@ -4,7 +4,7 @@ categories: [Python]
 date: 2023-10-17
 draft: false
 summary: "A guide to setting up a local large language model (LLM) environment for TheraFit, a project focused on matching clients with therapists."
-tags: [python, llm, machine-learning, local-ai, therafit]
+tags: [python, llm, machine-learning, ai]
 title: "Setting Up a Local Large Language Model (LLM) Environment"
 toc: true
 usePageBundles: true
@@ -59,3 +59,4 @@ Accelerate: True
 ```shell
 python run.py
 ```
+

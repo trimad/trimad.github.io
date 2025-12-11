@@ -1,6 +1,6 @@
 ---
 author: Tristan Madden
-categories: [Shell]
+categories: [System Administration]
 date: 2023-05-17
 draft: true
 tags: [tracert, networking, powershell]
@@ -27,3 +27,5 @@ foreach ($computer in $computers) {
 }
 
 ```
+
+

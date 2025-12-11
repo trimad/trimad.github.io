@@ -1,6 +1,6 @@
 ---
 author: Tristan Madden
-categories: [powershell]
+categories: [PowerShell]
 date: 2023-10-10
 summary: "Install Windows Updates with the PSWindowsUpdate PowerShell module."
 tags: [powershell, windows-update, automation, system-administration]
@@ -46,3 +46,4 @@ Set-ExecutionPolicy Restricted -Scope Process -Force
 {{% notice warning "WARNING" %}}
 Don't forget to reset the PowerShell script execution policy back to 'Restricted' when you're done!
 {{% /notice %}}
+

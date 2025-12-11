@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [Shell]
+categories: [System Administration]
 date: 2023-04-13
 draft: false
-tags: [net, drives, printers]
+tags: [net, network-drives, printers]
 title: net use
 summary: "Connects a computer to or disconnects a computer from a shared resource, or displays information about computer connections. The command also controls persistent net connections. Used without parameters, net use retrieves a list of network connections."
 usePageBundles: true
@@ -83,3 +83,4 @@ Connect to a shared resource using a different username and password, without ma
 ```Shell
 net use \\<your>\<UNC>\<path> /user:<domain>\<username> <password>
 ```
+

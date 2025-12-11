@@ -16,48 +16,6 @@
       <description>Stub Summary</description>
     </item>
     <item>
-      <title>k-means Clustering</title>
-      <link>http://localhost:1313/posts/2021-05-18-k-means-clustering/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2021-05-18-k-means-clustering/</guid>
-      <description>A Processing visualization of the k-means clustering algorithm, demonstrating iterative centroid-based data partitioning and Voronoi cell formation for different values of k.</description>
-    </item>
-    <item>
-      <title>Buddhabrot</title>
-      <link>http://localhost:1313/posts/2019-08-25-buddhabrot/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-25-buddhabrot/</guid>
-      <description>An implementation of the Buddhabrot fractal rendering technique, which visualizes escape-time trajectories of points outside the Mandelbrot set, creating intricate patterns that resemble a seated Buddha figure.</description>
-    </item>
-    <item>
-      <title>Blending Textures With Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/</link>
-      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/</guid>
-      <description>A Processing implementation that combines Open Simplex Noise with image blending techniques to create smooth, organic animations of texture transitions.</description>
-    </item>
-    <item>
-      <title>Cube Wave</title>
-      <link>http://localhost:1313/posts/2018-12-30-cube-wave/</link>
-      <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-12-30-cube-wave/</guid>
-      <description>A Processing implementation of a 3D cube wave animation using PeasyCam for camera control, featuring dynamic lighting and orthographic projection for a mesmerizing visual effect.</description>
-    </item>
-    <item>
-      <title>Lorenz Doll</title>
-      <link>http://localhost:1313/posts/2018-11-21-lorenz-doll/</link>
-      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-11-21-lorenz-doll/</guid>
-      <description>A Processing visualization where each pixel of an image is transformed into a Lorenz System, with the system&amp;rsquo;s velocity mapped to the original pixel&amp;rsquo;s brightness values.</description>
-    </item>
-    <item>
-      <title>Barnsley Fern</title>
-      <link>http://localhost:1313/posts/2018-06-28-barnsley-fern/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
-      <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
-    </item>
-    <item>
       <title>UVa Online Judge Challenge &#34;11045&#34;</title>
       <link>http://localhost:1313/archive/2018-05-01-uva-11045/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
@@ -86,81 +44,11 @@
       <description>Although BFS and DFS were recommended solutions to the problem, I saw an opportunity to solve this problem using Disjoint Sets. The virtual judge run time was 0.050s.</description>
     </item>
     <item>
-      <title>Comparing Java Distance Functions</title>
-      <link>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</link>
-      <pubDate>Tue, 17 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</guid>
-      <description>A Java program that compares various distance calculation methods, including Manhattan, Euclidean, and Chebyshev distances, and visualizes their differences using Processing.</description>
-    </item>
-    <item>
-      <title>Faster Java String Inputs</title>
-      <link>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</link>
-      <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</guid>
-      <description>A high-performance Java input reader class optimized for programming contests, providing fast integer and double parsing with automatic tokenization and buffering options.</description>
-    </item>
-    <item>
-      <title>Kruskal&#39;s Algorithm Visualized With Processing</title>
-      <link>http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/</link>
-      <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/</guid>
-      <description>A Processing implementation of Kruskal&amp;rsquo;s algorithm for finding minimum spanning trees in weighted graphs, demonstrating the O(E log E) greedy approach to network optimization.</description>
-    </item>
-    <item>
-      <title>Collatz Conjecture &#43; Unit Circle</title>
-      <link>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</link>
-      <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</guid>
-      <description>A Processing visualization of the Collatz Conjecture mapped onto a unit circle, creating 360 distinct branches with 1-degree turns, featuring an interactive exploration of number paths.</description>
-    </item>
-    <item>
       <title>UVa Online Judge Challenge &#34;1112&#34;</title>
       <link>http://localhost:1313/archive/2018-04-09-uva-1112/</link>
       <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2018-04-09-uva-1112/</guid>
       <description>&lt;p&gt;This problem involves a relatively small graph, so I opted to implement the &lt;a href=&#34;https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm&#34;&gt;Floyd-Warshall Algorithm&lt;/a&gt; instead of &lt;a href=&#34;https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&#34;&gt;Dijkstra&amp;rsquo;s Algorithm&lt;/a&gt; for the sake of simplicity. This algorithm finds the shortest path between every pair of vertices in a graph, running in O(n^3) time. Although this might sound inefficient, the UVA judge accepted this program with a runtime of 0.12 seconds, which is well within the 3-second threshold. I designed this algorithm using an object-oriented approach and avoided arrays, so that if I ever have enough free time, I can easily integrate it into Processing and visualize it in 3D.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Minimum Spanning Tree Visualized</title>
-      <link>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</link>
-      <pubDate>Sat, 07 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</guid>
-      <description>A Processing visualization of Prim&amp;rsquo;s Algorithm creating a minimum spanning tree on procedurally generated terrain using Perlin noise height maps and orthographic projection.</description>
-    </item>
-    <item>
-      <title>AT&amp;T Hackathon</title>
-      <link>http://localhost:1313/posts/2018-03-12-att-hackathon/</link>
-      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-03-12-att-hackathon/</guid>
-      <description>A reflection on participating in the AT&amp;amp;T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions.</description>
-    </item>
-    <item>
-      <title>Generating Terrain with Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</link>
-      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</guid>
-      <description>A Processing implementation of a Minecraft-style terrain generator using Open Simplex Noise, featuring 3D voxel-based terrain with performance analysis of random walker agents.</description>
-    </item>
-    <item>
-      <title>Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</link>
-      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</guid>
-      <description>A Processing implementation exploring 4D Simplex Noise to create smooth, organic looping animations through a 2D grid of pixel objects with variable noise scaling.</description>
-    </item>
-    <item>
-      <title>Flipping Tiles</title>
-      <link>http://localhost:1313/posts/2017-11-18-flippy-tiles/</link>
-      <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2017-11-18-flippy-tiles/</guid>
-      <description>A Processing sketch creating mesmerizing animations of tiles that flip based on either random patterns or Perlin noise algorithms, demonstrating creative uses of procedural animation.</description>
-    </item>
-    <item>
-      <title>Juno Cam Image Processing</title>
-      <link>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</link>
-      <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</guid>
-      <description>A Java program that reconstructs and processes raw image data from NASA&amp;rsquo;s Juno spacecraft&amp;rsquo;s pushframe camera, combining multiple filter strips to create high-resolution composite images of Jupiter.</description>
     </item>
     <item>
       <title>UVa Online Judge Challenge &#34;10550&#34;</title>
@@ -231,13 +119,6 @@
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-08-15-kattis-different/</guid>
       <description>&amp;ldquo;Write a program that computes the difference between non-negative integers.&amp;rdquo;</description>
-    </item>
-    <item>
-      <title></title>
-      <link>http://localhost:1313/posts/2017-07-18-counting-sort/</link>
-      <pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2017-07-18-counting-sort/</guid>
-      <description>A Java implementation of the counting sort algorithm, a non-comparison based sorting method with O(n+k) time complexity, demonstrated using Processing.</description>
     </item>
   </channel>
 </rss>

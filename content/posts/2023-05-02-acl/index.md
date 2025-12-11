@@ -4,7 +4,7 @@ categories: [Windows, PowerShell, Security]
 date: 2023-05-02
 draft: false
 summary: "A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions."
-tags: [windows, powershell, security, permissions, acl, system-administration, active-directory, file-permissions]
+tags: [windows, powershell, security, permissions, system-administration, active-directory]
 title: "Windows ACL Management with PowerShell"
 toc: true
 usePageBundles: true
@@ -105,3 +105,4 @@ This is untested!
 (Get-Acl -Path "\\server\share").AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule("<SID>", "Write", "Allow"))) | Set-Acl -Path "\\server\share"
 
 ```
+

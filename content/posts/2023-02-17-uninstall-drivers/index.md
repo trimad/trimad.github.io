@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [Shell, Windows, System Administration]
+categories: [System Administration, Windows]
 date: 2023-02-17
 draft: false
-tags: [drivers, windows, system administration, hardware, device management, cmd, command line, troubleshooting]
+tags: [drivers, windows, hardware, device-management, cmd, shell]
 title: Windows Driver Management with pnputil
 usePageBundles: true
 thumbnail: "thumbnail.png"
@@ -35,3 +35,4 @@ pnputil.exe -d INF_file_name
 This command uninstalls the driver.
 
 Restart your computer to complete the uninstallation process.
+

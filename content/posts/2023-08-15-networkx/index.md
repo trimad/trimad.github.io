@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [Python]
 date: 2023-08-15
 summary: "A comprehensive guide to creating visually appealing network graphs with Python's networkx library, including node positioning, custom coloring, edge labeling, and group visualization with ellipses."
-tags: [python, networkx, data-visualization, graphs, network-analysis]
+tags: [python, graphs, data-visualization, network-analysis]
 title: "Python NetworkX Library for Network Graph Visualization"
 toc: true
 usePageBundles: true
@@ -194,3 +194,4 @@ plt.show()
 ```
 ## Graph Output
 {{< figure src="graph.png" >}}
+

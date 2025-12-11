@@ -23,6 +23,13 @@
       <description>A JavaScript implementation using p5.js to generate a black and white disco ball visualization.</description>
     </item>
     <item>
+      <title>AT&amp;T Hackathon</title>
+      <link>http://localhost:1313/posts/2018-03-12-att-hackathon/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-03-12-att-hackathon/</guid>
+      <description>A reflection on participating in the AT&amp;amp;T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions.</description>
+    </item>
+    <item>
       <title>Interactive Array Visualization</title>
       <link>http://localhost:1313/posts/2016-12-13-arrays/</link>
       <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>

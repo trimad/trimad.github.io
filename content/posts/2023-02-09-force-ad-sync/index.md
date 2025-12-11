@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [PowerShell, Active Directory, Azure AD]
 date: 2023-02-09
 draft: false
-tags: [powershell, azure, m365, active directory, ad sync, azure ad connect, domain controller, synchronization, automation, security]
+tags: [powershell, azure, ad-sync, azure-ad-connect, domain-controller, synchronization]
 title: PowerShell Script for Azure AD Synchronization Management
 usePageBundles: true
 thumbnail: "thumbnail.png"
@@ -46,3 +46,4 @@ switch ($selected_menu_item) {
 Write-Host 'Running Now.... Check miisclient to confirm'
 Start-Sleep -s 10
 ```
+

@@ -15,5 +15,19 @@
       <guid>http://localhost:1313/posts/2024-10-16-restart-iis-application/</guid>
       <description>A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling.</description>
     </item>
+    <item>
+      <title>Window Monitoring with Machine Vision</title>
+      <link>http://localhost:1313/posts/2024-03-25-window-watcher/</link>
+      <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2024-03-25-window-watcher/</guid>
+      <description>A guide to setting up a window monitoring system using the Moondream2 machine vision model for real-time window content analysis.</description>
+    </item>
+    <item>
+      <title>Key Event Tester</title>
+      <link>http://localhost:1313/posts/2023-05-08-keycode-event-test/</link>
+      <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2023-05-08-keycode-event-test/</guid>
+      <description>This diagnostic tool allows you to type into a text area and logs keyboard events, providing valuable information such as key codes, key names, and modifier keys (Alt, Ctrl, Shift, Meta). As you interact with the text area, the captured event data will be displayed in real-time. This can be particularly useful for debugging and understanding the nuances of keyboard events in your application.</description>
+    </item>
   </channel>
 </rss>

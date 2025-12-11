@@ -3,8 +3,8 @@ title: Generating Terrain with Open Simplex Noise
 author: Tristan Madden
 date: 2018-01-03
 draft: false
-tags: [open simplex noise]
-categories: [Java, Processing]
+tags: [open-simplex-noise]
+categories: [Development, Visualization]
 summary: "A Processing implementation of a Minecraft-style terrain generator using Open Simplex Noise, featuring 3D voxel-based terrain with performance analysis of random walker agents."
 usePageBundles: true
 ---
@@ -20,3 +20,4 @@ performance looked like. I was getting only 30FPS with 64 walkers on a relativel
 that Java is the wrong language for this application.
 
 {{< youtube qxbR32r74no >}}
+

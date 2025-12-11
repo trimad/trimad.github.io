@@ -3,7 +3,7 @@ title: Managing Exchange Calendars
 author: Tristan Madden
 date: 2021-09-16
 draft: false
-tags: [calendars, M365, ExchangeOnlineManagement]
+tags: [calendars, azure, exchange-online]
 categories: [PowerShell]
 summary: "A collection of PowerShell scripts using ExchangeOnlineManagement module to manage calendar permissions in Exchange Online, including bulk operations for granting, modifying, and viewing access rights across multiple mailboxes."
 usePageBundles: true
@@ -182,3 +182,4 @@ Foreach ($user in $users) {Set-MailboxFolderPermission $user":\Calendar" -User <
 # Source: https://docs.microsoft.com/en-us/powershell/module/exchange/get-mailboxfolderpermission?view=exchange-ps
 Foreach ($user in $users) {Get-MailboxFolderPermission $user":\Calendar" -User <UPN>}
 ```
+

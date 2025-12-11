@@ -3,8 +3,8 @@ title: Insertion Sort using WEBGL
 author: Tristan Madden
 date: 2018-01-28
 draft: false
-tags: [sorting, insertion sort, interactive, p5.js]
-categories: ["JavaScript"]
+tags: [sorting, insertion-sort, interactive, p5js]
+categories: [Development]
 summary: "An interactive 3D visualization of the Insertion Sort algorithm using p5.js and WEBGL, featuring real-time sorting animation with camera controls and step-by-step progression."
 toc: true
 usePageBundles: true
@@ -28,3 +28,5 @@ This is a (perhaps overkill) 3D WEBGL visualization of Insertion Sort using the 
 </h2>
 
 <h2><a href="https://editor.p5js.org/Berkanan/sketches/ND4PVEivz" target="_blank">Launch the p5.js editor</a></h2>
+
+

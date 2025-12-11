@@ -3,8 +3,8 @@ title: 10PRINT Image Filter
 author: Tristan Madden
 date: 2018-01-31
 draft: false
-tags: [10PRINT, interactive, p5.js]
-categories: ["JavaScript"]
+tags: [10print, interactive, p5js]
+categories: [Development]
 summary: "An interactive p5.js implementation of the classic 10PRINT algorithm, offering customizable image filtering with options for both precise and hand-drawn style maze patterns."
 toc: true
 usePageBundles: true
@@ -19,3 +19,5 @@ This sketch is a browser-based image filtering utility inspired by <a href="http
 <h2><a href="https://editor.p5js.org/Berkanan/full/YDIQkPqbb" target="_blank">Launch this sketch is a new window (recommended)</a></h2>
 
 <h2><a href="https://editor.p5js.org/Berkanan/sketches/YDIQkPqbb">Launch p5.js web editor</a></h2>
+
+

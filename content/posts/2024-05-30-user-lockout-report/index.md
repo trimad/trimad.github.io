@@ -99,3 +99,4 @@ $htmlContent | Out-File -FilePath $htmlPath
 # Open the HTML file in the default browser
 Start-Process "powershell.exe" -ArgumentList "Start-Process $htmlPath"
 ```
+

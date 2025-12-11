@@ -1,10 +1,10 @@
 ---
 author: Tristan Madden
-categories: [Networking, DNS]
+categories: [Networking]
 date: 2024-06-06
 draft: false
 summary: "A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices."
-tags: [dns, networking, email, domain-management, system-administration, dmarc, spf, dkim, mx]
+tags: [dns, networking, email, domain-management, system-administration, mx]
 title: "Complete DNS Records Reference Guide"
 toc: true
 usePageBundles: true
@@ -244,3 +244,5 @@ No specific action is taken for emails that do not match.
 ```
 ?all;
 ```
+
+

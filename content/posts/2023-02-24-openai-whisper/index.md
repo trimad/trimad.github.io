@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [Python, AI, Machine Learning]
 date: 2023-02-24
 draft: false
-tags: [ai, audio, speech recognition, machine learning, natural language processing, openai, python, cuda, gpu, multilingual]
+tags: [ai, audio, machine-learning, openai, python, cuda]
 title: OpenAI Whisper Speech Recognition Guide
 usePageBundles: true
 ---
@@ -49,3 +49,4 @@ There are five model sizes, four with English-only versions, offering speed and 
 | large  |   1550 M   |        N/A         |      `large`       |    ~10 GB     |       1x       |
 
 For English-only applications, the .en models tend to perform better, especially for the tiny.en and base.en models.
+

@@ -15,5 +15,19 @@
       <guid>http://localhost:1313/posts/2024-07-30-batch-compress-images/</guid>
       <description>A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library).</description>
     </item>
+    <item>
+      <title>Faster Java String Inputs</title>
+      <link>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</link>
+      <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</guid>
+      <description>A high-performance Java input reader class optimized for programming contests, providing fast integer and double parsing with automatic tokenization and buffering options.</description>
+    </item>
+    <item>
+      <title>AT&amp;T Hackathon</title>
+      <link>http://localhost:1313/posts/2018-03-12-att-hackathon/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-03-12-att-hackathon/</guid>
+      <description>A reflection on participating in the AT&amp;amp;T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions.</description>
+    </item>
   </channel>
 </rss>

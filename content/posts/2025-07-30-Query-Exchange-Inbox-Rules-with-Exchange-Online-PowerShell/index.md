@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [PowerShell]
 date: 2025-07-30
 draft: false
-tags: [Exchange, Security, Audit]
+tags: [exchange-online, security]
 title: "Query Exchange Inbox Rules with Exchange Online PowerShell"
 summary: "Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox—perfect for threat hunting, compliance, and incident response."
 usePageBundles: true
@@ -249,3 +249,5 @@ Start-Process $outputFile
 Disconnect-ExchangeOnline -Confirm:$false
 Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan
 ```
+
+

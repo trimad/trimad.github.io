@@ -1,10 +1,10 @@
 ---
 author: Tristan Madden
-categories: [Windows, PowerShell, Active Directory, Exchange]
+categories: [Windows, PowerShell, Active Directory]
 date: 2023-04-05
 draft: false
 summary: "A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute."
-tags: [active-directory, exchange, powershell, gal, system-administration, office-365, exchange-online, user-management, directory-services]
+tags: [active-directory, exchange-online, powershell, system-administration, user-management, directory-services]
 title: "Managing Global Address List (GAL) Visibility with PowerShell"
 toc: true
 usePageBundles: true
@@ -125,3 +125,4 @@ foreach ($user in $ExternalUsers) {
     Set-MailContact -Identity $user.Name -HiddenFromAddressListsEnabled $true
 }
 ```
+

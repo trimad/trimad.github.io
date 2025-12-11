@@ -3,8 +3,8 @@ title: Download Streams
 author: Tristan Madden
 date: 2022-06-09
 draft: false
-tags: [download, ffmpeg]
-categories: [Shell]
+tags: [download]
+categories: [System Administration]
 summary: "A guide to downloading HTTP Live Streams (HLS) by locating and using .m3u8 playlists with ffmpeg, including browser developer tools techniques for finding stream sources."
 usePageBundles: true
 ---
@@ -87,3 +87,4 @@ Here is an example of a stream that the content host was trying to protect. The 
 1898.jpg
 #EXT-X-ENDLIST
 ```
+

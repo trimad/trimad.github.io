@@ -1,10 +1,10 @@
 ---
 author: Tristan Madden
-categories: [Microsoft Office, System Administration]
+categories: [Microsoft 365, System Administration]
 date: 2024-09-10
 draft: false
 summary: "A comprehensive guide to managing Microsoft 365 versions using OfficeC2RClient, including checking current builds, consulting version history, and rolling back or updating Office installations."
-tags: [microsoft-office, office365, version-management, system-administration, windows, powershell, officec2rclient]
+tags: [officec2rclient, exchange-online, version-management, system-administration, windows, powershell]
 title: "Managing Microsoft Office Versions with OfficeC2RClient"
 toc: true
 usePageBundles: true
@@ -163,3 +163,4 @@ Remove-Item -Path "C:\ProgramData\Microsoft\ClickToRun\Download" -Recurse -Force
 - **Backup Settings:** Before making changes, back up your Office settings, especially if you have custom configurations or macros.
 - **Monitor Updates:** Keep track of your Office versions and update history to manage installations effectively.
 - **Stay Informed:** Regularly check the Office release notes for updates on new features and fixes.
+

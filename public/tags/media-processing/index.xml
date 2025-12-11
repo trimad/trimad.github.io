@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Media Processing on Ghostfeed</title>
+    <title>Media-Processing on Ghostfeed</title>
     <link>http://localhost:1313/tags/media-processing/</link>
-    <description>Recent content in Media Processing on Ghostfeed</description>
+    <description>Recent content in Media-Processing on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>

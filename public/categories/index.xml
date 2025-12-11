@@ -6,20 +6,20 @@
     <description>Recent content in Categories on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Dec 2025 11:16:24 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 04 Dec 2025 12:35:41 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Powershell</title>
+      <title>PowerShell</title>
       <link>http://localhost:1313/categories/powershell/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/powershell/</guid>
       <description></description>
     </item>
     <item>
-      <title>Champva</title>
-      <link>http://localhost:1313/categories/champva/</link>
+      <title>System Administration</title>
+      <link>http://localhost:1313/categories/system-administration/</link>
       <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/champva/</guid>
+      <guid>http://localhost:1313/categories/system-administration/</guid>
       <description></description>
     </item>
     <item>
@@ -30,10 +30,17 @@
       <description></description>
     </item>
     <item>
-      <title>Google</title>
-      <link>http://localhost:1313/categories/google/</link>
+      <title>Networking</title>
+      <link>http://localhost:1313/categories/networking/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/google/</guid>
+      <guid>http://localhost:1313/categories/networking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows</title>
+      <link>http://localhost:1313/categories/windows/</link>
+      <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/windows/</guid>
       <description></description>
     </item>
     <item>
@@ -65,24 +72,10 @@
       <description></description>
     </item>
     <item>
-      <title>Windows</title>
-      <link>http://localhost:1313/categories/windows/</link>
-      <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/windows/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Microsoft Office</title>
-      <link>http://localhost:1313/categories/microsoft-office/</link>
+      <title>Microsoft 365</title>
+      <link>http://localhost:1313/categories/microsoft-365/</link>
       <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/microsoft-office/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>System Administration</title>
-      <link>http://localhost:1313/categories/system-administration/</link>
-      <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/system-administration/</guid>
+      <guid>http://localhost:1313/categories/microsoft-365/</guid>
       <description></description>
     </item>
     <item>
@@ -97,27 +90,6 @@
       <link>http://localhost:1313/categories/python/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/python/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Networking</title>
-      <link>http://localhost:1313/categories/networking/</link>
-      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/networking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Shell</title>
-      <link>http://localhost:1313/categories/shell/</link>
-      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/shell/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>DNS</title>
-      <link>http://localhost:1313/categories/dns/</link>
-      <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/dns/</guid>
       <description></description>
     </item>
     <item>
@@ -149,10 +121,17 @@
       <description></description>
     </item>
     <item>
-      <title>JavaScript</title>
-      <link>http://localhost:1313/categories/javascript/</link>
+      <title>Shell</title>
+      <link>http://localhost:1313/categories/shell/</link>
+      <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/shell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Development</title>
+      <link>http://localhost:1313/categories/development/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/javascript/</guid>
+      <guid>http://localhost:1313/categories/development/</guid>
       <description></description>
     </item>
     <item>
@@ -163,45 +142,10 @@
       <description></description>
     </item>
     <item>
-      <title>Nodejs</title>
-      <link>http://localhost:1313/categories/nodejs/</link>
-      <pubDate>Thu, 11 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/nodejs/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Exchange</title>
-      <link>http://localhost:1313/categories/exchange/</link>
-      <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/exchange/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Microsoft 365</title>
-      <link>http://localhost:1313/categories/microsoft-365/</link>
-      <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/microsoft-365/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Teams</title>
-      <link>http://localhost:1313/categories/teams/</link>
-      <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/teams/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Azure AD</title>
       <link>http://localhost:1313/categories/azure-ad/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/azure-ad/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Computer Vision</title>
-      <link>http://localhost:1313/categories/computer-vision/</link>
-      <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/computer-vision/</guid>
       <description></description>
     </item>
     <item>
@@ -212,24 +156,10 @@
       <description></description>
     </item>
     <item>
-      <title>Office 365</title>
-      <link>http://localhost:1313/categories/office-365/</link>
+      <title>Exchange</title>
+      <link>http://localhost:1313/categories/exchange/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/office-365/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Processing</title>
-      <link>http://localhost:1313/categories/processing/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/processing/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Reference</title>
-      <link>http://localhost:1313/categories/reference/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/reference/</guid>
+      <guid>http://localhost:1313/categories/exchange/</guid>
       <description></description>
     </item>
     <item>
@@ -237,13 +167,6 @@
       <link>http://localhost:1313/categories/c&#43;&#43;/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/c&#43;&#43;/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>MASM</title>
-      <link>http://localhost:1313/categories/masm/</link>
-      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/masm/</guid>
       <description></description>
     </item>
   </channel>

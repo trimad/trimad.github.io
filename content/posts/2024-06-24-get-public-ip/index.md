@@ -1,10 +1,10 @@
 ---
 author: Tristan Madden
-categories: [Networking, Shell, PowerShell]
+categories: [Networking, System Administration, PowerShell]
 date: 2024-06-24
 draft: false
 summary: "A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions."
-tags: [networking, ip-address, command-line, powershell, curl, nslookup]
+tags: [networking, ip-address, shell, powershell, curl, nslookup]
 title: "How to Find Your Public IP Address"
 toc: true
 usePageBundles: true
@@ -29,3 +29,4 @@ curl ifconfig.me
 
 ## Using a browser
 [https://ip.me/](https://ip.me/)
+

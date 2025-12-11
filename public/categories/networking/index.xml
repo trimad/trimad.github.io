@@ -6,8 +6,15 @@
     <description>Recent content in Networking on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jun 2025 09:57:53 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UDM Parameters for Google Search</title>
+      <link>http://localhost:1313/posts/2025-06-17-udm-arguments/</link>
+      <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-06-17-udm-arguments/</guid>
+      <description>Detailed guide to Google Search UDM (Universal Display Mode) parameters, each with descriptions and example searches.</description>
+    </item>
     <item>
       <title>How to Find Your Public IP Address</title>
       <link>http://localhost:1313/posts/2024-06-24-get-public-ip/</link>

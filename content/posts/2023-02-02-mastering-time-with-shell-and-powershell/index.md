@@ -3,8 +3,8 @@ title: Mastering Time with Shell and PowerShell
 author: Tristan Madden
 date: 2023-02-02
 draft: false
-tags: [time, shell, powershell, windows, systeminfo, wmic, Win32_OperatingSystem, tzutil]
-categories: [Shell, PowerShell]
+tags: [time, shell, powershell, windows, systeminfo, wmic]
+categories: [System Administration, PowerShell]
 summary: "A comprehensive guide to Windows time management using shell and PowerShell commands, covering system uptime, boot times, time synchronization, and timezone configuration."
 usePageBundles: true
 ---
@@ -102,3 +102,4 @@ Change the system time zone using the tzutil command by providing the desired ti
 ```Shell
 tzutil /s "Eastern Standard Time"
 ```
+

@@ -3,8 +3,8 @@ title: Merge Sort using WEBGL
 author: Tristan Madden
 date: 2018-02-05
 draft: false
-tags: [sorting, merge sort, interactive, p5.js]
-categories: ["JavaScript"]
+tags: [sorting, merge-sort, interactive, p5js]
+categories: [Development]
 summary: "An interactive 3D visualization of the Merge Sort algorithm using p5.js and WEBGL, featuring step-by-step animation with camera controls and real-time sorting visualization."
 toc: true
 usePageBundles: true
@@ -25,3 +25,5 @@ This is a (perhaps overkill) 3D WEBGL visualization of <a href="https://en.wikip
 * RIGHT_ARROW = step forwards
 * SCROLL_UP = zoom in
 * SCROLL_DOWN = zoom out
+
+

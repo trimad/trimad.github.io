@@ -3,8 +3,8 @@ title: Collatz Conjecture + Unit Circle
 author: Tristan Madden
 date: 2018-04-09
 draft: false
-tags: [collatz conjecture, 3n+1]
-categories: [Java, Processing]
+tags: [3n-plus-1]
+categories: [Development, Visualization]
 summary: "A Processing visualization of the Collatz Conjecture mapped onto a unit circle, creating 360 distinct branches with 1-degree turns, featuring an interactive exploration of number paths."
 toc: true
 usePageBundles: true
@@ -122,3 +122,5 @@ class Turtle {
   }
 }
 ```
+
+

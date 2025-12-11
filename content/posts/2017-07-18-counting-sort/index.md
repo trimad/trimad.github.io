@@ -2,8 +2,8 @@
 author: Tristan Madden
 date: 2017-07-18
 draft: false
-tags: [sorting, counting sort]
-categories: [Java, Processing]
+tags: [sorting]
+categories: [Development, Visualization]
 summary: "A Java implementation of the counting sort algorithm, a non-comparison based sorting method with O(n+k) time complexity, demonstrated using Processing."
 toc: true
 usePageBundles: true
@@ -61,3 +61,5 @@ void countingSort(int arr[]) {
   }
 }
 ```
+
+

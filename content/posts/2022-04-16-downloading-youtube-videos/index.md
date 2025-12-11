@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2022-04-16
 draft: false
 tags: [download, youtube-dl, yt-dlp]
-categories: [Shell]
+categories: [System Administration]
 summary: "A guide to downloading YouTube videos and audio using yt-dlp and youtube-dl command-line tools, including various options for format selection and quality settings."
 usePageBundles: true
 ---
@@ -58,3 +58,4 @@ Begin downloading from a playlist at a specific position:
 ```CMD
 youtube-dl --yes-playlist --playlist-start 22 "https://www.youtube.com/watch?v=M5c9HdaQqh0&list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd"
 ```
+

@@ -3,8 +3,8 @@ title: Stable Diffusion Scripts
 author: Tristan Madden
 date: 2023-02-05
 draft: false
-tags: [ai, images, video, stable diffusion, python, javascript, automation, image processing]
-categories: [JavaScript, Python]
+tags: [ai, image-processing, video, stable-diffusion, python, javascript]
+categories: [Development, Python]
 summary: "A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools."
 usePageBundles: true
 ---
@@ -281,3 +281,4 @@ for filename in os.listdir('.'):
         output_path = os.path.join('output', new_filename)
         pixelated.save(output_path)
 ```
+

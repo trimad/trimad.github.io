@@ -23,11 +23,18 @@
       <description>A Python script using the qrcode library to generate customizable QR codes with error correction, including options for masking specific areas of the code.</description>
     </item>
     <item>
-      <title>3D Photo Inpainting with Python and PyTorch</title>
-      <link>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</link>
-      <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</guid>
-      <description>A comprehensive guide to setting up and using 3D Photo Inpainting on Windows, including Miniconda environment setup, dependency installation, and usage instructions.</description>
+      <title>Deforum Cheat Sheet</title>
+      <link>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</link>
+      <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</guid>
+      <description>This is a cheat sheet of animations showing what the various 3D translation and rotation settings do in Deforum Stable Diffusion.</description>
+    </item>
+    <item>
+      <title>Deep Floyd IF</title>
+      <link>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</link>
+      <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</guid>
+      <description>My tentative work flow for running Deep Floyd IF locally for image generation.</description>
     </item>
     <item>
       <title>Stable Diffusion Scripts</title>

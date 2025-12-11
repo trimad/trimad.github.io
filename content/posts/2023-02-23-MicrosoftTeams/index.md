@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [PowerShell, Microsoft 365, Teams]
+categories: [PowerShell, Microsoft 365, Microsoft Teams]
 date: 2023-02-23
 draft: false
-tags: [microsoft teams, powershell, team management, collaboration, automation, team ownership, channel management, user management]
+tags: [collaboration, powershell, team-management, automation, team-ownership]
 title: Microsoft Teams PowerShell Management Guide
 usePageBundles: true
 ---
@@ -54,3 +54,4 @@ $teamMemberships | Export-Csv -Path "team-memberships.csv" -NoTypeInformation
 $teamChannels | Export-Csv -Path "team-channels.csv" -NoTypeInformation
 $teamChannelMemberShips | Export-Csv -Path "team-channel-memberships.csv" -NoTypeInformation
 ```
+

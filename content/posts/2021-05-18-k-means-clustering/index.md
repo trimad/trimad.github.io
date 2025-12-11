@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2021-05-18
 draft: false
 tags: [animation, k-means]
-categories: [Java, Processing]
+categories: [Development, Visualization]
 summary: "A Processing visualization of the k-means clustering algorithm, demonstrating iterative centroid-based data partitioning and Voronoi cell formation for different values of k."
 toc: true
 usePageBundles: true
@@ -21,3 +21,4 @@ _k-means clustering_ is a method of vector quantization, originally from signal 
 {{< figure src="IY8X6gJ.gif" alt="K=5" >}}
 
 GitHub repository: https://github.com/Trimad/k-means-clustering
+

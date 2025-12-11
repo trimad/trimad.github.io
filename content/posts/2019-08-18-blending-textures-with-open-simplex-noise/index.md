@@ -3,8 +3,8 @@ title: Blending Textures With Open Simplex Noise
 author: Tristan Madden
 date: 2019-08-18
 draft: false
-tags: [animation, open simplex noise]
-categories: [Java, Processing]
+tags: [animation, open-simplex-noise]
+categories: [Development, Visualization]
 summary: "A Processing implementation that combines Open Simplex Noise with image blending techniques to create smooth, organic animations of texture transitions."
 usePageBundles: true
 ---
@@ -2231,3 +2231,5 @@ public class OpenSimplexNoise {
 }
 
 ```
+
+

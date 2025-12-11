@@ -3,8 +3,8 @@ title: AT&T Hackathon
 author: Tristan Madden
 date: 2018-03-12
 draft: false
-tags: [android]
-categories: [Java, Processing]
+tags: [programming, java, optimization, 3d-modeling, visualization]
+categories: [Development, Visualization]
 summary: "A reflection on participating in the AT&T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions."
 toc: true
 usePageBundles: true
@@ -22,3 +22,5 @@ end. I wrote a lot of useful functions for building 3D scenes and I can't wait t
 {{< youtube uubmKclwyWk >}}
 
 {{< youtube 0Nk2rGMuUYc >}}
+
+

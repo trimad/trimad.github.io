@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [powershell]
+categories: [PowerShell]
 date: 2025-12-02
 draft: false
-tags: [HP, bloatware]
+tags: [automation]
 title: "HP Bloatware Uninstaller"
 summary: "The perfect PowerShell script for uninstalling HP bloatware."
 usePageBundles: true

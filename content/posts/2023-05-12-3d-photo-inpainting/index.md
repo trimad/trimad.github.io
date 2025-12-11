@@ -4,7 +4,7 @@ categories: [Python, AI, Image Processing]
 date: 2023-05-12
 draft: false
 summary: "A comprehensive guide to setting up and using 3D Photo Inpainting on Windows, including Miniconda environment setup, dependency installation, and usage instructions."
-tags: [python, ai, 3d-modeling, photo-editing, computer-vision, machine-learning, image-processing]
+tags: [python, ai, 3d-modeling, photo-editing, computer-vision, machine-learning]
 title: "3D Photo Inpainting with Python and PyTorch"
 toc: true
 usePageBundles: true
@@ -53,3 +53,4 @@ pip install cynetworkx
 pip install scikit-image
 pip install pyyaml==5.4.1
 ```
+

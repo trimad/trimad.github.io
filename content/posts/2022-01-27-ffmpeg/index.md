@@ -3,8 +3,8 @@ title: FFmpeg Command Reference
 author: Tristan Madden
 date: 2022-01-27
 draft: false
-tags: [audio, video, ffmpeg, shell, media processing, video conversion, audio conversion, screen recording, filtering]
-categories: [Shell, Media Processing]
+tags: [audio, video, shell, media-processing, video-conversion, audio-conversion]
+categories: [System Administration, Media Processing]
 summary: "A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples."
 usePageBundles: true
 ---
@@ -203,3 +203,4 @@ The options used in the command are:
 * "-filter_complex paletteuse" : This is a filter that uses the previously generated palette to create the gif animation
 * "file.gif" : This is the output file name for the created gif animation
 In summary, this command is creating a gif animation from a sequence of PNG images using a previously generated color palette, and saving the animation to the file "file.gif". The resulting gif animation will have the same frame rate as the input images and a smaller file size due to the use of a limited color palette.
+

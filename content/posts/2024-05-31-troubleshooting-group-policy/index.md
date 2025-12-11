@@ -16,3 +16,4 @@ Test DNS
 ```shell
 dcdiag /test:dns > out.txt
 ```
+

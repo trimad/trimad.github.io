@@ -1,11 +1,11 @@
 ---
 title: "Disco Ball"
 author: Tristan Madden
-categories: [JavaScript]
+categories: [Development]
 date: 2023-08-24
 draft: false
 summary: "A JavaScript implementation using p5.js to generate a black and white disco ball visualization."
-tags: ["p5.js", "javascript", "creative-coding", "visualization"]
+tags: [p5js, javascript, creative-coding, visualization]
 toc: true
 usePageBundles: true
 ---
@@ -61,4 +61,6 @@ saveCanvas(c, 'myCanvas', 'png');
   
 }
 ```
+
+
 

@@ -15,5 +15,12 @@
       <guid>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</guid>
       <description>A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute.</description>
     </item>
+    <item>
+      <title>Get Group Membership</title>
+      <link>http://localhost:1313/posts/2021-09-16-active-directory-group-membership/</link>
+      <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-16-active-directory-group-membership/</guid>
+      <description>PowerShell scripts for extracting and reporting group membership information from both on-premises Active Directory and Azure AD, featuring progress tracking and CSV export functionality.</description>
+    </item>
   </channel>
 </rss>

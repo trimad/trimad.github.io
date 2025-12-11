@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Network Drives on Ghostfeed</title>
+    <title>Network-Drives on Ghostfeed</title>
     <link>http://localhost:1313/tags/network-drives/</link>
-    <description>Recent content in Network Drives on Ghostfeed</description>
+    <description>Recent content in Network-Drives on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
@@ -14,6 +14,13 @@
       <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-07-20-mapped-drives/</guid>
       <description>This blog post discusses a PowerShell script that can map a network drive using a Security Identifier (SID), even without being logged in as that user.</description>
+    </item>
+    <item>
+      <title>net use</title>
+      <link>http://localhost:1313/posts/2023-04-13-net-use/</link>
+      <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2023-04-13-net-use/</guid>
+      <description>Connects a computer to or disconnects a computer from a shared resource, or displays information about computer connections. The command also controls persistent net connections. Used without parameters, net use retrieves a list of network connections.</description>
     </item>
   </channel>
 </rss>

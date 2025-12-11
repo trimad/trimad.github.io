@@ -6,8 +6,15 @@
     <description>Recent content in Windows on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Jun 2025 14:36:50 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 03 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/2025-12-11-rebuild-user-profile/</link>
+      <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-12-11-rebuild-user-profile/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</title>
       <link>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</link>
@@ -98,13 +105,6 @@
       <pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/</guid>
       <description>A comprehensive guide to Windows time management using shell and PowerShell commands, covering system uptime, boot times, time synchronization, and timezone configuration.</description>
-    </item>
-    <item>
-      <title>PowerShell Script to Export WiFi Network Credentials</title>
-      <link>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</guid>
-      <description>A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.</description>
     </item>
     <item>
       <title>Windows Settings URI Reference</title>

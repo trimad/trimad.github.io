@@ -4,7 +4,7 @@ categories: [Python, Machine Learning]
 date: 2024-03-25
 draft: false
 summary: "A guide to setting up a window monitoring system using the Moondream2 machine vision model for real-time window content analysis."
-tags: [python, machine-learning, computer-vision, monitoring, moondream]
+tags: [python, machine-learning, computer-vision, logging, moondream]
 title: "Window Monitoring with Machine Vision"
 toc: true
 usePageBundles: true
@@ -107,4 +107,6 @@ if __name__ == "__main__":
 POST `http://127.0.0.1:5000/itt`
 
 ### Client-Side Script
+
+
 

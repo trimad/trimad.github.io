@@ -4,7 +4,7 @@ categories: [Windows, Security, System Administration]
 date: 2023-03-03
 draft: false
 summary: "A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding."
-tags: [windows, security, firewall, netsh, system-administration, windows-defender, network-security, command-line, rdp, port-management]
+tags: [windows, security, netsh, system-administration, windows-defender, network-security]
 title: "Windows Defender Firewall Management Guide"
 toc: true
 usePageBundles: true
@@ -39,3 +39,4 @@ These rules allow incoming TCP traffic on ports 10004 and 10005. Again, the "dir
 netsh advfirewall firewall add rule name="10004" dir=in action=allow protocol=TCP localport=10004 enable=yes
 netsh advfirewall firewall add rule name="10005" dir=in action=allow protocol=TCP localport=10005 enable=yes
 ```
+

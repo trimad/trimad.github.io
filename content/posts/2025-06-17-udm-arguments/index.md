@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [Google]
+categories: [Networking]
 date: 2025-06-18
 draft: false
-tags: [UDM]
+tags: [udm]
 title: UDM Parameters for Google Search
 summary: "Detailed guide to Google Search UDM (Universal Display Mode) parameters, each with descriptions and example searches."
 usePageBundles: true
@@ -210,3 +210,5 @@ Strips the UI of non-essential elements—minimal ads, no extra flair.
 ---
 
 *Sources: [Reddit thread on udm=56](https://www.reddit.com/r/sysadmin/comments/1le5ibq/googles_udm56_parameter_unlocks_cleaner_and/?utm_source=chatgpt.com) and web exploration.*
+
+

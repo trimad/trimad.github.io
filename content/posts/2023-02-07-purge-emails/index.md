@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [PowerShell, Security, Microsoft 365]
 date: 2023-02-07
 draft: false
-tags: [email security, hacked accounts, M365, ExchangeOnlineManagement, powershell, azure, compliance, security management, email management, incident response]
+tags: [email-security, hacked-accounts, azure, exchange-online, powershell, security]
 title: Microsoft 365 Email Security Management Guide
 usePageBundles: true
 thumbnail: "security_thumbnail.png"
@@ -104,3 +104,4 @@ foreach ($userEmail in $userEmails) {
 }
 
 ```
+

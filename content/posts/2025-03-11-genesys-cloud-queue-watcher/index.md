@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [JavaScript]
+categories: [Development]
 date: 2025-03-11
 draft: true
-tags: [Genesys Cloud]
+tags: [api]
 title: Genesys Cloud Queue Watcher
 thumbnail: "thumbnail.png"
 summary: "A JavaScript script that monitors waiting calls in Genesys Cloud and plays a Super Mario Bros. theme when a call is waiting."
@@ -97,3 +97,4 @@ function stopQueueWatcher() {
 4. Copy and paste the script into the console.
 5. Run `startQueueWatcher();` to begin monitoring.
 6. If you want to stop it, run `stopQueueWatcher();`.
+

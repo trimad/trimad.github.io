@@ -16,6 +16,13 @@
       <description>A practical collection of Python Flask API implementations for running various AI models locally, including image-to-text using Moondream, text-to-speech with Coqui TTS, and text generation via local LLMs with OpenAI-compatible interfaces.</description>
     </item>
     <item>
+      <title>Setting Up a Local Large Language Model (LLM) Environment</title>
+      <link>http://localhost:1313/posts/2023-10-17-local-llm/</link>
+      <pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2023-10-17-local-llm/</guid>
+      <description>A guide to setting up a local large language model (LLM) environment for TheraFit, a project focused on matching clients with therapists.</description>
+    </item>
+    <item>
       <title>Deforum Cheat Sheet</title>
       <link>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>

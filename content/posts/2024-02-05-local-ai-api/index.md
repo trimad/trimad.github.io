@@ -4,7 +4,7 @@ categories: [Python]
 date: 2024-02-05
 draft: false
 summary: "A practical collection of Python Flask API implementations for running various AI models locally, including image-to-text using Moondream, text-to-speech with Coqui TTS, and text generation via local LLMs with OpenAI-compatible interfaces."
-tags: [python, ai, machine-learning, api, flask, local-ai, moondream, coqui-tts]
+tags: [python, ai, machine-learning, api, flask, moondream]
 title: "Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs"
 toc: true
 usePageBundles: true
@@ -238,3 +238,4 @@ while True:
 ### Usage
 
 No need to reinvent the wheel here, the quantized weights work great in <a href="https://lmstudio.ai/">LM Studio</a>.
+

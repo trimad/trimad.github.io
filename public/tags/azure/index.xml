@@ -6,8 +6,15 @@
     <description>Recent content in Azure on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 03 Dec 2025 13:26:16 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Query Conditional Access Policies With Microsoft Graph</title>
+      <link>http://localhost:1313/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/</guid>
+      <description>A clean PowerShell approach to export Azure AD Conditional Access policies using the Microsoft Graph SDK.</description>
+    </item>
     <item>
       <title>PowerShell Script for Azure AD Synchronization Management</title>
       <link>http://localhost:1313/posts/2023-02-09-force-ad-sync/</link>
@@ -35,6 +42,13 @@
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2021-09-16-active-directory-group-membership/</guid>
       <description>PowerShell scripts for extracting and reporting group membership information from both on-premises Active Directory and Azure AD, featuring progress tracking and CSV export functionality.</description>
+    </item>
+    <item>
+      <title>Managing Exchange Calendars</title>
+      <link>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</link>
+      <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</guid>
+      <description>A collection of PowerShell scripts using ExchangeOnlineManagement module to manage calendar permissions in Exchange Online, including bulk operations for granting, modifying, and viewing access rights across multiple mailboxes.</description>
     </item>
   </channel>
 </rss>

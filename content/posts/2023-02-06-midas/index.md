@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [Python, AI, Computer Vision]
+categories: [Python, AI, Machine Learning]
 date: 2023-02-06
 draft: false
-tags: [ai, computer vision, depth estimation, midas, python, cuda, installation]
+tags: [ai, computer-vision, midas, python, cuda, installation]
 title: MiDaS Depth Estimation Guide
 usePageBundles: true
 thumbnail: "thumbnail.png"
@@ -70,3 +70,4 @@ python run.py --model_type dpt_swin2_tiny_256 --input_path input --output_path o
 ```
 
 For "inferno" color mapping, omit the --grayscale flag.
+

@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [powershell]
+categories: [PowerShell]
 date: 2025-12-03
 draft: false
-tags: [entra, powershell, microsoft-graph, signin, security]
+tags: [entra, powershell, api, signin, security]
 title: "Query Successful Sign-ins With Microsoft Graph"
 summary: "A quick PowerShell script that pulls successful sign-ins from Entra ID using Microsoft Graph."
 usePageBundles: true
@@ -136,3 +136,4 @@ Start-Process $outputFile
 #Disconnect-MgGraph -Confirm:$false
 Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan
 ```
+

@@ -52,3 +52,5 @@ If you need the machine to automatically log in but lock the screen immediately 
 6. Click OK and enter credentials if prompted.
 
 Now, every time the system logs in automatically, it will immediately lock the workstation.
+
+

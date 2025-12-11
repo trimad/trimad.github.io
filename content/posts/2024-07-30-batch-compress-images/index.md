@@ -93,3 +93,5 @@ def optimize_directory_images(directory_path):
 directory_path = '.'  # Path to the directory containing PNG images (use '.' for the current directory)
 optimize_directory_images(directory_path)
 ```
+
+

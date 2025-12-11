@@ -15,5 +15,12 @@
       <guid>http://localhost:1313/posts/2023-05-08-keycode-event-test/</guid>
       <description>This diagnostic tool allows you to type into a text area and logs keyboard events, providing valuable information such as key codes, key names, and modifier keys (Alt, Ctrl, Shift, Meta). As you interact with the text area, the captured event data will be displayed in real-time. This can be particularly useful for debugging and understanding the nuances of keyboard events in your application.</description>
     </item>
+    <item>
+      <title>Faster Java String Inputs</title>
+      <link>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</link>
+      <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</guid>
+      <description>A high-performance Java input reader class optimized for programming contests, providing fast integer and double parsing with automatic tokenization and buffering options.</description>
+    </item>
   </channel>
 </rss>

@@ -6,14 +6,49 @@
     <description>Recent content in Exchange-Online on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 04 Dec 2025 12:35:41 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/exchange-online/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Query Exchange Inbox Rules with Exchange Online PowerShell</title>
+      <link>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</link>
+      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</guid>
+      <description>Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox—perfect for threat hunting, compliance, and incident response.</description>
+    </item>
+    <item>
+      <title>Managing Microsoft Office Versions with OfficeC2RClient</title>
+      <link>http://localhost:1313/posts/2024-09-10-officec2rclient/</link>
+      <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-10-officec2rclient/</guid>
+      <description>A comprehensive guide to managing Microsoft 365 versions using OfficeC2RClient, including checking current builds, consulting version history, and rolling back or updating Office installations.</description>
+    </item>
     <item>
       <title>Managing Global Address List (GAL) Visibility with PowerShell</title>
       <link>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</link>
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</guid>
       <description>A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute.</description>
+    </item>
+    <item>
+      <title>Microsoft 365 Email Security Management Guide</title>
+      <link>http://localhost:1313/posts/2023-02-07-purge-emails/</link>
+      <pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2023-02-07-purge-emails/</guid>
+      <description>&lt;h2 id=&#34;block-unwanted-emails&#34;&gt;Block Unwanted Emails&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Prevent sending or receiving emails from specific external email addresses or domains.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Navigate to the Tenant Allow/Block List in the Microsoft Security Center. Configure the settings to block specific email addresses or domains. For direct access, use this link: &lt;a href=&#34;https://security.microsoft.com/tenantAllowBlockList&#34;&gt;Tenant Allow/Block List&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;review-past-week-of-sign-in-history&#34;&gt;Review Past Week of Sign-In History&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Review sign-in history to identify any unusual user activity.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Access the Azure portal&amp;rsquo;s sign-in history section. Specify the user of interest and examine their sign-in locations and activities. Access the portal here: &lt;a href=&#34;https://portal.azure.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/SignIns&#34;&gt;Azure Sign-In History&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Combining PowerShell Cmdlets</title>
+      <link>http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/</link>
+      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/</guid>
+      <description>A PowerShell script demonstrating the integration of ExchangeOnlineManagement and AzureAD modules to generate comprehensive email troubleshooting reports by correlating data through UserPrincipalName matching.</description>
+    </item>
+    <item>
+      <title>Managing Exchange Calendars</title>
+      <link>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</link>
+      <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</guid>
+      <description>A collection of PowerShell scripts using ExchangeOnlineManagement module to manage calendar permissions in Exchange Online, including bulk operations for granting, modifying, and viewing access rights across multiple mailboxes.</description>
     </item>
     <item>
       <title>Managing Exchange Online Auto-Expanding Archives with PowerShell</title>

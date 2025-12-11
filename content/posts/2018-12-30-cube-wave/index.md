@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2018-12-30
 draft: false
 tags: [animation]
-categories: [Java, Processing]
+categories: [Development, Visualization]
 summary: "A Processing implementation of a 3D cube wave animation using PeasyCam for camera control, featuring dynamic lighting and orthographic projection for a mesmerizing visual effect."
 usePageBundles: true
 ---
@@ -78,3 +78,4 @@ void draw() {
 - <a href="https://twitter.com/beesandbombs/status/940639806522085376">https://twitter.com/beesandbombs/status/940639806522085376</a>
 
 - <a href="https://www.youtube.com/watch?v=H81Tdrmz2LA">https://www.youtube.com/watch?v=H81Tdrmz2LA</a>
+

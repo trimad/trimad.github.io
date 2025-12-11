@@ -15,26 +15,5 @@
       <guid>http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/</guid>
       <description>How to turn any YouTube video into your Microsoft Teams background.</description>
     </item>
-    <item>
-      <title>Download Streams</title>
-      <link>http://localhost:1313/posts/2022-06-09-download-streams/</link>
-      <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-06-09-download-streams/</guid>
-      <description>A guide to downloading HTTP Live Streams (HLS) by locating and using .m3u8 playlists with ffmpeg, including browser developer tools techniques for finding stream sources.</description>
-    </item>
-    <item>
-      <title>Record Desktop Silently</title>
-      <link>http://localhost:1313/posts/2022-02-09-record-desktop-silently/</link>
-      <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-02-09-record-desktop-silently/</guid>
-      <description>A stealth desktop recording solution combining ffmpeg, batch scripting, and VBScript to capture Windows sessions without visible indicators, featuring configurable frame rates and recording durations.</description>
-    </item>
-    <item>
-      <title>FFmpeg Command Reference</title>
-      <link>http://localhost:1313/posts/2022-01-27-ffmpeg/</link>
-      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-01-27-ffmpeg/</guid>
-      <description>A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples.</description>
-    </item>
   </channel>
 </rss>

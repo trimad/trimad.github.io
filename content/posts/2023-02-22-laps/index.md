@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [PowerShell, Security, Windows]
 date: 2023-02-23
 draft: false
-tags: [passwords, security, windows, active directory, password management, automation, local administrator, domain security]
+tags: [password-management, security, windows, automation, local-administrator]
 title: Microsoft LAPS (Local Administrator Password Solution) Guide
 thumbnail: "thumbnail.png"
 summary: Microsoft LAPS (Local Administrator Password Solution) is a tool designed to securely manage local administrator account passwords on Windows domain-joined computers. It automates password generation and rotation, and stores passwords in a secure manner, providing greater control and security over local accounts.
@@ -35,3 +35,4 @@ _from Active Directory PowerShell:_
 ```PowerShell
 Get-ADComputer -Filter * -SearchBase “OU=,DC=,DC=,DC=” | Get-AdmPwdPassword -ComputerName {$_.Name}
 ```
+

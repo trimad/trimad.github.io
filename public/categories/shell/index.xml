@@ -9,13 +9,6 @@
     <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>How to Find Your Public IP Address</title>
-      <link>http://localhost:1313/posts/2024-06-24-get-public-ip/</link>
-      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-24-get-public-ip/</guid>
-      <description>A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions.</description>
-    </item>
-    <item>
       <title>Remote and Local DNS Configuration Guide</title>
       <link>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
@@ -23,102 +16,11 @@
       <description>Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management using WMIC and PowerShell.</description>
     </item>
     <item>
-      <title>Mapping Network Drives Using PowerShell and SID</title>
-      <link>http://localhost:1313/posts/2023-07-20-mapped-drives/</link>
-      <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-07-20-mapped-drives/</guid>
-      <description>This blog post discusses a PowerShell script that can map a network drive using a Security Identifier (SID), even without being logged in as that user.</description>
-    </item>
-    <item>
-      <title>Join a Workstation to Active Directory with Shell and PowerShell</title>
-      <link>http://localhost:1313/posts/2023-07-13-join-active-directory/</link>
-      <pubDate>Thu, 13 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-07-13-join-active-directory/</guid>
-      <description>A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality.</description>
-    </item>
-    <item>
-      <title>Deep Floyd IF</title>
-      <link>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</link>
-      <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</guid>
-      <description>My tentative work flow for running Deep Floyd IF locally for image generation.</description>
-    </item>
-    <item>
-      <title>net use</title>
-      <link>http://localhost:1313/posts/2023-04-13-net-use/</link>
-      <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-04-13-net-use/</guid>
-      <description>Connects a computer to or disconnects a computer from a shared resource, or displays information about computer connections. The command also controls persistent net connections. Used without parameters, net use retrieves a list of network connections.</description>
-    </item>
-    <item>
-      <title>Windows Remediation</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-remediation/</link>
-      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-03-windows-remediation/</guid>
-      <description>A comprehensive collection of Windows troubleshooting and repair tools including DISM, SFC, DLL registration commands, and PowerShell scripts for reinstalling Windows apps.</description>
-    </item>
-    <item>
       <title>Managing Windows User Accounts with net user Command</title>
       <link>http://localhost:1313/posts/2023-02-21-net-user/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-02-21-net-user/</guid>
       <description>&lt;p&gt;The &amp;ldquo;net user&amp;rdquo; command is a Command Prompt (Shell) command used to manage user accounts on a Windows operating system. It can be used to create, modify, or delete user accounts, as well as to change passwords and manage group memberships.&lt;/p&gt;&#xA;&lt;h2 id=&#34;syntax&#34;&gt;Syntax&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; /ADD &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DELETE&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/TIMES:&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;times | ALL&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/ACTIVE: &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;YES | NO&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;add-a-user&#34;&gt;Add a user&lt;/h2&gt;&#xA;&lt;p&gt;To add a new user account:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Windows Driver Management with pnputil</title>
-      <link>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</link>
-      <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</guid>
-      <description>&lt;p&gt;You can uninstall third-party drivers (such as the WAVES MaxxAudio Pro driver) from the Command Prompt (CMD) by using the &amp;ldquo;pnputil.exe&amp;rdquo; utility. Here&amp;rsquo;s the basic process:&lt;/p&gt;&#xA;&lt;p&gt;Open Command Prompt as administrator: Press the Windows key + X, and then select &amp;ldquo;Command Prompt (Admin)&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;Type the following command and press Enter:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pnputil.exe -e&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# or export the list to a file&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pnputil.exe -e &amp;gt; !drivers.csv&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This command lists all the third-party drivers installed on your system.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Mastering Time with Shell and PowerShell</title>
-      <link>http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/</link>
-      <pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/</guid>
-      <description>A comprehensive guide to Windows time management using shell and PowerShell commands, covering system uptime, boot times, time synchronization, and timezone configuration.</description>
-    </item>
-    <item>
-      <title>Download Streams</title>
-      <link>http://localhost:1313/posts/2022-06-09-download-streams/</link>
-      <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-06-09-download-streams/</guid>
-      <description>A guide to downloading HTTP Live Streams (HLS) by locating and using .m3u8 playlists with ffmpeg, including browser developer tools techniques for finding stream sources.</description>
-    </item>
-    <item>
-      <title>NVIDIA Maxine Windows Audio Effects SDK</title>
-      <link>http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</link>
-      <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</guid>
-      <description>A step-by-step workflow for cleaning poor audio recordings using NVIDIA Maxine Windows Audio Effects SDK with different sample rate configurations.</description>
-    </item>
-    <item>
-      <title>Download YouTube Videos</title>
-      <link>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</link>
-      <pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</guid>
-      <description>A guide to downloading YouTube videos and audio using yt-dlp and youtube-dl command-line tools, including various options for format selection and quality settings.</description>
-    </item>
-    <item>
-      <title>Record Desktop Silently</title>
-      <link>http://localhost:1313/posts/2022-02-09-record-desktop-silently/</link>
-      <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-02-09-record-desktop-silently/</guid>
-      <description>A stealth desktop recording solution combining ffmpeg, batch scripting, and VBScript to capture Windows sessions without visible indicators, featuring configurable frame rates and recording durations.</description>
-    </item>
-    <item>
-      <title>FFmpeg Command Reference</title>
-      <link>http://localhost:1313/posts/2022-01-27-ffmpeg/</link>
-      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-01-27-ffmpeg/</guid>
-      <description>A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples.</description>
-    </item>
-    <item>
-      <title>Robo Mirror</title>
-      <link>http://localhost:1313/posts/2019-02-28-robo-mirror/</link>
-      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-02-28-robo-mirror/</guid>
-      <description>A batch script that leverages robocopy to perform automated file mirroring based on a predefined list of target paths.</description>
     </item>
   </channel>
 </rss>

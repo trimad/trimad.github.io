@@ -1,10 +1,10 @@
 ---
 author: Tristan Madden
-categories: [Shell, PowerShell]
+categories: [System Administration, PowerShell]
 date: 2023-03-03
 draft: false
 summary: "A comprehensive collection of Windows troubleshooting and repair tools including DISM, SFC, DLL registration commands, and PowerShell scripts for reinstalling Windows apps."
-tags: [shell, PowerShell]
+tags: [shell, powershell]
 title: Windows Remediation
 toc: true
 usePageBundles: true
@@ -80,3 +80,4 @@ Reinstall and re-register all Windows apps for <i>all accounts</i>:
 ```PowerShell
 Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 ```
+

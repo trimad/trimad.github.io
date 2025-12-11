@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [Python, Shell]
+categories: [Python, System Administration]
 date: 2023-05-03
 draft: false
-tags: [ai, images]
+tags: [ai, image-processing]
 title: "Deep Floyd IF"
 summary: "My tentative work flow for running Deep Floyd IF locally for image generation."
 usePageBundles: true
@@ -137,3 +137,4 @@ My takeaways from Deep Floyd IF:
 * Deep Floyd IF has extremely slow inference times, upwards of two mintues per 256x256 image. I've played around a bit with memory management but don't know enough about Pytorch to get VRAM usage under 16GB. I got stage 3 working in CPU mode only, which sent inference times soaring over 40 minutes per 1024x1024 image.
 * Community adoption has been slow, probably because of slow inference times
 * Not really seeing an advantage of this over Stable Diffusion + ControlNet
+

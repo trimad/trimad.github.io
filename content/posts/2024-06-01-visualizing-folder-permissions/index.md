@@ -4,7 +4,7 @@ categories: [PowerShell, Python, Security]
 date: 2024-06-01
 draft: false
 summary: "A comprehensive guide to exporting and visualizing Windows folder permissions using PowerShell and Python, including treemap visualizations of user access rights."
-tags: [windows, powershell, python, security, permissions, data-visualization, active-directory]
+tags: [windows, powershell, python, security, permissions, data-visualization]
 title: "Visualizing and Analyzing Windows Folder Permissions"
 toc: true
 usePageBundles: true
@@ -420,3 +420,4 @@ if __name__ == "__main__":
 ```
 
 This approach provides a clear and structured method for administrators to audit and visualize folder permissions in their environment.
+

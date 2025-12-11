@@ -4,7 +4,7 @@ categories: [Windows, PowerShell, Web Administration]
 date: 2024-10-16
 draft: false
 summary: "A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling."
-tags: [iis, powershell, windows-server, web-administration, automation, logging, system-administration]
+tags: [iis, powershell, windows-server, web-administration, automation, logging]
 title: "Automated IIS Application Pool Restart with PowerShell"
 toc: true
 usePageBundles: true
@@ -103,3 +103,4 @@ if ($postStartProcesses) {
 3. **Worker Process Details**: I use `Get-WmiObject` to grab info about the worker processes (`w3wp.exe`) tied to the app pool. It logs process IDs and memory usage before stopping and after starting the app pool.
 
 4. **Shutdown Time Limit**: Bumping the shutdown time limit to 300 seconds gives ongoing requests a better chance to finish before the app pool shuts down.
+

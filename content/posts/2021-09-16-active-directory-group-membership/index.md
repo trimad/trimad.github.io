@@ -3,7 +3,7 @@ title: Get Group Membership
 author: Tristan Madden
 date: 2021-09-16
 draft: false
-tags: [active directory, azure, domain, reports, group]
+tags: [azure, domain, reports, directory-services]
 categories: [PowerShell]
 summary: "PowerShell scripts for extracting and reporting group membership information from both on-premises Active Directory and Azure AD, featuring progress tracking and CSV export functionality."
 usePageBundles: true
@@ -132,3 +132,4 @@ $resultsarray | Export-Csv $csvFilePath -NoTypeInformation
 Start-Process -FilePath $csvFilePath
 
 ```
+

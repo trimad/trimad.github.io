@@ -1,11 +1,11 @@
 ---
 title: "Gmail Photo Downloader"
 author: Tristan Madden
-categories: [JavaScript]
+categories: [Development]
 date: 2023-09-11
 draft: false
 summary: "A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder."
-tags: [google-apps-script, gmail, google-drive, automation, javascript]
+tags: [automation, email, javascript]
 toc: true
 usePageBundles: true
 ---
@@ -73,3 +73,4 @@ For context, here's how the image tag looks in the daycare email:
 <img alt="Photo" border="0" title="Photo" width="100%" src="https://ci3.googleusercontent.com/proxy/L1Bhkyu1CzMzbd_mVCr3YwEPxKZhmzyce3uAkFuwTq1Fco1msKzwi270_a4_gnUBGJCl_1Yx9ZL4E7I76YQXE_xqbKjepm0AGiPbcT4HxYatKGdluYUqZehMEly5Y_cLpQylyC_YWORwY-pOhXa28n0Vsztq_XxMTuuj1PlXLc_N8UiBnW1JfT5Ydm6VofcibFcZhDqzwfdof9XXRRL7AA585lrxnpMU_8xpXFcVY61syua5YzBGkU7XMDtheRVpbysYLzvf1jTeMg7V4NaBVhf-ac4fNqkfiKdYhcCZC_0oNY-i_rvZmqUboioMK-yJcQKjmwVmUgNnLbfeTwNXbOE=s0-d-e1-ft#https://private.kinderlime.com/profile_pics/files/2f791232-d5f1-44c3-ab14-437643988c23/profilepic_1997707fb0462088434fe6e1b5c79a7f03d85ae0fe669997a2ca0dd912bb85d841/main/img_cropped7753123271202479858.jpg_1694105215459_photo.jpg?1694109217" class="CToWUd a6T" data-bit="iit" tabindex="0">
 ```
 The script specifically looks for image tags with alt="Photo" to ensure we're only downloading relevant images.
+

@@ -3,8 +3,8 @@ title: Record Desktop Silently
 author: Tristan Madden
 date: 2022-02-09
 draft: false
-tags: [ffmpeg, VBScript, bat]
-categories: [Shell]
+tags: [vbscript, bat]
+categories: [System Administration]
 summary: "A stealth desktop recording solution combining ffmpeg, batch scripting, and VBScript to capture Windows sessions without visible indicators, featuring configurable frame rates and recording durations."
 usePageBundles: true
 ---
@@ -24,3 +24,5 @@ Place these 3 files in any directory and run update.vbs to begin recording a Win
 
 ## update.vbs
 * This Visual Basic script runs udpate.bat without a visible command prompt.
+
+

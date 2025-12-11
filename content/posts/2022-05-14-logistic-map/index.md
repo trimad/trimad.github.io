@@ -17,3 +17,4 @@ The fractal structure is easier to see when it's stretched out:
 {{< youtube TnbPVTxKGqg >}}
 
 Repository for code that generated this fractal: https://github.com/Trimad/Sandbox
+

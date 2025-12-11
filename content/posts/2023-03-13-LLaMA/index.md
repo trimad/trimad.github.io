@@ -1,11 +1,11 @@
 ---
 author: Tristan Madden
-categories: [python]
+categories: [Python]
 date: 2023-03-13
 draft: true
 layout: single
 summary: "This is my tentative workflow for getting Facebook's LLaMA working with text-generation-webui."
-tags: [LLaMA]
+tags: [llm]
 title: "LLaMA"
 toc: true
 usePageBundles: true
@@ -24,3 +24,4 @@ https://my.visualstudio.com/Downloads?q=visual%20studio%202019&wt.mc_id=o~msft~v
 ### Install Microsoft C++ Build Tools
 
 https://visualstudio.microsoft.com/visual-cpp-build-tools/
+

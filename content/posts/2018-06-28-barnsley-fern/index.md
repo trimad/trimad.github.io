@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2018-06-28
 draft: false
 tags: [animation, fractal]
-categories: [Java, Processing]
+categories: [Development, Visualization]
 summary: "A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory."
 toc: true
 usePageBundles: true
@@ -127,3 +127,4 @@ void drawPoint() {
 ```
 
 Written using the Processing Java library: https://processing.org/download
+

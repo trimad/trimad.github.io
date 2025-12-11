@@ -1,10 +1,10 @@
 ---
 author: Tristan Madden
-categories: [JavaScript]
+categories: [Development]
 date: 2023-03-22
 draft: false
 summary: "A client-side JavaScript tool that generates secure random passwords with three complexity levels: special characters, alphanumeric, and alphabetic only. Passwords automatically refresh on page load."
-tags: [javascript, security, web-development, password-generator, client-side]
+tags: [javascript, security, web-development, password-generator]
 title: "Random Password Generator"
 toc: false
 usePageBundles: true
@@ -85,3 +85,4 @@ let password = Array.from(crypto.getRandomValues(new Uint8Array(passwordLength))
 <!-- {{- define "page-script" -}} -->
 
 <!-- {{- end -}} -->
+

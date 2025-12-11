@@ -3,7 +3,7 @@ author: Tristan Madden
 categories: [PowerShell]
 date: 2025-07-02
 draft: false
-tags: [SMTP, spoofing, Gmail, GSuite, Outlook]
+tags: [smtp, spoofing, email]
 title: Test SMTP
 summary: "PowerShell scripts for testing SMTP, with and without authentication."
 usePageBundles: true
@@ -104,3 +104,4 @@ try {
     Write-Output "Failed to spoof email. Error: $_"
 }
 ```
+

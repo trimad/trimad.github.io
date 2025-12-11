@@ -40,3 +40,4 @@ If the aforementioned services do not exist, a clean reinstall is appropriate.
 3. Delete every folder in `C:\Program Files (x86)` that looks like `BeAnywhere Support Express`
 4. Check the box next to "Install Take Control" in Remote Control Settings.
 5. Wait 5 minutes. if it still doesn't show up, open the device page in NCentral, select "ADD TASK" at the top and click on "Reinstall Agent".
+

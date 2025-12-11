@@ -1,7 +1,8 @@
 ---
+categories: [Windows, System Administration]
 title: "Troubleshoot Crashing Apps with ProcDump & WinDbg"
 date: 2025-05-01
-tags: ["windows", "troubleshooting", "procdump", "windbg", "sysinternals"]
+tags: [windows, troubleshooting, windbg, sysinternals]
 description: "Step‑by‑step guide for capturing crash dumps with ProcDump and performing post‑mortem analysis in WinDbg."
 toc: true
 usePageBundles: false
@@ -106,3 +107,5 @@ kb / kH            # Short / long stack
 u address          # Disassemble around address
 .dt nt!_EXCEPTION_RECORD -r @$exr  # Decode exception record
 ```
+
+

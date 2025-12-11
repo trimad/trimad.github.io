@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [JavaScript, Python, Security]
+categories: [Development, Python, Security]
 date: 2023-02-15
 draft: false
-tags: ["phishing", "email security", "base64", "hex encoding", "uri encoding", "obfuscation", "decoding", "security analysis", "cybersecurity", "p5.js"]
+tags: [phishing, email-security, decoding, hex-encoding, uri-encoding, obfuscation]
 title: Phishing Email Decoding Tools
 usePageBundles: true
 thumbnail: "thumbnail.png"
@@ -140,4 +140,6 @@ with open('decoded.html', 'w') as output_file:
     output_file.write(decoded_html)
 
 ```
+
+
 
