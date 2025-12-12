@@ -6,42 +6,14 @@
     <description>Recent content in Networking on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/networking/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>How to Find Your Public IP Address</title>
-      <link>http://localhost:1313/posts/2024-06-24-get-public-ip/</link>
-      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-24-get-public-ip/</guid>
-      <description>A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions.</description>
-    </item>
-    <item>
-      <title>Complete DNS Records Reference Guide</title>
-      <link>http://localhost:1313/posts/2024-06-06-dns-records/</link>
-      <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
-      <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
-    </item>
-    <item>
-      <title>Network Subnet Visualization Tools</title>
-      <link>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</link>
-      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</guid>
-      <description>Tools and scripts for visualizing and analyzing network subnets, including IP address ranges and network topologies.</description>
-    </item>
     <item>
       <title>Remote and Local DNS Configuration Guide</title>
       <link>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</guid>
       <description>Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management using WMIC and PowerShell.</description>
-    </item>
-    <item>
-      <title>Graphing a LAN with PyVis</title>
-      <link>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</link>
-      <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</guid>
-      <description>A guide to visualizing Local Area Network (LAN) topologies using Python and pyvis for interactive network graphs.</description>
     </item>
   </channel>
 </rss>

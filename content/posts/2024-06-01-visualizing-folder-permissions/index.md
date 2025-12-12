@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [PowerShell, Python, Security]
 date: 2024-06-01
 draft: false
 summary: "A comprehensive guide to exporting and visualizing Windows folder permissions using PowerShell and Python, including treemap visualizations of user access rights."
-tags: [windows, powershell, python, security, permissions, data-visualization]
+tags: ["permissions", "data-visualization"]
 title: "Visualizing and Analyzing Windows Folder Permissions"
 toc: true
 usePageBundles: true

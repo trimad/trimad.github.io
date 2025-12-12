@@ -1,11 +1,11 @@
----
+﻿---
 author: Tristan Madden
 categories: [PowerShell]
 date: 2025-07-30
 draft: false
-tags: [exchange-online, security]
+tags: ["exchange-online"]
 title: "Query Exchange Inbox Rules with Exchange Online PowerShell"
-summary: "Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox—perfect for threat hunting, compliance, and incident response."
+summary: "Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailboxâ€”perfect for threat hunting, compliance, and incident response."
 usePageBundles: true
 toc: true
 ---
@@ -16,8 +16,8 @@ Monitoring inbox rules is one of the most effective ways to detect compromised a
 
 This post provides **two complementary PowerShell scripts**:
 
-1. **Tenant-wide inbox rule collector** – audits every mailbox across all accepted domains  
-2. **Single-user inbox rule collector** – ideal for incident response and targeted investigations  
+1. **Tenant-wide inbox rule collector** â€“ audits every mailbox across all accepted domains  
+2. **Single-user inbox rule collector** â€“ ideal for incident response and targeted investigations  
 
 Both scripts export results into clean JSON files suitable for SOC review or automated detection pipelines.
 
@@ -29,11 +29,11 @@ This script enumerates all accepted domains, collects inbox rules from every mai
 
 ## Key Capabilities
 
-- **Domain-aware enumeration** — Automatically detects all accepted domains in the tenant  
-- **Mailbox filtering** — Only scans relevant SMTP domains  
-- **Color-coded progress output** — Useful for long-running audits  
-- **Graceful error handling** — Skips inaccessible mailboxes  
-- **Structured JSON output** — Saves as `FilteredInboxRules.json` and opens automatically  
+- **Domain-aware enumeration** â€” Automatically detects all accepted domains in the tenant  
+- **Mailbox filtering** â€” Only scans relevant SMTP domains  
+- **Color-coded progress output** â€” Useful for long-running audits  
+- **Graceful error handling** â€” Skips inaccessible mailboxes  
+- **Structured JSON output** â€” Saves as `FilteredInboxRules.json` and opens automatically  
 
 ---
 
@@ -57,9 +57,9 @@ Write-Host "`n=== Exchange Online Inbox Rule Collector ===`n" -ForegroundColor C
 try {
     Write-Host "Connecting to Exchange Online..." -ForegroundColor Yellow
     Connect-ExchangeOnline -ErrorAction Stop
-    Write-Host "✅ Connected successfully.`n" -ForegroundColor Green
+    Write-Host "âœ… Connected successfully.`n" -ForegroundColor Green
 } catch {
-    Write-Host "❌ Failed to connect to Exchange Online: $_" -ForegroundColor Red
+    Write-Host "âŒ Failed to connect to Exchange Online: $_" -ForegroundColor Red
     exit
 }
 
@@ -68,7 +68,7 @@ Write-Host "Retrieving accepted domains..." -ForegroundColor Yellow
 $acceptedDomains = Get-AcceptedDomain | Select-Object DomainName, DomainType, Default
 
 if (-not $acceptedDomains) {
-    Write-Host "❌ No accepted domains found. Exiting." -ForegroundColor Red
+    Write-Host "âŒ No accepted domains found. Exiting." -ForegroundColor Red
     Disconnect-ExchangeOnline -Confirm:$false
     exit
 }
@@ -84,7 +84,7 @@ $mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {
 }
 
 if (-not $mailboxes) {
-    Write-Host "❌ No mailboxes found for the accepted domains." -ForegroundColor Red
+    Write-Host "âŒ No mailboxes found for the accepted domains." -ForegroundColor Red
     Disconnect-ExchangeOnline -Confirm:$false
     exit
 }
@@ -133,7 +133,7 @@ if ($allRules.Count -eq 0) {
     "[]" | Out-File -FilePath $outputFile -Encoding utf8
 } else {
     $allRules | ConvertTo-Json -Depth 5 | Out-File -FilePath $outputFile -Encoding utf8
-    Write-Host ("`n✅ Exported {0} inbox rules to {1}" -f $allRules.Count, $outputFile) -ForegroundColor Green
+    Write-Host ("`nâœ… Exported {0} inbox rules to {1}" -f $allRules.Count, $outputFile) -ForegroundColor Green
 }
 
 # --- STEP 6: Open the file automatically ---
@@ -151,12 +151,12 @@ This companion script focuses on **one mailbox at a time**.
 
 ## Key Capabilities
 
-- Mailbox validation — Confirms the mailbox exists before running any queries
-- Targeted rule inspection — Retrieves inbox rules for only one specified mailbox
-- Ideal for incident response — Quickly exposes forwarding, redirect, or exfiltration rules linked to suspicious activity
-- Lightweight execution — Much faster than tenant-wide enumeration; minimal data collection
-- Structured JSON export — Outputs to `SingleMailboxInboxRules.json` for easy sharing, auditing, or investigation
-- Safe error handling — Gracefully handles missing mailboxes or permission issues without halting your session
+- Mailbox validation â€” Confirms the mailbox exists before running any queries
+- Targeted rule inspection â€” Retrieves inbox rules for only one specified mailbox
+- Ideal for incident response â€” Quickly exposes forwarding, redirect, or exfiltration rules linked to suspicious activity
+- Lightweight execution â€” Much faster than tenant-wide enumeration; minimal data collection
+- Structured JSON export â€” Outputs to `SingleMailboxInboxRules.json` for easy sharing, auditing, or investigation
+- Safe error handling â€” Gracefully handles missing mailboxes or permission issues without halting your session
 
 ## Script: Query a Single User
 
@@ -176,7 +176,7 @@ Write-Host "`n=== Single Mailbox Inbox Rule Collector ===`n" -ForegroundColor Cy
 $mailbox = Read-Host "Enter the mailbox (UPN or SMTP address)"
 
 if (-not $mailbox) {
-    Write-Host "❌ No mailbox provided. Exiting." -ForegroundColor Red
+    Write-Host "âŒ No mailbox provided. Exiting." -ForegroundColor Red
     exit
 }
 
@@ -184,9 +184,9 @@ if (-not $mailbox) {
 try {
     Write-Host "Connecting to Exchange Online..." -ForegroundColor Yellow
     Connect-ExchangeOnline -ErrorAction Stop
-    Write-Host "✅ Connected successfully.`n" -ForegroundColor Green
+    Write-Host "âœ… Connected successfully.`n" -ForegroundColor Green
 } catch {
-    Write-Host "❌ Failed to connect to Exchange Online: $_" -ForegroundColor Red
+    Write-Host "âŒ Failed to connect to Exchange Online: $_" -ForegroundColor Red
     exit
 }
 
@@ -195,7 +195,7 @@ try {
     $mbx = Get-Mailbox -Identity $mailbox -ErrorAction Stop
     Write-Host "Mailbox found: $($mbx.PrimarySmtpAddress)`n" -ForegroundColor Green
 } catch {
-    Write-Host "❌ Mailbox not found or inaccessible: $_" -ForegroundColor Red
+    Write-Host "âŒ Mailbox not found or inaccessible: $_" -ForegroundColor Red
     Disconnect-ExchangeOnline -Confirm:$false
     exit
 }
@@ -228,7 +228,7 @@ try {
         }
     }
 } catch {
-    Write-Host "❌ Failed to retrieve inbox rules: $_" -ForegroundColor Red
+    Write-Host "âŒ Failed to retrieve inbox rules: $_" -ForegroundColor Red
 }
 
 # --- STEP 5: Export results to JSON ---
@@ -239,7 +239,7 @@ if ($rules.Count -eq 0) {
     "[]" | Out-File -FilePath $outputFile -Encoding utf8
 } else {
     $rules | ConvertTo-Json -Depth 5 | Out-File -FilePath $outputFile -Encoding utf8
-    Write-Host ("`n✅ Exported {0} inbox rules to {1}" -f $rules.Count, $outputFile) -ForegroundColor Green
+    Write-Host ("`nâœ… Exported {0} inbox rules to {1}" -f $rules.Count, $outputFile) -ForegroundColor Green
 }
 
 # --- STEP 6: Open the output file ---

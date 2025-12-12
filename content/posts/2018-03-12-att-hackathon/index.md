@@ -1,9 +1,9 @@
----
+﻿---
 title: AT&T Hackathon
 author: Tristan Madden
 date: 2018-03-12
 draft: false
-tags: [programming, java, optimization, 3d-modeling, visualization]
+tags: ["programming", "java", "optimization", "3d-modeling"]
 categories: [Development, Visualization]
 summary: "A reflection on participating in the AT&T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions."
 toc: true

@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [Python, AI, Machine Learning]
 date: 2023-02-24
 draft: false
-tags: [ai, audio, machine-learning, openai, python, cuda]
+tags: ["audio", "machine-learning", "openai", "cuda"]
 title: OpenAI Whisper Speech Recognition Guide
 usePageBundles: true
 ---

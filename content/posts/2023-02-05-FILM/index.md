@@ -1,9 +1,9 @@
----
+﻿---
 title: Frame Interpolation Large Motion (FILM)
 author: Tristan Madden
 date: 2023-02-05
 draft: false
-tags: [ai, video, animation, tensorflow, python, machine-learning]
+tags: ["video", "animation", "tensorflow", "machine-learning"]
 categories: [Python, Machine Learning]
 summary: "A comprehensive guide to setting up and using Google's Frame Interpolation Large Motion (FILM) TensorFlow implementation, enabling the creation of smooth animations by generating intermediate frames between existing images using deep learning techniques."
 usePageBundles: true

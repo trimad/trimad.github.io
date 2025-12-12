@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [Python, AI, Machine Learning]
 date: 2023-02-06
 draft: false
-tags: [ai, computer-vision, midas, python, cuda, installation]
+tags: ["computer-vision", "midas", "cuda", "installation"]
 title: MiDaS Depth Estimation Guide
 usePageBundles: true
 thumbnail: "thumbnail.png"

@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [PowerShell, Active Directory, Azure AD]
 date: 2023-02-09
 draft: false
-tags: [powershell, azure, ad-sync, azure-ad-connect, domain-controller, synchronization]
+tags: ["azure", "ad-sync", "azure-ad-connect", "domain-controller", "synchronization"]
 title: PowerShell Script for Azure AD Synchronization Management
 usePageBundles: true
 thumbnail: "thumbnail.png"

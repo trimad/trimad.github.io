@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [System Administration]
 date: 2023-05-17
 draft: true
-tags: [tracert, networking, powershell]
+tags: ["tracert"]
 title: "Tracert"
 summary: "A PowerShell script to run tracert for multiple computers listed in a text file"
 usePageBundles: true

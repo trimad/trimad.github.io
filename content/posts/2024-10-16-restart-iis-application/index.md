@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [Windows, PowerShell, Web Administration]
 date: 2024-10-16
 draft: false
 summary: "A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling."
-tags: [iis, powershell, windows-server, web-administration, automation, logging]
+tags: ["iis", "windows-server", "web-administration", "automation", "logging"]
 title: "Automated IIS Application Pool Restart with PowerShell"
 toc: true
 usePageBundles: true
@@ -96,7 +96,7 @@ if ($postStartProcesses) {
 
 ## Explanation
 
-1. **Logging Functionality**: The `Write-Log` function just logs messages to a file with a timestamp. It keeps track of what’s going on when things start and stop.
+1. **Logging Functionality**: The `Write-Log` function just logs messages to a file with a timestamp. It keeps track of whatâ€™s going on when things start and stop.
 
 2. **Managing App Pool State**: The script uses `Get-WebAppPoolState`, `Stop-WebAppPool`, and `Start-WebAppPool` cmdlets from the `WebAdministration` module.
 

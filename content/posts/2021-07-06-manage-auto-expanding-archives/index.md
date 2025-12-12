@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [Exchange, PowerShell, Microsoft 365]
 date: 2021-07-06
 draft: false
 summary: "A comprehensive collection of PowerShell scripts for managing Exchange Online auto-expanding archives, including monitoring, configuration, and reporting tools using the ExchangeOnlineManagement module."
-tags: [exchange-online, powershell, email-management, exchange-management, automation, system-administration]
+tags: ["exchange-online", "email-management", "exchange-management", "automation", "system-administration"]
 title: "Managing Exchange Online Auto-Expanding Archives with PowerShell"
 toc: true
 usePageBundles: true

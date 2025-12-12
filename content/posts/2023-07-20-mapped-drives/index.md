@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [System Administration, PowerShell]
 date: 2023-07-20
 summary: "This blog post discusses a PowerShell script that can map a network drive using a Security Identifier (SID), even without being logged in as that user."
-tags: [powershell, network-drives, sid, registry-modification]
+tags: ["network-drives", "sid", "registry-modification"]
 title: Mapping Network Drives Using PowerShell and SID
 toc: true
 usePageBundles: true

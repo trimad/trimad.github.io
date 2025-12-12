@@ -1,9 +1,9 @@
----
+﻿---
 title: Mastering Time with Shell and PowerShell
 author: Tristan Madden
 date: 2023-02-02
 draft: false
-tags: [time, shell, powershell, windows, systeminfo, wmic]
+tags: ["time", "shell", "systeminfo", "wmic"]
 categories: [System Administration, PowerShell]
 summary: "A comprehensive guide to Windows time management using shell and PowerShell commands, covering system uptime, boot times, time synchronization, and timezone configuration."
 usePageBundles: true

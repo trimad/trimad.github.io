@@ -1,9 +1,9 @@
----
+﻿---
 title: Remove-AppxPackages
 author: Tristan Madden
 date: 2019-08-28
 draft: false
-tags: [powershell, windows]
+tags: []
 categories: [PowerShell]
 summary: "A PowerShell script that removes unwanted Windows Store apps (AppX packages) while preserving essential system apps, using a list of package names to exclude from removal."
 usePageBundles: true

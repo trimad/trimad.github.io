@@ -1,9 +1,9 @@
----
+﻿---
 title: Windows Settings URI Reference
 author: Tristan Madden
 date: 2021-01-01
 draft: false
-tags: [windows, settings, uri, reference, automation, shell]
+tags: ["settings", "uri", "reference", "automation", "shell"]
 categories: [Windows]
 summary: "A comprehensive reference guide to Windows ms-settings URI schemes, enabling direct access to specific Windows Settings pages through command-line or scripting interfaces."
 usePageBundles: true

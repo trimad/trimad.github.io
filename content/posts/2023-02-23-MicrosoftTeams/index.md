@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [PowerShell, Microsoft 365, Microsoft Teams]
 date: 2023-02-23
 draft: false
-tags: [collaboration, powershell, team-management, automation, team-ownership]
+tags: ["collaboration", "team-management", "automation", "team-ownership"]
 title: Microsoft Teams PowerShell Management Guide
 usePageBundles: true
 ---

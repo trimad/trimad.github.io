@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [Microsoft 365, System Administration]
 date: 2024-09-10
 draft: false
 summary: "A comprehensive guide to managing Microsoft 365 versions using OfficeC2RClient, including checking current builds, consulting version history, and rolling back or updating Office installations."
-tags: [officec2rclient, exchange-online, version-management, system-administration, windows, powershell]
+tags: ["officec2rclient", "exchange-online", "version-management", "system-administration"]
 title: "Managing Microsoft Office Versions with OfficeC2RClient"
 toc: true
 usePageBundles: true

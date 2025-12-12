@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [Python, System Administration]
 date: 2023-05-03
 draft: false
-tags: [ai, image-processing]
+tags: ["image-processing"]
 title: "Deep Floyd IF"
 summary: "My tentative work flow for running Deep Floyd IF locally for image generation."
 usePageBundles: true

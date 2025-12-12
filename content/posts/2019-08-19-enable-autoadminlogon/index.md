@@ -1,9 +1,9 @@
----
+﻿---
 title: Enable AutoAdminLogon with PowerShell
 author: Tristan Madden
 date: 2019-08-19
 draft: false
-tags: [powershell, windows]
+tags: []
 categories: [PowerShell]
 summary: "A PowerShell script that enables AutoAdminLogon by configuring registry settings to automatically log in a specified user without prompting for credentials."
 usePageBundles: true

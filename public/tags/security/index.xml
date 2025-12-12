@@ -6,91 +6,14 @@
     <description>Recent content in Security on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/security/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Query Successful Sign-ins With Microsoft Graph</title>
-      <link>http://localhost:1313/posts/2025-12-03-query-successful-sign-ins-with-microsoft-graph/</link>
-      <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-12-03-query-successful-sign-ins-with-microsoft-graph/</guid>
-      <description>A quick PowerShell script that pulls successful sign-ins from Entra ID using Microsoft Graph.</description>
-    </item>
-    <item>
-      <title>ChampVA Claims</title>
-      <link>http://localhost:1313/posts/2025-11-14-champ-va/</link>
-      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-11-14-champ-va/</guid>
-      <description>My personal workflow for how to file claims with ChampVA</description>
-    </item>
-    <item>
-      <title>Query Exchange Inbox Rules with Exchange Online PowerShell</title>
-      <link>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</link>
-      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</guid>
-      <description>Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox—perfect for threat hunting, compliance, and incident response.</description>
-    </item>
-    <item>
-      <title>Visualizing and Analyzing Windows Folder Permissions</title>
-      <link>http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/</link>
-      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/</guid>
-      <description>A comprehensive guide to exporting and visualizing Windows folder permissions using PowerShell and Python, including treemap visualizations of user access rights.</description>
-    </item>
-    <item>
-      <title>Active Directory User Lockout and Password Report</title>
-      <link>http://localhost:1313/posts/2024-05-30-user-lockout-report/</link>
-      <pubDate>Thu, 30 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-05-30-user-lockout-report/</guid>
-      <description>A PowerShell script that generates an HTML diagnostics report for user lockouts in Active Directory, including password age, expiration details, and account status.</description>
-    </item>
-    <item>
-      <title>Windows ACL Management with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-05-02-acl/</link>
-      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-02-acl/</guid>
-      <description>A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions.</description>
-    </item>
-    <item>
-      <title>Random Password Generator</title>
-      <link>http://localhost:1313/posts/2023-03-22-random-password-generator/</link>
-      <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-22-random-password-generator/</guid>
-      <description>A client-side JavaScript tool that generates secure random passwords with three complexity levels: special characters, alphanumeric, and alphabetic only. Passwords automatically refresh on page load.</description>
-    </item>
-    <item>
-      <title>Windows Defender Firewall Management Guide</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
-      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
-      <description>A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding.</description>
-    </item>
-    <item>
-      <title>Microsoft LAPS (Local Administrator Password Solution) Guide</title>
-      <link>http://localhost:1313/posts/2023-02-22-laps/</link>
-      <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-22-laps/</guid>
-      <description>Microsoft LAPS (Local Administrator Password Solution) is a tool designed to securely manage local administrator account passwords on Windows domain-joined computers. It automates password generation and rotation, and stores passwords in a secure manner, providing greater control and security over local accounts.</description>
-    </item>
     <item>
       <title>Managing Windows User Accounts with net user Command</title>
       <link>http://localhost:1313/posts/2023-02-21-net-user/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-02-21-net-user/</guid>
       <description>&lt;p&gt;The &amp;ldquo;net user&amp;rdquo; command is a Command Prompt (Shell) command used to manage user accounts on a Windows operating system. It can be used to create, modify, or delete user accounts, as well as to change passwords and manage group memberships.&lt;/p&gt;&#xA;&lt;h2 id=&#34;syntax&#34;&gt;Syntax&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; /ADD &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DELETE&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/TIMES:&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;times | ALL&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/ACTIVE: &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;YES | NO&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;add-a-user&#34;&gt;Add a user&lt;/h2&gt;&#xA;&lt;p&gt;To add a new user account:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Microsoft 365 Email Security Management Guide</title>
-      <link>http://localhost:1313/posts/2023-02-07-purge-emails/</link>
-      <pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-07-purge-emails/</guid>
-      <description>&lt;h2 id=&#34;block-unwanted-emails&#34;&gt;Block Unwanted Emails&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Prevent sending or receiving emails from specific external email addresses or domains.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Navigate to the Tenant Allow/Block List in the Microsoft Security Center. Configure the settings to block specific email addresses or domains. For direct access, use this link: &lt;a href=&#34;https://security.microsoft.com/tenantAllowBlockList&#34;&gt;Tenant Allow/Block List&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;review-past-week-of-sign-in-history&#34;&gt;Review Past Week of Sign-In History&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Review sign-in history to identify any unusual user activity.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Access the Azure portal&amp;rsquo;s sign-in history section. Specify the user of interest and examine their sign-in locations and activities. Access the portal here: &lt;a href=&#34;https://portal.azure.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/SignIns&#34;&gt;Azure Sign-In History&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>PowerShell Script to Export WiFi Network Credentials</title>
-      <link>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</guid>
-      <description>A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.</description>
     </item>
   </channel>
 </rss>

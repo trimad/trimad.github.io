@@ -16,6 +16,20 @@
       <description></description>
     </item>
     <item>
+      <title>Troubleshooting</title>
+      <link>http://localhost:1313/categories/troubleshooting/</link>
+      <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/troubleshooting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows</title>
+      <link>http://localhost:1313/categories/windows/</link>
+      <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/windows/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>System Administration</title>
       <link>http://localhost:1313/categories/system-administration/</link>
       <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
@@ -34,13 +48,6 @@
       <link>http://localhost:1313/categories/networking/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/networking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Windows</title>
-      <link>http://localhost:1313/categories/windows/</link>
-      <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/windows/</guid>
       <description></description>
     </item>
     <item>

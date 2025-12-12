@@ -10,14 +10,19 @@
   
 <header class="gg-topbar gg-article-topbar">
   <div class="gg-brand">
-    <span class="gg-logo">◎</span>
+    <span class="gg-logo">F-Z</span>
     <div>
       <div class="gg-title">Ghostfeed</div>
       <div class="gg-subtitle">Reading: Microsoft LAPS (Local Administrator Password Solution) Guide</div>
     </div>
   </div>
+  <nav class="gg-nav">
+      <a class="gg-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+      <a class="gg-nav-link" href="http://localhost:1313/archive/">Archive</a>
+      <a class="gg-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+  </nav>
   <div class="gg-search">
-    <a class="gg-back" href="http://localhost:1313/">← Back to graph</a>
+    <a class="gg-back" href="http://localhost:1313/posts/">Back to graph</a>
   </div>
 </header>
 
@@ -26,7 +31,7 @@
     <h1>Microsoft LAPS (Local Administrator Password Solution) Guide</h1>
     <p class="gg-meta">
       Published February 23, 2023
-       • Updated December 11, 2025
+       - Updated December 11, 2025
     </p>
     
     <div class="gg-terms">
@@ -35,10 +40,6 @@
           <span class="gg-term-label">Tags:</span>
           
             <a class="gg-term-pill" href="http://localhost:1313/?q=password-management">password-management</a>
-          
-            <a class="gg-term-pill" href="http://localhost:1313/?q=security">security</a>
-          
-            <a class="gg-term-pill" href="http://localhost:1313/?q=windows">windows</a>
           
             <a class="gg-term-pill" href="http://localhost:1313/?q=automation">automation</a>
           
@@ -70,7 +71,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-ADComputer -Identity &lt;computername&gt; -Properties DistinguishedName,DNSHostName
 </span></span></code></pre></div><h3>Get the local admin password for all computers</h3>
 <p><em>from Active Directory PowerShell:</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-ADComputer -Filter * -SearchBase <span style="color:#960050;background-color:#1e0010">“</span>OU=,DC=,DC=,DC=<span style="color:#960050;background-color:#1e0010">”</span> | Get-AdmPwdPassword -ComputerName {$_.Name}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-ADComputer -Filter * -SearchBase â<span style="color:#960050;background-color:#1e0010">€</span>œOU=,DC=,DC=,DC=â<span style="color:#960050;background-color:#1e0010">€</span> | Get-AdmPwdPassword -ComputerName {$_.Name}
 </span></span></code></pre></div>
     </div>
   </article>

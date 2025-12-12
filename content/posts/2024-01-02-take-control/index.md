@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [PowerShell]
 date: 2024-01-02
 draft: false
 summary: "Steps to take when N-Central's Take Control remote access feature isn't working, including how to restart the necessary services."
-tags: [powershell, n-central, remote-access, troubleshooting, system-administration]
+tags: ["n-central", "remote-access", "troubleshooting", "system-administration"]
 title: "Troubleshooting N-Central Take Control"
 toc: true
 usePageBundles: true

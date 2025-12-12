@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [Python]
 date: 2023-04-28
 draft: true
 summary: "A guide for converting EXE files to MSI format using Python 2.7 and WiX Toolset"
-tags: [python, installation, automation, executables, windows]
+tags: ["installation", "automation", "executables"]
 toc: true
 title: "EXEtoMSI"
 usePageBundles: true

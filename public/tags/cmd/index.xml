@@ -6,8 +6,15 @@
     <description>Recent content in Cmd on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 12 Dec 2025 11:22:25 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/cmd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rebuilding a Corrupted Windows User Profile Using CMD</title>
+      <link>http://localhost:1313/posts/2025-12-11-rebuild-user-profile/</link>
+      <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-12-11-rebuild-user-profile/</guid>
+      <description>How to rebuild a corrupted Windows profile entirely through Command Prompt when remote tools won’t elevate.</description>
+    </item>
     <item>
       <title>Windows Driver Management with pnputil</title>
       <link>http://localhost:1313/posts/2023-02-17-uninstall-drivers/</link>

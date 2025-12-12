@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [PowerShell]
 date: 2023-10-10
 summary: "Install Windows Updates with the PSWindowsUpdate PowerShell module."
-tags: [powershell, windows-update, automation, system-administration]
+tags: ["windows-update", "automation", "system-administration"]
 title: "PSWindowsUpdate: Managing Windows Updates with PowerShell"
 toc: true
 usePageBundles: true

@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [Python, Image Processing]
 date: 2024-07-30
 draft: false
 summary: "A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library)."
-tags: [python, image-processing, optimization, pil, pillow, batch-processing]
+tags: ["image-processing", "optimization", "pil", "pillow", "batch-processing"]
 title: "Automated Batch Image Compression with Python"
 toc: false
 usePageBundles: true

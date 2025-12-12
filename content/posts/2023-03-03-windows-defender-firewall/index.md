@@ -1,10 +1,10 @@
----
+﻿---
 author: Tristan Madden
 categories: [Windows, Security, System Administration]
 date: 2023-03-03
 draft: false
 summary: "A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding."
-tags: [windows, security, netsh, system-administration, windows-defender, network-security]
+tags: ["netsh", "system-administration", "windows-defender", "network-security"]
 title: "Windows Defender Firewall Management Guide"
 toc: true
 usePageBundles: true

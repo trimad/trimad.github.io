@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [System Administration, Windows]
 date: 2023-02-17
 draft: false
-tags: [drivers, windows, hardware, device-management, cmd, shell]
+tags: ["drivers", "hardware", "device-management", "cmd", "shell"]
 title: Windows Driver Management with pnputil
 usePageBundles: true
 thumbnail: "thumbnail.png"

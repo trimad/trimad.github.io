@@ -3,38 +3,41 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Troubleshoot Crashing Apps with ProcDump &amp; WinDbg | Ghostfeed</title>
+  <title>Troubleshoot Crashing Apps with ProcDumpÂ &amp;Â WinDbg | Ghostfeed</title>
   <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
 </head>
 <body class="gg-body">
   
 <header class="gg-topbar gg-article-topbar">
   <div class="gg-brand">
-    <span class="gg-logo">◎</span>
+    <span class="gg-logo">F-Z</span>
     <div>
       <div class="gg-title">Ghostfeed</div>
-      <div class="gg-subtitle">Reading: Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</div>
+      <div class="gg-subtitle">Reading: Troubleshoot Crashing Apps with ProcDumpÂ &amp;Â WinDbg</div>
     </div>
   </div>
+  <nav class="gg-nav">
+      <a class="gg-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+      <a class="gg-nav-link" href="http://localhost:1313/archive/">Archive</a>
+      <a class="gg-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+  </nav>
   <div class="gg-search">
-    <a class="gg-back" href="http://localhost:1313/">← Back to graph</a>
+    <a class="gg-back" href="http://localhost:1313/posts/">Back to graph</a>
   </div>
 </header>
 
 <main class="gg-article">
   <article>
-    <h1>Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</h1>
+    <h1>Troubleshoot Crashing Apps with ProcDumpÂ &amp;Â WinDbg</h1>
     <p class="gg-meta">
       Published May 1, 2025
-       • Updated December 11, 2025
+       - Updated December 11, 2025
     </p>
     
     <div class="gg-terms">
       
         <div class="gg-term-row">
           <span class="gg-term-label">Tags:</span>
-          
-            <a class="gg-term-pill" href="http://localhost:1313/?q=windows">windows</a>
           
             <a class="gg-term-pill" href="http://localhost:1313/?q=troubleshooting">troubleshooting</a>
           
@@ -58,21 +61,21 @@
     
     <div class="gg-content">
       <blockquote>
-<p><em>“Logs tell you something broke; a crash dump tells you <strong>why</strong>.”</em></p>
+<p><em>â€œLogs tell you something broke; a crash dump tells you <strong>why</strong>.â€</em></p>
 </blockquote>
 <hr>
 <h2 id="1-set-the-stage">1. Set the Stage</h2>
 <ol>
 <li>
-<p><strong>Grab ProcDump</strong> if it’s not already on your toolbox machine.<br>
-👉 <a href="https://learn.microsoft.com/sysinternals/downloads/procdump">ProcDump — Sysinternals</a></p>
+<p><strong>Grab ProcDump</strong> if itâ€™s not already on your toolbox machine.<br>
+ðŸ‘‰ <a href="https://learn.microsoft.com/sysinternals/downloads/procdump">ProcDump â€” Sysinternals</a></p>
 </li>
 <li>
 <p><strong>Create a home for dumps</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>New-Item -ItemType Directory C:\Dumps -Force
 </span></span></code></pre></div></li>
 <li>
-<p><strong>Clean the slate:</strong> Close every stray instance of the app you’re chasing.</p>
+<p><strong>Clean the slate:</strong> Close every stray instance of the app youâ€™re chasing.</p>
 </li>
 </ol>
 <hr>
@@ -92,30 +95,30 @@
       </tr>
       <tr>
           <td><code>-h</code></td>
-          <td>Also triggers on a user‑mode <strong>h</strong>ang (useful when the UI just freezes)</td>
+          <td>Also triggers on a userâ€‘mode <strong>h</strong>ang (useful when the UI just freezes)</td>
       </tr>
       <tr>
           <td><code>-ma</code></td>
-          <td>Creates a <strong>m</strong>ini‑dump <strong>a</strong>nd <em>all</em> process memory (full dump)</td>
+          <td>Creates a <strong>m</strong>iniâ€‘dump <strong>a</strong>nd <em>all</em> process memory (full dump)</td>
       </tr>
   </tbody>
 </table>
 <p>ProcDump parks the dump as <code>excel.exe_YYMMDD_HHMM.dmp</code> in <code>C:\Dumps</code>. Reproduce the crash and wait for <em>Dump written</em> to show.</p>
 <hr>
 <h2 id="3-install-windbg">3. Install WinDbg</h2>
-<p>I use <strong>WinDbg Preview</strong> because dark mode is life:<br>
-👉 <a href="https://learn.microsoft.com/windows-hardware/drivers/debugger/debugger-download-tools">Install WinDbg — Windows Drivers</a></p>
+<p>I use <strong>WinDbgÂ Preview</strong> because dark mode is life:<br>
+ðŸ‘‰ <a href="https://learn.microsoft.com/windows-hardware/drivers/debugger/debugger-download-tools">Install WinDbg â€” Windows Drivers</a></p>
 <hr>
 <h2 id="4-open-the-dump">4. Open the Dump</h2>
 <ol>
 <li>
-<p><strong>File → Open Dump…</strong></p>
+<p><strong>Fileâ€¯â†’â€¯Open Dumpâ€¦</strong></p>
 </li>
 <li>
-<p>The debugger breaks immediately—no need to hit <em>Start</em>.</p>
+<p>The debugger breaks immediatelyâ€”no need to hit <em>Start</em>.</p>
 </li>
 <li>
-<p>Paste your symbol path (one‑liner, no spaces):</p>
+<p>Paste your symbol path (oneâ€‘liner, no spaces):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>.symfix; .reload
 </span></span></code></pre></div><blockquote>
 <p>For stubborn cases:<br>
@@ -124,27 +127,27 @@
 </li>
 </ol>
 <hr>
-<h2 id="5-autoanalysis">5. Auto‑analysis</h2>
+<h2 id="5-autoâanalysis">5. Autoâ€‘analysis</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>!analyze -v
 </span></span></code></pre></div><ul>
 <li><strong><code>EXCEPTION_CODE</code></strong> tells you <em>what</em> blew up.</li>
 <li><strong>Faulting module</strong> shows <em>where</em> (DLL or EXE).</li>
 <li>The <strong>stack trace</strong> is your breadcrumb trail.</li>
 </ul>
-<p>If the stack ends in <code>ucrtbase!_invalid_parameter</code>, your app fed bad data to a C runtime call—it’s not always Microsoft’s fault, promise.</p>
+<p>If the stack ends in <code>ucrtbase!_invalid_parameter</code>, your app fed bad data to a C runtime callâ€”itâ€™s not always Microsoftâ€™s fault, promise.</p>
 <hr>
 <h2 id="6-dig-deeper">6. Dig Deeper</h2>
 <ul>
-<li><strong>Threads:</strong> <code>~* k</code> to list every thread’s call stack.</li>
+<li><strong>Threads:</strong> <code>~* k</code> to list every threadâ€™s call stack.</li>
 <li><strong>Loaded modules:</strong> <code>lmvm excel</code> (swap <code>excel</code> for any DLL).</li>
-<li><strong>Memory leaks:</strong> <code>!heap -s</code> (when RAM keeps climbing pre‑crash).</li>
+<li><strong>Memory leaks:</strong> <code>!heap -s</code> (when RAM keeps climbing preâ€‘crash).</li>
 <li><strong>Handle leaks:</strong> <code>!handle 0 7</code> (careful, noisy).</li>
 </ul>
 <hr>
 <h2 id="7-fix-or-escalate">7. Fix or Escalate</h2>
 <ol>
 <li><strong>Patch or update</strong> the crashing module first.</li>
-<li><strong>Check add‑ins &amp; plugins</strong>—Office add‑ins love to throw stones.</li>
+<li><strong>Check addâ€‘ins &amp; plugins</strong>â€”Office addâ€‘ins love to throw stones.</li>
 <li><strong>Validate input</strong> if you own the source.</li>
 <li><strong>Capture a second dump</strong> after changes; compare stacks.</li>
 </ol>
@@ -152,7 +155,7 @@
 <h2 id="cheat-sheet">Cheat Sheet</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>.sympath           # Show current symbol path
 </span></span><span style="display:flex;"><span>.reload /f         # Force symbol reload
-</span></span><span style="display:flex;"><span>.ecxr              # Switch to the crashing thread’s context
+</span></span><span style="display:flex;"><span>.ecxr              # Switch to the crashing threadâ€™s context
 </span></span><span style="display:flex;"><span>kb / kH            # Short / long stack
 </span></span><span style="display:flex;"><span>u address          # Disassemble around address
 </span></span><span style="display:flex;"><span>.dt nt!_EXCEPTION_RECORD -r @$exr  # Decode exception record

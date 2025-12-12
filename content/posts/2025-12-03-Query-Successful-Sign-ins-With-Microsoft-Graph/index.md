@@ -1,9 +1,9 @@
----
+﻿---
 author: Tristan Madden
 categories: [PowerShell]
 date: 2025-12-03
 draft: false
-tags: [entra, powershell, api, signin, security]
+tags: ["entra", "api", "signin"]
 title: "Query Successful Sign-ins With Microsoft Graph"
 summary: "A quick PowerShell script that pulls successful sign-ins from Entra ID using Microsoft Graph."
 usePageBundles: true
@@ -49,9 +49,9 @@ $requiredScopes = @(
 try {
     Write-Host "Connecting to Microsoft Graph..." -ForegroundColor Yellow
     Connect-MgGraph -Scopes $requiredScopes -NoWelcome -ErrorAction Stop
-    Write-Host "✅ Connected successfully.`n" -ForegroundColor Green
+    Write-Host "âœ… Connected successfully.`n" -ForegroundColor Green
 } catch {
-    Write-Host "❌ Failed to connect to Microsoft Graph: $_" -ForegroundColor Red
+    Write-Host "âŒ Failed to connect to Microsoft Graph: $_" -ForegroundColor Red
     exit
 }
 
@@ -73,13 +73,13 @@ try {
     # Server-side filter on date + success, client-side filter on location
     $allSignIns = Get-MgAuditLogSignIn -All -Filter $filter
 } catch {
-    Write-Host "❌ Failed to retrieve sign-in logs: $_" -ForegroundColor Red
+    Write-Host "âŒ Failed to retrieve sign-in logs: $_" -ForegroundColor Red
     Disconnect-MgGraph -Confirm:$false
     exit
 }
 
 if (-not $allSignIns) {
-    Write-Host "❌ No sign-ins found for the specified time range." -ForegroundColor Red
+    Write-Host "âŒ No sign-ins found for the specified time range." -ForegroundColor Red
     Disconnect-MgGraph -Confirm:$false
     exit
 }
@@ -97,7 +97,7 @@ $nySignIns = $allSignIns | Where-Object {
 }
 
 if (-not $nySignIns) {
-    Write-Host "⚠️ No successful sign-ins found from New York for this period." -ForegroundColor Yellow
+    Write-Host "âš ï¸ No successful sign-ins found from New York for this period." -ForegroundColor Yellow
 }
 
 Write-Host ("Found {0} successful sign-ins from New York.`n" -f $nySignIns.Count) -ForegroundColor Green
@@ -126,7 +126,7 @@ if (-not $results -or $results.Count -eq 0) {
     "[]" | Out-File -FilePath $outputFile -Encoding utf8
 } else {
     $results | ConvertTo-Json -Depth 5 | Out-File -FilePath $outputFile -Encoding utf8
-    Write-Host ("`n✅ Exported {0} New York sign-ins to {1}" -f $results.Count, $outputFile) -ForegroundColor Green
+    Write-Host ("`nâœ… Exported {0} New York sign-ins to {1}" -f $results.Count, $outputFile) -ForegroundColor Green
 }
 
 # --- STEP 7: Open the file automatically ---
