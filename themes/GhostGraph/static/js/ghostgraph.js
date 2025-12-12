@@ -556,53 +556,74 @@
   }
 
   function drawCategoryLabels() {
-    const catBounds = new Map();
-    for (const n of nodes) {
-      if (!n.visible) continue;
-      const cats = n.categories && n.categories.length ? n.categories : ["uncategorized"];
-      const r = n.renderRadius || 8.5;
-      for (const c of cats) {
-        const b = catBounds.get(c) || {
-          minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity,
-        };
-        b.minX = Math.min(b.minX, n.x - r);
-        b.minY = Math.min(b.minY, n.y - r);
-        b.maxX = Math.max(b.maxX, n.x + r);
-        b.maxY = Math.max(b.maxY, n.y + r);
-        catBounds.set(c, b);
+    const cats = allCategories.length ? allCategories : ["uncategorized"];
+    if (!cats.length) return;
+
+    ctx.save();
+    ctx.font = '24px "Share Tech Mono", monospace';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    const labels = cats.map((cat) => {
+      const anchor = categoryAnchors.get(cat) || { x: width / 2, y: height / 2 };
+      const hue = categoryHueMap.get(cat) ?? hashHue(cat || "uncategorized");
+      const fill = `hsla(${hue}, 75%, 62%, 0.08)`;
+      const stroke = `hsla(${hue}, 80%, 55%, 0.45)`;
+      const textCol = `hsl(${hue}, 85%, 65%)`;
+      const label = (cat || "uncategorized").toUpperCase();
+      const metrics = ctx.measureText(label);
+      const padX = 12;
+      const boxW = metrics.width + padX * 2;
+      const boxH = 26;
+      return { cat, label, cx: anchor.x, cy: anchor.y, w: boxW, h: boxH, fill, stroke, textCol };
+    });
+
+    // Repel overlapping label boxes (axis-aligned)
+    const iterations = 10;
+    const damp = 0.65;
+    for (let iter = 0; iter < iterations; iter++) {
+      for (let i = 0; i < labels.length; i++) {
+        for (let j = i + 1; j < labels.length; j++) {
+          const a = labels[i];
+          const b = labels[j];
+          const dx = b.cx - a.cx;
+          const dy = b.cy - a.cy;
+          const minX = (a.w + b.w) / 2 + 8;
+          const minY = (a.h + b.h) / 2 + 8;
+          if (Math.abs(dx) < minX && Math.abs(dy) < minY) {
+            if (Math.abs(dx) > Math.abs(dy)) {
+              const push = (minX - Math.abs(dx)) / 2;
+              const dir = dx >= 0 ? 1 : -1;
+              a.cx -= dir * push * damp;
+              b.cx += dir * push * damp;
+            } else {
+              const push = (minY - Math.abs(dy)) / 2;
+              const dir = dy >= 0 ? 1 : -1;
+              a.cy -= dir * push * damp;
+              b.cy += dir * push * damp;
+            }
+          }
+        }
       }
     }
 
-    if (!catBounds.size) return;
+    labels.forEach((item) => {
+      // Keep inside viewport
+      item.cx = clamp(item.cx, item.w / 2 + 8, width - item.w / 2 - 8);
+      item.cy = clamp(item.cy, item.h / 2 + 8, height - item.h / 2 - 8);
 
-    ctx.save();
+      const x = item.cx - item.w / 2;
+      const y = item.cy - item.h / 2;
 
-    catBounds.forEach((b, cat) => {
-      if (!Number.isFinite(b.minX) || !Number.isFinite(b.minY)) return;
-      const pad = 26;
-      const w = (b.maxX - b.minX) + pad * 2;
-      const h = (b.maxY - b.minY) + pad * 2;
-      const x = b.minX - pad;
-      const y = b.minY - pad;
-
-      const hue = categoryHueMap.get(cat) ?? hashHue(cat || "uncategorized");
-      const fill = `hsla(${hue}, 75%, 62%, 0.01)`;
-      const stroke = `hsla(${hue}, 80%, 55%, 0.35)`;
-      const textCol = `hsl(${hue}, 85%, 65%)`;
-
-      drawRoundedRect(x, y, w, h, 14);
-      ctx.fillStyle = fill;
-      ctx.strokeStyle = stroke;
+      drawRoundedRect(x, y, item.w, item.h, 12);
+      ctx.fillStyle = item.fill;
+      ctx.strokeStyle = item.stroke;
       ctx.lineWidth = 2;
       ctx.fill();
       ctx.stroke();
 
-      const label = (cat || "uncategorized").toUpperCase();
-      ctx.font = '24px "Share Tech Mono", monospace';
-      ctx.fillStyle = textCol;
-      ctx.textAlign = "left";
-      ctx.textBaseline = "bottom";
-      ctx.fillText(label, x, y - 6);
+      ctx.fillStyle = item.textCol;
+      ctx.fillText(item.label, item.cx, item.cy + 1);
     });
 
     ctx.restore();
