@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
 /* =========================================================
-   GHOST GRID (GitS-inspired) — drop-in stylesheet
+   GHOST GRID (GitS-inspired) â€” drop-in stylesheet
    ========================================================= */
 
 :root {
@@ -175,6 +175,55 @@ body.gg-body::after {
   line-height: 1.2;
 }
 
+/* ---------------------------
+   Nav
+--------------------------- */
+.gg-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gg-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--pill);
+  border: 1px solid rgba(72, 242, 227, 0.34);
+  color: var(--text);
+  background: rgba(72, 242, 227, 0.07);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    border-color var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    transform var(--t-fast) var(--ease),
+    background-color var(--t) var(--ease),
+    color var(--t) var(--ease);
+}
+
+.gg-nav-link:hover {
+  border-color: rgba(72, 242, 227, 0.75);
+  background: rgba(72, 242, 227, 0.10);
+  box-shadow: 0 0 0 1px rgba(72, 242, 227, 0.18);
+  transform: translateY(-1px);
+}
+
+.gg-nav-link.is-active {
+  color: #021010;
+  background: linear-gradient(90deg, rgba(72, 242, 227, 0.95), rgba(156, 251, 135, 0.95));
+  border-color: rgba(156, 251, 135, 0.75);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.40);
+}
+
+.gg-nav-link:focus-visible {
+  outline: 2px solid rgba(156, 251, 135, 0.65);
+  outline-offset: 2px;
+}
 /* ---------------------------
    Search
 --------------------------- */
@@ -557,3 +606,4 @@ pre::-webkit-scrollbar-track {
     opacity: 0.10;
   }
 }
+

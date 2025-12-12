@@ -1,12 +1,22 @@
-{{ define "main" }}
+﻿{{ define "main" }}
 <header class="gg-topbar">
   <div class="gg-brand">
-    <span class="gg-logo">◎</span>
+    <span class="gg-logo">F-Z</span>
     <div>
       <div class="gg-title">{{ .Site.Title }}</div>
       <div class="gg-subtitle">Graph view: posts linked by tags & categories</div>
     </div>
   </div>
+  <nav class="gg-nav">
+    {{- $navItems := slice
+      (dict "label" "Posts" "url" "/posts/" "active" (or (eq .Kind "home") (eq .Section "posts")))
+      (dict "label" "Archive" "url" "/archive/" "active" (eq .Section "archive"))
+      (dict "label" "Prompts" "url" "/prompts/" "active" (eq .Section "prompts"))
+    -}}
+    {{- range $navItems }}
+      <a class="gg-nav-link{{ if .active }} is-active{{ end }}" href="{{ .url }}">{{ .label }}</a>
+    {{- end }}
+  </nav>
   <div class="gg-search">
     <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" />
   </div>
@@ -25,6 +35,13 @@
 {
   "nodes": [
     {{- $pages := .Site.RegularPages -}}
+    {{- if eq .Kind "home" -}}
+      {{- with .Site.GetPage "section" "posts" -}}
+        {{- $pages = .RegularPages -}}
+      {{- end -}}
+    {{- else if or (eq .Section "posts") (eq .Section "archive") (eq .Section "prompts") -}}
+      {{- $pages = .RegularPages -}}
+    {{- end -}}
     {{- range $index, $p := $pages -}}
       {{- if $index }},{{ end -}}
       {
