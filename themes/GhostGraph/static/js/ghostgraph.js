@@ -1,57 +1,96 @@
+/* GhostGraph — Pure Force-Directed Layout (auto-tuned for any node count)
+   Requires:
+   - <canvas id="gg-canvas"></canvas>
+   - <script type="application/json" id="gg-data">{"nodes":[...]}</script>
+   - optional <input id="gg-search" />
+*/
 (function () {
-  const canvas = document.getElementById('gg-canvas');
-  const dataEl = document.getElementById('gg-data');
-  const searchEl = document.getElementById('gg-search');
+  "use strict";
+
+  const canvas = document.getElementById("gg-canvas");
+  const dataEl = document.getElementById("gg-data");
+  const searchEl = document.getElementById("gg-search");
   if (!canvas || !dataEl) return;
 
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d", { alpha: true });
+
+  // ----------------------------
+  // Canvas sizing (DPR-safe)
+  // ----------------------------
   let width = canvas.clientWidth;
   let height = canvas.clientHeight;
   let dpr = window.devicePixelRatio || 1;
 
+  function clamp(v, lo, hi) {
+    return Math.max(lo, Math.min(hi, v));
+  }
+
   function resize() {
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
     width = canvas.clientWidth;
     height = canvas.clientHeight;
     dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    canvas.width = Math.max(1, Math.floor(width * dpr));
+    canvas.height = Math.max(1, Math.floor(height * dpr));
     ctx.scale(dpr, dpr);
-    if (typeof categories !== 'undefined' && categories.length) seedCategoryCenters();
+
+    // Graph forces depend on size; retune on resize
+    updateCategoryAnchors();
+    rebuildEdges();
+    retuneForGraph();
+    reheat();
   }
 
-let parsed = { nodes: [] };
+  // ----------------------------
+  // Parse + normalize data
+  // ----------------------------
+  let parsed = { nodes: [] };
   try {
-    parsed = JSON.parse(dataEl.textContent || '{}');
+    parsed = JSON.parse(dataEl.textContent || "{}");
   } catch (err) {
-    console.error('GhostGraph: failed to parse data', err);
+    console.error("GhostGraph: failed to parse data", err);
     return;
   }
 
+  const cleanString = (s) =>
+    String(s || "").replace(/[\[\]'"]/g, "").trim().toLowerCase();
+
   const normalizeList = (v) => {
-    const clean = (s) => String(s).replace(/[\[\]'"]/g, '').trim().toLowerCase();
-    if (Array.isArray(v)) return v.filter(Boolean).map(clean);
-    if (typeof v === 'string') {
-      return v.split(',').map(clean).filter(Boolean);
-    }
+    if (Array.isArray(v)) return v.filter(Boolean).map(cleanString);
+    if (typeof v === "string") return v.split(",").map(cleanString).filter(Boolean);
     return [];
   };
-  const tokenize = (str) => (str || '')
-    .toLowerCase()
-    .split(/[^a-z0-9]+/)
-    .filter(t => t && t.length >= 2);
 
-  const nodes = (parsed.nodes || []).map((n) => {
+  const tokenize = (str) =>
+    (str || "")
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((t) => t && t.length >= 2);
+
+  // Stable 32-bit hash (FNV-1a-ish)
+  function hash32(str) {
+    str = String(str || "");
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+
+  const nodes = (parsed.nodes || []).map((n, idx) => {
     const tags = normalizeList(n.tags);
     const categories = normalizeList(n.categories);
-    const cleanUrl = (n.url || '').toString().replace(/"/g, '').trim();
-    const tokenSet = new Set([
-      ...tokenize(n.title || ''),
-      ...tags,
-      ...categories
-    ]);
+    const cleanUrl = (n.url || "").toString().replace(/"/g, "").trim();
+
+    const tokenSet = new Set([...tokenize(n.title || ""), ...tags, ...categories]);
+
+    const key = n.id || n.slug || n.url || n.title || String(idx);
+
     return {
       ...n,
+      _key: String(key),
       url: cleanUrl,
       tags,
       categories,
@@ -61,228 +100,634 @@ let parsed = { nodes: [] };
       vx: 0,
       vy: 0,
       visible: true,
-      primary: categories[0] || 'uncategorized',
-      renderRadius: 8.5
+      renderRadius: 8.5,
     };
   });
 
   if (!nodes.length) {
-    console.warn('GhostGraph: no posts found to render');
+    console.warn("GhostGraph: no posts found to render");
     return;
   }
 
-  const hashHue = (str, offset = 0, span = 360) => {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = (hash << 5) - hash + str.charCodeAt(i);
-      hash |= 0;
-    }
-    const hue = (Math.abs(hash) % span) + offset;
-    return hue % 360;
-  };
+  // ----------------------------
+  // Colors (layout is not category-based, but color is)
+  // ----------------------------
+  const hashHue = (str, offset = 0, span = 360) =>
+    (hash32(str) % span + offset) % 360;
 
-  const categoryColorMap = new Map();
-  const tagColorMap = new Map();
+  const allCategories = Array.from(
+    new Set(
+      nodes.flatMap((n) =>
+        n.categories && n.categories.length ? n.categories : ["uncategorized"]
+      )
+    )
+  );
 
-  const categories = Array.from(new Set(nodes.flatMap(n => (n.categories && n.categories.length) ? n.categories : ['uncategorized'])));
-  const colorByCategory = new Map();
-  categories.forEach(cat => {
-    const hue = hashHue(cat || 'uncategorized');
-    const color = `hsl(${hue}, 75%, 60%)`;
-    colorByCategory.set(cat, color);
-    categoryColorMap.set(cat, color);
-  });
-  let queryActive = false;
+  const categoryHueMap = new Map();
+  (function buildCategoryHues() {
+    const cats = allCategories.length ? allCategories : ["uncategorized"];
+    const count = cats.length;
+    const step = count > 0 ? 360 / count : 360;
+    // Start at a deterministic offset to avoid always beginning at pure red
+    const offset = hashHue("category-offset", 0, 360);
 
-  // category cluster centers on a ring
-  const catCenters = new Map();
-  function seedCategoryCenters() {
-    catCenters.clear();
-    const radius = Math.min(width, height) * 0.45;
-    const cx = width / 2;
-    const cy = height / 2;
-    categories.forEach((cat, idx) => {
-      const angle = (idx / Math.max(1, categories.length)) * Math.PI * 2;
-      catCenters.set(cat, {
-        x: cx + Math.cos(angle) * radius,
-        y: cy + Math.sin(angle) * radius
-      });
-    });
-  }
-  // initial sizing and category layout
-  resize();
-  seedCategoryCenters();
-  window.addEventListener('resize', resize);
-
-  // seed nodes near their category center
-  (function seedPositions() {
-    nodes.forEach(n => {
-      const center = catCenters.get(n.primary) || { x: width / 2, y: height / 2 };
-      const jitterR = 40 + Math.random() * 60;
-      const angle = Math.random() * Math.PI * 2;
-      n.x = center.x + Math.cos(angle) * jitterR;
-      n.y = center.y + Math.sin(angle) * jitterR;
+    cats.forEach((cat, idx) => {
+      const hue = (offset + idx * step) % 360;
+      categoryHueMap.set(cat, hue);
     });
   })();
 
-  function sharedTag(a, b) {
-    const tagsA = new Set(a.tags || []);
-    const tagsB = new Set(b.tags || []);
-    for (const t of tagsA) {
-      if (tagsB.has(t)) return t;
-    }
-    return null;
-  }
+  const categoryAnchors = new Map();
+  function updateCategoryAnchors() {
+    categoryAnchors.clear();
 
-  function tagColor(tag) {
-    if (!tag) return 'rgba(72, 242, 227, 0.26)';
-    if (tagColorMap.has(tag)) return tagColorMap.get(tag);
-    const hue = hashHue(tag);
-    const color = `hsl(${hue}, 80%, 62%)`;
-    tagColorMap.set(tag, color);
-    return color;
-  }
+    const cats = allCategories.length ? allCategories : ["uncategorized"];
+    const cx = width / 2;
+    const cy = height / 2;
+    const ring = Math.min(width, height) * 0.34;
 
-  function hslToRgb(str) {
-    const m = /hsl\s*\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*\)/i.exec(str || '');
-    if (!m) return { r: 0, g: 255, b: 247 };
-    let h = parseFloat(m[1]);
-    const s = parseFloat(m[2]) / 100;
-    const l = parseFloat(m[3]) / 100;
-    h = ((h % 360) + 360) % 360;
-    if (s === 0) {
-      const v = Math.round(l * 255);
-      return { r: v, g: v, b: v };
-    }
-    const c = (1 - Math.abs(2 * l - 1)) * s;
-    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-    const mVal = l - c / 2;
-    let r1 = 0, g1 = 0, b1 = 0;
-    if (h < 60) { r1 = c; g1 = x; b1 = 0; }
-    else if (h < 120) { r1 = x; g1 = c; b1 = 0; }
-    else if (h < 180) { r1 = 0; g1 = c; b1 = x; }
-    else if (h < 240) { r1 = 0; g1 = x; b1 = c; }
-    else if (h < 300) { r1 = x; g1 = 0; b1 = c; }
-    else { r1 = c; g1 = 0; b1 = x; }
-    return {
-      r: Math.round((r1 + mVal) * 255),
-      g: Math.round((g1 + mVal) * 255),
-      b: Math.round((b1 + mVal) * 255)
-    };
-  }
-
-  function mixColors(colors) {
-    if (!colors || !colors.length) return '#00fff7';
-    if (colors.length === 1) return colors[0];
-    let r = 0, g = 0, b = 0;
-    colors.forEach(c => {
-      const { r: rr, g: gg, b: bb } = hslToRgb(c);
-      r += rr; g += gg; b += bb;
-    });
-    const n = colors.length;
-    r = Math.round(r / n);
-    g = Math.round(g / n);
-    b = Math.round(b / n);
-    return `rgb(${r}, ${g}, ${b})`;
-  }
-
-  function nodePalette(node) {
-    const cats = (node.categories && node.categories.length) ? node.categories : [node.primary];
-    const unique = Array.from(new Set(cats));
-    const palette = unique.map(c => colorByCategory.get(c) || '#00fff7');
-    return palette.length ? palette : ['#00fff7'];
-  }
-
-let edges = [];
-let hoveredNode = null;
-let activeNode = null;
-let dragNode = null;
-let dragOffset = { x: 0, y: 0 };
-let dragStart = null;
-let dragMoved = false;
-
-function rebuildEdges() {
-    edges = [];
-    const tagMap = new Map();
-    nodes.forEach(n => {
-      (n.tags || []).forEach(t => {
-        const key = t || '__untagged__';
-        if (!tagMap.has(key)) tagMap.set(key, []);
-        tagMap.get(key).push(n);
+    cats.forEach((cat, idx) => {
+      const baseAngle = (idx / Math.max(1, cats.length)) * Math.PI * 2;
+      const wiggle = ((hash32("cat|" + cat) % 1000) / 1000 - 0.5) * 0.35;
+      const theta = baseAngle + wiggle * (Math.PI / Math.max(2, cats.length));
+      const radial = ring * (0.72 + ((hash32("cat-r|" + cat) % 1000) / 1000) * 0.18);
+      categoryAnchors.set(cat, {
+        x: cx + Math.cos(theta) * radial * 0.55,
+        y: cy + Math.sin(theta) * radial * 0.55,
       });
     });
+  }
+  updateCategoryAnchors();
+
+  const tagColorMap = new Map();
+  function tagColor(tag) {
+    const t = tag || "__untagged__";
+    if (tagColorMap.has(t)) return tagColorMap.get(t);
+    const hue = hashHue(t);
+    const col = `hsl(${hue}, 80%, 62%)`;
+    tagColorMap.set(t, col);
+    return col;
+  }
+
+  // ----------------------------
+  // Edges: deterministic, aesthetic, capped per tag (cap auto-scales with N)
+  // ----------------------------
+  let edges = [];
+
+  function edgeCapForN(N) {
+    // Small graphs can afford more per-tag connections; large graphs need stricter caps
+    // ~12..28 range feels good; adjust if your tags are extremely broad.
+    return Math.round(clamp(10 + Math.sqrt(N) * 1.6, 12, 28));
+  }
+
+  function rebuildEdges() {
+    edges = [];
+
+    const live = nodes.filter((n) => n.visible);
+    if (live.length < 2) return;
+
+    const EDGE_CAP_PER_TAG = edgeCapForN(live.length);
+
+    const tagMap = new Map(); // tag -> nodes[]
+    live.forEach((n) => {
+      (n.tags || []).forEach((t) => {
+        const tag = t || "__untagged__";
+        if (!tagMap.has(tag)) tagMap.set(tag, []);
+        tagMap.get(tag).push(n);
+      });
+    });
+
+    // Merge multi-tag edges into a single edge with weight
+    const merged = new Map(); // pairKey -> edge
+
+    function addEdge(a, b, tag) {
+      if (!a || !b || a === b) return;
+      const ka = a._key;
+      const kb = b._key;
+      const key = ka < kb ? `${ka}|${kb}` : `${kb}|${ka}`;
+
+      const existing = merged.get(key);
+      if (existing) {
+        existing.weight += 1;
+        if (tag) existing.tags.add(tag);
+        return;
+      }
+
+      merged.set(key, {
+        source: a,
+        target: b,
+        weight: 1,
+        tags: new Set(tag ? [tag] : []),
+      });
+    }
 
     for (const [tag, list] of tagMap) {
       if (list.length < 2) continue;
-      // shuffle lightly to vary hubs
-      const shuffled = [...list].sort(() => Math.random() - 0.5);
-      const hub = shuffled[0];
-      let count = 0;
-      for (let i = 1; i < shuffled.length; i++) {
-        edges.push({ source: hub, target: shuffled[i], tag });
-        count++;
-      }
-      // connect a few neighbor pairs for shape
-      for (let i = 1; i < shuffled.length - 1; i++) {
-        edges.push({ source: shuffled[i], target: shuffled[i + 1], tag });
-        count++;
-      }
-    }
 
-    // minimal category connectors if a category has no tag edges
-    const catBuckets = new Map();
-    nodes.forEach(n => {
-      const key = n.primary || 'uncategorized';
-      if (!catBuckets.has(key)) catBuckets.set(key, []);
-      catBuckets.get(key).push(n);
-    });
-    for (const [cat, list] of catBuckets) {
-      if (list.length < 2) continue;
-      const hasEdges = edges.some(e => e.source.primary === cat || e.target.primary === cat);
-      if (hasEdges) continue;
-      // connect in a simple chain for visibility
-      for (let i = 0; i < list.length - 1 && i < 30; i++) {
-        edges.push({ source: list[i], target: list[i + 1], tag: `cat:${cat}` });
-      }
-    }
-    // if still empty (e.g., no tags), make a loose ring to show something
-    if (!edges.length && nodes.length > 1) {
-      for (let i = 0; i < nodes.length; i++) {
-        edges.push({ source: nodes[i], target: nodes[(i + 1) % nodes.length], tag: 'fallback' });
-      }
-    }
-
-    // annotate multi-edges for bezier offsets
-    const groups = new Map();
-    edges.forEach(e => {
-      const a = e.source.id || e.source.title || 'a';
-      const b = e.target.id || e.target.title || 'b';
-      const key = a < b ? `${a}|${b}` : `${b}|${a}`;
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key).push(e);
-    });
-    groups.forEach(list => {
-      list.forEach((e, idx) => {
-        e.multiIndex = idx;
-        e.multiTotal = list.length;
+      // Stable, deterministic order for this tag group
+      const sorted = [...list].sort((a, b) => {
+        const ha = hash32(tag + "|" + a._key);
+        const hb = hash32(tag + "|" + b._key);
+        return ha - hb;
       });
+
+      // Cap to prevent big tags from creating hairballs
+      const trimmed =
+        sorted.length > EDGE_CAP_PER_TAG ? sorted.slice(0, EDGE_CAP_PER_TAG) : sorted;
+
+      const m = trimmed.length;
+      const makeRing = m <= 10;
+
+      // chain (and ring for small sets)
+      for (let i = 0; i < m - 1; i++) addEdge(trimmed[i], trimmed[i + 1], tag);
+      if (makeRing) addEdge(trimmed[m - 1], trimmed[0], tag);
+
+      // chords
+      const step = Math.max(2, Math.round(Math.sqrt(m)));
+      const chordCount = Math.min(5, Math.floor(m / 3));
+      for (let i = 0; i < chordCount; i++) {
+        addEdge(trimmed[i], trimmed[(i + step) % m], tag);
+      }
+    }
+
+    // Fallback if no tags exist
+    if (!merged.size) {
+      const sorted = [...live].sort((a, b) => hash32(a._key) - hash32(b._key));
+      for (let i = 0; i < sorted.length; i++) {
+        addEdge(sorted[i], sorted[(i + 1) % sorted.length], "fallback");
+      }
+    }
+
+    edges = Array.from(merged.values()).map((e) => {
+      const tags = Array.from(e.tags);
+      e.tag = tags[0] || "fallback";
+      e.tags = tags;
+      return e;
     });
   }
-  rebuildEdges();
 
+  // ----------------------------
+  // Seed positions (wide spread based on N + viewport)
+  // ----------------------------
+  function seedPositions() {
+    const live = nodes.filter((n) => n.visible);
+    const N = Math.max(1, live.length);
+
+    const cx = width / 2;
+    const cy = height / 2;
+
+    // k is the natural spacing length scale (bigger when N small, smaller when N large)
+    const area = Math.max(1, width * height);
+    const k = Math.sqrt(area / N);
+
+    // Start wide: scale up from k, but keep within viewport
+    const R = clamp(k * 6.8, Math.min(width, height) * 0.36, Math.min(width, height) * 0.78);
+
+    nodes.forEach((n) => {
+      const a = (hash32(n._key) / 0xffffffff) * Math.PI * 2;
+      const r = (0.25 + (hash32("r|" + n._key) / 0xffffffff) * 0.75) * R;
+      n.x = cx + Math.cos(a) * r;
+      n.y = cy + Math.sin(a) * r;
+      n.vx = 0;
+      n.vy = 0;
+    });
+  }
+
+  // ----------------------------
+  // Force simulation (auto-tuned)
+  // ----------------------------
+  const sim = {
+    alpha: 1.0,
+    alphaMin: 0.015,
+    alphaDecay: 0.022,
+
+    charge: 1800,
+    spring: 0.017,
+    baseLink: 240,
+
+    center: 0.0009,
+    collide: 0.070,
+    padding: 10,
+
+    categoryPull: 0.012,
+
+    fillTarget: 0.94,
+    fillStrength: 0.0016,
+
+    friction: 0.84,
+    maxVel: 5.2,
+    margin: 30,
+  };
+
+  function reheat() {
+    sim.alpha = 1.0;
+  }
+
+  function retuneForGraph() {
+    const live = nodes.filter((n) => n.visible);
+    const N = Math.max(1, live.length);
+    const area = Math.max(1, width * height);
+
+    const k = Math.sqrt(area / N); // natural spacing scale
+
+    // density hint
+    const E = edges.length;
+    const avgDegree = N > 0 ? (2 * E) / N : 0;
+
+    // Distances + forces derived from k
+    sim.baseLink = clamp(k * 1.45, 150, 460);
+    sim.charge = clamp(k * k * 0.32, 1000, 9000);
+
+    // Springs: slightly stronger as degree increases
+    sim.spring = clamp(0.013 + avgDegree * 0.0009, 0.013, 0.030);
+
+    // Center gravity: weaker with more nodes (prevents "balling up")
+    sim.center = clamp(0.0014 / Math.sqrt(N), 0.00035, 0.0012);
+
+    // Category gravity: keep category clusters cohesive without overpowering links
+    sim.categoryPull = clamp(0.007 + (80 / (N + 80)) * 0.010, 0.007, 0.020);
+
+    // Fill: small graphs should fill more of the viewport
+    sim.fillTarget = clamp(0.90 + (60 / (N + 60)) * 0.06, 0.90, 0.98);
+    sim.fillStrength = clamp(0.0016 + (80 / (N + 80)) * 0.0018, 0.0016, 0.0034);
+
+    // Motion bounds
+    sim.maxVel = clamp(4.6 + Math.log10(N + 10), 4.6, 6.4);
+    sim.friction = clamp(0.86 - Math.log10(N + 10) * 0.02, 0.78, 0.86);
+
+    // Collision padding: slightly more when sparse
+    sim.padding = clamp(9 + (120 / (N + 120)) * 4, 9, 13);
+
+    reheat();
+  }
+
+  // Interaction state
+  let queryActive = false;
+  let hoveredNode = null;
+  let activeNode = null;
+  let dragNode = null;
+  let dragOffset = { x: 0, y: 0 };
+  let dragStart = null;
+  let dragMoved = false;
+
+  function applyForces() {
+    const live = nodes.filter((n) => n.visible);
+    if (!live.length) return;
+
+    const cx = width / 2;
+    const cy = height / 2;
+
+    // Pairwise: repulsion + collision
+    for (let i = 0; i < live.length; i++) {
+      const a = live[i];
+      if (dragNode === a) continue;
+
+      for (let j = i + 1; j < live.length; j++) {
+        const b = live[j];
+        if (dragNode === b) continue;
+
+        let dx = a.x - b.x;
+        let dy = a.y - b.y;
+        let dist2 = dx * dx + dy * dy + 0.01;
+        let dist = Math.sqrt(dist2);
+
+        const nx = dx / dist;
+        const ny = dy / dist;
+
+        // Charge
+        const f = (sim.charge * sim.alpha) / dist2;
+        a.vx += nx * f;
+        a.vy += ny * f;
+        b.vx -= nx * f;
+        b.vy -= ny * f;
+
+        // Collision
+        const ra = (a.renderRadius || 8.5) + sim.padding;
+        const rb = (b.renderRadius || 8.5) + sim.padding;
+        const minDist = ra + rb;
+
+        if (dist < minDist) {
+          const overlap = minDist - dist;
+          const push = overlap * sim.collide * sim.alpha;
+          a.vx += nx * push;
+          a.vy += ny * push;
+          b.vx -= nx * push;
+          b.vy -= ny * push;
+        }
+      }
+    }
+
+    // Link springs
+    for (const e of edges) {
+      if (!e.source.visible || !e.target.visible) continue;
+      if (dragNode === e.source || dragNode === e.target) continue;
+
+      const a = e.source;
+      const b = e.target;
+
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+
+      const w = Math.min(6, e.weight || 1);
+      const desired = Math.max(90, sim.baseLink - w * 14);
+      const strength = sim.spring * (0.8 + w * 0.25) * sim.alpha;
+
+      const diff = dist - desired;
+      const nx = dx / dist;
+      const ny = dy / dist;
+
+      const fx = nx * diff * strength;
+      const fy = ny * diff * strength;
+
+      a.vx += fx;
+      a.vy += fy;
+      b.vx -= fx;
+      b.vy -= fy;
+    }
+
+    // Category clustering
+    const catPull = sim.categoryPull * sim.alpha;
+    if (catPull > 0) {
+      for (const n of live) {
+        if (dragNode === n) continue;
+        const cats = n.categories && n.categories.length ? n.categories : ["uncategorized"];
+        let tx = 0, ty = 0, count = 0;
+        for (const c of cats) {
+          const anchor = categoryAnchors.get(c) || { x: width / 2, y: height / 2 };
+          tx += anchor.x;
+          ty += anchor.y;
+          count += 1;
+        }
+        if (count) {
+          const ax = tx / count;
+          const ay = ty / count;
+          n.vx += (ax - n.x) * catPull;
+          n.vy += (ay - n.y) * catPull;
+        }
+      }
+    }
+
+    // Viewport-fill force (force-based, not post-rescaling)
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const n of live) {
+      if (n.x < minX) minX = n.x;
+      if (n.x > maxX) maxX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.y > maxY) maxY = n.y;
+    }
+
+    const spanX = Math.max(1, maxX - minX);
+    const spanY = Math.max(1, maxY - minY);
+    const bbCx = (minX + maxX) / 2;
+    const bbCy = (minY + maxY) / 2;
+
+    const targetX = width * sim.fillTarget;
+    const targetY = height * sim.fillTarget;
+
+    const needX = (targetX - spanX) / targetX; // + expand, - compress
+    const needY = (targetY - spanY) / targetY;
+
+    const fill = sim.fillStrength * sim.alpha;
+    const fxScale = needX * fill;
+    const fyScale = needY * fill;
+
+    for (const n of live) {
+      if (dragNode === n) continue;
+      n.vx += (n.x - bbCx) * fxScale;
+      n.vy += (n.y - bbCy) * fyScale;
+    }
+
+    // Integrate + mild centering + soft bounds
+    const margin = sim.margin;
+    const boundMinX = margin;
+    const boundMaxX = width - margin;
+    const boundMinY = margin;
+    const boundMaxY = height - margin;
+
+    for (const n of live) {
+      if (dragNode === n) {
+        n.vx = 0;
+        n.vy = 0;
+        continue;
+      }
+
+      n.vx += (cx - n.x) * sim.center * sim.alpha;
+      n.vy += (cy - n.y) * sim.center * sim.alpha;
+
+      if (n.x < boundMinX) n.vx += (boundMinX - n.x) * 0.03 * sim.alpha;
+      if (n.x > boundMaxX) n.vx -= (n.x - boundMaxX) * 0.03 * sim.alpha;
+      if (n.y < boundMinY) n.vy += (boundMinY - n.y) * 0.03 * sim.alpha;
+      if (n.y > boundMaxY) n.vy -= (n.y - boundMaxY) * 0.03 * sim.alpha;
+
+      n.vx *= sim.friction;
+      n.vy *= sim.friction;
+
+      const s2 = n.vx * n.vx + n.vy * n.vy;
+      if (s2 > sim.maxVel * sim.maxVel) {
+        const scale = sim.maxVel / Math.sqrt(s2);
+        n.vx *= scale;
+        n.vy *= scale;
+      }
+
+      n.x += n.vx;
+      n.y += n.vy;
+    }
+
+    sim.alpha = Math.max(sim.alphaMin, sim.alpha * (1 - sim.alphaDecay));
+  }
+
+  // ----------------------------
+  // Rendering
+  // ----------------------------
+  function drawRoundedRect(x, y, w, h, r) {
+    const radius = Math.max(4, Math.min(r, Math.min(w, h) / 2));
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + w - radius, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+    ctx.lineTo(x + w, y + h - radius);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+    ctx.lineTo(x + radius, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  }
+
+  function drawCategoryLabels() {
+    const catBounds = new Map();
+    for (const n of nodes) {
+      if (!n.visible) continue;
+      const cats = n.categories && n.categories.length ? n.categories : ["uncategorized"];
+      const r = n.renderRadius || 8.5;
+      for (const c of cats) {
+        const b = catBounds.get(c) || {
+          minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity,
+        };
+        b.minX = Math.min(b.minX, n.x - r);
+        b.minY = Math.min(b.minY, n.y - r);
+        b.maxX = Math.max(b.maxX, n.x + r);
+        b.maxY = Math.max(b.maxY, n.y + r);
+        catBounds.set(c, b);
+      }
+    }
+
+    if (!catBounds.size) return;
+
+    ctx.save();
+
+    catBounds.forEach((b, cat) => {
+      if (!Number.isFinite(b.minX) || !Number.isFinite(b.minY)) return;
+      const pad = 26;
+      const w = (b.maxX - b.minX) + pad * 2;
+      const h = (b.maxY - b.minY) + pad * 2;
+      const x = b.minX - pad;
+      const y = b.minY - pad;
+
+      const hue = categoryHueMap.get(cat) ?? hashHue(cat || "uncategorized");
+      const fill = `hsla(${hue}, 75%, 62%, 0.01)`;
+      const stroke = `hsla(${hue}, 80%, 55%, 0.35)`;
+      const textCol = `hsl(${hue}, 85%, 65%)`;
+
+      drawRoundedRect(x, y, w, h, 14);
+      ctx.fillStyle = fill;
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 2;
+      ctx.fill();
+      ctx.stroke();
+
+      const label = (cat || "uncategorized").toUpperCase();
+      ctx.font = '24px "Share Tech Mono", monospace';
+      ctx.fillStyle = textCol;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "bottom";
+      ctx.fillText(label, x, y - 6);
+    });
+
+    ctx.restore();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Category backdrops behind edges/nodes
+    drawCategoryLabels();
+
+    // Edges
+    for (const e of edges) {
+      if (!e.source.visible || !e.target.visible) continue;
+
+      const sx = e.source.x, sy = e.source.y;
+      const tx = e.target.x, ty = e.target.y;
+
+      const col = tagColor(e.tag);
+      const w = Math.min(6, e.weight || 1);
+
+      ctx.globalAlpha = queryActive ? 0.60 : 0.42;
+      ctx.lineWidth = 0.95 + w * 0.08;
+
+      ctx.strokeStyle = col;
+      ctx.shadowColor = col;
+      ctx.shadowBlur = 2;
+
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(tx, ty);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      if (queryActive) {
+        const label = String(e.tag || "").replace(/^cat:/, "").replace(/["']/g, "");
+        if (label) {
+          ctx.save();
+          ctx.globalAlpha = 0.72;
+          ctx.font = '10px "Share Tech Mono", monospace';
+          ctx.fillStyle = "rgba(216, 226, 255, 0.75)";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(label, (sx + tx) / 2, (sy + ty) / 2);
+          ctx.restore();
+        }
+      }
+    }
+
+    // Nodes
+    ctx.globalAlpha = 1;
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    for (const n of nodes) {
+      if (!n.visible) continue;
+
+      const isHover = hoveredNode === n;
+      const isActive = activeNode === n;
+
+      const rBase = n.renderRadius || 8.5;
+      const r = isActive ? rBase * 1.25 : isHover ? rBase * 1.12 : rBase;
+
+      const grad = ctx.createRadialGradient(
+        n.x - r * 0.4, n.y - r * 0.4, r * 0.2,
+        n.x, n.y, r
+      );
+
+      grad.addColorStop(0, "rgba(124, 255, 255, 0.95)");
+      grad.addColorStop(0.55, "rgba(0, 205, 190, 0.80)");
+      grad.addColorStop(1, "rgba(0, 24, 44, 0.55)");
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (queryActive) {
+        ctx.save();
+        ctx.shadowColor = "rgba(0,0,0,0.60)";
+        ctx.shadowBlur = 2;
+
+        const title = (n.title || "").replace(/["']/g, "");
+        const angle = Math.atan2(n.y - centerY, n.x - centerX);
+        const dx = Math.cos(angle);
+        const dy = Math.sin(angle);
+
+        ctx.font = '14px "Share Tech Mono", monospace';
+        ctx.fillStyle = "rgba(216, 226, 255, 0.92)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        const baseOffset = r + 10;
+        ctx.fillText(title, n.x + dx * baseOffset, n.y + dy * baseOffset);
+
+        ctx.restore();
+      }
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  // ----------------------------
+  // Loop (idle-friendly)
+  // ----------------------------
+  function loop() {
+    const stillHot = sim.alpha > sim.alphaMin + 0.001;
+    const interacting = !!dragNode;
+
+    if (stillHot || interacting) applyForces();
+    draw();
+
+    requestAnimationFrame(loop);
+  }
+
+  // ----------------------------
+  // Search filtering
+  // ----------------------------
   function similarityToQuery(nodeTokens, queryTokens) {
     if (!queryTokens.size) return 0;
     let hits = 0;
     for (const qt of queryTokens) {
-      // fuzzy substring match against any node token
       let matched = false;
       for (const nt of nodeTokens) {
-        if (nt === qt) {
-          matched = true;
-          break;
-        }
-        // allow prefix matches to respond on every keystroke without over-matching substrings
-        if (nt.startsWith(qt)) {
+        if (nt === qt || nt.startsWith(qt)) {
           matched = true;
           break;
         }
@@ -292,316 +737,64 @@ function rebuildEdges() {
     return hits / queryTokens.size;
   }
 
-  function applyForces() {
-    const repulsion = 1200;      // node-to-node push strength
-    const spring = 0.0085;       // edge pull strength
-    const linkDistance = 260;    // preferred edge length
-    const damping = 0.9;         // velocity decay per tick
-    const maxVel = 3.0;          // clamp node speed
-    const margin = 24;           // padding from canvas edges
-    const minX = margin;
-    const maxX = width - margin;
-    const minY = margin;
-    const maxY = height - margin;
-
-    // repulsion
-    for (let i = 0; i < nodes.length; i++) {
-      const n1 = nodes[i];
-      if (!n1.visible) continue;
-      for (let j = i + 1; j < nodes.length; j++) {
-        const n2 = nodes[j];
-        if (!n2.visible) continue;
-        let dx = n1.x - n2.x;
-        let dy = n1.y - n2.y;
-        let dist2 = dx * dx + dy * dy + 0.01;
-        let force = repulsion / dist2;
-        let dist = Math.sqrt(dist2);
-        dx /= dist;
-        dy /= dist;
-        n1.vx += dx * force;
-        n1.vy += dy * force;
-        n2.vx -= dx * force;
-        n2.vy -= dy * force;
-      }
-    }
-
-    // springs
-    for (const e of edges) {
-      if (!e.source.visible || !e.target.visible) continue;
-      const dx = e.target.x - e.source.x;
-      const dy = e.target.y - e.source.y;
-      const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
-      const diff = dist - linkDistance;
-      const force = spring * diff;
-      const nx = dx / dist;
-      const ny = dy / dist;
-      e.source.vx += nx * force;
-      e.source.vy += ny * force;
-      e.target.vx -= nx * force;
-      e.target.vy -= ny * force;
-    }
-
-    // center gravity and move within golden box
-    for (const n of nodes) {
-      if (!n.visible) continue;
-      if (dragNode === n || hoveredNode === n) {
-        n.vx = 0;
-        n.vy = 0;
-        continue;
-      }
-      const center = catCenters.get(n.primary) || { x: width / 2, y: height / 2 };
-      n.vx += (center.x - n.x) * 0.001;
-      n.vy += (center.y - n.y) * 0.001;
-      n.vx *= damping;
-      n.vy *= damping;
-      // clamp velocity
-      const speed2 = n.vx * n.vx + n.vy * n.vy;
-      if (speed2 > maxVel * maxVel) {
-        const scale = maxVel / Math.sqrt(speed2);
-        n.vx *= scale;
-        n.vy *= scale;
-      }
-      n.x += n.vx;
-      n.y += n.vy;
-      n.x = Math.max(minX, Math.min(maxX, n.x));
-      n.y = Math.max(minY, Math.min(maxY, n.y));
-    }
-
-    // recenter & rescale visible nodes to occupy ~80% of viewport
-    const visibleNodes = nodes.filter(n => n.visible);
-    if (visibleNodes.length) {
-      let minVX = Infinity, maxVX = -Infinity, minVY = Infinity, maxVY = -Infinity;
-      // measure label widths for padding
-      ctx.font = '14px "Share Tech Mono", monospace';
-      visibleNodes.forEach(n => {
-        const label = (n.title || '').replace(/["']/g, '');
-        const w = ctx.measureText(label).width;
-        const h = 14;
-        const padX = w / 2 + 12;
-        const padY = h / 2 + 12;
-        minVX = Math.min(minVX, n.x - padX);
-        maxVX = Math.max(maxVX, n.x + padX);
-        minVY = Math.min(minVY, n.y - padY);
-        maxVY = Math.max(maxVY, n.y + padY);
-      });
-
-      // if no labels measured, fallback to positions
-      visibleNodes.forEach(n => {
-        if (!isFinite(minVX)) minVX = n.x;
-        if (!isFinite(maxVX)) maxVX = n.x;
-        if (!isFinite(minVY)) minVY = n.y;
-        if (!isFinite(maxVY)) maxVY = n.y;
-      });
-
-      const pad = 20;
-      const spanX = Math.max(1, maxVX - minVX);
-      const spanY = Math.max(1, maxVY - minVY);
-      const targetW = width * 0.9;
-      const targetH = height * 0.9;
-      const scale = Math.min(targetW / (spanX + pad), targetH / (spanY + pad), 2.0);
-
-      const cx = (minVX + maxVX) / 2;
-      const cy = (minVY + maxVY) / 2;
-      const targetCX = width / 2;
-      const targetCY = height / 2;
-
-      visibleNodes.forEach(n => {
-        if (hoveredNode && hoveredNode === n) return;
-        const nx = (n.x - cx) * scale + targetCX;
-        const ny = (n.y - cy) * scale + targetCY;
-        n.x = Math.max(minX, Math.min(maxX, nx));
-        n.y = Math.max(minY, Math.min(maxY, ny));
-      });
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
-    const cx = width / 2;
-    const cy = height / 2;
-
-    ctx.lineWidth = 1.1;
-    for (const e of edges) {
-      if (!e.source.visible || !e.target.visible) continue;
-      ctx.strokeStyle = tagColor(e.tag);
-      ctx.shadowColor = ctx.strokeStyle;
-      ctx.shadowBlur = 2;
-      const sx = e.source.x, sy = e.source.y;
-      const tx = e.target.x, ty = e.target.y;
-      const dx = tx - sx;
-      const dy = ty - sy;
-      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-      const px = -dy / dist;
-      const py = dx / dist;
-      const offset = (e.multiTotal > 1)
-        ? (e.multiIndex - (e.multiTotal - 1) / 2) * 42
-        : 0;
-      const cx = (sx + tx) / 2 + px * offset;
-      const cy = (sy + ty) / 2 + py * offset;
-
-      ctx.beginPath();
-      if (offset === 0) {
-        ctx.moveTo(sx, sy);
-        ctx.lineTo(tx, ty);
-      } else {
-        ctx.moveTo(sx, sy);
-        ctx.quadraticCurveTo(cx, cy, tx, ty);
-      }
-      ctx.stroke();
-      ctx.shadowBlur = 0;
-
-      // edge label at curve mid
-      if (queryActive) {
-        const tagLabel = String(e.tag || '').replace(/^cat:/, '').replace(/["']/g, '');
-        if (tagLabel) {
-          const qx = 0.25 * sx + 0.5 * cx + 0.25 * tx;
-          const qy = 0.25 * sy + 0.5 * cy + 0.25 * ty;
-          ctx.save();
-          ctx.font = '10px "Share Tech Mono", monospace';
-          ctx.fillStyle = 'rgba(216, 226, 255, 0.7)';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(tagLabel, qx, qy);
-          ctx.restore();
-        }
-      }
-    }
-
-    // category backdrops
-    ctx.save();
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.font = '64px "Orbitron", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
-    categories.forEach(cat => {
-      // compute centroid of visible nodes in this category
-      let sumX = 0, sumY = 0, count = 0;
-      nodes.forEach(n => {
-        if (n.visible && n.primary === cat) {
-          sumX += n.x;
-          sumY += n.y;
-          count++;
-        }
-      });
-      if (!count) return; // skip labels when a category has been fully pruned
-      const center = { x: sumX / count, y: sumY / count };
-      const label = String(cat || '').replace(/["']/g, '').toUpperCase();
-      const baseColor = colorByCategory.get(cat) || '#00fff7';
-      ctx.save();
-      ctx.fillStyle = baseColor;
-      ctx.globalAlpha = 0.08;
-      ctx.fillText(label, center.x, center.y);
-      ctx.restore();
-    });
-    ctx.restore();
-
-    for (const n of nodes) {
-      if (!n.visible) continue;
-      const palette = nodePalette(n);
-      const baseColor = palette.length === 1 ? palette[0] : mixColors(palette);
-      const isHover = hoveredNode === n;
-      const isActive = activeNode === n;
-      const rBase = n.renderRadius || 8.5;
-      const r = isActive ? rBase * 1.25 : isHover ? rBase * 1.12 : rBase;
-      const grad = ctx.createRadialGradient(n.x - r * 0.4, n.y - r * 0.4, r * 0.2, n.x, n.y, r);
-      if (palette.length === 1) {
-        grad.addColorStop(0, baseColor);
-        grad.addColorStop(1, 'rgba(0,0,0,0.4)');
-      } else {
-        const steps = palette.length;
-        palette.forEach((c, idx) => {
-          const t = idx / Math.max(1, steps - 1);
-          grad.addColorStop(t, c);
-        });
-        grad.addColorStop(1, 'rgba(0,0,0,0.35)');
-      }
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-      ctx.fill();
-
-      // label
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
-      ctx.shadowBlur = 2;
-      const title = (n.title || '').replace(/["']/g, '');
-      const angle = Math.atan2(n.y - cy, n.x - cx);
-      const dx = Math.cos(angle);
-      const dy = Math.sin(angle);
-      const baseOffset = r + 8;
-
-      if (queryActive) {
-        ctx.font = '14px "Share Tech Mono", monospace';
-        ctx.fillStyle = 'rgba(216, 226, 255, 0.92)';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        const metrics = ctx.measureText(title);
-        const w = metrics.width;
-        const h = 14; // approximate line height
-        const labelX = n.x + dx * (baseOffset + w / 2 + 4);
-        const labelY = n.y + dy * (baseOffset + h / 2 + 4);
-        ctx.fillText(title, labelX, labelY);
-      }
-
-      ctx.shadowBlur = 0;
-    }
-  }
-
-  function loop() {
-    applyForces();
-    draw();
-    requestAnimationFrame(loop);
-  }
-  loop();
-
   if (searchEl) {
-    let queryTokens = new Set();
-    searchEl.addEventListener('input', (e) => {
-      const q = (e.target.value || '').toLowerCase().trim();
+    searchEl.addEventListener("input", (e) => {
+      const q = (e.target.value || "").toLowerCase().trim();
       const terms = q.split(/\s+/).filter(Boolean);
-      queryTokens = new Set(terms);
+      const queryTokens = new Set(terms);
       queryActive = terms.length > 0;
+
       if (!terms.length) {
-        nodes.forEach(n => {
+        nodes.forEach((n) => {
           n.visible = true;
           n.renderRadius = 8.5;
         });
         rebuildEdges();
+        retuneForGraph();
+        reheat();
         return;
       }
-      nodes.forEach(n => {
-        const sim = similarityToQuery(n.tokens, queryTokens);
-        n.visible = sim > 0;
+
+      nodes.forEach((n) => {
+        const simScore = similarityToQuery(n.tokens, queryTokens);
+        n.visible = simScore > 0;
         if (n.visible) {
           const base = 6;
-          const boost = Math.min(16, sim * 20);
+          const boost = Math.min(16, simScore * 20);
           n.renderRadius = base + boost;
         }
       });
+
       rebuildEdges();
+      retuneForGraph();
+      reheat();
     });
   }
 
-  // prefill search from ?q= query param
   (function prefillSearch() {
     if (!searchEl) return;
     const params = new URLSearchParams(window.location.search);
-    const q = params.get('q');
+    const q = params.get("q");
     if (q) {
       searchEl.value = q;
-      const evt = new Event('input', { bubbles: true });
-      searchEl.dispatchEvent(evt);
+      searchEl.dispatchEvent(new Event("input", { bubbles: true }));
     }
   })();
 
+  // ----------------------------
+  // Interaction (hover/drag/click)
+  // ----------------------------
   function findNodeAt(clientX, clientY) {
     const rect = canvas.getBoundingClientRect();
     const x = clientX - rect.left;
     const y = clientY - rect.top;
+
     let closest = null;
     let minDist = Infinity;
+
     for (const n of nodes) {
       if (!n.visible) continue;
-      const r = (n.renderRadius || 8.5) * 1.3;
+      const r = (n.renderRadius || 8.5) * 1.35;
       const dx = n.x - x;
       const dy = n.y - y;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -613,100 +806,108 @@ function rebuildEdges() {
     return closest;
   }
 
-  canvas.addEventListener('mousemove', (e) => {
+  canvas.addEventListener("mousemove", (e) => {
     if (dragNode) {
       const rect = canvas.getBoundingClientRect();
-      dragNode.x = (e.clientX - rect.left) + dragOffset.x;
-      dragNode.y = (e.clientY - rect.top) + dragOffset.y;
+      dragNode.x = e.clientX - rect.left + dragOffset.x;
+      dragNode.y = e.clientY - rect.top + dragOffset.y;
+
       if (dragStart) {
         const dx = e.clientX - dragStart.x;
         const dy = e.clientY - dragStart.y;
-        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
-          dragMoved = true;
-        }
+        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
       }
+      reheat();
       return;
     }
+
     hoveredNode = findNodeAt(e.clientX, e.clientY);
-    canvas.style.cursor = hoveredNode ? 'pointer' : 'default';
+    canvas.style.cursor = hoveredNode ? "pointer" : "default";
   });
 
-  canvas.addEventListener('mouseleave', () => {
+  canvas.addEventListener("mouseleave", () => {
     hoveredNode = null;
     activeNode = null;
-    canvas.style.cursor = 'default';
+    canvas.style.cursor = "default";
   });
 
-  canvas.addEventListener('mousedown', (e) => {
+  canvas.addEventListener("mousedown", (e) => {
     activeNode = findNodeAt(e.clientX, e.clientY);
     if (activeNode) {
       dragNode = activeNode;
       const rect = canvas.getBoundingClientRect();
-      dragOffset.x = activeNode.x - (e.clientX - rect.left);
-      dragOffset.y = activeNode.y - (e.clientY - rect.top);
+      dragOffset.x = dragNode.x - (e.clientX - rect.left);
+      dragOffset.y = dragNode.y - (e.clientY - rect.top);
       dragStart = { x: e.clientX, y: e.clientY };
       dragMoved = false;
+      reheat();
     }
   });
 
-  canvas.addEventListener('mouseup', () => {
+  canvas.addEventListener("mouseup", () => {
     activeNode = null;
     dragNode = null;
     dragStart = null;
+    reheat();
   });
 
-  canvas.addEventListener('click', (e) => {
+  canvas.addEventListener("click", (e) => {
     if (dragMoved) {
       dragMoved = false;
       return;
     }
-    const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left);
-    const y = (e.clientY - rect.top);
-    let closest = null;
-    let minDist = 9999;
-    for (const n of nodes) {
-      if (!n.visible) continue;
-      const dx = n.x - x;
-      const dy = n.y - y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < minDist) {
-        minDist = dist;
-        closest = n;
-      }
-    }
-    if (closest && minDist < 14 && closest.url) {
-      window.location.href = closest.url;
-    }
+    const node = findNodeAt(e.clientX, e.clientY);
+    if (node && node.url) window.location.href = node.url;
   });
 
-  canvas.addEventListener('auxclick', (e) => {
+  canvas.addEventListener("auxclick", (e) => {
     if (e.button !== 1) return;
     const node = findNodeAt(e.clientX, e.clientY);
     if (node && node.url) {
       e.preventDefault();
-      window.open(node.url, '_blank');
+      window.open(node.url, "_blank");
     }
   });
 
-  // simple HUD for debugging visibility
-  const hud = document.createElement('div');
-  hud.style.position = 'fixed';
-  hud.style.left = '12px';
-  hud.style.bottom = '12px';
-  hud.style.padding = '6px 10px';
-  hud.style.borderRadius = '8px';
-  hud.style.background = 'rgba(5, 8, 15, 0.75)';
-  hud.style.color = '#9ab6ff';
+  // ----------------------------
+  // HUD (always on top)
+  // ----------------------------
+  const hud = document.createElement("div");
+  hud.className = "gg-hud";
+  hud.style.position = "fixed";
+  hud.style.left = "12px";
+  hud.style.bottom = "12px";
+  hud.style.padding = "6px 10px";
+  hud.style.borderRadius = "8px";
+  hud.style.background = "rgba(5, 8, 15, 0.75)";
+  hud.style.color = "#9ab6ff";
   hud.style.font = '12px "Share Tech Mono", monospace';
-  hud.style.pointerEvents = 'none';
+  hud.style.pointerEvents = "none";
+  hud.style.zIndex = "2147483647";
+  hud.style.isolation = "isolate";
   document.body.appendChild(hud);
 
   function updateHud() {
-    const visibleNodes = nodes.filter(n => n.visible).length;
-    const visibleEdges = edges.filter(e => e.source.visible && e.target.visible).length;
-    hud.textContent = `Nodes: ${visibleNodes}/${nodes.length} • Edges: ${visibleEdges}/${edges.length}`;
+    const visibleNodes = nodes.filter((n) => n.visible).length;
+    const visibleEdges = edges.filter((e) => e.source.visible && e.target.visible).length;
+    hud.textContent =
+      `Nodes: ${visibleNodes}/${nodes.length} • ` +
+      `Edges: ${visibleEdges}/${edges.length} • ` +
+      `cap/tag: ${edgeCapForN(Math.max(1, visibleNodes))} • ` +
+      `α=${sim.alpha.toFixed(2)}`;
   }
   updateHud();
   setInterval(updateHud, 800);
+
+  // ----------------------------
+  // Init
+  // ----------------------------
+  resize();           // sets canvas and calls rebuildEdges/retune
+  seedPositions();    // wide initial spread (needs width/height)
+  rebuildEdges();
+  retuneForGraph();
+  reheat();
+
+  window.addEventListener("resize", resize);
+  loop();
 })();
