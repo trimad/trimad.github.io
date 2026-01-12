@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It) | Ghostfeed</title>
+  <meta name="description" content="A PowerShell 5.1 script to export Shared Mailbox permissions from Exchange Online, and why it must relaunch itself out of PowerShell ISE.">
+  <meta property="og:title" content="Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It) | Ghostfeed">
+  <meta property="og:description" content="A PowerShell 5.1 script to export Shared Mailbox permissions from Exchange Online, and why it must relaunch itself out of PowerShell ISE.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/posts/2026-01-09-export-shared-mailbox-delegates/">
+  <meta property="og:site_name" content="Ghostfeed">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It) | Ghostfeed">
+  <meta name="twitter:description" content="A PowerShell 5.1 script to export Shared Mailbox permissions from Exchange Online, and why it must relaunch itself out of PowerShell ISE.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
+</head>
+<body class="gg-body">
+  
+<header class="gg-topbar gg-article-topbar">
+  <div class="gg-brand">
+    <span class="gg-logo">F-Z</span>
+    <div>
+      <div class="gg-title">Ghostfeed</div>
+      <div class="gg-subtitle">Reading: Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It)</div>
+    </div>
+  </div>
+  <nav class="gg-nav">
+      <a class="gg-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+      <a class="gg-nav-link" href="http://localhost:1313/archive/">Archive</a>
+      <a class="gg-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+  </nav>
+  <div class="gg-search">
+    <a class="gg-back" href="http://localhost:1313/posts/">Back to graph</a>
+  </div>
+</header>
+
+<div class="gg-layout">
+  <main class="gg-article">
+    <article>
+      <h1>Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It)</h1>
+      <p class="gg-meta">
+        Published January 9, 2026
+         - Updated January 9, 2026
+      </p>
+      
+      <div class="gg-terms">
+        
+          <div class="gg-term-row">
+            <span class="gg-term-label">Tags:</span>
+            
+              <a class="gg-term-pill" href="http://localhost:1313/?q=powershell">powershell</a>
+            
+              <a class="gg-term-pill" href="http://localhost:1313/?q=exchange-online">exchange-online</a>
+            
+              <a class="gg-term-pill" href="http://localhost:1313/?q=microsoft-365">microsoft-365</a>
+            
+              <a class="gg-term-pill" href="http://localhost:1313/?q=sysadmin">sysadmin</a>
+            
+              <a class="gg-term-pill" href="http://localhost:1313/?q=automation">automation</a>
+            
+          </div>
+        
+        
+          <div class="gg-term-row">
+            <span class="gg-term-label">Categories:</span>
+            
+              <a class="gg-term-pill" href="http://localhost:1313/?q=PowerShell">PowerShell</a>
+            
+              <a class="gg-term-pill" href="http://localhost:1313/?q=Microsoft&#43;365">Microsoft 365</a>
+            
+          </div>
+        
+      </div>
+      
+      <div class="gg-content">
+        <h2 id="the-problem">The problem</h2>
+<p>I needed a <strong>single, reliable export</strong> of all <strong>Shared Mailboxes</strong> in Exchange Online and <strong>who can access them</strong>, specifically:</p>
+<ul>
+<li><strong>Full Access</strong></li>
+<li><strong>Send As</strong></li>
+<li><strong>Send on Behalf</strong></li>
+</ul>
+<p>This is deceptively annoying in Exchange Online because those permissions live in <strong>three different places</strong>:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Permission Type</th>
+          <th>Where it lives</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Full Access</td>
+          <td><code>Get-MailboxPermission</code></td>
+      </tr>
+      <tr>
+          <td>Send As</td>
+          <td><code>Get-RecipientPermission</code></td>
+      </tr>
+      <tr>
+          <td>Send on Behalf</td>
+          <td><code>GrantSendOnBehalfTo</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>On top of that, I’m running <strong>Windows PowerShell 5.1</strong>, not PowerShell 7, and I routinely work out of <strong>PowerShell ISE</strong>.</p>
+<p>That combination introduces a very specific authentication problem.</p>
+<hr>
+<h2 id="why-powershell-ise-breaks-exchange-online-authentication">Why PowerShell ISE breaks Exchange Online authentication</h2>
+<p>Short version:</p>
+<blockquote>
+<p><strong>PowerShell ISE does not provide a real interactive window handle</strong>, and modern Exchange Online authentication <em>expects one</em>.</p>
+</blockquote>
+<p>Longer version:</p>
+<ul>
+<li><code>Connect-ExchangeOnline</code> uses <strong>modern authentication (MSAL / WAM)</strong> under the hood.</li>
+<li>That auth stack expects to attach to a <strong>real console window</strong> for sign-in prompts.</li>
+<li>PowerShell ISE runs in a <strong>hosted editor process</strong>, not a normal console.</li>
+<li>The result is errors like:
+<ul>
+<li><em>“A window handle must be configured”</em></li>
+<li>Silent authentication failures</li>
+<li>Or the session simply exiting</li>
+</ul>
+</li>
+</ul>
+<p>Even worse, different versions of the <code>ExchangeOnlineManagement</code> module expose <strong>different parameters</strong>:</p>
+<ul>
+<li>Some have <code>-Device</code></li>
+<li>Some have <code>-UseWebLogin</code></li>
+<li>Older ones have <strong>neither</strong></li>
+</ul>
+<p>ISE makes all of this more fragile.</p>
+<hr>
+<h2 id="the-pragmatic-solution">The pragmatic solution</h2>
+<p>Instead of fighting ISE, the script does something very deliberate:</p>
+<ol>
+<li><strong>Detects when it’s running inside PowerShell ISE</strong></li>
+<li><strong>Spawns a real <code>powershell.exe</code> console</strong></li>
+<li><strong>Re-runs itself there</strong></li>
+<li>Keeps the window open so you can see errors or output</li>
+</ol>
+<p>This avoids:</p>
+<ul>
+<li>MSAL window handle issues</li>
+<li>Partial authentication failures</li>
+<li>“It worked yesterday” module version roulette</li>
+</ul>
+<p>ISE becomes the <strong>editor</strong>, not the runtime.</p>
+<hr>
+<h2 id="what-the-script-does">What the script does</h2>
+<ul>
+<li>Uses <strong>no <code>[CmdletBinding()]</code></strong></li>
+<li>Uses <strong>no <code>param()</code> block</strong></li>
+<li>Works in <strong>PowerShell 5.1</strong></li>
+<li>Exports <strong>one CSV only</strong>:</li>
+</ul>
+<pre tabindex="0"><code>C:\temp\SharedMailboxes.csv
+</code></pre><ul>
+<li>Resolves delegates to:
+<ul>
+<li>Display name</li>
+<li>Primary SMTP address</li>
+<li>Recipient type</li>
+</ul>
+</li>
+<li>Filters out noise like:
+<ul>
+<li><code>NT AUTHORITY\SELF</code></li>
+<li>Exchange system principals (unless you explicitly allow them)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="the-script">The script</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">&lt;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Shared mailbox delegate export (WinPS 5.1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">- NO [CmdletBinding()] and NO param() block
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">- Exports ONLY:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    C:\temp\SharedMailboxes.csv
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">- Captures:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * Full Access
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * Send As
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * Send on Behalf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">- Auto re-launches out of PowerShell ISE into console and keeps it open
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===================== SETTINGS =====================</span>
+</span></span><span style="display:flex;"><span>$AdminUPN                = $null
+</span></span><span style="display:flex;"><span>$OutputPath              = <span style="color:#e6db74">&#34;C:\temp&#34;</span>
+</span></span><span style="display:flex;"><span>$IncludeInherited        = $false
+</span></span><span style="display:flex;"><span>$IncludeSystemPrincipals = $false
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ====================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Set-StrictMode -Version Latest
+</span></span><span style="display:flex;"><span>$ErrorActionPreference = <span style="color:#e6db74">&#34;Stop&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Ensure-Tls12 {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> { [<span style="color:#66d9ef">Net.ServicePointManager</span>]::SecurityProtocol = [<span style="color:#66d9ef">Net.SecurityProtocolType</span>]::Tls12 } <span style="color:#66d9ef">catch</span> {}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Ensure-ExchangeOnlineModule {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> (Get-Module -ListAvailable -Name ExchangeOnlineManagement)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;ExchangeOnlineManagement module not found.&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Import-Module ExchangeOnlineManagement -ErrorAction Stop | Out-Null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Connect-EXO {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span>([<span style="color:#66d9ef">string</span>]$AdminUPN)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $cmd = Get-Command Connect-ExchangeOnline -ErrorAction Stop
+</span></span><span style="display:flex;"><span>    $params = @{ ShowBanner = $false }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($AdminUPN <span style="color:#f92672">-and</span> $cmd.Parameters.ContainsKey(<span style="color:#e6db74">&#39;UserPrincipalName&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        $params[<span style="color:#e6db74">&#39;UserPrincipalName&#39;</span>] = $AdminUPN
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Connect-ExchangeOnline @params
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Should-IncludePrincipal {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span>([<span style="color:#66d9ef">string</span>]$Principal)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($IncludeSystemPrincipals) { <span style="color:#66d9ef">return</span> $true }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($Principal <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;^NT AUTHORITY\\SELF$&#39;</span>) { <span style="color:#66d9ef">return</span> $false }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($Principal <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;^NT AUTHORITY\\SYSTEM$&#39;</span>) { <span style="color:#66d9ef">return</span> $false }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($Principal <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;^S-1-5-&#39;</span>) { <span style="color:#66d9ef">return</span> $false }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($Principal <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;^Microsoft Exchange$&#39;</span>) { <span style="color:#66d9ef">return</span> $false }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($Principal <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;^ExchangeOnlineProtection\\&#39;</span>) { <span style="color:#66d9ef">return</span> $false }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $true
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$script:RecipientCache = @{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Resolve-RecipientCached {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span>([<span style="color:#66d9ef">string</span>]$Identity)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($script:RecipientCache.ContainsKey($Identity)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $script:RecipientCache[$Identity]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        $r = Get-Recipient -Identity $Identity -ErrorAction Stop
+</span></span><span style="display:flex;"><span>        $obj = [<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>            DisplayName          = $r.DisplayName
+</span></span><span style="display:flex;"><span>            PrimarySmtpAddress   = $r.PrimarySmtpAddress.ToString()
+</span></span><span style="display:flex;"><span>            RecipientTypeDetails = $r.RecipientTypeDetails
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>        $obj = [<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>            DisplayName          = $Identity
+</span></span><span style="display:flex;"><span>            PrimarySmtpAddress   = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>            RecipientTypeDetails = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $script:RecipientCache[$Identity] = $obj
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $obj
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -------------------- ISE auto re-launch --------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($Host.Name <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;*ISE*&#34;</span>) {
+</span></span><span style="display:flex;"><span>    $escaped = $PSCommandPath.Replace(<span style="color:#e6db74">&#34;&#39;&#34;</span>, <span style="color:#e6db74">&#34;&#39;&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span>    Start-Process powershell.exe -ArgumentList @(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;-NoExit&#39;</span>,<span style="color:#e6db74">&#39;-ExecutionPolicy&#39;</span>,<span style="color:#e6db74">&#39;Bypass&#39;</span>,<span style="color:#e6db74">&#39;-NoProfile&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;-Command&#39;</span>, <span style="color:#e6db74">&#34;&amp; &#39;</span>$escaped<span style="color:#e6db74">&#39;; Write-Host &#39;Press Enter to close&#39;; Read-Host&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -------------------- main --------------------</span>
+</span></span><span style="display:flex;"><span>Ensure-Tls12
+</span></span><span style="display:flex;"><span>Ensure-ExchangeOnlineModule
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> (Test-Path $OutputPath)) {
+</span></span><span style="display:flex;"><span>    New-Item -ItemType Directory -Path $OutputPath | Out-Null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Connecting to Exchange Online...&#34;</span> -ForegroundColor Cyan
+</span></span><span style="display:flex;"><span>Connect-EXO -AdminUPN $AdminUPN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$detail = New-Object System.Collections.Generic.List[<span style="color:#66d9ef">object</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$sharedMbx = Get-Mailbox -RecipientTypeDetails SharedMailbox -ResultSize Unlimited
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($mbx <span style="color:#66d9ef">in</span> $sharedMbx) {
+</span></span><span style="display:flex;"><span>    $id = $mbx.Identity
+</span></span><span style="display:flex;"><span>    $primary = $mbx.PrimarySmtpAddress.ToString()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Get-MailboxPermission $id | Where-Object {
+</span></span><span style="display:flex;"><span>        $_.AccessRights <span style="color:#f92672">-contains</span> <span style="color:#e6db74">&#34;FullAccess&#34;</span> <span style="color:#f92672">-and</span> <span style="color:#f92672">-not</span> $_.IsInherited <span style="color:#f92672">-and</span> <span style="color:#f92672">-not</span> $_.Deny
+</span></span><span style="display:flex;"><span>    } | ForEach-Object {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (Should-IncludePrincipal $_.User) {
+</span></span><span style="display:flex;"><span>            $r = Resolve-RecipientCached $_.User
+</span></span><span style="display:flex;"><span>            $detail.Add([<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>                Mailbox        = $primary
+</span></span><span style="display:flex;"><span>                PermissionType = <span style="color:#e6db74">&#34;FullAccess&#34;</span>
+</span></span><span style="display:flex;"><span>                DelegateName   = $r.DisplayName
+</span></span><span style="display:flex;"><span>                DelegateSMTP   = $r.PrimarySmtpAddress
+</span></span><span style="display:flex;"><span>                DelegateType   = $r.RecipientTypeDetails
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Get-RecipientPermission $id | Where-Object {
+</span></span><span style="display:flex;"><span>        $_.AccessRights <span style="color:#f92672">-contains</span> <span style="color:#e6db74">&#34;SendAs&#34;</span>
+</span></span><span style="display:flex;"><span>    } | ForEach-Object {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (Should-IncludePrincipal $_.Trustee) {
+</span></span><span style="display:flex;"><span>            $r = Resolve-RecipientCached $_.Trustee
+</span></span><span style="display:flex;"><span>            $detail.Add([<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>                Mailbox        = $primary
+</span></span><span style="display:flex;"><span>                PermissionType = <span style="color:#e6db74">&#34;SendAs&#34;</span>
+</span></span><span style="display:flex;"><span>                DelegateName   = $r.DisplayName
+</span></span><span style="display:flex;"><span>                DelegateSMTP   = $r.PrimarySmtpAddress
+</span></span><span style="display:flex;"><span>                DelegateType   = $r.RecipientTypeDetails
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> ($sob <span style="color:#66d9ef">in</span> $mbx.GrantSendOnBehalfTo) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (Should-IncludePrincipal $sob) {
+</span></span><span style="display:flex;"><span>            $r = Resolve-RecipientCached $sob
+</span></span><span style="display:flex;"><span>            $detail.Add([<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>                Mailbox        = $primary
+</span></span><span style="display:flex;"><span>                PermissionType = <span style="color:#e6db74">&#34;SendOnBehalf&#34;</span>
+</span></span><span style="display:flex;"><span>                DelegateName   = $r.DisplayName
+</span></span><span style="display:flex;"><span>                DelegateSMTP   = $r.PrimarySmtpAddress
+</span></span><span style="display:flex;"><span>                DelegateType   = $r.RecipientTypeDetails
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$detail | Export-Csv -NoTypeInformation -Encoding UTF8 -Path <span style="color:#e6db74">&#34;</span>$OutputPath<span style="color:#e6db74">\SharedMailboxes.csv&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Export complete: </span>$OutputPath<span style="color:#e6db74">\SharedMailboxes.csv&#34;</span> -ForegroundColor Green
+</span></span></code></pre></div><hr>
+<h2 id="final-notes">Final notes</h2>
+<ul>
+<li><strong>ISE is fine for writing PowerShell</strong></li>
+<li><strong>ISE is not fine for modern cloud authentication</strong></li>
+<li>Relaunching into a real console is not a hack — it’s a <strong>deliberate boundary between editor and runtime</strong></li>
+</ul>
+<p>If Microsoft ever retrofits ISE with proper WAM support (they won’t), this wouldn’t be necessary. Until then, this approach is stable, repeatable, and boring — which is exactly what you want in admin scripts.</p>
+
+      </div>
+    </article>
+  </main>
+  <aside class="gg-rightnav" aria-label="Recently updated posts">
+  <div class="gg-rightnav-title">Recently Updated</div><ol class="gg-rightnav-list">
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2026-01-09-export-shared-mailbox-delegates/">
+          <span class="gg-rightnav-text">Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It)</span>
+          <time class="gg-rightnav-meta" datetime="2026-01-09">Jan 9, 2026</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2026-01-09-export-all-group-memberships/">
+          <span class="gg-rightnav-text">Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</span>
+          <time class="gg-rightnav-meta" datetime="2026-01-09">Jan 9, 2026</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2016-12-13-arrays/">
+          <span class="gg-rightnav-text">Interactive Array Visualization</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-03-12-att-hackathon/">
+          <span class="gg-rightnav-text">AT&amp;T Hackathon</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-19-enable-autoadminlogon/">
+          <span class="gg-rightnav-text">Enable AutoAdminLogon with PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-28-remove-appx-packages/">
+          <span class="gg-rightnav-text">Remove-AppxPackages</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-01-01-ms-settings-uri-reference/">
+          <span class="gg-rightnav-text">Windows Settings URI Reference</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/">
+          <span class="gg-rightnav-text">Managing Exchange Online Auto-Expanding Archives with PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/">
+          <span class="gg-rightnav-text">PowerShell Script to Export WiFi Network Credentials</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/">
+          <span class="gg-rightnav-text">Mastering Time with Shell and PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-05-stable-diffusion/">
+          <span class="gg-rightnav-text">Stable Diffusion Scripts</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-05-film/">
+          <span class="gg-rightnav-text">Frame Interpolation Large Motion (FILM)</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-06-midas/">
+          <span class="gg-rightnav-text">MiDaS Depth Estimation Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-07-purge-emails/">
+          <span class="gg-rightnav-text">Microsoft 365 Email Security Management Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-09-force-ad-sync/">
+          <span class="gg-rightnav-text">PowerShell Script for Azure AD Synchronization Management</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-17-uninstall-drivers/">
+          <span class="gg-rightnav-text">Windows Driver Management with pnputil</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-23-microsoftteams/">
+          <span class="gg-rightnav-text">Microsoft Teams PowerShell Management Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-22-laps/">
+          <span class="gg-rightnav-text">Microsoft LAPS (Local Administrator Password Solution) Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-24-openai-whisper/">
+          <span class="gg-rightnav-text">OpenAI Whisper Speech Recognition Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-03-03-windows-remediation/">
+          <span class="gg-rightnav-text">Windows Remediation</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-03-03-windows-defender-firewall/">
+          <span class="gg-rightnav-text">Windows Defender Firewall Management Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-03-22-random-password-generator/">
+          <span class="gg-rightnav-text">Random Password Generator</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/">
+          <span class="gg-rightnav-text">Managing Global Address List (GAL) Visibility with PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-04-12-thin-plate-spline-motion-model/">
+          <span class="gg-rightnav-text">Thin Plate Spline Motion Model</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-02-acl/">
+          <span class="gg-rightnav-text">Windows ACL Management with PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">
+          <span class="gg-rightnav-text">Deep Floyd IF</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/">
+          <span class="gg-rightnav-text">3D Photo Inpainting with Python and PyTorch</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/">
+          <span class="gg-rightnav-text">Deforum Cheat Sheet</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-06-24-qr/">
+          <span class="gg-rightnav-text">QR Code Generator with Python</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-07-13-join-active-directory/">
+          <span class="gg-rightnav-text">Join a Workstation to Active Directory with Shell and PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-07-20-mapped-drives/">
+          <span class="gg-rightnav-text">Mapping Network Drives Using PowerShell and SID</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-08-15-networkx/">
+          <span class="gg-rightnav-text">Python NetworkX Library for Network Graph Visualization</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-08-24-disco-ball/">
+          <span class="gg-rightnav-text">Disco Ball</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-10-10-pswindowsupdate/">
+          <span class="gg-rightnav-text">PSWindowsUpdate: Managing Windows Updates with PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-10-17-local-llm/">
+          <span class="gg-rightnav-text">Setting Up a Local Large Language Model (LLM) Environment</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/">
+          <span class="gg-rightnav-text">Generating Knowledge Graphs with LLMs and PyVis</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-12-28-pyvis-graphing-directories/">
+          <span class="gg-rightnav-text">Visualizing Directory Structures with PyVis</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/">
+          <span class="gg-rightnav-text">Graphing a LAN with PyVis</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-01-02-take-control/">
+          <span class="gg-rightnav-text">Troubleshooting N-Central Take Control</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-02-05-local-ai-api/">
+          <span class="gg-rightnav-text">Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-03-25-window-watcher/">
+          <span class="gg-rightnav-text">Window Monitoring with Machine Vision</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-05-30-user-lockout-report/">
+          <span class="gg-rightnav-text">Active Directory User Lockout and Password Report</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/">
+          <span class="gg-rightnav-text">Troubleshooting Group Policy Objects (GPOs)</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/">
+          <span class="gg-rightnav-text">Visualizing and Analyzing Windows Folder Permissions</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-01-visualizing-subnets/">
+          <span class="gg-rightnav-text">Network Subnet Visualization Tools</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-06-dns-records/">
+          <span class="gg-rightnav-text">Complete DNS Records Reference Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-24-get-public-ip/">
+          <span class="gg-rightnav-text">How to Find Your Public IP Address</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-07-30-batch-compress-images/">
+          <span class="gg-rightnav-text">Automated Batch Image Compression with Python</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-09-10-officec2rclient/">
+          <span class="gg-rightnav-text">Managing Microsoft Office Versions with OfficeC2RClient</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-10-16-restart-iis-application/">
+          <span class="gg-rightnav-text">Automated IIS Application Pool Restart with PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-05-02-procdump-and-windbg/">
+          <span class="gg-rightnav-text">Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-11-14-champ-va/">
+          <span class="gg-rightnav-text">ChampVA Claims</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-12-11-rebuild-user-profile/">
+          <span class="gg-rightnav-text">Rebuilding a Corrupted Windows User Profile Using CMD</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/">
+          <span class="gg-rightnav-text">Simple Perlin Noise Map</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-07-18-counting-sort/">
+          <span class="gg-rightnav-text"></span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/">
+          <span class="gg-rightnav-text">Nth Fibonacci Number</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/">
+          <span class="gg-rightnav-text">Sieve of Eratosthenes</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/">
+          <span class="gg-rightnav-text">Demonstrating Procedures and Console Output</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/">
+          <span class="gg-rightnav-text">Juno Cam Image Processing</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-11-18-flippy-tiles/">
+          <span class="gg-rightnav-text">Flipping Tiles</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-02-open-simplex-noise/">
+          <span class="gg-rightnav-text">Open Simplex Noise</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/">
+          <span class="gg-rightnav-text">Generating Terrain with Open Simplex Noise</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-28-insertion-sort/">
+          <span class="gg-rightnav-text">Insertion Sort using WEBGL</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-31-10print-image-filter/">
+          <span class="gg-rightnav-text">10PRINT Image Filter</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-02-05-merge-sort/">
+          <span class="gg-rightnav-text">Merge Sort using WEBGL</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-03-24-basic-prime-checker/">
+          <span class="gg-rightnav-text">Basic Prime Checker, C&#43;&#43;</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/">
+          <span class="gg-rightnav-text">Minimum Spanning Tree Visualized</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/">
+          <span class="gg-rightnav-text">Collatz Conjecture &#43; Unit Circle</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/">
+          <span class="gg-rightnav-text">Kruskal&#39;s Algorithm Visualized With Processing</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-11-java-turbo-reader/">
+          <span class="gg-rightnav-text">Faster Java String Inputs</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/">
+          <span class="gg-rightnav-text">Comparing Java Distance Functions</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-05-17-ulam-sprial/">
+          <span class="gg-rightnav-text">Ulam Spiral</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-06-28-barnsley-fern/">
+          <span class="gg-rightnav-text">Barnsley Fern</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-11-12-orbiting-pixels-utility/">
+          <span class="gg-rightnav-text">Orbiting Pixels Utility</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-11-16-fridge-magnet-simulator/">
+          <span class="gg-rightnav-text">Fridge Magnet Simulator</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-11-21-lorenz-doll/">
+          <span class="gg-rightnav-text">Lorenz Doll</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-12-30-cube-wave/">
+          <span class="gg-rightnav-text">Cube Wave</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-02-28-robo-mirror/">
+          <span class="gg-rightnav-text">Robo Mirror</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/">
+          <span class="gg-rightnav-text">Blending Textures With Open Simplex Noise</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-25-daily-donation-report/">
+          <span class="gg-rightnav-text">Daily Donation Report</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-25-buddhabrot/">
+          <span class="gg-rightnav-text">Buddhabrot</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/">
+          <span class="gg-rightnav-text">Remote Reboot With SMTP Status</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-05-18-k-means-clustering/">
+          <span class="gg-rightnav-text">k-means Clustering</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/">
+          <span class="gg-rightnav-text">Managing Exchange Calendars</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-09-16-active-directory-group-membership/">
+          <span class="gg-rightnav-text">Get Group Membership</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/">
+          <span class="gg-rightnav-text">Combining PowerShell Cmdlets</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-01-27-ffmpeg/">
+          <span class="gg-rightnav-text">FFmpeg Command Reference</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-02-09-record-desktop-silently/">
+          <span class="gg-rightnav-text">Record Desktop Silently</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/">
+          <span class="gg-rightnav-text">Download YouTube Videos</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/">
+          <span class="gg-rightnav-text">NVIDIA Maxine Windows Audio Effects SDK</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-05-04-archimedean-spiral/">
+          <span class="gg-rightnav-text">Archimedean Spiral</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-05-14-logistic-map/">
+          <span class="gg-rightnav-text">Logistic Map</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-06-09-download-streams/">
+          <span class="gg-rightnav-text">Download Streams</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-15-decode-phishing-emails/">
+          <span class="gg-rightnav-text">Phishing Email Decoding Tools</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-04-13-net-use/">
+          <span class="gg-rightnav-text">net use</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-08-keycode-event-test/">
+          <span class="gg-rightnav-text">Key Event Tester</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-11-rapidapi/">
+          <span class="gg-rightnav-text">Yahoo Finance API via RapidAPI</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">
+          <span class="gg-rightnav-text">Gmail Photo Downloader</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-06-17-udm-arguments/">
+          <span class="gg-rightnav-text">UDM Parameters for Google Search</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/">
+          <span class="gg-rightnav-text">Test SMTP</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-12-02-hp-bloatware-uninstall/">
+          <span class="gg-rightnav-text">HP Bloatware Uninstaller</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-12-03-export-successful-sign-ins-with-microsoft-graph/">
+          <span class="gg-rightnav-text">Export Successful Sign-ins With Microsoft Graph</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-03">Dec 3, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/">
+          <span class="gg-rightnav-text">Export Conditional Access Policies With Microsoft Graph</span>
+          <time class="gg-rightnav-meta" datetime="2025-11-06">Nov 6, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-07-30-export-exchange-inbox-rules-with-exchange-online-powershell/">
+          <span class="gg-rightnav-text">Export Exchange Inbox Rules with Exchange Online PowerShell</span>
+          <time class="gg-rightnav-meta" datetime="2025-07-30">Jul 30, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/">
+          <span class="gg-rightnav-text">Videos as Teams Backgrounds</span>
+          <time class="gg-rightnav-meta" datetime="2025-07-02">Jul 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-21-net-user/">
+          <span class="gg-rightnav-text">Managing Windows User Accounts with net user Command</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-13">May 13, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-03-21-change-dns-remotely/">
+          <span class="gg-rightnav-text">Remote and Local DNS Configuration Guide</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-13">May 13, 2025</time>
+        </a>
+      </li>
+  </ol></aside>
+
+</div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+  
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          }).catch(() => {
+            button.textContent = 'Error';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+  </script>
+</body>
+</html>

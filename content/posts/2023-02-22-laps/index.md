@@ -33,6 +33,6 @@ Get-ADComputer -Identity <computername> -Properties DistinguishedName,DNSHostNam
 _from Active Directory PowerShell:_
 
 ```PowerShell
-Get-ADComputer -Filter * -SearchBase â€œOU=,DC=,DC=,DC=â€ | Get-AdmPwdPassword -ComputerName {$_.Name}
+Get-ADComputer -Filter * -SearchBase "OU=,DC=,DC=,DC=" | Get-AdmPwdPassword -ComputerName {$_.Name}
 ```
 

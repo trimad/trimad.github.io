@@ -20,7 +20,7 @@ enableGitInfo = true
   term = ["HTML", "RSS"]
 
 [params]
-  description = "Your site description goes here."
+  description = "Ghostfeed: Ghost in the Shell-inspired notes, experiments, and troubleshooting posts."
   # Add other site-wide parameters here
 
 # Enable robots.txt and sitemap generation (usually enabled by default)

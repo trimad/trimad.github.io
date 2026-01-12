@@ -10,7 +10,7 @@ toc: true
 usePageBundles: true
 ---
 
-Useful tools for when that got dang Windows just ain't acting right. ðŸ˜¤
+Useful tools for when that got dang Windows just ain't acting right. :-/
 
 ## DISM
 

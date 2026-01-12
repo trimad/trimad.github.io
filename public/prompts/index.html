@@ -2,8 +2,19 @@
 <html lang="en-us">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LLM Prompts | Ghostfeed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LLM Prompts | Ghostfeed</title>
+  <meta name="description" content="N/A">
+  <meta property="og:title" content="LLM Prompts | Ghostfeed">
+  <meta property="og:description" content="N/A">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/prompts/">
+  <meta property="og:site_name" content="Ghostfeed">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="LLM Prompts | Ghostfeed">
+  <meta name="twitter:description" content="N/A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap">
   <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
 </head>
 <body class="gg-body">
@@ -22,18 +33,30 @@
       <a class="gg-nav-link is-active" href="http://localhost:1313/prompts/">Prompts</a>
   </nav>
   <div class="gg-search">
-    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" />
+    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" aria-label="Search posts" />
   </div>
 </header>
 
-<main class="gg-shell">
-  <canvas id="gg-canvas"></canvas>
-  <div class="gg-legend">
-    <div class="gg-legend-title">Categories</div>
-    <div id="gg-legend-list" class="gg-legend-list"></div>
-    <div class="gg-legend-hint">Click a node to open the post.</div>
-  </div>
-</main>
+<div class="gg-layout">
+  <main class="gg-shell">
+    <canvas id="gg-canvas"></canvas>
+    <div class="gg-legend">
+      <div class="gg-legend-title">Categories</div>
+      <div id="gg-legend-list" class="gg-legend-list"></div>
+      <div class="gg-legend-hint">Click a node to open the post.</div>
+    </div>
+  </main>
+  <aside class="gg-rightnav" aria-label="Recently updated posts">
+  <div class="gg-rightnav-title">Recently Updated</div><ol class="gg-rightnav-list">
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/prompts/2025-07-03-stub/">
+          <span class="gg-rightnav-text">Stub Title</span>
+          <time class="gg-rightnav-meta" datetime="2025-12-04">Dec 4, 2025</time>
+        </a>
+      </li>
+  </ol></aside>
+
+</div>
 
 <script id="gg-data" type="application/json">
 {
@@ -46,11 +69,11 @@
       }]
 }
 </script>
+<script src="http://localhost:1313/js/ghostgraph.js"></script>
 
 
-  <script src="http://localhost:1313/js/ghostgraph.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
-  <script src="http://localhost:1313/js/bg.js"></script>
+  
   <script>
     
     document.addEventListener('DOMContentLoaded', () => {

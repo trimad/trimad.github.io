@@ -6,13 +6,13 @@
     <description>Recent content in Azure on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/azure/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Query Conditional Access Policies With Microsoft Graph</title>
-      <link>http://localhost:1313/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/</link>
+      <title>Export Conditional Access Policies With Microsoft Graph</title>
+      <link>http://localhost:1313/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/</link>
       <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-11-06-query-conditional-access-policies-with-microsoft-graph/</guid>
+      <guid>http://localhost:1313/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/</guid>
       <description>A clean PowerShell approach to export Azure AD Conditional Access policies using the Microsoft Graph SDK.</description>
     </item>
     <item>

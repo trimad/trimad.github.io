@@ -2,8 +2,19 @@
 <html lang="en-us">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Archive | Ghostfeed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Archive | Ghostfeed</title>
+  <meta name="description" content="N/A">
+  <meta property="og:title" content="Archive | Ghostfeed">
+  <meta property="og:description" content="N/A">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/archive/">
+  <meta property="og:site_name" content="Ghostfeed">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Archive | Ghostfeed">
+  <meta name="twitter:description" content="N/A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap">
   <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
 </head>
 <body class="gg-body">
@@ -22,18 +33,114 @@
       <a class="gg-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
   </nav>
   <div class="gg-search">
-    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" />
+    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" aria-label="Search posts" />
   </div>
 </header>
 
-<main class="gg-shell">
-  <canvas id="gg-canvas"></canvas>
-  <div class="gg-legend">
-    <div class="gg-legend-title">Categories</div>
-    <div id="gg-legend-list" class="gg-legend-list"></div>
-    <div class="gg-legend-hint">Click a node to open the post.</div>
-  </div>
-</main>
+<div class="gg-layout">
+  <main class="gg-shell">
+    <canvas id="gg-canvas"></canvas>
+    <div class="gg-legend">
+      <div class="gg-legend-title">Categories</div>
+      <div id="gg-legend-list" class="gg-legend-list"></div>
+      <div class="gg-legend-hint">Click a node to open the post.</div>
+    </div>
+  </main>
+  <aside class="gg-rightnav" aria-label="Recently updated posts">
+  <div class="gg-rightnav-title">Recently Updated</div><ol class="gg-rightnav-list">
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-08-15-kattis-different/">
+          <span class="gg-rightnav-text">Kattis Challenge &#34;A Different Problem&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-08-18-kattis-server/">
+          <span class="gg-rightnav-text">Kattis Challenge &#34;Server&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-08-18-kattis-line-them-up/">
+          <span class="gg-rightnav-text">Kattis Challenge &#34;Line Them Up&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-08-24-uva-11172/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;11172&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/">
+          <span class="gg-rightnav-text">Kattis Challenge &#34;Sum of Others&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-09-15-kattis-parking2/">
+          <span class="gg-rightnav-text">Kattis Challenge &#34;Parking&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-10-05-uva-10110/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;10110&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-10-05-uva-100/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;100&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-10-17-uva-272/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;272&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2017-11-09-uva-10550/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;10550&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2018-04-09-uva-1112/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;1112&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2018-04-23-uva-572/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;572&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2018-04-26-uva-10305/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;10305&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2018-04-20-kattis-grid/">
+          <span class="gg-rightnav-text">Kattis Challenge &#34;Grid&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/archive/2018-05-01-uva-11045/">
+          <span class="gg-rightnav-text">UVa Online Judge Challenge &#34;11045&#34;</span>
+          <time class="gg-rightnav-meta" datetime="2025-05-02">May 2, 2025</time>
+        </a>
+      </li>
+  </ol></aside>
+
+</div>
 
 <script id="gg-data" type="application/json">
 {
@@ -130,11 +237,11 @@
       }]
 }
 </script>
+<script src="http://localhost:1313/js/ghostgraph.js"></script>
 
 
-  <script src="http://localhost:1313/js/ghostgraph.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
-  <script src="http://localhost:1313/js/bg.js"></script>
+  
   <script>
     
     document.addEventListener('DOMContentLoaded', () => {

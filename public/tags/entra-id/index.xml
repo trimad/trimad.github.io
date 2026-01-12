@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Entra-Id on Ghostfeed</title>
+    <link>http://localhost:1313/tags/entra-id/</link>
+    <description>Recent content in Entra-Id on Ghostfeed</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 09 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/entra-id/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</title>
+      <link>http://localhost:1313/posts/2026-01-09-export-all-group-memberships/</link>
+      <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2026-01-09-export-all-group-memberships/</guid>
+      <description>Export direct membership for Teams, Microsoft 365 groups, distribution lists, and security groups using Microsoft Graph PowerShell.</description>
+    </item>
+  </channel>
+</rss>

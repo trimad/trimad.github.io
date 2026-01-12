@@ -18,18 +18,21 @@
     {{- end }}
   </nav>
   <div class="gg-search">
-    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" />
+    <input id="gg-search" type="search" placeholder="Search title, tag, category" autocomplete="off" spellcheck="false" aria-label="Search posts" />
   </div>
 </header>
 
-<main class="gg-shell">
-  <canvas id="gg-canvas"></canvas>
-  <div class="gg-legend">
-    <div class="gg-legend-title">Categories</div>
-    <div id="gg-legend-list" class="gg-legend-list"></div>
-    <div class="gg-legend-hint">Click a node to open the post.</div>
-  </div>
-</main>
+<div class="gg-layout">
+  <main class="gg-shell">
+    <canvas id="gg-canvas"></canvas>
+    <div class="gg-legend">
+      <div class="gg-legend-title">Categories</div>
+      <div id="gg-legend-list" class="gg-legend-list"></div>
+      <div class="gg-legend-hint">Click a node to open the post.</div>
+    </div>
+  </main>
+  {{ partial "rightnav.html" . }}
+</div>
 
 <script id="gg-data" type="application/json">
 {
@@ -55,4 +58,5 @@
   ]
 }
 </script>
+<script src="{{ "js/ghostgraph.js" | relURL }}"></script>
 {{ end }}

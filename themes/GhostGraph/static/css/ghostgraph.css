@@ -1,7 +1,6 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
-
+﻿
 /* =========================================================
-   GHOST GRID (GitS-inspired) â€” drop-in stylesheet
+   GHOST GRID (GitS-inspired) - drop-in stylesheet
    ========================================================= */
 
 :root {
@@ -251,6 +250,102 @@ body.gg-body::after {
   border-color: rgba(72, 242, 227, 0.75);
   box-shadow: 0 0 0 3px rgba(72, 242, 227, 0.14), 0 0 18px rgba(72, 242, 227, 0.25);
   transform: translateY(-1px);
+}
+
+/* ---------------------------
+   Layout / right nav
+--------------------------- */
+.gg-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  gap: 18px;
+  padding: 0 calc(var(--pad) + 2px);
+  align-items: start;
+}
+
+.gg-layout > main {
+  min-width: 0;
+}
+
+.gg-layout .gg-article {
+  width: 100%;
+  margin: 28px 0 48px;
+}
+
+.gg-rightnav {
+  position: sticky;
+  top: 96px;
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  padding: 12px 12px 14px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1;
+}
+
+.gg-rightnav-title {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.gg-rightnav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.gg-rightnav-link {
+  display: grid;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  color: var(--text);
+  background: rgba(72, 242, 227, 0.05);
+  text-decoration: none;
+  transition:
+    border-color var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    transform var(--t-fast) var(--ease),
+    background-color var(--t) var(--ease);
+}
+
+.gg-rightnav-link:hover {
+  border-color: rgba(72, 242, 227, 0.65);
+  background: rgba(72, 242, 227, 0.10);
+  box-shadow: 0 0 0 1px rgba(72, 242, 227, 0.14);
+  transform: translateY(-1px);
+}
+
+.gg-rightnav-link:focus-visible {
+  outline: 2px solid rgba(156, 251, 135, 0.65);
+  outline-offset: 2px;
+}
+
+.gg-rightnav-text {
+  line-height: 1.35;
+}
+
+.gg-rightnav-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gg-rightnav-empty {
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 /* ---------------------------
@@ -576,6 +671,15 @@ pre::-webkit-scrollbar-track {
     gap: 10px;
   }
 
+  .gg-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .gg-rightnav {
+    position: static;
+    max-height: none;
+  }
+
   .gg-shell {
     height: calc(100vh - 132px);
   }
@@ -606,4 +710,3 @@ pre::-webkit-scrollbar-track {
     opacity: 0.10;
   }
 }
-

@@ -6,21 +6,14 @@
     <description>Recent content in Exchange on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Dec 2025 13:26:16 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 09 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/exchange/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Query Exchange Inbox Rules with Exchange Online PowerShell</title>
-      <link>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</link>
-      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-07-30-query-exchange-inbox-rules-with-exchange-online-powershell/</guid>
-      <description>Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox—perfect for threat hunting, compliance, and incident response.</description>
-    </item>
-    <item>
-      <title>Managing Global Address List (GAL) Visibility with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</link>
-      <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</guid>
-      <description>A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute.</description>
+      <title>Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</title>
+      <link>http://localhost:1313/posts/2026-01-09-export-all-group-memberships/</link>
+      <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2026-01-09-export-all-group-memberships/</guid>
+      <description>Export direct membership for Teams, Microsoft 365 groups, distribution lists, and security groups using Microsoft Graph PowerShell.</description>
     </item>
   </channel>
 </rss>

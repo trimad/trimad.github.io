@@ -1,0 +1,38 @@
+{{- $section := "posts" -}}
+{{- if eq .Section "archive" -}}
+  {{- $section = "archive" -}}
+{{- else if eq .Section "prompts" -}}
+  {{- $section = "prompts" -}}
+{{- else if eq .Section "posts" -}}
+  {{- $section = "posts" -}}
+{{- else if eq .Kind "home" -}}
+  {{- $section = "posts" -}}
+{{- end -}}
+
+{{- $posts := slice -}}
+{{- with .Site.GetPage "section" $section -}}
+  {{- $posts = .RegularPages -}}
+{{- else -}}
+  {{- $posts = .Site.RegularPages -}}
+{{- end -}}
+{{- $posts = $posts.ByLastmod.Reverse -}}
+
+<aside class="gg-rightnav" aria-label="Recently updated posts">
+  <div class="gg-rightnav-title">Recently Updated</div>
+  {{- if gt (len $posts) 0 -}}
+  <ol class="gg-rightnav-list">
+    {{- range $posts }}
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="{{ .RelPermalink }}">
+          <span class="gg-rightnav-text">{{ .Title }}</span>
+          {{- with .Lastmod }}
+          <time class="gg-rightnav-meta" datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2, 2006" }}</time>
+          {{- end }}
+        </a>
+      </li>
+    {{- end }}
+  </ol>
+  {{- else -}}
+  <div class="gg-rightnav-empty">No posts yet.</div>
+  {{- end -}}
+</aside>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups) | Ghostfeed</title>
+  <meta name="description" content="Export direct membership for Teams, Microsoft 365 groups, distribution lists, and security groups using Microsoft Graph PowerShell.">
+  <meta property="og:title" content="Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups) | Ghostfeed">
+  <meta property="og:description" content="Export direct membership for Teams, Microsoft 365 groups, distribution lists, and security groups using Microsoft Graph PowerShell.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/posts/2025-01-09-2026/">
+  <meta property="og:site_name" content="Ghostfeed">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups) | Ghostfeed">
+  <meta name="twitter:description" content="Export direct membership for Teams, Microsoft 365 groups, distribution lists, and security groups using Microsoft Graph PowerShell.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
+</head>
+<body class="gg-body">
+  
+<header class="gg-topbar gg-article-topbar">
+  <div class="gg-brand">
+    <span class="gg-logo">F-Z</span>
+    <div>
+      <div class="gg-title">Ghostfeed</div>
+      <div class="gg-subtitle">Reading: Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</div>
+    </div>
+  </div>
+  <nav class="gg-nav">
+      <a class="gg-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+      <a class="gg-nav-link" href="http://localhost:1313/archive/">Archive</a>
+      <a class="gg-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+  </nav>
+  <div class="gg-search">
+    <a class="gg-back" href="http://localhost:1313/posts/">Back to graph</a>
+  </div>
+</header>
+
+<main class="gg-article">
+  <article>
+    <h1>Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</h1>
+    <p class="gg-meta">
+      Published January 9, 2026
+       - Updated January 9, 2026
+    </p>
+    
+    <div class="gg-terms">
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Tags:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=microsoft-graph">microsoft-graph</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=powershell">powershell</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=m365">m365</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=entra-id">entra-id</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=exchange">exchange</a>
+          
+        </div>
+      
+      
+        <div class="gg-term-row">
+          <span class="gg-term-label">Categories:</span>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=powershell">powershell</a>
+          
+            <a class="gg-term-pill" href="http://localhost:1313/?q=microsoft-365">microsoft-365</a>
+          
+        </div>
+      
+    </div>
+    
+    <div class="gg-content">
+      <h2 id="overview">Overview</h2>
+<p>Group sprawl is a fact of life in Microsoft 365 environments. Between Teams, Microsoft 365 groups, distribution lists, and security groups, it quickly becomes difficult to answer simple questions like:</p>
+<ul>
+<li>Who has access to what?</li>
+<li>Is this group still in use?</li>
+<li>Which users are members of multiple high‑risk groups?</li>
+</ul>
+<p>This post walks through a <strong>single PowerShell script</strong> that connects to <strong>Microsoft Graph</strong> and exports <strong>direct membership</strong> for:</p>
+<ul>
+<li>Teams &amp; Microsoft 365 groups</li>
+<li>Distribution lists</li>
+<li>Security groups</li>
+</ul>
+<p>The result is a clean, flattened CSV that’s easy to audit, pivot, and hand off to security or compliance.</p>
+<hr>
+<h2 id="what-this-script-exports">What This Script Exports</h2>
+<p>Each row in the CSV represents <strong>one group → one member</strong> relationship and includes:</p>
+<ul>
+<li>Group type (Teams, M365, DL, Security)</li>
+<li>Group display name and mail address</li>
+<li>Member display name</li>
+<li>Member UPN and mail</li>
+<li>Member object type (User, Group, ServicePrincipal, etc.)</li>
+</ul>
+<p>Empty groups are still included so nothing disappears silently.</p>
+<hr>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>PowerShell 5.1 or PowerShell 7</li>
+<li>Microsoft Graph PowerShell SDK</li>
+<li>Delegated permissions:
+<ul>
+<li><code>Group.Read.All</code></li>
+<li><code>GroupMember.Read.All</code></li>
+<li><code>User.Read.All</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>In locked‑down tenants, <code>Directory.Read.All</code> may also be required.</p>
+</blockquote>
+<hr>
+<h2 id="the-script">The Script</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">&lt;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">.</span><span style="color:#e6db74">SYNOPSIS</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Export members of:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  - Teams &amp; Microsoft 365 Groups (Unified)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  - Distribution Lists
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  - Security Groups
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">.</span><span style="color:#e6db74">DESCRIPTION</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Uses Microsoft Graph PowerShell SDK to enumerate groups and export direct memberships.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Outputs a flattened CSV suitable for Excel.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">.REQUIREMENTS
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">- Microsoft Graph PowerShell SDK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">- Permissions (delegated):
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Group.Read.All
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    GroupMember.Read.All
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    User.Read.All
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  (If you hit permission issues, add: Directory.Read.All)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">.OUTPUT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">C:\Temp\GroupExports\GroupMemberships_&lt;timestamp&gt;.csv
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">=== Export Group Memberships (Teams/M365 + DLs + Security Groups) ===</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">&#34;</span> -ForegroundColor Cyan
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------- Config ----------</span>
+</span></span><span style="display:flex;"><span>$exportDir = <span style="color:#e6db74">&#34;C:\Temp\GroupExports&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> (Test-Path $exportDir)) { New-Item -ItemType Directory -Path $exportDir | Out-Null }
+</span></span><span style="display:flex;"><span>$timestamp = Get-Date -Format <span style="color:#e6db74">&#34;yyyyMMdd_HHmmss&#34;</span>
+</span></span><span style="display:flex;"><span>$outFile   = Join-Path $exportDir <span style="color:#e6db74">&#34;GroupMemberships_</span>$timestamp<span style="color:#e6db74">.csv&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------- Ensure modules ----------</span>
+</span></span><span style="display:flex;"><span>$mods = @(
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Microsoft.Graph.Authentication&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Microsoft.Graph.Groups&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Microsoft.Graph.Users&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($m <span style="color:#66d9ef">in</span> $mods) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> (Get-Module -ListAvailable -Name $m)) {
+</span></span><span style="display:flex;"><span>    Write-Host <span style="color:#e6db74">&#34;Installing </span>$m<span style="color:#e6db74"> ...&#34;</span> -ForegroundColor Yellow
+</span></span><span style="display:flex;"><span>    Install-Module $m -Scope CurrentUser -Force -AllowClobber
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>Import-Module Microsoft.Graph.Authentication -ErrorAction Stop
+</span></span><span style="display:flex;"><span>Import-Module Microsoft.Graph.Groups -ErrorAction Stop
+</span></span><span style="display:flex;"><span>Import-Module Microsoft.Graph.Users -ErrorAction Stop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------- Connect ----------</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  Write-Host <span style="color:#e6db74">&#34;Connecting to Microsoft Graph...&#34;</span> -ForegroundColor Yellow
+</span></span><span style="display:flex;"><span>  Connect-MgGraph -Scopes <span style="color:#e6db74">&#34;Group.Read.All&#34;</span>,<span style="color:#e6db74">&#34;GroupMember.Read.All&#34;</span>,<span style="color:#e6db74">&#34;User.Read.All&#34;</span> -ErrorAction Stop
+</span></span><span style="display:flex;"><span>  $ctx = Get-MgContext
+</span></span><span style="display:flex;"><span>  Write-Host <span style="color:#e6db74">&#34;✅ Connected as: </span>$($ctx.Account)<span style="color:#ae81ff">`n</span><span style="color:#e6db74">&#34;</span> -ForegroundColor Green
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>  Write-Host <span style="color:#e6db74">&#34;❌ Graph connect failed: </span>$($_.Exception.Message)<span style="color:#e6db74">&#34;</span> -ForegroundColor Red
+</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------- Pull groups ----------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Grab only properties we need. We classify locally to cover all requested group types.</span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Retrieving groups...&#34;</span> -ForegroundColor Yellow
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  $allGroups = Get-MgGroup -All -Property `
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;id,displayName,mail,mailEnabled,securityEnabled,groupTypes,resourceProvisioningOptions&#34;</span> -ErrorAction Stop
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>  Write-Host <span style="color:#e6db74">&#34;❌ Failed to retrieve groups: </span>$($_.Exception.Message)<span style="color:#e6db74">&#34;</span> -ForegroundColor Red
+</span></span><span style="display:flex;"><span>  Disconnect-MgGraph | Out-Null
+</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> $allGroups <span style="color:#f92672">-or</span> $allGroups.Count <span style="color:#f92672">-eq</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>  Write-Host <span style="color:#e6db74">&#34;⚠️ No groups found.&#34;</span> -ForegroundColor Yellow
+</span></span><span style="display:flex;"><span>  Disconnect-MgGraph | Out-Null
+</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------- Classify groups ----------</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-GroupCategory {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>($g)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $isUnified = $false
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($g.GroupTypes) { $isUnified = ($g.GroupTypes <span style="color:#f92672">-contains</span> <span style="color:#e6db74">&#34;Unified&#34;</span>) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $isTeam = $false
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($g.ResourceProvisioningOptions) { $isTeam = ($g.ResourceProvisioningOptions <span style="color:#f92672">-contains</span> <span style="color:#e6db74">&#34;Team&#34;</span>) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($isTeam)   { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Teams group&#34;</span> }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($isUnified){ <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Microsoft 365 group&#34;</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Distribution list: mail-enabled, not security-enabled, not Unified</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($g.MailEnabled <span style="color:#f92672">-eq</span> $true <span style="color:#f92672">-and</span> $g.SecurityEnabled <span style="color:#f92672">-eq</span> $false) { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Distribution list&#34;</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Security group: security-enabled, not Unified (mail may be true if mail-enabled security group)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($g.SecurityEnabled <span style="color:#f92672">-eq</span> $true) { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Security group&#34;</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Other&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$targetGroups = $allGroups | Where-Object {
+</span></span><span style="display:flex;"><span>  $cat = Get-GroupCategory $_
+</span></span><span style="display:flex;"><span>  $cat -in @(<span style="color:#e6db74">&#34;Teams group&#34;</span>,<span style="color:#e6db74">&#34;Microsoft 365 group&#34;</span>,<span style="color:#e6db74">&#34;Distribution list&#34;</span>,<span style="color:#e6db74">&#34;Security group&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host (<span style="color:#e6db74">&#34;✅ Retrieved {0} group(s) total; exporting memberships for {1} target group(s).</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">-f</span> $allGroups.Count, $targetGroups.Count) -ForegroundColor Green
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------- Export memberships ----------</span>
+</span></span><span style="display:flex;"><span>$results = New-Object System.Collections.Generic.List[<span style="color:#66d9ef">object</span>]
+</span></span><span style="display:flex;"><span>$idx = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($g <span style="color:#66d9ef">in</span> $targetGroups) {
+</span></span><span style="display:flex;"><span>  $category = Get-GroupCategory $g
+</span></span><span style="display:flex;"><span>  Write-Host (<span style="color:#e6db74">&#34;[{0}/{1}] {2} ({3})&#34;</span> <span style="color:#f92672">-f</span> $idx, $targetGroups.Count, $g.DisplayName, $category) -ForegroundColor Cyan
+</span></span><span style="display:flex;"><span>  $idx++
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $members = @()
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    $members = Get-MgGroupMember -GroupId $g.Id -All -ErrorAction Stop
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>    Write-Warning <span style="color:#e6db74">&#34;Failed to retrieve members for [</span>$($g.DisplayName)<span style="color:#e6db74">]: </span>$($_.Exception.Message)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> $members <span style="color:#f92672">-or</span> $members.Count <span style="color:#f92672">-eq</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    $results.Add([<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>      GroupCategory     = $category
+</span></span><span style="display:flex;"><span>      GroupDisplayName  = $g.DisplayName
+</span></span><span style="display:flex;"><span>      GroupId           = $g.Id
+</span></span><span style="display:flex;"><span>      GroupMail         = $g.Mail
+</span></span><span style="display:flex;"><span>      MemberDisplayName = $null
+</span></span><span style="display:flex;"><span>      MemberUPN         = $null
+</span></span><span style="display:flex;"><span>      MemberMail        = $null
+</span></span><span style="display:flex;"><span>      MemberType        = <span style="color:#e6db74">&#34;None&#34;</span>
+</span></span><span style="display:flex;"><span>      MemberId          = $null
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">foreach</span> ($m <span style="color:#66d9ef">in</span> $members) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Type from @odata.type if present</span>
+</span></span><span style="display:flex;"><span>    $odataType = $null
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($m.AdditionalProperties <span style="color:#f92672">-and</span> $m.AdditionalProperties.ContainsKey(<span style="color:#e6db74">&#34;@odata.type&#34;</span>)) {
+</span></span><span style="display:flex;"><span>      $odataType = [<span style="color:#66d9ef">string</span>]$m.AdditionalProperties[<span style="color:#e6db74">&#34;@odata.type&#34;</span>]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    $memberType = <span style="color:#66d9ef">if</span> ($odataType) { $odataType <span style="color:#f92672">-replace</span> <span style="color:#e6db74">&#39;^#microsoft\.graph\.&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span> } <span style="color:#66d9ef">else</span> { $m.GetType().Name }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $memberDisplayName = $m.AdditionalProperties.displayName
+</span></span><span style="display:flex;"><span>    $memberMail        = $m.AdditionalProperties.mail
+</span></span><span style="display:flex;"><span>    $memberUPN         = $m.AdditionalProperties.userPrincipalName
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If it&#39;s a user and UPN is missing, do a quick lookup</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($memberType <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;user&#34;</span> <span style="color:#f92672">-and</span> [<span style="color:#66d9ef">string</span>]::IsNullOrWhiteSpace($memberUPN)) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        $u = Get-MgUser -UserId $m.Id -Property <span style="color:#e6db74">&#34;displayName,mail,userPrincipalName&#34;</span> -ErrorAction Stop
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($u) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> $memberDisplayName) { $memberDisplayName = $u.DisplayName }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> $memberMail)        { $memberMail = $u.Mail }
+</span></span><span style="display:flex;"><span>          $memberUPN = $u.UserPrincipalName
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">catch</span> { }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $results.Add([<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>      GroupCategory     = $category
+</span></span><span style="display:flex;"><span>      GroupDisplayName  = $g.DisplayName
+</span></span><span style="display:flex;"><span>      GroupId           = $g.Id
+</span></span><span style="display:flex;"><span>      GroupMail         = $g.Mail
+</span></span><span style="display:flex;"><span>      MemberDisplayName = $memberDisplayName
+</span></span><span style="display:flex;"><span>      MemberUPN         = $memberUPN
+</span></span><span style="display:flex;"><span>      MemberMail        = $memberMail
+</span></span><span style="display:flex;"><span>      MemberType        = $memberType
+</span></span><span style="display:flex;"><span>      MemberId          = $m.Id
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------- Save ----------</span>
+</span></span><span style="display:flex;"><span>$results |
+</span></span><span style="display:flex;"><span>  Sort-Object GroupCategory, GroupDisplayName, MemberType, MemberDisplayName |
+</span></span><span style="display:flex;"><span>  Export-Csv -Path $outFile -NoTypeInformation -Encoding UTF8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">✅ Export complete:</span><span style="color:#ae81ff">`n</span>$outFile<span style="color:#e6db74">&#34;</span> -ForegroundColor Green
+</span></span><span style="display:flex;"><span>Disconnect-MgGraph | Out-Null
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">=== Done ===</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">&#34;</span> -ForegroundColor Cyan
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## How the Script Works</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>. **Connects to Microsoft Graph** using delegated permissions
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>. **Retrieves all groups** from Entra ID
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>. **Classifies each group** as<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>   - Teams group
+</span></span><span style="display:flex;"><span>   - Microsoft <span style="color:#ae81ff">365</span> group
+</span></span><span style="display:flex;"><span>   - Distribution list
+</span></span><span style="display:flex;"><span>   - Security group
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>. **Enumerates direct members** <span style="color:#66d9ef">for</span> each group
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>. **Resolves missing user properties** when Graph returns partial objects
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>. **Exports a normalized CSV** sorted by group and member
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Nested membership is intentionally *not* expanded to avoid ambiguity and recursion issues.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Output Location</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>By <span style="color:#66d9ef">default</span>, the script creates<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span></code></pre></div><p>C:\Temp\GroupExports\GroupMemberships_<timestamp>.csv</p>
+<pre tabindex="0"><code>
+This makes it easy to:
+
+- Open directly in Excel
+- Import into Power BI
+- Attach to tickets or audits
+- Store in IT Glue / SharePoint documentation
+
+---
+
+## Why Use Graph Instead of Exchange Cmdlets?
+
+- Microsoft Graph covers **all group types** consistently
+- No dependency on Exchange Online sessions
+- Faster for large tenants
+- Cleaner object model for reporting
+
+For shared mailbox permissions or legacy Exchange‑only objects, Exchange Online PowerShell is still the right tool—but for *group membership*, Graph is the correct abstraction.
+
+---
+
+## Common Follow‑Ups
+
+- Expand nested group membership
+- Export one row per **user** with a list of groups
+- Flag groups with no owners or no members
+- Compare exports over time to detect drift
+
+If you want any of those, this script is a solid foundation.
+
+---
+</code></pre>
+    </div>
+  </article>
+</main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+  <script src="http://localhost:1313/js/bg.js"></script>
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          }).catch(() => {
+            button.textContent = 'Error';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+  </script>
+</body>
+</html>

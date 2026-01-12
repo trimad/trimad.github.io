@@ -5,7 +5,7 @@ date: 2025-11-06
 draft: false
 summary: "A clean PowerShell approach to export Azure AD Conditional Access policies using the Microsoft Graph SDK."
 tags: ["api", "azure", "conditional-access", "automation"]
-title: "Query Conditional Access Policies With Microsoft Graph"
+title: "Export Conditional Access Policies With Microsoft Graph"
 toc: true
 usePageBundles: true
 ---
@@ -60,20 +60,20 @@ Import-Module Microsoft.Graph.Identity.SignIns
 Write-Host "`nConnecting to Microsoft Graph..." -ForegroundColor Cyan
 Connect-MgGraph -Scopes "Policy.Read.All","Policy.Read.ConditionalAccess"
 $ctx = Get-MgContext
-Write-Host "âœ… Connected as: $($ctx.Account)" -ForegroundColor Green
+Write-Host "[OK] Connected as: $($ctx.Account)" -ForegroundColor Green
 
 # Step 4: Retrieve policies
 Write-Host "`nRetrieving Conditional Access policies..." -ForegroundColor Cyan
 $Policies = Get-MgIdentityConditionalAccessPolicy -All
 
 if (-not $Policies -or $Policies.Count -eq 0) {
-    Write-Host "âš ï¸  No Conditional Access policies found or insufficient permissions." -ForegroundColor Yellow
+    Write-Host "[WARN]  No Conditional Access policies found or insufficient permissions." -ForegroundColor Yellow
     Disconnect-MgGraph
     return
 }
 
-Write-Host "`nâœ… Retrieved $($Policies.Count) Conditional Access policy(ies):" -ForegroundColor Green
-$Policies | ForEach-Object { Write-Host "   - $($_.DisplayName) [$($_.State)]" }
+Write-Host "`n[OK] Retrieved $($Policies.Count) Conditional Access policy(ies):" -ForegroundColor Green
+$Policies | ForEach-Object { Write-Host "  - $($_.DisplayName) [$($_.State)]" }
 
 # Step 5: Export policies
 $ExportPath = "C:\Temp\ConditionalAccessPolicies"
@@ -84,12 +84,12 @@ foreach ($p in $Policies) {
     if ([string]::IsNullOrWhiteSpace($SafeName)) { $SafeName = "UnnamedPolicy_$([guid]::NewGuid().ToString())" }
     $File = Join-Path $ExportPath "$SafeName.json"
     $p | ConvertTo-Json -Depth 10 | Out-File $File -Encoding UTF8
-    Write-Host "âœ… Exported: $($p.DisplayName)" -ForegroundColor Green
+    Write-Host "[OK] Exported: $($p.DisplayName)" -ForegroundColor Green
 }
 
 $Combined = Join-Path $ExportPath "All_ConditionalAccessPolicies.json"
 $Policies | ConvertTo-Json -Depth 10 | Out-File $Combined -Encoding UTF8
-Write-Host "`nâœ… Combined export saved to: $Combined" -ForegroundColor Green
+Write-Host "`n[OK] Combined export saved to: $Combined" -ForegroundColor Green
 
 Disconnect-MgGraph
 Write-Host "`n=== Export Complete ===" -ForegroundColor Cyan
@@ -123,18 +123,18 @@ Removing all Microsoft.Graph modules...
 
 Installing minimal modules...
 Connecting to Microsoft Graph...
-âœ… Connected as: admin@contoso.com
+[OK] Connected as: admin@contoso.com
 
 Retrieving Conditional Access policies...
-âœ… Retrieved 4 Conditional Access policy(ies):
-   - Block Legacy Auth [enabled]
-   - Require MFA for Admins [enabled]
-   - Require Compliant Device [enabled]
-   - Block International Sign-ins [reportOnly]
+[OK] Retrieved 4 Conditional Access policy(ies):
+  - Block Legacy Auth [enabled]
+  - Require MFA for Admins [enabled]
+  - Require Compliant Device [enabled]
+  - Block International Sign-ins [reportOnly]
 
-âœ… Exported: Block Legacy Auth
-âœ… Exported: Require MFA for Admins
-âœ… Combined export saved to: C:\Temp\ConditionalAccessPolicies\All_ConditionalAccessPolicies.json
+[OK] Exported: Block Legacy Auth
+[OK] Exported: Require MFA for Admins
+[OK] Combined export saved to: C:\Temp\ConditionalAccessPolicies\All_ConditionalAccessPolicies.json
 === Export Complete ===
 ```
 
@@ -154,9 +154,9 @@ This script automates the otherwise tedious process of resetting and exporting, 
 
 ## Related Commands
 
-- `Get-MgIdentityConditionalAccessPolicy` â€” Retrieves Conditional Access policies.
-- `Connect-MgGraph` â€” Establishes the connection to Microsoft Graph API.
-- `Uninstall-Module` / `Install-Module` â€” Manages PowerShell modules.
+- `Get-MgIdentityConditionalAccessPolicy` - Retrieves Conditional Access policies.
+- `Connect-MgGraph` - Establishes the connection to Microsoft Graph API.
+- `Uninstall-Module` / `Install-Module` - Manages PowerShell modules.
 
 ---
 
