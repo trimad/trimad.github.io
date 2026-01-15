@@ -23,7 +23,7 @@
       <description>An interactive 3D visualization of the Insertion Sort algorithm using p5.js and WEBGL, featuring real-time sorting animation with camera controls and step-by-step progression.</description>
     </item>
     <item>
-      <title></title>
+      <title>Counting Sort</title>
       <link>http://localhost:1313/posts/2017-07-18-counting-sort/</link>
       <pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2017-07-18-counting-sort/</guid>

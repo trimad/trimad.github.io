@@ -5,20 +5,21 @@
 
 :root {
   /* Color system */
-  --bg: #04080f;
-  --panel: rgba(10, 14, 22, 0.92);
-  --panel-2: rgba(10, 15, 26, 0.72);
-  --line: rgba(72, 242, 227, 0.18);
+  --bg: #05090f;
+  --panel: rgba(8, 12, 20, 0.94);
+  --panel-2: rgba(10, 15, 24, 0.76);
+  --line: rgba(88, 210, 203, 0.18);
 
-  --accent: #48f2e3;   /* teal */
-  --accent-2: #9cfb87; /* phosphor green */
-  --hot: #ff3db3;      /* magenta edge glow */
-  --text: #dff7ff;
-  --muted: #8da0b5;
+  --accent: #57e0d6;   /* teal */
+  --accent-2: #a6e6a2; /* muted green */
+  --hot: #f06aa6;      /* soft magenta */
+  --text: #e3f7ff;
+  --muted: #8aa0b8;
 
   /* Type */
   --font-ui: 'Orbitron', system-ui, -apple-system, Segoe UI, sans-serif;
   --font-mono: 'Share Tech Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, Segoe UI, sans-serif;
 
   /* Shape + FX */
   --radius: 10px;
@@ -27,13 +28,17 @@
   --pad: 14px;
   --blur: 10px;
 
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-  --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.35);
-  --inset-glow: inset 0 0 0 1px rgba(255, 61, 179, 0.12);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.40);
+  --inset-glow: inset 0 0 0 1px rgba(240, 106, 166, 0.12);
 
   /* Borders */
-  --border: 1px solid rgba(72, 242, 227, 0.22);
+  --border: 1px solid rgba(88, 210, 203, 0.22);
   --border-soft: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* Tooltip */
+  --tooltip-bg: rgba(8, 12, 20, 0.96);
+  --tooltip-border: 1px solid rgba(88, 210, 203, 0.32);
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -58,11 +63,11 @@ body.gg-body {
   margin: 0;
   min-height: 100vh;
   color: var(--text);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   background:
-    radial-gradient(circle at 20% 20%, rgba(72, 242, 227, 0.11), transparent 32%),
-    radial-gradient(circle at 80% 0%, rgba(156, 251, 135, 0.08), transparent 36%),
-    radial-gradient(circle at 90% 85%, rgba(255, 61, 179, 0.06), transparent 40%),
+    radial-gradient(circle at 18% 18%, rgba(87, 224, 214, 0.10), transparent 32%),
+    radial-gradient(circle at 82% 12%, rgba(166, 230, 162, 0.07), transparent 36%),
+    radial-gradient(circle at 90% 85%, rgba(240, 106, 166, 0.06), transparent 40%),
     var(--bg);
   overflow-x: hidden;
 }
@@ -78,7 +83,7 @@ body.gg-body::after {
 }
 
 body.gg-body::before {
-  opacity: 0.18;
+  opacity: 0.14;
   background: repeating-linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.04),
@@ -90,10 +95,10 @@ body.gg-body::before {
 }
 
 body.gg-body::after {
-  opacity: 0.16;
+  opacity: 0.12;
   background:
-    linear-gradient(to right, rgba(72, 242, 227, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(72, 242, 227, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(88, 210, 203, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(88, 210, 203, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(circle at 50% 30%, black 0%, transparent 62%);
 }
@@ -118,9 +123,10 @@ body.gg-body::after {
   justify-content: space-between;
   gap: 14px;
   padding: calc(var(--pad) + 2px);
+  font-family: var(--font-mono);
   background:
     linear-gradient(145deg, rgba(6, 9, 15, 0.96), rgba(8, 12, 18, 0.92));
-  border-bottom: 1px solid rgba(72, 242, 227, 0.18);
+  border-bottom: 1px solid rgba(88, 210, 203, 0.18);
   box-shadow: var(--shadow);
   backdrop-filter: blur(var(--blur));
   -webkit-backdrop-filter: blur(var(--blur));
@@ -131,7 +137,7 @@ body.gg-body::after {
   position: absolute;
   inset: auto 0 0 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(72, 242, 227, 0.55), rgba(156, 251, 135, 0.35), transparent);
+  background: linear-gradient(90deg, transparent, rgba(87, 224, 214, 0.55), rgba(166, 230, 162, 0.35), transparent);
   opacity: 0.6;
 }
 
@@ -152,13 +158,13 @@ body.gg-body::after {
   font-family: var(--font-ui);
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #021010;
+  color: #031313;
 
   background:
-    radial-gradient(circle at 30% 30%, rgba(156, 251, 135, 0.50), transparent 55%),
-    radial-gradient(circle at 65% 60%, rgba(72, 242, 227, 0.70), rgba(72, 242, 227, 0.22));
+    radial-gradient(circle at 30% 30%, rgba(166, 230, 162, 0.50), transparent 55%),
+    radial-gradient(circle at 65% 60%, rgba(87, 224, 214, 0.70), rgba(87, 224, 214, 0.22));
   box-shadow:
-    0 0 0 1px rgba(72, 242, 227, 0.35),
+    0 0 0 1px rgba(87, 224, 214, 0.35),
     0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
@@ -172,6 +178,7 @@ body.gg-body::after {
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.2;
+  font-family: var(--font-mono);
 }
 
 /* ---------------------------
@@ -190,10 +197,11 @@ body.gg-body::after {
   gap: 8px;
   padding: 6px 12px;
   border-radius: var(--pill);
-  border: 1px solid rgba(72, 242, 227, 0.34);
+  border: 1px solid rgba(87, 224, 214, 0.34);
   color: var(--text);
-  background: rgba(72, 242, 227, 0.07);
+  background: rgba(87, 224, 214, 0.07);
   text-decoration: none;
+  font-family: var(--font-mono);
   font-size: 0.95rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -206,21 +214,21 @@ body.gg-body::after {
 }
 
 .gg-nav-link:hover {
-  border-color: rgba(72, 242, 227, 0.75);
-  background: rgba(72, 242, 227, 0.10);
-  box-shadow: 0 0 0 1px rgba(72, 242, 227, 0.18);
+  border-color: rgba(87, 224, 214, 0.75);
+  background: rgba(87, 224, 214, 0.10);
+  box-shadow: 0 0 0 1px rgba(87, 224, 214, 0.18);
   transform: translateY(-1px);
 }
 
 .gg-nav-link.is-active {
-  color: #021010;
-  background: linear-gradient(90deg, rgba(72, 242, 227, 0.95), rgba(156, 251, 135, 0.95));
-  border-color: rgba(156, 251, 135, 0.75);
+  color: #031313;
+  background: linear-gradient(90deg, rgba(87, 224, 214, 0.95), rgba(166, 230, 162, 0.95));
+  border-color: rgba(166, 230, 162, 0.75);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.40);
 }
 
 .gg-nav-link:focus-visible {
-  outline: 2px solid rgba(156, 251, 135, 0.65);
+  outline: 2px solid rgba(166, 230, 162, 0.65);
   outline-offset: 2px;
 }
 /* ---------------------------
@@ -230,12 +238,12 @@ body.gg-body::after {
   width: min(520px, 60vw);
   padding: 10px 14px;
   border-radius: var(--pill);
-  border: 1px solid rgba(72, 242, 227, 0.22);
+  border: 1px solid rgba(87, 224, 214, 0.22);
   background: rgba(8, 12, 18, 0.88);
   color: var(--text);
   font-family: var(--font-mono);
   outline: none;
-  box-shadow: 0 0 0 0 rgba(72, 242, 227, 0);
+  box-shadow: 0 0 0 0 rgba(87, 224, 214, 0);
   transition:
     border-color var(--t) var(--ease),
     box-shadow var(--t) var(--ease),
@@ -247,8 +255,8 @@ body.gg-body::after {
 }
 
 .gg-search input:focus-visible {
-  border-color: rgba(72, 242, 227, 0.75);
-  box-shadow: 0 0 0 3px rgba(72, 242, 227, 0.14), 0 0 18px rgba(72, 242, 227, 0.25);
+  border-color: rgba(87, 224, 214, 0.75);
+  box-shadow: 0 0 0 3px rgba(87, 224, 214, 0.14), 0 0 18px rgba(87, 224, 214, 0.25);
   transform: translateY(-1px);
 }
 
@@ -285,6 +293,7 @@ body.gg-body::after {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 1;
+  font-family: var(--font-body);
 }
 
 .gg-rightnav-title {
@@ -311,7 +320,7 @@ body.gg-body::after {
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   color: var(--text);
-  background: rgba(72, 242, 227, 0.05);
+  background: rgba(87, 224, 214, 0.05);
   text-decoration: none;
   transition:
     border-color var(--t) var(--ease),
@@ -321,14 +330,14 @@ body.gg-body::after {
 }
 
 .gg-rightnav-link:hover {
-  border-color: rgba(72, 242, 227, 0.65);
-  background: rgba(72, 242, 227, 0.10);
-  box-shadow: 0 0 0 1px rgba(72, 242, 227, 0.14);
+  border-color: rgba(87, 224, 214, 0.65);
+  background: rgba(87, 224, 214, 0.10);
+  box-shadow: 0 0 0 1px rgba(87, 224, 214, 0.14);
   transform: translateY(-1px);
 }
 
 .gg-rightnav-link:focus-visible {
-  outline: 2px solid rgba(156, 251, 135, 0.65);
+  outline: 2px solid rgba(166, 230, 162, 0.65);
   outline-offset: 2px;
 }
 
@@ -341,6 +350,7 @@ body.gg-body::after {
   color: var(--muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  font-family: var(--font-mono);
 }
 
 .gg-rightnav-empty {
@@ -364,18 +374,170 @@ body.gg-body::after {
   width: 100%;
   height: 100%;
   background:
-    linear-gradient(120deg, rgba(72, 242, 227, 0.06), transparent 55%),
-    radial-gradient(circle at 80% 30%, rgba(156, 251, 135, 0.06), transparent 42%),
-    radial-gradient(circle at 10% 85%, rgba(255, 61, 179, 0.04), transparent 40%),
+    linear-gradient(120deg, rgba(87, 224, 214, 0.06), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(166, 230, 162, 0.06), transparent 42%),
+    radial-gradient(circle at 10% 85%, rgba(240, 106, 166, 0.04), transparent 40%),
     transparent;
 
   /* makes glow feel integrated w/ background */
   mix-blend-mode: screen;
 }
 
+/* Accessibility hotspots */
+.gg-hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.gg-hotspot {
+  position: absolute;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: rgba(6, 10, 18, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--t-fast) var(--ease),
+    border-color var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    background-color var(--t) var(--ease);
+}
+
+.gg-hotspot:focus-visible {
+  opacity: 1;
+  border-color: rgba(87, 224, 214, 0.75);
+  box-shadow: 0 0 0 2px rgba(87, 224, 214, 0.25);
+  background: rgba(10, 16, 24, 0.65);
+  outline: none;
+}
+
+.gg-hotspot.is-derived:focus-visible {
+  border-color: rgba(240, 106, 166, 0.75);
+  box-shadow: 0 0 0 2px rgba(240, 106, 166, 0.25);
+}
+
+.gg-hotspot-post {
+  border-radius: 999px;
+}
+
+.gg-hotspot-badge:focus-visible {
+  border-radius: 999px;
+}
+
+/* Tooltip */
+.gg-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 180px;
+  max-width: 300px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--tooltip-bg);
+  border: var(--tooltip-border);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition:
+    opacity var(--t) var(--ease),
+    transform var(--t) var(--ease);
+  z-index: 5;
+}
+
+.gg-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gg-tooltip-title {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.gg-tooltip-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
 /* Hidden by default, keep hook intact */
 .gg-legend {
   display: none;
+}
+
+/* Fallback hierarchy */
+.gg-fallback {
+  margin: 24px 0 32px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-body);
+}
+
+.gg-fallback-title {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.gg-fallback-category {
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(88, 210, 203, 0.12);
+}
+
+.gg-fallback-category-title {
+  margin: 0 0 8px;
+  font-family: var(--font-ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.gg-fallback-tags {
+  display: grid;
+  gap: 10px;
+}
+
+.gg-fallback-tag-title {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.gg-fallback-posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.gg-fallback-posts a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(87, 224, 214, 0.25);
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+
+.gg-fallback-posts a:hover {
+  color: var(--accent-2);
+  border-bottom-color: rgba(166, 230, 162, 0.55);
 }
 
 /* ---------------------------
@@ -414,15 +576,18 @@ body.gg-body::after {
 .gg-meta {
   color: var(--muted);
   margin-bottom: 18px;
+  font-family: var(--font-mono);
 }
 
 .gg-content {
   background: var(--panel-2);
-  border: 1px solid rgba(72, 242, 227, 0.14);
+  border: 1px solid rgba(87, 224, 214, 0.14);
   border-radius: var(--radius);
   padding: 18px;
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(2px);
+  font-family: var(--font-body);
+  font-size: 1.02rem;
 }
 
 .gg-content p {
@@ -433,17 +598,17 @@ body.gg-body::after {
 .gg-content a {
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(72, 242, 227, 0.28);
+  border-bottom: 1px solid rgba(87, 224, 214, 0.28);
   transition: border-color var(--t) var(--ease), color var(--t) var(--ease);
 }
 
 .gg-content a:hover {
   color: var(--accent-2);
-  border-bottom-color: rgba(156, 251, 135, 0.55);
+  border-bottom-color: rgba(166, 230, 162, 0.55);
 }
 
 .gg-content a:focus-visible {
-  outline: 2px solid rgba(72, 242, 227, 0.65);
+  outline: 2px solid rgba(87, 224, 214, 0.65);
   outline-offset: 2px;
   border-bottom-color: transparent;
 }
@@ -469,6 +634,7 @@ body.gg-body::after {
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  font-family: var(--font-mono);
 }
 
 .gg-term-pill {
@@ -477,12 +643,13 @@ body.gg-body::after {
   gap: 8px;
   padding: 4px 10px;
   border-radius: var(--pill);
-  border: 1px solid rgba(72, 242, 227, 0.34);
+  border: 1px solid rgba(87, 224, 214, 0.34);
   color: var(--text);
-  background: rgba(72, 242, 227, 0.07);
+  background: rgba(87, 224, 214, 0.07);
   text-decoration: none;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
+  font-family: var(--font-mono);
 
   transition:
     border-color var(--t) var(--ease),
@@ -492,14 +659,14 @@ body.gg-body::after {
 }
 
 .gg-term-pill:hover {
-  border-color: rgba(72, 242, 227, 0.75);
-  background: rgba(72, 242, 227, 0.10);
-  box-shadow: 0 0 0 1px rgba(72, 242, 227, 0.18);
+  border-color: rgba(87, 224, 214, 0.75);
+  background: rgba(87, 224, 214, 0.10);
+  box-shadow: 0 0 0 1px rgba(87, 224, 214, 0.18);
   transform: translateY(-1px);
 }
 
 .gg-term-pill:focus-visible {
-  outline: 2px solid rgba(156, 251, 135, 0.65);
+  outline: 2px solid rgba(166, 230, 162, 0.65);
   outline-offset: 2px;
 }
 
@@ -547,9 +714,10 @@ body.gg-body::after {
 
   padding: 8px 12px;
   border-radius: var(--pill);
-  border: 1px solid rgba(0, 255, 247, 0.22);
+  border: 1px solid rgba(87, 224, 214, 0.22);
   background: rgba(8, 12, 22, 0.84);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  font-family: var(--font-mono);
 
   transition:
     border-color var(--t) var(--ease),
@@ -558,13 +726,13 @@ body.gg-body::after {
 }
 
 .gg-back:hover {
-  border-color: rgba(72, 242, 227, 0.65);
-  box-shadow: 0 0 0 1px rgba(72, 242, 227, 0.14), 0 16px 44px rgba(0, 0, 0, 0.45);
+  border-color: rgba(87, 224, 214, 0.65);
+  box-shadow: 0 0 0 1px rgba(87, 224, 214, 0.14), 0 16px 44px rgba(0, 0, 0, 0.45);
   transform: translateY(-1px);
 }
 
 .gg-back:focus-visible {
-  outline: 2px solid rgba(72, 242, 227, 0.65);
+  outline: 2px solid rgba(87, 224, 214, 0.65);
   outline-offset: 2px;
 }
 
@@ -585,7 +753,7 @@ pre {
 /* Nice selection in code blocks */
 pre ::selection,
 code ::selection {
-  background: rgba(72, 242, 227, 0.25);
+  background: rgba(87, 224, 214, 0.25);
 }
 
 code {
@@ -593,7 +761,8 @@ code {
   color: var(--accent-2);
   padding: 2px 6px;
   border-radius: 4px;
-  border: 1px solid rgba(72, 242, 227, 0.14);
+  border: 1px solid rgba(87, 224, 214, 0.14);
+  font-family: var(--font-mono);
 }
 
 pre code {
@@ -609,7 +778,7 @@ pre::-webkit-scrollbar {
   width: 10px;
 }
 pre::-webkit-scrollbar-thumb {
-  background: rgba(72, 242, 227, 0.20);
+  background: rgba(87, 224, 214, 0.20);
   border-radius: 999px;
   border: 2px solid rgba(12, 17, 28, 0.9);
 }
@@ -627,13 +796,13 @@ pre::-webkit-scrollbar-track {
   font: 12px var(--font-mono);
   letter-spacing: 0.06em;
 
-  background: rgba(72, 242, 227, 0.12);
+  background: rgba(87, 224, 214, 0.12);
   color: var(--text);
-  border: 1px solid rgba(72, 242, 227, 0.40);
+  border: 1px solid rgba(87, 224, 214, 0.40);
   border-radius: var(--pill);
   cursor: pointer;
 
-  box-shadow: 0 0 0 1px rgba(255, 61, 179, 0.08), 0 10px 30px rgba(0, 0, 0, 0.50);
+  box-shadow: 0 0 0 1px rgba(240, 106, 166, 0.08), 0 10px 30px rgba(0, 0, 0, 0.50);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 
@@ -646,9 +815,9 @@ pre::-webkit-scrollbar-track {
 }
 
 .copy-button:hover {
-  background: linear-gradient(90deg, rgba(72, 242, 227, 0.95), rgba(156, 251, 135, 0.95));
+  background: linear-gradient(90deg, rgba(87, 224, 214, 0.95), rgba(166, 230, 162, 0.95));
   color: #120713;
-  border-color: rgba(156, 251, 135, 0.75);
+  border-color: rgba(166, 230, 162, 0.75);
   box-shadow: var(--shadow);
 }
 
@@ -657,7 +826,7 @@ pre::-webkit-scrollbar-track {
 }
 
 .copy-button:focus-visible {
-  outline: 2px solid rgba(255, 61, 179, 0.55);
+  outline: 2px solid rgba(240, 106, 166, 0.55);
   outline-offset: 2px;
 }
 

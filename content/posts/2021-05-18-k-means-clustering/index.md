@@ -3,8 +3,8 @@ title: k-means Clustering
 author: Tristan Madden
 date: 2021-05-18
 draft: false
-tags: [animation, k-means]
-categories: [Development, Visualization]
+tags: [processing, visualization]
+categories: [Java]
 summary: "A Processing visualization of the k-means clustering algorithm, demonstrating iterative centroid-based data partitioning and Voronoi cell formation for different values of k."
 toc: true
 usePageBundles: true

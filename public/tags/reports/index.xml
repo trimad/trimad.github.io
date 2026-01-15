@@ -9,13 +9,6 @@
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/reports/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Yahoo Finance API via RapidAPI</title>
-      <link>http://localhost:1313/posts/2023-05-11-rapidapi/</link>
-      <pubDate>Thu, 11 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-11-rapidapi/</guid>
-      <description>This program loads comma-separated stock symbols from a file named &lt;code&gt;symbols.txt&lt;/code&gt; and then queries the Yahoo Finance API using a RapidAPI endpoint. It retrieves prices for every 60 minutes on a max time window.</description>
-    </item>
-    <item>
       <title>Combining PowerShell Cmdlets</title>
       <link>http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>

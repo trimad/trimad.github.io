@@ -3,8 +3,8 @@ title: Comparing Java Distance Functions
 author: Tristan Madden
 date: 2018-04-17
 draft: false
-tags: [java]
-categories: [Development]
+tags: [optimization]
+categories: [Java]
 summary: "A Java program that compares various distance calculation methods, including Manhattan, Euclidean, and Chebyshev distances, and visualizes their differences using Processing."
 usePageBundles: true
 ---

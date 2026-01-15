@@ -3,8 +3,8 @@ title: Sieve of Eratosthenes
 author: Tristan Madden
 date: 2017-10-17
 draft: false
-tags: [assembly, prime-numbers]
-categories: [Development]
+tags: [MASM, prime-numbers]
+categories: [Assembly]
 summary: "An x86 MASM implementation of the Sieve of Eratosthenes algorithm that finds and counts prime numbers up to a given value n, translated from Java to assembly language."
 toc: true
 usePageBundles: true

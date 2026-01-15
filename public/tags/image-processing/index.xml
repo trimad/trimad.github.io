@@ -43,5 +43,33 @@
       <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
       <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
     </item>
+    <item>
+      <title>Buddhabrot</title>
+      <link>http://localhost:1313/posts/2019-08-25-buddhabrot/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2019-08-25-buddhabrot/</guid>
+      <description>An implementation of the Buddhabrot fractal rendering technique, which visualizes escape-time trajectories of points outside the Mandelbrot set, creating intricate patterns that resemble a seated Buddha figure.</description>
+    </item>
+    <item>
+      <title>Lorenz Doll</title>
+      <link>http://localhost:1313/posts/2018-11-21-lorenz-doll/</link>
+      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-11-21-lorenz-doll/</guid>
+      <description>A Processing visualization where each pixel of an image is transformed into a Lorenz System, with the system&amp;rsquo;s velocity mapped to the original pixel&amp;rsquo;s brightness values.</description>
+    </item>
+    <item>
+      <title>Barnsley Fern</title>
+      <link>http://localhost:1313/posts/2018-06-28-barnsley-fern/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
+      <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
+    </item>
+    <item>
+      <title>Open Simplex Noise</title>
+      <link>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</guid>
+      <description>A Processing implementation exploring 4D Simplex Noise to create smooth, organic looping animations through a 2D grid of pixel objects with variable noise scaling.</description>
+    </item>
   </channel>
 </rss>

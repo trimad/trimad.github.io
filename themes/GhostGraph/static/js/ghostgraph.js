@@ -10,20 +10,26 @@
   const canvas = document.getElementById("gg-canvas");
   const dataEl = document.getElementById("gg-data");
   const searchEl = document.getElementById("gg-search");
+  const tooltipEl = document.getElementById("gg-tooltip");
+  const hotspotsEl = document.getElementById("gg-hotspots");
   if (!canvas || !dataEl) return;
 
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
+  const shell = canvas.closest(".gg-shell") || canvas.parentElement;
+  const prefersReducedMotion =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const palette = [
-    { h: 178, s: 82, l: 52 }, // teal
-    { h: 138, s: 82, l: 52 }, // green
-    { h: 312, s: 82, l: 58 }, // magenta
-    { h: 198, s: 82, l: 60 }, // cyan
-    { h: 36, s: 90, l: 58 },  // amber
-    { h: 220, s: 75, l: 60 }, // blue
+    { h: 178, s: 68, l: 52 }, // teal
+    { h: 148, s: 64, l: 50 }, // green
+    { h: 310, s: 70, l: 58 }, // magenta
+    { h: 198, s: 70, l: 60 }, // cyan
+    { h: 36, s: 78, l: 58 },  // amber
+    { h: 220, s: 68, l: 60 }, // blue
   ];
   const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+  const transitionMs = 260;
 
   function clamp(v, lo, hi) {
     return Math.max(lo, Math.min(hi, v));
@@ -31,6 +37,19 @@
 
   function hsla(h, s, l, a) {
     return "hsla(" + h + ", " + s + "%, " + l + "%, " + a + ")";
+  }
+
+  function mixHue(a, b, t) {
+    const delta = ((b - a + 540) % 360) - 180;
+    return (a + delta * t + 360) % 360;
+  }
+
+  function mixHsl(a, b, t) {
+    return {
+      h: mixHue(a.h, b.h, t),
+      s: a.s + (b.s - a.s) * t,
+      l: a.l + (b.l - a.l) * t,
+    };
   }
 
   function hash32(str) {
@@ -81,33 +100,65 @@
     return clean.slice(0, cut).trimEnd() + "...";
   }
 
-  function categoryColors(key) {
+  function categoryBase(key) {
     const p = palette[hash32("cat|" + key) % palette.length];
+    return { h: p.h, s: p.s, l: p.l };
+  }
+
+  function categoryColorsFromBase(base) {
     return {
-      fill: hsla(p.h, p.s, 26, 0.2),
-      fillStrong: hsla(p.h, p.s, 32, 0.3),
-      edge: hsla(p.h, p.s, 64, 0.5),
-      edgeStrong: hsla(p.h, p.s, 70, 0.9),
-      glow: hsla(p.h, p.s, 64, 0.22),
-      label: hsla(p.h, p.s, 82, 0.95),
-      post: hsla(p.h, p.s, 64, 1),
+      fill: hsla(base.h, base.s, 24, 0.22),
+      fillStrong: hsla(base.h, base.s, 30, 0.32),
+      edge: hsla(base.h, base.s, 64, 0.5),
+      edgeStrong: hsla(base.h, base.s, 70, 0.9),
+      glow: hsla(base.h, base.s, 64, 0.22),
+      label: hsla(base.h, base.s, 82, 0.95),
+      post: hsla(base.h, base.s, 64, 1),
     };
   }
 
-  function tagColors(key) {
-    const p = palette[hash32("tag|" + key) % palette.length];
+  function categoryColors(baseOrKey) {
+    const base =
+      typeof baseOrKey === "string" || !baseOrKey
+        ? categoryBase(baseOrKey || "category")
+        : baseOrKey;
+    return categoryColorsFromBase(base);
+  }
+
+  function tagColors(tagKey, baseOrKey) {
+    const base =
+      typeof baseOrKey === "string" || !baseOrKey
+        ? categoryBase(baseOrKey || tagKey || "tag")
+        : baseOrKey;
+    const jitter = (hash32("tag|" + tagKey) % 36) - 18;
+    const h = (base.h + jitter + 360) % 360;
+    const s = clamp(base.s + 6, 48, 86);
+    const l = clamp(base.l + 8, 42, 74);
     return {
-      link: hsla(p.h, p.s, 62, 0.36),
-      halo: hsla(p.h, p.s, 62, 0.14),
-      edge: hsla(p.h, p.s, 70, 0.6),
-      node: hsla(p.h, p.s, 68, 0.85),
-      label: hsla(p.h, p.s, 82, 0.9),
-      fill: hsla(p.h, p.s, 24, 0.18),
-      fillStrong: hsla(p.h, p.s, 30, 0.28),
-      edgeStrong: hsla(p.h, p.s, 76, 0.85),
-      glow: hsla(p.h, p.s, 64, 0.22),
-      post: hsla(p.h, p.s, 68, 1),
+      link: hsla(h, s, 60, 0.32),
+      halo: hsla(h, s, 62, 0.14),
+      edge: hsla(h, s, 70, 0.6),
+      node: hsla(h, s, 68, 0.85),
+      label: hsla(h, s, 82, 0.9),
+      fill: hsla(h, s, 24, 0.18),
+      fillStrong: hsla(h, s, 30, 0.28),
+      edgeStrong: hsla(h, s, 76, 0.85),
+      glow: hsla(h, s, 64, 0.22),
+      post: hsla(h, s, 68, 1),
     };
+  }
+
+  function makePairKey(a, b) {
+    const pair = [String(a || ""), String(b || "")].sort();
+    return pair[0] + "~" + pair[1];
+  }
+
+  function parsePairKey(value) {
+    const raw = String(value || "");
+    if (!raw || raw.indexOf("~") === -1) return null;
+    const parts = raw.split("~").filter(Boolean);
+    if (parts.length !== 2) return null;
+    return { keyA: parts[0], keyB: parts[1] };
   }
 
   function polygonArea(poly) {
@@ -141,6 +192,24 @@
     }
     const scale = 1 / (6 * area);
     return { x: cx * scale, y: cy * scale };
+  }
+
+  function polygonBounds(poly) {
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+    for (let i = 0; i < poly.length; i++) {
+      const p = poly[i];
+      if (p.x < minX) minX = p.x;
+      if (p.y < minY) minY = p.y;
+      if (p.x > maxX) maxX = p.x;
+      if (p.y > maxY) maxY = p.y;
+    }
+    if (!isFinite(minX) || !isFinite(minY)) {
+      return { x: 0, y: 0, w: 0, h: 0 };
+    }
+    return { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
   }
 
   function rectsIntersect(a, b) {
@@ -250,27 +319,34 @@
   const posts = [];
   const allCategoryNames = new Map();
   const allTagNames = new Map();
+  const UNCLASSIFIED_KEY = "unclassified";
+  const UNCLASSIFIED_NAME = "Unclassified";
   const UNTAGGED_KEY = "untagged";
+  allCategoryNames.set(UNCLASSIFIED_KEY, UNCLASSIFIED_NAME);
 
   (parsed.nodes || []).forEach((n, idx) => {
     const title = String(n.title || "");
     const url = String(n.url || "").replace(/["']/g, "").trim();
     const rawTags = normalizeList(n.tags);
     const rawCategories = normalizeList(n.categories);
-    const categoryNames = rawCategories.length ? rawCategories : ["Uncategorized"];
+    let categoryNames = rawCategories.length ? rawCategories : [UNCLASSIFIED_NAME];
+    if (categoryNames.length > 2) categoryNames = categoryNames.slice(0, 2);
     const categoryKeys = [];
 
     categoryNames.forEach((name) => {
-      const key = keyify(name) || "uncategorized";
+      const key = keyify(name) || UNCLASSIFIED_KEY;
       categoryKeys.push(key);
       if (!allCategoryNames.has(key)) {
-        allCategoryNames.set(key, cleanString(name) || "Uncategorized");
+        allCategoryNames.set(key, cleanString(name) || UNCLASSIFIED_NAME);
       }
     });
 
-    const primaryKey = categoryKeys[0] || "uncategorized";
+    const primaryKey = categoryKeys[0] || UNCLASSIFIED_KEY;
+    const secondaryKey = categoryKeys[1] || null;
     const primaryName =
-      allCategoryNames.get(primaryKey) || cleanString(categoryNames[0]) || "Uncategorized";
+      allCategoryNames.get(primaryKey) || cleanString(categoryNames[0]) || UNCLASSIFIED_NAME;
+    const secondaryName = secondaryKey ? allCategoryNames.get(secondaryKey) || "" : "";
+    const pairKey = categoryKeys.length === 2 ? makePairKey(categoryKeys[0], categoryKeys[1]) : null;
 
     const tagKeys = [];
     const tagNames = [];
@@ -285,6 +361,11 @@
     });
 
     const nodeKey = n.id || n.slug || n.url || n.title || String(idx);
+    const dateRaw = String(n.date || "");
+    const dateDisplay = String(n.dateDisplay || "");
+    const readingTime = Number(n.readingTime) || 0;
+    const readingTimeDisplay = String(n.readingTimeDisplay || "");
+    const dateValue = dateRaw ? Date.parse(dateRaw) || 0 : 0;
     const tokens = new Set([
       ...tokenize(title),
       ...tagKeys,
@@ -302,10 +383,18 @@
       url,
       tags: tagNames,
       tagKeys,
-      categories: categoryNames.map((name) => cleanString(name) || "Uncategorized"),
+      categories: categoryNames.map((name) => cleanString(name) || UNCLASSIFIED_NAME),
       categoryKeys,
       categoryKey: primaryKey,
       categoryName: primaryName,
+      categorySecondaryKey: secondaryKey,
+      categorySecondaryName: secondaryName,
+      categoryPairKey: pairKey,
+      date: dateRaw,
+      dateDisplay,
+      dateValue,
+      readingTime,
+      readingTimeDisplay,
       tokens,
       searchText,
       cellKey: primaryKey,
@@ -324,22 +413,71 @@
   }
 
   function createCategory(key, name) {
+    const base = categoryBase(key);
     return {
       key,
       name: name || allCategoryNames.get(key) || key,
       count: 0,
+      weightCount: 0,
       posts: [],
-      colors: categoryColors(key),
+      base,
+      colors: categoryColors(base),
+      isDerived: false,
     };
   }
 
-  function createTag(key, name) {
+  function createDerivedCategory(keyA, keyB) {
+    const pairKey = makePairKey(keyA, keyB);
+    const nameA = allCategoryNames.get(keyA) || keyA;
+    const nameB = allCategoryNames.get(keyB) || keyB;
+    const base = mixHsl(categoryBase(keyA), categoryBase(keyB), 0.5);
+    return {
+      key: pairKey,
+      name: nameA + " + " + nameB,
+      pairKeys: [keyA, keyB],
+      pairNames: [nameA, nameB],
+      count: 0,
+      weightCount: 0,
+      posts: [],
+      base,
+      colors: categoryColors(base),
+      isDerived: true,
+    };
+  }
+
+  function createDerivedTag(keyA, keyB, tagA, tagB) {
+    const pairKey = makePairKey(keyA, keyB);
+    const nameA = (tagA && tagA.name) || allTagNames.get(keyA) || keyA;
+    const nameB = (tagB && tagB.name) || allTagNames.get(keyB) || keyB;
+    const baseA = (tagA && tagA.base) || categoryBase(keyA);
+    const baseB = (tagB && tagB.base) || categoryBase(keyB);
+    const base = mixHsl(baseA, baseB, 0.5);
+    return {
+      key: pairKey,
+      name: nameA + " + " + nameB,
+      pairKeys: [keyA, keyB],
+      pairNames: [nameA, nameB],
+      count: 0,
+      weightCount: 0,
+      posts: [],
+      base,
+      colors: categoryColors(base),
+      isDerived: true,
+    };
+  }
+
+  function createTag(key, name, base, categoryKey) {
+    const resolvedBase =
+      base || categoryBase(categoryKey || key || UNCLASSIFIED_KEY);
     return {
       key,
       name: name || allTagNames.get(key) || key,
       count: 0,
       posts: [],
-      colors: tagColors(key),
+      categoryKey: categoryKey || null,
+      categoryCounts: new Map(),
+      base: resolvedBase,
+      colors: tagColors(key, resolvedBase),
     };
   }
 
@@ -347,13 +485,21 @@
     mode: "category",
     filterCategoryKey: null,
     filterCategoryName: null,
+    filterPairKey: null,
+    filterPairNames: null,
+    filterBase: null,
+    focusTagKey: null,
     posts: [],
     cells: [],
     cellMap: new Map(),
     categories: [],
     categoryMap: new Map(),
+    derivedCategories: [],
+    derivedMap: new Map(),
     tags: [],
     tagMap: new Map(),
+    derivedTags: [],
+    derivedTagMap: new Map(),
     categoryBadge: null,
   };
 
@@ -363,10 +509,13 @@
     dpr: window.devicePixelRatio || 1,
     margin: 24,
     time: 0,
+    motionTime: 0,
     postRadius: 4,
     queryTokens: new Set(),
     queryActive: false,
     searchQuery: "",
+    transitionStart: 0,
+    transitionActive: false,
   };
 
   function getSearchTerms() {
@@ -384,19 +533,50 @@
     return { key, name: allCategoryNames.get(key) };
   }
 
+  function resolvePairFilter(value) {
+    const parsed = parsePairKey(value);
+    if (!parsed) return null;
+    if (!allCategoryNames.has(parsed.keyA) || !allCategoryNames.has(parsed.keyB)) {
+      return null;
+    }
+    return parsed;
+  }
+
   function buildView() {
     const filterKey = view.filterCategoryKey;
-    let basePosts = filterKey
-      ? posts.filter((post) => post.categoryKeys.includes(filterKey))
-      : posts.slice();
-    if (filterKey && !basePosts.length) {
+    const filterPairKey = view.filterPairKey;
+    let basePosts = posts.slice();
+    if (filterPairKey) {
+      basePosts = posts.filter((post) => post.categoryPairKey === filterPairKey);
+    } else if (filterKey) {
+      basePosts = posts.filter((post) => post.categoryKeys.includes(filterKey));
+    }
+    if ((filterKey || filterPairKey) && !basePosts.length) {
       view.mode = "category";
       view.filterCategoryKey = null;
       view.filterCategoryName = null;
+      view.filterPairKey = null;
+      view.filterPairNames = null;
+      view.filterBase = null;
       basePosts = posts.slice();
     }
     view.filterCategoryName = view.filterCategoryKey
       ? allCategoryNames.get(view.filterCategoryKey)
+      : null;
+    const pairResolved = view.filterPairKey ? resolvePairFilter(view.filterPairKey) : null;
+    if (view.filterPairKey && !pairResolved) {
+      view.filterPairKey = null;
+    }
+    view.filterPairNames = pairResolved
+      ? [
+          allCategoryNames.get(pairResolved.keyA),
+          allCategoryNames.get(pairResolved.keyB),
+        ]
+      : null;
+    view.filterBase = pairResolved
+      ? mixHsl(categoryBase(pairResolved.keyA), categoryBase(pairResolved.keyB), 0.5)
+      : view.filterCategoryKey
+      ? categoryBase(view.filterCategoryKey)
       : null;
 
     const terms = getSearchTerms();
@@ -407,83 +587,159 @@
       : basePosts;
 
     const categoryMap = new Map();
+    const derivedMap = new Map();
     view.posts.forEach((post) => {
-      const key = post.categoryKey;
-      let cat = categoryMap.get(key);
-      if (!cat) {
-        cat = createCategory(key, post.categoryName);
-        categoryMap.set(key, cat);
+      const keys = post.categoryKeys.length ? post.categoryKeys : [UNCLASSIFIED_KEY];
+      keys.forEach((key) => {
+        let cat = categoryMap.get(key);
+        if (!cat) {
+          cat = createCategory(key);
+          categoryMap.set(key, cat);
+        }
+        cat.weightCount += 1;
+      });
+
+      if (keys.length === 2) {
+        const pairKey = post.categoryPairKey || makePairKey(keys[0], keys[1]);
+        let pairCell = derivedMap.get(pairKey);
+        if (!pairCell) {
+          pairCell = createDerivedCategory(keys[0], keys[1]);
+          derivedMap.set(pairKey, pairCell);
+        }
+        pairCell.posts.push(post);
+        pairCell.count += 1;
+        pairCell.weightCount += 1;
+        post.categoryCellKey = pairKey;
+      } else {
+        const key = keys[0] || UNCLASSIFIED_KEY;
+        let cat = categoryMap.get(key);
+        if (!cat) {
+          cat = createCategory(key);
+          categoryMap.set(key, cat);
+        }
+        cat.posts.push(post);
+        cat.count += 1;
+        post.categoryCellKey = key;
       }
-      cat.posts.push(post);
-      cat.count += 1;
     });
     view.categories = Array.from(categoryMap.values()).sort((a, b) =>
       a.name.localeCompare(b.name)
     );
     view.categoryMap = categoryMap;
+    view.derivedCategories = Array.from(derivedMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    view.derivedMap = derivedMap;
 
     const tagMap = new Map();
-    let hasUntagged = false;
+    const untaggedPosts = [];
     view.posts.forEach((post) => {
-      if (!post.tagKeys.length) {
-        hasUntagged = true;
+      const tagKeysForView =
+        view.mode === "tag" ? post.tagKeys.slice(0, 2) : post.tagKeys;
+      const tagNamesForView =
+        view.mode === "tag" ? post.tags.slice(0, 2) : post.tags;
+      if (!tagKeysForView.length) {
+        untaggedPosts.push(post);
         return;
       }
-      post.tagKeys.forEach((key, idx) => {
+      tagKeysForView.forEach((key, idx) => {
         let tag = tagMap.get(key);
         if (!tag) {
-          tag = createTag(key, post.tags[idx]);
+          tag = createTag(key, tagNamesForView[idx]);
           tagMap.set(key, tag);
         }
         tag.posts.push(post);
         tag.count += 1;
+        post.categoryKeys.forEach((catKey) => {
+          tag.categoryCounts.set(
+            catKey,
+            (tag.categoryCounts.get(catKey) || 0) + 1
+          );
+        });
       });
     });
-    if (hasUntagged) {
+    if (untaggedPosts.length) {
       if (!allTagNames.has(UNTAGGED_KEY)) {
         allTagNames.set(UNTAGGED_KEY, "Untagged");
       }
-      if (!tagMap.has(UNTAGGED_KEY)) {
-        tagMap.set(UNTAGGED_KEY, createTag(UNTAGGED_KEY, "Untagged"));
+      let tag = tagMap.get(UNTAGGED_KEY);
+      if (!tag) {
+        tag = createTag(
+          UNTAGGED_KEY,
+          "Untagged",
+          view.filterBase,
+          view.filterCategoryKey
+        );
+        tagMap.set(UNTAGGED_KEY, tag);
       }
+      untaggedPosts.forEach((post) => {
+        tag.posts.push(post);
+        tag.count += 1;
+        post.categoryKeys.forEach((catKey) => {
+          tag.categoryCounts.set(
+            catKey,
+            (tag.categoryCounts.get(catKey) || 0) + 1
+          );
+        });
+      });
     }
     view.tags = Array.from(tagMap.values()).sort((a, b) =>
       a.name.localeCompare(b.name)
     );
+    view.tags.forEach((tag) => {
+      const dominant = pickDominantCategory(tag.categoryCounts) || UNCLASSIFIED_KEY;
+      const base = view.filterBase ? view.filterBase : categoryBase(dominant);
+      tag.categoryKey = view.filterCategoryKey || dominant;
+      tag.base = base;
+      tag.colors = tagColors(tag.key, base);
+      tag.latestPost = pickLatestPost(tag.posts);
+    });
     view.tagMap = tagMap;
+    view.derivedTags = [];
+    view.derivedTagMap = new Map();
 
-    if (view.mode === "category") {
-      view.cells = view.categories;
-      view.cellMap = view.categoryMap;
+    if (view.mode === "tag") {
+      const derivedTagMap = new Map();
       view.posts.forEach((post) => {
-        post.cellKey = post.categoryKey;
-      });
-    } else {
-      const cellMap = new Map();
-      view.tags.forEach((tag) => {
-        cellMap.set(tag.key, {
-          key: tag.key,
-          name: tag.name,
-          count: 0,
-          posts: [],
-          colors: tag.colors,
-        });
-      });
-      view.posts.forEach((post) => {
-        const primaryTag = pickPrimaryTag(post);
-        post.cellKey = primaryTag;
-        let cell = cellMap.get(primaryTag);
-        if (!cell) {
-          cell = createTag(primaryTag);
-          cellMap.set(primaryTag, cell);
+        const tagKeysForView = post.tagKeys.slice(0, 2);
+        if (tagKeysForView.length >= 2) {
+          const pairKey = makePairKey(tagKeysForView[0], tagKeysForView[1]);
+          let pairCell = derivedTagMap.get(pairKey);
+          if (!pairCell) {
+            const tagA = tagMap.get(tagKeysForView[0]);
+            const tagB = tagMap.get(tagKeysForView[1]);
+            pairCell = createDerivedTag(tagKeysForView[0], tagKeysForView[1], tagA, tagB);
+            derivedTagMap.set(pairKey, pairCell);
+          }
+          pairCell.posts.push(post);
+          pairCell.count += 1;
+          pairCell.weightCount += 1;
+          post.tagCellKey = pairKey;
+        } else {
+          post.tagCellKey = pickPrimaryTag(post);
         }
-        cell.posts.push(post);
-        cell.count += 1;
       });
-      view.cells = Array.from(cellMap.values()).sort((a, b) =>
+      view.derivedTags = Array.from(derivedTagMap.values()).sort((a, b) =>
         a.name.localeCompare(b.name)
       );
-      view.cellMap = cellMap;
+      view.derivedTags.forEach((cell) => {
+        cell.latestPost = pickLatestPost(cell.posts);
+      });
+      view.derivedTagMap = derivedTagMap;
+    }
+
+    if (view.mode === "category") {
+      view.cells = view.categories.concat(view.derivedCategories);
+      view.cellMap = new Map([...categoryMap, ...derivedMap]);
+      view.posts.forEach((post) => {
+        post.cellKey = post.categoryCellKey || post.categoryKey;
+      });
+    } else {
+      view.cells = view.tags.concat(view.derivedTags);
+      view.cellMap = new Map([...tagMap, ...view.derivedTagMap]);
+      view.posts.forEach((post) => {
+        post.cellKey = post.tagCellKey || pickPrimaryTag(post);
+      });
     }
   }
 
@@ -492,13 +748,48 @@
     return post.tagKeys[0];
   }
 
+  function pickDominantCategory(counts) {
+    if (!counts || !counts.size) return null;
+    let bestKey = null;
+    let bestCount = -1;
+    counts.forEach((count, key) => {
+      if (count > bestCount) {
+        bestCount = count;
+        bestKey = key;
+      }
+    });
+    return bestKey;
+  }
+
+  function pickLatestPost(list) {
+    if (!list || !list.length) return null;
+    return list
+      .slice()
+      .sort((a, b) => {
+        if (b.dateValue !== a.dateValue) return b.dateValue - a.dateValue;
+        const titleCmp = (a.title || "").localeCompare(b.title || "");
+        if (titleCmp !== 0) return titleCmp;
+        return String(a.key || "").localeCompare(String(b.key || ""));
+      })[0];
+  }
+
   (function initFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const match = resolveCategoryFilter(params.get("category"));
-    if (match) {
+    const pairMatch = resolvePairFilter(params.get("pair"));
+    if (pairMatch) {
       view.mode = "tag";
-      view.filterCategoryKey = match.key;
-      view.filterCategoryName = match.name;
+      view.filterPairKey = makePairKey(pairMatch.keyA, pairMatch.keyB);
+      view.filterPairNames = [
+        allCategoryNames.get(pairMatch.keyA),
+        allCategoryNames.get(pairMatch.keyB),
+      ];
+    } else {
+      const match = resolveCategoryFilter(params.get("category"));
+      if (match) {
+        view.mode = "tag";
+        view.filterCategoryKey = match.key;
+        view.filterCategoryName = match.name;
+      }
     }
     buildView();
   })();
@@ -513,18 +804,36 @@
     const h = Math.max(1, state.height - margin * 2);
     const baseSpacing =
       Math.min(state.width, state.height) / (Math.sqrt(Math.max(1, view.cells.length)) + 1);
-    const weights = view.cells.map((cell) => Math.sqrt(cell.count || 1));
-    const maxWeight = Math.max(1, ...weights);
+    const baseCells = view.cells.filter((cell) => !cell.isDerived);
+    const derivedCells = view.cells.filter((cell) => cell.isDerived);
+    const rankedCells = view.cells
+      .slice()
+      .sort((a, b) => {
+        const countA = a.count || 0;
+        const countB = b.count || 0;
+        if (countB !== countA) return countB - countA;
+        return String(a.key || "").localeCompare(String(b.key || ""));
+      });
+    const rankMap = new Map();
+    rankedCells.forEach((cell, idx) => {
+      rankMap.set(cell.key, idx);
+    });
+    const rankDenom = Math.max(1, rankedCells.length - 1);
     const weightScale = baseSpacing * 1.2;
 
-    view.cells.forEach((cell, idx) => {
+    function rankWeight(cell) {
+      const rank = rankMap.has(cell.key) ? rankMap.get(cell.key) : rankDenom;
+      const t = 1 - rank / rankDenom;
+      return 0.4 + 0.6 * t;
+    }
+
+    baseCells.forEach((cell) => {
       const rng = makeRng(hash32(cell.key));
-      const weight = weights[idx] || 1;
-      const t = weight / maxWeight;
+      const weight = rankWeight(cell);
       cell.x = margin + rng() * w;
       cell.y = margin + rng() * h;
       cell.weight = weight;
-      cell.weightValue = weightScale * (0.35 + 0.65 * t);
+      cell.weightValue = weightScale * weight;
     });
 
     const iterations = 80;
@@ -532,10 +841,10 @@
     const cy = state.height / 2;
 
     for (let iter = 0; iter < iterations; iter++) {
-      for (let i = 0; i < view.cells.length; i++) {
-        const a = view.cells[i];
-        for (let j = i + 1; j < view.cells.length; j++) {
-          const b = view.cells[j];
+      for (let i = 0; i < baseCells.length; i++) {
+        const a = baseCells[i];
+        for (let j = i + 1; j < baseCells.length; j++) {
+          const b = baseCells[j];
           let dx = a.x - b.x;
           let dy = a.y - b.y;
           let dist = Math.hypot(dx, dy);
@@ -555,13 +864,40 @@
           }
         }
       }
-      view.cells.forEach((cell) => {
+      baseCells.forEach((cell) => {
         cell.x += (cx - cell.x) * 0.003;
         cell.y += (cy - cell.y) * 0.003;
         cell.x = clamp(cell.x, margin, state.width - margin);
         cell.y = clamp(cell.y, margin, state.height - margin);
       });
     }
+
+    const parentMap = view.mode === "tag" ? view.tagMap : view.categoryMap;
+    derivedCells.forEach((cell) => {
+      const parentA = cell.pairKeys ? parentMap.get(cell.pairKeys[0]) : null;
+      const parentB = cell.pairKeys ? parentMap.get(cell.pairKeys[1]) : null;
+      if (parentA && parentB) {
+        const midX = (parentA.x + parentB.x) * 0.5;
+        const midY = (parentA.y + parentB.y) * 0.5;
+        let dx = parentB.x - parentA.x;
+        let dy = parentB.y - parentA.y;
+        let dist = Math.hypot(dx, dy);
+        if (!dist) dist = 1;
+        const nx = -dy / dist;
+        const ny = dx / dist;
+        const offset = clamp(dist * 0.12, 10, 44);
+        const sign = hash32("offset|" + cell.key) % 2 ? 1 : -1;
+        cell.x = clamp(midX + nx * offset * sign, margin, state.width - margin);
+        cell.y = clamp(midY + ny * offset * sign, margin, state.height - margin);
+      } else {
+        const rng = makeRng(hash32(cell.key));
+        cell.x = margin + rng() * w;
+        cell.y = margin + rng() * h;
+      }
+      const weight = rankWeight(cell);
+      cell.weight = weight;
+      cell.weightValue = weightScale * weight * 0.7;
+    });
   }
 
   function computeVoronoi() {
@@ -759,6 +1095,68 @@
     view.cells.forEach((cell) => {
       const labelBase = cell.name.toUpperCase();
       const label = view.mode === "tag" ? "#" + labelBase : labelBase;
+
+      if (view.mode === "category") {
+        const centroid = cell.centroid || { x: cell.x, y: cell.y };
+        const bounds =
+          cell.poly && cell.poly.length
+            ? polygonBounds(cell.poly)
+            : {
+                x: state.margin,
+                y: state.margin,
+                w: state.width - state.margin * 2,
+                h: state.height - state.margin * 2,
+              };
+        const usableW = Math.max(24, bounds.w * 0.82);
+        const usableH = Math.max(20, bounds.h * 0.4);
+        let fontSize = clamp(
+          Math.sqrt(cell.area || 1) * 0.18 * scale,
+          18,
+          180
+        );
+        if (cell.isDerived) {
+          fontSize *= 0.72;
+        }
+        fontSize = Math.min(fontSize, usableH);
+        ctx.font = fontSize + 'px "Share Tech Mono", monospace';
+        let w = ctx.measureText(label).width;
+        if (w > usableW) {
+          fontSize = Math.max(12, Math.floor(fontSize * (usableW / w)));
+          ctx.font = fontSize + 'px "Share Tech Mono", monospace';
+          w = ctx.measureText(label).width;
+        }
+        if (fontSize < 12 || usableW < 36 || usableH < 18) {
+          cell.label = label;
+          cell.labelWidth = w;
+          cell.labelSize = fontSize;
+          cell.labelRect = null;
+          return;
+        }
+
+        const cx = clamp(
+          centroid.x,
+          bounds.x + w / 2,
+          bounds.x + bounds.w - w / 2
+        );
+        const cy = clamp(
+          centroid.y,
+          bounds.y + fontSize / 2,
+          bounds.y + bounds.h - fontSize / 2
+        );
+        cell.label = label;
+        cell.labelWidth = w;
+        cell.labelSize = fontSize;
+        cell.labelX = cx;
+        cell.labelY = cy;
+        cell.labelRect = {
+          x: cx - w / 2,
+          y: cy - fontSize / 2,
+          w: w,
+          h: fontSize,
+        };
+        return;
+      }
+
       ctx.font = cellSize + 'px "Share Tech Mono", monospace';
       const w = ctx.measureText(label).width;
       const paddingX = cellSize * 0.45;
@@ -771,6 +1169,13 @@
         state.margin + cellSize,
         state.height - state.margin - cellSize
       );
+      if ((cell.area || 0) < 900) {
+        cell.label = label;
+        cell.labelWidth = w;
+        cell.labelSize = cellSize;
+        cell.labelRect = null;
+        return;
+      }
       cell.label = label;
       cell.labelWidth = w;
       cell.labelSize = cellSize;
@@ -801,6 +1206,13 @@
           state.margin + tagSize,
           state.height - state.margin - tagSize
         );
+        if (tagSize < 10 || tag.orbit < 12) {
+          tag.label = label;
+          tag.labelWidth = w;
+          tag.labelSize = tagSize;
+          tag.labelRect = null;
+          return;
+        }
         tag.label = label;
         tag.labelWidth = w;
         tag.labelSize = tagSize;
@@ -816,8 +1228,11 @@
     }
 
     view.categoryBadge = null;
-    if (view.mode === "tag" && view.filterCategoryName) {
-      const badge = ("Category: " + view.filterCategoryName).toUpperCase();
+    if (view.mode === "tag" && (view.filterCategoryName || view.filterPairNames)) {
+      const badgeLabel = view.filterPairNames
+        ? "Overlap: " + view.filterPairNames.join(" + ")
+        : "Category: " + view.filterCategoryName;
+      const badge = badgeLabel.toUpperCase();
       ctx.font = cellSize + 'px "Share Tech Mono", monospace';
       const w = ctx.measureText(badge).width;
       const paddingX = cellSize * 0.55;
@@ -828,7 +1243,7 @@
         label: badge,
         labelWidth: w,
         labelSize: cellSize,
-        colors: categoryColors(view.filterCategoryKey || "category"),
+        colors: categoryColors(view.filterBase || view.filterCategoryKey || "category"),
         rect: {
           x: x,
           y: y - cellSize / 2 - paddingY,
@@ -841,7 +1256,7 @@
 
   function measurePostLabels() {
     const scale = state.width < 720 ? 0.85 : 1;
-    const postSize = Math.max(10, Math.round(11 * scale));
+    const postSize = Math.max(11, Math.round(13 * scale));
     const reserved = [];
     const padding = 4;
 
@@ -858,7 +1273,7 @@
     }
 
     view.posts.forEach((post) => {
-      const label = truncateLabel(post.title || "Untitled", 28);
+      const label = truncateLabel(post.title || "Untitled", 60);
       ctx.font = postSize + 'px "Share Tech Mono", monospace';
       const w = ctx.measureText(label).width;
       const paddingX = postSize * 0.45;
@@ -866,6 +1281,15 @@
       const rectW = w + paddingX * 2;
       const rectH = postSize + paddingY * 2;
       const cell = view.cellMap.get(post.cellKey);
+      const hideLabel = cell && cell.area && cell.area < 700;
+      post.labelHidden = hideLabel;
+      if (hideLabel) {
+        post.label = label;
+        post.labelWidth = w;
+        post.labelSize = postSize;
+        post.labelRect = null;
+        return;
+      }
       const baseAngle = cell && cell.centroid
         ? Math.atan2(post.y - cell.centroid.y, post.x - cell.centroid.x)
         : (hash32("pl|" + post.key) / 4294967295) * Math.PI * 2;
@@ -919,6 +1343,273 @@
     });
   }
 
+  function getElementCenter(el) {
+    if (!el || !shell) return { x: 0, y: 0 };
+    const rect = el.getBoundingClientRect();
+    const shellRect = shell.getBoundingClientRect();
+    return {
+      x: rect.left - shellRect.left + rect.width / 2,
+      y: rect.top - shellRect.top + rect.height / 2,
+    };
+  }
+
+  function setHotspotRect(el, rect) {
+    el.style.left = rect.x + "px";
+    el.style.top = rect.y + "px";
+    el.style.width = rect.w + "px";
+    el.style.height = rect.h + "px";
+  }
+
+  function clampRect(rect) {
+    const pad = 6;
+    return {
+      x: clamp(rect.x, pad, state.width - rect.w - pad),
+      y: clamp(rect.y, pad, state.height - rect.h - pad),
+      w: rect.w,
+      h: rect.h,
+    };
+  }
+
+  function getCellHotspotRect(cell) {
+    if (cell.labelRect) return clampRect(cell.labelRect);
+    const center = cell.safePoint || cell.centroid || { x: cell.x, y: cell.y };
+    const size = clamp(Math.sqrt(cell.area || 1) * 0.22, 60, 160);
+    return clampRect({
+      x: center.x - size / 2,
+      y: center.y - size / 3,
+      w: size,
+      h: size * 0.55,
+    });
+  }
+
+  function getPostHotspotRect(post) {
+    if (post.labelRect) return clampRect(post.labelRect);
+    const size = clamp(post.radius * 2.8, 16, 28);
+    return clampRect({
+      x: post.x - size / 2,
+      y: post.y - size / 2,
+      w: size,
+      h: size,
+    });
+  }
+
+  function formatList(list, joiner) {
+    return (list || []).filter(Boolean).join(joiner || ", ");
+  }
+
+  function buildPostLines(post) {
+    const lines = [];
+    if (post.categories && post.categories.length) {
+      const label = post.categories.length > 1 ? "Categories" : "Category";
+      lines.push(label + ": " + formatList(post.categories, " / "));
+    }
+    if (post.tags && post.tags.length) {
+      const label = post.tags.length > 1 ? "Tags" : "Tag";
+      lines.push(label + ": " + formatList(post.tags, ", "));
+    }
+    const timeParts = [];
+    const dateText = post.dateDisplay || post.date || "";
+    const readText =
+      post.readingTimeDisplay ||
+      (post.readingTime ? post.readingTime + " min read" : "");
+    if (dateText) timeParts.push(dateText);
+    if (readText) timeParts.push(readText);
+    if (timeParts.length) lines.push(timeParts.join(" - "));
+    return lines;
+  }
+
+  function setTooltipContent(title, lines) {
+    if (!tooltipEl) return;
+    tooltipEl.innerHTML = "";
+    const titleEl = document.createElement("div");
+    titleEl.className = "gg-tooltip-title";
+    titleEl.textContent = title;
+    tooltipEl.appendChild(titleEl);
+    (lines || []).forEach((line) => {
+      const row = document.createElement("div");
+      row.className = "gg-tooltip-meta";
+      row.textContent = line;
+      tooltipEl.appendChild(row);
+    });
+  }
+
+  function positionTooltip(x, y) {
+    if (!tooltipEl || !shell) return;
+    const pad = 12;
+    const maxX = shell.clientWidth - tooltipEl.offsetWidth - pad;
+    const maxY = shell.clientHeight - tooltipEl.offsetHeight - pad;
+    const left = clamp(x + 14, pad, maxX);
+    const top = clamp(y + 14, pad, maxY);
+    tooltipEl.style.left = left + "px";
+    tooltipEl.style.top = top + "px";
+  }
+
+  function showTooltip(title, lines, x, y) {
+    if (!tooltipEl) return;
+    setTooltipContent(title, lines);
+    tooltipEl.classList.add("is-visible");
+    tooltipEl.setAttribute("aria-hidden", "false");
+    positionTooltip(x, y);
+  }
+
+  function hideTooltip() {
+    if (!tooltipEl) return;
+    tooltipEl.classList.remove("is-visible");
+    tooltipEl.setAttribute("aria-hidden", "true");
+  }
+
+  function showTooltipForPost(post, pos) {
+    const lines = buildPostLines(post);
+    showTooltip(post.title || "Untitled", lines, pos.x, pos.y);
+  }
+
+  function showTooltipForCell(cell, pos) {
+    if (cell.isDerived) {
+      const names = cell.pairNames || [cell.name];
+      const title = "Overlap: " + names.join(" + ");
+      showTooltip(title, ["Posts: " + cell.count], pos.x, pos.y);
+      return;
+    }
+    const lines = [];
+    if (view.mode === "tag") {
+      const latest = cell.latestPost ? "Latest: " + cell.latestPost.title : null;
+      if (latest) lines.push(latest);
+      lines.push("Posts: " + cell.count);
+      showTooltip("Tag: #" + cell.name, lines, pos.x, pos.y);
+      return;
+    }
+    lines.push("Posts: " + cell.count);
+    showTooltip("Category: " + cell.name, lines, pos.x, pos.y);
+  }
+
+  function showTooltipForTag(tag, pos) {
+    const lines = [];
+    const latest = tag.latestPost ? "Latest: " + tag.latestPost.title : null;
+    if (latest) lines.push(latest);
+    lines.push("Posts: " + tag.count);
+    showTooltip("Tag: #" + tag.name, lines, pos.x, pos.y);
+  }
+
+  function updateTooltipFromHover(pos) {
+    if (!tooltipEl || !pos) return;
+    if (hoveredPost) {
+      showTooltipForPost(hoveredPost, pos);
+      return;
+    }
+    if (view.mode === "category" && hoveredTag) {
+      showTooltipForTag(hoveredTag, pos);
+      return;
+    }
+    if (hoveredCell) {
+      showTooltipForCell(hoveredCell, pos);
+      return;
+    }
+    hideTooltip();
+  }
+
+  function syncHotspots() {
+    if (!hotspotsEl) return;
+    const frag = document.createDocumentFragment();
+
+    view.cells.forEach((cell) => {
+      const rect = getCellHotspotRect(cell);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "gg-hotspot gg-hotspot-cell";
+      if (cell.isDerived) button.classList.add("is-derived");
+      setHotspotRect(button, rect);
+      if (view.mode === "tag") {
+        const latest = cell.latestPost ? ", latest: " + cell.latestPost.title : "";
+        button.setAttribute("aria-label", "Tag " + cell.name + ", " + cell.count + " posts" + latest);
+      } else if (cell.isDerived) {
+        button.setAttribute(
+          "aria-label",
+          "Overlap " + cell.name + ", " + cell.count + " posts"
+        );
+      } else {
+        button.setAttribute(
+          "aria-label",
+          "Category " + cell.name + ", " + cell.count + " posts"
+        );
+      }
+      button.addEventListener("focus", () => {
+        hoveredPost = null;
+        hoveredTag = null;
+        hoveredCell = cell;
+        showTooltipForCell(cell, getElementCenter(button));
+      });
+      button.addEventListener("blur", () => {
+        hoveredCell = null;
+        hideTooltip();
+      });
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (view.mode === "category") {
+          applyCategoryFilter(cell);
+        } else {
+          openLatestPostForTag(cell, false);
+        }
+      });
+      frag.appendChild(button);
+    });
+
+    if (view.categoryBadge && view.categoryBadge.rect) {
+      const badgeButton = document.createElement("button");
+      badgeButton.type = "button";
+      badgeButton.className = "gg-hotspot gg-hotspot-badge";
+      setHotspotRect(badgeButton, clampRect(view.categoryBadge.rect));
+      badgeButton.setAttribute("aria-label", "Back to categories");
+      badgeButton.addEventListener("focus", () => {
+        hoveredPost = null;
+        hoveredTag = null;
+        hoveredCell = null;
+        const center = getElementCenter(badgeButton);
+        showTooltip("Back to categories", [], center.x, center.y);
+      });
+      badgeButton.addEventListener("blur", () => {
+        hideTooltip();
+      });
+      badgeButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        clearCategoryFilter();
+      });
+      frag.appendChild(badgeButton);
+    }
+
+    view.posts.forEach((post) => {
+      if (!post.url) return;
+      const rect = getPostHotspotRect(post);
+      const link = document.createElement("a");
+      link.className = "gg-hotspot gg-hotspot-post";
+      link.href = post.url;
+      setHotspotRect(link, rect);
+      const ariaParts = [post.title || "Untitled"];
+      if (post.categories && post.categories.length) {
+        ariaParts.push("Categories: " + formatList(post.categories, " / "));
+      }
+      if (post.tags && post.tags.length) {
+        ariaParts.push("Tags: " + formatList(post.tags, ", "));
+      }
+      if (post.dateDisplay) ariaParts.push(post.dateDisplay);
+      if (post.readingTimeDisplay) ariaParts.push(post.readingTimeDisplay);
+      link.setAttribute("aria-label", ariaParts.join(". "));
+      link.addEventListener("focus", () => {
+        hoveredPost = post;
+        hoveredTag = null;
+        hoveredCell = null;
+        showTooltipForPost(post, getElementCenter(link));
+      });
+      link.addEventListener("blur", () => {
+        hoveredPost = null;
+        hideTooltip();
+      });
+      frag.appendChild(link);
+    });
+
+    hotspotsEl.textContent = "";
+    hotspotsEl.appendChild(frag);
+  }
+
   function layout() {
     if (state.width <= 0 || state.height <= 0) return;
     seedCells();
@@ -927,6 +1618,24 @@
     computeTags();
     measureLabels();
     measurePostLabels();
+    if (hotspotsEl) syncHotspots();
+  }
+
+  function startTransition() {
+    if (prefersReducedMotion) return;
+    state.transitionStart = performance.now();
+    state.transitionActive = true;
+  }
+
+  function getTransitionAlpha() {
+    if (!state.transitionActive) return 1;
+    const elapsed = state.time - state.transitionStart;
+    const t = clamp(elapsed / transitionMs, 0, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    if (t >= 1) {
+      state.transitionActive = false;
+    }
+    return eased;
   }
 
   function updateSearch(query) {
@@ -951,6 +1660,7 @@
     hoveredPost = null;
     hoveredCell = null;
     hoveredTag = null;
+    if (tooltipEl) hideTooltip();
   }
 
   function getExpandedPostLabel(post) {
@@ -964,7 +1674,12 @@
     const paddingY = fontSize * 0.3;
     const rectW = textWidth + paddingX * 2;
     const rectH = fontSize + paddingY * 2;
-    const base = post.labelRect || { x: post.x, y: post.y, w: rectW, h: rectH };
+    const base = post.labelRect || {
+      x: post.x - rectW / 2,
+      y: post.y - rectH / 2,
+      w: rectW,
+      h: rectH,
+    };
     const cx = base.x + base.w / 2;
     const cy = base.y + base.h / 2;
     const x = clamp(cx - rectW / 2, state.margin, state.width - rectW - state.margin);
@@ -978,14 +1693,19 @@
   }
 
   function findPostLabelAt(x, y) {
-    if (hoveredPost && hoveredPost.labelRect) {
+    if (hoveredPost && hoveredPost.labelRect && !hoveredPost.labelHidden) {
       const expanded = getExpandedPostLabel(hoveredPost);
       if (pointInRect(x, y, expanded.rect)) return hoveredPost;
     }
     for (let i = view.posts.length - 1; i >= 0; i--) {
       const post = view.posts[i];
-      if (!post.labelRect) continue;
-      if (pointInRect(x, y, post.labelRect)) return post;
+      if (post.labelRect && !post.labelHidden) {
+        if (pointInRect(x, y, post.labelRect)) return post;
+      }
+    }
+    for (let i = view.posts.length - 1; i >= 0; i--) {
+      const post = view.posts[i];
+      if (pointInCircle(x, y, post.x, post.y, post.radius + 4)) return post;
     }
     return null;
   }
@@ -1006,6 +1726,12 @@
     return x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h;
   }
 
+  function pointInCircle(x, y, cx, cy, r) {
+    const dx = x - cx;
+    const dy = y - cy;
+    return dx * dx + dy * dy <= r * r;
+  }
+
   function findCellAt(x, y) {
     for (const cell of view.cells) {
       if (!cell.poly || !cell.poly.length) continue;
@@ -1014,27 +1740,48 @@
     return null;
   }
 
-  function updateUrl(categoryName) {
+  function updateUrl(filter) {
     const url = new URL(window.location.href);
-    if (categoryName) {
-      url.searchParams.set("category", categoryName);
+    if (filter && filter.type === "pair") {
+      url.searchParams.set("pair", filter.key);
+      url.searchParams.delete("category");
+    } else if (filter && filter.type === "category") {
+      url.searchParams.set("category", filter.name);
+      url.searchParams.delete("pair");
     } else {
       url.searchParams.delete("category");
+      url.searchParams.delete("pair");
     }
     window.history.pushState(null, "", url.toString());
   }
 
   function syncViewFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const match = resolveCategoryFilter(params.get("category"));
-    if (match) {
+    const pairMatch = resolvePairFilter(params.get("pair"));
+    if (pairMatch) {
       view.mode = "tag";
-      view.filterCategoryKey = match.key;
-      view.filterCategoryName = match.name;
-    } else {
-      view.mode = "category";
+      view.filterPairKey = makePairKey(pairMatch.keyA, pairMatch.keyB);
+      view.filterPairNames = [
+        allCategoryNames.get(pairMatch.keyA),
+        allCategoryNames.get(pairMatch.keyB),
+      ];
       view.filterCategoryKey = null;
       view.filterCategoryName = null;
+    } else {
+      const match = resolveCategoryFilter(params.get("category"));
+      if (match) {
+        view.mode = "tag";
+        view.filterCategoryKey = match.key;
+        view.filterCategoryName = match.name;
+        view.filterPairKey = null;
+        view.filterPairNames = null;
+      } else {
+        view.mode = "category";
+        view.filterCategoryKey = null;
+        view.filterCategoryName = null;
+        view.filterPairKey = null;
+        view.filterPairNames = null;
+      }
     }
     updateSearch(state.searchQuery);
     hoveredPost = null;
@@ -1045,19 +1792,33 @@
   function applyCategoryFilter(cell) {
     if (!cell) return;
     view.mode = "tag";
-    view.filterCategoryKey = cell.key;
-    view.filterCategoryName = cell.name;
+    if (cell.isDerived) {
+      view.filterPairKey = cell.key;
+      view.filterPairNames = cell.pairNames || null;
+      view.filterCategoryKey = null;
+      view.filterCategoryName = null;
+      updateUrl({ type: "pair", key: cell.key });
+    } else {
+      view.filterCategoryKey = cell.key;
+      view.filterCategoryName = cell.name;
+      view.filterPairKey = null;
+      view.filterPairNames = null;
+      updateUrl({ type: "category", name: cell.name });
+    }
+    startTransition();
     updateSearch(state.searchQuery);
     hoveredPost = null;
     hoveredCell = null;
     hoveredTag = null;
-    updateUrl(cell.name);
   }
 
   function clearCategoryFilter() {
     view.mode = "category";
     view.filterCategoryKey = null;
     view.filterCategoryName = null;
+    view.filterPairKey = null;
+    view.filterPairNames = null;
+    startTransition();
     updateSearch(state.searchQuery);
     hoveredPost = null;
     hoveredCell = null;
@@ -1065,7 +1826,17 @@
     updateUrl(null);
   }
 
-  function drawCells(focusCell) {
+  function openLatestPostForTag(tag, openInNewTab) {
+    if (!tag || !tag.latestPost || !tag.latestPost.url) return;
+    if (openInNewTab) {
+      window.open(tag.latestPost.url, "_blank", "noopener,noreferrer");
+    } else {
+      window.location.href = tag.latestPost.url;
+    }
+  }
+
+  function drawCells(focusCell, fade) {
+    const fadeScale = fade || 1;
     ctx.save();
     ctx.lineJoin = "round";
     view.cells.forEach((cell) => {
@@ -1073,22 +1844,24 @@
       const highlight = focusCell && focusCell.key === cell.key;
       const fill = highlight ? cell.colors.fillStrong : cell.colors.fill;
       const edge = highlight ? cell.colors.edgeStrong : cell.colors.edge;
+      const alpha = (cell.isDerived ? 0.82 : 1) * fadeScale;
 
       tracePolygon(cell.poly);
-      ctx.globalAlpha = 1;
+      ctx.globalAlpha = alpha;
       ctx.fillStyle = fill;
       ctx.fill();
 
       tracePolygon(cell.poly);
       ctx.strokeStyle = edge;
-      ctx.lineWidth = highlight ? 1.9 : 1.1;
-      ctx.setLineDash([8, 12]);
-      ctx.lineDashOffset = -state.time * 0.02 + (hash32(cell.key) % 60);
+      ctx.lineWidth = highlight ? 1.9 : cell.isDerived ? 0.95 : 1.1;
+      ctx.setLineDash(cell.isDerived ? [5, 10] : [8, 12]);
+      ctx.lineDashOffset =
+        -state.motionTime * (cell.isDerived ? 0.015 : 0.02) + (hash32(cell.key) % 60);
       ctx.stroke();
       ctx.setLineDash([]);
 
       tracePolygon(cell.poly);
-      ctx.globalAlpha = highlight ? 0.35 : 0.16;
+      ctx.globalAlpha = (highlight ? 0.35 : cell.isDerived ? 0.12 : 0.16) * fadeScale;
       ctx.strokeStyle = cell.colors.glow;
       ctx.lineWidth = highlight ? 3.2 : 2.2;
       ctx.stroke();
@@ -1096,10 +1869,11 @@
     ctx.restore();
   }
 
-  function drawTagLinks(focusTag, focusPost) {
+  function drawTagLinks(focusTag, focusPost, fade) {
     if (!state.queryActive) return;
     const focusTagKey = focusTag ? focusTag.key : null;
     const focusPostTags = focusPost ? new Set(focusPost.tagKeys) : null;
+    const fadeScale = fade || 1;
 
     ctx.save();
     view.tags.forEach((tag) => {
@@ -1113,11 +1887,11 @@
       const baseAlpha = tagActive ? 0.6 : activeCount ? 0.16 : 0.06;
       const alpha = baseAlpha * (0.6 + density * 0.8);
 
-      ctx.globalAlpha = alpha;
+      ctx.globalAlpha = alpha * fadeScale;
       ctx.strokeStyle = tag.colors.halo;
       ctx.lineWidth = tagActive ? 1.4 : 0.7;
       ctx.setLineDash([4, 12]);
-      ctx.lineDashOffset = -state.time * 0.03 + (hash32(tag.key) % 40);
+      ctx.lineDashOffset = -state.motionTime * 0.03 + (hash32(tag.key) % 40);
       ctx.beginPath();
       ctx.arc(tag.x, tag.y, tag.orbit, 0, Math.PI * 2);
       ctx.stroke();
@@ -1139,11 +1913,11 @@
         const cx = mx + nx * bend;
         const cy = my + ny * bend;
 
-        ctx.globalAlpha = linkAlpha;
+        ctx.globalAlpha = linkAlpha * fadeScale;
         ctx.strokeStyle = tag.colors.link;
         ctx.lineWidth = tagActive ? 1.4 : 0.8;
         ctx.setLineDash([6, 10]);
-        ctx.lineDashOffset = -state.time * 0.05;
+        ctx.lineDashOffset = -state.motionTime * 0.05;
         ctx.beginPath();
         ctx.moveTo(tag.x, tag.y);
         ctx.quadraticCurveTo(cx, cy, post.x, post.y);
@@ -1151,7 +1925,7 @@
         ctx.setLineDash([]);
       }
 
-      ctx.globalAlpha = tagActive ? 0.9 : 0.5;
+      ctx.globalAlpha = (tagActive ? 0.9 : 0.5) * fadeScale;
       ctx.fillStyle = tag.colors.node;
       const nodeR = tagActive ? 4 : 3;
       ctx.beginPath();
@@ -1165,10 +1939,12 @@
     ctx.restore();
   }
 
-  function drawPostLabels(focusPost, focusCell, focusTag) {
+  function drawPostLabels(focusPost, focusCell, focusTag, fade) {
     const focusTagKey = focusTag ? focusTag.key : null;
+    const fadeScale = fade || 1;
     ctx.save();
     for (const post of view.posts) {
+      if (post.labelHidden && (!focusPost || post !== focusPost)) continue;
       if (focusPost && post === focusPost) continue;
       if (!post.labelRect) continue;
       let alpha = 1;
@@ -1186,16 +1962,23 @@
         post.labelSize,
         color,
         stroke,
-        alpha,
+        alpha * fadeScale,
         post.labelWidth
       );
     }
 
-    if (focusPost && focusPost.labelRect) {
+    if (focusPost) {
       let alpha = 1;
       if (focusCell && focusPost.cellKey !== focusCell.key) alpha *= 0.14;
       if (focusTagKey && !focusPost.tagKeys.includes(focusTagKey)) alpha *= 0.14;
-      const expanded = getExpandedPostLabel(focusPost);
+      const expanded = focusPost.labelRect
+        ? {
+            text: focusPost.label,
+            rect: focusPost.labelRect,
+            fontSize: focusPost.labelSize,
+            textWidth: focusPost.labelWidth,
+          }
+        : getExpandedPostLabel(focusPost);
       const cell = view.cellMap.get(focusPost.cellKey);
       const color = cell ? cell.colors.label : "rgba(216, 226, 255, 0.9)";
       const stroke = cell ? cell.colors.edge : "rgba(72, 242, 227, 0.4)";
@@ -1205,7 +1988,7 @@
         expanded.fontSize,
         color,
         stroke,
-        alpha,
+        alpha * fadeScale,
         expanded.textWidth
       );
     }
@@ -1218,33 +2001,61 @@
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
     ctx.globalAlpha = alpha;
-    ctx.fillStyle = "rgba(6, 10, 18, 0.7)";
+    ctx.fillStyle = "rgba(6, 10, 18, 0.85)";
     ctx.strokeStyle = stroke;
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 1.2;
+    ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetY = 3;
     roundRect(rect.x, rect.y, rect.w, rect.h, 6);
     ctx.fill();
     ctx.stroke();
+    ctx.shadowColor = "transparent";
     ctx.fillStyle = color;
     ctx.fillText(label, rect.x + (rect.w - textWidth) / 2, rect.y + rect.h / 2);
     ctx.restore();
   }
 
-  function drawLabels(focusCell, focusTag) {
+  function drawCellLabel(label, rect, fontSize, color, alpha) {
+    ctx.save();
+    ctx.font = fontSize + 'px "Share Tech Mono", monospace';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.fillText(label, rect.x + rect.w / 2, rect.y + rect.h / 2);
+    ctx.restore();
+  }
+
+  function drawLabels(focusCell, focusTag, fade) {
+    const fadeScale = fade || 1;
     ctx.save();
     view.cells.forEach((cell) => {
       if (!cell.labelRect) return;
       const highlight = focusCell && focusCell.key === cell.key;
       const active = !state.queryActive || (cell.activeCount || 0) > 0;
-      const alpha = highlight ? 0.95 : active ? 0.7 : 0.25;
-      drawLabel(
-        cell.label,
-        cell.labelRect,
-        cell.labelSize,
-        cell.colors.label,
-        cell.colors.edge,
-        alpha,
-        cell.labelWidth
-      );
+      if (view.mode === "category") {
+        let alpha = highlight ? 0.45 : active ? 0.28 : 0.12;
+        if (cell.isDerived) alpha *= 0.7;
+        drawCellLabel(
+          cell.label,
+          cell.labelRect,
+          cell.labelSize,
+          cell.colors.label,
+          alpha * fadeScale
+        );
+      } else {
+        const alpha = highlight ? 0.95 : active ? 0.7 : 0.25;
+        drawLabel(
+          cell.label,
+          cell.labelRect,
+          cell.labelSize,
+          cell.colors.label,
+          cell.colors.edge,
+          alpha * fadeScale,
+          cell.labelWidth
+        );
+      }
     });
 
     if (view.mode === "category" && state.queryActive) {
@@ -1259,7 +2070,7 @@
           tag.labelSize,
           tag.colors.label,
           tag.colors.edge,
-          alpha,
+          alpha * fadeScale,
           tag.labelWidth
         );
       });
@@ -1272,7 +2083,7 @@
         view.categoryBadge.labelSize,
         view.categoryBadge.colors.label,
         view.categoryBadge.colors.edge,
-        0.85,
+        0.85 * fadeScale,
         view.categoryBadge.labelWidth
       );
     }
@@ -1284,17 +2095,19 @@
     const focusPost = hoveredPost || null;
     const focusCell = hoveredCell || null;
     const focusTag = view.mode === "category" ? hoveredTag || null : null;
+    const fade = getTransitionAlpha();
 
-    drawCells(focusCell);
+    drawCells(focusCell, fade);
     if (view.mode === "category") {
-      drawTagLinks(focusTag, focusPost);
+      drawTagLinks(focusTag, focusPost, fade);
     }
-    drawPostLabels(focusPost, focusCell, focusTag);
-    drawLabels(focusCell, focusTag);
+    drawPostLabels(focusPost, focusCell, focusTag, fade);
+    drawLabels(focusCell, focusTag, fade);
   }
 
   function loop(ts) {
     state.time = ts || state.time + 16;
+    state.motionTime = prefersReducedMotion ? 0 : state.time;
     draw();
     requestAnimationFrame(loop);
   }
@@ -1324,6 +2137,7 @@
       hoveredCell = null;
       hoveredTag = null;
       canvas.style.cursor = "pointer";
+      updateTooltipFromHover(pos);
       return;
     }
     if (view.mode === "category" && state.queryActive) {
@@ -1337,26 +2151,32 @@
         ? pointInRect(pos.x, pos.y, view.categoryBadge.rect)
         : false;
     if (badgeHover) {
+      hoveredPost = null;
       hoveredCell = null;
+      hoveredTag = null;
       canvas.style.cursor = "pointer";
+      showTooltip("Back to categories", [], pos.x, pos.y);
       return;
     }
 
     if (hoveredTag) {
       hoveredCell = null;
       canvas.style.cursor = "pointer";
+      updateTooltipFromHover(pos);
       return;
     }
 
     const cellLabel = findLabelAt(view.cells, pos.x, pos.y);
     hoveredCell = cellLabel || findCellAt(pos.x, pos.y);
 
-    if (view.mode === "category" && hoveredCell) {
+    if (hoveredCell) {
       canvas.style.cursor = "pointer";
+      updateTooltipFromHover(pos);
       return;
     }
 
     canvas.style.cursor = "default";
+    updateTooltipFromHover(pos);
   });
 
   canvas.addEventListener("mouseleave", () => {
@@ -1364,6 +2184,7 @@
     hoveredCell = null;
     hoveredTag = null;
     canvas.style.cursor = "default";
+    hideTooltip();
   });
 
   canvas.addEventListener("click", (e) => {
@@ -1381,6 +2202,13 @@
       clearCategoryFilter();
       return;
     }
+    if (view.mode === "tag") {
+      const cell = findLabelAt(view.cells, pos.x, pos.y) || findCellAt(pos.x, pos.y);
+      if (cell) {
+        openLatestPostForTag(cell, false);
+        return;
+      }
+    }
     if (view.mode === "category") {
       const cell = findLabelAt(view.cells, pos.x, pos.y) || findCellAt(pos.x, pos.y);
       if (cell) {
@@ -1396,6 +2224,14 @@
     if (node && node.url) {
       e.preventDefault();
       window.open(node.url, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (view.mode === "tag") {
+      const cell = findLabelAt(view.cells, pos.x, pos.y) || findCellAt(pos.x, pos.y);
+      if (cell) {
+        e.preventDefault();
+        openLatestPostForTag(cell, true);
+      }
     }
   });
 

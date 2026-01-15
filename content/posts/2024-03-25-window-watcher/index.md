@@ -1,10 +1,10 @@
 ﻿---
 author: Tristan Madden
-categories: [Python, Machine Learning]
+categories: [Python, AI]
 date: 2024-03-25
 draft: false
 summary: "A guide to setting up a window monitoring system using the Moondream2 machine vision model for real-time window content analysis."
-tags: ["machine-learning", "computer-vision", "logging", "moondream"]
+tags: ["computer-vision", "logging", "moondream"]
 title: "Window Monitoring with Machine Vision"
 toc: true
 usePageBundles: true

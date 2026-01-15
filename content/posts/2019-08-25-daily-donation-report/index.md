@@ -3,8 +3,8 @@ title: Daily Donation Report
 author: Tristan Madden
 date: 2019-08-25
 draft: false
-tags: [automation, reports]
-categories: [Development]
+tags: [google-apps-script, automation, reports]
+categories: [JavaScript]
 summary: "A Google Apps Script that automates the collection and distribution of Google Forms data by aggregating submissions, converting them to XLSX format, and sending formatted HTML email reports."
 toc: true
 usePageBundles: true

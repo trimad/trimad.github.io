@@ -1,0 +1,70 @@
+{{- $pages := .Site.RegularPages -}}
+{{- if eq .Kind "home" -}}
+  {{- with .Site.GetPage "section" "posts" -}}
+    {{- $pages = .RegularPages -}}
+  {{- end -}}
+{{- else if or (eq .Section "posts") (eq .Section "archive") (eq .Section "prompts") -}}
+  {{- $pages = .RegularPages -}}
+{{- end -}}
+{{- $pages = $pages.ByDate.Reverse -}}
+
+{{- $categoryMap := dict -}}
+{{- $categoryKeys := slice -}}
+{{- range $pages -}}
+  {{- $page := . -}}
+  {{- $cats := $page.Params.categories | default (slice "Unclassified") -}}
+  {{- if gt (len $cats) 2 -}}
+    {{- $cats = first 2 $cats -}}
+  {{- end -}}
+  {{- $tags := $page.Params.tags | default (slice "Untagged") -}}
+  {{- range $cat := $cats -}}
+    {{- $catKey := lower $cat -}}
+    {{- if not (in $categoryKeys $catKey) -}}
+      {{- $categoryKeys = $categoryKeys | append $catKey -}}
+    {{- end -}}
+    {{- $catEntry := index $categoryMap $catKey | default (dict "name" $cat "tags" (dict) "tagKeys" (slice)) -}}
+    {{- $tagMap := index $catEntry "tags" -}}
+    {{- $tagKeys := index $catEntry "tagKeys" -}}
+    {{- range $tag := $tags -}}
+      {{- $tagKey := lower $tag -}}
+      {{- if not (in $tagKeys $tagKey) -}}
+        {{- $tagKeys = $tagKeys | append $tagKey -}}
+      {{- end -}}
+      {{- $tagEntry := index $tagMap $tagKey | default (dict "name" $tag "posts" (slice)) -}}
+      {{- $posts := index $tagEntry "posts" | append $page -}}
+      {{- $tagEntry = merge $tagEntry (dict "posts" $posts) -}}
+      {{- $tagMap = merge $tagMap (dict $tagKey $tagEntry) -}}
+    {{- end -}}
+    {{- $catEntry = merge $catEntry (dict "tags" $tagMap "tagKeys" $tagKeys) -}}
+    {{- $categoryMap = merge $categoryMap (dict $catKey $catEntry) -}}
+  {{- end -}}
+{{- end -}}
+{{- $categoryKeys = sort $categoryKeys -}}
+
+<noscript>
+  <div class="gg-fallback" aria-label="Category, tag, and post list">
+    <div class="gg-fallback-title">Browse by category</div>
+    {{- range $categoryKeys -}}
+      {{- $catEntry := index $categoryMap . -}}
+      <section class="gg-fallback-category">
+        <h3 class="gg-fallback-category-title">{{ index $catEntry "name" }}</h3>
+        {{- $tagMap := index $catEntry "tags" -}}
+        {{- $tagKeys := sort (index $catEntry "tagKeys") -}}
+        <div class="gg-fallback-tags">
+          {{- range $tagKeys -}}
+            {{- $tagEntry := index $tagMap . -}}
+            <div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#{{ index $tagEntry "name" }}</div>
+              {{- $posts := index $tagEntry "posts" -}}
+              <ul class="gg-fallback-posts">
+                {{- range $posts -}}
+                  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                {{- end -}}
+              </ul>
+            </div>
+          {{- end -}}
+        </div>
+      </section>
+    {{- end -}}
+  </div>
+</noscript>

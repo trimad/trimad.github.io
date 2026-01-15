@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2018-01-28
 draft: false
 tags: [sorting, insertion-sort, interactive, p5js]
-categories: [Development]
+categories: [JavaScript]
 summary: "An interactive 3D visualization of the Insertion Sort algorithm using p5.js and WEBGL, featuring real-time sorting animation with camera controls and step-by-step progression."
 toc: true
 usePageBundles: true

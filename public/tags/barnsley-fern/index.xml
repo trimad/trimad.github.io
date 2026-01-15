@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Barnsley-Fern on Ghostfeed</title>
+    <link>http://localhost:1313/tags/barnsley-fern/</link>
+    <description>Recent content in Barnsley-Fern on Ghostfeed</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/barnsley-fern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Barnsley Fern</title>
+      <link>http://localhost:1313/posts/2018-06-28-barnsley-fern/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
+      <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
+    </item>
+  </channel>
+</rss>

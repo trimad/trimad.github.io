@@ -6,7 +6,7 @@
     <description>Recent content in System Administration on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/system-administration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ChampVA Claims</title>
@@ -51,25 +51,11 @@
       <description>A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality.</description>
     </item>
     <item>
-      <title>Deep Floyd IF</title>
-      <link>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</link>
-      <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</guid>
-      <description>My tentative work flow for running Deep Floyd IF locally for image generation.</description>
-    </item>
-    <item>
       <title>net use</title>
       <link>http://localhost:1313/posts/2023-04-13-net-use/</link>
       <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-04-13-net-use/</guid>
       <description>Connects a computer to or disconnects a computer from a shared resource, or displays information about computer connections. The command also controls persistent net connections. Used without parameters, net use retrieves a list of network connections.</description>
-    </item>
-    <item>
-      <title>Windows Defender Firewall Management Guide</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
-      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
-      <description>A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding.</description>
     </item>
     <item>
       <title>Windows Remediation</title>

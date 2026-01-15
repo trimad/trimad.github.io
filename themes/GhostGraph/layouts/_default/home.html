@@ -24,7 +24,10 @@
 
 <div class="gg-layout">
   <main class="gg-shell">
-    <canvas id="gg-canvas"></canvas>
+    <canvas id="gg-canvas" aria-label="Voronoi diagram of categories, tags, and posts"></canvas>
+    <div id="gg-hotspots" class="gg-hotspots"></div>
+    <div id="gg-tooltip" class="gg-tooltip" role="status" aria-live="polite" aria-hidden="true"></div>
+    {{ partial "graph-fallback.html" . }}
   </main>
   {{ partial "rightnav.html" . }}
 </div>
@@ -41,13 +44,22 @@
       {{- $pages = .RegularPages -}}
     {{- end -}}
     {{- range $index, $p := $pages -}}
+      {{- $reading := $p.ReadingTime -}}
+      {{- $readingDisplay := "" -}}
+      {{- if gt $reading 0 -}}
+        {{- $readingDisplay = printf "%d min read" $reading -}}
+      {{- end -}}
       {{- if $index }},{{ end -}}
       {
         "id": {{ printf "post-%d" $index | jsonify }},
         "title": {{ $p.Title | jsonify }},
         "url": {{ $p.RelPermalink | jsonify }},
         "tags": {{ $p.Params.tags | default (slice) | jsonify }},
-        "categories": {{ $p.Params.categories | default (slice) | jsonify }}
+        "categories": {{ $p.Params.categories | default (slice) | jsonify }},
+        "date": {{ $p.Date.Format "2006-01-02" | jsonify }},
+        "dateDisplay": {{ $p.Date.Format "Jan 2, 2006" | jsonify }},
+        "readingTime": {{ $reading }},
+        "readingTimeDisplay": {{ $readingDisplay | jsonify }}
       }
     {{- end -}}
   ]

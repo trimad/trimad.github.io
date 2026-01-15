@@ -3,8 +3,8 @@ title: Stable Diffusion Scripts
 author: Tristan Madden
 date: 2023-02-05
 draft: false
-tags: ["image-processing", "video", "stable-diffusion", "javascript"]
-categories: [Development, Python]
+tags: [image-processing, stable-diffusion]
+categories: [Python, AI]
 summary: "A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools."
 usePageBundles: true
 ---

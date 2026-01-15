@@ -2,65 +2,68 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</loc>
+    <lastmod>2026-01-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/automation/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/entra-id/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/exchange/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/exchange-online/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2026-01-09-export-all-group-memberships/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2026-01-09-export-shared-mailbox-delegates/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/m365/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/microsoft-365/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/microsoft-365/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/microsoft-graph/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/powershell/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/powershell/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/sysadmin/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/api/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/cmd/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/entra/</loc>
-    <lastmod>2025-12-03T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2025-12-03-export-successful-sign-ins-with-microsoft-graph/</loc>
-    <lastmod>2025-12-03T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/profiles/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -69,13 +72,13 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/signin/</loc>
-    <lastmod>2025-12-03T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/troubleshooting/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/windows/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/windows11/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -90,19 +93,19 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/system-administration/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/azure/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/conditional-access/</loc>
-    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/</loc>
-    <lastmod>2025-11-06T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2025-07-30-export-exchange-inbox-rules-with-exchange-online-powershell/</loc>
-    <lastmod>2025-07-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/email/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -138,49 +141,34 @@
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/sysinternals/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/troubleshooting/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/windbg/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/c%23/</loc>
-    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/java/</loc>
-    <lastmod>2025-12-04T11:16:24-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/stub/</loc>
-    <lastmod>2025-12-04T11:16:24-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/stub/</loc>
-    <lastmod>2025-12-04T11:16:24-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/prompts/2025-07-03-stub/</loc>
-    <lastmod>2025-12-04T11:16:24-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2024-10-16-restart-iis-application/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/iis/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/logging/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/web-administration/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/web-administration/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/windows-server/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2024-09-10-officec2rclient/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -216,7 +204,7 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/python/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/curl/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -231,7 +219,7 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/shell/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2024-06-06-dns-records/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -246,7 +234,7 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/data-visualization/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/ip-addressing/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -351,19 +339,19 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/knowledge-graphs/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/llm/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/mistral-7b/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/nlp/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2023-10-17-local-llm/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -374,13 +362,13 @@
     <loc>http://localhost:1313/tags/windows-update/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/development/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/javascript/</loc>
+    <loc>http://localhost:1313/tags/google-apps-script/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/javascript/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/creative-coding/</loc>
@@ -452,7 +440,7 @@
     <loc>http://localhost:1313/tags/photo-editing/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/reports/</loc>
+    <loc>http://localhost:1313/tags/nodejs/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2023-05-11-rapidapi/</loc>
@@ -461,11 +449,14 @@
     <loc>http://localhost:1313/tags/debugging/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/categories/djavascript/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/2023-05-08-keycode-event-test/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/keyboard/</loc>
-    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+    <loc>http://localhost:1313/tags/ai/</loc>
+    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -503,11 +494,14 @@
     <loc>http://localhost:1313/tags/netsh/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/tags/security/</loc>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2023-03-03-windows-remediation/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/windows-defender/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -527,17 +521,14 @@
     <loc>http://localhost:1313/tags/collaboration/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/local-administrator/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/2023-02-22-laps/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2023-02-23-microsoftteams/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/password-management/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+    <loc>http://localhost:1313/tags/passwords/</loc>
+    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/team-management/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -554,7 +545,7 @@
     <loc>http://localhost:1313/posts/2023-02-21-net-user/</loc>
     <lastmod>2025-05-13T16:05:13-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/security/</loc>
+    <loc>http://localhost:1313/tags/password-management/</loc>
     <lastmod>2025-05-13T16:05:13-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/device-management/</loc>
@@ -647,6 +638,9 @@
     <loc>http://localhost:1313/posts/2022-06-09-download-streams/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/categories/c%23/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/fractal/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
@@ -707,6 +701,9 @@
     <loc>http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/tags/reports/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/calendars/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
@@ -722,19 +719,22 @@
     <loc>http://localhost:1313/tags/email-management/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/exchange/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/exchange-management/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/k-means/</loc>
-    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+    <loc>http://localhost:1313/categories/java/</loc>
+    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2021-05-18-k-means-clustering/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/processing/</loc>
+    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/visualization/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/reference/</loc>
@@ -791,13 +791,13 @@
     <loc>http://localhost:1313/posts/2018-11-16-fridge-magnet-simulator/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/processing/</loc>
-    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/2018-11-12-orbiting-pixels-utility/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2018-06-28-barnsley-fern/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/barnsley-fern/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/prime-numbers/</loc>
@@ -851,9 +851,6 @@
     <loc>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/java/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
@@ -883,6 +880,9 @@
   </url><url>
     <loc>http://localhost:1313/categories/c&#43;&#43;/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/android/</loc>
+    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2018-03-12-att-hackathon/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -926,10 +926,13 @@
     <loc>http://localhost:1313/archive/2017-11-09-uva-10550/</loc>
     <lastmod>2025-05-02T11:58:43-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/assembly/</loc>
+    <loc>http://localhost:1313/categories/assembly/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/masm/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</loc>
@@ -937,6 +940,9 @@
   </url><url>
     <loc>http://localhost:1313/archive/2017-10-17-uva-272/</loc>
     <lastmod>2025-05-02T11:58:43-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/assembly/</loc>
+    <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/fibonacci/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
@@ -975,9 +981,6 @@
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/arrays/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/education/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2016-12-13-arrays/</loc>

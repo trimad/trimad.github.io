@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2022-01-27
 draft: false
 tags: [audio, video, shell, media-processing, video-conversion, audio-conversion]
-categories: [System Administration, Media Processing]
+categories: [PowerShell, CMD]
 summary: "A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples."
 usePageBundles: true
 ---

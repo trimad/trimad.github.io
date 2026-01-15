@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="N/A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
 </head>
 <body class="gg-body">
@@ -39,7 +39,18 @@
 
 <div class="gg-layout">
   <main class="gg-shell">
-    <canvas id="gg-canvas"></canvas>
+    <canvas id="gg-canvas" aria-label="Voronoi diagram of categories, tags, and posts"></canvas>
+    <div id="gg-hotspots" class="gg-hotspots"></div>
+    <div id="gg-tooltip" class="gg-tooltip" role="status" aria-live="polite" aria-hidden="true"></div>
+    <noscript>
+  <div class="gg-fallback" aria-label="Category, tag, and post list">
+    <div class="gg-fallback-title">Browse by category</div><section class="gg-fallback-category">
+        <h3 class="gg-fallback-category-title">Unclassified</h3><div class="gg-fallback-tags"><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#Untagged</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">Generative Guidelines for This Hugo Blog Theme</a></li></ul>
+            </div></div>
+      </section></div>
+</noscript>
+
     <div class="gg-legend">
       <div class="gg-legend-title">Categories</div>
       <div id="gg-legend-list" class="gg-legend-list"></div>
@@ -49,9 +60,9 @@
   <aside class="gg-rightnav" aria-label="Recently updated posts">
   <div class="gg-rightnav-title">Recently Updated</div><ol class="gg-rightnav-list">
       <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/prompts/2025-07-03-stub/">
-          <span class="gg-rightnav-text">Stub Title</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-04">Dec 4, 2025</time>
+        <a class="gg-rightnav-link" href="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">
+          <span class="gg-rightnav-text">Generative Guidelines for This Hugo Blog Theme</span>
+          <time class="gg-rightnav-meta" datetime="2026-01-15">Jan 15, 2026</time>
         </a>
       </li>
   </ol></aside>
@@ -62,10 +73,14 @@
 {
   "nodes": [{
         "id": "\"post-0\"",
-        "title": "\"Stub Title\"",
-        "url": "\"/prompts/2025-07-03-stub/\"",
-        "tags": "[\"stub\"]",
-        "categories": "[\"stub\",\"Java\",\"C#\"]"
+        "title": "\"Generative Guidelines for This Hugo Blog Theme\"",
+        "url": "\"/prompts/2026-01-15-generative-guidelines-for-this-blog/\"",
+        "tags": "[]",
+        "categories": "[]",
+        "date": "\"2026-01-15\"",
+        "dateDisplay": "\"Jan 15, 2026\"",
+        "readingTime":  3 ,
+        "readingTimeDisplay": "\"3 min read\""
       }]
 }
 </script>

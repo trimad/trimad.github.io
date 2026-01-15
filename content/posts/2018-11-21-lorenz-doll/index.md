@@ -3,8 +3,8 @@ title: Lorenz Doll
 author: Tristan Madden
 date: 2018-11-21
 draft: false
-tags: [animation, lorenz-system]
-categories: [Development, Visualization]
+tags: [processing, lorenz-system, animation, image-processing]
+categories: [Java]
 summary: "A Processing visualization where each pixel of an image is transformed into a Lorenz System, with the system's velocity mapped to the original pixel's brightness values."
 usePageBundles: true
 ---

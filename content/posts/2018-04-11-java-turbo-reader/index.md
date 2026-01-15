@@ -3,8 +3,8 @@ title: Faster Java String Inputs
 author: Tristan Madden
 date: 2018-04-11
 draft: false
-tags: [java, programming, optimization, debugging]
-categories: [Development]
+tags: [optimization, debugging]
+categories: [Java]
 summary: "A high-performance Java input reader class optimized for programming contests, providing fast integer and double parsing with automatic tokenization and buffering options."
 usePageBundles: true
 ---

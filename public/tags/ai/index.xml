@@ -1,82 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ai on Ghostfeed</title>
+    <title>AI on Ghostfeed</title>
     <link>http://localhost:1313/tags/ai/</link>
-    <description>Recent content in Ai on Ghostfeed</description>
+    <description>Recent content in AI on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/ai/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs</title>
-      <link>http://localhost:1313/posts/2024-02-05-local-ai-api/</link>
-      <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-02-05-local-ai-api/</guid>
-      <description>A practical collection of Python Flask API implementations for running various AI models locally, including image-to-text using Moondream, text-to-speech with Coqui TTS, and text generation via local LLMs with OpenAI-compatible interfaces.</description>
-    </item>
-    <item>
-      <title>Setting Up a Local Large Language Model (LLM) Environment</title>
-      <link>http://localhost:1313/posts/2023-10-17-local-llm/</link>
-      <pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-10-17-local-llm/</guid>
-      <description>A guide to setting up a local large language model (LLM) environment for TheraFit, a project focused on matching clients with therapists.</description>
-    </item>
-    <item>
-      <title>Deforum Cheat Sheet</title>
-      <link>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</link>
-      <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</guid>
-      <description>This is a cheat sheet of animations showing what the various 3D translation and rotation settings do in Deforum Stable Diffusion.</description>
-    </item>
-    <item>
-      <title>3D Photo Inpainting with Python and PyTorch</title>
-      <link>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</link>
-      <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</guid>
-      <description>A comprehensive guide to setting up and using 3D Photo Inpainting on Windows, including Miniconda environment setup, dependency installation, and usage instructions.</description>
-    </item>
     <item>
       <title>Deep Floyd IF</title>
       <link>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</guid>
       <description>My tentative work flow for running Deep Floyd IF locally for image generation.</description>
-    </item>
-    <item>
-      <title>Thin Plate Spline Motion Model</title>
-      <link>http://localhost:1313/posts/2023-04-12-thin-plate-spline-motion-model/</link>
-      <pubDate>Wed, 12 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-04-12-thin-plate-spline-motion-model/</guid>
-      <description>A practical guide to using the Thin Plate Spline Motion Model for animating static images by transferring motion from a driving video, with setup instructions and observations about optimal video dimensions and motion tracking limitations.</description>
-    </item>
-    <item>
-      <title>OpenAI Whisper Speech Recognition Guide</title>
-      <link>http://localhost:1313/posts/2023-02-24-openai-whisper/</link>
-      <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-24-openai-whisper/</guid>
-      <description>&lt;p&gt;Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.&lt;/p&gt;&#xA;&lt;h3&gt;&lt;a href=&#34;https://github.com/openai/whisper&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/h3&gt;&#xD;&#xA;&lt;h3&gt;Installation&lt;/h3&gt;&#xD;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install git+https://github.com/openai/whisper.git &#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Fix CUDA not detecting GPU&lt;/h3&gt;&#xD;&#xA;Whisper will default to the CPU if a GPU is not detected, which is considerably slower.&#xD;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip uninstall torch&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Example usage&lt;/h3&gt;&#xD;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Transcribe&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;whisper input.mp3 --model medium.en --language en --task transcribe&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Translate&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;whisper japanese.wav --model large --language Japanese --task translate&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Available models and languages&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;There are five model sizes, four with English-only versions, offering speed and accuracy tradeoffs. Below are the names of the available models and their approximate memory requirements and relative speed.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>MiDaS Depth Estimation Guide</title>
-      <link>http://localhost:1313/posts/2023-02-06-midas/</link>
-      <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-06-midas/</guid>
-      <description>&lt;h3&gt;&lt;a href=&#34;https://github.com/isl-org/MiDaS&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;During installation, I ran into an issue where the CUDA package wasn&amp;rsquo;t found. Had to modify environment.yaml to:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;name: midas-py310&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;channels:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pytorch&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - defaults&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dependencies:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - nvidia::cuda-toolkit&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;11.7.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - python&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;3.10.8&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pytorch::pytorch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.13.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - torchvision&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;0.14.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;22.3.1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - numpy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.23.4&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pip:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - opencv-python&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;4.6.0.66&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - imutils&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.5.4&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - timm&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.6.12&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - einops&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.6.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Commands that were helpful for troubleshooting CUDA:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Frame Interpolation Large Motion (FILM)</title>
-      <link>http://localhost:1313/posts/2023-02-05-film/</link>
-      <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-05-film/</guid>
-      <description>A comprehensive guide to setting up and using Google&amp;rsquo;s Frame Interpolation Large Motion (FILM) TensorFlow implementation, enabling the creation of smooth animations by generating intermediate frames between existing images using deep learning techniques.</description>
-    </item>
-    <item>
-      <title>Stable Diffusion Scripts</title>
-      <link>http://localhost:1313/posts/2023-02-05-stable-diffusion/</link>
-      <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
-      <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
     </item>
   </channel>
 </rss>

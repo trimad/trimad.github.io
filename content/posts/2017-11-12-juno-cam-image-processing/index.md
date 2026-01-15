@@ -3,8 +3,8 @@ title: Juno Cam Image Processing
 author: Tristan Madden
 date: 2017-11-12
 draft: false
-tags: [p5js]
-categories: [Development, Visualization]
+tags: [p5js, visualization]
+categories: [JavaScript]
 summary: "A Java program that reconstructs and processes raw image data from NASA's Juno spacecraft's pushframe camera, combining multiple filter strips to create high-resolution composite images of Jupiter."
 toc: true
 usePageBundles: true

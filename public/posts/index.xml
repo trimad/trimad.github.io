@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</title>
@@ -126,13 +126,6 @@
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
       <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
-    </item>
-    <item>
-      <title>Network Subnet Visualization Tools</title>
-      <link>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</link>
-      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</guid>
-      <description>Tools and scripts for visualizing and analyzing network subnets, including IP address ranges and network topologies.</description>
     </item>
     <item>
       <title>Visualizing and Analyzing Windows Folder Permissions</title>
@@ -737,7 +730,7 @@
       <description>An x86 MASM assembly program that calculates and displays the nth Fibonacci number, demonstrating basic assembly programming concepts and memory management.</description>
     </item>
     <item>
-      <title></title>
+      <title>Counting Sort</title>
       <link>http://localhost:1313/posts/2017-07-18-counting-sort/</link>
       <pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2017-07-18-counting-sort/</guid>

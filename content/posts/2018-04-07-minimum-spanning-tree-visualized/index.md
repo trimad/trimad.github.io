@@ -3,8 +3,8 @@ title: Minimum Spanning Tree Visualized
 author: Tristan Madden
 date: 2018-04-07
 draft: false
-tags: [minimum-spanning-tree]
-categories: [Development, Visualization]
+tags: [processing, minimum-spanning-tree, animation]
+categories: [Java]
 summary: "A Processing visualization of Prim's Algorithm creating a minimum spanning tree on procedurally generated terrain using Perlin noise height maps and orthographic projection."
 toc: true
 usePageBundles: true

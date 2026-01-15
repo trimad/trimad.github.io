@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Microsoft 365</title>
@@ -55,27 +55,6 @@
       <link>http://localhost:1313/categories/networking/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/networking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>C#</title>
-      <link>http://localhost:1313/categories/c%23/</link>
-      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/c%23/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Java</title>
-      <link>http://localhost:1313/categories/java/</link>
-      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/java/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Stub</title>
-      <link>http://localhost:1313/categories/stub/</link>
-      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/stub/</guid>
       <description></description>
     </item>
     <item>
@@ -135,10 +114,10 @@
       <description></description>
     </item>
     <item>
-      <title>Development</title>
-      <link>http://localhost:1313/categories/development/</link>
+      <title>JavaScript</title>
+      <link>http://localhost:1313/categories/javascript/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/development/</guid>
+      <guid>http://localhost:1313/categories/javascript/</guid>
       <description></description>
     </item>
     <item>
@@ -149,10 +128,24 @@
       <description></description>
     </item>
     <item>
+      <title>DJavaScript</title>
+      <link>http://localhost:1313/categories/djavascript/</link>
+      <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/djavascript/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Azure AD</title>
       <link>http://localhost:1313/categories/azure-ad/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/azure-ad/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C#</title>
+      <link>http://localhost:1313/categories/c%23/</link>
+      <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/c%23/</guid>
       <description></description>
     </item>
     <item>
@@ -163,10 +156,10 @@
       <description></description>
     </item>
     <item>
-      <title>Exchange</title>
-      <link>http://localhost:1313/categories/exchange/</link>
-      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/exchange/</guid>
+      <title>Java</title>
+      <link>http://localhost:1313/categories/java/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/java/</guid>
       <description></description>
     </item>
     <item>
@@ -174,6 +167,13 @@
       <link>http://localhost:1313/categories/c&#43;&#43;/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Assembly</title>
+      <link>http://localhost:1313/categories/assembly/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/assembly/</guid>
       <description></description>
     </item>
   </channel>

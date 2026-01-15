@@ -1,9 +1,9 @@
 ---
 author: Tristan Madden
-categories: [Development, Python, Security]
+categories: [Python]
 date: 2023-02-15
 draft: false
-tags: [phishing, email-security, decoding, hex-encoding, uri-encoding, obfuscation]
+tags: [security, phishing, email-security, decoding, hex-encoding, uri-encoding, obfuscation]
 title: Phishing Email Decoding Tools
 usePageBundles: true
 thumbnail: "thumbnail.png"

@@ -8,6 +8,13 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Generative Guidelines for This Hugo Blog Theme</title>
+      <link>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</link>
+      <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</guid>
+      <description>&lt;h2 id=&#34;core-structural-rules&#34;&gt;Core Structural Rules&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Categories and tags MUST be visualized as Voronoi diagrams.&lt;/strong&gt;&lt;br&gt;&#xA;Categories represent the top-level Voronoi partition of the site.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;The visual language of the theme MUST be inspired by &lt;em&gt;Ghost in the Shell&lt;/em&gt;.&lt;/strong&gt;&lt;br&gt;&#xA;This includes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Muted neon accents&lt;/li&gt;&#xA;&lt;li&gt;High-contrast dark backgrounds&lt;/li&gt;&#xA;&lt;li&gt;Technical typography&lt;/li&gt;&#xA;&lt;li&gt;A subtle cyberpunk / cybernetic aesthetic&lt;br&gt;&#xA;(Inspiration, not imitation.)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Selecting a category Voronoi cell MUST transition to a second Voronoi diagram representing tags within that category.&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</title>
       <link>http://localhost:1313/posts/2026-01-09-export-all-group-memberships/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
@@ -92,13 +99,6 @@
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;&amp;ldquo;Logs tell you something broke; a crash dump tells you &lt;strong&gt;why&lt;/strong&gt;.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-set-the-stage&#34;&gt;1. Set the Stage&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Grab ProcDump&lt;/strong&gt; if it&amp;rsquo;s not already on your toolbox machine.&lt;br&gt;&#xA;-&amp;gt; &lt;a href=&#34;https://learn.microsoft.com/sysinternals/downloads/procdump&#34;&gt;ProcDump - Sysinternals&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Create a home for dumps&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;New-Item -ItemType Directory C:\Dumps -Force&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Clean the slate:&lt;/strong&gt; Close every stray instance of the app you&amp;rsquo;re chasing.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;2-capture-the-crash&#34;&gt;2. Capture the Crash&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;procdump.exe -e -h -ma excel.exe C:\Dumps&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Switch&lt;/th&gt;&#xA;          &lt;th&gt;Why it matters&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;-e&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Breaks on an unhandled &lt;strong&gt;e&lt;/strong&gt;xception (a real crash, not a polite exit)&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;-h&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Also triggers on a user-mode &lt;strong&gt;h&lt;/strong&gt;ang (useful when the UI just freezes)&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;code&gt;-ma&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;Creates a &lt;strong&gt;m&lt;/strong&gt;ini-dump &lt;strong&gt;a&lt;/strong&gt;nd &lt;em&gt;all&lt;/em&gt; process memory (full dump)&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;ProcDump parks the dump as &lt;code&gt;excel.exe_YYMMDD_HHMM.dmp&lt;/code&gt; in &lt;code&gt;C:\Dumps&lt;/code&gt;. Reproduce the crash and wait for &lt;em&gt;Dump written&lt;/em&gt; to show.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Stub Title</title>
-      <link>http://localhost:1313/prompts/2025-07-03-stub/</link>
-      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/prompts/2025-07-03-stub/</guid>
-      <description>Stub Summary</description>
-    </item>
-    <item>
       <title>Automated IIS Application Pool Restart with PowerShell</title>
       <link>http://localhost:1313/posts/2024-10-16-restart-iis-application/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
@@ -132,13 +132,6 @@
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
       <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
-    </item>
-    <item>
-      <title>Network Subnet Visualization Tools</title>
-      <link>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</link>
-      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</guid>
-      <description>Tools and scripts for visualizing and analyzing network subnets, including IP address ranges and network topologies.</description>
     </item>
     <item>
       <title>Visualizing and Analyzing Windows Folder Permissions</title>
@@ -848,7 +841,7 @@
       <description>&amp;ldquo;Write a program that computes the difference between non-negative integers.&amp;rdquo;</description>
     </item>
     <item>
-      <title></title>
+      <title>Counting Sort</title>
       <link>http://localhost:1313/posts/2017-07-18-counting-sort/</link>
       <pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2017-07-18-counting-sort/</guid>

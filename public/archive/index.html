@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="N/A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
 </head>
 <body class="gg-body">
@@ -39,7 +39,36 @@
 
 <div class="gg-layout">
   <main class="gg-shell">
-    <canvas id="gg-canvas"></canvas>
+    <canvas id="gg-canvas" aria-label="Voronoi diagram of categories, tags, and posts"></canvas>
+    <div id="gg-hotspots" class="gg-hotspots"></div>
+    <div id="gg-tooltip" class="gg-tooltip" role="status" aria-live="polite" aria-hidden="true"></div>
+    <noscript>
+  <div class="gg-fallback" aria-label="Category, tag, and post list">
+    <div class="gg-fallback-title">Browse by category</div><section class="gg-fallback-category">
+        <h3 class="gg-fallback-category-title">Java</h3><div class="gg-fallback-tags"><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#bipartite graph</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-05-01-uva-11045/">UVa Online Judge Challenge &#34;11045&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#bitset</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-04-26-uva-10305/">UVa Online Judge Challenge &#34;10305&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#coding challenge</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-05-01-uva-11045/">UVa Online Judge Challenge &#34;11045&#34;</a></li><li><a href="http://localhost:1313/archive/2018-04-20-kattis-grid/">Kattis Challenge &#34;Grid&#34;</a></li><li><a href="http://localhost:1313/archive/2018-04-26-uva-10305/">UVa Online Judge Challenge &#34;10305&#34;</a></li><li><a href="http://localhost:1313/archive/2018-04-23-uva-572/">UVa Online Judge Challenge &#34;572&#34;</a></li><li><a href="http://localhost:1313/archive/2018-04-09-uva-1112/">UVa Online Judge Challenge &#34;1112&#34;</a></li><li><a href="http://localhost:1313/archive/2017-11-09-uva-10550/">UVa Online Judge Challenge &#34;10550&#34;</a></li><li><a href="http://localhost:1313/archive/2017-10-17-uva-272/">UVa Online Judge Challenge &#34;272&#34;</a></li><li><a href="http://localhost:1313/archive/2017-10-05-uva-10110/">UVa Online Judge Challenge &#34;10110&#34;</a></li><li><a href="http://localhost:1313/archive/2017-10-05-uva-100/">UVa Online Judge Challenge &#34;100&#34;</a></li><li><a href="http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/">Kattis Challenge &#34;Sum of Others&#34;</a></li><li><a href="http://localhost:1313/archive/2017-09-15-kattis-parking2/">Kattis Challenge &#34;Parking&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-24-uva-11172/">UVa Online Judge Challenge &#34;11172&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-18-kattis-server/">Kattis Challenge &#34;Server&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-18-kattis-line-them-up/">Kattis Challenge &#34;Line Them Up&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-15-kattis-different/">Kattis Challenge &#34;A Different Problem&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#dag</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-04-26-uva-10305/">UVa Online Judge Challenge &#34;10305&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#directed acyclic graph</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-04-26-uva-10305/">UVa Online Judge Challenge &#34;10305&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#disjoint set</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-04-23-uva-572/">UVa Online Judge Challenge &#34;572&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#kattis</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-04-20-kattis-grid/">Kattis Challenge &#34;Grid&#34;</a></li><li><a href="http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/">Kattis Challenge &#34;Sum of Others&#34;</a></li><li><a href="http://localhost:1313/archive/2017-09-15-kattis-parking2/">Kattis Challenge &#34;Parking&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-18-kattis-server/">Kattis Challenge &#34;Server&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-18-kattis-line-them-up/">Kattis Challenge &#34;Line Them Up&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-15-kattis-different/">Kattis Challenge &#34;A Different Problem&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#maximum flow</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-05-01-uva-11045/">UVa Online Judge Challenge &#34;11045&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#topological sort</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-04-26-uva-10305/">UVa Online Judge Challenge &#34;10305&#34;</a></li></ul>
+            </div><div class="gg-fallback-tag">
+              <div class="gg-fallback-tag-title">#uva</div><ul class="gg-fallback-posts"><li><a href="http://localhost:1313/archive/2018-05-01-uva-11045/">UVa Online Judge Challenge &#34;11045&#34;</a></li><li><a href="http://localhost:1313/archive/2018-04-26-uva-10305/">UVa Online Judge Challenge &#34;10305&#34;</a></li><li><a href="http://localhost:1313/archive/2018-04-23-uva-572/">UVa Online Judge Challenge &#34;572&#34;</a></li><li><a href="http://localhost:1313/archive/2018-04-09-uva-1112/">UVa Online Judge Challenge &#34;1112&#34;</a></li><li><a href="http://localhost:1313/archive/2017-11-09-uva-10550/">UVa Online Judge Challenge &#34;10550&#34;</a></li><li><a href="http://localhost:1313/archive/2017-10-17-uva-272/">UVa Online Judge Challenge &#34;272&#34;</a></li><li><a href="http://localhost:1313/archive/2017-10-05-uva-10110/">UVa Online Judge Challenge &#34;10110&#34;</a></li><li><a href="http://localhost:1313/archive/2017-10-05-uva-100/">UVa Online Judge Challenge &#34;100&#34;</a></li><li><a href="http://localhost:1313/archive/2017-08-24-uva-11172/">UVa Online Judge Challenge &#34;11172&#34;</a></li></ul>
+            </div></div>
+      </section></div>
+</noscript>
+
     <div class="gg-legend">
       <div class="gg-legend-title">Categories</div>
       <div id="gg-legend-list" class="gg-legend-list"></div>
@@ -149,91 +178,151 @@
         "title": "\"UVa Online Judge Challenge \\\"11045\\\"\"",
         "url": "\"/archive/2018-05-01-uva-11045/\"",
         "tags": "[\"uva\",\"maximum flow\",\"bipartite graph\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2018-05-01\"",
+        "dateDisplay": "\"May 1, 2018\"",
+        "readingTime":  5 ,
+        "readingTimeDisplay": "\"5 min read\""
       },{
         "id": "\"post-1\"",
         "title": "\"Kattis Challenge \\\"Grid\\\"\"",
         "url": "\"/archive/2018-04-20-kattis-grid/\"",
         "tags": "[\"kattis\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2018-04-28\"",
+        "dateDisplay": "\"Apr 28, 2018\"",
+        "readingTime":  3 ,
+        "readingTimeDisplay": "\"3 min read\""
       },{
         "id": "\"post-2\"",
         "title": "\"UVa Online Judge Challenge \\\"10305\\\"\"",
         "url": "\"/archive/2018-04-26-uva-10305/\"",
         "tags": "[\"uva\",\"dag\",\"directed acyclic graph\",\"topological sort\",\"bitset\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2018-04-26\"",
+        "dateDisplay": "\"Apr 26, 2018\"",
+        "readingTime":  2 ,
+        "readingTimeDisplay": "\"2 min read\""
       },{
         "id": "\"post-3\"",
         "title": "\"UVa Online Judge Challenge \\\"572\\\"\"",
         "url": "\"/archive/2018-04-23-uva-572/\"",
         "tags": "[\"uva\",\"coding challenge\",\"disjoint set\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2018-04-23\"",
+        "dateDisplay": "\"Apr 23, 2018\"",
+        "readingTime":  3 ,
+        "readingTimeDisplay": "\"3 min read\""
       },{
         "id": "\"post-4\"",
         "title": "\"UVa Online Judge Challenge \\\"1112\\\"\"",
         "url": "\"/archive/2018-04-09-uva-1112/\"",
         "tags": "[\"uva\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2018-04-09\"",
+        "dateDisplay": "\"Apr 9, 2018\"",
+        "readingTime":  3 ,
+        "readingTimeDisplay": "\"3 min read\""
       },{
         "id": "\"post-5\"",
         "title": "\"UVa Online Judge Challenge \\\"10550\\\"\"",
         "url": "\"/archive/2017-11-09-uva-10550/\"",
         "tags": "[\"uva\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-11-09\"",
+        "dateDisplay": "\"Nov 9, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-6\"",
         "title": "\"UVa Online Judge Challenge \\\"272\\\"\"",
         "url": "\"/archive/2017-10-17-uva-272/\"",
         "tags": "[\"uva\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-10-17\"",
+        "dateDisplay": "\"Oct 17, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-7\"",
         "title": "\"UVa Online Judge Challenge \\\"100\\\"\"",
         "url": "\"/archive/2017-10-05-uva-100/\"",
         "tags": "[\"uva\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-10-05\"",
+        "dateDisplay": "\"Oct 5, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-8\"",
         "title": "\"UVa Online Judge Challenge \\\"10110\\\"\"",
         "url": "\"/archive/2017-10-05-uva-10110/\"",
         "tags": "[\"uva\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-10-05\"",
+        "dateDisplay": "\"Oct 5, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-9\"",
         "title": "\"Kattis Challenge \\\"Parking\\\"\"",
         "url": "\"/archive/2017-09-15-kattis-parking2/\"",
         "tags": "[\"kattis\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-09-15\"",
+        "dateDisplay": "\"Sep 15, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-10\"",
         "title": "\"Kattis Challenge \\\"Sum of Others\\\"\"",
         "url": "\"/archive/2017-09-15-kattis-sum-of-others/\"",
         "tags": "[\"kattis\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-09-15\"",
+        "dateDisplay": "\"Sep 15, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-11\"",
         "title": "\"UVa Online Judge Challenge \\\"11172\\\"\"",
         "url": "\"/archive/2017-08-24-uva-11172/\"",
         "tags": "[\"uva\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-08-24\"",
+        "dateDisplay": "\"Aug 24, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-12\"",
         "title": "\"Kattis Challenge \\\"Line Them Up\\\"\"",
         "url": "\"/archive/2017-08-18-kattis-line-them-up/\"",
         "tags": "[\"kattis\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-08-18\"",
+        "dateDisplay": "\"Aug 18, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-13\"",
         "title": "\"Kattis Challenge \\\"Server\\\"\"",
         "url": "\"/archive/2017-08-18-kattis-server/\"",
         "tags": "[\"kattis\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-08-18\"",
+        "dateDisplay": "\"Aug 18, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       },{
         "id": "\"post-14\"",
         "title": "\"Kattis Challenge \\\"A Different Problem\\\"\"",
         "url": "\"/archive/2017-08-15-kattis-different/\"",
         "tags": "[\"kattis\",\"coding challenge\"]",
-        "categories": "[\"Java\"]"
+        "categories": "[\"Java\"]",
+        "date": "\"2017-08-15\"",
+        "dateDisplay": "\"Aug 15, 2017\"",
+        "readingTime":  1 ,
+        "readingTimeDisplay": "\"1 min read\""
       }]
 }
 </script>

@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2018-02-05
 draft: false
 tags: [sorting, merge-sort, interactive, p5js]
-categories: [Development]
+categories: [JavaScript]
 summary: "An interactive 3D visualization of the Merge Sort algorithm using p5.js and WEBGL, featuring step-by-step animation with camera controls and real-time sorting visualization."
 toc: true
 usePageBundles: true

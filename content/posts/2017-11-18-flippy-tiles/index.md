@@ -3,8 +3,8 @@ title: Flipping Tiles
 author: Tristan Madden
 date: 2017-11-18
 draft: false
-tags: [perlin-noise]
-categories: [Development, Visualization]
+tags: [processing, perlin-noise, animation]
+categories: [Java]
 summary: "A Processing sketch creating mesmerizing animations of tiles that flip based on either random patterns or Perlin noise algorithms, demonstrating creative uses of procedural animation."
 toc: true
 usePageBundles: true

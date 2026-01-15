@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2018-11-12
 draft: false
 tags: [interactive, p5js]
-categories: [Development]
+categories: [JavaScript]
 summary: "A p5.js interactive visualization that transforms images into dynamic grids of orbiting objects, where each object's rotation phase and characteristics are mapped to pixel brightness values."
 toc: true
 usePageBundles: true

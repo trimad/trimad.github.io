@@ -3,8 +3,8 @@ title: Cube Wave
 author: Tristan Madden
 date: 2018-12-30
 draft: false
-tags: [animation]
-categories: [Development, Visualization]
+tags: [processing, animation]
+categories: [Java]
 summary: "A Processing implementation of a 3D cube wave animation using PeasyCam for camera control, featuring dynamic lighting and orthographic projection for a mesmerizing visual effect."
 usePageBundles: true
 ---

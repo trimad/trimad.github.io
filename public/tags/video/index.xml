@@ -30,13 +30,6 @@
       <description>A comprehensive guide to setting up and using Google&amp;rsquo;s Frame Interpolation Large Motion (FILM) TensorFlow implementation, enabling the creation of smooth animations by generating intermediate frames between existing images using deep learning techniques.</description>
     </item>
     <item>
-      <title>Stable Diffusion Scripts</title>
-      <link>http://localhost:1313/posts/2023-02-05-stable-diffusion/</link>
-      <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
-      <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
-    </item>
-    <item>
       <title>FFmpeg Command Reference</title>
       <link>http://localhost:1313/posts/2022-01-27-ffmpeg/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>

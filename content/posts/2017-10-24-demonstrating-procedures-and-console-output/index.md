@@ -3,8 +3,8 @@ title: Demonstrating Procedures and Console Output
 author: Tristan Madden
 date: 2017-10-24
 draft: false
-tags: [assembly]
-categories: [Development]
+tags: ["MASM"]
+categories: [Assembly]
 summary: "An x86 MASM assembly program showcasing procedure implementation and colored console output manipulation through low-level system calls."
 toc: true
 usePageBundles: true

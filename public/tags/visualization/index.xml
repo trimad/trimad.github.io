@@ -9,32 +9,25 @@
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/visualization/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Network Subnet Visualization Tools</title>
-      <link>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</link>
-      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-01-visualizing-subnets/</guid>
-      <description>Tools and scripts for visualizing and analyzing network subnets, including IP address ranges and network topologies.</description>
+      <title>k-means Clustering</title>
+      <link>http://localhost:1313/posts/2021-05-18-k-means-clustering/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2021-05-18-k-means-clustering/</guid>
+      <description>A Processing visualization of the k-means clustering algorithm, demonstrating iterative centroid-based data partitioning and Voronoi cell formation for different values of k.</description>
     </item>
     <item>
-      <title>Disco Ball</title>
-      <link>http://localhost:1313/posts/2023-08-24-disco-ball/</link>
-      <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-08-24-disco-ball/</guid>
-      <description>A JavaScript implementation using p5.js to generate a black and white disco ball visualization.</description>
+      <title>Collatz Conjecture &#43; Unit Circle</title>
+      <link>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</link>
+      <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</guid>
+      <description>A Processing visualization of the Collatz Conjecture mapped onto a unit circle, creating 360 distinct branches with 1-degree turns, featuring an interactive exploration of number paths.</description>
     </item>
     <item>
-      <title>AT&amp;T Hackathon</title>
-      <link>http://localhost:1313/posts/2018-03-12-att-hackathon/</link>
-      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-03-12-att-hackathon/</guid>
-      <description>A reflection on participating in the AT&amp;amp;T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions.</description>
-    </item>
-    <item>
-      <title>Interactive Array Visualization</title>
-      <link>http://localhost:1313/posts/2016-12-13-arrays/</link>
-      <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2016-12-13-arrays/</guid>
-      <description>An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface.</description>
+      <title>Juno Cam Image Processing</title>
+      <link>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</link>
+      <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</guid>
+      <description>A Java program that reconstructs and processes raw image data from NASA&amp;rsquo;s Juno spacecraft&amp;rsquo;s pushframe camera, combining multiple filter strips to create high-resolution composite images of Jupiter.</description>
     </item>
   </channel>
 </rss>

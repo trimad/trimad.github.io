@@ -9,13 +9,6 @@
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/c%23/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Stub Title</title>
-      <link>http://localhost:1313/prompts/2025-07-03-stub/</link>
-      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/prompts/2025-07-03-stub/</guid>
-      <description>Stub Summary</description>
-    </item>
-    <item>
       <title>Logistic Map</title>
       <link>http://localhost:1313/posts/2022-05-14-logistic-map/</link>
       <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>

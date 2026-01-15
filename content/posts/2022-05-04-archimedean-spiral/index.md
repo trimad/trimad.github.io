@@ -4,7 +4,7 @@ author: Tristan Madden
 date: 2022-05-04
 draft: false
 tags: [spiral, interactive, p5js]
-categories: [Development]
+categories: [JavaScript]
 summary: "An interactive p5.js sketch that generates Archimedean spirals using polar coordinates, with the ability to export SVG files for physical fabrication."
 usePageBundles: true
 ---

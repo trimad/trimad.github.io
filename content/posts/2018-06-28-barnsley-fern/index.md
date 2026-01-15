@@ -3,8 +3,8 @@ title: Barnsley Fern
 author: Tristan Madden
 date: 2018-06-28
 draft: false
-tags: [animation, fractal]
-categories: [Development, Visualization]
+tags: [fractal, barnsley-fern, animation, image-processing]
+categories: [Java]
 summary: "A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory."
 toc: true
 usePageBundles: true

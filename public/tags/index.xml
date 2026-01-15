@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Ghostfeed</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automation</title>
@@ -195,13 +195,6 @@
       <link>http://localhost:1313/tags/windbg/</link>
       <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/windbg/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Stub</title>
-      <link>http://localhost:1313/tags/stub/</link>
-      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/stub/</guid>
       <description></description>
     </item>
     <item>
@@ -513,10 +506,10 @@
       <description></description>
     </item>
     <item>
-      <title>Javascript</title>
-      <link>http://localhost:1313/tags/javascript/</link>
+      <title>Google-Apps-Script</title>
+      <link>http://localhost:1313/tags/google-apps-script/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/javascript/</guid>
+      <guid>http://localhost:1313/tags/google-apps-script/</guid>
       <description></description>
     </item>
     <item>
@@ -625,10 +618,10 @@
       <description></description>
     </item>
     <item>
-      <title>Reports</title>
-      <link>http://localhost:1313/tags/reports/</link>
+      <title>Nodejs</title>
+      <link>http://localhost:1313/tags/nodejs/</link>
       <pubDate>Thu, 11 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/reports/</guid>
+      <guid>http://localhost:1313/tags/nodejs/</guid>
       <description></description>
     </item>
     <item>
@@ -639,10 +632,10 @@
       <description></description>
     </item>
     <item>
-      <title>Keyboard</title>
-      <link>http://localhost:1313/tags/keyboard/</link>
-      <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/keyboard/</guid>
+      <title>AI</title>
+      <link>http://localhost:1313/tags/ai/</link>
+      <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ai/</guid>
       <description></description>
     </item>
     <item>
@@ -688,6 +681,13 @@
       <description></description>
     </item>
     <item>
+      <title>Security</title>
+      <link>http://localhost:1313/tags/security/</link>
+      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Windows-Defender</title>
       <link>http://localhost:1313/tags/windows-defender/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
@@ -723,17 +723,10 @@
       <description></description>
     </item>
     <item>
-      <title>Local-Administrator</title>
-      <link>http://localhost:1313/tags/local-administrator/</link>
+      <title>Passwords</title>
+      <link>http://localhost:1313/tags/passwords/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/local-administrator/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Password-Management</title>
-      <link>http://localhost:1313/tags/password-management/</link>
-      <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/password-management/</guid>
+      <guid>http://localhost:1313/tags/passwords/</guid>
       <description></description>
     </item>
     <item>
@@ -765,10 +758,10 @@
       <description></description>
     </item>
     <item>
-      <title>Security</title>
-      <link>http://localhost:1313/tags/security/</link>
+      <title>Password Management</title>
+      <link>http://localhost:1313/tags/password-management/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/security/</guid>
+      <guid>http://localhost:1313/tags/password-management/</guid>
       <description></description>
     </item>
     <item>
@@ -989,6 +982,13 @@
       <description></description>
     </item>
     <item>
+      <title>Reports</title>
+      <link>http://localhost:1313/tags/reports/</link>
+      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/reports/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Calendars</title>
       <link>http://localhost:1313/tags/calendars/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
@@ -1017,10 +1017,17 @@
       <description></description>
     </item>
     <item>
-      <title>K-Means</title>
-      <link>http://localhost:1313/tags/k-means/</link>
+      <title>Processing</title>
+      <link>http://localhost:1313/tags/processing/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/k-means/</guid>
+      <guid>http://localhost:1313/tags/processing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Visualization</title>
+      <link>http://localhost:1313/tags/visualization/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/visualization/</guid>
       <description></description>
     </item>
     <item>
@@ -1073,10 +1080,10 @@
       <description></description>
     </item>
     <item>
-      <title>Processing</title>
-      <link>http://localhost:1313/tags/processing/</link>
-      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/processing/</guid>
+      <title>Barnsley-Fern</title>
+      <link>http://localhost:1313/tags/barnsley-fern/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/barnsley-fern/</guid>
       <description></description>
     </item>
     <item>
@@ -1157,13 +1164,6 @@
       <description></description>
     </item>
     <item>
-      <title>Java</title>
-      <link>http://localhost:1313/tags/java/</link>
-      <pubDate>Tue, 17 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/java/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Kruskal</title>
       <link>http://localhost:1313/tags/kruskal/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
@@ -1182,6 +1182,13 @@
       <link>http://localhost:1313/tags/3n-plus-1/</link>
       <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/3n-plus-1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Android</title>
+      <link>http://localhost:1313/tags/android/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/android/</guid>
       <description></description>
     </item>
     <item>
@@ -1220,9 +1227,16 @@
       <description></description>
     </item>
     <item>
+      <title>MASM</title>
+      <link>http://localhost:1313/tags/masm/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/masm/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Assembly</title>
       <link>http://localhost:1313/tags/assembly/</link>
-      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 07 Oct 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/assembly/</guid>
       <description></description>
     </item>
@@ -1238,13 +1252,6 @@
       <link>http://localhost:1313/tags/arrays/</link>
       <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/arrays/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Education</title>
-      <link>http://localhost:1313/tags/education/</link>
-      <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/education/</guid>
       <description></description>
     </item>
   </channel>

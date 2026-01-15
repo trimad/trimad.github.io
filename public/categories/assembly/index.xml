@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Assembly on Ghostfeed</title>
+    <link>http://localhost:1313/categories/assembly/</link>
+    <description>Recent content in Assembly on Ghostfeed</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/assembly/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Demonstrating Procedures and Console Output</title>
+      <link>http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/</guid>
+      <description>An x86 MASM assembly program showcasing procedure implementation and colored console output manipulation through low-level system calls.</description>
+    </item>
+    <item>
+      <title>Sieve of Eratosthenes</title>
+      <link>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</guid>
+      <description>An x86 MASM implementation of the Sieve of Eratosthenes algorithm that finds and counts prime numbers up to a given value n, translated from Java to assembly language.</description>
+    </item>
+    <item>
+      <title>Nth Fibonacci Number</title>
+      <link>http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/</link>
+      <pubDate>Sat, 07 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/</guid>
+      <description>An x86 MASM assembly program that calculates and displays the nth Fibonacci number, demonstrating basic assembly programming concepts and memory management.</description>
+    </item>
+  </channel>
+</rss>

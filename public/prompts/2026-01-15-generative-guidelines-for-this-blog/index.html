@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Generative Guidelines for This Hugo Blog Theme | Ghostfeed</title>
+  <meta name="description" content="Authoritative rules governing how generative systems should structure, style, and extend this Hugo blog theme.">
+  <meta property="og:title" content="Generative Guidelines for This Hugo Blog Theme | Ghostfeed">
+  <meta property="og:description" content="Authoritative rules governing how generative systems should structure, style, and extend this Hugo blog theme.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">
+  <meta property="og:site_name" content="Ghostfeed">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Generative Guidelines for This Hugo Blog Theme | Ghostfeed">
+  <meta name="twitter:description" content="Authoritative rules governing how generative systems should structure, style, and extend this Hugo blog theme.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
+</head>
+<body class="gg-body">
+  
+<header class="gg-topbar gg-article-topbar">
+  <div class="gg-brand">
+    <span class="gg-logo">F-Z</span>
+    <div>
+      <div class="gg-title">Ghostfeed</div>
+      <div class="gg-subtitle">Reading: Generative Guidelines for This Hugo Blog Theme</div>
+    </div>
+  </div>
+  <nav class="gg-nav">
+      <a class="gg-nav-link" href="http://localhost:1313/posts/">Posts</a>
+      <a class="gg-nav-link" href="http://localhost:1313/archive/">Archive</a>
+      <a class="gg-nav-link is-active" href="http://localhost:1313/prompts/">Prompts</a>
+  </nav>
+  <div class="gg-search">
+    <a class="gg-back" href="http://localhost:1313/posts/">Back to graph</a>
+  </div>
+</header>
+
+<div class="gg-layout">
+  <main class="gg-article">
+    <article>
+      <h1>Generative Guidelines for This Hugo Blog Theme</h1>
+      <p class="gg-meta">
+        Published January 15, 2026
+         - Updated January 15, 2026
+      </p>
+      
+      <div class="gg-content">
+        <h2 id="core-structural-rules">Core Structural Rules</h2>
+<ol>
+<li>
+<p><strong>Categories and tags MUST be visualized as Voronoi diagrams.</strong><br>
+Categories represent the top-level Voronoi partition of the site.</p>
+</li>
+<li>
+<p><strong>The visual language of the theme MUST be inspired by <em>Ghost in the Shell</em>.</strong><br>
+This includes:</p>
+<ul>
+<li>Muted neon accents</li>
+<li>High-contrast dark backgrounds</li>
+<li>Technical typography</li>
+<li>A subtle cyberpunk / cybernetic aesthetic<br>
+(Inspiration, not imitation.)</li>
+</ul>
+</li>
+<li>
+<p><strong>Selecting a category Voronoi cell MUST transition to a second Voronoi diagram representing tags within that category.</strong></p>
+</li>
+<li>
+<p><strong>All Voronoi cells MUST be interactive.</strong></p>
+<ul>
+<li>Category cells link to tag-level diagrams</li>
+<li>Tag cells link to individual posts</li>
+<li>Post-level links MUST be directly clickable from the diagram</li>
+</ul>
+</li>
+<li>
+<p><strong>Posts assigned to exactly two categories MUST appear in a derived Voronoi cell bordering both parent category cells.</strong></p>
+<ul>
+<li>The derived cell’s color MUST be an interpolation of its parent category colors</li>
+<li>Posts with more than two categories MUST ignore additional categories beyond the first two</li>
+</ul>
+</li>
+</ol>
+<p>5a. <strong>Posts assigned to exactly two tags MUST appear in a derived Voronoi cell bordering both parent tag cells.</strong></p>
+<ul>
+<li>The derived cell&rsquo;s color MUST be an interpolation of its parent tag colors</li>
+<li>Posts with more than two tags MUST ignore additional tags beyond the first two</li>
+</ul>
+<hr>
+<h2 id="layout--interaction-rules-recommended">Layout &amp; Interaction Rules (Recommended)</h2>
+<ol start="6">
+<li><strong>Voronoi diagrams MUST be deterministic.</strong><br>
+Given the same content set, the diagram layout MUST remain stable between builds to avoid disorienting users.</li>
+</ol>
+<p>6a. <strong>Voronoi cell areas MUST be weighted by post count.</strong><br>
+Cells should be ranked from most posts to least posts, and the size weighting MUST follow that ranking.</p>
+<ol start="7">
+<li>
+<p><strong>Diagram transitions SHOULD be animated but non-intrusive.</strong><br>
+Animations should convey hierarchy changes, not distract from navigation.</p>
+</li>
+<li>
+<p><strong>Hover states MUST reveal metadata.</strong><br>
+Hovering over a cell SHOULD display:</p>
+<ul>
+<li>Post title</li>
+<li>Category / tag</li>
+<li>Publish date (optional)</li>
+<li>Estimated reading time (optional)</li>
+</ul>
+</li>
+<li>
+<p><strong>Text legibility MUST take precedence over visual density.</strong><br>
+If a Voronoi cell becomes too small to display text clearly:</p>
+<ul>
+<li>Hide text</li>
+<li>Rely on hover or click interactions instead</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="content--metadata-rules-recommended">Content &amp; Metadata Rules (Recommended)</h2>
+<ol start="10">
+<li>
+<p><strong>Front matter MUST be treated as authoritative.</strong><br>
+Generative systems MUST NOT infer categories or tags that are not explicitly defined in front matter.</p>
+</li>
+<li>
+<p><strong>Categories SHOULD be few and stable.</strong><br>
+Tags MAY be numerous and fluid.<br>
+The visualization SHOULD reinforce this distinction.</p>
+</li>
+<li>
+<p><strong>Posts without categories MUST be assigned to a fallback “Unclassified” Voronoi cell.</strong></p>
+</li>
+</ol>
+<hr>
+<h2 id="styling--theming-rules-recommended">Styling &amp; Theming Rules (Recommended)</h2>
+<ol start="13">
+<li>
+<p><strong>Color usage MUST encode meaning.</strong></p>
+<ul>
+<li>Categories define base hues</li>
+<li>Tags derive from category hues</li>
+<li>Multi-category posts interpolate hues<br>
+Color MUST NOT be purely decorative.</li>
+</ul>
+</li>
+<li>
+<p><strong>Typography SHOULD favor monospaced or neo-grotesque fonts.</strong><br>
+Body text MAY use a more readable companion font, but UI elements SHOULD remain technical.</p>
+</li>
+<li>
+<p><strong>Visual noise MUST be minimal.</strong><br>
+Effects such as scanlines, glitches, or noise SHOULD be subtle and optional, never obstructing content.</p>
+</li>
+</ol>
+<hr>
+<h2 id="performance--accessibility-rules-recommended">Performance &amp; Accessibility Rules (Recommended)</h2>
+<ol start="16">
+<li>
+<p><strong>The visualization MUST degrade gracefully.</strong><br>
+If JavaScript is unavailable:</p>
+<ul>
+<li>A list-based category → tag → post hierarchy MUST be rendered.</li>
+</ul>
+</li>
+<li>
+<p><strong>Keyboard navigation MUST be supported.</strong><br>
+Voronoi cells MUST be focusable and activatable without a mouse.</p>
+</li>
+<li>
+<p><strong>Contrast ratios MUST meet WCAG AA at minimum.</strong></p>
+</li>
+</ol>
+<hr>
+<h2 id="generative-behavior-constraints-recommended">Generative Behavior Constraints (Recommended)</h2>
+<ol start="19">
+<li>
+<p><strong>Generative systems MUST NOT introduce new visualization paradigms.</strong><br>
+All extensions MUST remain Voronoi-based unless explicitly instructed otherwise.</p>
+</li>
+<li>
+<p><strong>When ambiguity exists, preserve structure over novelty.</strong><br>
+Stability, navigability, and semantic clarity take precedence over visual experimentation.</p>
+</li>
+</ol>
+<hr>
+<h2 id="design-philosophy-non-negotiable">Design Philosophy (Non-Negotiable)</h2>
+<ol start="21">
+<li>
+<p><strong>The diagram is the interface.</strong><br>
+Navigation menus, tag clouds, and category lists are secondary or fallback-only.</p>
+</li>
+<li>
+<p><strong>This theme values spatial memory.</strong><br>
+Users should be able to <em>remember where ideas live</em>.</p>
+</li>
+</ol>
+
+      </div>
+    </article>
+  </main>
+  <aside class="gg-rightnav" aria-label="Recently updated posts">
+  <div class="gg-rightnav-title">Recently Updated</div><ol class="gg-rightnav-list">
+      <li class="gg-rightnav-item">
+        <a class="gg-rightnav-link" href="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">
+          <span class="gg-rightnav-text">Generative Guidelines for This Hugo Blog Theme</span>
+          <time class="gg-rightnav-meta" datetime="2026-01-15">Jan 15, 2026</time>
+        </a>
+      </li>
+  </ol></aside>
+
+</div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+  
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(block.textContent).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          }).catch(() => {
+            button.textContent = 'Error';
+            setTimeout(() => (button.textContent = 'Copy'), 1500);
+          });
+        });
+        block.parentNode.insertBefore(button, block);
+      });
+    });
+  </script>
+</body>
+</html>

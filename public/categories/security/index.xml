@@ -23,39 +23,11 @@
       <description>A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions.</description>
     </item>
     <item>
-      <title>Windows Defender Firewall Management Guide</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
-      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
-      <description>A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding.</description>
-    </item>
-    <item>
-      <title>Microsoft LAPS (Local Administrator Password Solution) Guide</title>
-      <link>http://localhost:1313/posts/2023-02-22-laps/</link>
-      <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-22-laps/</guid>
-      <description>Microsoft LAPS (Local Administrator Password Solution) is a tool designed to securely manage local administrator account passwords on Windows domain-joined computers. It automates password generation and rotation, and stores passwords in a secure manner, providing greater control and security over local accounts.</description>
-    </item>
-    <item>
-      <title>Phishing Email Decoding Tools</title>
-      <link>http://localhost:1313/posts/2023-02-15-decode-phishing-emails/</link>
-      <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-15-decode-phishing-emails/</guid>
-      <description>&lt;h2 id=&#34;atob-obfuscation&#34;&gt;atob() obfuscation&lt;/h2&gt;&#xA;&lt;p&gt;This p5.js script is designed to find and decode base64-encoded strings that are nested within one another. The script has several functions that work together to achieve this goal:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;isBase64(str)&lt;/code&gt;: This function checks if a given string str is a valid base64-encoded string. It uses a regular expression to test the string and the &lt;code&gt;atob()&lt;/code&gt; function to try decoding the string. If the decoding is successful, the function returns true; otherwise, it returns false.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>Microsoft 365 Email Security Management Guide</title>
       <link>http://localhost:1313/posts/2023-02-07-purge-emails/</link>
       <pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-02-07-purge-emails/</guid>
       <description>&lt;h2 id=&#34;block-unwanted-emails&#34;&gt;Block Unwanted Emails&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Prevent sending or receiving emails from specific external email addresses or domains.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Navigate to the Tenant Allow/Block List in the Microsoft Security Center. Configure the settings to block specific email addresses or domains. For direct access, use this link: &lt;a href=&#34;https://security.microsoft.com/tenantAllowBlockList&#34;&gt;Tenant Allow/Block List&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;review-past-week-of-sign-in-history&#34;&gt;Review Past Week of Sign-In History&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Review sign-in history to identify any unusual user activity.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Access the Azure portal&amp;rsquo;s sign-in history section. Specify the user of interest and examine their sign-in locations and activities. Access the portal here: &lt;a href=&#34;https://portal.azure.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/SignIns&#34;&gt;Azure Sign-In History&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>PowerShell Script to Export WiFi Network Credentials</title>
-      <link>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/</guid>
-      <description>A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.</description>
     </item>
   </channel>
 </rss>

@@ -37,13 +37,6 @@
       <description>A C# implementation of the logistic map that visualizes how this simple mathematical model produces complex chaotic behavior when modeling population growth under resource constraints.</description>
     </item>
     <item>
-      <title>k-means Clustering</title>
-      <link>http://localhost:1313/posts/2021-05-18-k-means-clustering/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2021-05-18-k-means-clustering/</guid>
-      <description>A Processing visualization of the k-means clustering algorithm, demonstrating iterative centroid-based data partitioning and Voronoi cell formation for different values of k.</description>
-    </item>
-    <item>
       <title>Buddhabrot</title>
       <link>http://localhost:1313/posts/2019-08-25-buddhabrot/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
@@ -77,6 +70,20 @@
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
       <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
+    </item>
+    <item>
+      <title>Minimum Spanning Tree Visualized</title>
+      <link>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</link>
+      <pubDate>Sat, 07 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</guid>
+      <description>A Processing visualization of Prim&amp;rsquo;s Algorithm creating a minimum spanning tree on procedurally generated terrain using Perlin noise height maps and orthographic projection.</description>
+    </item>
+    <item>
+      <title>Flipping Tiles</title>
+      <link>http://localhost:1313/posts/2017-11-18-flippy-tiles/</link>
+      <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2017-11-18-flippy-tiles/</guid>
+      <description>A Processing sketch creating mesmerizing animations of tiles that flip based on either random patterns or Perlin noise algorithms, demonstrating creative uses of procedural animation.</description>
     </item>
   </channel>
 </rss>

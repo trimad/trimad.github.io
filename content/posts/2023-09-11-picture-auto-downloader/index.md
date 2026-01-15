@@ -1,11 +1,11 @@
 ---
 title: "Gmail Photo Downloader"
 author: Tristan Madden
-categories: [Development]
+categories: [JavaScript]
 date: 2023-09-11
 draft: false
 summary: "A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder."
-tags: [automation, email, javascript]
+tags: [google-apps-script, automation, email]
 toc: true
 usePageBundles: true
 ---
