@@ -3,7 +3,7 @@ title: Nth Fibonacci Number
 author: Tristan Madden
 date: 2017-10-07
 draft: false
-tags: [fibonacci, assembly]
+tags: [Fibonacci, MASM]
 categories: [Assembly]
 summary: "An x86 MASM assembly program that calculates and displays the nth Fibonacci number, demonstrating basic assembly programming concepts and memory management."
 toc: true

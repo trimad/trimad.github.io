@@ -9,7 +9,9 @@
   --accent: #4ef0ff;
   --accent-warm: #ff9f6a;
   --stroke: rgba(120, 230, 255, 0.35);
+  --dim: rgba(120, 150, 178, 0.18);
   --shadow: 0 26px 70px rgba(2, 6, 12, 0.6);
+  --control-height: 44px;
 }
 
 *,
@@ -136,7 +138,7 @@ body.sv-body::after {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.75rem;
-  height: 44px;
+  height: var(--control-height);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -255,6 +257,7 @@ body.sv-body::after {
   letter-spacing: 0.16em;
   color: var(--muted);
   font-size: 0.6rem;
+  height: var(--control-height);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -266,7 +269,7 @@ body.sv-body::after {
   flex: 1;
   position: relative;
   overflow: hidden;
-  height: 44px;
+  height: var(--control-height);
 }
 
 .sv-nav-search {
@@ -348,6 +351,13 @@ body.sv-body::after {
   cursor: not-allowed;
 }
 
+.sv-map-home {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+}
+
 .sv-map-stage {
   position: relative;
   min-height: 60vh;
@@ -364,6 +374,195 @@ body.sv-body::after {
   position: absolute;
   inset: 0;
   z-index: 1;
+}
+
+.sv-map-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  font-family: "Chakra Petch", sans-serif;
+}
+
+.sv-map-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-shadow: 0 0 10px rgba(3, 10, 16, 0.7);
+  white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sv-map-label.is-primary {
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(78, 240, 255, 0.35);
+}
+
+.dag-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  font-family: "Chakra Petch", sans-serif;
+  color: var(--muted);
+  background: rgba(5, 10, 16, 0.55);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sv-map-canvas.is-empty .dag-empty {
+  opacity: 1;
+}
+
+.sv-map-results {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 260px;
+  max-height: calc(100% - 32px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(7, 12, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  font-family: "Chakra Petch", sans-serif;
+  color: var(--muted);
+  box-shadow: 0 16px 32px rgba(2, 8, 14, 0.5);
+  opacity: 0.9;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.2s ease;
+  z-index: 3;
+}
+
+.sv-map.is-searching .sv-map-results {
+  opacity: 1;
+}
+
+.sv-map:not(.is-searching) .sv-map-results {
+  opacity: 0.82;
+}
+
+.sv-map-results .sv-map-search,
+.sv-map-results-search {
+  width: 100%;
+  min-width: 0;
+}
+
+.sv-map-results .sv-map-search--primary {
+  min-width: 0;
+  height: var(--control-height);
+}
+
+.sv-map-results .sv-search-input {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  height: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.sv-search-input::-webkit-search-cancel-button,
+.sv-search-input::-webkit-search-decoration,
+.sv-search-input::-webkit-search-results-button,
+.sv-search-input::-webkit-search-results-decoration {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.sv-search-clear {
+  border: 1px solid rgba(78, 240, 255, 0.25);
+  background: rgba(6, 16, 22, 0.8);
+  color: var(--muted);
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 0.75rem;
+  height: 28px;
+  width: 28px;
+  border-radius: 8px;
+  padding: 0;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: -16px;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.sv-search-clear:hover,
+.sv-search-clear:focus {
+  border-color: rgba(78, 240, 255, 0.7);
+  color: var(--accent);
+  background: rgba(78, 240, 255, 0.12);
+  outline: none;
+}
+
+.sv-map-results-title {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  color: rgba(159, 179, 200, 0.8);
+}
+
+.sv-map-results-empty {
+  font-size: 0.75rem;
+  color: rgba(159, 179, 200, 0.7);
+}
+
+.sv-map-results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.sv-map-results-item button {
+  width: 100%;
+  text-align: left;
+  background: rgba(8, 16, 22, 0.7);
+  border: 1px solid rgba(78, 240, 255, 0.12);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.sv-map-results-item button:hover,
+.sv-map-results-item button:focus {
+  border-color: rgba(78, 240, 255, 0.5);
+  color: var(--accent);
+  outline: none;
+}
+
+.sv-map-results-item.is-primary button {
+  border-color: rgba(78, 240, 255, 0.8);
+  color: var(--accent);
+  box-shadow: 0 0 18px rgba(78, 240, 255, 0.25);
+}
+
+.sv-map-results.is-empty .sv-map-results-list {
+  display: none;
+}
+
+.sv-map-results:not(.is-empty) .sv-map-results-empty {
+  display: none;
 }
 
 .sv-map-info {
@@ -611,6 +810,12 @@ body.sv-body::after {
 
   .sv-map-title {
     font-size: 1.5rem;
+  }
+
+  .sv-map-results {
+    left: 12px;
+    right: 12px;
+    width: auto;
   }
 }
 

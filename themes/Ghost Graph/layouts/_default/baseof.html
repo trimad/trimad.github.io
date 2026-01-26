@@ -8,10 +8,19 @@
     {{ block "main" . }}{{ end }}
     {{- if .Scratch.Get "showGraph" -}}
       {{ partial "dag-data.html" . }}
-      <script src="https://unpkg.com/three@0.160.1/build/three.min.js" defer></script>
-      <script src="https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js" defer></script>
+      <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.min.js",
+            "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.webgpu.min.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/",
+            "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/",
+            "3d-force-graph": "https://esm.sh/3d-force-graph@1.79.0?external=three"
+          }
+        }
+      </script>
       {{- $js := resources.Get "js/dag.js" | minify | fingerprint -}}
-      <script src="{{ $js.RelPermalink }}" defer></script>
+      <script type="module" src="{{ $js.RelPermalink }}"></script>
     {{- end -}}
     {{- if .Scratch.Get "showBg" -}}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" defer></script>

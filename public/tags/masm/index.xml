@@ -22,5 +22,12 @@
       <guid>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</guid>
       <description>An x86 MASM implementation of the Sieve of Eratosthenes algorithm that finds and counts prime numbers up to a given value n, translated from Java to assembly language.</description>
     </item>
+    <item>
+      <title>Nth Fibonacci Number</title>
+      <link>http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/</link>
+      <pubDate>Sat, 07 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/</guid>
+      <description>An x86 MASM assembly program that calculates and displays the nth Fibonacci number, demonstrating basic assembly programming concepts and memory management.</description>
+    </item>
   </channel>
 </rss>
