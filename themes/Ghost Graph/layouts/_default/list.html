@@ -1,0 +1,19 @@
+{{ define "main" }}
+  {{ .Scratch.Set "showGraph" true }}
+  {{- $focusKind := "" -}}
+  {{- $focusValue := "" -}}
+  {{- if .Data.Term -}}
+    {{- $focusKind = .Data.Plural -}}
+    {{- $focusValue = .Data.Term -}}
+  {{- end -}}
+
+<div class="sv-shell">
+  {{ partial "site-header.html" . }}
+  <div class="sv-layout">
+    <main class="sv-main">
+      {{ partial "dag.html" (dict "page" . "focusKind" $focusKind "focusValue" $focusValue "contentId" "content") }}
+    </main>
+    {{ partial "recently-modified.html" . }}
+  </div>
+</div>
+{{ end }}

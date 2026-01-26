@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LLM Prompts on Ghostfeed</title>
+    <title>LLM Prompts on Ghost Graph</title>
     <link>http://localhost:1313/prompts/</link>
-    <description>Recent content in LLM Prompts on Ghostfeed</description>
+    <description>Recent content in LLM Prompts on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/prompts/index.xml" rel="self" type="application/rss+xml" />
@@ -12,7 +12,7 @@
       <link>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</guid>
-      <description>&lt;h2 id=&#34;core-structural-rules&#34;&gt;Core Structural Rules&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Categories and tags MUST be visualized as Voronoi diagrams.&lt;/strong&gt;&lt;br&gt;&#xA;Categories represent the top-level Voronoi partition of the site.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;The visual language of the theme MUST be inspired by &lt;em&gt;Ghost in the Shell&lt;/em&gt;.&lt;/strong&gt;&lt;br&gt;&#xA;This includes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Muted neon accents&lt;/li&gt;&#xA;&lt;li&gt;High-contrast dark backgrounds&lt;/li&gt;&#xA;&lt;li&gt;Technical typography&lt;/li&gt;&#xA;&lt;li&gt;A subtle cyberpunk / cybernetic aesthetic&lt;br&gt;&#xA;(Inspiration, not imitation.)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Selecting a category Voronoi cell MUST transition to a second Voronoi diagram representing tags within that category.&lt;/strong&gt;&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;core-structural-rules&#34;&gt;Core Structural Rules&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Categories, tags, and posts MUST be visualized using a Voronoi Treemap.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Categories form the top-level Voronoi partition&lt;/li&gt;&#xA;&lt;li&gt;Tags are nested Voronoi partitions within category cells&lt;/li&gt;&#xA;&lt;li&gt;Posts are leaf nodes within tag cells&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;The Voronoi Treemap MUST represent hierarchy through spatial containment.&lt;/strong&gt;&lt;br&gt;&#xA;Category → Tag → Post relationships MUST be encoded through nesting, not solely through color or labeling.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;The visual language of the theme MUST be inspired by &lt;em&gt;Ghost in the Shell&lt;/em&gt;.&lt;/strong&gt;&lt;br&gt;&#xA;This includes:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

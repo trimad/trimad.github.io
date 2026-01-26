@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Visualization on Ghostfeed</title>
+    <title>Visualization on Ghost Graph</title>
     <link>http://localhost:1313/tags/visualization/</link>
-    <description>Recent content in Visualization on Ghostfeed</description>
+    <description>Recent content in Visualization on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/visualization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>k-means Clustering</title>

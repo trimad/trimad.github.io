@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>C&#43;&#43; on Ghostfeed</title>
+    <title>C&#43;&#43; on Ghost Graph</title>
     <link>http://localhost:1313/categories/c&#43;&#43;/</link>
-    <description>Recent content in C&#43;&#43; on Ghostfeed</description>
+    <description>Recent content in C&#43;&#43; on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>

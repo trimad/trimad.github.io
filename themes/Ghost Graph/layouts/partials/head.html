@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{- $pageTitle := .Site.Title -}}
+{{- if not .IsHome -}}
+  {{- $pageTitle = printf "%s | %s" .Title .Site.Title -}}
+{{- end -}}
+{{- $desc := .Site.Params.description | default "" -}}
+{{- if not .IsHome -}}
+  {{- with .Params.description -}}
+    {{- $desc = . -}}
+  {{- else -}}
+    {{- with .Summary -}}
+      {{- $desc = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $desc = $desc | plainify | htmlUnescape | truncate 160 -}}
+<title>{{ $pageTitle }}</title>
+{{- if $desc }}
+<meta name="description" content="{{ $desc }}">
+{{- end }}
+<meta property="og:title" content="{{ $pageTitle }}">
+{{- if $desc }}
+<meta property="og:description" content="{{ $desc }}">
+{{- end }}
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ $pageTitle }}">
+{{- if $desc }}
+<meta name="twitter:description" content="{{ $desc }}">
+{{- end }}
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Spectral:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">

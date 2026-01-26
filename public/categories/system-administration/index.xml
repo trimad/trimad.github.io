@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>System Administration on Ghostfeed</title>
+    <title>System Administration on Ghost Graph</title>
     <link>http://localhost:1313/categories/system-administration/</link>
-    <description>Recent content in System Administration on Ghostfeed</description>
+    <description>Recent content in System Administration on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
@@ -112,13 +112,6 @@
       <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2022-02-09-record-desktop-silently/</guid>
       <description>A stealth desktop recording solution combining ffmpeg, batch scripting, and VBScript to capture Windows sessions without visible indicators, featuring configurable frame rates and recording durations.</description>
-    </item>
-    <item>
-      <title>FFmpeg Command Reference</title>
-      <link>http://localhost:1313/posts/2022-01-27-ffmpeg/</link>
-      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-01-27-ffmpeg/</guid>
-      <description>A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples.</description>
     </item>
     <item>
       <title>Robo Mirror</title>

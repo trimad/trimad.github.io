@@ -1,8 +1,8 @@
 baseURL = 'https://trimad.github.io'
 languageCode = 'en-us'
-title = 'Ghostfeed'
+title = 'Ghost Graph'
 
-theme = "GhostGraph"
+theme = "Ghost Graph"
 
 relativeURLs = false
 canonifyURLs = true
@@ -20,7 +20,7 @@ enableGitInfo = true
   term = ["HTML", "RSS"]
 
 [params]
-  description = "Ghostfeed: Ghost in the Shell-inspired notes, experiments, and troubleshooting posts."
+  description = "Ghost Graph: Interlinked notes, diagnostics, and proven scripts rendered as a navigable 3D graph."
   # Add other site-wide parameters here
 
 # Enable robots.txt and sitemap generation (usually enabled by default)

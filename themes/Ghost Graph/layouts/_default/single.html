@@ -1,0 +1,51 @@
+{{ define "main" }}
+{{ .Scratch.Set "showBg" true }}
+<div class="sv-shell">
+  {{ partial "site-header.html" . }}
+  <div class="sv-layout sv-layout-article">
+    <main class="sv-main">
+      <article class="sv-article" id="content">
+        <div class="sv-article-bg" id="bg-canvas" aria-hidden="true"></div>
+        <div class="sv-article-body">
+          <header class="sv-article-header">
+            <div class="sv-kicker">Reading</div>
+            <h1>{{ .Title }}</h1>
+            <div class="sv-article-meta">
+              <span>Published {{ .Date.Format "Jan 2, 2006" }}</span>
+              {{ with .Lastmod }}<span>Updated {{ .Format "Jan 2, 2006" }}</span>{{ end }}
+            </div>
+            <div class="sv-article-links">
+              <a class="sv-inline-link" href="{{ "/" | relURL }}">Return to map</a>
+            </div>
+          </header>
+          {{ if or .Params.tags .Params.categories }}
+            <div class="sv-terms">
+              {{ with .Params.categories }}
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Categories</span>
+                  {{ range . }}
+                    <a class="sv-term-pill" href="{{ (printf "/categories/%s/" (urlize .)) | relURL }}">{{ . }}</a>
+                  {{ end }}
+                </div>
+              {{ end }}
+              {{ with .Params.tags }}
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Tags</span>
+                  {{ range . }}
+                    <a class="sv-term-pill" href="{{ (printf "/tags/%s/" (urlize .)) | relURL }}">#{{ . }}</a>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+          <div class="sv-content">
+            {{ .Content }}
+          </div>
+        </div>
+      </article>
+
+    </main>
+    {{ partial "recently-modified.html" . }}
+  </div>
+</div>
+{{ end }}

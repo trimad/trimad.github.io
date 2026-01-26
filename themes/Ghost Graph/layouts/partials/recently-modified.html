@@ -1,0 +1,16 @@
+{{- $recent := first 20 (sort .Site.RegularPages "Lastmod" "desc") -}}
+<aside class="sv-sidebar" aria-label="Recently modified">
+  <div class="sv-sidebar-title">Recently Modified</div>
+  <ul class="sv-sidebar-list">
+    {{- range (sort $recent "Lastmod" "asc") -}}
+      <li class="sv-sidebar-item">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="sv-sidebar-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+      </li>
+    {{- else -}}
+      <li class="sv-sidebar-item">
+        <span>No posts yet.</span>
+      </li>
+    {{- end -}}
+  </ul>
+</aside>

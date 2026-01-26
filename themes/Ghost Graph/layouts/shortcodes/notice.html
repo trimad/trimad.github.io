@@ -1,0 +1,8 @@
+{{- $type := .Get "type" | default (.Get 0) | default "note" -}}
+{{- $title := .Get "title" | default (.Get 1) -}}
+<div class="notice notice--{{ $type | urlize }}">
+  {{- if $title -}}
+    <div class="notice__title">{{ $title }}</div>
+  {{- end -}}
+  <div class="notice__body">{{ .Inner | markdownify }}</div>
+</div>

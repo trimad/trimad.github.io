@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Directed Acyclic Graph on Ghostfeed</title>
+    <title>Directed Acyclic Graph on Ghost Graph</title>
     <link>http://localhost:1313/tags/directed-acyclic-graph/</link>
-    <description>Recent content in Directed Acyclic Graph on Ghostfeed</description>
+    <description>Recent content in Directed Acyclic Graph on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 02 May 2025 11:58:43 -0400</lastBuildDate>

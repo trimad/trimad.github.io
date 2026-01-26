@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Command-Line on Ghostfeed</title>
+    <title>Command-Line on Ghost Graph</title>
     <link>http://localhost:1313/tags/command-line/</link>
-    <description>Recent content in Command-Line on Ghostfeed</description>
+    <description>Recent content in Command-Line on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 13 May 2025 16:05:13 -0400</lastBuildDate>

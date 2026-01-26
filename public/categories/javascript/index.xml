@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JavaScript on Ghostfeed</title>
+    <title>JavaScript on Ghost Graph</title>
     <link>http://localhost:1313/categories/javascript/</link>
-    <description>Recent content in JavaScript on Ghostfeed</description>
+    <description>Recent content in JavaScript on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gmail Photo Downloader</title>
@@ -28,6 +28,13 @@
       <pubDate>Thu, 11 May 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-05-11-rapidapi/</guid>
       <description>This program loads comma-separated stock symbols from a file named &lt;code&gt;symbols.txt&lt;/code&gt; and then queries the Yahoo Finance API using a RapidAPI endpoint. It retrieves prices for every 60 minutes on a max time window.</description>
+    </item>
+    <item>
+      <title>Key Event Tester</title>
+      <link>http://localhost:1313/posts/2023-05-08-keycode-event-test/</link>
+      <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2023-05-08-keycode-event-test/</guid>
+      <description>This diagnostic tool allows you to type into a text area and logs keyboard events, providing valuable information such as key codes, key names, and modifier keys (Alt, Ctrl, Shift, Meta). As you interact with the text area, the captured event data will be displayed in real-time. This can be particularly useful for debugging and understanding the nuances of keyboard events in your application.</description>
     </item>
     <item>
       <title>Random Password Generator</title>

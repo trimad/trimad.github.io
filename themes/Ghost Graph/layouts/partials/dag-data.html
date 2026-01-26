@@ -1,0 +1,34 @@
+{{- $posts := slice -}}
+{{- $pages := .Site.RegularPages -}}
+{{- if eq .Kind "section" -}}
+  {{- $pages = .RegularPages -}}
+{{- else if eq .Kind "term" -}}
+  {{- $pages = .Pages -}}
+{{- end -}}
+{{- range $pages -}}
+  {{- $cats := .Params.categories | default (slice) -}}
+  {{- $tags := .Params.tags | default (slice) -}}
+  {{- $post := dict
+      "title" .Title
+      "relPermalink" .RelPermalink
+      "permalink" .Permalink
+      "date" (.Date.Format "2006-01-02")
+      "lastmod" (.Lastmod.Format "2006-01-02")
+      "categories" $cats
+      "tags" $tags
+    -}}
+  {{- $posts = $posts | append $post -}}
+{{- end -}}
+
+{{- $catLinks := dict -}}
+{{- range $term, $_ := .Site.Taxonomies.categories -}}
+  {{- $catLinks = merge $catLinks (dict $term ((printf "/categories/%s/" (urlize $term)) | relURL)) -}}
+{{- end -}}
+
+{{- $tagLinks := dict -}}
+{{- range $term, $_ := .Site.Taxonomies.tags -}}
+  {{- $tagLinks = merge $tagLinks (dict $term ((printf "/tags/%s/" (urlize $term)) | relURL)) -}}
+{{- end -}}
+
+{{- $data := dict "posts" $posts "taxonomies" (dict "categories" $catLinks "tags" $tagLinks) -}}
+<script type="application/json" id="dag-data">{{ $data | jsonify | safeJS }}</script>

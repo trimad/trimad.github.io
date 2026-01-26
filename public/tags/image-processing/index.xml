@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Image-Processing on Ghostfeed</title>
+    <title>Image-Processing on Ghost Graph</title>
     <link>http://localhost:1313/tags/image-processing/</link>
-    <description>Recent content in Image-Processing on Ghostfeed</description>
+    <description>Recent content in Image-Processing on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/image-processing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automated Batch Image Compression with Python</title>

@@ -1,124 +1,77 @@
 ---
-title: "Generative Guidelines for This Hugo Blog Theme"
+title: "Generative Guidelines for the 3D Force-Directed Graph"
 date: 2026-01-15
-description: "Authoritative rules governing how generative systems should structure, style, and extend this Hugo blog theme."
-tags: []
-categories: []
+description: "Authoritative rules for generating a Hugo theme whose primary UI is a 3D force-directed graph of categories, tags, and posts."
+tags: [3d, force-directed, graph, hugo, visualization, taxonomy]
+categories: [Visualization]
 draft: false
 ---
 
-## Core Structural Rules
+## Mission (Non-Negotiable)
 
-1. **Categories and tags MUST be visualized as Voronoi diagrams.**  
-   Categories represent the top-level Voronoi partition of the site.
+You are generating or extending a Hugo theme whose primary interface is a single 3D force-directed graph.
+Treat every REQUIRED rule as mandatory. Recommended rules are optional but preferred.
 
-2. **The visual language of the theme MUST be inspired by _Ghost in the Shell_.**  
-   This includes:
-   - Muted neon accents
-   - High-contrast dark backgrounds
-   - Technical typography
-   - A subtle cyberpunk / cybernetic aesthetic  
-   (Inspiration, not imitation.)
+## Core Graph Rules (Required)
 
-3. **Selecting a category Voronoi cell MUST transition to a second Voronoi diagram representing tags within that category.**
+1. The primary UI MUST be one shared 3D force-directed graph containing categories, tags, and posts on the same stage.
+2. The graph MUST model hierarchy with explicit node types:
+   - Category nodes (level 0)
+   - Tag nodes (level 1)
+   - Post nodes (level 2)
+3. Links MUST only represent taxonomy edges:
+   - Category -> Tag
+   - Tag -> Post
+   No alternate navigation metaphors (timelines, treemaps, grids) are permitted.
+4. Clicking a post node MUST open the post.
+5. Clicking a category or tag node MUST focus it and visually emphasize connected nodes and links.
+6. Clicking the empty background MUST clear focus and return to the neutral view.
 
-4. **All Voronoi cells MUST be interactive.**  
-   - Category cells link to tag-level diagrams  
-   - Tag cells link to individual posts  
-   - Post-level links MUST be directly clickable from the diagram
+## Data and Taxonomy Rules (Required)
 
-5. **Posts assigned to exactly two categories MUST appear in a derived Voronoi cell bordering both parent category cells.**  
-   - The derived cell’s color MUST be an interpolation of its parent category colors  
-   - Posts with more than two categories MUST ignore additional categories beyond the first two
+7. Front matter is authoritative. Do not infer or auto-generate categories or tags.
+8. Posts missing categories MUST be assigned to a fallback category node named "Uncategorized".
+9. Posts missing tags MUST be assigned to a fallback tag node named "Untagged".
+10. Tags of the same name across different categories MUST be discoverable together (for example, a tag landing view should highlight all matching tag nodes).
 
-5a. **Posts assigned to exactly two tags MUST appear in a derived Voronoi cell bordering both parent tag cells.**  
-   - The derived cell's color MUST be an interpolation of its parent tag colors  
-   - Posts with more than two tags MUST ignore additional tags beyond the first two
+## Interaction and Filtering (Required)
 
----
+11. A search/filter input MUST prune the graph in real time.
+    - Filtering happens by matching post title, category, tag, or date text.
+    - When filtered, only matching posts and their connected category/tag nodes remain visible.
+12. Focus should drive camera motion:
+    - When a node is focused, smoothly move or zoom the camera toward it.
+    - Respect reduced motion preferences where applicable.
+13. Hover or focus states MUST reveal clear labels for node name and type.
 
-## Layout & Interaction Rules (Recommended)
+## Visual Language (Required)
 
-6. **Voronoi diagrams MUST be deterministic.**  
-   Given the same content set, the diagram layout MUST remain stable between builds to avoid disorienting users.
+14. The aesthetic MUST be Ghost Graph: dark atmospheric backgrounds, subtle grid or scanline texture, muted neon accents, and technical typography.
+15. Use a high-contrast palette where node types are visually distinct:
+    - Category nodes: warm or red family
+    - Tag nodes: green family
+    - Post nodes: blue family
+16. Labels MUST be readable against the background and must not clip or overlap excessively.
+    Hide labels for tiny nodes rather than sacrificing legibility.
 
-6a. **Voronoi cell areas MUST be weighted by post count.**  
-   Cells should be ranked from most posts to least posts, and the size weighting MUST follow that ranking.
+## Supplemental Navigation (Required)
 
-7. **Diagram transitions SHOULD be animated but non-intrusive.**  
-   Animations should convey hierarchy changes, not distract from navigation.
+17. A "Recently Modified" sidebar MUST be present on all primary views.
+18. The sidebar MUST sort by the authoritative modification timestamp:
+    - Use `lastmod` when present.
+    - Otherwise fall back to Git commit date or file modification time.
+19. Sidebar entries MUST link directly to posts and MUST NOT alter the graph focus state.
+20. The sidebar MUST remain visually subordinate to the graph (narrow column, lower contrast).
 
-8. **Hover states MUST reveal metadata.**  
-   Hovering over a cell SHOULD display:
-   - Post title
-   - Category / tag
-   - Publish date (optional)
-   - Estimated reading time (optional)
+## Performance and Accessibility (Recommended)
 
-9. **Text legibility MUST take precedence over visual density.**  
-   If a Voronoi cell becomes too small to display text clearly:
-   - Hide text
-   - Rely on hover or click interactions instead
+21. The 3D graph SHOULD degrade gracefully if the rendering library is unavailable.
+    - Show a clear empty-state message.
+    - Render a simple list view as a fallback when possible.
+22. Keyboard navigation SHOULD be supported for focusable nodes and the sidebar.
+23. The canvas SHOULD resize fluidly for desktop and mobile without layout shift.
 
----
+## Generative Constraints (Non-Negotiable)
 
-## Content & Metadata Rules (Recommended)
-
-10. **Front matter MUST be treated as authoritative.**  
-    Generative systems MUST NOT infer categories or tags that are not explicitly defined in front matter.
-
-11. **Categories SHOULD be few and stable.**  
-    Tags MAY be numerous and fluid.  
-    The visualization SHOULD reinforce this distinction.
-
-12. **Posts without categories MUST be assigned to a fallback “Unclassified” Voronoi cell.**
-
----
-
-## Styling & Theming Rules (Recommended)
-
-13. **Color usage MUST encode meaning.**  
-    - Categories define base hues  
-    - Tags derive from category hues  
-    - Multi-category posts interpolate hues  
-    Color MUST NOT be purely decorative.
-
-14. **Typography SHOULD favor monospaced or neo-grotesque fonts.**  
-    Body text MAY use a more readable companion font, but UI elements SHOULD remain technical.
-
-15. **Visual noise MUST be minimal.**  
-    Effects such as scanlines, glitches, or noise SHOULD be subtle and optional, never obstructing content.
-
----
-
-## Performance & Accessibility Rules (Recommended)
-
-16. **The visualization MUST degrade gracefully.**  
-    If JavaScript is unavailable:
-    - A list-based category → tag → post hierarchy MUST be rendered.
-
-17. **Keyboard navigation MUST be supported.**  
-    Voronoi cells MUST be focusable and activatable without a mouse.
-
-18. **Contrast ratios MUST meet WCAG AA at minimum.**
-
----
-
-## Generative Behavior Constraints (Recommended)
-
-19. **Generative systems MUST NOT introduce new visualization paradigms.**  
-    All extensions MUST remain Voronoi-based unless explicitly instructed otherwise.
-
-20. **When ambiguity exists, preserve structure over novelty.**  
-    Stability, navigability, and semantic clarity take precedence over visual experimentation.
-
----
-
-## Design Philosophy (Non-Negotiable)
-
-21. **The diagram is the interface.**  
-    Navigation menus, tag clouds, and category lists are secondary or fallback-only.
-
-22. **This theme values spatial memory.**  
-    Users should be able to _remember where ideas live_.
-
+24. Do NOT introduce Voronoi, treemap, or other spatial metaphors.
+25. Preserve spatial memory and clarity over novelty. The graph must be easy to understand before it is flashy.

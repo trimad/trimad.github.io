@@ -1,0 +1,36 @@
+{{- $page := .page -}}
+{{- $contentId := .contentId | default "" -}}
+<section class="sv-map dag-section"{{ if $contentId }} id="{{ $contentId }}"{{ end }}>
+  <div class="sv-map-header">
+    <div>
+      <div class="sv-kicker">3D Force-Directed Graph</div>
+      <h1 class="sv-map-title">{{ if $page.IsHome }}{{ $page.Site.Title }}{{ else }}{{ $page.Title }}{{ end }}</h1>
+      <p class="sv-map-subtitle">Categories, tags, and posts share one 3D force-directed map. Click nodes to focus, click posts to open them.</p>
+      <div class="sv-map-path">Filter in real time. The graph prunes as you type.</div>
+    </div>
+    <div class="sv-map-controls">
+      <label class="sv-map-search sv-map-search--primary">
+        <span class="sv-search-label">🔎</span>
+        <input
+          class="sv-search-input"
+          type="search"
+          id="dag-search"
+          placeholder="Filter posts, categories, tags"
+          autocomplete="off"
+        >
+      </label>
+    </div>
+  </div>
+
+  <div class="sv-map-stage">
+    <div
+      class="sv-map-canvas dag-canvas"
+      id="dag"
+      data-focus-kind="{{ .focusKind }}"
+      data-focus-value="{{ .focusValue }}"
+    >
+      <div class="dag-empty">Add posts with categories and tags to grow the map.</div>
+    </div>
+
+  </div>
+</section>

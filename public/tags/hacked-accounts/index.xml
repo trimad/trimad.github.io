@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hacked-Accounts on Ghostfeed</title>
+    <title>Hacked-Accounts on Ghost Graph</title>
     <link>http://localhost:1313/tags/hacked-accounts/</link>
-    <description>Recent content in Hacked-Accounts on Ghostfeed</description>
+    <description>Recent content in Hacked-Accounts on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>

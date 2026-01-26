@@ -1,9 +1,0 @@
-<section>
-    <h2>Sections</h2>
-    <ul>
-        <li><a href="{{ .Site.BaseURL }}">Home</a></li>
-        {{ range .Site.Sections }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-        {{ end }}
-    </ul>
-</section>

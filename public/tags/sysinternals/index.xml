@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sysinternals on Ghostfeed</title>
+    <title>Sysinternals on Ghost Graph</title>
     <link>http://localhost:1313/tags/sysinternals/</link>
-    <description>Recent content in Sysinternals on Ghostfeed</description>
+    <description>Recent content in Sysinternals on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>

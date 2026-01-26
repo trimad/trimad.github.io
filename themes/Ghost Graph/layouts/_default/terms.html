@@ -1,0 +1,12 @@
+{{ define "main" }}
+{{ .Scratch.Set "showGraph" true }}
+<div class="sv-shell">
+  {{ partial "site-header.html" . }}
+  <div class="sv-layout">
+    <main class="sv-main">
+      {{ partial "dag.html" (dict "page" . "focusKind" "" "focusValue" "" "contentId" "content") }}
+    </main>
+    {{ partial "recently-modified.html" . }}
+  </div>
+</div>
+{{ end }}

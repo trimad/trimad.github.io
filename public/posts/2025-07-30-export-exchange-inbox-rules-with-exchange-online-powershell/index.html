@@ -1,72 +1,82 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Export Exchange Inbox Rules with Exchange Online PowerShell | Ghostfeed</title>
-  <meta name="description" content="Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox - perfect for …">
-  <meta property="og:title" content="Export Exchange Inbox Rules with Exchange Online PowerShell | Ghostfeed">
-  <meta property="og:description" content="Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox - perfect for …">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="http://localhost:1313/posts/2025-07-30-export-exchange-inbox-rules-with-exchange-online-powershell/">
-  <meta property="og:site_name" content="Ghostfeed">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Export Exchange Inbox Rules with Exchange Online PowerShell | Ghostfeed">
-  <meta name="twitter:description" content="Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox - perfect for …">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
-</head>
-<body class="gg-body">
-  
-<header class="gg-topbar gg-article-topbar">
-  <div class="gg-brand">
-    <span class="gg-logo">F-Z</span>
-    <div>
-      <div class="gg-title">Ghostfeed</div>
-      <div class="gg-subtitle">Reading: Export Exchange Inbox Rules with Exchange Online PowerShell</div>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Export Exchange Inbox Rules with Exchange Online PowerShell | Ghost Graph</title>
+<meta name="description" content="Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox - perfect for …">
+<meta property="og:title" content="Export Exchange Inbox Rules with Exchange Online PowerShell | Ghost Graph">
+<meta property="og:description" content="Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox - perfect for …">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/posts/2025-07-30-export-exchange-inbox-rules-with-exchange-online-powershell/">
+<meta property="og:site_name" content="Ghost Graph">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Export Exchange Inbox Rules with Exchange Online PowerShell | Ghost Graph">
+<meta name="twitter:description" content="Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox - perfect for …">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Spectral:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="http://localhost:1313/css/main.min.8cc0a8d5cbea8062ed9d2a2a7a3a15ae2a3d406f2f0330b99e1f5b017a81b47e.css">
+
+  </head>
+  <body class="sv-body">
+    <a class="sv-skip" href="#content">Skip to content</a>
+    
+
+<div class="sv-shell">
+  <header class="sv-header">
+  <div class="sv-brand">
+    <a class="sv-mark" href="http://localhost:1313/">SV</a>
+    <div class="sv-brand-text">
+      <div class="sv-title">Ghost Graph</div>
+      <div class="sv-subtitle">Ghost Graph: Interlinked notes, diagnostics, and proven scripts rendered as a navigable 3D graph.</div>
     </div>
   </div>
-  <nav class="gg-nav">
-      <a class="gg-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
-      <a class="gg-nav-link" href="http://localhost:1313/archive/">Archive</a>
-      <a class="gg-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+  <nav class="sv-nav" aria-label="Primary">
+    <a class="sv-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/archive/">Archive</a>
   </nav>
-  <div class="gg-search">
-    <a class="gg-back" href="http://localhost:1313/posts/">Back to graph</a>
-  </div>
 </header>
 
-<div class="gg-layout">
-  <main class="gg-article">
-    <article>
-      <h1>Export Exchange Inbox Rules with Exchange Online PowerShell</h1>
-      <p class="gg-meta">
-        Published July 30, 2025
-         - Updated January 12, 2026
-      </p>
-      
-      <div class="gg-terms">
-        
-          <div class="gg-term-row">
-            <span class="gg-term-label">Tags:</span>
-            
-              <a class="gg-term-pill" href="http://localhost:1313/?q=exchange-online">exchange-online</a>
-            
-          </div>
-        
-        
-          <div class="gg-term-row">
-            <span class="gg-term-label">Categories:</span>
-            
-              <a class="gg-term-pill" href="http://localhost:1313/?q=PowerShell">PowerShell</a>
-            
-          </div>
-        
-      </div>
-      
-      <div class="gg-content">
-        <h1 id="exchange-online-inbox-rule-auditing">Exchange Online Inbox Rule Auditing</h1>
+  <div class="sv-layout sv-layout-article">
+    <main class="sv-main">
+      <article class="sv-article" id="content">
+        <div class="sv-article-bg" id="bg-canvas" aria-hidden="true"></div>
+        <div class="sv-article-body">
+          <header class="sv-article-header">
+            <div class="sv-kicker">Reading</div>
+            <h1>Export Exchange Inbox Rules with Exchange Online PowerShell</h1>
+            <div class="sv-article-meta">
+              <span>Published Jul 30, 2025</span>
+              <span>Updated Jan 12, 2026</span>
+            </div>
+            <div class="sv-article-links">
+              <a class="sv-inline-link" href="http://localhost:1313/">Return to map</a>
+            </div>
+          </header>
+          
+            <div class="sv-terms">
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Categories</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/categories/powershell/">PowerShell</a>
+                  
+                </div>
+              
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Tags</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/exchange-online/">#exchange-online</a>
+                  
+                </div>
+              
+            </div>
+          
+          <div class="sv-content">
+            <h1 id="exchange-online-inbox-rule-auditing">Exchange Online Inbox Rule Auditing</h1>
 <p>Monitoring inbox rules is one of the most effective ways to detect compromised accounts in Microsoft 365. Attackers commonly create forwarding or redirect rules to exfiltrate mail or hide activity.</p>
 <p>This post provides <strong>two complementary PowerShell scripts</strong>:</p>
 <ol>
@@ -289,679 +299,77 @@
 </span></span><span style="display:flex;"><span>Disconnect-ExchangeOnline -Confirm:$false
 </span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">Session disconnected. All done!</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">&#34;</span> -ForegroundColor Cyan
 </span></span></code></pre></div>
-      </div>
-    </article>
-  </main>
-  <aside class="gg-rightnav" aria-label="Recently updated posts">
-  <div class="gg-rightnav-title">Recently Updated</div><ol class="gg-rightnav-list">
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-22-laps/">
-          <span class="gg-rightnav-text">Microsoft LAPS (Local Administrator Password Solution) Guide</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-03-03-windows-remediation/">
-          <span class="gg-rightnav-text">Windows Remediation</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/">
-          <span class="gg-rightnav-text">Generating Knowledge Graphs with LLMs and PyVis</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-10-16-restart-iis-application/">
-          <span class="gg-rightnav-text">Automated IIS Application Pool Restart with PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-05-02-procdump-and-windbg/">
-          <span class="gg-rightnav-text">Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-07-30-export-exchange-inbox-rules-with-exchange-online-powershell/">
-          <span class="gg-rightnav-text">Export Exchange Inbox Rules with Exchange Online PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/">
-          <span class="gg-rightnav-text">Export Conditional Access Policies With Microsoft Graph</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-12-03-export-successful-sign-ins-with-microsoft-graph/">
-          <span class="gg-rightnav-text">Export Successful Sign-ins With Microsoft Graph</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2026-01-09-export-shared-mailbox-delegates/">
-          <span class="gg-rightnav-text">Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It)</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2026-01-09-export-all-group-memberships/">
-          <span class="gg-rightnav-text">Export All Group Memberships (Teams, Microsoft 365, Distribution Lists, Security Groups)</span>
-          <time class="gg-rightnav-meta" datetime="2026-01-12">Jan 12, 2026</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2016-12-13-arrays/">
-          <span class="gg-rightnav-text">Interactive Array Visualization</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-03-12-att-hackathon/">
-          <span class="gg-rightnav-text">AT&amp;T Hackathon</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-19-enable-autoadminlogon/">
-          <span class="gg-rightnav-text">Enable AutoAdminLogon with PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-28-remove-appx-packages/">
-          <span class="gg-rightnav-text">Remove-AppxPackages</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-01-01-ms-settings-uri-reference/">
-          <span class="gg-rightnav-text">Windows Settings URI Reference</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/">
-          <span class="gg-rightnav-text">Managing Exchange Online Auto-Expanding Archives with PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/">
-          <span class="gg-rightnav-text">PowerShell Script to Export WiFi Network Credentials</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-02-mastering-time-with-shell-and-powershell/">
-          <span class="gg-rightnav-text">Mastering Time with Shell and PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-05-stable-diffusion/">
-          <span class="gg-rightnav-text">Stable Diffusion Scripts</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-05-film/">
-          <span class="gg-rightnav-text">Frame Interpolation Large Motion (FILM)</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-06-midas/">
-          <span class="gg-rightnav-text">MiDaS Depth Estimation Guide</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-07-purge-emails/">
-          <span class="gg-rightnav-text">Microsoft 365 Email Security Management Guide</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-09-force-ad-sync/">
-          <span class="gg-rightnav-text">PowerShell Script for Azure AD Synchronization Management</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-17-uninstall-drivers/">
-          <span class="gg-rightnav-text">Windows Driver Management with pnputil</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-23-microsoftteams/">
-          <span class="gg-rightnav-text">Microsoft Teams PowerShell Management Guide</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-24-openai-whisper/">
-          <span class="gg-rightnav-text">OpenAI Whisper Speech Recognition Guide</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-03-03-windows-defender-firewall/">
-          <span class="gg-rightnav-text">Windows Defender Firewall Management Guide</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-03-22-random-password-generator/">
-          <span class="gg-rightnav-text">Random Password Generator</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/">
-          <span class="gg-rightnav-text">Managing Global Address List (GAL) Visibility with PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-04-12-thin-plate-spline-motion-model/">
-          <span class="gg-rightnav-text">Thin Plate Spline Motion Model</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-02-acl/">
-          <span class="gg-rightnav-text">Windows ACL Management with PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">
-          <span class="gg-rightnav-text">Deep Floyd IF</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/">
-          <span class="gg-rightnav-text">3D Photo Inpainting with Python and PyTorch</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/">
-          <span class="gg-rightnav-text">Deforum Cheat Sheet</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-06-24-qr/">
-          <span class="gg-rightnav-text">QR Code Generator with Python</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-07-13-join-active-directory/">
-          <span class="gg-rightnav-text">Join a Workstation to Active Directory with Shell and PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-07-20-mapped-drives/">
-          <span class="gg-rightnav-text">Mapping Network Drives Using PowerShell and SID</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-08-15-networkx/">
-          <span class="gg-rightnav-text">Python NetworkX Library for Network Graph Visualization</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-08-24-disco-ball/">
-          <span class="gg-rightnav-text">Disco Ball</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-10-10-pswindowsupdate/">
-          <span class="gg-rightnav-text">PSWindowsUpdate: Managing Windows Updates with PowerShell</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-10-17-local-llm/">
-          <span class="gg-rightnav-text">Setting Up a Local Large Language Model (LLM) Environment</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-12-28-pyvis-graphing-directories/">
-          <span class="gg-rightnav-text">Visualizing Directory Structures with PyVis</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/">
-          <span class="gg-rightnav-text">Graphing a LAN with PyVis</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-01-02-take-control/">
-          <span class="gg-rightnav-text">Troubleshooting N-Central Take Control</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-02-05-local-ai-api/">
-          <span class="gg-rightnav-text">Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-03-25-window-watcher/">
-          <span class="gg-rightnav-text">Window Monitoring with Machine Vision</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-05-30-user-lockout-report/">
-          <span class="gg-rightnav-text">Active Directory User Lockout and Password Report</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/">
-          <span class="gg-rightnav-text">Troubleshooting Group Policy Objects (GPOs)</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-01-visualizing-folder-permissions/">
-          <span class="gg-rightnav-text">Visualizing and Analyzing Windows Folder Permissions</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-01-visualizing-subnets/">
-          <span class="gg-rightnav-text">Network Subnet Visualization Tools</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-06-dns-records/">
-          <span class="gg-rightnav-text">Complete DNS Records Reference Guide</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-06-24-get-public-ip/">
-          <span class="gg-rightnav-text">How to Find Your Public IP Address</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-07-30-batch-compress-images/">
-          <span class="gg-rightnav-text">Automated Batch Image Compression with Python</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-09-10-officec2rclient/">
-          <span class="gg-rightnav-text">Managing Microsoft Office Versions with OfficeC2RClient</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-11-14-champ-va/">
-          <span class="gg-rightnav-text">ChampVA Claims</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-12-11-rebuild-user-profile/">
-          <span class="gg-rightnav-text">Rebuilding a Corrupted Windows User Profile Using CMD</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-12">Dec 12, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/">
-          <span class="gg-rightnav-text">Simple Perlin Noise Map</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-07-18-counting-sort/">
-          <span class="gg-rightnav-text">Counting Sort</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/">
-          <span class="gg-rightnav-text">Nth Fibonacci Number</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/">
-          <span class="gg-rightnav-text">Sieve of Eratosthenes</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/">
-          <span class="gg-rightnav-text">Demonstrating Procedures and Console Output</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/">
-          <span class="gg-rightnav-text">Juno Cam Image Processing</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2017-11-18-flippy-tiles/">
-          <span class="gg-rightnav-text">Flipping Tiles</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-02-open-simplex-noise/">
-          <span class="gg-rightnav-text">Open Simplex Noise</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/">
-          <span class="gg-rightnav-text">Generating Terrain with Open Simplex Noise</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-28-insertion-sort/">
-          <span class="gg-rightnav-text">Insertion Sort using WEBGL</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-01-31-10print-image-filter/">
-          <span class="gg-rightnav-text">10PRINT Image Filter</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-02-05-merge-sort/">
-          <span class="gg-rightnav-text">Merge Sort using WEBGL</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-03-24-basic-prime-checker/">
-          <span class="gg-rightnav-text">Basic Prime Checker, C&#43;&#43;</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/">
-          <span class="gg-rightnav-text">Minimum Spanning Tree Visualized</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/">
-          <span class="gg-rightnav-text">Collatz Conjecture &#43; Unit Circle</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/">
-          <span class="gg-rightnav-text">Kruskal&#39;s Algorithm Visualized With Processing</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-11-java-turbo-reader/">
-          <span class="gg-rightnav-text">Faster Java String Inputs</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/">
-          <span class="gg-rightnav-text">Comparing Java Distance Functions</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-05-17-ulam-sprial/">
-          <span class="gg-rightnav-text">Ulam Spiral</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-06-28-barnsley-fern/">
-          <span class="gg-rightnav-text">Barnsley Fern</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-11-12-orbiting-pixels-utility/">
-          <span class="gg-rightnav-text">Orbiting Pixels Utility</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-11-16-fridge-magnet-simulator/">
-          <span class="gg-rightnav-text">Fridge Magnet Simulator</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-11-21-lorenz-doll/">
-          <span class="gg-rightnav-text">Lorenz Doll</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2018-12-30-cube-wave/">
-          <span class="gg-rightnav-text">Cube Wave</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-02-28-robo-mirror/">
-          <span class="gg-rightnav-text">Robo Mirror</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/">
-          <span class="gg-rightnav-text">Blending Textures With Open Simplex Noise</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-25-daily-donation-report/">
-          <span class="gg-rightnav-text">Daily Donation Report</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-25-buddhabrot/">
-          <span class="gg-rightnav-text">Buddhabrot</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/">
-          <span class="gg-rightnav-text">Remote Reboot With SMTP Status</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-05-18-k-means-clustering/">
-          <span class="gg-rightnav-text">k-means Clustering</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/">
-          <span class="gg-rightnav-text">Managing Exchange Calendars</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-09-16-active-directory-group-membership/">
-          <span class="gg-rightnav-text">Get Group Membership</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/">
-          <span class="gg-rightnav-text">Combining PowerShell Cmdlets</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-01-27-ffmpeg/">
-          <span class="gg-rightnav-text">FFmpeg Command Reference</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-02-09-record-desktop-silently/">
-          <span class="gg-rightnav-text">Record Desktop Silently</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/">
-          <span class="gg-rightnav-text">Download YouTube Videos</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/">
-          <span class="gg-rightnav-text">NVIDIA Maxine Windows Audio Effects SDK</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-05-04-archimedean-spiral/">
-          <span class="gg-rightnav-text">Archimedean Spiral</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-05-14-logistic-map/">
-          <span class="gg-rightnav-text">Logistic Map</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2022-06-09-download-streams/">
-          <span class="gg-rightnav-text">Download Streams</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-15-decode-phishing-emails/">
-          <span class="gg-rightnav-text">Phishing Email Decoding Tools</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-04-13-net-use/">
-          <span class="gg-rightnav-text">net use</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-08-keycode-event-test/">
-          <span class="gg-rightnav-text">Key Event Tester</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-05-11-rapidapi/">
-          <span class="gg-rightnav-text">Yahoo Finance API via RapidAPI</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">
-          <span class="gg-rightnav-text">Gmail Photo Downloader</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-06-17-udm-arguments/">
-          <span class="gg-rightnav-text">UDM Parameters for Google Search</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/">
-          <span class="gg-rightnav-text">Test SMTP</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-12-02-hp-bloatware-uninstall/">
-          <span class="gg-rightnav-text">HP Bloatware Uninstaller</span>
-          <time class="gg-rightnav-meta" datetime="2025-12-11">Dec 11, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/">
-          <span class="gg-rightnav-text">Videos as Teams Backgrounds</span>
-          <time class="gg-rightnav-meta" datetime="2025-07-02">Jul 2, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2023-02-21-net-user/">
-          <span class="gg-rightnav-text">Managing Windows User Accounts with net user Command</span>
-          <time class="gg-rightnav-meta" datetime="2025-05-13">May 13, 2025</time>
-        </a>
-      </li>
-      <li class="gg-rightnav-item">
-        <a class="gg-rightnav-link" href="http://localhost:1313/posts/2024-03-21-change-dns-remotely/">
-          <span class="gg-rightnav-text">Remote and Local DNS Configuration Guide</span>
-          <time class="gg-rightnav-meta" datetime="2025-05-13">May 13, 2025</time>
-        </a>
-      </li>
-  </ol></aside>
+          </div>
+        </div>
+      </article>
 
+    </main>
+    <aside class="sv-sidebar" aria-label="Recently modified">
+  <div class="sv-sidebar-title">Recently Modified</div>
+  <ul class="sv-sidebar-list"><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">Generative Guidelines for the 3D Force-Directed Graph</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2024-03-25-window-watcher/">Window Monitoring with Machine Vision</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">Gmail Photo Downloader</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-08-24-disco-ball/">Disco Ball</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-11-rapidapi/">Yahoo Finance API via RapidAPI</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-08-keycode-event-test/">Key Event Tester</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">Deep Floyd IF</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-22-random-password-generator/">Random Password Generator</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-03-windows-defender-firewall/">Windows Defender Firewall Management Guide</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-22-laps/">Microsoft LAPS (Local Administrator Password Solution) Guide</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-15-decode-phishing-emails/">Phishing Email Decoding Tools</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-film/">Frame Interpolation Large Motion (FILM)</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-stable-diffusion/">Stable Diffusion Scripts</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2022-05-04-archimedean-spiral/">Archimedean Spiral</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/">PowerShell Script to Export WiFi Network Credentials</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2022-01-27-ffmpeg/">FFmpeg Command Reference</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/">Managing Exchange Online Auto-Expanding Archives with PowerShell</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2021-05-18-k-means-clustering/">k-means Clustering</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2019-08-25-buddhabrot/">Buddhabrot</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2019-08-25-daily-donation-report/">Daily Donation Report</a>
+        <span class="sv-sidebar-date">Jan 15, 2026</span>
+      </li></ul>
+</aside>
+
+  </div>
 </div>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
-  
-  <script>
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('pre code').forEach((block) => {
-        const button = document.createElement('button');
-        button.className = 'copy-button';
-        button.textContent = 'Copy';
-        button.addEventListener('click', () => {
-          navigator.clipboard.writeText(block.textContent).then(() => {
-            button.textContent = 'Copied!';
-            setTimeout(() => (button.textContent = 'Copy'), 1500);
-          }).catch(() => {
-            button.textContent = 'Error';
-            setTimeout(() => (button.textContent = 'Copy'), 1500);
-          });
-        });
-        block.parentNode.insertBefore(button, block);
-      });
-    });
-  </script>
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" defer></script><script src="http://localhost:1313/js/bg.min.755651a487d05c01fc17783e6e842144da8c894c0188689cec21f19560bef07f.js" defer></script></body>
 </html>

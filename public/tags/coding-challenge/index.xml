@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Coding Challenge on Ghostfeed</title>
+    <title>Coding Challenge on Ghost Graph</title>
     <link>http://localhost:1313/tags/coding-challenge/</link>
-    <description>Recent content in Coding Challenge on Ghostfeed</description>
+    <description>Recent content in Coding Challenge on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 02 May 2025 11:58:43 -0400</lastBuildDate>
