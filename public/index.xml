@@ -8,6 +8,13 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Get DNS Records with PowerShell</title>
+      <link>http://localhost:1313/posts/2026-01-27-get-dns-records/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2026-01-27-get-dns-records/</guid>
+      <description>&lt;h1 id=&#34;the-script&#34;&gt;The Script&lt;/h1&gt;&#xA;&lt;div class=&#34;notice notice--warning&#34;&gt;&lt;div class=&#34;notice__title&#34;&gt;AI-Generated Content&lt;/div&gt;&lt;div class=&#34;notice__body&#34;&gt;This script and description AI-generated. Please review for completeness and accuracy.&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;This PowerShell script builds a DNS “inventory” report for a given domain by querying common records (A/AAAA/NS/SOA/MX/TXT/CNAME/CAA), email-security records (DMARC, SPF, DKIM across many selectors, BIMI, MTA-STS, TLS-RPT), common hostnames (autodiscover/mail/smtp/etc.), and related SRV records. It safely wraps Resolve-DnsName to normalize results (ok/missing/error/unsupported), flattens TXT values to extract things like the SPF/DMARC strings, and recursively expands SPF include:/redirect= chains up to a max depth while avoiding loops. If CAA lookups aren’t supported by the local Resolve-DnsName, it falls back to nslookup -type=caa, and it also resolves MX/apex IPs and performs PTR lookups for those IPs. Finally, it writes everything as JSON to C:\Temp&amp;lt;domain&amp;gt;.json and prints the saved path.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Generative Guidelines for the 3D Force-Directed Graph (Search-First)</title>
       <link>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</link>
       <pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate>

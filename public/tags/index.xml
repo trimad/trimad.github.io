@@ -6,8 +6,57 @@
     <description>Recent content in Tags on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Jan 2026 10:50:53 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 27 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dmarc</title>
+      <link>http://localhost:1313/tags/dmarc/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/dmarc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dns</title>
+      <link>http://localhost:1313/tags/dns/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/dns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Email</title>
+      <link>http://localhost:1313/tags/email/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/email/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mx</title>
+      <link>http://localhost:1313/tags/mx/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/mx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nslookup</title>
+      <link>http://localhost:1313/tags/nslookup/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/nslookup/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Powershell</title>
+      <link>http://localhost:1313/tags/powershell/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/powershell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spf</title>
+      <link>http://localhost:1313/tags/spf/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/spf/</guid>
+      <description></description>
+    </item>
     <item>
       <title>3d</title>
       <link>http://localhost:1313/tags/3d/</link>
@@ -107,13 +156,6 @@
       <description></description>
     </item>
     <item>
-      <title>Powershell</title>
-      <link>http://localhost:1313/tags/powershell/</link>
-      <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/powershell/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Sysadmin</title>
       <link>http://localhost:1313/tags/sysadmin/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
@@ -181,13 +223,6 @@
       <link>http://localhost:1313/tags/conditional-access/</link>
       <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/conditional-access/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Email</title>
-      <link>http://localhost:1313/tags/email/</link>
-      <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/email/</guid>
       <description></description>
     </item>
     <item>
@@ -345,13 +380,6 @@
       <description></description>
     </item>
     <item>
-      <title>Nslookup</title>
-      <link>http://localhost:1313/tags/nslookup/</link>
-      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/nslookup/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Shell</title>
       <link>http://localhost:1313/tags/shell/</link>
       <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
@@ -359,24 +387,10 @@
       <description></description>
     </item>
     <item>
-      <title>Dns</title>
-      <link>http://localhost:1313/tags/dns/</link>
-      <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/dns/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Domain-Management</title>
       <link>http://localhost:1313/tags/domain-management/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/domain-management/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Mx</title>
-      <link>http://localhost:1313/tags/mx/</link>
-      <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/mx/</guid>
       <description></description>
     </item>
     <item>

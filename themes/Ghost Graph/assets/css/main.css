@@ -1,4 +1,4 @@
-.dag-section {
+﻿.dag-section {
   position: relative;
 }
 
@@ -31,7 +31,7 @@
   font-family: "Chakra Petch", sans-serif;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: 1em;
   z-index: 2;
 }
 
@@ -58,3 +58,4 @@
 .notice--info {
   border-left-color: var(--accent);
 }
+

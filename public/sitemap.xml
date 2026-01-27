@@ -2,38 +2,68 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/tags/3d/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/force-directed/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <loc>http://localhost:1313/tags/dmarc/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <loc>http://localhost:1313/tags/dns/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/graph/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <loc>http://localhost:1313/tags/email/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <loc>http://localhost:1313/posts/2026-01-27-get-dns-records/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/search/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <loc>http://localhost:1313/tags/mx/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/nslookup/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/powershell/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/powershell/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/spf/</loc>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <lastmod>2026-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/3d/</loc>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/force-directed/</loc>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</loc>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/graph/</loc>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/hugo/</loc>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/search/</loc>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/taxonomy/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/visualization/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/visualization/</loc>
-    <lastmod>2026-01-26T10:50:53-05:00</lastmod>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/automation/</loc>
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
@@ -64,15 +94,6 @@
   </url><url>
     <loc>http://localhost:1313/tags/microsoft-graph/</loc>
     <lastmod>2026-01-12T12:29:24-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/powershell/</loc>
-    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/powershell/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/sysadmin/</loc>
     <lastmod>2026-01-12T12:29:24-05:00</lastmod>
@@ -130,9 +151,6 @@
   </url><url>
     <loc>http://localhost:1313/posts/2025-07-30-export-exchange-inbox-rules-with-exchange-online-powershell/</loc>
     <lastmod>2026-01-12T12:29:24-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/email/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/ffmpeg/</loc>
     <lastmod>2025-07-02T14:29:39-04:00</lastmod>
@@ -239,22 +257,13 @@
     <loc>http://localhost:1313/tags/ip-address/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/nslookup/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/shell/</loc>
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2024-06-06-dns-records/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/dns/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/domain-management/</loc>
-    <lastmod>2025-12-12T17:02:56-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/mx/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/data-visualization/</loc>
@@ -933,13 +942,13 @@
     <lastmod>2025-05-02T11:58:43-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/assembly/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2017-10-24-demonstrating-procedures-and-console-output/</loc>
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/masm/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</loc>
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
@@ -948,10 +957,10 @@
     <lastmod>2025-05-02T11:58:43-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/fibonacci/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/archive/2017-10-05-uva-100/</loc>
     <lastmod>2025-05-02T11:58:43-04:00</lastmod>

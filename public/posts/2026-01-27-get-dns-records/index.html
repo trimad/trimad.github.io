@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Get DNS Records with PowerShell | Ghost Graph</title>
+<meta name="description" content="A PowerShell script that collects DNS records relevant to email delivery and security, including MX, SPF, DMARC, and related lookups.">
+<meta property="og:title" content="Get DNS Records with PowerShell | Ghost Graph">
+<meta property="og:description" content="A PowerShell script that collects DNS records relevant to email delivery and security, including MX, SPF, DMARC, and related lookups.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/posts/2026-01-27-get-dns-records/">
+<meta property="og:site_name" content="Ghost Graph">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Get DNS Records with PowerShell | Ghost Graph">
+<meta name="twitter:description" content="A PowerShell script that collects DNS records relevant to email delivery and security, including MX, SPF, DMARC, and related lookups.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Spectral:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="http://localhost:1313/css/main.min.1efafb374d1d93935ff3ecb888d3aa65829ec92a5823e9cf5cdaa963ab5a3101.css">
+
+  </head>
+  <body class="sv-body">
+    <a class="sv-skip" href="#content">Skip to content</a>
+    
+<div class="sv-shell">
+  <header class="sv-header">
+  <div class="sv-brand">
+    <a class="sv-mark" href="http://localhost:1313/">GG</a>
+    <div class="sv-brand-text">
+      <div class="sv-title">Ghost Graph</div>
+      <div class="sv-subtitle">Ghost Graph: Interlinked notes, diagnostics, and proven scripts rendered as a navigable 3D graph.</div>
+    </div>
+  </div>
+  <nav class="sv-nav" aria-label="Primary">
+    <a class="sv-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/archive/">Archive</a>
+  </nav>
+</header>
+
+  <div class="sv-layout sv-layout-article">
+    <main class="sv-main">
+      <article class="sv-article" id="content">
+        <div class="sv-article-body">
+          <header class="sv-article-header">
+            <div class="sv-kicker">Reading</div>
+            <h1>Get DNS Records with PowerShell</h1>
+            <div class="sv-article-meta">
+              <span>Published Jan 27, 2026</span>
+              <span>Updated Jan 27, 2026</span>
+            </div>
+            <div class="sv-article-links">
+              <a class="sv-inline-link" href="http://localhost:1313/">Return to map</a>
+            </div>
+          </header>
+          
+            <div class="sv-terms">
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Categories</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/categories/powershell/">PowerShell</a>
+                  
+                </div>
+              
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Tags</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/dns/">#dns</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/dmarc/">#dmarc</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/email/">#email</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/mx/">#mx</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/nslookup/">#nslookup</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/powershell/">#powershell</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/spf/">#spf</a>
+                  
+                </div>
+              
+            </div>
+          <div class="sv-toc" aria-label="Table of contents">
+              <div class="sv-toc-title">On this page</div>
+              <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-script">The Script</a></li>
+    <li><a href="#check-environment">Check Environment</a></li>
+    <li><a href="#proven-working-environment">Proven Working Environment</a></li>
+  </ul>
+</nav>
+            </div><div class="sv-content">
+            <h1 id="the-script">The Script</h1>
+<div class="notice notice--warning"><div class="notice__title">AI-Generated Content</div><div class="notice__body">This script and description AI-generated. Please review for completeness and accuracy.</div>
+</div>
+
+<p>This PowerShell script builds a DNS “inventory” report for a given domain by querying common records (A/AAAA/NS/SOA/MX/TXT/CNAME/CAA), email-security records (DMARC, SPF, DKIM across many selectors, BIMI, MTA-STS, TLS-RPT), common hostnames (autodiscover/mail/smtp/etc.), and related SRV records. It safely wraps Resolve-DnsName to normalize results (ok/missing/error/unsupported), flattens TXT values to extract things like the SPF/DMARC strings, and recursively expands SPF include:/redirect= chains up to a max depth while avoiding loops. If CAA lookups aren’t supported by the local Resolve-DnsName, it falls back to nslookup -type=caa, and it also resolves MX/apex IPs and performs PTR lookups for those IPs. Finally, it writes everything as JSON to C:\Temp&lt;domain&gt;.json and prints the saved path.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$Domain = <span style="color:#e6db74">&#34;domain.com&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Set-StrictMode -Version Latest
+</span></span><span style="display:flex;"><span>$ErrorActionPreference = <span style="color:#e6db74">&#34;Stop&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -------------------- StrictMode-safe helpers --------------------</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Has-Prop {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>    [Parameter(<span style="color:#a6e22e">Mandatory</span>)] $Obj,
+</span></span><span style="display:flex;"><span>    [Parameter(<span style="color:#a6e22e">Mandatory</span>)] [<span style="color:#66d9ef">string</span>] $Name
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> ($null <span style="color:#f92672">-ne</span> $Obj) <span style="color:#f92672">-and</span> ($null <span style="color:#f92672">-ne</span> $Obj.PSObject) <span style="color:#f92672">-and</span> ($null <span style="color:#f92672">-ne</span> $Obj.PSObject.Properties[$Name])
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-Prop {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>    [Parameter(<span style="color:#a6e22e">Mandatory</span>)] $Obj,
+</span></span><span style="display:flex;"><span>    [Parameter(<span style="color:#a6e22e">Mandatory</span>)] [<span style="color:#66d9ef">string</span>] $Name
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (Has-Prop -Obj $Obj -Name $Name) { <span style="color:#66d9ef">return</span> $Obj.$Name }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> $null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> New-ResultObject {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>([<span style="color:#66d9ef">string</span>]$Name, [<span style="color:#66d9ef">string</span>]$Type)
+</span></span><span style="display:flex;"><span>  [<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>    name        = $Name
+</span></span><span style="display:flex;"><span>    type        = $Type
+</span></span><span style="display:flex;"><span>    status      = <span style="color:#e6db74">&#34;unknown&#34;</span>   <span style="color:#75715e"># ok | missing | error | unsupported</span>
+</span></span><span style="display:flex;"><span>    answers     = @()
+</span></span><span style="display:flex;"><span>    notes       = @()
+</span></span><span style="display:flex;"><span>    error       = $null
+</span></span><span style="display:flex;"><span>    queried_at  = (Get-Date).ToString(<span style="color:#e6db74">&#34;o&#34;</span>)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Resolve-DnsSafe {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>    [Parameter(<span style="color:#a6e22e">Mandatory</span>)] [<span style="color:#66d9ef">string</span>]$Name,
+</span></span><span style="display:flex;"><span>    [Parameter(<span style="color:#a6e22e">Mandatory</span>)] [<span style="color:#66d9ef">string</span>]$Type
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $res = New-ResultObject -Name $Name -Type $Type
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    $r = Resolve-DnsName -Name $Name -Type $Type -DnsOnly -ErrorAction Stop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $ans = @($r | Where-Object { (Has-Prop $_ <span style="color:#e6db74">&#34;Section&#34;</span>) <span style="color:#f92672">-and</span> $_.Section <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;Answer&#34;</span> })
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($ans.Count <span style="color:#f92672">-gt</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      $res.status = <span style="color:#e6db74">&#34;ok&#34;</span>
+</span></span><span style="display:flex;"><span>      $res.answers = $ans
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      $res.status = <span style="color:#e6db74">&#34;missing&#34;</span>
+</span></span><span style="display:flex;"><span>      $res.notes += <span style="color:#e6db74">&#34;No Answer section records; record likely does not exist (Authority section may contain SOA).&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>    $msg = $_.Exception.Message
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($msg <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;DNS name does not exist&#34;</span>) {
+</span></span><span style="display:flex;"><span>      $res.status = <span style="color:#e6db74">&#34;missing&#34;</span>
+</span></span><span style="display:flex;"><span>      $res.notes += <span style="color:#e6db74">&#34;NXDOMAIN (DNS name does not exist).&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elseif</span> ($msg <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;Unable to match the identifier name CAA&#34;</span>) {
+</span></span><span style="display:flex;"><span>      $res.status = <span style="color:#e6db74">&#34;unsupported&#34;</span>
+</span></span><span style="display:flex;"><span>      $res.notes += <span style="color:#e6db74">&#34;CAA not supported by this Resolve-DnsName build; will attempt nslookup fallback.&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      $res.status = <span style="color:#e6db74">&#34;error&#34;</span>
+</span></span><span style="display:flex;"><span>      $res.error  = $msg
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> $res
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Extract-TxtStrings {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>($ResolveResult)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $vals = New-Object System.Collections.Generic.List[<span style="color:#66d9ef">string</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">foreach</span> ($a <span style="color:#66d9ef">in</span> @($ResolveResult.answers)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (Has-Prop $a <span style="color:#e6db74">&#34;Strings&#34;</span>) {
+</span></span><span style="display:flex;"><span>      $s = $a.Strings
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> ($null <span style="color:#f92672">-ne</span> $s) { $vals.Add(($s -join <span style="color:#e6db74">&#34;&#34;</span>)) }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elseif</span> (Has-Prop $a <span style="color:#e6db74">&#34;Text&#34;</span>) {
+</span></span><span style="display:flex;"><span>      $t = $a.Text
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> ($null <span style="color:#f92672">-ne</span> $t) { $vals.Add(($t -join <span style="color:#e6db74">&#34;&#34;</span>)) }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> $vals.ToArray()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Nslookup-CAA {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>([Parameter(<span style="color:#a6e22e">Mandatory</span>)][<span style="color:#66d9ef">string</span>]$Name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Native PowerShell-only suppression of nslookup &#34;stderr -&gt; NativeCommandError&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># We temporarily suppress error display and capture both streams as text.</span>
+</span></span><span style="display:flex;"><span>  $oldEap = $ErrorActionPreference
+</span></span><span style="display:flex;"><span>  $ErrorActionPreference = <span style="color:#e6db74">&#34;SilentlyContinue&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    $raw = &amp; nslookup.exe -type=caa $Name <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    $ErrorActionPreference = $oldEap
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $lines = @($raw) | ForEach-Object { $_.ToString().Trim() } | Where-Object {
+</span></span><span style="display:flex;"><span>    $_ <span style="color:#f92672">-and</span>
+</span></span><span style="display:flex;"><span>    $_ <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;^\*{3}&#34;</span> <span style="color:#f92672">-and</span>
+</span></span><span style="display:flex;"><span>    $_ <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;^Server:&#34;</span> <span style="color:#f92672">-and</span>
+</span></span><span style="display:flex;"><span>    $_ <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;^Address:&#34;</span> <span style="color:#f92672">-and</span>
+</span></span><span style="display:flex;"><span>    $_ <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;^Non-authoritative answer&#34;</span> <span style="color:#f92672">-and</span>
+</span></span><span style="display:flex;"><span>    $_ <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;Can&#39;t find server address&#34;</span> <span style="color:#f92672">-and</span>
+</span></span><span style="display:flex;"><span>    $_ <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;DNS request timed out&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># nslookup formatting varies; keep likely CAA lines</span>
+</span></span><span style="display:flex;"><span>  $caaLines = @($lines | Where-Object { $_ <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;\b(issue|issuewild|iodef)\b&#34;</span> <span style="color:#f92672">-or</span> $_ <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;\bCAA\b&#34;</span> <span style="color:#f92672">-or</span> $_ <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;\bcaa\b&#34;</span> })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  [<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>    name   = $Name
+</span></span><span style="display:flex;"><span>    type   = <span style="color:#e6db74">&#34;CAA&#34;</span>
+</span></span><span style="display:flex;"><span>    status = <span style="color:#66d9ef">if</span> ($caaLines.Count <span style="color:#f92672">-gt</span> <span style="color:#ae81ff">0</span>) { <span style="color:#e6db74">&#34;ok&#34;</span> } <span style="color:#66d9ef">else</span> { <span style="color:#e6db74">&#34;missing&#34;</span> }
+</span></span><span style="display:flex;"><span>    raw    = $lines
+</span></span><span style="display:flex;"><span>    caa    = $caaLines
+</span></span><span style="display:flex;"><span>    notes  = @(<span style="color:#e6db74">&#34;nslookup output captured with local ErrorActionPreference=SilentlyContinue to avoid NativeCommandError noise.&#34;</span>)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-PtrForIp {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>([Parameter(<span style="color:#a6e22e">Mandatory</span>)][<span style="color:#66d9ef">string</span>]$Ip)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (Resolve-DnsSafe -Name $Ip -Type <span style="color:#e6db74">&#34;PTR&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-SpfTree {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>    [Parameter(<span style="color:#a6e22e">Mandatory</span>)][<span style="color:#66d9ef">string</span>]$Name,
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">int</span>]$Depth = <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">int</span>]$MaxDepth = <span style="color:#ae81ff">8</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">hashtable</span>]$Seen = $null
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> $Seen) { $Seen = @{} }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $node = [<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>    domain      = $Name
+</span></span><span style="display:flex;"><span>    depth       = $Depth
+</span></span><span style="display:flex;"><span>    record      = $null
+</span></span><span style="display:flex;"><span>    mechanisms  = @()
+</span></span><span style="display:flex;"><span>    includes    = @()
+</span></span><span style="display:flex;"><span>    status      = <span style="color:#e6db74">&#34;unknown&#34;</span>
+</span></span><span style="display:flex;"><span>    notes       = @()
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($Seen.ContainsKey($Name)) {
+</span></span><span style="display:flex;"><span>    $node.status = <span style="color:#e6db74">&#34;ok&#34;</span>
+</span></span><span style="display:flex;"><span>    $node.notes += <span style="color:#e6db74">&#34;Already visited (cycle prevention).&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $node
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  $Seen[$Name] = $true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $txt = Resolve-DnsSafe -Name $Name -Type <span style="color:#e6db74">&#34;TXT&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($txt.status <span style="color:#f92672">-ne</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>    $node.status = $txt.status
+</span></span><span style="display:flex;"><span>    $node.notes += <span style="color:#e6db74">&#34;TXT lookup status: </span>$($txt.status)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($txt.error) { $node.notes += $txt.error }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $node
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $spf = (Extract-TxtStrings $txt) | Where-Object { $_ <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;^v=spf1\b&#39;</span> } | Select-Object -First <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> $spf) {
+</span></span><span style="display:flex;"><span>    $node.status = <span style="color:#e6db74">&#34;missing&#34;</span>
+</span></span><span style="display:flex;"><span>    $node.notes += <span style="color:#e6db74">&#34;No v=spf1 TXT record found.&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $node
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $node.status = <span style="color:#e6db74">&#34;ok&#34;</span>
+</span></span><span style="display:flex;"><span>  $node.record = $spf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $parts = @($spf -split <span style="color:#e6db74">&#34;\s+&#34;</span>) | Where-Object { $_ }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">foreach</span> ($p <span style="color:#66d9ef">in</span> $parts) {
+</span></span><span style="display:flex;"><span>    $node.mechanisms += $p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($p <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;include:*&#34;</span>) {
+</span></span><span style="display:flex;"><span>      $inc = $p.Substring(<span style="color:#e6db74">&#34;include:&#34;</span>.Length)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> ($Depth <span style="color:#f92672">-lt</span> $MaxDepth) {
+</span></span><span style="display:flex;"><span>        $node.includes += (Get-SpfTree -Name $inc -Depth ($Depth+<span style="color:#ae81ff">1</span>) -MaxDepth $MaxDepth -Seen $Seen)
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        $node.notes += <span style="color:#e6db74">&#34;MaxDepth reached; include not expanded: </span>$inc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elseif</span> ($p <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;redirect=*&#34;</span>) {
+</span></span><span style="display:flex;"><span>      $redir = $p.Substring(<span style="color:#e6db74">&#34;redirect=&#34;</span>.Length)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> ($Depth <span style="color:#f92672">-lt</span> $MaxDepth) {
+</span></span><span style="display:flex;"><span>        $node.includes += (Get-SpfTree -Name $redir -Depth ($Depth+<span style="color:#ae81ff">1</span>) -MaxDepth $MaxDepth -Seen $Seen)
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        $node.notes += <span style="color:#e6db74">&#34;MaxDepth reached; redirect not expanded: </span>$redir<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> $node
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -------------------- configuration --------------------</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$SpfMaxDepth = <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>$DkimSelectors = @(
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;selector1&#34;</span>,<span style="color:#e6db74">&#34;selector2&#34;</span>,<span style="color:#e6db74">&#34;default&#34;</span>,<span style="color:#e6db74">&#34;google&#34;</span>,<span style="color:#e6db74">&#34;s1&#34;</span>,<span style="color:#e6db74">&#34;s2&#34;</span>,<span style="color:#e6db74">&#34;dkim&#34;</span>,<span style="color:#e6db74">&#34;mail&#34;</span>,<span style="color:#e6db74">&#34;mta&#34;</span>,<span style="color:#e6db74">&#34;k1&#34;</span>,<span style="color:#e6db74">&#34;k2&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;smtp&#34;</span>,<span style="color:#e6db74">&#34;sendgrid&#34;</span>,<span style="color:#e6db74">&#34;mailgun&#34;</span>,<span style="color:#e6db74">&#34;mandrill&#34;</span>,<span style="color:#e6db74">&#34;amazonses&#34;</span>,<span style="color:#e6db74">&#34;ses&#34;</span>,<span style="color:#e6db74">&#34;sparkpost&#34;</span>,<span style="color:#e6db74">&#34;postmark&#34;</span>,<span style="color:#e6db74">&#34;zoho&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;mimecast&#34;</span>,<span style="color:#e6db74">&#34;proofpoint&#34;</span>,<span style="color:#e6db74">&#34;pp&#34;</span>,<span style="color:#e6db74">&#34;mg&#34;</span>,<span style="color:#e6db74">&#34;k3&#34;</span>,<span style="color:#e6db74">&#34;k4&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -------------------- build report --------------------</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$Domain = $Domain.ToLower()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$report = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>  meta = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    domain       = $Domain
+</span></span><span style="display:flex;"><span>    generated_at = (Get-Date).ToString(<span style="color:#e6db74">&#34;o&#34;</span>)
+</span></span><span style="display:flex;"><span>    host         = $env:COMPUTERNAME
+</span></span><span style="display:flex;"><span>    user         = $env:USERNAME
+</span></span><span style="display:flex;"><span>    powershell   = $PSVersionTable.PSVersion.ToString()
+</span></span><span style="display:flex;"><span>    strictmode   = <span style="color:#e6db74">&#34;Latest&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  apex = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    A     = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>    AAAA  = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>    NS    = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;NS&#34;</span>
+</span></span><span style="display:flex;"><span>    SOA   = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;SOA&#34;</span>
+</span></span><span style="display:flex;"><span>    MX    = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;MX&#34;</span>
+</span></span><span style="display:flex;"><span>    TXT   = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;TXT&#34;</span>
+</span></span><span style="display:flex;"><span>    CNAME = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    CAA   = Resolve-DnsSafe -Name $Domain -Type <span style="color:#e6db74">&#34;CAA&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  mail_security = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    dmarc = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_dmarc.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;TXT&#34;</span>
+</span></span><span style="display:flex;"><span>    bimi  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;default._bimi.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;TXT&#34;</span>
+</span></span><span style="display:flex;"><span>    mta_sts_policy = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_mta-sts.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;TXT&#34;</span>
+</span></span><span style="display:flex;"><span>    tls_rpt = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_smtp._tls.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;TXT&#34;</span>
+</span></span><span style="display:flex;"><span>    spf_tree = $null
+</span></span><span style="display:flex;"><span>    dkim = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      selectors_tried   = $DkimSelectors
+</span></span><span style="display:flex;"><span>      selector_results  = @()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  common_hostnames = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    autodiscover = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      A     = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;autodiscover.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>      AAAA  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;autodiscover.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>      CNAME = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;autodiscover.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    mta_sts_host = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      A     = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;mta-sts.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>      AAAA  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;mta-sts.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>      CNAME = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;mta-sts.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    mail = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      A     = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;mail.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>      AAAA  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;mail.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>      CNAME = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;mail.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    smtp = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      A     = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;smtp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>      AAAA  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;smtp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>      CNAME = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;smtp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    imap = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      A     = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;imap.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>      AAAA  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;imap.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>      CNAME = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;imap.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    pop = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      A     = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;pop.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>      AAAA  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;pop.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>      CNAME = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;pop.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    webmail = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      A     = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;webmail.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>      AAAA  = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;webmail.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>      CNAME = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;webmail.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  srv = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    submission = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_submission._tcp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;SRV&#34;</span>
+</span></span><span style="display:flex;"><span>    smtp       = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_smtp._tcp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;SRV&#34;</span>
+</span></span><span style="display:flex;"><span>    imap       = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_imap._tcp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;SRV&#34;</span>
+</span></span><span style="display:flex;"><span>    pop3       = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_pop3._tcp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;SRV&#34;</span>
+</span></span><span style="display:flex;"><span>    autodiscover = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_autodiscover._tcp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;SRV&#34;</span>
+</span></span><span style="display:flex;"><span>    sip_tls            = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_sip._tls.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;SRV&#34;</span>
+</span></span><span style="display:flex;"><span>    sipfederationtls   = Resolve-DnsSafe -Name (<span style="color:#e6db74">&#34;_sipfederationtls._tcp.</span>$Domain<span style="color:#e6db74">&#34;</span>) -Type <span style="color:#e6db74">&#34;SRV&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  derived = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    txt_all_values = @()
+</span></span><span style="display:flex;"><span>    spf_record     = $null
+</span></span><span style="display:flex;"><span>    dmarc_record   = $null
+</span></span><span style="display:flex;"><span>    bimi_record    = $null
+</span></span><span style="display:flex;"><span>    mta_sts_record = $null
+</span></span><span style="display:flex;"><span>    tls_rpt_record = $null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mx_hosts       = @()
+</span></span><span style="display:flex;"><span>    mx_host_ips    = @()
+</span></span><span style="display:flex;"><span>    apex_ips       = @()
+</span></span><span style="display:flex;"><span>    ptr_lookups    = @()
+</span></span><span style="display:flex;"><span>    caa_nslookup   = $null
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TXT flattening</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.apex.TXT.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  $report.derived.txt_all_values = @(Extract-TxtStrings $report.apex.TXT)
+</span></span><span style="display:flex;"><span>  $report.derived.spf_record = ($report.derived.txt_all_values | Where-Object { $_ <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;^v=spf1\b&#39;</span> } | Select-Object -First <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.mail_security.dmarc.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  $report.derived.dmarc_record = (Extract-TxtStrings $report.mail_security.dmarc | Select-Object -First <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.mail_security.bimi.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  $report.derived.bimi_record = (Extract-TxtStrings $report.mail_security.bimi | Select-Object -First <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.mail_security.mta_sts_policy.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  $report.derived.mta_sts_record = (Extract-TxtStrings $report.mail_security.mta_sts_policy | Select-Object -First <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.mail_security.tls_rpt.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  $report.derived.tls_rpt_record = (Extract-TxtStrings $report.mail_security.tls_rpt | Select-Object -First <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SPF tree</span>
+</span></span><span style="display:flex;"><span>$report.mail_security.spf_tree = Get-SpfTree -Name $Domain -MaxDepth $SpfMaxDepth
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DKIM selectors</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($sel <span style="color:#66d9ef">in</span> $DkimSelectors) {
+</span></span><span style="display:flex;"><span>  $q = <span style="color:#e6db74">&#34;</span>$sel<span style="color:#e6db74">._domainkey.</span>$Domain<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $item = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    selector = $sel
+</span></span><span style="display:flex;"><span>    name     = $q
+</span></span><span style="display:flex;"><span>    txt      = Resolve-DnsSafe -Name $q -Type <span style="color:#e6db74">&#34;TXT&#34;</span>
+</span></span><span style="display:flex;"><span>    cname    = Resolve-DnsSafe -Name $q -Type <span style="color:#e6db74">&#34;CNAME&#34;</span>
+</span></span><span style="display:flex;"><span>    cname_target_txt = $null
+</span></span><span style="display:flex;"><span>    derived = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>      dkim_txt_values = @()
+</span></span><span style="display:flex;"><span>      cname_target    = $null
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($item.txt.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>    $item.derived.dkim_txt_values = @(Extract-TxtStrings $item.txt)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ($item.cname.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span> <span style="color:#f92672">-and</span> $item.cname.answers.Count <span style="color:#f92672">-gt</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    $first = $item.cname.answers[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    $target = $null
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (Has-Prop $first <span style="color:#e6db74">&#34;NameHost&#34;</span>)       { $target = $first.NameHost }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elseif</span> (Has-Prop $first <span style="color:#e6db74">&#34;NameTarget&#34;</span>) { $target = $first.NameTarget }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $item.derived.cname_target = $target
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($target) { $item.cname_target_txt = Resolve-DnsSafe -Name $target -Type <span style="color:#e6db74">&#34;TXT&#34;</span> }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $report.mail_security.dkim.selector_results += [<span style="color:#66d9ef">pscustomobject</span>]$item
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MX host resolution + PTR</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.apex.MX.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  $mxHosts = @()
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">foreach</span> ($mxAns <span style="color:#66d9ef">in</span> @($report.apex.MX.answers)) {
+</span></span><span style="display:flex;"><span>    $ex = Get-Prop $mxAns <span style="color:#e6db74">&#34;NameExchange&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($ex) { $mxHosts += $ex }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  $mxHosts = $mxHosts | Select-Object -Unique
+</span></span><span style="display:flex;"><span>  $report.derived.mx_hosts = @($mxHosts)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">foreach</span> ($mx <span style="color:#66d9ef">in</span> $mxHosts) {
+</span></span><span style="display:flex;"><span>    $a    = Resolve-DnsSafe -Name $mx -Type <span style="color:#e6db74">&#34;A&#34;</span>
+</span></span><span style="display:flex;"><span>    $aaaa = Resolve-DnsSafe -Name $mx -Type <span style="color:#e6db74">&#34;AAAA&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $ips = @()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($a.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">foreach</span> ($ans <span style="color:#66d9ef">in</span> @($a.answers)) {
+</span></span><span style="display:flex;"><span>        $ip = Get-Prop $ans <span style="color:#e6db74">&#34;IPAddress&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($ip) { $ips += $ip }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($aaaa.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">foreach</span> ($ans <span style="color:#66d9ef">in</span> @($aaaa.answers)) {
+</span></span><span style="display:flex;"><span>        $ip = Get-Prop $ans <span style="color:#e6db74">&#34;IPAddress&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($ip) { $ips += $ip }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $ips = $ips | Where-Object { $_ } | Select-Object -Unique
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $report.derived.mx_host_ips += [<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>      host = $mx
+</span></span><span style="display:flex;"><span>      A    = $a
+</span></span><span style="display:flex;"><span>      AAAA = $aaaa
+</span></span><span style="display:flex;"><span>      ips  = @($ips)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> ($ip <span style="color:#66d9ef">in</span> $ips) {
+</span></span><span style="display:flex;"><span>      $report.derived.ptr_lookups += (Get-PtrForIp -Ip $ip)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apex PTRs</span>
+</span></span><span style="display:flex;"><span>$apexIps = @()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.apex.A.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">foreach</span> ($ans <span style="color:#66d9ef">in</span> @($report.apex.A.answers)) {
+</span></span><span style="display:flex;"><span>    $ip = Get-Prop $ans <span style="color:#e6db74">&#34;IPAddress&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($ip) { $apexIps += $ip }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.apex.AAAA.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;ok&#34;</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">foreach</span> ($ans <span style="color:#66d9ef">in</span> @($report.apex.AAAA.answers)) {
+</span></span><span style="display:flex;"><span>    $ip = Get-Prop $ans <span style="color:#e6db74">&#34;IPAddress&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($ip) { $apexIps += $ip }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$apexIps = $apexIps | Where-Object { $_ } | Select-Object -Unique
+</span></span><span style="display:flex;"><span>$report.derived.apex_ips = @($apexIps)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($ip <span style="color:#66d9ef">in</span> $apexIps) {
+</span></span><span style="display:flex;"><span>  $report.derived.ptr_lookups += (Get-PtrForIp -Ip $ip)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># CAA fallback (native PS only, no CMD; no red error spam)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($report.apex.CAA.status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;unsupported&#34;</span>) {
+</span></span><span style="display:flex;"><span>  $report.derived.caa_nslookup = Nslookup-CAA -Name $Domain
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- write JSON to C:\Temp\&lt;domain&gt;.json ---</span>
+</span></span><span style="display:flex;"><span>$OutDir  = <span style="color:#e6db74">&#34;C:\Temp&#34;</span>
+</span></span><span style="display:flex;"><span>$OutFile = Join-Path $OutDir <span style="color:#e6db74">&#34;</span>$Domain<span style="color:#e6db74">.json&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> (Test-Path $OutDir)) {
+</span></span><span style="display:flex;"><span>  New-Item -Path $OutDir -ItemType Directory -Force | Out-Null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$json = $report | ConvertTo-Json -Depth <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">System.IO.File</span>]::WriteAllText($OutFile, $json, [<span style="color:#66d9ef">System.Text.Encoding</span>]::UTF8)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Saved JSON to: </span>$OutFile<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><h1 id="check-environment">Check Environment</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ErrorActionPreference = <span style="color:#e6db74">&#39;Stop&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Safe-Get {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>        [Parameter(<span style="color:#a6e22e">Mandatory</span>)] [<span style="color:#66d9ef">scriptblock</span>] $Script,
+</span></span><span style="display:flex;"><span>        $Default = $null
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> { &amp; $Script } <span style="color:#66d9ef">catch</span> { $Default }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-PSPreReleaseLabel {
+</span></span><span style="display:flex;"><span>    $label = Safe-Get { $PSVersionTable.PSVersion.PreReleaseLabel } $null
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($label) { <span style="color:#66d9ef">return</span> $label }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $label2 = Safe-Get { $PSVersionTable.PSVersion.PreRelease } $null
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($label2) { <span style="color:#66d9ef">return</span> $label2 }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> $null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ensure output directory exists</span>
+</span></span><span style="display:flex;"><span>$OutputPath = <span style="color:#e6db74">&#39;C:\temp\environment.json&#39;</span>
+</span></span><span style="display:flex;"><span>$OutputDir  = Split-Path $OutputPath
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">-not</span> (Test-Path $OutputDir)) {
+</span></span><span style="display:flex;"><span>    New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$report = [<span style="color:#66d9ef">ordered</span>]@{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PowerShell Engine</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span>$psv = $PSVersionTable.PSVersion
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$report.PowerShell = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    PSEdition             = $PSVersionTable.PSEdition
+</span></span><span style="display:flex;"><span>    PSVersion             = Safe-Get { $psv.ToString() } $null
+</span></span><span style="display:flex;"><span>    Major                 = Safe-Get { $psv.Major } $null
+</span></span><span style="display:flex;"><span>    Minor                 = Safe-Get { $psv.Minor } $null
+</span></span><span style="display:flex;"><span>    Build                 = Safe-Get { $psv.Build } $null
+</span></span><span style="display:flex;"><span>    Revision              = Safe-Get { $psv.Revision } $null
+</span></span><span style="display:flex;"><span>    PreReleaseLabel       = Get-PSPreReleaseLabel
+</span></span><span style="display:flex;"><span>    GitCommitId           = Safe-Get { $PSVersionTable.GitCommitId } $null
+</span></span><span style="display:flex;"><span>    PSCompatibleVersions  = Safe-Get { $PSVersionTable.PSCompatibleVersions | ForEach-Object { $_.ToString() } } @()
+</span></span><span style="display:flex;"><span>    SerializationVersion  = Safe-Get { $PSVersionTable.SerializationVersion.ToString() } $null
+</span></span><span style="display:flex;"><span>    WSManStackVersion     = Safe-Get { $PSVersionTable.WSManStackVersion.ToString() } $null
+</span></span><span style="display:flex;"><span>    CLRVersion            = Safe-Get { $PSVersionTable.CLRVersion.ToString() } $null
+</span></span><span style="display:flex;"><span>    BuildVersion          = Safe-Get { $PSVersionTable.BuildVersion.ToString() } $null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Host</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span>$ui = Safe-Get { $Host.UI } $null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$report.Host = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    Name            = $Host.Name
+</span></span><span style="display:flex;"><span>    Version         = Safe-Get { $Host.Version.ToString() } $null
+</span></span><span style="display:flex;"><span>    InstanceId      = Safe-Get { $Host.InstanceId } $null
+</span></span><span style="display:flex;"><span>    IsInteractive   = ($ui <span style="color:#f92672">-ne</span> $null)
+</span></span><span style="display:flex;"><span>    SupportsVT100   = Safe-Get { $ui.SupportsVirtualTerminal } $null
+</span></span><span style="display:flex;"><span>    WindowSize      = Safe-Get { <span style="color:#e6db74">&#34;{0}x{1}&#34;</span> <span style="color:#f92672">-f</span> $ui.RawUI.WindowSize.Width, $ui.RawUI.WindowSize.Height } $null
+</span></span><span style="display:flex;"><span>    BufferSize      = Safe-Get { <span style="color:#e6db74">&#34;{0}x{1}&#34;</span> <span style="color:#f92672">-f</span> $ui.RawUI.BufferSize.Width, $ui.RawUI.BufferSize.Height } $null
+</span></span><span style="display:flex;"><span>    ForegroundColor = Safe-Get { $ui.RawUI.ForegroundColor.ToString() } $null
+</span></span><span style="display:flex;"><span>    BackgroundColor = Safe-Get { $ui.RawUI.BackgroundColor.ToString() } $null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Session / Language / Preferences</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span>$report.Session = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    LanguageMode              = Safe-Get { $ExecutionContext.SessionState.LanguageMode.ToString() } $null
+</span></span><span style="display:flex;"><span>    RunspaceId                = Safe-Get { $ExecutionContext.SessionState.Runspace.Id } $null
+</span></span><span style="display:flex;"><span>    CurrentLocation           = Safe-Get { (Get-Location).Path } $null
+</span></span><span style="display:flex;"><span>    PSModulePath              = $env:PSModulePath
+</span></span><span style="display:flex;"><span>    ExecutionPolicyByScope    = Safe-Get {
+</span></span><span style="display:flex;"><span>        Get-ExecutionPolicy -List |
+</span></span><span style="display:flex;"><span>            Sort-Object Scope |
+</span></span><span style="display:flex;"><span>            ForEach-Object {
+</span></span><span style="display:flex;"><span>                [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>                    Scope  = $_.Scope.ToString()
+</span></span><span style="display:flex;"><span>                    Policy = $_.ExecutionPolicy.ToString()
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>    } @()
+</span></span><span style="display:flex;"><span>    ConfirmPreference         = Safe-Get { $ConfirmPreference } $null
+</span></span><span style="display:flex;"><span>    ErrorActionPreference     = Safe-Get { $ErrorActionPreference } $null
+</span></span><span style="display:flex;"><span>    ProgressPreference        = Safe-Get { $ProgressPreference } $null
+</span></span><span style="display:flex;"><span>    VerbosePreference         = Safe-Get { $VerbosePreference } $null
+</span></span><span style="display:flex;"><span>    WarningPreference         = Safe-Get { $WarningPreference } $null
+</span></span><span style="display:flex;"><span>    InformationPreference     = Safe-Get { $InformationPreference } $null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loaded Modules</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span>$report.ModulesLoaded = Safe-Get {
+</span></span><span style="display:flex;"><span>    Get-Module |
+</span></span><span style="display:flex;"><span>        Sort-Object Name |
+</span></span><span style="display:flex;"><span>        ForEach-Object {
+</span></span><span style="display:flex;"><span>            [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>                Name       = $_.Name
+</span></span><span style="display:flex;"><span>                Version    = Safe-Get { $_.Version.ToString() } $null
+</span></span><span style="display:flex;"><span>                ModuleType = Safe-Get { $_.ModuleType.ToString() } $null
+</span></span><span style="display:flex;"><span>                Path       = $_.Path
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>} @()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Commands Summary</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span>$cmds = Safe-Get { Get-Command } @()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$report.CommandsSummary = [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>    Total = Safe-Get { $cmds.Count } <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    ByCommandType = Safe-Get {
+</span></span><span style="display:flex;"><span>        $cmds |
+</span></span><span style="display:flex;"><span>            Group-Object CommandType |
+</span></span><span style="display:flex;"><span>            Sort-Object Name |
+</span></span><span style="display:flex;"><span>            ForEach-Object {
+</span></span><span style="display:flex;"><span>                [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>                    Type  = $_.Name
+</span></span><span style="display:flex;"><span>                    Count = $_.Count
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>    } @()
+</span></span><span style="display:flex;"><span>    ByModuleTop20 = Safe-Get {
+</span></span><span style="display:flex;"><span>        $cmds |
+</span></span><span style="display:flex;"><span>            Where-Object { $_.ModuleName } |
+</span></span><span style="display:flex;"><span>            Group-Object ModuleName |
+</span></span><span style="display:flex;"><span>            Sort-Object Count -Descending |
+</span></span><span style="display:flex;"><span>            Select-Object -First <span style="color:#ae81ff">20</span> |
+</span></span><span style="display:flex;"><span>            ForEach-Object {
+</span></span><span style="display:flex;"><span>                [<span style="color:#66d9ef">ordered</span>]@{
+</span></span><span style="display:flex;"><span>                    Module = $_.Name
+</span></span><span style="display:flex;"><span>                    Count  = $_.Count
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>    } @()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Write JSON to disk</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------</span>
+</span></span><span style="display:flex;"><span>$report |
+</span></span><span style="display:flex;"><span>    ConvertTo-Json -Depth <span style="color:#ae81ff">7</span> |
+</span></span><span style="display:flex;"><span>    Set-Content -Path $OutputPath -Encoding UTF8
+</span></span></code></pre></div>
+<h1 id="proven-working-environment">Proven Working Environment</h1>
+<div class="notice notice--info"><div class="notice__title">AI-Generated Content</div><div class="notice__body">This script was tested and verified to work by a human in this environment.</div>
+</div>
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;PowerShell&#34;</span>:  {
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;PSEdition&#34;</span>:  <span style="color:#e6db74">&#34;Desktop&#34;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;PSVersion&#34;</span>:  <span style="color:#e6db74">&#34;5.1.26100.7462&#34;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;Major&#34;</span>:  <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;Minor&#34;</span>:  <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;Build&#34;</span>:  <span style="color:#ae81ff">26100</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;Revision&#34;</span>:  <span style="color:#ae81ff">7462</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;PreReleaseLabel&#34;</span>:  <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;GitCommitId&#34;</span>:  <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;PSCompatibleVersions&#34;</span>:  [
+</span></span><span style="display:flex;"><span>                                                    <span style="color:#e6db74">&#34;1.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                    <span style="color:#e6db74">&#34;2.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                    <span style="color:#e6db74">&#34;3.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                    <span style="color:#e6db74">&#34;4.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                    <span style="color:#e6db74">&#34;5.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                    <span style="color:#e6db74">&#34;5.1.26100.7462&#34;</span>
+</span></span><span style="display:flex;"><span>                                                ],
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;SerializationVersion&#34;</span>:  <span style="color:#e6db74">&#34;1.1.0.1&#34;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;WSManStackVersion&#34;</span>:  <span style="color:#e6db74">&#34;3.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;CLRVersion&#34;</span>:  <span style="color:#e6db74">&#34;4.0.30319.42000&#34;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#f92672">&#34;BuildVersion&#34;</span>:  <span style="color:#e6db74">&#34;10.0.26100.7462&#34;</span>
+</span></span><span style="display:flex;"><span>                   },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Host&#34;</span>:  {
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;Windows PowerShell ISE Host&#34;</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;5.1.26100.7462&#34;</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;InstanceId&#34;</span>:  <span style="color:#e6db74">&#34;f00fb830-2ac7-460e-af4c-1e61e86a60a3&#34;</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;IsInteractive&#34;</span>:  <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;SupportsVT100&#34;</span>:  <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;WindowSize&#34;</span>:  <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;BufferSize&#34;</span>:  <span style="color:#e6db74">&#34;141x0&#34;</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;ForegroundColor&#34;</span>:  <span style="color:#e6db74">&#34;-1&#34;</span>,
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">&#34;BackgroundColor&#34;</span>:  <span style="color:#e6db74">&#34;-1&#34;</span>
+</span></span><span style="display:flex;"><span>             },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Session&#34;</span>:  {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;LanguageMode&#34;</span>:  <span style="color:#e6db74">&#34;FullLanguage&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;RunspaceId&#34;</span>:  <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;CurrentLocation&#34;</span>:  <span style="color:#e6db74">&#34;C:\\temp&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;PSModulePath&#34;</span>:  <span style="color:#e6db74">&#34;C:\\Users\\50567920\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Windows Kits\\10\\Microsoft Application Virtualization\\Sequencer\\AppvPkgConverter;C:\\Program Files (x86)\\Windows Kits\\10\\Microsoft Application Virtualization\\Sequencer\\AppvSequencer;C:\\Program Files (x86)\\Windows Kits\\10\\Microsoft Application Virtualization\\;C:\\Program Files\\Thycotic\\Powershell\\&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;ExecutionPolicyByScope&#34;</span>:  [
+</span></span><span style="display:flex;"><span>                                                   {
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Scope&#34;</span>:  <span style="color:#e6db74">&#34;Process&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Policy&#34;</span>:  <span style="color:#e6db74">&#34;Undefined&#34;</span>
+</span></span><span style="display:flex;"><span>                                                   },
+</span></span><span style="display:flex;"><span>                                                   {
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Scope&#34;</span>:  <span style="color:#e6db74">&#34;CurrentUser&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Policy&#34;</span>:  <span style="color:#e6db74">&#34;RemoteSigned&#34;</span>
+</span></span><span style="display:flex;"><span>                                                   },
+</span></span><span style="display:flex;"><span>                                                   {
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Scope&#34;</span>:  <span style="color:#e6db74">&#34;LocalMachine&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Policy&#34;</span>:  <span style="color:#e6db74">&#34;RemoteSigned&#34;</span>
+</span></span><span style="display:flex;"><span>                                                   },
+</span></span><span style="display:flex;"><span>                                                   {
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Scope&#34;</span>:  <span style="color:#e6db74">&#34;UserPolicy&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Policy&#34;</span>:  <span style="color:#e6db74">&#34;Undefined&#34;</span>
+</span></span><span style="display:flex;"><span>                                                   },
+</span></span><span style="display:flex;"><span>                                                   {
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Scope&#34;</span>:  <span style="color:#e6db74">&#34;MachinePolicy&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                       <span style="color:#f92672">&#34;Policy&#34;</span>:  <span style="color:#e6db74">&#34;Undefined&#34;</span>
+</span></span><span style="display:flex;"><span>                                                   }
+</span></span><span style="display:flex;"><span>                                               ],
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;ConfirmPreference&#34;</span>:  <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;ErrorActionPreference&#34;</span>:  <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;ProgressPreference&#34;</span>:  <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;VerbosePreference&#34;</span>:  <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;WarningPreference&#34;</span>:  <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;InformationPreference&#34;</span>:  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ModulesLoaded&#34;</span>:  [
+</span></span><span style="display:flex;"><span>                          {
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;CimCmdlets&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;1.0.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;ModuleType&#34;</span>:  <span style="color:#e6db74">&#34;Binary&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Path&#34;</span>:  <span style="color:#e6db74">&#34;C:\\WINDOWS\\Microsoft.Net\\assembly\\GAC_MSIL\\Microsoft.Management.Infrastructure.CimCmdlets\\v4.0_1.0.0.0__31bf3856ad364e35\\Microsoft.Management.Infrastructure.CimCmdlets.dll&#34;</span>
+</span></span><span style="display:flex;"><span>                          },
+</span></span><span style="display:flex;"><span>                          {
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;DnsClient&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;1.0.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;ModuleType&#34;</span>:  <span style="color:#e6db74">&#34;Manifest&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Path&#34;</span>:  <span style="color:#e6db74">&#34;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\DnsClient\\DnsClient.psd1&#34;</span>
+</span></span><span style="display:flex;"><span>                          },
+</span></span><span style="display:flex;"><span>                          {
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;ISE&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;1.0.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;ModuleType&#34;</span>:  <span style="color:#e6db74">&#34;Script&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Path&#34;</span>:  <span style="color:#e6db74">&#34;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\ISE\\ISE.psm1&#34;</span>
+</span></span><span style="display:flex;"><span>                          },
+</span></span><span style="display:flex;"><span>                          {
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.PowerShell.Management&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;3.1.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;ModuleType&#34;</span>:  <span style="color:#e6db74">&#34;Manifest&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Path&#34;</span>:  <span style="color:#e6db74">&#34;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Management\\Microsoft.PowerShell.Management.psd1&#34;</span>
+</span></span><span style="display:flex;"><span>                          },
+</span></span><span style="display:flex;"><span>                          {
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.PowerShell.Security&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;3.0.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;ModuleType&#34;</span>:  <span style="color:#e6db74">&#34;Manifest&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Path&#34;</span>:  <span style="color:#e6db74">&#34;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Security\\Microsoft.PowerShell.Security.psd1&#34;</span>
+</span></span><span style="display:flex;"><span>                          },
+</span></span><span style="display:flex;"><span>                          {
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.PowerShell.Utility&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;3.1.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;ModuleType&#34;</span>:  <span style="color:#e6db74">&#34;Manifest&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Path&#34;</span>:  <span style="color:#e6db74">&#34;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1&#34;</span>
+</span></span><span style="display:flex;"><span>                          },
+</span></span><span style="display:flex;"><span>                          {
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Name&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.WSMan.Management&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Version&#34;</span>:  <span style="color:#e6db74">&#34;3.0.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;ModuleType&#34;</span>:  <span style="color:#e6db74">&#34;Manifest&#34;</span>,
+</span></span><span style="display:flex;"><span>                              <span style="color:#f92672">&#34;Path&#34;</span>:  <span style="color:#e6db74">&#34;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.WSMan.Management\\Microsoft.WSMan.Management.psd1&#34;</span>
+</span></span><span style="display:flex;"><span>                          }
+</span></span><span style="display:flex;"><span>                      ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CommandsSummary&#34;</span>:  {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;Total&#34;</span>:  <span style="color:#ae81ff">21380</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;ByCommandType&#34;</span>:  [
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Type&#34;</span>:  <span style="color:#e6db74">&#34;Alias&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">1266</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Type&#34;</span>:  <span style="color:#e6db74">&#34;Cmdlet&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">5939</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Type&#34;</span>:  <span style="color:#e6db74">&#34;Filter&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Type&#34;</span>:  <span style="color:#e6db74">&#34;Function&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">14174</span>
+</span></span><span style="display:flex;"><span>                                                  }
+</span></span><span style="display:flex;"><span>                                              ],
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;ByModuleTop20&#34;</span>:  [
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Files&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">1252</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Devices.CorporateManagement&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">1164</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Sites&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">1052</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Identity.Governance&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">988</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Az.Network&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">893</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Identity.SignIns&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">836</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Teams&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">773</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Security&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">460</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Notes&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">401</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Identity.DirectoryManagement&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">385</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;VMware.VimAutomation.Core&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">351</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Online.SharePoint.PowerShell&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">344</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Az.Sql&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">329</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Applications&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">312</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.Education&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">297</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Az.Compute&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">277</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;VMware.Sdk.vSphere.Esx.Settings&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">267</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Az.Synapse&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">237</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Az.RecoveryServices&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">233</span>
+</span></span><span style="display:flex;"><span>                                                  },
+</span></span><span style="display:flex;"><span>                                                  {
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Module&#34;</span>:  <span style="color:#e6db74">&#34;Microsoft.Graph.DeviceManagement&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                      <span style="color:#f92672">&#34;Count&#34;</span>:  <span style="color:#ae81ff">229</span>
+</span></span><span style="display:flex;"><span>                                                  }
+</span></span><span style="display:flex;"><span>                                              ]
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+          </div>
+        </div>
+      </article>
+
+    </main>
+    <aside class="sv-sidebar" aria-label="Recently modified">
+  <div class="sv-sidebar-title">Recently Modified</div>
+  <ul class="sv-sidebar-list"><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2026-01-27-get-dns-records/">Get DNS Records with PowerShell</a>
+        <time class="sv-sidebar-date" datetime="2026-01-27">
+          Jan 27, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">Generative Guidelines for the 3D Force-Directed Graph (Search-First)</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/">Nth Fibonacci Number</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2024-03-25-window-watcher/">Window Monitoring with Machine Vision</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">Gmail Photo Downloader</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-08-24-disco-ball/">Disco Ball</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-11-rapidapi/">Yahoo Finance API via RapidAPI</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-08-keycode-event-test/">Key Event Tester</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">Deep Floyd IF</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-22-random-password-generator/">Random Password Generator</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-03-windows-defender-firewall/">Windows Defender Firewall Management Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-22-laps/">Microsoft LAPS (Local Administrator Password Solution) Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-15-decode-phishing-emails/">Phishing Email Decoding Tools</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-film/">Frame Interpolation Large Motion (FILM)</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-stable-diffusion/">Stable Diffusion Scripts</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2022-05-04-archimedean-spiral/">Archimedean Spiral</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li></ul>
+</aside>
+
+  </div>
+</div>
+<script src="http://localhost:1313/js/code-copy.js" defer></script>
+  </body>
+</html>

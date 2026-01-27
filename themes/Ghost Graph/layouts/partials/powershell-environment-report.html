@@ -1,0 +1,151 @@
+{{- $code := `$ErrorActionPreference = 'Stop'
+
+function Safe-Get {
+    param(
+        [Parameter(Mandatory)] [scriptblock] $Script,
+        $Default = $null
+    )
+    try { & $Script } catch { $Default }
+}
+
+function Get-PSPreReleaseLabel {
+    $label = Safe-Get { $PSVersionTable.PSVersion.PreReleaseLabel } $null
+    if ($label) { return $label }
+
+    $label2 = Safe-Get { $PSVersionTable.PSVersion.PreRelease } $null
+    if ($label2) { return $label2 }
+
+    return $null
+}
+
+# Ensure output directory exists
+$OutputPath = 'C:\temp\environment.json'
+$OutputDir  = Split-Path $OutputPath
+
+if (-not (Test-Path $OutputDir)) {
+    New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
+}
+
+$report = [ordered]@{}
+
+# ---------------------------
+# PowerShell Engine
+# ---------------------------
+$psv = $PSVersionTable.PSVersion
+
+$report.PowerShell = [ordered]@{
+    PSEdition             = $PSVersionTable.PSEdition
+    PSVersion             = Safe-Get { $psv.ToString() } $null
+    Major                 = Safe-Get { $psv.Major } $null
+    Minor                 = Safe-Get { $psv.Minor } $null
+    Build                 = Safe-Get { $psv.Build } $null
+    Revision              = Safe-Get { $psv.Revision } $null
+    PreReleaseLabel       = Get-PSPreReleaseLabel
+    GitCommitId           = Safe-Get { $PSVersionTable.GitCommitId } $null
+    PSCompatibleVersions  = Safe-Get { $PSVersionTable.PSCompatibleVersions | ForEach-Object { $_.ToString() } } @()
+    SerializationVersion  = Safe-Get { $PSVersionTable.SerializationVersion.ToString() } $null
+    WSManStackVersion     = Safe-Get { $PSVersionTable.WSManStackVersion.ToString() } $null
+    CLRVersion            = Safe-Get { $PSVersionTable.CLRVersion.ToString() } $null
+    BuildVersion          = Safe-Get { $PSVersionTable.BuildVersion.ToString() } $null
+}
+
+# ---------------------------
+# Host
+# ---------------------------
+$ui = Safe-Get { $Host.UI } $null
+
+$report.Host = [ordered]@{
+    Name            = $Host.Name
+    Version         = Safe-Get { $Host.Version.ToString() } $null
+    InstanceId      = Safe-Get { $Host.InstanceId } $null
+    IsInteractive   = ($ui -ne $null)
+    SupportsVT100   = Safe-Get { $ui.SupportsVirtualTerminal } $null
+    WindowSize      = Safe-Get { "{0}x{1}" -f $ui.RawUI.WindowSize.Width, $ui.RawUI.WindowSize.Height } $null
+    BufferSize      = Safe-Get { "{0}x{1}" -f $ui.RawUI.BufferSize.Width, $ui.RawUI.BufferSize.Height } $null
+    ForegroundColor = Safe-Get { $ui.RawUI.ForegroundColor.ToString() } $null
+    BackgroundColor = Safe-Get { $ui.RawUI.BackgroundColor.ToString() } $null
+}
+
+# ---------------------------
+# Session / Language / Preferences
+# ---------------------------
+$report.Session = [ordered]@{
+    LanguageMode              = Safe-Get { $ExecutionContext.SessionState.LanguageMode.ToString() } $null
+    RunspaceId                = Safe-Get { $ExecutionContext.SessionState.Runspace.Id } $null
+    CurrentLocation           = Safe-Get { (Get-Location).Path } $null
+    PSModulePath              = $env:PSModulePath
+    ExecutionPolicyByScope    = Safe-Get {
+        Get-ExecutionPolicy -List |
+            Sort-Object Scope |
+            ForEach-Object {
+                [ordered]@{
+                    Scope  = $_.Scope.ToString()
+                    Policy = $_.ExecutionPolicy.ToString()
+                }
+            }
+    } @()
+    ConfirmPreference         = Safe-Get { $ConfirmPreference } $null
+    ErrorActionPreference     = Safe-Get { $ErrorActionPreference } $null
+    ProgressPreference        = Safe-Get { $ProgressPreference } $null
+    VerbosePreference         = Safe-Get { $VerbosePreference } $null
+    WarningPreference         = Safe-Get { $WarningPreference } $null
+    InformationPreference     = Safe-Get { $InformationPreference } $null
+}
+
+# ---------------------------
+# Loaded Modules
+# ---------------------------
+$report.ModulesLoaded = Safe-Get {
+    Get-Module |
+        Sort-Object Name |
+        ForEach-Object {
+            [ordered]@{
+                Name       = $_.Name
+                Version    = Safe-Get { $_.Version.ToString() } $null
+                ModuleType = Safe-Get { $_.ModuleType.ToString() } $null
+                Path       = $_.Path
+            }
+        }
+} @()
+
+# ---------------------------
+# Commands Summary
+# ---------------------------
+$cmds = Safe-Get { Get-Command } @()
+
+$report.CommandsSummary = [ordered]@{
+    Total = Safe-Get { $cmds.Count } 0
+    ByCommandType = Safe-Get {
+        $cmds |
+            Group-Object CommandType |
+            Sort-Object Name |
+            ForEach-Object {
+                [ordered]@{
+                    Type  = $_.Name
+                    Count = $_.Count
+                }
+            }
+    } @()
+    ByModuleTop20 = Safe-Get {
+        $cmds |
+            Where-Object { $_.ModuleName } |
+            Group-Object ModuleName |
+            Sort-Object Count -Descending |
+            Select-Object -First 20 |
+            ForEach-Object {
+                [ordered]@{
+                    Module = $_.Name
+                    Count  = $_.Count
+                }
+            }
+    } @()
+}
+
+# ---------------------------
+# Write JSON to disk
+# ---------------------------
+$report |
+    ConvertTo-Json -Depth 7 |
+    Set-Content -Path $OutputPath -Encoding UTF8
+` -}}
+{{- highlight $code "powershell" "" -}}

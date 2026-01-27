@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --bg: #070c12;
   --bg-deep: #02050a;
   --panel: rgba(8, 18, 26, 0.95);
@@ -116,7 +116,7 @@ body.sv-body::after {
 
 .sv-subtitle {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 1em;
 }
 
 .sv-nav {
@@ -124,7 +124,7 @@ body.sv-body::after {
   flex-wrap: nowrap;
   gap: 12px;
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.85rem;
+  font-size: 1em;
   align-items: center;
 }
 
@@ -137,7 +137,7 @@ body.sv-body::after {
   background: rgba(6, 16, 22, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.75rem;
+  font-size: 1em;
   height: var(--control-height);
   display: inline-flex;
   align-items: center;
@@ -210,7 +210,7 @@ body.sv-body::after {
   font-family: "Chakra Petch", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  font-size: 0.7rem;
+  font-size: 1em;
   color: var(--accent);
 }
 
@@ -231,7 +231,7 @@ body.sv-body::after {
 .sv-map-path {
   margin-top: 8px;
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.7rem;
+  font-size: 1em;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(159, 179, 200, 0.8);
@@ -244,11 +244,32 @@ body.sv-body::after {
   align-items: center;
 }
 
+.sv-map-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 1em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(6, 12, 18, 0.6);
+  border: 1px solid rgba(78, 240, 255, 0.3);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
+.sv-map-toggle input {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+}
+
 .sv-map-search {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 16px;
+  padding: 0 20px;
   border-radius: 10px;
   border: 1px solid rgba(78, 240, 255, 0.3);
   background: rgba(6, 12, 18, 0.7);
@@ -256,7 +277,7 @@ body.sv-body::after {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--muted);
-  font-size: 0.6rem;
+  font-size: 1em;
   height: var(--control-height);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
@@ -265,17 +286,11 @@ body.sv-body::after {
   border-color: rgba(78, 240, 255, 0.5);
   background: rgba(6, 16, 22, 0.9);
   box-shadow: 0 10px 28px rgba(4, 10, 18, 0.5);
-  min-width: 520px;
+  min-width: clamp(320px, 45vw, 680px);
   flex: 1;
   position: relative;
   overflow: hidden;
   height: var(--control-height);
-}
-
-.sv-nav-search {
-  margin-left: auto;
-  flex: 1 1 1024px;
-  max-width: 1600px;
 }
 
 .sv-search-label {
@@ -287,9 +302,9 @@ body.sv-body::after {
   background: transparent;
   border: none;
   outline: none;
-  color: var(--text);
+  color: var(#FF0000);
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.75rem;
+  font-size: 1em;
   letter-spacing: 0.08em;
   min-width: 0;
   flex: 1 1 auto;
@@ -299,10 +314,12 @@ body.sv-body::after {
 .sv-map-search--primary .sv-search-input {
   font-size: 1rem;
   letter-spacing: 0.12em;
+  color: var(#FF0000);
   min-width: 0;
 }
 
 .sv-map-search--primary::after {
+  color: var(#FF0000);
   content: "";
   position: absolute;
   inset: 0;
@@ -340,7 +357,7 @@ body.sv-body::after {
   border-radius: 8px;
   padding: 8px 12px;
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.8rem;
+  font-size: 1em;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
@@ -387,7 +404,7 @@ body.sv-body::after {
 .sv-map-label {
   position: absolute;
   transform: translate(-50%, -50%);
-  font-size: 0.7rem;
+  font-size: 1em;
   letter-spacing: 0.08em;
   color: var(--text);
   text-shadow: 0 0 10px rgba(3, 10, 16, 0.7);
@@ -427,7 +444,7 @@ body.sv-body::after {
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 260px;
+  width: clamp(280px, 32vw, 420px);
   max-height: calc(100% - 32px);
   overflow: hidden;
   display: flex;
@@ -467,7 +484,7 @@ body.sv-body::after {
 }
 
 .sv-map-results .sv-search-input {
-  font-size: 0.8rem;
+  font-size: 1em;
   letter-spacing: 0.1em;
   height: 100%;
   appearance: none;
@@ -487,7 +504,7 @@ body.sv-body::after {
   background: rgba(6, 16, 22, 0.8);
   color: var(--muted);
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.75rem;
+  font-size: 1em;
   height: 28px;
   width: 28px;
   border-radius: 8px;
@@ -509,12 +526,12 @@ body.sv-body::after {
 .sv-map-results-title {
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 0.7rem;
+  font-size: 1em;
   color: rgba(159, 179, 200, 0.8);
 }
 
 .sv-map-results-empty {
-  font-size: 0.75rem;
+  font-size: 1em;
   color: rgba(159, 179, 200, 0.7);
 }
 
@@ -538,7 +555,7 @@ body.sv-body::after {
   border-radius: 10px;
   padding: 8px 10px;
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.75rem;
+  font-size: 1em;
   letter-spacing: 0.1em;
   color: var(--text);
   cursor: pointer;
@@ -565,31 +582,9 @@ body.sv-body::after {
   display: none;
 }
 
-.sv-map-info {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  max-width: none;
-  background: rgba(7, 12, 18, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 0.85rem;
-  color: var(--muted);
-  font-family: "Chakra Petch", sans-serif;
-  z-index: 2;
-}
-
-.sv-map-info strong {
-  display: block;
-  color: var(--text);
-  margin-bottom: 6px;
-  font-size: 0.9rem;
-}
-
 .sv-sidebar {
   width: 100%;
-  align-self: stretch;
+  align-self: start;
   background: rgba(10, 16, 22, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
@@ -598,11 +593,11 @@ body.sv-body::after {
   color: var(--muted);
   display: flex;
   flex-direction: column;
-  min-height: 0;
+  height: fit-content;
 }
 
 .sv-sidebar-title {
-  font-size: 0.85rem;
+  font-size: 1em;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   color: var(--accent);
@@ -623,7 +618,7 @@ body.sv-body::after {
 .sv-sidebar-item a {
   color: var(--text);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 1em;
   display: block;
 }
 
@@ -632,7 +627,7 @@ body.sv-body::after {
 }
 
 .sv-sidebar-date {
-  font-size: 0.7rem;
+  font-size: 1em;
   color: var(--muted);
 }
 
@@ -676,7 +671,7 @@ body.sv-body::after {
   gap: 16px;
   color: var(--muted);
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.8rem;
+  font-size: 1em;
   text-transform: uppercase;
   letter-spacing: 0.18em;
 }
@@ -690,7 +685,7 @@ body.sv-body::after {
   text-decoration: none;
   color: var(--accent);
   letter-spacing: 0.12em;
-  font-size: 0.8rem;
+  font-size: 1em;
 }
 
 .sv-terms {
@@ -709,7 +704,7 @@ body.sv-body::after {
 
 .sv-term-label {
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.75rem;
+  font-size: 1em;
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: var(--muted);
@@ -717,13 +712,66 @@ body.sv-body::after {
 
 .sv-term-pill {
   font-family: "Chakra Petch", sans-serif;
-  font-size: 0.75rem;
+  font-size: 1em;
   letter-spacing: 0.12em;
   padding: 4px 8px;
   border-radius: 999px;
   border: 1px solid rgba(78, 240, 255, 0.35);
   color: var(--text);
   text-decoration: none;
+}
+
+.sv-toc {
+  margin: 20px 0 28px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(6, 12, 18, 0.75);
+  font-family: "Chakra Petch", sans-serif;
+  color: var(--muted);
+}
+
+.sv-toc-title {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 1em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.sv-toc #TableOfContents {
+  font-family: "Chakra Petch", sans-serif;
+}
+
+.sv-toc #TableOfContents ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.sv-toc #TableOfContents li {
+  margin: 0;
+}
+
+.sv-toc #TableOfContents a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1em;
+  letter-spacing: 0.08em;
+}
+
+.sv-toc #TableOfContents a:hover,
+.sv-toc #TableOfContents a:focus {
+  color: var(--accent);
+}
+
+.sv-toc #TableOfContents ul ul {
+  padding-left: 14px;
+  margin-left: 4px;
+  border-left: 1px solid rgba(78, 240, 255, 0.2);
+  gap: 6px;
 }
 
 .sv-content {
@@ -740,6 +788,49 @@ body.sv-body::after {
   border-radius: 6px;
 }
 
+.sv-code-block {
+  position: relative;
+}
+
+.sv-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  background: rgba(6, 16, 22, 0.9);
+  color: var(--text);
+  border: 1px solid rgba(78, 240, 255, 0.35);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 1em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.sv-code-block:hover .sv-copy-btn,
+.sv-code-block:focus-within .sv-copy-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sv-copy-btn:hover,
+.sv-copy-btn:focus {
+  outline: none;
+  color: var(--accent);
+  border-color: rgba(78, 240, 255, 0.7);
+  background: rgba(78, 240, 255, 0.12);
+}
+
+.sv-copy-btn.is-copied {
+  color: var(--accent);
+  border-color: rgba(78, 240, 255, 0.9);
+}
+
 .notice {
   margin: 18px 0;
   padding: 14px 16px;
@@ -747,14 +838,6 @@ body.sv-body::after {
   background: rgba(6, 12, 18, 0.8);
   border-radius: 8px;
   font-family: "Chakra Petch", sans-serif;
-}
-
-.notice-info {
-  border-left-color: var(--accent);
-}
-
-.notice-warn {
-  border-left-color: var(--accent-warm);
 }
 
 @media (max-width: 1024px) {
@@ -780,13 +863,6 @@ body.sv-body::after {
 
   .sv-nav {
     flex-wrap: wrap;
-    width: 100%;
-  }
-
-  .sv-nav-search {
-    margin-left: 0;
-    flex: 1 1 100%;
-    max-width: none;
     width: 100%;
   }
 
@@ -824,3 +900,4 @@ body.sv-body::after {
     animation: none;
   }
 }
+

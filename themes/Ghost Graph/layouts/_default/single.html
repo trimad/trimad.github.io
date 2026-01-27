@@ -1,11 +1,9 @@
 {{ define "main" }}
-{{ .Scratch.Set "showBg" true }}
 <div class="sv-shell">
   {{ partial "site-header.html" . }}
   <div class="sv-layout sv-layout-article">
     <main class="sv-main">
       <article class="sv-article" id="content">
-        <div class="sv-article-bg" id="bg-canvas" aria-hidden="true"></div>
         <div class="sv-article-body">
           <header class="sv-article-header">
             <div class="sv-kicker">Reading</div>
@@ -38,6 +36,13 @@
               {{ end }}
             </div>
           {{ end }}
+          {{- $showToc := and (.Params.toc) (gt (len .TableOfContents) 0) -}}
+          {{- if $showToc -}}
+            <div class="sv-toc" aria-label="Table of contents">
+              <div class="sv-toc-title">On this page</div>
+              {{ .TableOfContents }}
+            </div>
+          {{- end -}}
           <div class="sv-content">
             {{ .Content }}
           </div>

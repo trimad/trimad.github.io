@@ -1,71 +1,96 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LLaMA | Ghostfeed</title>
-  <meta name="description" content="This is my tentative workflow for getting Facebook’s LLaMA working with text-generation-webui.">
-  <meta property="og:title" content="LLaMA | Ghostfeed">
-  <meta property="og:description" content="This is my tentative workflow for getting Facebook’s LLaMA working with text-generation-webui.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="http://localhost:1313/posts/2023-03-13-llama/">
-  <meta property="og:site_name" content="Ghostfeed">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="LLaMA | Ghostfeed">
-  <meta name="twitter:description" content="This is my tentative workflow for getting Facebook’s LLaMA working with text-generation-webui.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap">
-  <link rel="stylesheet" href="http://localhost:1313/css/ghostgraph.css">
-</head>
-<body class="gg-body">
-  
-<header class="gg-topbar gg-article-topbar">
-  <div class="gg-brand">
-    <span class="gg-logo">F-Z</span>
-    <div>
-      <div class="gg-title">Ghostfeed</div>
-      <div class="gg-subtitle">Reading: LLaMA</div>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LLaMA | Ghost Graph</title>
+<meta name="description" content="This is my tentative workflow for getting Facebook’s LLaMA working with text-generation-webui.">
+<meta property="og:title" content="LLaMA | Ghost Graph">
+<meta property="og:description" content="This is my tentative workflow for getting Facebook’s LLaMA working with text-generation-webui.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/posts/2023-03-13-llama/">
+<meta property="og:site_name" content="Ghost Graph">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LLaMA | Ghost Graph">
+<meta name="twitter:description" content="This is my tentative workflow for getting Facebook’s LLaMA working with text-generation-webui.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Spectral:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="http://localhost:1313/css/main.min.1efafb374d1d93935ff3ecb888d3aa65829ec92a5823e9cf5cdaa963ab5a3101.css">
+
+  </head>
+  <body class="sv-body">
+    <a class="sv-skip" href="#content">Skip to content</a>
+    
+<div class="sv-shell">
+  <header class="sv-header">
+  <div class="sv-brand">
+    <a class="sv-mark" href="http://localhost:1313/">GG</a>
+    <div class="sv-brand-text">
+      <div class="sv-title">Ghost Graph</div>
+      <div class="sv-subtitle">Ghost Graph: Interlinked notes, diagnostics, and proven scripts rendered as a navigable 3D graph.</div>
     </div>
   </div>
-  <nav class="gg-nav">
-      <a class="gg-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
-      <a class="gg-nav-link" href="http://localhost:1313/archive/">Archive</a>
-      <a class="gg-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+  <nav class="sv-nav" aria-label="Primary">
+    <a class="sv-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/archive/">Archive</a>
   </nav>
-  <div class="gg-search">
-    <a class="gg-back" href="http://localhost:1313/posts/">Back to graph</a>
-  </div>
 </header>
 
-<main class="gg-article">
-  <article>
-    <h1>LLaMA</h1>
-    <p class="gg-meta">
-      Published March 13, 2023
-       - Updated December 11, 2025
-    </p>
-    
-    <div class="gg-terms">
-      
-        <div class="gg-term-row">
-          <span class="gg-term-label">Tags:</span>
+  <div class="sv-layout sv-layout-article">
+    <main class="sv-main">
+      <article class="sv-article" id="content">
+        <div class="sv-article-body">
+          <header class="sv-article-header">
+            <div class="sv-kicker">Reading</div>
+            <h1>LLaMA</h1>
+            <div class="sv-article-meta">
+              <span>Published Mar 13, 2023</span>
+              <span>Updated Dec 11, 2025</span>
+            </div>
+            <div class="sv-article-links">
+              <a class="sv-inline-link" href="http://localhost:1313/">Return to map</a>
+            </div>
+          </header>
           
-            <a class="gg-term-pill" href="http://localhost:1313/?q=llm">llm</a>
-          
-        </div>
-      
-      
-        <div class="gg-term-row">
-          <span class="gg-term-label">Categories:</span>
-          
-            <a class="gg-term-pill" href="http://localhost:1313/?q=Python">Python</a>
-          
-        </div>
-      
-    </div>
-    
-    <div class="gg-content">
-      <h2 id="windows-11">Windows 11</h2>
+            <div class="sv-terms">
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Categories</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/categories/python/">Python</a>
+                  
+                </div>
+              
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Tags</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/llm/">#llm</a>
+                  
+                </div>
+              
+            </div>
+          <div class="sv-toc" aria-label="Table of contents">
+              <div class="sv-toc-title">On this page</div>
+              <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#windows-11">Windows 11</a>
+          <ul>
+            <li><a href="#a-hrefhttpsgithubcomoobaboogatext-generation-webuigithub-repositorya"><a href="https://github.com/oobabooga/text-generation-webui">GitHub Repository</a></a></li>
+            <li><a href="#downgrade-visual-studio-to-version-2019">Downgrade Visual Studio to version 2019</a></li>
+            <li><a href="#install-microsoft-c-build-tools">Install Microsoft C++ Build Tools</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div><div class="sv-content">
+            <h2 id="windows-11">Windows 11</h2>
 <h3 id="a-hrefhttpsgithubcomoobaboogatext-generation-webuigithub-repositorya"><a href="https://github.com/oobabooga/text-generation-webui">GitHub Repository</a></h3>
 <p>This is my tentative workflow for getting Facebook&rsquo;s LLaMA working with text-generation-webui.</p>
 <h3 id="downgrade-visual-studio-to-version-2019">Downgrade Visual Studio to version 2019</h3>
@@ -73,32 +98,98 @@
 <h3 id="install-microsoft-c-build-tools">Install Microsoft C++ Build Tools</h3>
 <p><a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">https://visualstudio.microsoft.com/visual-cpp-build-tools/</a></p>
 
-    </div>
-  </article>
-</main>
+          </div>
+        </div>
+      </article>
 
+    </main>
+    <aside class="sv-sidebar" aria-label="Recently modified">
+  <div class="sv-sidebar-title">Recently Modified</div>
+  <ul class="sv-sidebar-list"><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2026-01-27-get-dns-records/">Get DNS Records with PowerShell</a>
+        <time class="sv-sidebar-date" datetime="2026-01-27">
+          Jan 27, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">Generative Guidelines for the 3D Force-Directed Graph (Search-First)</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/">Nth Fibonacci Number</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2024-03-25-window-watcher/">Window Monitoring with Machine Vision</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">Gmail Photo Downloader</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-08-24-disco-ball/">Disco Ball</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-11-rapidapi/">Yahoo Finance API via RapidAPI</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-08-keycode-event-test/">Key Event Tester</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">Deep Floyd IF</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-22-random-password-generator/">Random Password Generator</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-03-windows-defender-firewall/">Windows Defender Firewall Management Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-22-laps/">Microsoft LAPS (Local Administrator Password Solution) Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-15-decode-phishing-emails/">Phishing Email Decoding Tools</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-film/">Frame Interpolation Large Motion (FILM)</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-stable-diffusion/">Stable Diffusion Scripts</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2022-05-04-archimedean-spiral/">Archimedean Spiral</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li></ul>
+</aside>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
-  <script src="http://localhost:1313/js/bg.js"></script>
-  <script>
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('pre code').forEach((block) => {
-        const button = document.createElement('button');
-        button.className = 'copy-button';
-        button.textContent = 'Copy';
-        button.addEventListener('click', () => {
-          navigator.clipboard.writeText(block.textContent).then(() => {
-            button.textContent = 'Copied!';
-            setTimeout(() => (button.textContent = 'Copy'), 1500);
-          }).catch(() => {
-            button.textContent = 'Error';
-            setTimeout(() => (button.textContent = 'Copy'), 1500);
-          });
-        });
-        block.parentNode.insertBefore(button, block);
-      });
-    });
-  </script>
-</body>
+  </div>
+</div>
+<script src="http://localhost:1313/js/code-copy.js" defer></script>
+  </body>
 </html>

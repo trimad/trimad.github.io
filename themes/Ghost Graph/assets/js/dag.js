@@ -61,9 +61,15 @@ import * as THREE from "three";
   let graphData = buildGraphData(indexedPosts, taxonomies);
   applyDeterministicPositions(graphData);
   const fullGraphData = graphData;
+  let searchGraphData = graphData;
   let baseGraphData = graphData;
   const homePath = "/";
   const taxonomyPathLookup = buildTaxonomyPathLookup(fullGraphData);
+  const visibility = {
+    categories: true,
+    tags: true,
+    posts: true,
+  };
 
   const highlight = {
     selectedNodes: new Set(),
@@ -176,6 +182,9 @@ import * as THREE from "three";
     ? mapSection.querySelector(".sv-search-clear")
     : document.querySelector(".sv-search-clear");
   const homeButton = document.getElementById("dag-home");
+  const categoryToggle = document.getElementById("dag-toggle-categories");
+  const tagToggle = document.getElementById("dag-toggle-tags");
+  const postToggle = document.getElementById("dag-toggle-posts");
   if (searchInput) {
     searchInput.addEventListener("input", (event) => {
       const value = String(event.target.value || "").trim().toLowerCase();
@@ -189,6 +198,21 @@ import * as THREE from "three";
       updateSearch("");
       updateClearVisibility();
       searchInput.focus();
+    });
+  }
+  if (categoryToggle || tagToggle || postToggle) {
+    const updateVisibility = () => {
+      visibility.categories = categoryToggle ? categoryToggle.checked : true;
+      visibility.tags = tagToggle ? tagToggle.checked : true;
+      visibility.posts = postToggle ? postToggle.checked : true;
+      currentSelection = sanitizeSelectionForVisibility(currentSelection);
+      baseGraphData = buildGraphTypeFilter(searchGraphData, visibility);
+      applySelectionPrune(currentSelection);
+      refreshHighlights();
+    };
+    [categoryToggle, tagToggle, postToggle].forEach((toggle) => {
+      if (!toggle) return;
+      toggle.addEventListener("change", updateVisibility);
     });
   }
   if (homeButton) {
@@ -375,7 +399,9 @@ import * as THREE from "three";
     clearSet(highlight.searchLinks);
 
     if (!query) {
-      baseGraphData = fullGraphData;
+      searchGraphData = fullGraphData;
+      baseGraphData = buildGraphTypeFilter(searchGraphData, visibility);
+      currentSelection = sanitizeSelectionForVisibility(currentSelection);
       applySelectionPrune(currentSelection);
       if (mapSection) {
         mapSection.classList.remove("is-searching");
@@ -386,7 +412,9 @@ import * as THREE from "three";
     }
 
     const ranked = rankSearchResults(query, indexedPosts);
-    baseGraphData = buildFilteredGraphData(ranked);
+    searchGraphData = buildFilteredGraphData(ranked);
+    baseGraphData = buildGraphTypeFilter(searchGraphData, visibility);
+    currentSelection = sanitizeSelectionForVisibility(currentSelection);
     applySelectionPrune(currentSelection);
 
     if (ranked.length) {
@@ -504,6 +532,17 @@ import * as THREE from "three";
     return null;
   }
 
+  function sanitizeSelectionForVisibility(selection) {
+    if (!selection) return null;
+    if (selection.kind === "tag-group" && !visibility.tags) return null;
+    if (selection.kind === "node") {
+      if (selection.node.type === "category" && !visibility.categories) return null;
+      if (selection.node.type === "tag" && !visibility.tags) return null;
+      if (selection.node.type === "post" && !visibility.posts) return null;
+    }
+    return selection;
+  }
+
   function goHome(options = {}) {
     currentSelection = null;
     highlight.primaryNodeId = null;
@@ -584,7 +623,7 @@ import * as THREE from "three";
   }
 
   function syncSelectionToLocation() {
-    const selection = selectionFromLocation();
+    const selection = sanitizeSelectionForVisibility(selectionFromLocation());
     currentSelection = selection;
     applySelectionPrune(selection);
     refreshHighlights();
@@ -1565,6 +1604,31 @@ import * as THREE from "three";
     if (!clearButton || !searchInput) return;
     const hasValue = String(searchInput.value || "").trim().length > 0;
     clearButton.hidden = !hasValue;
+  }
+
+  function buildGraphTypeFilter(sourceGraph, filter) {
+    const nodeIds = new Set();
+    (sourceGraph.nodes || []).forEach((node) => {
+      if (node.type === "category" && !filter.categories) return;
+      if (node.type === "tag" && !filter.tags) return;
+      if (node.type === "post" && !filter.posts) return;
+      nodeIds.add(node.id);
+    });
+
+    const linkIds = new Set();
+    (sourceGraph.links || []).forEach((link) => {
+      const sourceId = linkEndpointId(link.source);
+      const targetId = linkEndpointId(link.target);
+      if (!sourceId || !targetId) return;
+      if (!nodeIds.has(sourceId) || !nodeIds.has(targetId)) return;
+      linkIds.add(link.id);
+    });
+
+    if (!nodeIds.size) {
+      return createEmptyGraphData(sourceGraph);
+    }
+
+    return buildGraphSlice(nodeIds, linkIds, sourceGraph);
   }
 
   function stripAlpha(color) {

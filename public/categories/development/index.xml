@@ -1,89 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Development on Ghostfeed</title>
+    <title>Development on Ghost Graph</title>
     <link>http://localhost:1313/categories/development/</link>
-    <description>Recent content in Development on Ghostfeed</description>
+    <description>Recent content in Development on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/development/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Stable Diffusion Scripts</title>
-      <link>http://localhost:1313/posts/2023-02-05-stable-diffusion/</link>
-      <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
-      <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
-    </item>
-    <item>
-      <title>Buddhabrot</title>
-      <link>http://localhost:1313/posts/2019-08-25-buddhabrot/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-25-buddhabrot/</guid>
-      <description>An implementation of the Buddhabrot fractal rendering technique, which visualizes escape-time trajectories of points outside the Mandelbrot set, creating intricate patterns that resemble a seated Buddha figure.</description>
-    </item>
-    <item>
-      <title>Blending Textures With Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/</link>
-      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-18-blending-textures-with-open-simplex-noise/</guid>
-      <description>A Processing implementation that combines Open Simplex Noise with image blending techniques to create smooth, organic animations of texture transitions.</description>
-    </item>
-    <item>
-      <title>Cube Wave</title>
-      <link>http://localhost:1313/posts/2018-12-30-cube-wave/</link>
-      <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-12-30-cube-wave/</guid>
-      <description>A Processing implementation of a 3D cube wave animation using PeasyCam for camera control, featuring dynamic lighting and orthographic projection for a mesmerizing visual effect.</description>
-    </item>
-    <item>
-      <title>Lorenz Doll</title>
-      <link>http://localhost:1313/posts/2018-11-21-lorenz-doll/</link>
-      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-11-21-lorenz-doll/</guid>
-      <description>A Processing visualization where each pixel of an image is transformed into a Lorenz System, with the system&amp;rsquo;s velocity mapped to the original pixel&amp;rsquo;s brightness values.</description>
-    </item>
-    <item>
-      <title>Barnsley Fern</title>
-      <link>http://localhost:1313/posts/2018-06-28-barnsley-fern/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
-      <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
-    </item>
-    <item>
-      <title>Minimum Spanning Tree Visualized</title>
-      <link>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</link>
-      <pubDate>Sat, 07 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</guid>
-      <description>A Processing visualization of Prim&amp;rsquo;s Algorithm creating a minimum spanning tree on procedurally generated terrain using Perlin noise height maps and orthographic projection.</description>
-    </item>
-    <item>
-      <title>AT&amp;T Hackathon</title>
-      <link>http://localhost:1313/posts/2018-03-12-att-hackathon/</link>
-      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-03-12-att-hackathon/</guid>
-      <description>A reflection on participating in the AT&amp;amp;T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions.</description>
-    </item>
-    <item>
-      <title>Generating Terrain with Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</link>
-      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-01-03-generating-terrain-with-open-simplex-noise/</guid>
-      <description>A Processing implementation of a Minecraft-style terrain generator using Open Simplex Noise, featuring 3D voxel-based terrain with performance analysis of random walker agents.</description>
-    </item>
-    <item>
-      <title>Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</link>
-      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</guid>
-      <description>A Processing implementation exploring 4D Simplex Noise to create smooth, organic looping animations through a 2D grid of pixel objects with variable noise scaling.</description>
-    </item>
-    <item>
-      <title>Flipping Tiles</title>
-      <link>http://localhost:1313/posts/2017-11-18-flippy-tiles/</link>
-      <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2017-11-18-flippy-tiles/</guid>
-      <description>A Processing sketch creating mesmerizing animations of tiles that flip based on either random patterns or Perlin noise algorithms, demonstrating creative uses of procedural animation.</description>
+      <title>Genesys Cloud Queue Watcher</title>
+      <link>http://localhost:1313/posts/2025-03-11-genesys-cloud-queue-watcher/</link>
+      <pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-11-genesys-cloud-queue-watcher/</guid>
+      <description>A JavaScript script that monitors waiting calls in Genesys Cloud and plays a Super Mario Bros. theme when a call is waiting.</description>
     </item>
   </channel>
 </rss>
