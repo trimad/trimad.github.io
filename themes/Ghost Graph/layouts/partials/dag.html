@@ -33,7 +33,14 @@
     >
       <div class="dag-empty">Add posts with categories and tags to grow the map.</div>
     </div>
-    <button class="sv-control sv-map-home" type="button" id="dag-home">Home</button>
+    <button class="sv-control sv-map-home" type="button" id="dag-home">Reset</button>
+    <div class="sv-map-count" id="dag-count" aria-live="polite">
+      <span class="sv-map-count-label">Nodes</span>
+      <span class="sv-map-count-value" data-count="nodes">0</span>
+      <span class="sv-map-count-sep">•</span>
+      <span class="sv-map-count-label">Edges</span>
+      <span class="sv-map-count-value" data-count="links">0</span>
+    </div>
     <aside class="sv-map-results" id="dag-results" aria-live="polite" aria-label="Search results">
       <label class="sv-map-search sv-map-search--primary sv-map-results-search">
         <span class="sv-search-label">🔍</span>
@@ -53,6 +60,5 @@
 
   </div>
 </section>
-
 
 

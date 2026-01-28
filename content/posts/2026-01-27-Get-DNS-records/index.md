@@ -19,7 +19,7 @@ toc: true
 
 # The Script
 {{< notice type="warning" title="AI-Generated Content" >}}
-This script and description AI-generated. Please review for completeness and accuracy.
+This PowerShell script and description are AI-generated. Please review for completeness and accuracy.
 {{< /notice >}}
 
 

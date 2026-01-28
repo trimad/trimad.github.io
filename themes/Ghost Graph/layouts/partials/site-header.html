@@ -7,8 +7,8 @@
     </div>
   </div>
   <nav class="sv-nav" aria-label="Primary">
-    <a class="sv-nav-link{{ if or (eq .Section "posts") (and .IsHome (eq .Kind "home")) }} is-active{{ end }}" href="{{ "/posts/" | relURL }}">Posts</a>
-    <a class="sv-nav-link{{ if eq .Section "prompts" }} is-active{{ end }}" href="{{ "/prompts/" | relURL }}">Prompts</a>
-    <a class="sv-nav-link{{ if eq .Section "archive" }} is-active{{ end }}" href="{{ "/archive/" | relURL }}">Archive</a>
+    <a class="sv-nav-link{{ if and (not .IsPage) (or (eq .Section "posts") (and .IsHome (eq .Kind "home"))) }} is-active{{ end }}" href="{{ "/posts/" | relURL }}">Posts</a>
+    <a class="sv-nav-link{{ if and (not .IsPage) (eq .Section "prompts") }} is-active{{ end }}" href="{{ "/prompts/" | relURL }}">Prompts</a>
+    <a class="sv-nav-link{{ if and (not .IsPage) (eq .Section "archive") }} is-active{{ end }}" href="{{ "/archive/" | relURL }}">Archive</a>
   </nav>
 </header>

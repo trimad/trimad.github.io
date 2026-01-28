@@ -32,7 +32,7 @@
     </div>
   </div>
   <nav class="sv-nav" aria-label="Primary">
-    <a class="sv-nav-link is-active" href="http://localhost:1313/posts/">Posts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/posts/">Posts</a>
     <a class="sv-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
     <a class="sv-nav-link" href="http://localhost:1313/archive/">Archive</a>
   </nav>
@@ -75,128 +75,162 @@
                   
                     <a class="sv-term-pill" href="http://localhost:1313/tags/shell/">#shell</a>
                   
-                    <a class="sv-term-pill" href="http://localhost:1313/tags/media-processing/">#media-processing</a>
-                  
-                    <a class="sv-term-pill" href="http://localhost:1313/tags/video-conversion/">#video-conversion</a>
-                  
-                    <a class="sv-term-pill" href="http://localhost:1313/tags/audio-conversion/">#audio-conversion</a>
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/ffmpeg/">#ffmpeg</a>
                   
                 </div>
               
             </div>
-          <div class="sv-content">
-            <p>ffmpeg is a complete, cross-platform solution to record, convert and stream audio and video.</p>
-<h2><a href="https://www.ffmpeg.org/download.html#build-windows">ffmpeg Download</a></h2>
-<h2><a href="https://ffmpeg.org/ffmpeg.html">ffmpeg Documentation
-</a></h2>
-<h2 id="audio-processing">Audio Processing</h2>
-<h3 id="convert-to-8khz-single-channel-pcm">Convert to 8kHz, single-channel PCM</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp3&#34;</span> -ar <span style="color:#ae81ff">8000</span> -ac <span style="color:#ae81ff">1</span> output.wav
-</span></span></code></pre></div><h3 id="convert-to-16khz-single-channel-pcm">Convert to 16kHz, single-channel PCM</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp3&#34;</span> -ar <span style="color:#ae81ff">16000</span> -ac <span style="color:#ae81ff">1</span> output.wav
-</span></span></code></pre></div><h3 id="convert-to-48khz-single-channel-pcm">Convert to 48kHz, single-channel PCM</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i input.mp3 -ar <span style="color:#ae81ff">48000</span> -ac <span style="color:#ae81ff">1</span> output.wav
-</span></span></code></pre></div><h2 id="video-processing">Video Processing</h2>
-<h3 id="add-music-to-a-video">Add Music to a Video</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i video.mp4 -i music.mp3 -codec copy -shortest output.mp4
+          <div class="sv-toc" aria-label="Table of contents">
+              <div class="sv-toc-title">On this page</div>
+              <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#downloads-and-docs">Downloads and docs</a></li>
+        <li><a href="#audio-processing">Audio processing</a>
+          <ul>
+            <li><a href="#convert-to-8-khz-mono-pcm-wav">Convert to 8 kHz, mono PCM (WAV)</a></li>
+            <li><a href="#convert-to-16-khz-mono-pcm-wav">Convert to 16 kHz, mono PCM (WAV)</a></li>
+            <li><a href="#convert-to-48-khz-mono-pcm-wav">Convert to 48 kHz, mono PCM (WAV)</a></li>
+          </ul>
+        </li>
+        <li><a href="#video-processing">Video processing</a>
+          <ul>
+            <li><a href="#add-music-to-a-video-no-re-encode">Add music to a video (no re-encode)</a></li>
+            <li><a href="#assemble-images-into-a-video">Assemble images into a video</a></li>
+            <li><a href="#re-encode-for-youtube-h264">Re-encode for YouTube (H.264)</a></li>
+          </ul>
+        </li>
+        <li><a href="#video-filters">Video filters</a>
+          <ul>
+            <li><a href="#stack-two-videos-side-by-side-hstack">Stack two videos side-by-side (hstack)</a></li>
+            <li><a href="#vertical-scroll-and-wrap">Vertical scroll and wrap</a></li>
+            <li><a href="#remove-black-bars-from-top-and-bottom-crop">Remove black bars from top and bottom (crop)</a></li>
+            <li><a href="#resize-a-videos-height-while-maintaining-aspect-ratio">Resize a video&rsquo;s height while maintaining aspect ratio</a></li>
+            <li><a href="#crop-a-video-down-the-center-eg-to-720-wide">Crop a video down the center (e.g., to 720 wide)</a></li>
+            <li><a href="#crop--scale--crop-all-in-one-go">Crop → scale → crop (all in one go)</a></li>
+          </ul>
+        </li>
+        <li><a href="#screen-recording-windows">Screen recording (Windows)</a>
+          <ul>
+            <li><a href="#record-all-screens-example-5-seconds-with-audio">Record all screens (example: 5 seconds, with audio)</a></li>
+            <li><a href="#record-a-single-region-example-one-19201080-screen-5-seconds-with-audio">Record a single region (example: one 1920×1080 screen, 5 seconds, with audio)</a></li>
+            <li><a href="#record-the-right-half-of-a-51201440-screen-no-audio">Record the right half of a 5120×1440 screen (no audio)</a></li>
+          </ul>
+        </li>
+        <li><a href="#animated-gif">Animated GIF</a>
+          <ul>
+            <li><a href="#create-a-gif-from-a-video-quicksimple">Create a GIF from a video (quick/simple)</a></li>
+            <li><a href="#create-a-high-quality-gif-from-an-image-sequence-palette-workflow">Create a high-quality GIF from an image sequence (palette workflow)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div><div class="sv-content">
+            <p>FFmpeg is a complete, cross-platform solution to record, convert, and stream audio and video.</p>
+<h2 id="downloads-and-docs">Downloads and docs</h2>
+<ul>
+<li><a href="https://www.ffmpeg.org/download.html#build-windows">FFmpeg Windows builds</a></li>
+<li><a href="https://ffmpeg.org/ffmpeg.html">FFmpeg documentation (ffmpeg)</a></li>
+</ul>
+<h2 id="audio-processing">Audio processing</h2>
+<h3 id="convert-to-8-khz-mono-pcm-wav">Convert to 8 kHz, mono PCM (WAV)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp3&#34;</span> -ar <span style="color:#ae81ff">8000</span> -ac <span style="color:#ae81ff">1</span> output.wav
+</span></span></code></pre></div><h3 id="convert-to-16-khz-mono-pcm-wav">Convert to 16 kHz, mono PCM (WAV)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp3&#34;</span> -ar <span style="color:#ae81ff">16000</span> -ac <span style="color:#ae81ff">1</span> output.wav
+</span></span></code></pre></div><h3 id="convert-to-48-khz-mono-pcm-wav">Convert to 48 kHz, mono PCM (WAV)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp3&#34;</span> -ar <span style="color:#ae81ff">48000</span> -ac <span style="color:#ae81ff">1</span> output.wav
+</span></span></code></pre></div><h2 id="video-processing">Video processing</h2>
+<h3 id="add-music-to-a-video-no-re-encode">Add music to a video (no re-encode)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;video.mp4&#34;</span> -i <span style="color:#e6db74">&#34;music.mp3&#34;</span> -codec copy -shortest output.mp4
 </span></span></code></pre></div><dl>
 <dt>-i video.mp4</dt>
-<dd>Select &ldquo;video.mp4&rdquo; as an input file from the same directory.</dd>
+<dd>Select <code>video.mp4</code> as an input file (same directory unless you provide a path).</dd>
 <dt>-i music.mp3</dt>
-<dd>Select &ldquo;music.mp4&rdquo; as an input file from the same directory.</dd>
+<dd>Select <code>music.mp3</code> as an input file.</dd>
 <dt>-codec copy</dt>
-<dd>Specifies that we are not re-encoding anything.</dd>
+<dd>Copy streams without re-encoding.</dd>
 <dt>-shortest</dt>
-<dd>Use this flag if the video length is shorter than the audio length. Otherwise, use no flag at all here.</dd>
+<dd>Stop the output when the shortest input ends (useful when audio is longer than video).</dd>
 </dl>
 <h3 id="assemble-images-into-a-video">Assemble images into a video</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -framerate <span style="color:#ae81ff">60</span> -s 2560x1440 -i %04d.png output.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -framerate <span style="color:#ae81ff">60</span> -s 2560x1440 -i %04d.png output.mp4
 </span></span></code></pre></div><dl>
 <dt>-framerate 60</dt>
-<dd>Set the frame rate to 60FPS.</dd>
+<dd>Set the frame rate to 60 FPS.</dd>
 <dt>-s 2560x1440</dt>
-<dd>Set the video resolution to 2560x1440 pixels.</dd>
+<dd>Set the output resolution.</dd>
 <dt>-i %04d.png</dt>
-<dd>This flag assumes there is a folder of .png files in the same directory named in the format 0001.png, 0002.png, etc. It will load all images following this naming convention as inputs to be processed.</dd>
+<dd>Read an image sequence named like <code>0001.png</code>, <code>0002.png</code>, etc.</dd>
 </dl>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>&gt;ffmpeg -start_number <span style="color:#ae81ff">0140</span> -i %04d.png interpolated-0.mp4
-</span></span></code></pre></div><h3 id="re-encode-video-for-youtube">Re-encode Video For YouTube</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i transition.mp4 -c:v libx264 -preset slow -crf <span style="color:#ae81ff">18</span> -c:a copy -pix_fmt yuv420p transition.mkv
+<p>Start from a specific frame number:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -start_number <span style="color:#ae81ff">140</span> -i %04d.png interpolated-0.mp4
+</span></span></code></pre></div><h3 id="re-encode-for-youtube-h264">Re-encode for YouTube (H.264)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;transition.mp4&#34;</span> -c:v libx264 -preset slow -crf <span style="color:#ae81ff">18</span> -c:a copy -pix_fmt yuv420p <span style="color:#e6db74">&#34;transition.mkv&#34;</span>
 </span></span></code></pre></div><dl>
-<dt>-i transition.mp4</dt>
-<dd>Select &ldquo;transition.mp4&rdquo; as the input file.</dd>
 <dt>-c:v libx264</dt>
-<dd>set the video codec to H.264</dd>
+<dd>Encode video as H.264.</dd>
 <dt>-preset slow</dt>
-<dd>A preset is a collection of options that will provide a certain encoding speed to compression ratio. A slower preset will provide better compression (compression is quality per filesize). This means that, for example, if you target a certain file size or constant bit rate, you will achieve better quality with a slower preset. Similarly, for constant quality encoding, you will simply save bitrate by choosing a slower preset. Use the slowest preset that you have patience for. The available presets in descending order of speed are:</dd>
-</dl>
-<ul>
-<li>ultrafast</li>
-<li>superfast</li>
-<li>veryfast</li>
-<li>faster</li>
-<li>fast</li>
-<li>medium (default preset)</li>
-<li>slow</li>
-<li>slower</li>
-<li>veryslow</li>
-</ul>
-<dl>
+<dd>Encoding speed vs compression efficiency. Slower presets usually produce smaller files at the same quality.</dd>
 <dt>-crf 18</dt>
-<dd>Constant Rate Factor (CRF). The range of the CRF scale is 0–51, where 0 is lossless, 23 is the default, and 51 is worst quality possible. A lower value generally leads to higher quality, and a subjectively sane range is 17–28. Consider 17 or 18 to be visually lossless or nearly so; it should look the same or nearly the same as the input but it isn&rsquo;t technically lossless.</dd>
+<dd>Constant Rate Factor (quality target). Lower = higher quality. Typical “sane” range is ~17–28.</dd>
 <dt>-c:a copy</dt>
-<dd>Copy the audio codec from that of the input file to the output file</dd>
+<dd>Copy the input audio as-is (no re-encode).</dd>
 <dt>-pix_fmt yuv420p</dt>
-<dd>This flag is only needed for your output to work in QuickTime, Windows Media player and other offline media players. These players only support the YUV planar color space with 4:2:0 chroma subsampling for H.264 video. Otherwise, depending on your source, ffmpeg may output to a pixel format that may be incompatible with these players.</dd>
+<dd>Improves compatibility with many players (QuickTime/Windows Media Player/etc.).</dd>
 </dl>
-<h2>Video Filters</h2>
-<h3 id="stack-two-videos-side-by-side">Stack two videos side-by-side</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;left.mp4&#34;</span> -i <span style="color:#e6db74">&#34;right.mp4&#34;</span> -filter_complex hstack output.mp4
-</span></span></code></pre></div><p>This command uses the ffmpeg software to combine two video files, &ldquo;left.mp4&rdquo; and &ldquo;right.mp4&rdquo;, into a single output video file &ldquo;output.mp4&rdquo;. The &ldquo;-i&rdquo; option specifies the input video files. The &ldquo;-filter_complex&rdquo; option applies the &ldquo;hstack&rdquo; filter, which horizontally stacks the two input videos side by side to form a single output video.</p>
-<h3 id="vertical-scroll-and-wrap">Vertical scroll and wrap</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i input.mp4 -vf scroll<span style="color:#f92672">=</span>vertical<span style="color:#f92672">=</span>0.001,format<span style="color:#f92672">=</span>yuv420p output.mp4
-</span></span></code></pre></div><p>This ffmpeg command takes an input video file named &ldquo;input.mp4&rdquo; and applies a video filter to it that creates a scrolling effect with a vertical scroll speed of 0.001 units per frame. The output video is then saved as &ldquo;output.mp4&rdquo; in the YUV420P format.</p>
-<h3 id="remove-black-bars-from-top-and-bottom-of-video">Remove black bars from top and bottom of video</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i input.mp4 -vf <span style="color:#e6db74">&#34;crop=iw:ih-40:0:20&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
-</span></span></code></pre></div><h3 id="resize-a-videos-height-while-maintaining-aspect-width-aspect-ratio">Resize a video&rsquo;s height while maintaining aspect width aspect ratio</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i input.mp4 -vf <span style="color:#e6db74">&#34;scale=-1:1280&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
-</span></span></code></pre></div><h3 id="crop-a-video-down-the-center">Crop a video down the center</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i input.mp4 -vf <span style="color:#e6db74">&#34;crop=720:ih:((iw-720)/2):0&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
-</span></span></code></pre></div><h3 id="do-the-above-three-in-one-go">Do the above three in one go</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i input.mp4 -vf <span style="color:#e6db74">&#34;crop=iw:ih-40:0:20,scale=-1:1280,crop=720:ih:((iw-720)/2):0&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
-</span></span></code></pre></div><h2 id="screen-recording">Screen recording</h2>
-<h3 id="all-screens">All screens</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -f gdigrab -framerate <span style="color:#ae81ff">30</span> -t <span style="color:#ae81ff">5</span> -i desktop -c:v libx264 -preset ultrafast -pix_fmt yuv420p -c:a aac -b:a 128k output.mp4
-</span></span></code></pre></div><h3 id="just-one-screen">Just one screen</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -f gdigrab -framerate <span style="color:#ae81ff">30</span> -t <span style="color:#ae81ff">5</span> -offset_x <span style="color:#ae81ff">0</span> -offset_y <span style="color:#ae81ff">0</span> -video_size 1920x1080 -i desktop -c:v libx264 -preset ultrafast -pix_fmt yuv420p -c:a aac -b:a 128k output.mp4
-</span></span></code></pre></div><h2 id="animated-gif">Animated GIF</h2>
-<h3 id="create-an-animated-gif-from-a-video">Create an animated GIF from a video</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -i input.mp4 output.gif
-</span></span></code></pre></div><h3 id="assembled-a-folder-of-images-into-an-animated-gif">Assembled a folder of images into an animated GIF</h3>
-<h3 id="generate-a-palette">Generate a palette</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -y -i %3d.png -vf palettegen palette.png
-</span></span></code></pre></div><p>The command line above is using FFmpeg to process a sequence of PNG images, where each image is named with a number and a 3 digit format, such as &ldquo;001.png&rdquo;, &ldquo;002.png&rdquo;, etc. In summary, this command is generating a color palette from a sequence of PNG images and saving the palette to the file &ldquo;palette.png&rdquo;. This palette can be used to create a GIF animation from the sequence of images. The resulting palette will have a smaller number of colors than the original images, allowing for a smaller file size for the final GIF.</p>
-<p>The options used in the command are:</p>
+<h2 id="video-filters">Video filters</h2>
+<h3 id="stack-two-videos-side-by-side-hstack">Stack two videos side-by-side (hstack)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;left.mp4&#34;</span> -i <span style="color:#e6db74">&#34;right.mp4&#34;</span> -filter_complex hstack output.mp4
+</span></span></code></pre></div><h3 id="vertical-scroll-and-wrap">Vertical scroll and wrap</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp4&#34;</span> -vf <span style="color:#e6db74">&#34;scroll=vertical=0.001,format=yuv420p&#34;</span> output.mp4
+</span></span></code></pre></div><h3 id="remove-black-bars-from-top-and-bottom-crop">Remove black bars from top and bottom (crop)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp4&#34;</span> -vf <span style="color:#e6db74">&#34;crop=iw:ih-40:0:20&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
+</span></span></code></pre></div><h3 id="resize-a-videos-height-while-maintaining-aspect-ratio">Resize a video&rsquo;s height while maintaining aspect ratio</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp4&#34;</span> -vf <span style="color:#e6db74">&#34;scale=-1:1280&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
+</span></span></code></pre></div><h3 id="crop-a-video-down-the-center-eg-to-720-wide">Crop a video down the center (e.g., to 720 wide)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp4&#34;</span> -vf <span style="color:#e6db74">&#34;crop=720:ih:((iw-720)/2):0&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
+</span></span></code></pre></div><h3 id="crop--scale--crop-all-in-one-go">Crop → scale → crop (all in one go)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp4&#34;</span> -vf <span style="color:#e6db74">&#34;crop=iw:ih-40:0:20,scale=-1:1280,crop=720:ih:((iw-720)/2):0&#34;</span> -c:v libx264 -crf <span style="color:#ae81ff">18</span> -pix_fmt yuv420p output.mp4
+</span></span></code></pre></div><h2 id="screen-recording-windows">Screen recording (Windows)</h2>
+<blockquote>
+<p>Uses <code>gdigrab</code> for desktop capture.</p>
+</blockquote>
+<h3 id="record-all-screens-example-5-seconds-with-audio">Record all screens (example: 5 seconds, with audio)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -f gdigrab -framerate <span style="color:#ae81ff">30</span> -t <span style="color:#ae81ff">5</span> -i desktop -c:v libx264 -preset ultrafast -pix_fmt yuv420p -c:a aac -b:a 128k output.mp4
+</span></span></code></pre></div><h3 id="record-a-single-region-example-one-19201080-screen-5-seconds-with-audio">Record a single region (example: one 1920×1080 screen, 5 seconds, with audio)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -f gdigrab -framerate <span style="color:#ae81ff">30</span> -t <span style="color:#ae81ff">5</span> -offset_x <span style="color:#ae81ff">0</span> -offset_y <span style="color:#ae81ff">0</span> -video_size 1920x1080 -i desktop -c:v libx264 -preset ultrafast -pix_fmt yuv420p -c:a aac -b:a 128k output.mp4
+</span></span></code></pre></div><h3 id="record-the-right-half-of-a-51201440-screen-no-audio">Record the right half of a 5120×1440 screen (no audio)</h3>
+<p>Right half math:</p>
 <ul>
-<li>&ldquo;-y&rdquo; : Overwrite output files without asking.</li>
-<li>&ldquo;-i %3d.png&rdquo; : The input file is a sequence of PNG images, where the file name format is &ldquo;%3d&rdquo; (3 digits) followed by &ldquo;.png&rdquo;</li>
-<li>&ldquo;-vf palettegen&rdquo; : This is a video filter that generates a color palette from the input image sequence.</li>
-<li>&ldquo;palette.png&rdquo; : This is the output file name for the generated color palette.
-In summary, this command is generating a color palette from a sequence of PNG images and saving the palette to the file &ldquo;palette.png&rdquo;. This palette can be used to create a GIF animation from the sequence of images. The resulting palette will have a smaller number of colors than the original images, allowing for a smaller file size for the final GIF.</li>
+<li>Full: 5120×1440</li>
+<li>Right-half width: 2560</li>
+<li>Offset X: 2560</li>
 </ul>
-<h3 id="create-an-animated-gif-using-the-previously-generated-color-palette">Create an animated GIF using the previously generated color palette</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>ffmpeg -y -f image2 -framerate <span style="color:#ae81ff">60</span> -i %3d.png -i palette.png -filter_complex paletteuse file.gif
-</span></span></code></pre></div><p>The command line above is using FFmpeg to create a GIF animation from a sequence of PNG images and a previously generated color palette.</p>
-<p>The options used in the command are:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -f gdigrab -framerate <span style="color:#ae81ff">60</span> -offset_x <span style="color:#ae81ff">2560</span> -offset_y <span style="color:#ae81ff">0</span> -video_size 2560x1440 -i desktop -an output.mp4
+</span></span></code></pre></div><h4 id="how-to-stop-the-recording">How to stop the recording</h4>
 <ul>
-<li>&ldquo;-y&rdquo; : Overwrite output files without asking.</li>
-<li>&ldquo;-f image2&rdquo; : The input is a sequence of image files</li>
-<li>&ldquo;-framerate 60&rdquo; : The frame rate for the output gif is set to 60 frames per second</li>
-<li>&ldquo;-i %3d.png&rdquo; : The input file is a sequence of PNG images, where the file name format is &ldquo;%3d&rdquo; (3 digits) followed by &ldquo;.png&rdquo;</li>
-<li>&ldquo;-i palette.png&rdquo; : The input file is the previously generated color palette</li>
-<li>&ldquo;-filter_complex paletteuse&rdquo; : This is a filter that uses the previously generated palette to create the gif animation</li>
-<li>&ldquo;file.gif&rdquo; : This is the output file name for the created gif animation
-In summary, this command is creating a gif animation from a sequence of PNG images using a previously generated color palette, and saving the animation to the file &ldquo;file.gif&rdquo;. The resulting gif animation will have the same frame rate as the input images and a smaller file size due to the use of a limited color palette.</li>
+<li>Click the terminal window running FFmpeg and press <strong><code>q</code></strong> (clean stop / finalizes the file).</li>
+<li>Alternatively, press <strong>Ctrl+C</strong> (works, but <code>q</code> is usually cleaner).</li>
+</ul>
+<h2 id="animated-gif">Animated GIF</h2>
+<h3 id="create-a-gif-from-a-video-quicksimple">Create a GIF from a video (quick/simple)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -i <span style="color:#e6db74">&#34;input.mp4&#34;</span> output.gif
+</span></span></code></pre></div><h3 id="create-a-high-quality-gif-from-an-image-sequence-palette-workflow">Create a high-quality GIF from an image sequence (palette workflow)</h3>
+<p>Generate a palette:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -y -i %03d.png -vf palettegen palette.png
+</span></span></code></pre></div><ul>
+<li><code>-y</code>: overwrite output</li>
+<li><code>-i %03d.png</code>: reads <code>001.png</code>, <code>002.png</code>, etc.</li>
+<li><code>-vf palettegen</code>: generates a reduced color palette for better GIF quality/size</li>
+</ul>
+<p>Create the GIF using the palette:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ffmpeg -y -f image2 -framerate <span style="color:#ae81ff">60</span> -i %03d.png -i palette.png -filter_complex paletteuse file.gif
+</span></span></code></pre></div><ul>
+<li><code>-framerate 60</code>: output GIF frame rate</li>
+<li><code>-filter_complex paletteuse</code>: applies the palette to the GIF for improved quality</li>
 </ul>
 
           </div>

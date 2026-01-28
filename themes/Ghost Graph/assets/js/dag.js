@@ -17,6 +17,15 @@ import * as THREE from "three";
   const resultsEmpty = resultsPanel
     ? resultsPanel.querySelector(".sv-map-results-empty")
     : null;
+  const countPanel = document.getElementById("dag-count");
+  const countNodes = countPanel
+    ? countPanel.querySelector('[data-count="nodes"]')
+    : null;
+  const countLinks = countPanel
+    ? countPanel.querySelector('[data-count="links"]')
+    : null;
+  const countFormatter =
+    typeof Intl !== "undefined" ? new Intl.NumberFormat() : null;
 
   const FALLBACK_CATEGORY = "Uncategorized";
   const FALLBACK_TAG = "Untagged";
@@ -154,6 +163,22 @@ import * as THREE from "three";
     controls.addEventListener("change", () => scheduleLabelUpdate());
   }
 
+  const ensureControlsActive = () => {
+    if (!controls) return;
+    controls.enabled = true;
+    controls.enableRotate = true;
+    if (controls.mouseButtons && typeof THREE !== "undefined" && THREE.MOUSE) {
+      controls.mouseButtons.LEFT = THREE.MOUSE.ROTATE;
+      controls.mouseButtons.MIDDLE = THREE.MOUSE.DOLLY;
+      controls.mouseButtons.RIGHT = THREE.MOUSE.PAN;
+    }
+  };
+
+  container.addEventListener("pointerdown", ensureControlsActive);
+  container.addEventListener("pointerup", ensureControlsActive);
+  container.addEventListener("pointercancel", ensureControlsActive);
+  window.addEventListener("blur", ensureControlsActive);
+
   let fitted = false;
   let pendingFit = false;
   Graph.onEngineStop(() => {
@@ -176,6 +201,7 @@ import * as THREE from "three";
     currentSelection = selectionFromFocus(graphData, focusKind, focusValue);
   }
   refreshHighlights();
+  updateCounts();
 
   const searchInput = document.getElementById("dag-search");
   const clearButton = mapSection
@@ -290,7 +316,16 @@ import * as THREE from "three";
     }
     graphData = nextGraphData;
     Graph.graphData({ nodes: graphData.nodes, links: graphData.links });
+    updateCounts();
     pendingFit = true;
+  }
+
+  function updateCounts() {
+    if (!countNodes || !countLinks) return;
+    const format = (value) =>
+      countFormatter ? countFormatter.format(value) : String(value);
+    countNodes.textContent = format(graphData.nodes.length);
+    countLinks.textContent = format(graphData.links.length);
   }
 
   function buildSelectionGraphData(selection) {

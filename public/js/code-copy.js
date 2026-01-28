@@ -35,6 +35,22 @@
     return "";
   };
 
+  const trimTrailingNewline = (codeEl) => {
+    if (!codeEl) {
+      return;
+    }
+
+    const walker = document.createTreeWalker(codeEl, NodeFilter.SHOW_TEXT, null);
+    let lastText = null;
+    while (walker.nextNode()) {
+      lastText = walker.currentNode;
+    }
+
+    if (lastText) {
+      lastText.nodeValue = lastText.nodeValue.replace(/\n+$/, "");
+    }
+  };
+
   const enhanceBlock = (block) => {
     if (block.dataset.copyReady === "true") {
       return;
@@ -47,6 +63,8 @@
 
     block.dataset.copyReady = "true";
     block.classList.add("sv-code-block");
+
+    trimTrailingNewline(block.querySelector("code"));
 
     const button = document.createElement("button");
     button.type = "button";
