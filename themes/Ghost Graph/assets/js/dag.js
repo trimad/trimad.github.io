@@ -17,16 +17,6 @@ import * as THREE from "three";
   const resultsEmpty = resultsPanel
     ? resultsPanel.querySelector(".sv-map-results-empty")
     : null;
-  const countPanel = document.getElementById("dag-count");
-  const countNodes = countPanel
-    ? countPanel.querySelector('[data-count="nodes"]')
-    : null;
-  const countLinks = countPanel
-    ? countPanel.querySelector('[data-count="links"]')
-    : null;
-  const countFormatter =
-    typeof Intl !== "undefined" ? new Intl.NumberFormat() : null;
-
   const FALLBACK_CATEGORY = "Uncategorized";
   const FALLBACK_TAG = "Untagged";
   const palette = getPalette();
@@ -201,13 +191,11 @@ import * as THREE from "three";
     currentSelection = selectionFromFocus(graphData, focusKind, focusValue);
   }
   refreshHighlights();
-  updateCounts();
 
   const searchInput = document.getElementById("dag-search");
   const clearButton = mapSection
     ? mapSection.querySelector(".sv-search-clear")
     : document.querySelector(".sv-search-clear");
-  const homeButton = document.getElementById("dag-home");
   const categoryToggle = document.getElementById("dag-toggle-categories");
   const tagToggle = document.getElementById("dag-toggle-tags");
   const postToggle = document.getElementById("dag-toggle-posts");
@@ -239,11 +227,6 @@ import * as THREE from "three";
     [categoryToggle, tagToggle, postToggle].forEach((toggle) => {
       if (!toggle) return;
       toggle.addEventListener("change", updateVisibility);
-    });
-  }
-  if (homeButton) {
-    homeButton.addEventListener("click", () => {
-      goHome();
     });
   }
   updateClearVisibility();
@@ -316,16 +299,7 @@ import * as THREE from "three";
     }
     graphData = nextGraphData;
     Graph.graphData({ nodes: graphData.nodes, links: graphData.links });
-    updateCounts();
     pendingFit = true;
-  }
-
-  function updateCounts() {
-    if (!countNodes || !countLinks) return;
-    const format = (value) =>
-      countFormatter ? countFormatter.format(value) : String(value);
-    countNodes.textContent = format(graphData.nodes.length);
-    countLinks.textContent = format(graphData.links.length);
   }
 
   function buildSelectionGraphData(selection) {

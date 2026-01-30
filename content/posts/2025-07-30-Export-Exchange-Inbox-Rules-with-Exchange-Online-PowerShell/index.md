@@ -10,6 +10,14 @@ usePageBundles: true
 toc: true
 ---
 
+{{< notice type="warning" title="AI-Generated Content" >}}
+This PowerShell script and description are AI-generated. Please review for completeness and accuracy.
+{{< /notice >}}
+
+{{< notice type="info" title="AI-Generated Content" >}}
+This script was last tested and verified to work by a human on 1/26/2026. 
+{{< /notice >}}
+
 # Exchange Online Inbox Rule Auditing
 
 Monitoring inbox rules is one of the most effective ways to detect compromised accounts in Microsoft 365. Attackers commonly create forwarding or redirect rules to exfiltrate mail or hide activity.

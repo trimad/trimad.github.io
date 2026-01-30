@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Reset Passwords For All Users in an OU | Ghost Graph</title>
+<meta name="description" content="Bulk reset Active Directory user passwords for every account in a specific OU, export results to CSV, and log the exact target list for auditability.">
+<meta property="og:title" content="Reset Passwords For All Users in an OU | Ghost Graph">
+<meta property="og:description" content="Bulk reset Active Directory user passwords for every account in a specific OU, export results to CSV, and log the exact target list for auditability.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/posts/2026-01-30-reset-passwords-for-all-users-in-an-ou/">
+<meta property="og:site_name" content="Ghost Graph">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reset Passwords For All Users in an OU | Ghost Graph">
+<meta name="twitter:description" content="Bulk reset Active Directory user passwords for every account in a specific OU, export results to CSV, and log the exact target list for auditability.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Spectral:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="http://localhost:1313/css/main.min.1efafb374d1d93935ff3ecb888d3aa65829ec92a5823e9cf5cdaa963ab5a3101.css">
+
+  </head>
+  <body class="sv-body">
+    <a class="sv-skip" href="#content">Skip to content</a>
+    
+<div class="sv-shell">
+  <header class="sv-header">
+  <div class="sv-brand">
+    <a class="sv-mark" href="http://localhost:1313/">GG</a>
+    <div class="sv-brand-text">
+      <div class="sv-title">Ghost Graph</div>
+      <div class="sv-subtitle">Ghost Graph: Interlinked notes, diagnostics, and proven scripts rendered as a navigable 3D graph.</div>
+    </div>
+  </div>
+  <nav class="sv-nav" aria-label="Primary">
+    <a class="sv-nav-link" href="http://localhost:1313/posts/">Posts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/archive/">Archive</a>
+  </nav>
+</header>
+
+  <div class="sv-layout sv-layout-article">
+    <main class="sv-main">
+      <article class="sv-article" id="content">
+        <div class="sv-article-body">
+          <header class="sv-article-header">
+            <div class="sv-kicker">Reading</div>
+            <h1>Reset Passwords For All Users in an OU</h1>
+            <div class="sv-article-meta">
+              <span>Published Jan 30, 2026</span>
+              <span>Updated Jan 30, 2026</span>
+            </div>
+            <div class="sv-article-links">
+              <a class="sv-inline-link" href="http://localhost:1313/">Return to map</a>
+            </div>
+          </header>
+          
+            <div class="sv-terms">
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Categories</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/categories/powershell/">PowerShell</a>
+                  
+                </div>
+              
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Tags</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/activedirectory/">#ActiveDirectory</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/domaincontroller/">#DomainController</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/aduc/">#ADUC</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/security/">#Security</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/automation/">#Automation</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/passwordreset/">#PasswordReset</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/incidentresponse/">#IncidentResponse</a>
+                  
+                </div>
+              
+            </div>
+          <div class="sv-toc" aria-label="Table of contents">
+              <div class="sv-toc-title">On this page</div>
+              <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-this-does">What this does</a></li>
+        <li><a href="#the-gotcha-powershell-ise-vs-powershell">The gotcha: PowerShell ISE vs PowerShell</a></li>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#password-time-complexity">Password time complexity</a>
+          <ul>
+            <li><a href="#what-that-means-in-practice">What that means in practice</a></li>
+            <li><a href="#if-you-want-a-larger-search-space">If you want a larger search space</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-script">The script</a></li>
+        <li><a href="#how-to-run-it">How to run it</a>
+          <ul>
+            <li><a href="#validate-output-files">Validate output files</a></li>
+          </ul>
+        </li>
+        <li><a href="#operational-safety-notes">Operational safety notes</a>
+          <ul>
+            <li><a href="#plaintext-password-csv-handling">Plaintext password CSV handling</a></li>
+            <li><a href="#excluding-admin-or-service-accounts">Excluding admin or service accounts</a></li>
+            <li><a href="#only-target-enabled-users-optional">Only target enabled users (optional)</a></li>
+          </ul>
+        </li>
+        <li><a href="#wrap-up">Wrap-up</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div><div class="sv-content">
+            <div class="notice notice--warning"><div class="notice__title">AI-Generated Content</div><div class="notice__body">This PowerShell script and description are AI-generated. Please review for completeness and accuracy.</div>
+</div>
+
+<div class="notice notice--info"><div class="notice__title">AI-Generated Content</div><div class="notice__body">This script was last tested and verified to work by a human on 1/30/2026.</div>
+</div>
+
+<h2 id="what-this-does">What this does</h2>
+<p>This post documents a <strong>domain-controller-friendly</strong> PowerShell script that:</p>
+<ul>
+<li>Finds <strong>all user objects</strong> in a given OU (via LDAP filter)</li>
+<li>Generates a new password for each user using a <strong>hard-coded word list</strong> + <strong>9 digits</strong></li>
+<li>Resets each password with <code>Set-ADAccountPassword</code></li>
+<li>Forces <strong>Change password at next logon</strong></li>
+<li>Exports a CSV containing:
+<ul>
+<li><code>Username</code> (sAMAccountName)</li>
+<li><code>Password</code> (plaintext — see security notes)</li>
+<li><code>ResetSucceeded</code> and error details</li>
+</ul>
+</li>
+<li>Logs (to transcript) the <strong>exact target list</strong> before any changes are made</li>
+</ul>
+<blockquote>
+<p>⚠️ Security note: This produces a CSV containing <strong>plaintext passwords</strong>. Treat it like a credential dump: restrict NTFS permissions, move it securely, and delete it as soon as it’s no longer needed.</p>
+</blockquote>
+<hr>
+<h2 id="the-gotcha-powershell-ise-vs-powershell">The gotcha: PowerShell ISE vs PowerShell</h2>
+<p>In this environment, running the script from <strong>PowerShell ISE</strong> repeatedly produced:</p>
+<ul>
+<li><code>Set-ADAccountPassword : Access is denied</code></li>
+</ul>
+<p>Even with the same credentials, the script worked when executed from a <strong>Windows PowerShell console (<code>powershell.exe</code>)</strong>.</p>
+<p>If you run into the same thing:</p>
+<ol>
+<li>Try a regular <strong>PowerShell</strong> session (not ISE).</li>
+<li>Run it elevated.</li>
+<li>Confirm your admin groups are not “deny only”:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>whoami /groups | findstr /i <span style="color:#e6db74">&#34;domain admins enterprise admins schema admins&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Run on a <strong>Domain Controller</strong> or a machine with <strong>RSAT</strong> installed</li>
+<li><code>ActiveDirectory</code> PowerShell module available</li>
+<li>Permissions to reset passwords for users in the target OU</li>
+</ul>
+<hr>
+<h2 id="password-time-complexity">Password time complexity</h2>
+<p>The generated password format is:</p>
+<ul>
+<li>1 word selected uniformly from a hard-coded list of <strong>50</strong> words</li>
+<li>followed by <strong>9 digits</strong> (<code>000000000</code> through <code>999999999</code>)</li>
+</ul>
+<p>That means the total number of possible passwords (the <strong>search space</strong>) is:</p>
+<ul>
+<li>Words: <code>50</code></li>
+<li>Digit combinations: <code>10^9</code></li>
+<li>Total: <code>50 × 10^9 = 5 × 10^10</code> possibilities</li>
+</ul>
+<p>If an attacker knows the exact pattern and has the full word list, a targeted brute-force attack against this scheme is <strong>linear in the search space</strong>, i.e.:</p>
+<ul>
+<li><strong>Time complexity:</strong> <code>O(5 × 10^10)</code> guesses (same order as <code>O(10^10)</code>)</li>
+</ul>
+<h3 id="what-that-means-in-practice">What that means in practice</h3>
+<ul>
+<li><strong>Online guessing (against login prompts):</strong> Real-world time is dominated by rate limits, lockouts, and MFA, so brute forcing is generally infeasible.</li>
+<li><strong>Offline cracking (if hashes are stolen):</strong> Attack feasibility depends heavily on the hash type and attacker hardware. Fast hashes (like NTLM) can be tested very quickly, so the real protection is:
+<ul>
+<li>forcing password change at next logon (this script does),</li>
+<li>enforcing MFA,</li>
+<li>and preventing leakage of the plaintext CSV.</li>
+</ul>
+</li>
+</ul>
+<h3 id="if-you-want-a-larger-search-space">If you want a larger search space</h3>
+<p>You can increase the search space by adding more digits or more words:</p>
+<ul>
+<li>Add 1 digit → multiply space by <strong>10</strong></li>
+<li>Double word list size → multiply space by <strong>2</strong></li>
+</ul>
+<p>Example target:</p>
+<ul>
+<li><strong>~10^12</strong>: 100 words + 10 digits → <code>100 × 10^10 = 10^12</code></li>
+</ul>
+<hr>
+<h2 id="the-script">The script</h2>
+<blockquote>
+<p>Start with <code>$AuditOnly = $true</code> to validate the target list and output paths.<br>
+Flip to <code>$false</code> only when you’re ready to execute.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SAFETY TOGGLE (EDIT ME)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span>$AuditOnly = $true   <span style="color:#75715e"># &lt;-- set to $false to actually reset passwords</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Target OU + Output Files</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span>$OuDN      = <span style="color:#e6db74">&#34;OU=Users,OU=Company,DC=example,DC=local&#34;</span>
+</span></span><span style="display:flex;"><span>$OutCsv    = <span style="color:#e6db74">&#34;C:\Temp\Company_OU_PasswordReset_{0}.csv&#34;</span> <span style="color:#f92672">-f</span> (Get-Date -Format <span style="color:#e6db74">&#34;yyyyMMdd_HHmmss&#34;</span>)
+</span></span><span style="display:flex;"><span>$LogFile   = <span style="color:#e6db74">&#34;C:\Temp\Company_OU_PasswordReset_{0}.log&#34;</span> <span style="color:#f92672">-f</span> (Get-Date -Format <span style="color:#e6db74">&#34;yyyyMMdd_HHmmss&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ensure output folder exists</span>
+</span></span><span style="display:flex;"><span>$null = New-Item -Path (Split-Path $OutCsv) -ItemType Directory -Force -ErrorAction SilentlyContinue
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Start-Transcript -Path $LogFile -Force | Out-Null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hard-coded password words</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span>$Words = @(
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Nimbus&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Velocity&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Cobalt&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Juniper&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Phoenix&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Cascade&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Harbor&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Summit&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Orbit&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Citrine&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Voyager&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Aurora&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Granite&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Meadow&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Sterling&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Echoes&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Raptor&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Willow&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Atlas&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Banyan&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Zephyr&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Pinnacle&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Saffron&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Mariner&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Quartz&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Glacier&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Ember&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Prairie&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Timber&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Coral&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Vortex&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Lattice&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Riviera&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Sierra&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Horizon&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Solstice&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Monarch&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Crescent&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Radiant&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Pioneer&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Evergreen&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Tempest&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Sequoia&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Thunder&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Mirage&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Oasis&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Citadel&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Helios&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Canyon&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Starlight&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> New-Password {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">param</span>([<span style="color:#66d9ef">string[]</span>]$WordList)
+</span></span><span style="display:flex;"><span>  $word   = $WordList | Get-Random
+</span></span><span style="display:flex;"><span>  $digits = (Get-Random -Minimum <span style="color:#ae81ff">0</span> -Maximum <span style="color:#ae81ff">1000000000</span>).ToString(<span style="color:#e6db74">&#34;000000000&#34;</span>) <span style="color:#75715e"># 9 digits</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;</span>$word$digits<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Import-Module ActiveDirectory -ErrorAction Stop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pull users from OU</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span>$users = Get-ADUser -SearchBase $OuDN -LDAPFilter <span style="color:#e6db74">&#34;(&amp;(objectCategory=person)(objectClass=user))&#34;</span> `
+</span></span><span style="display:flex;"><span>  -Properties Enabled,DistinguishedName,sAMAccountName,UserPrincipalName
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Found </span>$($users.Count)<span style="color:#e6db74"> user(s) under: </span>$OuDN<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;AuditOnly = </span>$AuditOnly<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Output CSV: </span>$OutCsv<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Log File : </span>$LogFile<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Log which accounts will be hit (captured by transcript)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span>$targetList = $users |
+</span></span><span style="display:flex;"><span>  Select-Object Name,sAMAccountName,UserPrincipalName,Enabled,DistinguishedName |
+</span></span><span style="display:flex;"><span>  Sort-Object Name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">=== TARGET ACCOUNTS (</span>$($targetList.Count)<span style="color:#e6db74">) ===&#34;</span>
+</span></span><span style="display:flex;"><span>$targetList | Format-Table -Auto | Out-String | Write-Host
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;=== END TARGET ACCOUNTS ===</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reset loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =======================</span>
+</span></span><span style="display:flex;"><span>$results = New-Object System.Collections.Generic.List[<span style="color:#66d9ef">object</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($u <span style="color:#66d9ef">in</span> $users) {
+</span></span><span style="display:flex;"><span>  $newPw = New-Password -WordList $Words
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $row = [<span style="color:#66d9ef">pscustomobject</span>]@{
+</span></span><span style="display:flex;"><span>    Username          = $u.sAMAccountName
+</span></span><span style="display:flex;"><span>    Password          = $newPw
+</span></span><span style="display:flex;"><span>    Enabled           = $u.Enabled
+</span></span><span style="display:flex;"><span>    ResetAttempted    = $false
+</span></span><span style="display:flex;"><span>    ResetSucceeded    = $false
+</span></span><span style="display:flex;"><span>    Notes             = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    DistinguishedName = $u.DistinguishedName
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($AuditOnly) {
+</span></span><span style="display:flex;"><span>      $row.Notes = <span style="color:#e6db74">&#34;AuditOnly: no changes made.&#34;</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      $securePw = ConvertTo-SecureString -String $newPw -AsPlainText -Force
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      Set-ADAccountPassword -Identity $u.DistinguishedName -Reset -NewPassword $securePw -ErrorAction Stop
+</span></span><span style="display:flex;"><span>      $row.ResetAttempted = $true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      Set-ADUser -Identity $u.DistinguishedName -ChangePasswordAtLogon $true -ErrorAction Stop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      $row.ResetSucceeded = $true
+</span></span><span style="display:flex;"><span>      $row.Notes = <span style="color:#e6db74">&#34;Password reset + ChangePasswordAtLogon set.&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>    $row.ResetAttempted = (<span style="color:#f92672">-not</span> $AuditOnly)
+</span></span><span style="display:flex;"><span>    $row.ResetSucceeded = $false
+</span></span><span style="display:flex;"><span>    $row.Notes = $_.Exception.Message
+</span></span><span style="display:flex;"><span>    Write-Host <span style="color:#e6db74">&#34;FAILED: </span>$($u.sAMAccountName)<span style="color:#e6db74"> - </span>$($_.Exception.Message)<span style="color:#e6db74">&#34;</span> -ForegroundColor Red
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  $results.Add($row) | Out-Null
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$results | Export-Csv -Path $OutCsv -NoTypeInformation -Encoding UTF8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Stop-Transcript | Out-Null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">Done.&#34;</span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;CSV: </span>$OutCsv<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;Log: </span>$LogFile<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="how-to-run-it">How to run it</h2>
+<ol>
+<li>Copy the script to the DC (or a machine with RSAT).</li>
+<li>Start with <strong>AuditOnly mode</strong>:
+<ul>
+<li>Leave <code>$AuditOnly = $true</code></li>
+<li>Run once to confirm the <strong>TARGET ACCOUNTS</strong> list is correct.</li>
+</ul>
+</li>
+<li>Execute the reset:
+<ul>
+<li>Set <code>$AuditOnly = $false</code></li>
+<li>Run again.</li>
+</ul>
+</li>
+</ol>
+<h3 id="validate-output-files">Validate output files</h3>
+<ul>
+<li>CSV: <code>C:\Temp\Company_OU_PasswordReset_YYYYMMDD_HHMMSS.csv</code></li>
+<li>Log: <code>C:\Temp\Company_OU_PasswordReset_YYYYMMDD_HHMMSS.log</code></li>
+</ul>
+<hr>
+<h2 id="operational-safety-notes">Operational safety notes</h2>
+<h3 id="plaintext-password-csv-handling">Plaintext password CSV handling</h3>
+<p>This is the biggest risk. At minimum:</p>
+<ul>
+<li>Restrict NTFS permissions to only the admins who need it</li>
+<li>Transfer it using a secure method (avoid chat, plain email, and shared links)</li>
+<li>Delete it as soon as you no longer need it</li>
+</ul>
+<h3 id="excluding-admin-or-service-accounts">Excluding admin or service accounts</h3>
+<p>If your OU contains accounts like <code>*admin*</code>, <code>*svc*</code>, or other service principals, consider:</p>
+<ul>
+<li>Moving service accounts out of the OU used for bulk resets, or</li>
+<li>Filtering them out before the reset loop</li>
+</ul>
+<h3 id="only-target-enabled-users-optional">Only target enabled users (optional)</h3>
+<p>If you want to reset <strong>only enabled</strong> accounts, change the LDAP filter to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$users = Get-ADUser -SearchBase $OuDN -LDAPFilter <span style="color:#e6db74">&#34;(&amp;(objectCategory=person)(objectClass=user)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))&#34;</span> `
+</span></span><span style="display:flex;"><span>  -Properties Enabled,DistinguishedName,sAMAccountName,UserPrincipalName
+</span></span></code></pre></div><hr>
+<h2 id="wrap-up">Wrap-up</h2>
+<p>This approach is a reliable way to do a <strong>controlled mass password reset</strong> in a single OU while keeping:</p>
+<ul>
+<li>An auditable “target list” (transcript)</li>
+<li>A structured CSV export</li>
+<li>A log trail for review/troubleshooting</li>
+</ul>
+<p>If you want to extend it, easy upgrades include:</p>
+<ul>
+<li>Adding an explicit denylist of usernames to exclude</li>
+<li>Exporting the target list to a separate approval CSV</li>
+<li>Switching password generation to a stricter policy (length/complexity)</li>
+</ul>
+
+          </div>
+        </div>
+      </article>
+
+    </main>
+    <aside class="sv-sidebar" aria-label="Recently modified">
+  <div class="sv-sidebar-title">Recently Modified</div>
+  <ul class="sv-sidebar-list"><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2026-01-30-reset-passwords-for-all-users-in-an-ou/">Reset Passwords For All Users in an OU</a>
+        <time class="sv-sidebar-date" datetime="2026-01-30">
+          Jan 30, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2026-01-27-get-dns-records/">Get DNS Records with PowerShell</a>
+        <time class="sv-sidebar-date" datetime="2026-01-28">
+          Jan 28, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2022-01-27-ffmpeg/">FFmpeg Command Reference</a>
+        <time class="sv-sidebar-date" datetime="2026-01-28">
+          Jan 28, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/">Nth Fibonacci Number</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2024-03-25-window-watcher/">Window Monitoring with Machine Vision</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">Gmail Photo Downloader</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-08-24-disco-ball/">Disco Ball</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-11-rapidapi/">Yahoo Finance API via RapidAPI</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-08-keycode-event-test/">Key Event Tester</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">Deep Floyd IF</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-22-random-password-generator/">Random Password Generator</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-03-windows-defender-firewall/">Windows Defender Firewall Management Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-22-laps/">Microsoft LAPS (Local Administrator Password Solution) Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-15-decode-phishing-emails/">Phishing Email Decoding Tools</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-film/">Frame Interpolation Large Motion (FILM)</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-stable-diffusion/">Stable Diffusion Scripts</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li></ul>
+</aside>
+
+  </div>
+</div>
+<script src="http://localhost:1313/js/code-copy.js" defer></script>
+  </body>
+</html>

@@ -6,8 +6,15 @@
     <description>Recent content in Automation on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 30 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reset Passwords For All Users in an OU</title>
+      <link>http://localhost:1313/posts/2026-01-30-reset-passwords-for-all-users-in-an-ou/</link>
+      <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2026-01-30-reset-passwords-for-all-users-in-an-ou/</guid>
+      <description>&lt;div class=&#34;notice notice--warning&#34;&gt;&lt;div class=&#34;notice__title&#34;&gt;AI-Generated Content&lt;/div&gt;&lt;div class=&#34;notice__body&#34;&gt;This PowerShell script and description are AI-generated. Please review for completeness and accuracy.&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;div class=&#34;notice notice--info&#34;&gt;&lt;div class=&#34;notice__title&#34;&gt;AI-Generated Content&lt;/div&gt;&lt;div class=&#34;notice__body&#34;&gt;This script was last tested and verified to work by a human on 1/30/2026.&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h2 id=&#34;what-this-does&#34;&gt;What this does&lt;/h2&gt;&#xA;&lt;p&gt;This post documents a &lt;strong&gt;domain-controller-friendly&lt;/strong&gt; PowerShell script that:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Finds &lt;strong&gt;all user objects&lt;/strong&gt; in a given OU (via LDAP filter)&lt;/li&gt;&#xA;&lt;li&gt;Generates a new password for each user using a &lt;strong&gt;hard-coded word list&lt;/strong&gt; + &lt;strong&gt;9 digits&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;Resets each password with &lt;code&gt;Set-ADAccountPassword&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Forces &lt;strong&gt;Change password at next logon&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;Exports a CSV containing:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Username&lt;/code&gt; (sAMAccountName)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;Password&lt;/code&gt; (plaintext — see security notes)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;ResetSucceeded&lt;/code&gt; and error details&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Logs (to transcript) the &lt;strong&gt;exact target list&lt;/strong&gt; before any changes are made&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;⚠️ Security note: This produces a CSV containing &lt;strong&gt;plaintext passwords&lt;/strong&gt;. Treat it like a credential dump: restrict NTFS permissions, move it securely, and delete it as soon as it’s no longer needed.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It)</title>
       <link>http://localhost:1313/posts/2026-01-09-export-shared-mailbox-delegates/</link>
