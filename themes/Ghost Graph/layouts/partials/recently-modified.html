@@ -1,4 +1,20 @@
-{{- $pages := where .Site.RegularPages "Section" "ne" "archive" -}}
+{{- $section := .Section -}}
+{{- if eq .Kind "home" -}}
+  {{- $section = "posts" -}}
+{{- end -}}
+{{- if not $section -}}
+  {{- $section = "posts" -}}
+{{- end -}}
+{{- $pages := .Site.RegularPages -}}
+{{- if eq $section "posts" -}}
+  {{- $pages = where $pages "Section" "posts" -}}
+{{- else if eq $section "prompts" -}}
+  {{- $pages = where $pages "Section" "prompts" -}}
+{{- else if eq $section "archive" -}}
+  {{- $pages = where $pages "Section" "archive" -}}
+{{- else -}}
+  {{- $pages = where $pages "Section" "posts" -}}
+{{- end -}}
 {{- $recent := first 16 (sort $pages "Lastmod" "desc") -}}
 <aside class="sv-sidebar" aria-label="Recently modified">
   <div class="sv-sidebar-title">Recently Modified</div>

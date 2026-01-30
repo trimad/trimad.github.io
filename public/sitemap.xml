@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/dmarc/</loc>
     <lastmod>2026-01-28T10:57:57-05:00</lastmod>
@@ -36,37 +36,37 @@
     <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/3d/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/force-directed/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/prompts/2026-01-28-generative-guidelines-for-rei-theme/</loc>
-    <lastmod>2026-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</loc>
     <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/graph/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/hugo/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/search/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/taxonomy/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/visualization/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/visualization/</loc>
-    <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+    <lastmod>2026-01-30T08:43:04-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/automation/</loc>
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
