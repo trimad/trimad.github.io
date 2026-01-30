@@ -1,4 +1,5 @@
-{{- $recent := first 16 (sort .Site.RegularPages "Lastmod" "desc") -}}
+{{- $pages := where .Site.RegularPages "Section" "ne" "archive" -}}
+{{- $recent := first 16 (sort $pages "Lastmod" "desc") -}}
 <aside class="sv-sidebar" aria-label="Recently modified">
   <div class="sv-sidebar-title">Recently Modified</div>
   <ul class="sv-sidebar-list">

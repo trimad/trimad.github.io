@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Generative Guidelines for my Rei Hugo theme | Ghost Graph</title>
+<meta name="description" content="CSS variables &#43; font stacks (drop-in) /* ================================ Rei Ayanami Canon Palette ================================ */ :root { /* Base palette …">
+<meta property="og:title" content="Generative Guidelines for my Rei Hugo theme | Ghost Graph">
+<meta property="og:description" content="CSS variables &#43; font stacks (drop-in) /* ================================ Rei Ayanami Canon Palette ================================ */ :root { /* Base palette …">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/prompts/2026-01-28-generative-guidelines-for-rei-theme/">
+<meta property="og:site_name" content="Ghost Graph">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Generative Guidelines for my Rei Hugo theme | Ghost Graph">
+<meta name="twitter:description" content="CSS variables &#43; font stacks (drop-in) /* ================================ Rei Ayanami Canon Palette ================================ */ :root { /* Base palette …">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Spectral:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css"><link rel="stylesheet" href="http://localhost:1313/css/main.min.1efafb374d1d93935ff3ecb888d3aa65829ec92a5823e9cf5cdaa963ab5a3101.css">
+
+  </head>
+  <body class="sv-body">
+    <a class="sv-skip" href="#content">Skip to content</a>
+    
+<div class="sv-shell">
+  <header class="sv-header">
+  <div class="sv-brand">
+    <a class="sv-mark" href="http://localhost:1313/">GG</a>
+    <div class="sv-brand-text">
+      <div class="sv-title">Ghost Graph</div>
+      <div class="sv-subtitle">Ghost Graph: Interlinked notes, diagnostics, and proven scripts rendered as a navigable 3D graph.</div>
+    </div>
+  </div>
+  <nav class="sv-nav" aria-label="Primary">
+    <a class="sv-nav-link" href="http://localhost:1313/posts/">Posts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/prompts/">Prompts</a>
+    <a class="sv-nav-link" href="http://localhost:1313/archive/">Archive</a>
+  </nav>
+</header>
+
+  <div class="sv-layout sv-layout-article">
+    <main class="sv-main">
+      <article class="sv-article" id="content">
+        <div class="sv-article-body">
+          <header class="sv-article-header">
+            <div class="sv-kicker">Reading</div>
+            <h1>Generative Guidelines for my Rei Hugo theme</h1>
+            <div class="sv-article-meta">
+              <span>Published Jan 26, 2026</span>
+              <span>Updated Jan 26, 2026</span>
+            </div>
+            <div class="sv-article-links">
+              <a class="sv-inline-link" href="http://localhost:1313/">Return to map</a>
+            </div>
+          </header>
+          
+            <div class="sv-terms">
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Categories</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/categories/visualization/">Visualization</a>
+                  
+                </div>
+              
+              
+                <div class="sv-term-row">
+                  <span class="sv-term-label">Tags</span>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/3d/">#3d</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/force-directed/">#force-directed</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/graph/">#graph</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/hugo/">#hugo</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/visualization/">#visualization</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/taxonomy/">#taxonomy</a>
+                  
+                    <a class="sv-term-pill" href="http://localhost:1313/tags/search/">#search</a>
+                  
+                </div>
+              
+            </div>
+          <div class="sv-toc" aria-label="Table of contents">
+              <div class="sv-toc-title">On this page</div>
+              <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#css-variables--font-stacks-drop-in">CSS variables + font stacks (drop-in)</a></li>
+        <li><a href="#generative-guidelines">Generative Guidelines</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div><div class="sv-content">
+            <h2 id="css-variables--font-stacks-drop-in">CSS variables + font stacks (drop-in)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#75715e">/* ================================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   Rei Ayanami Canon Palette
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   ================================ */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">root</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* Base palette */</span>
+</span></span><span style="display:flex;"><span>  --rei-blue:     <span style="color:#ae81ff">#9AA3D2</span>; <span style="color:#75715e">/* calm atmospheric background */</span>
+</span></span><span style="display:flex;"><span>  --rei-surface:  <span style="color:#ae81ff">#EFEDED</span>; <span style="color:#75715e">/* sterile panels */</span>
+</span></span><span style="display:flex;"><span>  --rei-bone:     <span style="color:#ae81ff">#F1E7DA</span>; <span style="color:#75715e">/* subtle highlight */</span>
+</span></span><span style="display:flex;"><span>  --rei-red:      <span style="color:#ae81ff">#CF2D2F</span>; <span style="color:#75715e">/* critical only */</span>
+</span></span><span style="display:flex;"><span>  --rei-navy:     <span style="color:#ae81ff">#20202B</span>; <span style="color:#75715e">/* primary ink */</span>
+</span></span><span style="display:flex;"><span>  --rei-green:    <span style="color:#ae81ff">#254434</span>; <span style="color:#75715e">/* NERV system accents */</span>
+</span></span><span style="display:flex;"><span>  --rei-orange:   <span style="color:#ae81ff">#D4733C</span>; <span style="color:#75715e">/* interaction / focus */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* Semantic roles */</span>
+</span></span><span style="display:flex;"><span>  --bg: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">blue</span>);
+</span></span><span style="display:flex;"><span>  --surface: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span>surface);
+</span></span><span style="display:flex;"><span>  --surface-hover: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span>bone);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  --text: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">navy</span>);
+</span></span><span style="display:flex;"><span>  --text-muted: <span style="color:#a6e22e">color-mix</span>(in srgb, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">navy</span>) <span style="color:#ae81ff">55</span><span style="color:#66d9ef">%</span>, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">blue</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  --border: <span style="color:#a6e22e">color-mix</span>(in srgb, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">navy</span>) <span style="color:#ae81ff">15</span><span style="color:#66d9ef">%</span>, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">blue</span>));
+</span></span><span style="display:flex;"><span>  --divider: <span style="color:#a6e22e">color-mix</span>(in srgb, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">navy</span>) <span style="color:#ae81ff">10</span><span style="color:#66d9ef">%</span>, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">blue</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  --link: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">green</span>);
+</span></span><span style="display:flex;"><span>  --link-hover: <span style="color:#a6e22e">color-mix</span>(in srgb, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">green</span>) <span style="color:#ae81ff">70</span><span style="color:#66d9ef">%</span>, <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span>bone));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  --focus: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">orange</span>);
+</span></span><span style="display:flex;"><span>  --danger: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>rei<span style="color:#f92672">-</span><span style="color:#66d9ef">red</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* Shape language */</span>
+</span></span><span style="display:flex;"><span>  --radius-1: <span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>  --radius-2: <span style="color:#ae81ff">4</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>  --border-1: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>divider);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* Typography */</span>
+</span></span><span style="display:flex;"><span>  --font-sans: <span style="color:#e6db74">&#34;IBM Plex Sans&#34;</span>,<span style="color:#e6db74">&#34;Inter&#34;</span>,<span style="color:#e6db74">&#34;Source Sans 3&#34;</span>,system-ui,<span style="color:#f92672">-</span>apple-system,<span style="color:#e6db74">&#34;Segoe UI&#34;</span>,Roboto,Arial,<span style="color:#66d9ef">sans-serif</span>;
+</span></span><span style="display:flex;"><span>  --font-mono: <span style="color:#e6db74">&#34;IBM Plex Mono&#34;</span>,<span style="color:#e6db74">&#34;JetBrains Mono&#34;</span>,<span style="color:#e6db74">&#34;Source Code Pro&#34;</span>,ui-monospace,Menlo,Consolas,<span style="color:#66d9ef">monospace</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* Type scale */</span>
+</span></span><span style="display:flex;"><span>  --fs-meta: <span style="color:#ae81ff">0.8125</span><span style="color:#66d9ef">rem</span>;
+</span></span><span style="display:flex;"><span>  --fs-body: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">rem</span>;
+</span></span><span style="display:flex;"><span>  --fs-lead: <span style="color:#ae81ff">1.125</span><span style="color:#66d9ef">rem</span>;
+</span></span><span style="display:flex;"><span>  --fs-h3: <span style="color:#ae81ff">1.375</span><span style="color:#66d9ef">rem</span>;
+</span></span><span style="display:flex;"><span>  --fs-h2: <span style="color:#ae81ff">1.75</span><span style="color:#66d9ef">rem</span>;
+</span></span><span style="display:flex;"><span>  --fs-h1: <span style="color:#ae81ff">2.125</span><span style="color:#66d9ef">rem</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  --lh-body: <span style="color:#ae81ff">1.65</span>;
+</span></span><span style="display:flex;"><span>  --lh-tight: <span style="color:#ae81ff">1.2</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* Motion */</span>
+</span></span><span style="display:flex;"><span>  --ease-system: cubic-bezier(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="generative-guidelines">Generative Guidelines</h2>
+<pre tabindex="0"><code>RREI AYANAMI–INSPIRED HUGO THEME + GHOST GRAPH (3D FORCE-GRAPH)
+CANON PALETTE EDITION
+
+You are a senior creative director and front-end systems designer re-imagining an existing Hugo blog theme.
+
+==================================================
+AESTHETIC GOAL
+==================================================
+Design a minimalist, emotionally restrained interface inspired by Rei Ayanami’s tone
+(detachment, stillness, clinical calm, isolation) from Neon Genesis Evangelion.
+
+This is NOT anime fan art.
+Do NOT use character imagery, EVA iconography, or overt anime tropes.
+Translate Rei’s emotional restraint into a quiet, institutional design system.
+
+The interface should feel observational, archival, and deliberately impersonal.
+
+==================================================
+COLOR PALETTE (STRICT / CANONICAL REI)
+==================================================
+Use ONLY the following colors:
+
+#9AA3D2
+#EFEDED
+#254434
+#D4733C 
+#CF2D2F
+#F1E7DA
+
+Rules:
+- No pure black, no pure white
+- Red is rare and meaningful
+- Orange is functional, never decorative
+- Blue is atmospheric, not dominant text color
+- Hierarchy relies on spacing and typography more than color
+
+==================================================
+TYPOGRAPHY (MUST FEEL “REI”)
+==================================================
+Primary Sans (Body + UI):
+- IBM Plex Sans (preferred)
+- Inter
+- Source Sans 3
+
+Secondary Mono (Metadata, Labels, Classification):
+- IBM Plex Mono (preferred)
+- JetBrains Mono
+- Source Code Pro
+
+Typography rules:
+- Neutral, clinical, emotionally flat
+- Headings are factual, not expressive
+- Avoid dramatic weight contrast
+- Metadata appears archival and system-driven
+- No rounded, playful, or decorative typefaces
+
+==================================================
+SHAPE LANGUAGE (INSTITUTIONAL)
+==================================================
+Preferred:
+- Rectangles and long horizontal panels
+- Thin rules and inset borders
+- Subtle corner radius (2–4px max)
+
+Avoid:
+- Pills, circles, bubbles
+- Heavy shadows
+- Organic or playful shapes
+
+The interface should feel architectural and deliberate.
+
+==================================================
+LAYOUT &amp; COMPOSITION
+==================================================
+- Generous negative space
+- Left-aligned content preferred
+- Subtle asymmetry allowed
+- Reads like a technical archive, medical record, or classified report
+
+Navigation must feel recessed and unemotional.
+
+==================================================
+UI COMPONENTS
+==================================================
+- Notices resemble system messages (SYSTEM LOG, OBSERVATION, CLASSIFIED)
+- Links are understated; hover is minimal
+- Focus states are deliberate and visible
+- Code blocks are subdued and readable
+
+==================================================
+HUGO REQUIREMENTS
+==================================================
+The theme must support:
+- Long-form technical writing
+- Code-heavy posts
+- Clean table-of-contents
+- Taxonomies presented as classification systems
+- Metadata treated as first-class but emotionally neutral
+
+==================================================
+GHOST GRAPH / 3D FORCE-GRAPH RESKIN (CRITICAL)
+==================================================
+The graph must feel like an analytical instrument, not a toy.
+
+Canvas:
+- Background: #9AA3D2
+- Subtle fog using same color
+- No bloom, glow, or neon effects
+
+Nodes:
+- Category nodes: #254434 (largest, authoritative)
+- Tag nodes: #20202B (medium)
+- Post nodes: #EFEDED (smallest)
+
+Links:
+- Color: #20202B at low opacity
+- Hover: slightly increased opacity only
+
+Labels:
+- Hidden or minimal by default
+- On hover/search: mono font, crisp, restrained
+- Optional backing plate: translucent #F1E7DA
+
+Interaction:
+- Slow, damped orbit controls
+- Click selects and pins focus
+- Side panel opens like a system report
+- Search is primary navigation method
+
+==================================================
+HARD AVOIDS
+==================================================
+- Cute UI
+- Anime imagery
+- High-saturation accents
+- Marketing or landing-page aesthetics
+- Overly rounded or playful components
+
+==================================================
+FINAL IMPRESSION
+==================================================
+The result should feel calm, distant, institutional, and quietly human.
+
+Rei Ayanami — expressed as a documentation system.
+</code></pre>
+          </div>
+        </div>
+      </article>
+
+    </main>
+    <aside class="sv-sidebar" aria-label="Recently modified">
+  <div class="sv-sidebar-title">Recently Modified</div>
+  <ul class="sv-sidebar-list"><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2026-01-27-get-dns-records/">Get DNS Records with PowerShell</a>
+        <time class="sv-sidebar-date" datetime="2026-01-28">
+          Jan 28, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2022-01-27-ffmpeg/">FFmpeg Command Reference</a>
+        <time class="sv-sidebar-date" datetime="2026-01-28">
+          Jan 28, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/">Generative Guidelines for the 3D Force-Directed Graph (Search-First)</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2017-10-07-nth-fibonacci-number/">Nth Fibonacci Number</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/prompts/2026-01-28-generative-guidelines-for-rei-theme/">Generative Guidelines for my Rei Hugo theme</a>
+        <time class="sv-sidebar-date" datetime="2026-01-26">
+          Jan 26, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2024-03-25-window-watcher/">Window Monitoring with Machine Vision</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-09-11-picture-auto-downloader/">Gmail Photo Downloader</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-08-24-disco-ball/">Disco Ball</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-11-rapidapi/">Yahoo Finance API via RapidAPI</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-08-keycode-event-test/">Key Event Tester</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-05-03-deep-floyd-if/">Deep Floyd IF</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-22-random-password-generator/">Random Password Generator</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-03-03-windows-defender-firewall/">Windows Defender Firewall Management Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-22-laps/">Microsoft LAPS (Local Administrator Password Solution) Guide</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-15-decode-phishing-emails/">Phishing Email Decoding Tools</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li><li class="sv-sidebar-item">
+        <a href="http://localhost:1313/posts/2023-02-05-film/">Frame Interpolation Large Motion (FILM)</a>
+        <time class="sv-sidebar-date" datetime="2026-01-15">
+          Jan 15, 2026
+        </time>
+      </li></ul>
+</aside>
+
+  </div>
+</div>
+<script src="http://localhost:1313/js/code-copy.js" defer></script>
+  </body>
+</html>

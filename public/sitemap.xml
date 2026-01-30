@@ -3,46 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/dmarc/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/dns/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/email/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2026-01-27-get-dns-records/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/mx/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/nslookup/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/powershell/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/powershell/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/spf/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-01-27T17:03:55-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/3d/</loc>
     <lastmod>2026-01-26T17:06:11-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/force-directed/</loc>
     <lastmod>2026-01-26T17:06:11-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/prompts/2026-01-28-generative-guidelines-for-rei-theme/</loc>
+    <lastmod>2026-01-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/prompts/2026-01-15-generative-guidelines-for-this-blog/</loc>
     <lastmod>2026-01-26T17:06:11-05:00</lastmod>
@@ -153,7 +156,7 @@
     <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/ffmpeg/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/microsoft-teams/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -189,7 +192,7 @@
     <lastmod>2026-01-12T12:29:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/troubleshooting/</loc>
-    <lastmod>2026-01-12T12:29:24-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/windbg/</loc>
     <lastmod>2026-01-12T12:29:24-05:00</lastmod>
@@ -219,7 +222,7 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/system-administration/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/version-management/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -258,7 +261,7 @@
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/shell/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2024-06-06-dns-records/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -336,13 +339,13 @@
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/n-central/</loc>
-    <lastmod>2024-01-02T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/remote-access/</loc>
-    <lastmod>2024-01-02T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/archive/2024-01-02-take-control/</loc>
-    <lastmod>2024-01-02T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/file-system/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -444,7 +447,7 @@
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/video/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -522,7 +525,7 @@
     <lastmod>2026-01-15T16:04:39-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/audio/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/cuda/</loc>
     <lastmod>2025-12-12T17:02:56-05:00</lastmod>
@@ -702,10 +705,10 @@
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/cmd/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2022-01-27-ffmpeg/</loc>
-    <lastmod>2026-01-15T16:04:39-05:00</lastmod>
+    <lastmod>2026-01-28T10:57:57-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/2021-11-17-combining-powershell-cmdlets/</loc>
     <lastmod>2025-12-11T13:07:57-05:00</lastmod>
