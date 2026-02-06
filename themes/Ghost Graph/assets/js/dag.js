@@ -1,6 +1,3 @@
-import ForceGraph3D from "3d-force-graph";
-import * as THREE from "three";
-
 (() => {
   const dataEl = document.getElementById("dag-data");
   const container = document.getElementById("dag");
@@ -20,12 +17,21 @@ import * as THREE from "three";
   const FALLBACK_CATEGORY = "Uncategorized";
   const FALLBACK_TAG = "Untagged";
   const palette = getPalette();
+  const rootFontPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const graphTextBasePx = rootFontPx;
+  const resultDateFormatter = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
   const prefersReducedMotion =
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (typeof ForceGraph3D === "undefined") {
+  const ForceGraphLib = globalThis.ForceGraph;
+
+  if (typeof ForceGraphLib === "undefined") {
     if (emptyState) {
       emptyState.textContent = "Graph library unavailable. Check CDN access.";
     }
@@ -59,6 +65,8 @@ import * as THREE from "three";
   const taxonomies = data.taxonomies || {};
   let graphData = buildGraphData(indexedPosts, taxonomies);
   applyDeterministicPositions(graphData);
+  let graphJson = toGraphJson(graphData);
+  hydrateGraphForHover(graphJson);
   const fullGraphData = graphData;
   let searchGraphData = graphData;
   let baseGraphData = graphData;
@@ -81,25 +89,80 @@ import * as THREE from "three";
     hoveredNodeId: null,
     isSearchActive: false,
   };
+  const hoverHighlightNodes = new Set();
+  const hoverHighlightLinks = new Set();
+  let hoverNode = null;
 
-  const supportsThreeSprites = typeof THREE !== "undefined";
+  const supportsThreeSprites = false;
+  let isPointerInteracting = false;
 
-  const Graph = ForceGraph3D()(container)
-    .backgroundColor("rgba(0,0,0,0)")
-    .graphData({ nodes: graphData.nodes, links: graphData.links })
-    .nodeLabel((node) => `${node.name} (${labelForType(node.type)})`)
-    .nodeColor((node) => nodeColor(node, highlight, palette))
-    .nodeVal((node) => nodeValue(node, highlight))
-    .linkColor((link) => linkColor(link, highlight, palette))
-    .linkWidth((link) => linkWidth(link, highlight))
-    .linkOpacity(0.55)
-    .linkDirectionalParticles((link) => linkParticles(link, highlight))
-    .linkDirectionalParticleWidth(1.4)
-    .linkDirectionalParticleSpeed(0.007)
-    .onNodeClick((node, event) => handleNodeClick(node, event))
+  const Graph = new ForceGraphLib(container)
+    .backgroundColor("#101020")
+    .graphData(graphJson)
+    .nodeId("id")
+    .nodeLabel("name")
+    .cooldownTicks(0)
+    .nodeAutoColorBy("group")
+    .nodeRelSize(8)
+    .autoPauseRedraw(false)
+    .nodeCanvasObjectMode(() => "replace")
+    .nodeCanvasObject((node, ctx, globalScale) => {
+      drawTextNode(node, ctx, globalScale);
+    })
+    .nodePointerAreaPaint((node, color, ctx) => {
+      ctx.fillStyle = color;
+      const bckgDimensions = node.__bckgDimensions;
+      if (bckgDimensions) {
+        ctx.fillRect(
+          node.x - bckgDimensions[0] / 2,
+          node.y - bckgDimensions[1] / 2,
+          ...bckgDimensions
+        );
+      }
+    })
+    .linkWidth((link) => (hoverHighlightLinks.has(link) ? 5 : 1))
+    .linkDirectionalParticles(2)
+    .linkDirectionalParticleWidth((link) => (hoverHighlightLinks.has(link) ? 4 : 3))
+    .linkDirectionalParticleColor(() => "rgba(78, 240, 255, 0.95)")
+    .linkDirectionalParticleSpeed(0.01)
+    .linkDirectionalArrowLength(3)
+    .linkDirectionalArrowRelPos(1)
+    .linkCurvature(() => 0.08)
+    .linkColor(() => "rgba(78, 240, 255, 0.2)")
+    .onNodeClick((node, event) => {
+      if (!node) return;
+      Graph.centerAt(node.x, node.y, 1000);
+      Graph.zoom(8, 2000);
+      handleNodeClick(node, event);
+    })
     .onNodeHover((node) => {
+      if (isPointerInteracting) return;
+      hoverHighlightNodes.clear();
+      hoverHighlightLinks.clear();
+      if (node) {
+        hoverHighlightNodes.add(node);
+        (node.neighbors || []).forEach((neighbor) => hoverHighlightNodes.add(neighbor));
+        (node.links || []).forEach((link) => hoverHighlightLinks.add(link));
+      }
+      hoverNode = node || null;
       highlight.hoveredNodeId = node ? node.id : null;
-      updateLabels();
+      requestGraphRepaint();
+    })
+    .onLinkHover((link) => {
+      hoverHighlightNodes.clear();
+      hoverHighlightLinks.clear();
+      if (link) {
+        hoverHighlightLinks.add(link);
+        if (link.source) {
+          hoverHighlightNodes.add(link.source);
+        }
+        if (link.target) {
+          hoverHighlightNodes.add(link.target);
+        }
+      }
+      hoverNode = null;
+      highlight.hoveredNodeId = null;
+      requestGraphRepaint();
     })
     .onLinkClick((link, event) => {
       if (event && (event.metaKey || event.ctrlKey) && link.href) {
@@ -109,22 +172,29 @@ import * as THREE from "three";
       setFocus({ kind: "link", link });
     });
 
-  if (supportsThreeSprites) {
+  if (supportsThreeSprites && typeof Graph.nodeThreeObject === "function") {
     Graph.nodeThreeObject((node) => makeNodeGlyph(node, palette))
       .nodeThreeObjectExtend(false);
   }
 
-  const labelLayer = supportsThreeSprites ? null : createLabelLayer();
-  const labelNodes = supportsThreeSprites ? null : new Map();
-  const labelVector = supportsThreeSprites ? null : Graph.camera().position.clone();
+  const labelLayer = null;
+  const labelNodes = null;
+  const labelVector = null;
   let labelFrame = null;
 
   if (typeof Graph.onBackgroundClick === "function") {
-    Graph.onBackgroundClick(() => {});
+    Graph.onBackgroundClick(() => {
+      clearHoverHighlights();
+      requestGraphRepaint();
+    });
   }
 
-  Graph.d3Force("charge").strength(-160);
-  Graph.d3Force("link").distance((link) => (link.type === "cat-tag" ? 160 : 110));
+  if (typeof Graph.enableNodeDrag === "function") {
+    Graph.enableNodeDrag(false);
+  }
+  if (typeof Graph.numDimensions === "function") {
+    Graph.numDimensions(2);
+  }
 
   let lastWidth = 0;
   let lastHeight = 0;
@@ -148,40 +218,23 @@ import * as THREE from "three";
     window.addEventListener("resize", resizeGraph);
   }
 
-  const controls = Graph.controls && Graph.controls();
-  if (controls && typeof controls.addEventListener === "function") {
-    controls.addEventListener("change", () => scheduleLabelUpdate());
-  }
-
-  const ensureControlsActive = () => {
-    if (!controls) return;
-    controls.enabled = true;
-    controls.enableRotate = true;
-    if (controls.mouseButtons && typeof THREE !== "undefined" && THREE.MOUSE) {
-      controls.mouseButtons.LEFT = THREE.MOUSE.ROTATE;
-      controls.mouseButtons.MIDDLE = THREE.MOUSE.DOLLY;
-      controls.mouseButtons.RIGHT = THREE.MOUSE.PAN;
-    }
+  container.addEventListener("pointerdown", () => {
+    isPointerInteracting = true;
+  });
+  const releasePointerInteraction = () => {
+    isPointerInteracting = false;
+    scheduleLabelUpdate();
   };
+  container.addEventListener("pointerup", releasePointerInteraction);
+  container.addEventListener("pointercancel", releasePointerInteraction);
+  window.addEventListener("pointerup", releasePointerInteraction);
+  window.addEventListener("pointercancel", releasePointerInteraction);
+  window.addEventListener("blur", releasePointerInteraction);
 
-  container.addEventListener("pointerdown", ensureControlsActive);
-  container.addEventListener("pointerup", ensureControlsActive);
-  container.addEventListener("pointercancel", ensureControlsActive);
-  window.addEventListener("blur", ensureControlsActive);
-
-  let fitted = false;
-  let pendingFit = false;
   Graph.onEngineStop(() => {
     container.classList.add("is-ready");
-    if (!fitted) {
-      fitted = true;
-      Graph.zoomToFit(motionDuration(700), 60);
-    }
-    if (pendingFit && graphData.nodes.length) {
-      pendingFit = false;
-      Graph.zoomToFit(motionDuration(700), 60);
-    }
     updateLabels();
+    requestGraphRepaint();
   });
 
   let currentSelection = null;
@@ -235,12 +288,32 @@ import * as THREE from "three";
     syncSelectionToLocation();
   });
 
-  function handleNodeClick(node, event) {
-    if (!node) return;
-    if (node && node.type === "post" && node.href) {
-      window.location.href = node.href;
+  window.addEventListener("keydown", (event) => {
+    if (event.defaultPrevented) return;
+    if ((event.metaKey || event.ctrlKey || event.altKey) && event.key !== "Escape") return;
+
+    if (event.key === "/" && !isTypingElement(event.target)) {
+      event.preventDefault();
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+      }
       return;
     }
+
+    if (event.key === "Escape") {
+      const hasSearch = searchInput && String(searchInput.value || "").trim().length > 0;
+      if (searchInput && document.activeElement === searchInput) {
+        searchInput.blur();
+      }
+      if (hasSearch || currentSelection) {
+        goHome();
+      }
+    }
+  });
+
+  function handleNodeClick(node, event) {
+    if (!node) return;
     if (event && (event.metaKey || event.ctrlKey) && node.href) {
       window.location.href = node.href;
       return;
@@ -289,7 +362,7 @@ import * as THREE from "three";
     }
 
     updateLabels();
-    Graph.refresh();
+    requestGraphRepaint();
   }
 
   function applySelectionPrune(selection) {
@@ -298,8 +371,11 @@ import * as THREE from "three";
       return;
     }
     graphData = nextGraphData;
-    Graph.graphData({ nodes: graphData.nodes, links: graphData.links });
-    pendingFit = true;
+    applyDeterministicPositions(graphData);
+    graphJson = toGraphJson(graphData);
+    hydrateGraphForHover(graphJson);
+    Graph.graphData(graphJson);
+    clearHoverHighlights();
   }
 
   function buildSelectionGraphData(selection) {
@@ -353,6 +429,10 @@ import * as THREE from "three";
       const postNode = sourceGraph.postNodesByKey.get(post.key);
       if (!postNode) return;
       nodeIds.add(postNode.id);
+      const catPostLinkId = `link:${categoryNode.id}->${postNode.id}::cat-post`;
+      if (sourceGraph.linksById.has(catPostLinkId)) {
+        linkIds.add(catPostLinkId);
+      }
       post.tagKeys.forEach((tagKey) => {
         const tagId = `tag:${tagKey}`;
         const tagPostLinkId = `link:${tagId}->${postNode.id}`;
@@ -448,6 +528,12 @@ import * as THREE from "three";
         if (categoryNode) {
           highlight.searchNodes.add(categoryNode.id);
         }
+        if (postNode) {
+          const catPostLinkId = `link:cat:${categoryKey}->${postNode.id}::cat-post`;
+          if (graphData.linksById.has(catPostLinkId)) {
+            highlight.searchLinks.add(catPostLinkId);
+          }
+        }
         post.tagKeys.forEach((tagKey) => {
           const tagId = `tag:${tagKey}`;
           if (graphData.nodesById.has(tagId)) {
@@ -472,12 +558,6 @@ import * as THREE from "three";
     }
     updateResultsPanel(ranked);
     refreshHighlights();
-
-    const primaryNode =
-      highlight.primaryNodeId && graphData.nodesById.get(highlight.primaryNodeId);
-    if (primaryNode) {
-      focusCamera(primaryNode, { mode: "search" });
-    }
   }
 
   function updateResultsPanel(ranked) {
@@ -509,25 +589,43 @@ import * as THREE from "three";
       resultsEmpty.textContent = "";
     }
 
-    visibleRanked.forEach((item, index) => {
+    visibleRanked.forEach((item) => {
       const li = document.createElement("li");
       li.className = "sv-map-results-item";
-      if (index === 0) {
-        li.classList.add("is-primary");
+      const link = document.createElement("a");
+      link.href = item.post.relPermalink || item.post.permalink || "#";
+      link.textContent = item.post.title;
+
+      const time = document.createElement("time");
+      time.className = "sv-map-results-date";
+      const dateValue = item.post.lastmod || item.post.date || "";
+      const datetimeAttr = formatResultDateAttr(dateValue);
+      if (datetimeAttr) {
+        time.dateTime = datetimeAttr;
       }
-      const button = document.createElement("button");
-      button.type = "button";
-      button.textContent = item.post.title;
-      button.addEventListener("click", () => {
-        const node = graphData.postNodesByKey.get(item.post.key);
-        if (node) {
-          setFocus({ kind: "node", node });
-        }
-      });
-      li.appendChild(button);
+      time.textContent = formatResultDate(dateValue);
+
+      li.appendChild(link);
+      li.appendChild(time);
       resultsList.appendChild(li);
     });
     updateClearVisibility();
+  }
+
+  function formatResultDate(value) {
+    const time = Date.parse(value || "");
+    if (Number.isNaN(time)) {
+      return String(value || "");
+    }
+    return resultDateFormatter.format(new Date(time));
+  }
+
+  function formatResultDateAttr(value) {
+    const time = Date.parse(value || "");
+    if (Number.isNaN(time)) {
+      return "";
+    }
+    return new Date(time).toISOString().slice(0, 10);
   }
 
   function selectionAnchor(selection) {
@@ -655,16 +753,28 @@ import * as THREE from "three";
   }
 
   function focusCamera(node, options = {}) {
-    if (!node || node.x == null) return;
+    if (!node || node.x == null || node.y == null) return;
     const isSearch = options.mode === "search";
-    const distance = isSearch ? 80 : 140;
-    const dist = Math.hypot(node.x, node.y, node.z || 0);
-    const ratio = dist > 0 ? 1 + distance / dist : 1.2;
-    Graph.cameraPosition(
-      { x: node.x * ratio, y: node.y * ratio, z: (node.z || 0) * ratio },
-      node,
-      motionDuration(isSearch ? 650 : 900)
-    );
+    const duration = motionDuration(isSearch ? 650 : 900);
+    const zoom =
+      node.type === "category"
+        ? isSearch
+          ? 2.8
+          : 2.4
+        : node.type === "tag"
+          ? isSearch
+            ? 3.4
+            : 3
+          : isSearch
+            ? 4.4
+            : 4;
+
+    if (typeof Graph.centerAt === "function") {
+      Graph.centerAt(node.x, node.y, duration);
+    }
+    if (typeof Graph.zoom === "function") {
+      Graph.zoom(zoom, duration);
+    }
   }
 
   function motionDuration(ms) {
@@ -947,9 +1057,12 @@ import * as THREE from "three";
     return buildGraphSlice(nodeIds, linkIds, fullGraphData);
   }
 
-  function buildGraphSlice(nodeIds, linkIds, sourceGraph = fullGraphData) {
+  function buildGraphSlice(nodeIds, linkIds, sourceGraph = fullGraphData, extraLinks = []) {
     const nodes = (sourceGraph.nodes || []).filter((node) => nodeIds.has(node.id));
     const links = (sourceGraph.links || []).filter((link) => linkIds.has(link.id));
+    if (Array.isArray(extraLinks) && extraLinks.length) {
+      links.push(...extraLinks);
+    }
     const categoryNodes = (sourceGraph.categoryNodes || []).filter((node) => nodeIds.has(node.id));
     const tagNodes = (sourceGraph.tagNodes || []).filter((node) => nodeIds.has(node.id));
     const postNodes = (sourceGraph.postNodes || []).filter((node) => nodeIds.has(node.id));
@@ -1445,7 +1558,7 @@ import * as THREE from "three";
   }
 
   function updateDomLabels() {
-    if (!labelLayer || !labelNodes || !labelVector) return;
+    if (!labelLayer || !labelNodes) return;
     const width = container.clientWidth;
     const height = container.clientHeight;
     if (!width || !height) return;
@@ -1473,10 +1586,12 @@ import * as THREE from "three";
 
       const x = node.x || 0;
       const y = node.y || 0;
-      const z = node.z || 0;
-      labelVector.set(x, y, z).project(Graph.camera());
-      const screenX = (labelVector.x * 0.5 + 0.5) * width;
-      const screenY = (-labelVector.y * 0.5 + 0.5) * height;
+      const coords =
+        typeof Graph.graph2ScreenCoords === "function"
+          ? Graph.graph2ScreenCoords(x, y)
+          : { x: width / 2, y: height / 2 };
+      const screenX = coords.x;
+      const screenY = coords.y;
       el.style.transform = `translate(-50%, -50%) translate(${screenX}px, ${screenY}px)`;
     });
 
@@ -1535,34 +1650,59 @@ import * as THREE from "three";
   }
 
   function applyDeterministicPositions(graphData) {
-    graphData.nodes.forEach((node) => {
-      if (node.x != null && node.y != null && node.z != null) return;
-      const seed = Math.abs(hashString(node.id));
-      const randA = seededRandom(seed);
-      const randB = seededRandom(seed + 1);
-      const randC = seededRandom(seed + 2);
-      const baseRadius = node.type === "category" ? 240 : node.type === "tag" ? 200 : 160;
-      const radius = baseRadius + randC * 30;
-      const theta = randA * Math.PI * 2;
-      const phi = Math.acos(2 * randB - 1);
-      node.x = radius * Math.sin(phi) * Math.cos(theta);
-      node.y = radius * Math.sin(phi) * Math.sin(theta);
-      node.z = radius * Math.cos(phi);
+    if (!graphData || !Array.isArray(graphData.nodes) || !graphData.nodes.length) {
+      return;
+    }
+
+    const viewportWidth = Math.max(container.clientWidth || 0, 720);
+    const viewportHeight = Math.max(container.clientHeight || 0, 560);
+    const tagCount = (graphData.tagNodes || []).length;
+    const postCount = (graphData.postNodes || []).length;
+    const denseCount = Math.max(tagCount, postCount, 1);
+    const minRowGap = Math.max(16, graphTextBasePx * 1.35);
+    const requiredSpan = (denseCount - 1) * minRowGap;
+    const verticalSpan = Math.max(280, viewportHeight * 0.78, requiredSpan);
+    const countDrivenGap = Math.sqrt(denseCount) * 18;
+    const columnGap = Math.max(
+      180,
+      Math.min(820, viewportWidth * 0.28 + countDrivenGap)
+    );
+
+    layoutColumn(graphData.categoryNodes || [], -columnGap, verticalSpan);
+    layoutColumn(graphData.tagNodes || [], 0, verticalSpan);
+    layoutColumn(graphData.postNodes || [], columnGap, verticalSpan);
+
+    const positionedIds = new Set();
+    (graphData.categoryNodes || []).forEach((node) => positionedIds.add(node.id));
+    (graphData.tagNodes || []).forEach((node) => positionedIds.add(node.id));
+    (graphData.postNodes || []).forEach((node) => positionedIds.add(node.id));
+    (graphData.nodes || []).forEach((node) => {
+      if (positionedIds.has(node.id)) return;
+      setNodePosition(node, 0, 0);
     });
   }
 
-  function hashString(value) {
-    let hash = 5381;
-    for (let i = 0; i < value.length; i += 1) {
-      hash = (hash << 5) + hash + value.charCodeAt(i);
-      hash &= 0xffffffff;
-    }
-    return hash;
+  function layoutColumn(nodes, x, span) {
+    const ordered = [...nodes].sort((a, b) => {
+      return String(a.name || a.id).localeCompare(String(b.name || b.id));
+    });
+    const count = ordered.length;
+    if (!count) return;
+    const startY = -span / 2;
+    const step = count > 1 ? span / (count - 1) : 0;
+    ordered.forEach((node, index) => {
+      const y = count > 1 ? startY + step * index : 0;
+      setNodePosition(node, x, y);
+    });
   }
 
-  function seededRandom(seed) {
-    const x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
+  function setNodePosition(node, x, y) {
+    node.x = x;
+    node.y = y;
+    node.fx = x;
+    node.fy = y;
+    node.vx = 0;
+    node.vy = 0;
   }
 
   function findTagNodeForPost(tagKey, post) {
@@ -1633,11 +1773,147 @@ import * as THREE from "three";
       linkIds.add(link.id);
     });
 
+    const syntheticLinks = [];
+    if (!filter.tags && filter.categories && filter.posts) {
+      (sourceGraph.postNodes || []).forEach((postNode) => {
+        if (!nodeIds.has(postNode.id)) return;
+        const post = postNode.post;
+        (post.categoryKeys || []).forEach((categoryKey) => {
+          const categoryId = `cat:${categoryKey}`;
+          if (!nodeIds.has(categoryId)) return;
+          syntheticLinks.push({
+            id: `link:${categoryId}->${postNode.id}::cat-post`,
+            type: "cat-post",
+            source: categoryId,
+            target: postNode.id,
+            categoryKey,
+            postKey: post.key,
+            href: postNode.href,
+          });
+        });
+      });
+    }
+
     if (!nodeIds.size) {
       return createEmptyGraphData(sourceGraph);
     }
 
-    return buildGraphSlice(nodeIds, linkIds, sourceGraph);
+    return buildGraphSlice(nodeIds, linkIds, sourceGraph, syntheticLinks);
+  }
+
+  function drawTextNode(node, ctx, globalScale) {
+    const label = node.name || node.package || node.id;
+    const safeScale = Number.isFinite(globalScale) && globalScale > 0 ? globalScale : 1;
+    const scaledSize = graphTextBasePx * Math.pow(safeScale, 0.75);
+    const fontSize = Math.max(6, Math.min(20, scaledSize));
+    ctx.font = `${fontSize}px Chakra Petch, monospace`;
+    const textWidth = ctx.measureText(label).width;
+    const bckgDimensions = [textWidth, fontSize].map(
+      (value) => value + fontSize * 0.2
+    );
+
+    const isHoverTarget = hoverHighlightNodes.has(node);
+    const isDirectHover = node === hoverNode;
+    ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+    ctx.fillRect(
+      node.x - bckgDimensions[0] / 2,
+      node.y - bckgDimensions[1] / 2,
+      ...bckgDimensions
+    );
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = node.color || palette.accent;
+    ctx.shadowColor = stripAlpha(node.color || palette.accent);
+    ctx.shadowBlur = isDirectHover ? 22 : isHoverTarget || highlight.primaryNodeId === node.id ? 14 : 7;
+    ctx.fillText(label, node.x, node.y);
+    ctx.shadowBlur = 0;
+
+    node.__bckgDimensions = bckgDimensions;
+  }
+
+  function clearHoverHighlights() {
+    hoverHighlightNodes.clear();
+    hoverHighlightLinks.clear();
+    hoverNode = null;
+  }
+
+  function hydrateGraphForHover(graphPayload) {
+    if (!graphPayload || !Array.isArray(graphPayload.nodes) || !Array.isArray(graphPayload.links)) {
+      return;
+    }
+    const nodesById = new Map(graphPayload.nodes.map((node) => [node.id, node]));
+    graphPayload.nodes.forEach((node) => {
+      node.neighbors = [];
+      node.links = [];
+    });
+    graphPayload.links.forEach((link) => {
+      const sourceId = linkEndpointId(link.source);
+      const targetId = linkEndpointId(link.target);
+      const sourceNode = sourceId ? nodesById.get(sourceId) : null;
+      const targetNode = targetId ? nodesById.get(targetId) : null;
+      if (!sourceNode || !targetNode) return;
+      sourceNode.neighbors.push(targetNode);
+      targetNode.neighbors.push(sourceNode);
+      sourceNode.links.push(link);
+      targetNode.links.push(link);
+    });
+  }
+
+  function requestGraphRepaint() {
+    if (typeof Graph.refresh === "function") {
+      Graph.refresh();
+    }
+  }
+
+  function toGraphJson(sourceGraph) {
+    const graphObject = {
+      nodes: (sourceGraph.nodes || []).map((node) => ({
+        id: node.id,
+        package: node.id,
+        name: node.name,
+        version: node.post?.lastmod || node.post?.date || "",
+        key: node.key || null,
+        type: node.type,
+        group: groupForType(node.type),
+        color: textColorForType(node.type),
+        href: node.href || null,
+        x: node.x,
+        y: node.y,
+        fx: node.fx,
+        fy: node.fy,
+      })),
+      links: (sourceGraph.links || []).map((link) => ({
+        id: link.id,
+        source: linkEndpointId(link.source),
+        target: linkEndpointId(link.target),
+        type: link.type,
+        href: link.href || null,
+      })),
+    };
+
+    // Keep graph payload as plain JSON before passing to ForceGraph.
+    return JSON.parse(JSON.stringify(graphObject));
+  }
+
+  function groupForType(type) {
+    if (type === "category") return "category";
+    if (type === "tag") return "tag";
+    if (type === "post") return "post";
+    return "node";
+  }
+
+  function textColorForType(type) {
+    if (type === "category") return "#ff7b72";
+    if (type === "tag") return "#5df2d6";
+    if (type === "post") return "#7aa6ff";
+    return palette.text;
+  }
+
+  function isTypingElement(target) {
+    if (!target || !(target instanceof HTMLElement)) return false;
+    if (target.isContentEditable) return true;
+    const tagName = target.tagName;
+    return tagName === "INPUT" || tagName === "TEXTAREA" || tagName === "SELECT";
   }
 
   function stripAlpha(color) {

@@ -3,9 +3,9 @@
 <section class="sv-map dag-section"{{ if $contentId }} id="{{ $contentId }}"{{ end }}>
   <div class="sv-map-header">
     <div>
-      <div class="sv-kicker">3D Force-Directed Graph</div>
+      <div class="sv-kicker">2D Force-Directed Graph</div>
       <h1 class="sv-map-title">{{ if $page.IsHome }}{{ $page.Site.Title }}{{ else }}{{ $page.Title }}{{ end }}</h1>
-      <p class="sv-map-subtitle">Categories, tags, and posts share one 3D force-directed map. Click nodes to focus, click posts to open them.</p>
+      <p class="sv-map-subtitle">Categories, tags, and posts share one 2D force-directed map. Drag to pan, scroll to zoom, click nodes to focus, and press <kbd>/</kbd> to jump into search.</p>
       <div class="sv-map-controls">
         <label class="sv-map-toggle">
           <input type="checkbox" id="dag-toggle-categories" checked>
@@ -45,9 +45,11 @@
         <button class="sv-search-clear" type="button" aria-label="Clear search" hidden>✕</button>
       </label>
       <div class="sv-map-results-title">Search Results</div>
+      <div class="sv-map-results-hint">Press <kbd>/</kbd> to focus search. Press <kbd>Esc</kbd> to reset.</div>
       <div class="sv-map-results-empty">Type to search.</div>
       <ol class="sv-map-results-list"></ol>
     </aside>
+    {{ partial "recently-modified.html" $page }}
 
   </div>
 </section>
