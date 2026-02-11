@@ -60,13 +60,13 @@
     ...post,
     _search: buildSearchText(post),
     _searchMeta: buildSearchMeta(post),
+    _searchSortTime: safeDateValue(post.lastmod || post.date),
   }));
 
   const taxonomies = data.taxonomies || {};
   let graphData = buildGraphData(indexedPosts, taxonomies);
   applyDeterministicPositions(graphData);
   let graphJson = toGraphJson(graphData);
-  hydrateGraphForHover(graphJson);
   const fullGraphData = graphData;
   let searchGraphData = graphData;
   let baseGraphData = graphData;
@@ -89,9 +89,30 @@
     hoveredNodeId: null,
     isSearchActive: false,
   };
-  const hoverHighlightNodes = new Set();
-  const hoverHighlightLinks = new Set();
+  const hoverHighlightNodeIds = new Set();
+  const hoverHighlightLinkIds = new Set();
   let hoverNode = null;
+  let repaintFrame = null;
+  let graphAnimationFrame = null;
+  let graphAnimateUntil = 0;
+
+  const HOVER_PARTICLE_COUNT = prefersReducedMotion ? 1 : 2;
+  const HOVER_PARTICLE_SPEED = prefersReducedMotion ? 0.008 : 0.014;
+  const HOVER_PARTICLE_COLOR = "rgba(78, 240, 255, 0.95)";
+  const isCategoryNode = (node) => {
+    if (!node) return false;
+    if (node.type === "category") return true;
+    if (node.group === "category") return true;
+    if (String(node.id || "").startsWith("cat:")) return true;
+    return false;
+  };
+  const isHoverCategoryLink = (link) => {
+    if (!hoverNode || !isCategoryNode(hoverNode)) return false;
+    const hoverId = hoverNode.id;
+    const sourceId = linkEndpointId(link?.source);
+    const targetId = linkEndpointId(link?.target);
+    return sourceId === hoverId || targetId === hoverId;
+  };
 
   const supportsThreeSprites = false;
   let isPointerInteracting = false;
@@ -104,7 +125,7 @@
     .cooldownTicks(0)
     .nodeAutoColorBy("group")
     .nodeRelSize(8)
-    .autoPauseRedraw(false)
+    .autoPauseRedraw(true)
     .nodeCanvasObjectMode(() => "replace")
     .nodeCanvasObject((node, ctx, globalScale) => {
       drawTextNode(node, ctx, globalScale);
@@ -120,11 +141,17 @@
         );
       }
     })
-    .linkWidth((link) => (hoverHighlightLinks.has(link) ? 5 : 1))
-    .linkDirectionalParticles(2)
-    .linkDirectionalParticleWidth((link) => (hoverHighlightLinks.has(link) ? 4 : 3))
-    .linkDirectionalParticleColor(() => "rgba(78, 240, 255, 0.95)")
-    .linkDirectionalParticleSpeed(0.01)
+    .linkWidth((link) => (hoverHighlightLinkIds.has(link.id) ? 5 : 1))
+    .linkDirectionalParticles(HOVER_PARTICLE_COUNT)
+    .linkDirectionalParticleWidth((link) =>
+      isHoverCategoryLink(link) ? (hoverHighlightLinkIds.has(link.id) ? 4 : 3) : 0
+    )
+    .linkDirectionalParticleColor((link) =>
+      isHoverCategoryLink(link) ? HOVER_PARTICLE_COLOR : "rgba(0, 0, 0, 0)"
+    )
+    .linkDirectionalParticleSpeed((link) =>
+      isHoverCategoryLink(link) ? HOVER_PARTICLE_SPEED : 0
+    )
     .linkDirectionalArrowLength(3)
     .linkDirectionalArrowRelPos(1)
     .linkCurvature(() => 0.08)
@@ -133,35 +160,44 @@
       if (!node) return;
       Graph.centerAt(node.x, node.y, 1000);
       Graph.zoom(8, 2000);
+      keepGraphAnimatingFor(2000);
       handleNodeClick(node, event);
     })
     .onNodeHover((node) => {
       if (isPointerInteracting) return;
-      hoverHighlightNodes.clear();
-      hoverHighlightLinks.clear();
+      hoverHighlightNodeIds.clear();
+      hoverHighlightLinkIds.clear();
       if (node) {
-        hoverHighlightNodes.add(node);
-        (node.neighbors || []).forEach((neighbor) => hoverHighlightNodes.add(neighbor));
-        (node.links || []).forEach((link) => hoverHighlightLinks.add(link));
+        const nodeId = node.id;
+        hoverHighlightNodeIds.add(nodeId);
+        const links = graphData.linksByNode.get(nodeId) || [];
+        links.forEach((link) => {
+          hoverHighlightLinkIds.add(link.id);
+          const sourceId = linkEndpointId(link.source);
+          const targetId = linkEndpointId(link.target);
+          if (sourceId) hoverHighlightNodeIds.add(sourceId);
+          if (targetId) hoverHighlightNodeIds.add(targetId);
+        });
       }
       hoverNode = node || null;
       highlight.hoveredNodeId = node ? node.id : null;
+      ensureGraphAnimation();
       requestGraphRepaint();
     })
     .onLinkHover((link) => {
-      hoverHighlightNodes.clear();
-      hoverHighlightLinks.clear();
+      if (isPointerInteracting) return;
+      hoverHighlightNodeIds.clear();
+      hoverHighlightLinkIds.clear();
       if (link) {
-        hoverHighlightLinks.add(link);
-        if (link.source) {
-          hoverHighlightNodes.add(link.source);
-        }
-        if (link.target) {
-          hoverHighlightNodes.add(link.target);
-        }
+        hoverHighlightLinkIds.add(link.id);
+        const sourceId = linkEndpointId(link.source);
+        const targetId = linkEndpointId(link.target);
+        if (sourceId) hoverHighlightNodeIds.add(sourceId);
+        if (targetId) hoverHighlightNodeIds.add(targetId);
       }
       hoverNode = null;
       highlight.hoveredNodeId = null;
+      ensureGraphAnimation();
       requestGraphRepaint();
     })
     .onLinkClick((link, event) => {
@@ -220,7 +256,18 @@
 
   container.addEventListener("pointerdown", () => {
     isPointerInteracting = true;
+    clearHoverHighlights();
+    highlight.hoveredNodeId = null;
+    requestGraphRepaint();
   });
+  const clearHoverOnExit = () => {
+    clearHoverHighlights();
+    highlight.hoveredNodeId = null;
+    requestGraphRepaint();
+  };
+  // Force-graph's hover callback can miss the "leave" transition when the pointer exits the canvas.
+  container.addEventListener("pointerleave", clearHoverOnExit);
+  container.addEventListener("mouseleave", clearHoverOnExit);
   const releasePointerInteraction = () => {
     isPointerInteracting = false;
     scheduleLabelUpdate();
@@ -252,18 +299,36 @@
   const categoryToggle = document.getElementById("dag-toggle-categories");
   const tagToggle = document.getElementById("dag-toggle-tags");
   const postToggle = document.getElementById("dag-toggle-posts");
+
+  // Coalesce rapid input events so we don't rebuild the graph multiple times per frame while typing.
+  let queuedSearchQuery = "";
+  let searchFrame = null;
+  const queueSearchUpdate = (query) => {
+    queuedSearchQuery = query;
+    if (searchFrame) return;
+    searchFrame = window.requestAnimationFrame(() => {
+      searchFrame = null;
+      updateSearch(queuedSearchQuery);
+    });
+  };
+  const cancelQueuedSearchUpdate = () => {
+    if (!searchFrame) return;
+    window.cancelAnimationFrame(searchFrame);
+    searchFrame = null;
+  };
   if (searchInput) {
     searchInput.addEventListener("input", (event) => {
       const value = String(event.target.value || "").trim().toLowerCase();
-      updateSearch(value);
       updateClearVisibility();
+      queueSearchUpdate(value);
     });
   }
   if (clearButton && searchInput) {
     clearButton.addEventListener("click", () => {
+      cancelQueuedSearchUpdate();
       searchInput.value = "";
-      updateSearch("");
       updateClearVisibility();
+      queueSearchUpdate("");
       searchInput.focus();
     });
   }
@@ -373,7 +438,6 @@
     graphData = nextGraphData;
     applyDeterministicPositions(graphData);
     graphJson = toGraphJson(graphData);
-    hydrateGraphForHover(graphJson);
     Graph.graphData(graphJson);
     clearHoverHighlights();
   }
@@ -562,7 +626,7 @@
 
   function updateResultsPanel(ranked) {
     if (!resultsPanel || !resultsList) return;
-    resultsList.innerHTML = "";
+    resultsList.textContent = "";
     const visibleRanked = highlight.isSearchActive
       ? ranked.filter(({ post }) => graphData.postNodesByKey.has(post.key))
       : ranked;
@@ -589,6 +653,7 @@
       resultsEmpty.textContent = "";
     }
 
+    const fragment = document.createDocumentFragment();
     visibleRanked.forEach((item) => {
       const li = document.createElement("li");
       li.className = "sv-map-results-item";
@@ -607,8 +672,9 @@
 
       li.appendChild(link);
       li.appendChild(time);
-      resultsList.appendChild(li);
+      fragment.appendChild(li);
     });
+    resultsList.appendChild(fragment);
     updateClearVisibility();
   }
 
@@ -657,6 +723,7 @@
     if (searchInput) {
       searchInput.value = "";
     }
+    cancelQueuedSearchUpdate();
     updateSearch("");
     updateClearVisibility();
     if (options.updateUrl !== false) {
@@ -775,6 +842,7 @@
     if (typeof Graph.zoom === "function") {
       Graph.zoom(zoom, duration);
     }
+    keepGraphAnimatingFor(duration);
   }
 
   function motionDuration(ms) {
@@ -792,32 +860,38 @@
   }
 
   function rankSearchResults(query, postsInput) {
-    return postsInput
-      .map((post) => {
-        const meta = post._searchMeta;
-        let rank = null;
-        if (meta.title && meta.title === query) {
-          rank = 0;
-        } else if (meta.title && meta.title.includes(query)) {
-          rank = 1;
-        } else if (meta.tags && meta.tags.some((tag) => tag.includes(query))) {
-          rank = 2;
-        } else if (meta.categories && meta.categories.some((cat) => cat.includes(query))) {
-          rank = 3;
-        } else if (meta.dates && meta.dates.some((date) => date.includes(query))) {
-          rank = 4;
-        }
-        if (rank === null) return null;
-        return { post, rank };
-      })
-      .filter(Boolean)
-      .sort((a, b) => {
-        if (a.rank !== b.rank) return a.rank - b.rank;
-        const aDate = safeDateValue(a.post.lastmod || a.post.date);
-        const bDate = safeDateValue(b.post.lastmod || b.post.date);
-        if (aDate !== bDate) return bDate - aDate;
-        return String(a.post.title).localeCompare(String(b.post.title));
-      });
+    const results = [];
+    for (let i = 0; i < postsInput.length; i += 1) {
+      const post = postsInput[i];
+      const meta = post._searchMeta;
+      let rank = null;
+      if (meta.title && meta.title === query) {
+        rank = 0;
+      } else if (meta.title && meta.title.includes(query)) {
+        rank = 1;
+      } else if (meta.tags && meta.tags.some((tag) => tag.includes(query))) {
+        rank = 2;
+      } else if (meta.categories && meta.categories.some((cat) => cat.includes(query))) {
+        rank = 3;
+      } else if (meta.dates && meta.dates.some((date) => date.includes(query))) {
+        rank = 4;
+      }
+      if (rank === null) continue;
+      results.push({ post, rank });
+    }
+
+    results.sort((a, b) => {
+      if (a.rank !== b.rank) return a.rank - b.rank;
+      const aDate = Number.isFinite(a.post._searchSortTime)
+        ? a.post._searchSortTime
+        : safeDateValue(a.post.lastmod || a.post.date);
+      const bDate = Number.isFinite(b.post._searchSortTime)
+        ? b.post._searchSortTime
+        : safeDateValue(b.post.lastmod || b.post.date);
+      if (aDate !== bDate) return bDate - aDate;
+      return String(a.post.title).localeCompare(String(b.post.title));
+    });
+    return results;
   }
 
   function safeDateValue(value) {
@@ -876,6 +950,8 @@
       id: `cat:${key}`,
       key,
       type: "category",
+      group: groupForType("category"),
+      color: textColorForType("category"),
       name: categoryDisplayByKey.get(key),
       level: 0,
       href: taxonomyLinks.categories[key],
@@ -905,6 +981,8 @@
         id: `tag:${tagKey}`,
         key: tagKey,
         type: "tag",
+        group: groupForType("tag"),
+        color: textColorForType("tag"),
         name: tagDisplayByKey.get(tagKey),
         level: 1,
         href: taxonomyLinks.tags[tagKey],
@@ -918,11 +996,16 @@
     const postNodes = postsInput.map((post) => ({
       id: `post:${post.key}`,
       type: "post",
+      group: groupForType("post"),
+      color: textColorForType("post"),
       name: post.title,
       level: 2,
       href: post.relPermalink || post.permalink,
       post,
     }));
+    postNodes.sort((a, b) => {
+      return String(a.name || a.id).localeCompare(String(b.name || b.id));
+    });
     const postNodesByKey = new Map(postNodes.map((node) => [node.post.key, node]));
 
     const nodes = [...categoryNodes, ...tagNodes, ...postNodes];
@@ -1058,7 +1141,6 @@
   }
 
   function buildGraphSlice(nodeIds, linkIds, sourceGraph = fullGraphData, extraLinks = []) {
-    const nodes = (sourceGraph.nodes || []).filter((node) => nodeIds.has(node.id));
     const links = (sourceGraph.links || []).filter((link) => linkIds.has(link.id));
     if (Array.isArray(extraLinks) && extraLinks.length) {
       links.push(...extraLinks);
@@ -1066,16 +1148,24 @@
     const categoryNodes = (sourceGraph.categoryNodes || []).filter((node) => nodeIds.has(node.id));
     const tagNodes = (sourceGraph.tagNodes || []).filter((node) => nodeIds.has(node.id));
     const postNodes = (sourceGraph.postNodes || []).filter((node) => nodeIds.has(node.id));
+    // Preserve the original draw order: categories, then tags, then posts.
+    const nodes = [...categoryNodes, ...tagNodes, ...postNodes];
 
-    const nodesById = new Map(nodes.map((node) => [node.id, node]));
-    const categoryNodesByKey = new Map(categoryNodes.map((node) => [node.key, node]));
-    const postNodesByKey = new Map(postNodes.map((node) => [node.post.key, node]));
+    const nodesById = new Map();
+    nodes.forEach((node) => nodesById.set(node.id, node));
+
+    const categoryNodesByKey = new Map();
+    categoryNodes.forEach((node) => categoryNodesByKey.set(node.key, node));
+
+    const postNodesByKey = new Map();
+    postNodes.forEach((node) => postNodesByKey.set(node.post.key, node));
 
     const tagNodesByCategory = new Map();
     const tagNodesByName = new Map();
     const tagDisplayByKey = new Map();
-    const tagNodesByKey = new Map(tagNodes.map((node) => [node.key, node]));
+    const tagNodesByKey = new Map();
     tagNodes.forEach((node) => {
+      tagNodesByKey.set(node.key, node);
       pushToMap(tagNodesByName, node.key, node);
       if (!tagDisplayByKey.has(node.key)) {
         tagDisplayByKey.set(node.key, node.name);
@@ -1112,8 +1202,14 @@
     const linksByNode = new Map();
     const linksById = new Map();
     links.forEach((link) => {
-      pushToMap(linksByNode, link.source, link);
-      pushToMap(linksByNode, link.target, link);
+      const sourceId = linkEndpointId(link.source);
+      const targetId = linkEndpointId(link.target);
+      if (sourceId) {
+        pushToMap(linksByNode, sourceId, link);
+      }
+      if (targetId) {
+        pushToMap(linksByNode, targetId, link);
+      }
       linksById.set(link.id, link);
     });
 
@@ -1683,9 +1779,7 @@
   }
 
   function layoutColumn(nodes, x, span) {
-    const ordered = [...nodes].sort((a, b) => {
-      return String(a.name || a.id).localeCompare(String(b.name || b.id));
-    });
+    const ordered = Array.isArray(nodes) ? nodes : [];
     const count = ordered.length;
     if (!count) return;
     const startY = -span / 2;
@@ -1756,6 +1850,9 @@
   }
 
   function buildGraphTypeFilter(sourceGraph, filter) {
+    if (filter.categories && filter.tags && filter.posts) {
+      return sourceGraph;
+    }
     const nodeIds = new Set();
     (sourceGraph.nodes || []).forEach((node) => {
       if (node.type === "category" && !filter.categories) return;
@@ -1806,13 +1903,27 @@
     const safeScale = Number.isFinite(globalScale) && globalScale > 0 ? globalScale : 1;
     const scaledSize = graphTextBasePx * Math.pow(safeScale, 0.75);
     const fontSize = Math.max(6, Math.min(20, scaledSize));
-    ctx.font = `${fontSize}px Chakra Petch, monospace`;
-    const textWidth = ctx.measureText(label).width;
-    const bckgDimensions = [textWidth, fontSize].map(
-      (value) => value + fontSize * 0.2
-    );
+    const font = `${fontSize}px Chakra Petch, monospace`;
 
-    const isHoverTarget = hoverHighlightNodes.has(node);
+    // Measuring text is surprisingly expensive; cache per-node metrics until zoom changes.
+    let metrics = node.__labelMetrics;
+    if (!metrics || metrics.label !== label || metrics.font !== font) {
+      ctx.font = font;
+      const textWidth = ctx.measureText(label).width;
+      const pad = fontSize * 0.2;
+      metrics = {
+        label,
+        font,
+        bckgDimensions: [textWidth + pad, fontSize + pad],
+      };
+      node.__labelMetrics = metrics;
+    } else {
+      ctx.font = metrics.font;
+    }
+
+    const bckgDimensions = metrics.bckgDimensions;
+
+    const isHoverTarget = hoverHighlightNodeIds.has(node.id);
     const isDirectHover = node === hoverNode;
     ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
     ctx.fillRect(
@@ -1832,17 +1943,19 @@
   }
 
   function clearHoverHighlights() {
-    hoverHighlightNodes.clear();
-    hoverHighlightLinks.clear();
+    hoverHighlightNodeIds.clear();
+    hoverHighlightLinkIds.clear();
     hoverNode = null;
+    ensureGraphAnimation();
   }
 
   function hydrateGraphForHover(graphPayload) {
     if (!graphPayload || !Array.isArray(graphPayload.nodes) || !Array.isArray(graphPayload.links)) {
       return;
     }
-    const nodesById = new Map(graphPayload.nodes.map((node) => [node.id, node]));
+    const nodesById = new Map();
     graphPayload.nodes.forEach((node) => {
+      nodesById.set(node.id, node);
       node.neighbors = [];
       node.links = [];
     });
@@ -1860,39 +1973,81 @@
   }
 
   function requestGraphRepaint() {
-    if (typeof Graph.refresh === "function") {
+    if (typeof Graph.refresh !== "function") return;
+    if (repaintFrame) return;
+    repaintFrame = window.requestAnimationFrame(() => {
+      repaintFrame = null;
       Graph.refresh();
+    });
+  }
+
+  function nowMs() {
+    if (typeof performance !== "undefined" && typeof performance.now === "function") {
+      return performance.now();
     }
+    return Date.now();
+  }
+
+  function keepGraphAnimatingFor(durationMs) {
+    const ms = Number(durationMs) || 0;
+    if (ms <= 0) return;
+    const until = nowMs() + ms + 50;
+    if (until > graphAnimateUntil) {
+      graphAnimateUntil = until;
+    }
+    ensureGraphAnimation();
+  }
+
+  function shouldGraphAnimate() {
+    if (nowMs() < graphAnimateUntil) return true;
+    if (hoverNode && isCategoryNode(hoverNode) && hoverHighlightLinkIds.size) return true;
+    return false;
+  }
+
+  function ensureGraphAnimation() {
+    if (typeof window === "undefined" || typeof window.requestAnimationFrame !== "function") {
+      return;
+    }
+
+    if (!shouldGraphAnimate()) {
+      if (typeof Graph.autoPauseRedraw === "function") {
+        Graph.autoPauseRedraw(true);
+      }
+      if (graphAnimationFrame) {
+        window.cancelAnimationFrame(graphAnimationFrame);
+        graphAnimationFrame = null;
+      }
+      return;
+    }
+
+    // ForceGraph only animates directional particles when it's in continuous redraw mode.
+    // Enable continuous redraw while we need motion (hover effects/camera moves), then stop again.
+    if (typeof Graph.autoPauseRedraw === "function") {
+      Graph.autoPauseRedraw(false);
+    }
+
+    if (graphAnimationFrame) return;
+
+    const tick = () => {
+      if (!shouldGraphAnimate()) {
+        if (typeof Graph.autoPauseRedraw === "function") {
+          Graph.autoPauseRedraw(true);
+        }
+        graphAnimationFrame = null;
+        requestGraphRepaint();
+        return;
+      }
+      graphAnimationFrame = window.requestAnimationFrame(tick);
+    };
+
+    graphAnimationFrame = window.requestAnimationFrame(tick);
   }
 
   function toGraphJson(sourceGraph) {
-    const graphObject = {
-      nodes: (sourceGraph.nodes || []).map((node) => ({
-        id: node.id,
-        package: node.id,
-        name: node.name,
-        version: node.post?.lastmod || node.post?.date || "",
-        key: node.key || null,
-        type: node.type,
-        group: groupForType(node.type),
-        color: textColorForType(node.type),
-        href: node.href || null,
-        x: node.x,
-        y: node.y,
-        fx: node.fx,
-        fy: node.fy,
-      })),
-      links: (sourceGraph.links || []).map((link) => ({
-        id: link.id,
-        source: linkEndpointId(link.source),
-        target: linkEndpointId(link.target),
-        type: link.type,
-        href: link.href || null,
-      })),
+    return {
+      nodes: sourceGraph?.nodes || [],
+      links: sourceGraph?.links || [],
     };
-
-    // Keep graph payload as plain JSON before passing to ForceGraph.
-    return JSON.parse(JSON.stringify(graphObject));
   }
 
   function groupForType(type) {
