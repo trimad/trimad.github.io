@@ -1,5 +1,5 @@
 ---
-title: "Generative Guidelines for the 3D Force-Directed Graph (Search-First)"
+title: "Ghost in the Shell Theme Generative Guidelines"
 date: 2026-01-26
 description: "Authoritative rules for generating a Hugo theme whose primary UI is a 3D force-directed graph of categories, tags, and posts, optimized for practical search and retrieval."
 tags: [3d, force-directed, graph, hugo, visualization, taxonomy, search]

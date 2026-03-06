@@ -158,9 +158,6 @@
     .linkColor(() => "rgba(78, 240, 255, 0.2)")
     .onNodeClick((node, event) => {
       if (!node) return;
-      Graph.centerAt(node.x, node.y, 1000);
-      Graph.zoom(8, 2000);
-      keepGraphAnimatingFor(2000);
       handleNodeClick(node, event);
     })
     .onNodeHover((node) => {
@@ -383,6 +380,10 @@
       window.location.href = node.href;
       return;
     }
+    if (node.type === "post" && node.href) {
+      window.location.href = node.href;
+      return;
+    }
     if (node.type === "tag") {
       setFocus({
         kind: "tag-group",
@@ -402,10 +403,7 @@
     if (options.updateUrl !== false) {
       updateUrlForSelection(selection);
     }
-    const anchor = selectionAnchor(selection);
-    if (anchor) {
-      focusCamera(anchor, { mode: "focus" });
-    }
+    focusSelectionCamera(selection, { mode: "focus" });
   }
 
   function refreshHighlights() {
@@ -801,10 +799,7 @@
     currentSelection = selection;
     applySelectionPrune(selection);
     refreshHighlights();
-    const anchor = selectionAnchor(selection);
-    if (anchor) {
-      focusCamera(anchor, { mode: "focus" });
-    }
+    focusSelectionCamera(selection, { mode: "focus" });
   }
 
   function isSelectionPruneActive() {
@@ -843,6 +838,182 @@
       Graph.zoom(zoom, duration);
     }
     keepGraphAnimatingFor(duration);
+  }
+
+  function focusSelectionCamera(selection, options = {}) {
+    if (!selection) return;
+
+    if (selectionNeedsGraphFit(selection)) {
+      fitCameraToCurrentGraph(options);
+      return;
+    }
+
+    const anchor = selectionAnchor(selection);
+    if (anchor) {
+      focusCamera(anchor, options);
+    }
+  }
+
+  function selectionNeedsGraphFit(selection) {
+    if (!selection) return false;
+    if (selection.kind === "tag-group") return true;
+    if (selection.kind !== "node") return false;
+    return selection.node.type === "category" || selection.node.type === "tag";
+  }
+
+  function fitCameraToCurrentGraph(options = {}) {
+    const isSearch = options.mode === "search";
+    const duration = motionDuration(isSearch ? 650 : 900);
+    const viewportWidth = Math.max(container.clientWidth || 0, 1);
+    const viewportHeight = Math.max(container.clientHeight || 0, 1);
+    const viewportMin = Math.min(viewportWidth, viewportHeight);
+    const inset = Math.max(12, Math.min(28, Math.round(viewportMin * 0.03)));
+
+    const visibleNodes = (graphData.nodes || []).filter((node) => {
+      return Number.isFinite(node.x) && Number.isFinite(node.y);
+    });
+    if (!visibleNodes.length) return;
+
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+    visibleNodes.forEach((node) => {
+      if (node.x < minX) minX = node.x;
+      if (node.y < minY) minY = node.y;
+      if (node.x > maxX) maxX = node.x;
+      if (node.y > maxY) maxY = node.y;
+    });
+
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+    const spanX = Math.max(maxX - minX, 1);
+    const spanY = Math.max(maxY - minY, 1);
+
+    const safeRect = measureSafeFitRect(viewportWidth, viewportHeight, inset);
+    const safeWidth = safeRect.width;
+    const safeHeight = safeRect.height;
+    const safeLeft = safeRect.left;
+    const safeTop = safeRect.top;
+    const safeCenterX = safeLeft + safeWidth / 2;
+    const safeCenterY = safeTop + safeHeight / 2;
+    const targetZoom = Math.max(0.05, Math.min(8, Math.min(safeWidth / spanX, safeHeight / spanY)));
+
+    // ForceGraph centers graph coords in viewport center; offset center to place bbox in safe region.
+    const viewportCenterX = viewportWidth / 2;
+    const viewportCenterY = viewportHeight / 2;
+    let cameraCenterX = centerX - (safeCenterX - viewportCenterX) / targetZoom;
+    let cameraCenterY = centerY - (safeCenterY - viewportCenterY) / targetZoom;
+
+    // Prefer deriving offset from ForceGraph's own transform model to avoid orientation mismatches.
+    if (
+      typeof Graph.screen2GraphCoords === "function" &&
+      typeof Graph.zoom === "function" &&
+      typeof Graph.centerAt === "function"
+    ) {
+      const previousZoom = Graph.zoom();
+      const previousCenter = Graph.screen2GraphCoords(viewportCenterX, viewportCenterY);
+      if (
+        Number.isFinite(previousZoom) &&
+        previousCenter &&
+        Number.isFinite(previousCenter.x) &&
+        Number.isFinite(previousCenter.y)
+      ) {
+        Graph.zoom(targetZoom, 0);
+        Graph.centerAt(centerX, centerY, 0);
+        const safeGraphPoint = Graph.screen2GraphCoords(safeCenterX, safeCenterY);
+        if (
+          safeGraphPoint &&
+          Number.isFinite(safeGraphPoint.x) &&
+          Number.isFinite(safeGraphPoint.y)
+        ) {
+          cameraCenterX = centerX + (centerX - safeGraphPoint.x);
+          cameraCenterY = centerY + (centerY - safeGraphPoint.y);
+        }
+        Graph.zoom(previousZoom, 0);
+        Graph.centerAt(previousCenter.x, previousCenter.y, 0);
+      }
+    }
+
+    if (!Number.isFinite(cameraCenterX) || !Number.isFinite(cameraCenterY)) {
+      if (typeof Graph.zoomToFit === "function") {
+        Graph.zoomToFit(duration, inset, (node) => {
+          return node && Number.isFinite(node.x) && Number.isFinite(node.y);
+        });
+        keepGraphAnimatingFor(duration);
+        return;
+      }
+      cameraCenterX = centerX;
+      cameraCenterY = centerY;
+    }
+
+    if (typeof Graph.centerAt === "function") {
+      Graph.centerAt(cameraCenterX, cameraCenterY, duration);
+    }
+    if (typeof Graph.zoom === "function") {
+      Graph.zoom(targetZoom, duration);
+    }
+    keepGraphAnimatingFor(duration);
+  }
+
+  function measureSafeFitRect(viewportWidth, viewportHeight, inset) {
+    const stage = container.closest(".sv-map-stage") || container.parentElement;
+    const stageRect =
+      stage && typeof stage.getBoundingClientRect === "function"
+        ? stage.getBoundingClientRect()
+        : null;
+    const minWidth = Math.max(140, viewportWidth * 0.33);
+    const minHeight = Math.max(140, viewportHeight * 0.33);
+
+    let left = inset;
+    let top = inset;
+    let right = Math.max(left + 1, viewportWidth - inset);
+    let bottom = Math.max(top + 1, viewportHeight - inset);
+
+    if (stageRect) {
+      const header =
+        mapSection && typeof mapSection.querySelector === "function"
+          ? mapSection.querySelector(".sv-map-header")
+          : null;
+      if (header && typeof header.getBoundingClientRect === "function") {
+        const headerRect = header.getBoundingClientRect();
+        const headerBottom = headerRect.bottom - stageRect.top + inset;
+        if (Number.isFinite(headerBottom)) {
+          top = Math.max(top, Math.min(viewportHeight - inset - 1, headerBottom));
+        }
+      }
+
+      const sidebar =
+        stage && typeof stage.querySelector === "function"
+          ? stage.querySelector(".sv-sidebar")
+          : null;
+      if (sidebar && typeof sidebar.getBoundingClientRect === "function") {
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const sidebarLeft = sidebarRect.left - stageRect.left - inset;
+        if (Number.isFinite(sidebarLeft)) {
+          right = Math.min(right, Math.max(left + 1, sidebarLeft));
+        }
+      }
+    }
+
+    if (right - left < minWidth) {
+      right = Math.max(left + 1, viewportWidth - inset);
+    }
+    if (bottom - top < minHeight) {
+      top = inset;
+    }
+
+    right = Math.max(left + 1, right);
+    bottom = Math.max(top + 1, bottom);
+
+    return {
+      left,
+      top,
+      right,
+      bottom,
+      width: Math.max(1, right - left),
+      height: Math.max(1, bottom - top),
+    };
   }
 
   function motionDuration(ms) {

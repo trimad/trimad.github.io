@@ -6,8 +6,15 @@
     <description>Recent content in Active Directory on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 05 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/active-directory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Search Domain GPOs for the Remote Desktop Policy with PowerShell</title>
+      <link>http://localhost:1313/posts/2025-09-26-search-domain-gpos/</link>
+      <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2025-09-26-search-domain-gpos/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;When troubleshooting Remote Desktop access issues in an Active Directory environment, one of the most common challenges is identifying &lt;strong&gt;which Group Policy Object (GPO) is controlling the setting&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The policy &lt;strong&gt;“Allow users to connect remotely by using Remote Desktop Services”&lt;/strong&gt; determines whether Remote Desktop is permitted on domain machines.&lt;/p&gt;&#xA;&lt;p&gt;This policy ultimately configures the registry value:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services\fDenyTSConnections&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;In environments with dozens or hundreds of GPOs, manually inspecting&#xA;each policy in the &lt;strong&gt;Group Policy Management Console (GPMC)&lt;/strong&gt; can be&#xA;time-consuming.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Troubleshooting Group Policy Objects (GPOs)</title>
       <link>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</link>
