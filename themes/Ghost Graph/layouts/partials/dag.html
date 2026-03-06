@@ -1,25 +1,61 @@
-﻿{{- $page := .page -}}
+{{- $page := .page -}}
 {{- $contentId := .contentId | default "" -}}
+{{- $pages := $page.Site.RegularPages -}}
+{{- if eq $page.Kind "section" -}}
+  {{- $pages = $page.RegularPages -}}
+{{- else if eq $page.Kind "term" -}}
+  {{- $pages = $page.Pages -}}
+{{- end -}}
+{{- $scratch := newScratch -}}
+{{- $scratch.Set "categories" (dict) -}}
+{{- $scratch.Set "tags" (dict) -}}
+{{- range $pages -}}
+  {{- range .Params.categories | default (slice) -}}
+    {{- $scratch.SetInMap "categories" (urlize .) true -}}
+  {{- end -}}
+  {{- range .Params.tags | default (slice) -}}
+    {{- $scratch.SetInMap "tags" (urlize .) true -}}
+  {{- end -}}
+{{- end -}}
+{{- $categoryCount := len ($scratch.Get "categories") -}}
+{{- $tagCount := len ($scratch.Get "tags") -}}
+{{- $mapTitle := "Signal Atlas" -}}
+{{- $mapSubtitle := "Explore how sections, taxonomies, and entries connect. Search to isolate a path, click to focus, and use the atlas as a discovery layer alongside conventional browsing." -}}
+{{- if eq $page.Kind "section" -}}
+  {{- $mapTitle = printf "%s Atlas" $page.Title -}}
+  {{- $mapSubtitle = printf "This view narrows the field to %s while preserving category and tag context." $page.Title -}}
+{{- else if eq $page.Kind "term" -}}
+  {{- $mapTitle = printf "%s Focus" $page.Title -}}
+  {{- $mapSubtitle = printf "This focus view keeps %s in context so related tags, categories, and entries remain visible." $page.Title -}}
+{{- else if eq $page.Kind "taxonomy" -}}
+  {{- $mapTitle = printf "%s Atlas" $page.Title -}}
+  {{- $mapSubtitle = printf "Use the atlas to move between %s and the entries they connect." (lower $page.Title) -}}
+{{- end -}}
 <section class="sv-map dag-section"{{ if $contentId }} id="{{ $contentId }}"{{ end }}>
   <div class="sv-map-header">
-    <div>
-      <div class="sv-kicker">2D Force-Directed Graph</div>
-      <h1 class="sv-map-title">{{ if $page.IsHome }}{{ $page.Site.Title }}{{ else }}{{ $page.Title }}{{ end }}</h1>
-      <p class="sv-map-subtitle">Categories, tags, and posts share one 2D force-directed map. Drag to pan, scroll to zoom, click nodes to focus, and press <kbd>/</kbd> to jump into search.</p>
-      <div class="sv-map-controls">
-        <label class="sv-map-toggle">
-          <input type="checkbox" id="dag-toggle-categories" checked>
-          <span>Show Categories</span>
-        </label>
-        <label class="sv-map-toggle">
-          <input type="checkbox" id="dag-toggle-tags" checked>
-          <span>Show Tags</span>
-        </label>
-        <label class="sv-map-toggle">
-          <input type="checkbox" id="dag-toggle-posts" checked>
-          <span>Show Posts</span>
-        </label>
+    <div class="sv-map-copy">
+      <div class="sv-kicker">Atlas</div>
+      <h2 class="sv-map-title">{{ $mapTitle }}</h2>
+      <p class="sv-map-subtitle">{{ $mapSubtitle }}</p>
+      <div class="sv-chip-row sv-chip-row--dense">
+        <span class="sv-stat-pill"><strong>{{ len $pages }}</strong> entries</span>
+        <span class="sv-stat-pill"><strong>{{ $categoryCount }}</strong> categories</span>
+        <span class="sv-stat-pill"><strong>{{ $tagCount }}</strong> tags</span>
       </div>
+    </div>
+    <div class="sv-map-controls" aria-label="Atlas display controls">
+      <label class="sv-map-toggle">
+        <input type="checkbox" id="dag-toggle-categories" checked>
+        <span>Categories</span>
+      </label>
+      <label class="sv-map-toggle">
+        <input type="checkbox" id="dag-toggle-tags" checked>
+        <span>Tags</span>
+      </label>
+      <label class="sv-map-toggle">
+        <input type="checkbox" id="dag-toggle-posts" checked>
+        <span>Posts</span>
+      </label>
     </div>
   </div>
 
@@ -30,26 +66,25 @@
       data-focus-kind="{{ .focusKind }}"
       data-focus-value="{{ .focusValue }}"
     >
-      <div class="dag-empty">Add posts with categories and tags to grow the map.</div>
+      <div class="dag-empty">No atlas data yet. Add entries with categories and tags to light this surface up.</div>
     </div>
     <aside class="sv-map-results" id="dag-results" aria-live="polite" aria-label="Search results">
+      <div class="sv-map-results-title">Filter the field</div>
+      <div class="sv-map-results-hint">Press <kbd>/</kbd> to jump into search. Press <kbd>Esc</kbd> to clear focus.</div>
       <label class="sv-map-search sv-map-search--primary sv-map-results-search">
-        <span class="sv-search-label">🔍</span>
+        <span class="sv-search-label">Query</span>
         <input
           class="sv-search-input"
           type="search"
           id="dag-search"
-          placeholder="Filter posts, categories, tags"
+          placeholder="Search titles, tags, categories, or dates"
           autocomplete="off"
         >
-        <button class="sv-search-clear" type="button" aria-label="Clear search" hidden>✕</button>
+        <button class="sv-search-clear" type="button" aria-label="Clear search" hidden>Clear</button>
       </label>
-      <div class="sv-map-results-title">Search Results</div>
-      <div class="sv-map-results-hint">Press <kbd>/</kbd> to focus search. Press <kbd>Esc</kbd> to reset.</div>
       <div class="sv-map-results-empty">Type to search.</div>
       <ol class="sv-map-results-list"></ol>
     </aside>
-    {{ partial "recently-modified.html" $page }}
-
+    {{ partial "recently-modified.html" (dict "page" $page "pages" $pages "title" "Recent signals" "limit" 8) }}
   </div>
 </section>

@@ -1,0 +1,81 @@
+{{ define "main" }}
+  {{- $summary := .Description | default .Summary | plainify | default (truncate 220 (.Plain | plainify)) -}}
+  {{- $cover := partial "cover-data.html" . -}}
+  {{- $hasToc := and (.Params.toc | default false) (gt (len (findRE "<li" .TableOfContents)) 0) -}}
+  {{- $pageLabelSingular := "Entry" -}}
+  {{- $pageLabelPlural := "Entries" -}}
+  {{- if eq .Section "posts" -}}
+    {{- $pageLabelSingular = "Post" -}}
+    {{- $pageLabelPlural = "Posts" -}}
+  {{- end -}}
+  <main class="rei-page rei-page--single" id="content">
+    <article class="rei-single">
+      <header class="rei-dossier">
+        <div class="rei-dossier__band">
+          <span>{{ .Section | default "Entry" | title }}</span>
+          <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+          <span>{{ .ReadingTime }} min read</span>
+        </div>
+        <h1 class="rei-single__title">{{ .Title }}</h1>
+        {{- with $summary -}}
+          <p class="rei-single__summary">{{ . }}</p>
+        {{- end -}}
+        {{ partial "taxonomy-pills.html" (dict "page" . "showLabel" false) }}
+      </header>
+
+      {{- with $cover -}}
+        <figure class="rei-banner">
+          <img src="{{ . }}" alt="{{ $.Title }}" loading="eager">
+        </figure>
+      {{- end -}}
+
+      <div class="rei-reading">
+        <aside class="rei-signal-rail">
+          {{ partial "metadata-cluster.html" . }}
+          {{ if $hasToc }}
+            {{ partial "toc.html" . }}
+          {{ end }}
+          {{ partial "recent-feed.html" (dict
+            "page" .
+            "title" (printf "Recent in %s" (.Section | title))
+            "limit" 5
+            "pages" (where .Site.RegularPages "Section" .Section)
+          ) }}
+        </aside>
+
+        <div class="rei-reading__body">
+          <div class="rei-prose">
+            {{ .Content }}
+          </div>
+
+          <nav class="rei-adjacent" aria-label="Adjacent entries">
+            {{- with .NextInSection -}}
+              <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
+                <small>Next in {{ .Section | title }}</small>
+                <strong>{{ .Title }}</strong>
+              </a>
+            {{- end -}}
+            {{- with .PrevInSection -}}
+              <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
+                <small>Previous in {{ .Section | title }}</small>
+                <strong>{{ .Title }}</strong>
+              </a>
+            {{- end -}}
+          </nav>
+
+          {{ partial "related-content.html" . }}
+        </div>
+      </div>
+    </article>
+
+    {{ partial "memory-field.html" (dict
+      "page" .
+      "title" "Connected Memory"
+      "summary" "A focused relationship view around this entry, using shared categories and tags."
+      "focusKind" "page"
+      "focusValue" .RelPermalink
+      "pageLabelSingular" $pageLabelSingular
+      "pageLabelPlural" $pageLabelPlural
+    ) }}
+  </main>
+{{ end }}

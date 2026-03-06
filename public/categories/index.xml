@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Mar 2026 23:13:38 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Active Directory</title>
@@ -25,7 +25,7 @@
     <item>
       <title>Visualization</title>
       <link>http://localhost:1313/categories/visualization/</link>
-      <pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/visualization/</guid>
       <description></description>
     </item>

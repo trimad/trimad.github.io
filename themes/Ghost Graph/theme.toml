@@ -1,10 +1,10 @@
 name = "Ghost Graph"
 license = "MIT"
 licenselink = ""
-description = "A Hugo theme with a 3D force-directed knowledge graph for post navigation."
+description = "A Hugo theme for atmospheric technical publishing with a graph-inflected atlas, stronger metadata, and refined long-form reading."
 homepage = ""
-tags = ["blog", "graph", "force-graph", "taxonomy"]
-features = ["graph navigation", "taxonomy map", "recent posts"]
+tags = ["blog", "graph", "taxonomy", "technical-writing", "dark-theme"]
+features = ["homepage landing page", "taxonomy browsing", "graph atlas", "related content", "recent activity"]
 min_version = "0.92.0"
 
 [author]

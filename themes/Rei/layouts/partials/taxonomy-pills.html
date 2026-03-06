@@ -1,0 +1,20 @@
+{{- $page := .page | default . -}}
+{{- $showLabel := .showLabel | default false -}}
+{{- $categories := $page.Params.categories | default (slice) -}}
+{{- $tags := $page.Params.tags | default (slice) -}}
+{{- if or (gt (len $categories) 0) (gt (len $tags) 0) -}}
+  <div class="rei-taxonomy" aria-label="Taxonomies">
+    {{- if and $showLabel (gt (len $categories) 0) -}}
+      <span class="rei-taxonomy__label">Categories</span>
+    {{- end -}}
+    {{- range $categories -}}
+      <a class="rei-pill rei-pill--category" href="{{ printf "/categories/%s/" (. | urlize) | relURL }}">{{ . }}</a>
+    {{- end -}}
+    {{- if and $showLabel (gt (len $tags) 0) -}}
+      <span class="rei-taxonomy__label">Tags</span>
+    {{- end -}}
+    {{- range $tags -}}
+      <a class="rei-pill rei-pill--tag" href="{{ printf "/tags/%s/" (. | urlize) | relURL }}">#{{ . }}</a>
+    {{- end -}}
+  </div>
+{{- end -}}

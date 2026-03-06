@@ -1,0 +1,19 @@
+{{- $categories := .categories | default (slice) -}}
+{{- $tags := .tags | default (slice) -}}
+{{- $limit := .limit | default 0 -}}
+{{- if and (gt $limit 0) (gt (len $categories) $limit) -}}
+  {{- $categories = first $limit $categories -}}
+{{- end -}}
+{{- if and (gt $limit 0) (gt (len $tags) $limit) -}}
+  {{- $tags = first $limit $tags -}}
+{{- end -}}
+{{- if or (gt (len $categories) 0) (gt (len $tags) 0) -}}
+  <div class="sv-pill-group" aria-label="Categories and tags">
+    {{- range $categories -}}
+      <a class="sv-pill sv-pill--category" href="{{ (printf "/categories/%s/" (urlize .)) | relURL }}">{{ . }}</a>
+    {{- end -}}
+    {{- range $tags -}}
+      <a class="sv-pill sv-pill--tag" href="{{ (printf "/tags/%s/" (urlize .)) | relURL }}">#{{ . }}</a>
+    {{- end -}}
+  </div>
+{{- end -}}

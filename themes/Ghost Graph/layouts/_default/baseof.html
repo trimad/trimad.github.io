@@ -3,15 +3,21 @@
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body class="sv-body">
+  <body class="sv-body sv-kind-{{ .Kind }}{{ with .Section }} sv-section-{{ . | urlize }}{{ else }} sv-section-home{{ end }}">
     <a class="sv-skip" href="#content">Skip to content</a>
-    {{ block "main" . }}{{ end }}
+    <div class="sv-shell" id="top">
+      {{ partial "site-header.html" . }}
+      {{ block "main" . }}{{ end }}
+      {{ partial "site-footer.html" . }}
+    </div>
     {{- if .Scratch.Get "showGraph" -}}
       {{ partial "dag-data.html" . }}
-      <script src="//cdn.jsdelivr.net/npm/force-graph"></script>
+      <script src="https://cdn.jsdelivr.net/npm/force-graph"></script>
       {{- $js := resources.Get "js/dag.js" | minify | fingerprint -}}
       <script type="module" src="{{ $js.RelPermalink }}"></script>
     {{- end -}}
     <script src="{{ "js/code-copy.js" | relURL }}" defer></script>
+    {{- $listing := resources.Get "js/listing.js" | minify | fingerprint -}}
+    <script src="{{ $listing.RelPermalink }}" defer></script>
   </body>
 </html>

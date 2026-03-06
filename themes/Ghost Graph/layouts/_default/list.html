@@ -1,18 +1,131 @@
 {{ define "main" }}
-  {{ .Scratch.Set "showGraph" true }}
-  {{- $focusKind := "" -}}
-  {{- $focusValue := "" -}}
-  {{- if .Data.Term -}}
-    {{- $focusKind = .Data.Plural -}}
-    {{- $focusValue = .Data.Term -}}
+{{ .Scratch.Set "showGraph" true }}
+{{- $isTerm := eq .Kind "term" -}}
+{{- $pages := .Pages -}}
+{{- if eq .Kind "section" -}}
+  {{- $pages = .RegularPages -}}
+{{- end -}}
+{{- $pages = sort $pages "Lastmod" "desc" -}}
+{{- $count := len $pages -}}
+{{- $summary := .Description -}}
+{{- if not $summary -}}
+  {{- if $isTerm -}}
+    {{- $summary = printf "%d entries connected to %s. Use the list for scanning and the atlas for context." $count .Title -}}
+  {{- else if eq .Section "posts" -}}
+    {{- $summary = "Scripts, diagnostics, automation notes, and technical references arranged for scanning, filtering, and retrieval." -}}
+  {{- else if eq .Section "prompts" -}}
+    {{- $summary = "Implementation prompts and living specifications with stronger structure, metadata, and browsing support." -}}
+  {{- else if eq .Section "archive" -}}
+    {{- $summary = "Archived work preserved for reference, still connected through shared taxonomies and the atlas layer." -}}
+  {{- else -}}
+    {{- $summary = printf "%d entries in %s." $count .Title -}}
   {{- end -}}
+{{- end -}}
+{{- $focusKind := "" -}}
+{{- $focusValue := "" -}}
+{{- if $isTerm -}}
+  {{- $focusKind = .Data.Plural -}}
+  {{- $focusValue = .Data.Term -}}
+{{- end -}}
+{{- $kicker := "Section" -}}
+{{- if $isTerm -}}
+  {{- $kicker = title (.Data.Singular | default "Topic") -}}
+{{- end -}}
+{{- $paginator := .Paginate $pages 12 -}}
+{{- $relatedTerms := slice -}}
+{{- if $isTerm -}}
+  {{- $relatedTaxonomy := "" -}}
+  {{- if eq .Data.Plural "tags" -}}
+    {{- $relatedTaxonomy = "categories" -}}
+  {{- else if eq .Data.Plural "categories" -}}
+    {{- $relatedTaxonomy = "tags" -}}
+  {{- end -}}
+  {{- if $relatedTaxonomy -}}
+    {{- $scratch := newScratch -}}
+    {{- $scratch.Set "seen" (dict) -}}
+    {{- $scratch.Set "items" (slice) -}}
+    {{- range $pages -}}
+      {{- range index .Params $relatedTaxonomy | default (slice) -}}
+        {{- $key := urlize . -}}
+        {{- if not (index ($scratch.Get "seen") $key) -}}
+          {{- $scratch.SetInMap "seen" $key true -}}
+          {{- $scratch.Set "items" (($scratch.Get "items") | append .) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $relatedTerms = first 8 ($scratch.Get "items") -}}
+  {{- end -}}
+{{- end -}}
+<main class="sv-page sv-collection" id="content">
+  <section class="sv-page-header">
+    <div class="sv-page-header-copy">
+      <div class="sv-kicker">{{ $kicker }}</div>
+      <h1 class="sv-page-title">{{ .Title }}</h1>
+      <p class="sv-page-summary">{{ $summary }}</p>
+      <div class="sv-chip-row">
+        <span class="sv-stat-pill"><strong>{{ $count }}</strong> entries</span>
+        {{- if gt $count 0 -}}
+          <span class="sv-stat-pill"><strong>{{ (index $pages 0).Lastmod.Format "Jan 2, 2006" }}</strong> latest update</span>
+        {{- end -}}
+        {{- if $isTerm -}}
+          <span class="sv-stat-pill"><strong>{{ title .Data.Plural }}</strong> focus</span>
+        {{- else -}}
+          <span class="sv-stat-pill"><strong>{{ .Section | title }}</strong> collection</span>
+        {{- end -}}
+      </div>
+      {{- if gt (len $relatedTerms) 0 -}}
+        <div class="sv-chip-row sv-chip-row--dense">
+          {{- range $relatedTerms -}}
+            {{- if eq $.Data.Plural "tags" -}}
+              <a class="sv-pill sv-pill--category" href="{{ (printf "/categories/%s/" (urlize .)) | relURL }}">{{ . }}</a>
+            {{- else -}}
+              <a class="sv-pill sv-pill--tag" href="{{ (printf "/tags/%s/" (urlize .)) | relURL }}">#{{ . }}</a>
+            {{- end -}}
+          {{- end -}}
+        </div>
+      {{- end -}}
+    </div>
+    <section class="sv-panel sv-panel--aside">
+      <div class="sv-panel-head">
+        <div class="sv-kicker">Browse</div>
+        <h2 class="sv-panel-title">Collection tools</h2>
+      </div>
+      <div class="sv-mini-links">
+        {{- if $isTerm -}}
+          <a href="{{ (printf "/%s/" .Data.Plural) | relURL }}">All {{ .Data.Plural }}</a>
+        {{- end -}}
+        {{- with .OutputFormats.Get "RSS" -}}
+          <a href="{{ .RelPermalink }}">RSS feed</a>
+        {{- end -}}
+        <a href="#atlas">Atlas view</a>
+        <a href="{{ "/" | relURL }}">Home</a>
+      </div>
+    </section>
+  </section>
 
-<div class="sv-shell">
-  {{ partial "site-header.html" . }}
-  <div class="sv-layout sv-layout-map">
-    <main class="sv-main">
-      {{ partial "dag.html" (dict "page" . "focusKind" $focusKind "focusValue" $focusValue "contentId" "content") }}
-    </main>
-  </div>
-</div>
+  <section class="sv-section" data-collection-filter>
+    <div class="sv-section-heading">
+      <div>
+        <div class="sv-kicker">Browse</div>
+        <h2 class="sv-section-title">Entries</h2>
+        <p class="sv-section-summary">Filter the cards on this page without leaving the collection.</p>
+      </div>
+      <div class="sv-filter-meta">Showing <span data-listing-count>{{ len $paginator.Pages }}</span> entries on this page</div>
+    </div>
+    <label class="sv-filter-field">
+      <span class="sv-filter-label">Filter entries</span>
+      <input class="sv-filter-input" type="search" placeholder="Search titles, summaries, categories, or tags" data-listing-search>
+      <button class="sv-filter-clear" type="button" data-listing-clear hidden>Clear</button>
+    </label>
+    <div class="sv-card-grid">
+      {{- range $paginator.Pages -}}
+        {{ partial "article-card.html" (dict "page" .) }}
+      {{- end -}}
+    </div>
+    <div class="sv-empty-state" data-listing-empty hidden>No entries match the current filter on this page.</div>
+  </section>
+
+  {{ partial "pagination.html" $paginator }}
+  {{ partial "dag.html" (dict "page" . "focusKind" $focusKind "focusValue" $focusValue "contentId" "atlas") }}
+</main>
 {{ end }}

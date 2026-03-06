@@ -1,0 +1,17 @@
+{{- with . -}}
+  {{- if gt .TotalPages 1 -}}
+    <nav class="sv-pagination" aria-label="Pagination">
+      {{- with .Prev -}}
+        <a class="sv-pagination-link" href="{{ .URL }}">Previous</a>
+      {{- end -}}
+      <div class="sv-pagination-pages">
+        {{- range .Pagers -}}
+          <a class="sv-pagination-link{{ if eq .PageNumber $.PageNumber }} is-active{{ end }}" href="{{ .URL }}">{{ .PageNumber }}</a>
+        {{- end -}}
+      </div>
+      {{- with .Next -}}
+        <a class="sv-pagination-link" href="{{ .URL }}">Next</a>
+      {{- end -}}
+    </nav>
+  {{- end -}}
+{{- end -}}

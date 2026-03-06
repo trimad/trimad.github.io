@@ -1,0 +1,54 @@
+{{- $page := .page | default . -}}
+{{- $pages := slice -}}
+{{- range $page.Site.RegularPages -}}
+  {{- $summary := .Description | default .Summary | plainify | default (truncate 180 (.Plain | plainify)) -}}
+  {{- $categories := slice -}}
+  {{- range (.Params.categories | default (slice)) -}}
+    {{- $categories = $categories | append (dict "key" (. | urlize) "name" .) -}}
+  {{- end -}}
+  {{- $tags := slice -}}
+  {{- range (.Params.tags | default (slice)) -}}
+    {{- $tags = $tags | append (dict "key" (. | urlize) "name" .) -}}
+  {{- end -}}
+  {{- $pages = $pages | append (dict
+    "id" .RelPermalink
+    "title" .Title
+    "href" .RelPermalink
+    "section" .Section
+    "sectionTitle" (.Section | title)
+    "date" (.Date.Format "2006-01-02")
+    "lastmod" (.Lastmod.Format "2006-01-02")
+    "readingTime" .ReadingTime
+    "summary" $summary
+    "categories" $categories
+    "tags" $tags
+  ) -}}
+{{- end -}}
+{{- $categories := slice -}}
+{{- range $term, $taxonomy := $page.Site.Taxonomies.categories -}}
+  {{- $categories = $categories | append (dict
+    "id" (printf "category:%s" ($term | urlize))
+    "key" ($term | urlize)
+    "name" $term
+    "href" (printf "/categories/%s/" ($term | urlize) | relURL)
+    "count" (len $taxonomy.Pages)
+  ) -}}
+{{- end -}}
+{{- $tags := slice -}}
+{{- range $term, $taxonomy := $page.Site.Taxonomies.tags -}}
+  {{- $tags = $tags | append (dict
+    "id" (printf "tag:%s" ($term | urlize))
+    "key" ($term | urlize)
+    "name" $term
+    "href" (printf "/tags/%s/" ($term | urlize) | relURL)
+    "count" (len $taxonomy.Pages)
+  ) -}}
+{{- end -}}
+{{- $payload := dict
+  "site" (dict "title" $page.Site.Title)
+  "pages" $pages
+  "categories" $categories
+  "tags" $tags
+-}}
+{{- $payloadJSON := $payload | jsonify -}}
+<script type="application/json" data-memory-field-data>{{ $payloadJSON | safeJS }}</script>

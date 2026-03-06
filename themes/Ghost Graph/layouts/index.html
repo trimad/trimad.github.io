@@ -1,19 +1,129 @@
 {{ define "main" }}
-{{ if .IsHome }}
-  <meta http-equiv="refresh" content="0; url={{ "/posts/" | relURL }}">
-  <script>
-    window.location.replace("{{ "/posts/" | relURL }}");
-  </script>
-  <p>Redirecting to the <a href="{{ "/posts/" | relURL }}">Posts section</a>…</p>
-{{ else }}
-  {{ .Scratch.Set "showGraph" true }}
-  <div class="sv-shell">
-    {{ partial "site-header.html" . }}
-    <div class="sv-layout sv-layout-map">
-      <main class="sv-main">
-        {{ partial "dag.html" (dict "page" . "focusKind" "" "focusValue" "" "contentId" "content") }}
-      </main>
+{{ .Scratch.Set "showGraph" true }}
+{{- $allPages := .Site.RegularPages -}}
+{{- $recent := first 6 (sort $allPages "Lastmod" "desc") -}}
+{{- $latest := first 1 (sort $allPages "Lastmod" "desc") -}}
+{{- $sectionCards := slice
+  (dict "title" "Posts" "path" ("/posts/" | relURL) "count" (len (where $allPages "Section" "posts")) "summary" "Scripts, diagnostics, automation notes, experiments, and technical references.")
+  (dict "title" "Prompts" "path" ("/prompts/" | relURL) "count" (len (where $allPages "Section" "prompts")) "summary" "Implementation prompts, design specs, and system guidance captured as durable reference material.")
+  (dict "title" "Archive" "path" ("/archive/" | relURL) "count" (len (where $allPages "Section" "archive")) "summary" "Older material retained for continuity, still browsable through the same visual and taxonomy system.")
+-}}
+<main class="sv-page sv-home" id="content">
+  <section class="sv-hero">
+    <div class="sv-hero-copy">
+      <div class="sv-kicker">Ghost Graph</div>
+      <h1 class="sv-hero-title">{{ .Site.Title }}</h1>
+      <p class="sv-hero-summary">{{ .Site.Params.description | default "A cohesive command deck for technical writing, prompts, diagnostics, and visual experiments." }}</p>
+      <div class="sv-button-row">
+        <a class="sv-button is-primary" href="{{ "/posts/" | relURL }}">Read Posts</a>
+        <a class="sv-button" href="#atlas">Open Atlas</a>
+      </div>
+      <div class="sv-chip-row">
+        <span class="sv-stat-pill"><strong>{{ len $allPages }}</strong> entries</span>
+        <span class="sv-stat-pill"><strong>{{ len .Site.Taxonomies.categories }}</strong> categories</span>
+        <span class="sv-stat-pill"><strong>{{ len .Site.Taxonomies.tags }}</strong> tags</span>
+      </div>
     </div>
-  </div>
-{{ end }}
+    <div class="sv-hero-stack">
+      <section class="sv-panel">
+        <div class="sv-panel-head">
+          <div class="sv-kicker">System State</div>
+          <h2 class="sv-panel-title">Live overview</h2>
+        </div>
+        <ul class="sv-signal-list">
+          {{- range $sectionCards -}}
+            <li>
+              <span>{{ .title }}</span>
+              <strong>{{ .count }}</strong>
+            </li>
+          {{- end -}}
+          {{- with index $latest 0 -}}
+            <li>
+              <span>Latest update</span>
+              <strong>{{ .Lastmod.Format "Jan 2, 2006" }}</strong>
+            </li>
+          {{- end -}}
+        </ul>
+      </section>
+      <section class="sv-panel">
+        <div class="sv-panel-head">
+          <div class="sv-kicker">Browse Modes</div>
+          <h2 class="sv-panel-title">Choose a route</h2>
+        </div>
+        <div class="sv-mini-links">
+          <a href="{{ "/posts/" | relURL }}">Latest writing</a>
+          <a href="{{ "/categories/" | relURL }}">Browse categories</a>
+          <a href="{{ "/tags/" | relURL }}">Browse tags</a>
+          <a href="{{ "/prompts/" | relURL }}">Specification prompts</a>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="sv-section">
+    <div class="sv-section-heading">
+      <div>
+        <div class="sv-kicker">Recent Activity</div>
+        <h2 class="sv-section-title">Latest entries</h2>
+        <p class="sv-section-summary">Recent work across posts, prompts, and archived material.</p>
+      </div>
+    </div>
+    <div class="sv-card-grid">
+      {{- range $recent -}}
+        {{ partial "article-card.html" (dict "page" .) }}
+      {{- end -}}
+    </div>
+  </section>
+
+  <section class="sv-section">
+    <div class="sv-section-heading">
+      <div>
+        <div class="sv-kicker">Information Architecture</div>
+        <h2 class="sv-section-title">Browse the stacks</h2>
+        <p class="sv-section-summary">Section pages work as conventional collections first, with the atlas layered in as a secondary exploration tool.</p>
+      </div>
+    </div>
+    <div class="sv-route-grid">
+      {{- range $sectionCards -}}
+        <article class="sv-route-card">
+          <a class="sv-route-link" href="{{ .path }}">
+            <div class="sv-route-meta">
+              <span class="sv-route-count">{{ .count }}</span>
+              <span class="sv-route-label">entries</span>
+            </div>
+            <h3>{{ .title }}</h3>
+            <p>{{ .summary }}</p>
+          </a>
+        </article>
+      {{- end -}}
+    </div>
+  </section>
+
+  <section class="sv-section sv-section--split">
+    <div class="sv-panel">
+      <div class="sv-panel-head">
+        <div class="sv-kicker">Taxonomy</div>
+        <h2 class="sv-panel-title">Top categories</h2>
+      </div>
+      <div class="sv-chip-cloud">
+        {{- range first 8 .Site.Taxonomies.categories.ByCount -}}
+          <a class="sv-pill sv-pill--category" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span>{{ .Count }}</span></a>
+        {{- end -}}
+      </div>
+    </div>
+    <div class="sv-panel">
+      <div class="sv-panel-head">
+        <div class="sv-kicker">Signals</div>
+        <h2 class="sv-panel-title">Top tags</h2>
+      </div>
+      <div class="sv-chip-cloud">
+        {{- range first 10 .Site.Taxonomies.tags.ByCount -}}
+          <a class="sv-pill sv-pill--tag" href="{{ .Page.RelPermalink }}">#{{ .Page.Title }} <span>{{ .Count }}</span></a>
+        {{- end -}}
+      </div>
+    </div>
+  </section>
+
+  {{ partial "dag.html" (dict "page" . "focusKind" "" "focusValue" "" "contentId" "atlas") }}
+</main>
 {{ end }}

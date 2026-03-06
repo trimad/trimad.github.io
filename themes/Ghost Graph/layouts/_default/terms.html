@@ -1,11 +1,71 @@
 {{ define "main" }}
 {{ .Scratch.Set "showGraph" true }}
-<div class="sv-shell">
-  {{ partial "site-header.html" . }}
-  <div class="sv-layout sv-layout-map">
-    <main class="sv-main">
-      {{ partial "dag.html" (dict "page" . "focusKind" "" "focusValue" "" "contentId" "content") }}
-    </main>
-  </div>
-</div>
+{{- $terms := .Data.Terms.ByCount -}}
+{{- $count := len $terms -}}
+{{- $summary := .Description | default (printf "Browse %s as a first-class index, then open the atlas to see how they connect across the site." (lower .Title)) -}}
+<main class="sv-page sv-taxonomy" id="content">
+  <section class="sv-page-header">
+    <div class="sv-page-header-copy">
+      <div class="sv-kicker">Taxonomy</div>
+      <h1 class="sv-page-title">{{ .Title }}</h1>
+      <p class="sv-page-summary">{{ $summary }}</p>
+      <div class="sv-chip-row">
+        <span class="sv-stat-pill"><strong>{{ $count }}</strong> terms</span>
+        <span class="sv-stat-pill"><strong>{{ len .Site.RegularPages }}</strong> total entries</span>
+      </div>
+    </div>
+    <section class="sv-panel sv-panel--aside">
+      <div class="sv-panel-head">
+        <div class="sv-kicker">Routes</div>
+        <h2 class="sv-panel-title">Browse modes</h2>
+      </div>
+      <div class="sv-mini-links">
+        <a href="{{ "/posts/" | relURL }}">Posts</a>
+        <a href="{{ "/archive/" | relURL }}">Archive</a>
+        <a href="#atlas">Atlas view</a>
+        <a href="{{ "/" | relURL }}">Home</a>
+      </div>
+    </section>
+  </section>
+
+  <section class="sv-section" data-collection-filter>
+    <div class="sv-section-heading">
+      <div>
+        <div class="sv-kicker">Index</div>
+        <h2 class="sv-section-title">{{ .Title }} directory</h2>
+        <p class="sv-section-summary">Use the filter to trim the taxonomy list before drilling into a specific term page.</p>
+      </div>
+      <div class="sv-filter-meta">Showing <span data-listing-count>{{ $count }}</span> terms</div>
+    </div>
+    <label class="sv-filter-field">
+      <span class="sv-filter-label">Filter terms</span>
+      <input class="sv-filter-input" type="search" placeholder="Search terms or the latest connected entry" data-listing-search>
+      <button class="sv-filter-clear" type="button" data-listing-clear hidden>Clear</button>
+    </label>
+    <div class="sv-term-grid">
+      {{- range $terms -}}
+        {{- $termPage := .Page -}}
+        {{- $latestPages := sort $termPage.Pages "Lastmod" "desc" -}}
+        <article class="sv-term-card" data-card data-filter-text="{{ printf "%s %d" $termPage.Title .Count | lower }}">
+          <a class="sv-term-link" href="{{ $termPage.RelPermalink }}">
+            <div class="sv-term-card-top">
+              <span class="sv-term-label">{{ title $.Title }}</span>
+              <span class="sv-term-count">{{ .Count }}</span>
+            </div>
+            <h2>{{ $termPage.Title }}</h2>
+            {{- if gt (len $latestPages) 0 -}}
+              <p>Latest connection: {{ (index $latestPages 0).Title }}</p>
+              <div class="sv-term-meta">{{ (index $latestPages 0).Lastmod.Format "Jan 2, 2006" }}</div>
+            {{- else -}}
+              <p>No connected entries yet.</p>
+            {{- end -}}
+          </a>
+        </article>
+      {{- end -}}
+    </div>
+    <div class="sv-empty-state" data-listing-empty hidden>No terms match the current filter.</div>
+  </section>
+
+  {{ partial "dag.html" (dict "page" . "focusKind" "" "focusValue" "" "contentId" "atlas") }}
+</main>
 {{ end }}

@@ -1,56 +1,87 @@
 {{ define "main" }}
-<div class="sv-shell">
-  {{ partial "site-header.html" . }}
-  <div class="sv-layout sv-layout-article">
-    <main class="sv-main">
-      <article class="sv-article" id="content">
-        <div class="sv-article-body">
-          <header class="sv-article-header">
-            <div class="sv-kicker">Reading</div>
-            <h1>{{ .Title }}</h1>
-            <div class="sv-article-meta">
-              <span>Published {{ .Date.Format "Jan 2, 2006" }}</span>
-              {{ with .Lastmod }}<span>Updated {{ .Format "Jan 2, 2006" }}</span>{{ end }}
-            </div>
-            <div class="sv-article-links">
-              <a class="sv-inline-link" href="{{ "/" | relURL }}">Return to map</a>
-            </div>
-          </header>
-          {{ if or .Params.tags .Params.categories }}
-            <div class="sv-terms">
-              {{ with .Params.categories }}
-                <div class="sv-term-row">
-                  <span class="sv-term-label">Categories</span>
-                  {{ range . }}
-                    <a class="sv-term-pill" href="{{ (printf "/categories/%s/" (urlize .)) | relURL }}">{{ . }}</a>
-                  {{ end }}
-                </div>
-              {{ end }}
-              {{ with .Params.tags }}
-                <div class="sv-term-row">
-                  <span class="sv-term-label">Tags</span>
-                  {{ range . }}
-                    <a class="sv-term-pill" href="{{ (printf "/tags/%s/" (urlize .)) | relURL }}">#{{ . }}</a>
-                  {{ end }}
-                </div>
-              {{ end }}
-            </div>
-          {{ end }}
-          {{- $showToc := and (.Params.toc) (gt (len .TableOfContents) 0) -}}
-          {{- if $showToc -}}
-            <div class="sv-toc" aria-label="Table of contents">
-              <div class="sv-toc-title">On this page</div>
-              {{ .TableOfContents }}
-            </div>
-          {{- end -}}
-          <div class="sv-content">
-            {{ .Content }}
-          </div>
-        </div>
-      </article>
+{{- $showToc := and (.Params.toc) (gt (len .TableOfContents) 0) -}}
+{{- $summary := .Description | default .Params.description | default .Params.summary | default (.Summary | plainify) -}}
+{{- $summary = $summary | plainify | htmlUnescape | replaceRE "\\s+" " " | trim " " | truncate 220 -}}
+{{- $thumb := partial "content-thumbnail.html" . -}}
+{{- $kicker := .Section | title -}}
+{{- with .Params.categories -}}
+  {{- if gt (len .) 0 -}}
+    {{- $kicker = index . 0 -}}
+  {{- end -}}
+{{- end -}}
+<main class="sv-page sv-single" id="content">
+  <section class="sv-page-header sv-page-header--article">
+    <div class="sv-page-header-copy">
+      <div class="sv-kicker">{{ $kicker }}</div>
+      <h1 class="sv-page-title">{{ .Title }}</h1>
+      {{- with $summary -}}
+        <p class="sv-page-summary">{{ . }}</p>
+      {{- end -}}
+      <div class="sv-chip-row">
+        <span class="sv-stat-pill"><strong>{{ .Date.Format "Jan 2, 2006" }}</strong> published</span>
+        {{ with .Lastmod }}<span class="sv-stat-pill"><strong>{{ .Format "Jan 2, 2006" }}</strong> updated</span>{{ end }}
+        <span class="sv-stat-pill"><strong>{{ .ReadingTime }}</strong> min read</span>
+        <span class="sv-stat-pill"><strong>{{ .Section | title }}</strong> section</span>
+      </div>
+      {{ partial "taxonomy-pills.html" (dict "categories" (.Params.categories | default (slice)) "tags" (.Params.tags | default (slice)) "limit" 8) }}
+      <div class="sv-button-row">
+        <a class="sv-button is-primary" href="{{ (printf "/%s/" .Section) | relURL }}">More {{ .Section | title }}</a>
+        <a class="sv-button" href="{{ "/#atlas" | relURL }}">Open Atlas</a>
+      </div>
+    </div>
+  </section>
 
-    </main>
-    {{ partial "recently-modified.html" . }}
+  <div class="sv-single-grid">
+    <article class="sv-article-card">
+      {{- with $thumb -}}
+        <figure class="sv-feature-media">
+          <img src="{{ .RelPermalink }}" alt="" loading="eager" decoding="async">
+        </figure>
+      {{- end -}}
+      <div class="sv-content">
+        {{ .Content }}
+      </div>
+      {{- if or .PrevInSection .NextInSection -}}
+        <nav class="sv-adjacent" aria-label="Adjacent entries">
+          {{- with .PrevInSection -}}
+            <a class="sv-adjacent-link" href="{{ .RelPermalink }}">
+              <span class="sv-adjacent-label">Newer in {{ $.Section | title }}</span>
+              <strong>{{ .Title }}</strong>
+            </a>
+          {{- end -}}
+          {{- with .NextInSection -}}
+            <a class="sv-adjacent-link" href="{{ .RelPermalink }}">
+              <span class="sv-adjacent-label">Older in {{ $.Section | title }}</span>
+              <strong>{{ .Title }}</strong>
+            </a>
+          {{- end -}}
+        </nav>
+      {{- end -}}
+    </article>
+
+    <aside class="sv-article-rail">
+      <section class="sv-panel">
+        <div class="sv-panel-head">
+          <div class="sv-kicker">Entry data</div>
+          <h2 class="sv-panel-title">Metadata</h2>
+        </div>
+        <ul class="sv-signal-list">
+          <li><span>Published</span><strong>{{ .Date.Format "Jan 2, 2006" }}</strong></li>
+          {{ with .Lastmod }}<li><span>Updated</span><strong>{{ .Format "Jan 2, 2006" }}</strong></li>{{ end }}
+          <li><span>Reading time</span><strong>{{ .ReadingTime }} min</strong></li>
+          <li><span>Word count</span><strong>{{ .WordCount }}</strong></li>
+        </ul>
+      </section>
+      {{- if $showToc -}}
+        <section class="sv-toc" aria-label="Table of contents">
+          <div class="sv-toc-title">On this page</div>
+          {{ .TableOfContents }}
+        </section>
+      {{- end -}}
+      {{ partial "recently-modified.html" (dict "page" . "title" "Fresh in this section" "limit" 5) }}
+    </aside>
   </div>
-</div>
+
+  {{ partial "related-content.html" . }}
+</main>
 {{ end }}

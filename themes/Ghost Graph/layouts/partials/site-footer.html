@@ -1,0 +1,37 @@
+{{- $pages := .Site.RegularPages -}}
+{{- $latest := first 1 (sort $pages "Lastmod" "desc") -}}
+<footer class="sv-footer">
+  <div class="sv-footer-grid">
+    <section class="sv-footer-block">
+      <div class="sv-kicker">Ghost Graph</div>
+      <h2 class="sv-footer-title">{{ .Site.Title }}</h2>
+      <p class="sv-footer-copy">{{ .Site.Params.description | default "An atmospheric publication system for notes, scripts, prompts, and visual experiments." }}</p>
+    </section>
+    <section class="sv-footer-block">
+      <div class="sv-kicker">Site totals</div>
+      <div class="sv-footer-stats">
+        <div class="sv-footer-stat"><strong>{{ len $pages }}</strong><span>entries</span></div>
+        <div class="sv-footer-stat"><strong>{{ len .Site.Taxonomies.categories }}</strong><span>categories</span></div>
+        <div class="sv-footer-stat"><strong>{{ len .Site.Taxonomies.tags }}</strong><span>tags</span></div>
+      </div>
+    </section>
+    <section class="sv-footer-block">
+      <div class="sv-kicker">Routes</div>
+      <div class="sv-mini-links">
+        <a href="{{ "/posts/" | relURL }}">Posts</a>
+        <a href="{{ "/prompts/" | relURL }}">Prompts</a>
+        <a href="{{ "/archive/" | relURL }}">Archive</a>
+        <a href="{{ "/categories/" | relURL }}">Categories</a>
+        <a href="{{ "/tags/" | relURL }}">Tags</a>
+        {{ with .Site.Home.OutputFormats.Get "RSS" }}<a href="{{ .RelPermalink }}">RSS</a>{{ end }}
+        <a href="#top">Back to top</a>
+      </div>
+    </section>
+  </div>
+  {{- with index $latest 0 -}}
+    <div class="sv-footer-note">
+      Latest update <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "Jan 2, 2006" }}</time>:
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </div>
+  {{- end -}}
+</footer>

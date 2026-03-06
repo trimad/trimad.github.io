@@ -1,0 +1,19 @@
+{{- $term := .term -}}
+{{- $latest := index ($term.Pages.ByLastmod.Reverse) 0 -}}
+<article class="rei-term-row" data-filter-item data-filter-text="{{ lower $term.Term }}">
+  <a href="{{ $term.Page.RelPermalink }}">
+    <div class="rei-term-row__meta">
+      <span>{{ .taxonomy | title }}</span>
+      <strong>{{ $term.Count }}</strong>
+    </div>
+    <div class="rei-term-row__body">
+      <h2>{{ $term.Page.Title }}</h2>
+      {{- with $latest -}}
+        <p>Latest connected entry: {{ .Title }}</p>
+        <small>{{ .Lastmod.Format "Jan 2, 2006" }}</small>
+      {{- else -}}
+        <p>No connected entries yet.</p>
+      {{- end -}}
+    </div>
+  </a>
+</article>

@@ -1,0 +1,45 @@
+{{- $page := .page | default . -}}
+{{- $compact := .compact | default false -}}
+{{- $summary := $page.Description | default $page.Summary | plainify | default (truncate 150 ($page.Plain | plainify)) -}}
+{{- $cover := partial "cover-data.html" $page -}}
+{{- $categories := $page.Params.categories | default (slice) -}}
+{{- $tags := $page.Params.tags | default (slice) -}}
+{{- $filterText := delimit (slice $page.Title $summary ($page.Section | title) (delimit $categories " ") (delimit $tags " ")) " " -}}
+<article class="rei-entry{{ if $compact }} rei-entry--compact{{ end }}" data-filter-item data-filter-text="{{ $filterText | lower }}">
+  <a class="rei-entry__link" href="{{ $page.RelPermalink }}">
+    <div class="rei-entry__meta">
+      <span>{{ $page.Section | title }}</span>
+      <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
+      <small>Updated {{ $page.Lastmod.Format "Jan 2, 2006" }}</small>
+    </div>
+
+    <div class="rei-entry__body">
+      <h3>{{ $page.Title }}</h3>
+      {{- with $summary -}}
+        <p>{{ . }}</p>
+      {{- end -}}
+      {{- if or (gt (len $categories) 0) (gt (len $tags) 0) -}}
+        <div class="rei-entry__tags">
+          {{- range first 2 $categories -}}
+            <span class="rei-pill rei-pill--category">{{ . }}</span>
+          {{- end -}}
+          {{- range first 3 $tags -}}
+            <span class="rei-pill rei-pill--tag">#{{ . }}</span>
+          {{- end -}}
+        </div>
+      {{- end -}}
+    </div>
+
+    <div class="rei-entry__media">
+      {{- if $cover -}}
+        <figure class="rei-entry__thumb">
+          <img src="{{ $cover }}" alt="{{ $page.Title }}" loading="lazy">
+        </figure>
+      {{- else -}}
+        <div class="rei-entry__placeholder" aria-hidden="true">
+          <span>{{ $page.ReadingTime }} min</span>
+        </div>
+      {{- end -}}
+    </div>
+  </a>
+</article>

@@ -1,0 +1,102 @@
+{{- $page := .page | default . -}}
+{{- $pages := $page.RegularPagesRecursive -}}
+{{- if eq $page.Kind "term" -}}
+  {{- $pages = $page.Pages -}}
+{{- end -}}
+{{- $pages = $pages.ByDate.Reverse -}}
+{{- $paginator := $page.Paginate $pages 12 -}}
+{{- $summary := $page.Description | default $page.Summary | plainify -}}
+{{- if not $summary -}}
+  {{- if eq $page.Kind "term" -}}
+    {{- $summary = printf "Entries linked to %q across the quiet archive." $page.Title -}}
+  {{- else -}}
+    {{- $summary = printf "Browse %s through a restrained editorial system with strong metadata, filtering, and discovery." ($page.Title | lower) -}}
+  {{- end -}}
+{{- end -}}
+{{- $focusKind := "section" -}}
+{{- $focusValue := $page.Section -}}
+{{- $pageLabelSingular := "Entry" -}}
+{{- $pageLabelPlural := "Entries" -}}
+{{- if eq $page.Kind "term" -}}
+  {{- if eq $page.Data.Plural "categories" -}}
+    {{- $focusKind = "category" -}}
+  {{- else if eq $page.Data.Plural "tags" -}}
+    {{- $focusKind = "tag" -}}
+  {{- end -}}
+  {{- $focusValue = $page.Title | urlize -}}
+{{- end -}}
+{{- if and (eq $focusKind "section") (eq $focusValue "posts") -}}
+  {{- $pageLabelSingular = "Post" -}}
+  {{- $pageLabelPlural = "Posts" -}}
+{{- end -}}
+<main class="rei-page rei-page--collection" id="content">
+  {{ partial "page-intro.html" (dict
+    "page" $page
+    "kicker" (cond (eq $page.Kind "term") "Term View" "Collection View")
+    "title" $page.Title
+    "summary" $summary
+    "stats" (slice
+      (dict "label" "Entries" "value" (len $pages))
+      (dict "label" "Categories" "value" (len $page.Site.Taxonomies.categories))
+      (dict "label" "Tags" "value" (len $page.Site.Taxonomies.tags))
+    )
+  ) }}
+
+  <section class="rei-ledger-shell rei-ledger-shell--collection">
+    <section class="rei-panel rei-panel--filter" data-filter-root>
+      <div class="rei-filter">
+        <label class="rei-filter__label" for="collection-filter">Filter visible entries</label>
+        <div class="rei-filter__control">
+          <input id="collection-filter" type="search" placeholder="Filter by title, summary, tag, or category" data-filter-input>
+          <button class="rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
+        </div>
+        <p class="rei-filter__meta"><span data-filter-count>{{ len $paginator.Pages }}</span> entries on this page</p>
+      </div>
+    </section>
+
+    {{- if gt (len $paginator.Pages) 0 -}}
+      <div class="rei-ledger">
+        {{- range $paginator.Pages -}}
+          {{ partial "article-card.html" (dict "page" . "compact" false) }}
+        {{- end -}}
+      </div>
+      {{ partial "pagination.html" (dict "Paginator" $paginator) }}
+    {{- else -}}
+      {{ partial "empty-state.html" (dict
+        "title" "No entries found"
+        "summary" "This section or term does not have content yet. The route remains stable and readable."
+      ) }}
+    {{- end -}}
+  </section>
+
+  <section class="rei-section rei-index-panels">
+    <section class="rei-index-panel">
+      {{ partial "recent-feed.html" (dict "page" $page "title" "Recently modified" "limit" 6 "pages" $pages) }}
+    </section>
+    <section class="rei-index-panel">
+      <div class="rei-section__head">
+        <div>
+          <p class="rei-kicker"><span></span>Browse Routes</p>
+          <h2 class="rei-section__title">Adjacent collections</h2>
+        </div>
+      </div>
+      <ol class="rei-ranking">
+        <li><a href="{{ "/posts/" | relURL }}">Posts</a><span>{{ len (where $page.Site.RegularPages "Section" "posts") }}</span></li>
+        <li><a href="{{ "/prompts/" | relURL }}">Prompts</a><span>{{ len (where $page.Site.RegularPages "Section" "prompts") }}</span></li>
+        <li><a href="{{ "/archive/" | relURL }}">Archive</a><span>{{ len (where $page.Site.RegularPages "Section" "archive") }}</span></li>
+        <li><a href="{{ "/categories/" | relURL }}">Categories</a><span>{{ len $page.Site.Taxonomies.categories }}</span></li>
+        <li><a href="{{ "/tags/" | relURL }}">Tags</a><span>{{ len $page.Site.Taxonomies.tags }}</span></li>
+      </ol>
+    </section>
+  </section>
+
+  {{ partial "memory-field.html" (dict
+    "page" $page
+    "title" "Memory Field"
+    "summary" "A secondary exploration surface for following relationships beyond the visible ledger."
+    "focusKind" $focusKind
+    "focusValue" $focusValue
+    "pageLabelSingular" $pageLabelSingular
+    "pageLabelPlural" $pageLabelPlural
+  ) }}
+</main>

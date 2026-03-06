@@ -1,0 +1,98 @@
+{{- $page := .page | default . -}}
+{{- $page.Scratch.Set "hasMemoryField" true -}}
+{{- $id := .id | default "memory-field" -}}
+{{- $title := .title | default "Memory Field" -}}
+{{- $summary := .summary | default "A quiet relationship map connecting categories, tags, and entries." -}}
+{{- $focusKind := .focusKind | default "" -}}
+{{- $focusValue := .focusValue | default "" -}}
+{{- $pageLabelSingular := .pageLabelSingular | default "Entry" -}}
+{{- $pageLabelPlural := .pageLabelPlural | default "Entries" -}}
+{{- $defaultQuery := .defaultQuery | default "Rei" -}}
+<section class="rei-section rei-memory" id="{{ $id }}" data-memory-field data-focus-kind="{{ $focusKind }}" data-focus-value="{{ $focusValue }}" data-page-label-singular="{{ $pageLabelSingular }}" data-page-label-plural="{{ $pageLabelPlural }}" data-default-query="{{ $defaultQuery }}">
+  <div class="rei-section__head">
+    <div>
+      <p class="rei-kicker"><span></span>Discovery Layer</p>
+      <h2 class="rei-section__title">{{ $title }}</h2>
+      <p class="rei-section__summary">{{ $summary }}</p>
+    </div>
+  </div>
+
+  <div class="rei-memory__shell">
+    <div class="rei-memory__toolbar">
+      <label class="rei-filter__label" for="{{ $id }}-search">Search memory field</label>
+      <div class="rei-memory__controls">
+        <div class="rei-filter__control">
+          <input id="{{ $id }}-search" type="search" placeholder="Search {{ lower $pageLabelPlural }}, categories, or tags" data-memory-search>
+          <button class="rei-filter__clear" type="button" data-memory-clear hidden>Clear</button>
+        </div>
+        <div class="rei-memory__toggles" aria-label="Visible node types">
+          <label><input type="checkbox" data-memory-toggle="categories" checked> Categories</label>
+          <label><input type="checkbox" data-memory-toggle="tags" checked> Tags</label>
+          <label><input type="checkbox" data-memory-toggle="pages" checked>{{ $pageLabelPlural }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="rei-memory__layout">
+      <div class="rei-memory__stage" data-memory-stage>
+        <svg class="rei-memory__links" aria-hidden="true" data-memory-links></svg>
+        <section class="rei-memory__column" data-memory-column="category">
+          <header>
+            <span>Categories</span>
+            <strong data-memory-count="category">0</strong>
+          </header>
+          <div class="rei-memory__list" data-memory-list="category"></div>
+        </section>
+        <section class="rei-memory__column" data-memory-column="tag">
+          <header>
+            <span>Tags</span>
+            <strong data-memory-count="tag">0</strong>
+          </header>
+          <div class="rei-memory__list" data-memory-list="tag"></div>
+        </section>
+        <section class="rei-memory__column" data-memory-column="page">
+          <header>
+            <span>{{ $pageLabelPlural }}</span>
+            <strong data-memory-count="page">0</strong>
+          </header>
+          <div class="rei-memory__list" data-memory-list="page"></div>
+        </section>
+      </div>
+
+      <aside class="rei-memory__details" data-memory-details aria-live="polite">
+        <p class="rei-kicker"><span></span>Signal Detail</p>
+        <h3>Awaiting selection</h3>
+        <p>Hover or focus a node to inspect its relationships. Search narrows the chamber without replacing normal navigation.</p>
+      </aside>
+    </div>
+
+    <div class="rei-memory__results" data-memory-results hidden>
+      <p class="rei-memory__results-label">Matching {{ lower $pageLabelPlural }}</p>
+      <div class="rei-memory__results-list" data-memory-results-list></div>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="rei-memory__fallback">
+      <section class="rei-panel">
+        <div class="rei-panel__head">
+          <p class="rei-kicker"><span></span>Fallback</p>
+          <h3 class="rei-panel__title">JavaScript is disabled</h3>
+        </div>
+        <p class="rei-panel__note">Browse recent entries and high-frequency taxonomy routes below.</p>
+        <div class="rei-chip-cloud">
+          {{- range first 6 $page.Site.Taxonomies.categories.ByCount -}}
+            <a class="rei-pill rei-pill--category" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span>{{ .Count }}</span></a>
+          {{- end -}}
+        </div>
+        <div class="rei-chip-cloud">
+          {{- range first 8 $page.Site.Taxonomies.tags.ByCount -}}
+            <a class="rei-pill rei-pill--tag" href="{{ .Page.RelPermalink }}">#{{ .Page.Title }}</a>
+          {{- end -}}
+        </div>
+      </section>
+    </div>
+  </noscript>
+
+  {{ partial "memory-field-data.html" (dict "page" $page) }}
+</section>

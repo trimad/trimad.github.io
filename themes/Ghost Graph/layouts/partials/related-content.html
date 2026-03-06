@@ -1,0 +1,46 @@
+{{- $page := . -}}
+{{- $tags := $page.Params.tags | default (slice) -}}
+{{- $categories := $page.Params.categories | default (slice) -}}
+{{- $pool := where $page.Site.RegularPages "RelPermalink" "ne" $page.RelPermalink -}}
+{{- $scratch := newScratch -}}
+{{- $scratch.Set "seen" (dict) -}}
+{{- $scratch.Set "items" (slice) -}}
+{{- if gt (len $tags) 0 -}}
+  {{- range sort (where $pool "Params.tags" "intersect" $tags) "Lastmod" "desc" -}}
+    {{- if not (index ($scratch.Get "seen") .RelPermalink) -}}
+      {{- $scratch.SetInMap "seen" .RelPermalink true -}}
+      {{- $scratch.Set "items" (($scratch.Get "items") | append .) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt (len $categories) 0 -}}
+  {{- range sort (where $pool "Params.categories" "intersect" $categories) "Lastmod" "desc" -}}
+    {{- if not (index ($scratch.Get "seen") .RelPermalink) -}}
+      {{- $scratch.SetInMap "seen" .RelPermalink true -}}
+      {{- $scratch.Set "items" (($scratch.Get "items") | append .) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- range sort (where $pool "Section" $page.Section) "Lastmod" "desc" -}}
+  {{- if not (index ($scratch.Get "seen") .RelPermalink) -}}
+    {{- $scratch.SetInMap "seen" .RelPermalink true -}}
+    {{- $scratch.Set "items" (($scratch.Get "items") | append .) -}}
+  {{- end -}}
+{{- end -}}
+{{- $related := first 4 ($scratch.Get "items") -}}
+{{- if gt (len $related) 0 -}}
+  <section class="sv-section">
+    <div class="sv-section-heading">
+      <div>
+        <div class="sv-kicker">Connected Reading</div>
+        <h2 class="sv-section-title">Related signals</h2>
+        <p class="sv-section-summary">Additional entries chosen from shared tags, categories, and section context.</p>
+      </div>
+    </div>
+    <div class="sv-card-grid sv-card-grid--related">
+      {{- range $related -}}
+        {{ partial "article-card.html" (dict "page" .) }}
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}

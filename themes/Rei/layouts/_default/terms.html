@@ -1,0 +1,51 @@
+{{ define "main" }}
+  {{- $page := . -}}
+  {{- $terms := .Data.Terms.ByCount -}}
+  {{- $description := .Description | default (printf "Browse %s as a quiet index of related material." (.Title | lower)) -}}
+  <main class="rei-page rei-page--terms" id="content">
+    {{ partial "page-intro.html" (dict
+      "page" $page
+      "kicker" "Taxonomy Index"
+      "title" .Title
+      "summary" $description
+      "stats" (slice
+        (dict "label" "Terms" "value" (len $terms))
+        (dict "label" "Entries" "value" (len .Site.RegularPages))
+      )
+    ) }}
+
+    <section class="rei-ledger-shell">
+      <section class="rei-panel rei-panel--filter" data-filter-root>
+        <div class="rei-filter">
+          <label class="rei-filter__label" for="term-filter">Filter terms</label>
+          <div class="rei-filter__control">
+            <input id="term-filter" type="search" placeholder="Filter by term name" data-filter-input>
+            <button class="rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
+          </div>
+          <p class="rei-filter__meta"><span data-filter-count>{{ len $terms }}</span> terms visible</p>
+        </div>
+      </section>
+
+      {{- if gt (len $terms) 0 -}}
+        <div class="rei-term-ledger">
+          {{- range $terms -}}
+            {{ partial "term-card.html" (dict "term" . "taxonomy" $page.Data.Plural) }}
+          {{- end -}}
+        </div>
+      {{- else -}}
+        {{ partial "empty-state.html" (dict
+          "title" "No taxonomy terms yet"
+          "summary" "This index has not been populated. Add tags or categories to content to bring the field online."
+        ) }}
+      {{- end -}}
+    </section>
+
+    {{ partial "memory-field.html" (dict
+      "page" .
+      "title" "Memory Field"
+      "summary" "Explore the broader relationship map behind the taxonomy index."
+      "focusKind" ""
+      "focusValue" ""
+    ) }}
+  </main>
+{{ end }}

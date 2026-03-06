@@ -95,7 +95,12 @@
   };
 
   const init = () => {
-    document.querySelectorAll(".highlight").forEach(enhanceBlock);
+    document.querySelectorAll(".highlight, pre").forEach((block) => {
+      if (block.tagName === "PRE" && block.closest(".highlight")) {
+        return;
+      }
+      enhanceBlock(block);
+    });
   };
 
   if (document.readyState === "loading") {

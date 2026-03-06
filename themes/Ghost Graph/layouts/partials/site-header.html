@@ -1,14 +1,30 @@
+{{- $plural := "" -}}
+{{- with .Data.Plural -}}
+  {{- $plural = . -}}
+{{- end -}}
+{{- $atlasHref := ("/#atlas" | relURL) -}}
+{{- if or .IsHome (eq .Kind "section") (eq .Kind "term") (eq .Kind "taxonomy") -}}
+  {{- $atlasHref = "#atlas" -}}
+{{- end -}}
 <header class="sv-header">
-  <div class="sv-brand">
-    <a class="sv-mark" href="{{ "/" | relURL }}">GG</a>
-    <div class="sv-brand-text">
-      <div class="sv-title">{{ .Site.Title }}</div>
-      <div class="sv-subtitle">{{ .Site.Params.description | default "Voronoi index" }}</div>
+  <div class="sv-header-inner">
+    <a class="sv-brand" href="{{ "/" | relURL }}">
+      <span class="sv-mark">GG</span>
+      <span class="sv-brand-text">
+        <span class="sv-title">{{ .Site.Title }}</span>
+        <span class="sv-subtitle">{{ .Site.Params.description | default "An atmospheric publication system for notes, scripts, prompts, and visual experiments." }}</span>
+      </span>
+    </a>
+    <nav class="sv-nav" aria-label="Primary">
+      <a class="sv-nav-link{{ if .IsHome }} is-active{{ end }}" href="{{ "/" | relURL }}">Home</a>
+      <a class="sv-nav-link{{ if eq .Section "posts" }} is-active{{ end }}" href="{{ "/posts/" | relURL }}">Posts</a>
+      <a class="sv-nav-link{{ if eq .Section "prompts" }} is-active{{ end }}" href="{{ "/prompts/" | relURL }}">Prompts</a>
+      <a class="sv-nav-link{{ if eq .Section "archive" }} is-active{{ end }}" href="{{ "/archive/" | relURL }}">Archive</a>
+      <a class="sv-nav-link{{ if eq $plural "categories" }} is-active{{ end }}" href="{{ "/categories/" | relURL }}">Categories</a>
+      <a class="sv-nav-link{{ if eq $plural "tags" }} is-active{{ end }}" href="{{ "/tags/" | relURL }}">Tags</a>
+    </nav>
+    <div class="sv-header-tools">
+      <a class="sv-button sv-button--quiet" href="{{ $atlasHref }}">Atlas</a>
     </div>
   </div>
-  <nav class="sv-nav" aria-label="Primary">
-    <a class="sv-nav-link{{ if and (not .IsPage) (eq .Section "posts") }} is-active{{ end }}" href="{{ "/posts/" | relURL }}">Posts</a>
-    <a class="sv-nav-link{{ if and (not .IsPage) (eq .Section "prompts") }} is-active{{ end }}" href="{{ "/prompts/" | relURL }}">Prompts</a>
-    <a class="sv-nav-link{{ if and (not .IsPage) (eq .Section "archive") }} is-active{{ end }}" href="{{ "/archive/" | relURL }}">Archive</a>
-  </nav>
 </header>

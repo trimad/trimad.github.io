@@ -1,0 +1,17 @@
+{{- $page := . -}}
+{{- $thumb := false -}}
+{{- with $page.Resources -}}
+  {{- range .Match "thumbnail*" -}}
+    {{- if and (not $thumb) (hasPrefix .MediaType.Type "image") -}}
+      {{- $thumb = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $thumb -}}
+    {{- range .ByType "image" -}}
+      {{- if not $thumb -}}
+        {{- $thumb = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $thumb -}}

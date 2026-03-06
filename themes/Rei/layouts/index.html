@@ -1,0 +1,137 @@
+{{ define "main" }}
+  {{- $byLastmod := .Site.RegularPages.ByLastmod.Reverse -}}
+  {{- $recent := first 5 $byLastmod -}}
+  {{- $postsPreview := first 3 (where $byLastmod "Section" "posts") -}}
+  {{- $promptsPreview := first 3 (where $byLastmod "Section" "prompts") -}}
+  {{- $archivePreview := first 3 (where $byLastmod "Section" "archive") -}}
+  {{- $sectionCards := slice
+    (dict "title" "Posts" "path" ("/posts/" | relURL) "count" (len (where .Site.RegularPages "Section" "posts")) "summary" "Scripts, diagnostics, PowerShell workflows, automation, and technical field notes." "preview" $postsPreview)
+    (dict "title" "Prompts" "path" ("/prompts/" | relURL) "count" (len (where .Site.RegularPages "Section" "prompts")) "summary" "Implementation prompts, theme specifications, and design guidance captured as durable reference material." "preview" $promptsPreview)
+    (dict "title" "Archive" "path" ("/archive/" | relURL) "count" (len (where .Site.RegularPages "Section" "archive")) "summary" "Older entries retained inside the same system, still browseable through tags, categories, and the memory field." "preview" $archivePreview)
+  -}}
+  <main class="rei-page rei-home" id="content">
+    <section class="rei-chamber rei-chamber--solo">
+      <div class="rei-chamber__lead">
+        <p class="rei-kicker"><span></span>Specimen Log 00</p>
+        <h1 class="rei-hero__title">{{ .Site.Title }}</h1>
+        <p class="rei-hero__summary">
+          {{ .Site.Params.description | default "Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log." }}
+        </p>
+        <div class="rei-button-row">
+          <a class="rei-button rei-button--primary" href="{{ "/posts/" | relURL }}">Read the log</a>
+          <a class="rei-button" href="#memory-field">Open memory field</a>
+        </div>
+        <div class="rei-stat-strip" aria-label="Site overview">
+          <div class="rei-stat">
+            <span>Entries</span>
+            <strong>{{ len .Site.RegularPages }}</strong>
+          </div>
+          <div class="rei-stat">
+            <span>Categories</span>
+            <strong>{{ len .Site.Taxonomies.categories }}</strong>
+          </div>
+          <div class="rei-stat">
+            <span>Tags</span>
+            <strong>{{ len .Site.Taxonomies.tags }}</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rei-section">
+      <div class="rei-section__head">
+        <div>
+          <p class="rei-kicker"><span></span>Section Lanes</p>
+          <h2 class="rei-section__title">Three stable routes</h2>
+          <p class="rei-section__summary">Each section keeps its own tone and history, but the shell stays restrained and continuous.</p>
+        </div>
+      </div>
+      <div class="rei-lanes">
+        {{- range $sectionCards -}}
+          <article class="rei-lane">
+            <div class="rei-lane__header">
+              <div>
+                <p class="rei-kicker"><span></span>{{ .title }}</p>
+                <h3><a href="{{ .path }}">{{ .title }}</a></h3>
+              </div>
+              <div class="rei-lane__count">
+                <span>Entries</span>
+                <strong>{{ .count }}</strong>
+              </div>
+            </div>
+            <p class="rei-lane__summary">{{ .summary }}</p>
+            <ul class="rei-lane__list">
+              {{- range .preview -}}
+                <li>
+                  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                  <span>{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+                </li>
+              {{- end -}}
+            </ul>
+          </article>
+        {{- end -}}
+      </div>
+    </section>
+
+    <section class="rei-section">
+      <div class="rei-section__head">
+        <div>
+          <p class="rei-kicker"><span></span>Recent Transmissions</p>
+          <h2 class="rei-section__title">Fresh material across the archive</h2>
+          <p class="rei-section__summary">The home page surfaces new work as a ledger, not a dashboard.</p>
+        </div>
+      </div>
+      <div class="rei-ledger">
+        {{- range $recent -}}
+          {{ partial "article-card.html" (dict "page" . "compact" false) }}
+        {{- end -}}
+      </div>
+    </section>
+
+    <section class="rei-section rei-index-panels">
+      <section class="rei-index-panel">
+        <div class="rei-section__head">
+          <div>
+            <p class="rei-kicker"><span></span>Category Field</p>
+            <h2 class="rei-section__title">Dominant categories</h2>
+          </div>
+        </div>
+        <ol class="rei-ranking">
+          {{- range first 8 .Site.Taxonomies.categories.ByCount -}}
+            <li>
+              <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+              <span>{{ .Count }}</span>
+            </li>
+          {{- end -}}
+        </ol>
+      </section>
+      <section class="rei-index-panel">
+        <div class="rei-section__head">
+          <div>
+            <p class="rei-kicker"><span></span>Tag Field</p>
+            <h2 class="rei-section__title">Frequent signals</h2>
+          </div>
+        </div>
+        <ol class="rei-ranking">
+          {{- range first 10 .Site.Taxonomies.tags.ByCount -}}
+            <li>
+              <a href="{{ .Page.RelPermalink }}">#{{ .Page.Title }}</a>
+              <span>{{ .Count }}</span>
+            </li>
+          {{- end -}}
+        </ol>
+      </section>
+    </section>
+
+    {{ partial "memory-field.html" (dict
+      "page" .
+      "id" "memory-field"
+      "title" "Memory Field"
+      "summary" "A quiet relationship map connecting categories, tags, and entries without replacing normal navigation."
+      "focusKind" "section"
+      "focusValue" "posts"
+      "pageLabelSingular" "Post"
+      "pageLabelPlural" "Posts"
+    ) }}
+  </main>
+{{ end }}

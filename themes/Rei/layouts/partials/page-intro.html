@@ -1,0 +1,25 @@
+{{- $page := .page -}}
+{{- $title := .title | default $page.Title -}}
+{{- $summary := .summary | default $page.Description | default $page.Summary | plainify -}}
+{{- $stats := .stats | default (slice) -}}
+<header class="rei-page-intro">
+  <div class="rei-page-intro__copy">
+    {{- with .kicker -}}
+      <p class="rei-kicker"><span></span>{{ . }}</p>
+    {{- end -}}
+    <h1 class="rei-page-intro__title">{{ $title }}</h1>
+    {{- with $summary -}}
+      <p class="rei-page-intro__summary">{{ . }}</p>
+    {{- end -}}
+  </div>
+  {{- if gt (len $stats) 0 -}}
+    <div class="rei-page-intro__stats" aria-label="Page metrics">
+      {{- range $stats -}}
+        <div class="rei-page-intro__stat">
+          <span>{{ .label }}</span>
+          <strong>{{ .value }}</strong>
+        </div>
+      {{- end -}}
+    </div>
+  {{- end -}}
+</header>

@@ -1,0 +1,16 @@
+{{- $paginator := .Paginator -}}
+{{- if and $paginator (gt $paginator.TotalPages 1) -}}
+  <nav class="rei-pagination" aria-label="Pagination">
+    {{- with $paginator.Prev -}}
+      <a class="rei-button" href="{{ .URL }}">Newer</a>
+    {{- else -}}
+      <span class="rei-button is-disabled" aria-disabled="true">Newer</span>
+    {{- end -}}
+    <span class="rei-pagination__status">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+    {{- with $paginator.Next -}}
+      <a class="rei-button" href="{{ .URL }}">Older</a>
+    {{- else -}}
+      <span class="rei-button is-disabled" aria-disabled="true">Older</span>
+    {{- end -}}
+  </nav>
+{{- end -}}

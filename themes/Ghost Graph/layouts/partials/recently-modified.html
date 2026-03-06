@@ -1,30 +1,36 @@
-{{- $section := .Section -}}
-{{- if eq .Kind "home" -}}
-  {{- $section = "posts" -}}
+{{- $page := .page | default . -}}
+{{- $title := .title | default "Recently Modified" -}}
+{{- $limit := .limit | default 6 -}}
+{{- $pages := .pages -}}
+{{- if not $pages -}}
+  {{- $pages = $page.Site.RegularPages -}}
+  {{- if eq $page.Kind "section" -}}
+    {{- $pages = $page.RegularPages -}}
+  {{- else if eq $page.Kind "term" -}}
+    {{- $pages = $page.Pages -}}
+  {{- else if and $page.IsPage $page.Section -}}
+    {{- $pages = where $page.Site.RegularPages "Section" $page.Section -}}
+  {{- end -}}
 {{- end -}}
-{{- if not $section -}}
-  {{- $section = "posts" -}}
+{{- if $page.IsPage -}}
+  {{- $pages = where $pages "RelPermalink" "ne" $page.RelPermalink -}}
 {{- end -}}
-{{- $pages := .Site.RegularPages -}}
-{{- if eq $section "posts" -}}
-  {{- $pages = where $pages "Section" "posts" -}}
-{{- else if eq $section "prompts" -}}
-  {{- $pages = where $pages "Section" "prompts" -}}
-{{- else if eq $section "archive" -}}
-  {{- $pages = where $pages "Section" "archive" -}}
-{{- else -}}
-  {{- $pages = where $pages "Section" "posts" -}}
-{{- end -}}
-{{- $recent := first 16 (sort $pages "Lastmod" "desc") -}}
-<aside class="sv-sidebar" aria-label="Recently modified">
-  <div class="sv-sidebar-title">Recently Modified</div>
+{{- $recent := first $limit (sort $pages "Lastmod" "desc") -}}
+<aside class="sv-panel sv-sidebar" aria-label="{{ $title }}">
+  <div class="sv-panel-head">
+    <div class="sv-kicker">Live Feed</div>
+    <div class="sv-sidebar-title">{{ $title }}</div>
+  </div>
   <ul class="sv-sidebar-list">
     {{- range $recent -}}
       <li class="sv-sidebar-item">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <time class="sv-sidebar-date" datetime="{{ .Lastmod.Format "2006-01-02" }}">
-          {{ .Lastmod.Format "Jan 2, 2006" }}
-        </time>
+        <a href="{{ .RelPermalink }}">
+          <span class="sv-sidebar-item-title">{{ .Title }}</span>
+          <span class="sv-sidebar-item-meta">
+            <span>{{ .Section | title }}</span>
+            <time class="sv-sidebar-date" datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+          </span>
+        </a>
       </li>
     {{- else -}}
       <li class="sv-sidebar-item"><span>No posts yet.</span></li>

@@ -1,0 +1,38 @@
+{{- $page := .page | default . -}}
+{{- $categories := $page.Params.categories | default (slice) -}}
+{{- $tags := $page.Params.tags | default (slice) -}}
+{{- $summary := $page.Description | default $page.Params.description | default $page.Params.summary | default ($page.Summary | plainify) -}}
+{{- $summary = $summary | plainify | htmlUnescape | replaceRE "\\s+" " " | trim " " | truncate 180 -}}
+{{- $thumb := partial "content-thumbnail.html" $page -}}
+{{- $kicker := $page.Section | title -}}
+{{- if gt (len $categories) 0 -}}
+  {{- $kicker = index $categories 0 -}}
+{{- end -}}
+{{- $filterText := printf "%s %s %s %s %s" $page.Title $summary (delimit $categories " ") (delimit $tags " ") $page.Section | lower | plainify -}}
+<article class="sv-card" data-card data-filter-text="{{ $filterText }}">
+  <a class="sv-card-link" href="{{ $page.RelPermalink }}">
+    <div class="sv-card-media{{ if not $thumb }} sv-card-media--placeholder{{ end }}">
+      {{- with $thumb -}}
+        <img src="{{ .RelPermalink }}" alt="" loading="lazy" decoding="async">
+      {{- else -}}
+        <div class="sv-card-schematic" aria-hidden="true">
+          <span class="sv-card-schematic-kicker">Signal</span>
+          <span class="sv-card-schematic-label">{{ $kicker }}</span>
+        </div>
+      {{- end -}}
+    </div>
+    <div class="sv-card-body">
+      <div class="sv-card-meta">
+        <span class="sv-card-kicker">{{ $kicker }}</span>
+        <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
+      </div>
+      <h2 class="sv-card-title">{{ $page.Title }}</h2>
+      <p class="sv-card-summary">{{ $summary }}</p>
+      <div class="sv-card-footer">
+        <span>{{ $page.ReadingTime }} min read</span>
+        <span>Updated {{ $page.Lastmod.Format "Jan 2, 2006" }}</span>
+      </div>
+      {{ partial "taxonomy-pills.html" (dict "categories" $categories "tags" $tags "limit" 3) }}
+    </div>
+  </a>
+</article>

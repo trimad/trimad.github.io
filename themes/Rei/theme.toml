@@ -1,0 +1,12 @@
+name = "Rei"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A cold, restrained Hugo theme for technical writing, quiet archives, and clinical discovery."
+homepage = "https://trimad.github.io/"
+tags = ["blog", "minimal", "technical", "editorial", "accessible"]
+features = ["responsive", "taxonomy", "reading", "discovery"]
+min_version = "0.121.0"
+
+[author]
+  name = "OpenAI Codex"
+  homepage = "https://openai.com/"

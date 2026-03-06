@@ -1,0 +1,18 @@
+<div class="rei-meta" aria-label="Entry metadata">
+  <div class="rei-meta__item">
+    <span>Published</span>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+  </div>
+  <div class="rei-meta__item">
+    <span>Updated</span>
+    <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+  </div>
+  <div class="rei-meta__item">
+    <span>Reading time</span>
+    <strong>{{ .ReadingTime }} min</strong>
+  </div>
+  <div class="rei-meta__item">
+    <span>Words</span>
+    <strong>{{ .WordCount }}</strong>
+  </div>
+</div>
