@@ -1,7 +1,7 @@
 ---
 title: "Rei Theme Implementation Specification"
 date: 2026-01-28
-lastmod: 2026-03-06
+lastmod: 2026-03-09
 description: "Living design and engineering specification for the Rei Hugo theme: a cold, quiet, clinically restrained publication system for technical writing."
 tags: [hugo, theme, design-system, accessibility, performance, minimalism]
 categories: [Visualization]
@@ -259,6 +259,7 @@ Rei should ship an original **memory field**:
 - categories, tags, and entries rendered as structured nodes
 - search and lightweight filtering provided through small JavaScript
 - SVG connectors used for visual relationships
+- the initial view may ship with a seeded query such as `Rei` when needed to keep the client-side stage bounded on larger sites
 - conventional navigation always remains the primary browsing method
 
 The memory field is intentionally **not** a physics simulation and **not** a flashy canvas demo.
@@ -293,6 +294,7 @@ Code blocks should gain:
 - language/header treatment where available
 - copy button added progressively with JavaScript
 - accessible copy labels and status feedback
+- copy actions that capture only code content, never button labels or other UI text
 
 ## 4. Related Content
 
@@ -359,7 +361,7 @@ Required:
 Required:
 
 - title block with metadata
-- optional hero/feature image if available from page resources
+- optional responsive hero/feature image if available from page resources
 - taxonomy pills
 - table of contents when enabled
 - highly readable prose
@@ -517,6 +519,7 @@ Preferred:
 - Hugo asset pipeline for fingerprinted CSS and JS
 - limited font weights
 - bounded JS scope per feature
+- responsive cover-image derivatives generated at build time where page resources allow
 
 ---
 
@@ -560,6 +563,7 @@ Prefer:
 
 - a single main stylesheet organized by tokens, shell, components, prose, and responsive rules
 - small JS files split by responsibility
+- responsive page-bundle image handling with explicit dimensions to reduce layout shift
 - no external runtime script dependency for the memory field
 
 ## Data and fallback strategy
@@ -570,6 +574,7 @@ Fallback behavior:
 
 - if JavaScript is unavailable, users still see curated links for top categories, top tags, and recent entries
 - if a page lacks tags, categories, or thumbnails, cards and metadata must still render intentionally
+- because the memory-field payload is site-wide, Hugo may cache its rendered JSON across pages during the build
 
 ---
 

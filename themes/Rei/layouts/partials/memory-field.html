@@ -2,7 +2,7 @@
 {{- $page.Scratch.Set "hasMemoryField" true -}}
 {{- $id := .id | default "memory-field" -}}
 {{- $title := .title | default "Memory Field" -}}
-{{- $summary := .summary | default "A quiet relationship map connecting categories, tags, and entries." -}}
+{{- $summary := .summary | default "A relationship map connecting categories, tags, and entries." -}}
 {{- $focusKind := .focusKind | default "" -}}
 {{- $focusValue := .focusValue | default "" -}}
 {{- $pageLabelSingular := .pageLabelSingular | default "Entry" -}}
@@ -11,7 +11,7 @@
 <section class="rei-section rei-memory" id="{{ $id }}" data-memory-field data-focus-kind="{{ $focusKind }}" data-focus-value="{{ $focusValue }}" data-page-label-singular="{{ $pageLabelSingular }}" data-page-label-plural="{{ $pageLabelPlural }}" data-default-query="{{ $defaultQuery }}">
   <div class="rei-section__head">
     <div>
-      <p class="rei-kicker"><span></span>Discovery Layer</p>
+      <p class="rei-kicker"><span></span>Relationship Map</p>
       <h2 class="rei-section__title">{{ $title }}</h2>
       <p class="rei-section__summary">{{ $summary }}</p>
     </div>
@@ -60,7 +60,7 @@
       </div>
 
       <aside class="rei-memory__details" data-memory-details aria-live="polite">
-        <p class="rei-kicker"><span></span>Signal Detail</p>
+        <p class="rei-kicker"><span></span>Selection Details</p>
         <h3>Awaiting selection</h3>
         <p>Hover or focus a node to inspect its relationships. Search narrows the chamber without replacing normal navigation.</p>
       </aside>
@@ -76,7 +76,7 @@
     <div class="rei-memory__fallback">
       <section class="rei-panel">
         <div class="rei-panel__head">
-          <p class="rei-kicker"><span></span>Fallback</p>
+          <p class="rei-kicker"><span></span>Basic Browse</p>
           <h3 class="rei-panel__title">JavaScript is disabled</h3>
         </div>
         <p class="rei-panel__note">Browse recent entries and high-frequency taxonomy routes below.</p>
@@ -94,5 +94,5 @@
     </div>
   </noscript>
 
-  {{ partial "memory-field-data.html" (dict "page" $page) }}
+  {{ partialCached "memory-field-data.html" (dict "site" $page.Site) $page.Site.BaseURL $page.Site.Language.Lang }}
 </section>

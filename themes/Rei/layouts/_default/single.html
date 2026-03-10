@@ -25,7 +25,16 @@
 
       {{- with $cover -}}
         <figure class="rei-banner">
-          <img src="{{ . }}" alt="{{ $.Title }}" loading="eager">
+          {{ partial "cover-media.html" (dict
+            "page" $
+            "alt" $.Title
+            "loading" "eager"
+            "decoding" "async"
+            "fetchPriority" "high"
+            "defaultWidth" 1280
+            "sizes" "(max-width: 72rem) 100vw, 74rem"
+            "widths" (slice 720 960 1280 1600)
+          ) }}
         </figure>
       {{- end -}}
 
@@ -71,7 +80,7 @@
     {{ partial "memory-field.html" (dict
       "page" .
       "title" "Connected Memory"
-      "summary" "A focused relationship view around this entry, using shared categories and tags."
+      "summary" "This relationship map centers on the current entry and highlights connected categories and tags."
       "focusKind" "page"
       "focusValue" .RelPermalink
       "pageLabelSingular" $pageLabelSingular

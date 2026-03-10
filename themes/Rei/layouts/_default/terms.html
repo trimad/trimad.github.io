@@ -1,11 +1,11 @@
 {{ define "main" }}
   {{- $page := . -}}
   {{- $terms := .Data.Terms.ByCount -}}
-  {{- $description := .Description | default (printf "Browse %s as a quiet index of related material." (.Title | lower)) -}}
+  {{- $description := .Description | default (printf "Browse %s and open the entries connected to each term." (.Title | lower)) -}}
   <main class="rei-page rei-page--terms" id="content">
     {{ partial "page-intro.html" (dict
       "page" $page
-      "kicker" "Taxonomy Index"
+      "kicker" "Browse Terms"
       "title" .Title
       "summary" $description
       "stats" (slice
@@ -35,7 +35,7 @@
       {{- else -}}
         {{ partial "empty-state.html" (dict
           "title" "No taxonomy terms yet"
-          "summary" "This index has not been populated. Add tags or categories to content to bring the field online."
+          "summary" "No terms have been created yet. Add tags or categories to content and they will appear here."
         ) }}
       {{- end -}}
     </section>
@@ -43,7 +43,7 @@
     {{ partial "memory-field.html" (dict
       "page" .
       "title" "Memory Field"
-      "summary" "Explore the broader relationship map behind the taxonomy index."
+      "summary" "Use the relationship map to see how terms connect across the site."
       "focusKind" ""
       "focusValue" ""
     ) }}

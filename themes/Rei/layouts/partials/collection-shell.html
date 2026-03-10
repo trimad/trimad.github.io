@@ -8,9 +8,9 @@
 {{- $summary := $page.Description | default $page.Summary | plainify -}}
 {{- if not $summary -}}
   {{- if eq $page.Kind "term" -}}
-    {{- $summary = printf "Entries linked to %q across the quiet archive." $page.Title -}}
+    {{- $summary = printf "Entries connected to %q, gathered in one place for quick browsing." $page.Title -}}
   {{- else -}}
-    {{- $summary = printf "Browse %s through a restrained editorial system with strong metadata, filtering, and discovery." ($page.Title | lower) -}}
+    {{- $summary = printf "Browse %s with filtering, metadata, and links to related material." ($page.Title | lower) -}}
   {{- end -}}
 {{- end -}}
 {{- $focusKind := "section" -}}
@@ -32,7 +32,7 @@
 <main class="rei-page rei-page--collection" id="content">
   {{ partial "page-intro.html" (dict
     "page" $page
-    "kicker" (cond (eq $page.Kind "term") "Term View" "Collection View")
+    "kicker" (cond (eq $page.Kind "term") "Term Archive" "Section Archive")
     "title" $page.Title
     "summary" $summary
     "stats" (slice
@@ -64,7 +64,7 @@
     {{- else -}}
       {{ partial "empty-state.html" (dict
         "title" "No entries found"
-        "summary" "This section or term does not have content yet. The route remains stable and readable."
+        "summary" "No entries have been published here yet."
       ) }}
     {{- end -}}
   </section>
@@ -76,7 +76,7 @@
     <section class="rei-index-panel">
       <div class="rei-section__head">
         <div>
-          <p class="rei-kicker"><span></span>Browse Routes</p>
+          <p class="rei-kicker"><span></span>More to Browse</p>
           <h2 class="rei-section__title">Adjacent collections</h2>
         </div>
       </div>
@@ -93,7 +93,7 @@
   {{ partial "memory-field.html" (dict
     "page" $page
     "title" "Memory Field"
-    "summary" "A secondary exploration surface for following relationships beyond the visible ledger."
+    "summary" "Use the relationship map to follow related categories, tags, and entries beyond the current list."
     "focusKind" $focusKind
     "focusValue" $focusValue
     "pageLabelSingular" $pageLabelSingular

@@ -33,7 +33,15 @@
     <div class="rei-entry__media">
       {{- if $cover -}}
         <figure class="rei-entry__thumb">
-          <img src="{{ $cover }}" alt="{{ $page.Title }}" loading="lazy">
+          {{ partial "cover-media.html" (dict
+            "page" $page
+            "alt" $page.Title
+            "loading" "lazy"
+            "decoding" "async"
+            "defaultWidth" 480
+            "sizes" "(max-width: 52rem) 100vw, 11rem"
+            "widths" (slice 320 480 640)
+          ) }}
         </figure>
       {{- else -}}
         <div class="rei-entry__placeholder" aria-hidden="true">

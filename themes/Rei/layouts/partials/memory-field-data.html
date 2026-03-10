@@ -1,6 +1,6 @@
-{{- $page := .page | default . -}}
+{{- $site := .site | default (.page.Site) -}}
 {{- $pages := slice -}}
-{{- range $page.Site.RegularPages -}}
+{{- range $site.RegularPages -}}
   {{- $summary := .Description | default .Summary | plainify | default (truncate 180 (.Plain | plainify)) -}}
   {{- $categories := slice -}}
   {{- range (.Params.categories | default (slice)) -}}
@@ -25,7 +25,7 @@
   ) -}}
 {{- end -}}
 {{- $categories := slice -}}
-{{- range $term, $taxonomy := $page.Site.Taxonomies.categories -}}
+{{- range $term, $taxonomy := $site.Taxonomies.categories -}}
   {{- $categories = $categories | append (dict
     "id" (printf "category:%s" ($term | urlize))
     "key" ($term | urlize)
@@ -35,7 +35,7 @@
   ) -}}
 {{- end -}}
 {{- $tags := slice -}}
-{{- range $term, $taxonomy := $page.Site.Taxonomies.tags -}}
+{{- range $term, $taxonomy := $site.Taxonomies.tags -}}
   {{- $tags = $tags | append (dict
     "id" (printf "tag:%s" ($term | urlize))
     "key" ($term | urlize)
@@ -45,7 +45,7 @@
   ) -}}
 {{- end -}}
 {{- $payload := dict
-  "site" (dict "title" $page.Site.Title)
+  "site" (dict "title" $site.Title)
   "pages" $pages
   "categories" $categories
   "tags" $tags

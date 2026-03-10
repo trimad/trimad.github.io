@@ -11,7 +11,7 @@
 {{- $recent := first $limit (sort $pages "Lastmod" "desc") -}}
 <aside class="rei-panel rei-panel--aside" aria-label="{{ $title }}">
   <div class="rei-panel__head">
-    <p class="rei-kicker"><span></span>Recent</p>
+    <p class="rei-kicker"><span></span>Recent Updates</p>
     <h2 class="rei-panel__title">{{ $title }}</h2>
   </div>
   {{- if gt (len $recent) 0 -}}

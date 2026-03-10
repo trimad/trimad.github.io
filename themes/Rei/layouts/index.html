@@ -5,14 +5,14 @@
   {{- $promptsPreview := first 3 (where $byLastmod "Section" "prompts") -}}
   {{- $archivePreview := first 3 (where $byLastmod "Section" "archive") -}}
   {{- $sectionCards := slice
-    (dict "title" "Posts" "path" ("/posts/" | relURL) "count" (len (where .Site.RegularPages "Section" "posts")) "summary" "Scripts, diagnostics, PowerShell workflows, automation, and technical field notes." "preview" $postsPreview)
-    (dict "title" "Prompts" "path" ("/prompts/" | relURL) "count" (len (where .Site.RegularPages "Section" "prompts")) "summary" "Implementation prompts, theme specifications, and design guidance captured as durable reference material." "preview" $promptsPreview)
-    (dict "title" "Archive" "path" ("/archive/" | relURL) "count" (len (where .Site.RegularPages "Section" "archive")) "summary" "Older entries retained inside the same system, still browseable through tags, categories, and the memory field." "preview" $archivePreview)
+    (dict "title" "Posts" "path" ("/posts/" | relURL) "count" (len (where .Site.RegularPages "Section" "posts")) "summary" "Practical technical writeups covering scripts, diagnostics, PowerShell workflows, and automation tasks." "preview" $postsPreview)
+    (dict "title" "Prompts" "path" ("/prompts/" | relURL) "count" (len (where .Site.RegularPages "Section" "prompts")) "summary" "Implementation briefs, theme specifications, and design guidance kept as reusable reference material." "preview" $promptsPreview)
+    (dict "title" "Archive" "path" ("/archive/" | relURL) "count" (len (where .Site.RegularPages "Section" "archive")) "summary" "Older material preserved for reference, with the same categories, tags, and browsing tools as the rest of the site." "preview" $archivePreview)
   -}}
   <main class="rei-page rei-home" id="content">
     <section class="rei-chamber rei-chamber--solo">
       <div class="rei-chamber__lead">
-        <p class="rei-kicker"><span></span>Specimen Log 00</p>
+        <p class="rei-kicker"><span></span>Site Overview</p>
         <h1 class="rei-hero__title">{{ .Site.Title }}</h1>
         <p class="rei-hero__summary">
           {{ .Site.Params.description | default "Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log." }}
@@ -41,9 +41,9 @@
     <section class="rei-section">
       <div class="rei-section__head">
         <div>
-          <p class="rei-kicker"><span></span>Section Lanes</p>
+          <p class="rei-kicker"><span></span>Main Sections</p>
           <h2 class="rei-section__title">Three stable routes</h2>
-          <p class="rei-section__summary">Each section keeps its own tone and history, but the shell stays restrained and continuous.</p>
+          <p class="rei-section__summary">Start with the section that matches the kind of material you want to read.</p>
         </div>
       </div>
       <div class="rei-lanes">
@@ -76,9 +76,9 @@
     <section class="rei-section">
       <div class="rei-section__head">
         <div>
-          <p class="rei-kicker"><span></span>Recent Transmissions</p>
+          <p class="rei-kicker"><span></span>Recent Updates</p>
           <h2 class="rei-section__title">Fresh material across the archive</h2>
-          <p class="rei-section__summary">The home page surfaces new work as a ledger, not a dashboard.</p>
+          <p class="rei-section__summary">Latest updates from across posts, prompts, and archived material.</p>
         </div>
       </div>
       <div class="rei-ledger">
@@ -92,7 +92,7 @@
       <section class="rei-index-panel">
         <div class="rei-section__head">
           <div>
-            <p class="rei-kicker"><span></span>Category Field</p>
+            <p class="rei-kicker"><span></span>Top Categories</p>
             <h2 class="rei-section__title">Dominant categories</h2>
           </div>
         </div>
@@ -108,7 +108,7 @@
       <section class="rei-index-panel">
         <div class="rei-section__head">
           <div>
-            <p class="rei-kicker"><span></span>Tag Field</p>
+            <p class="rei-kicker"><span></span>Common Tags</p>
             <h2 class="rei-section__title">Frequent signals</h2>
           </div>
         </div>
@@ -127,7 +127,7 @@
       "page" .
       "id" "memory-field"
       "title" "Memory Field"
-      "summary" "A quiet relationship map connecting categories, tags, and entries without replacing normal navigation."
+      "summary" "Use the relationship map to follow connections between categories, tags, and entries without leaving normal browsing."
       "focusKind" "section"
       "focusValue" "posts"
       "pageLabelSingular" "Post"

@@ -1,4 +1,10 @@
 (() => {
+  const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
   document.querySelectorAll("[data-memory-field]").forEach((root) => {
     const dataEl = root.querySelector("[data-memory-field-data]");
     const stage = root.querySelector("[data-memory-stage]");
@@ -151,6 +157,8 @@
       count.textContent = visible ? String(items.length) : "0";
       if (!visible) return;
 
+      const fragment = document.createDocumentFragment();
+
       items.forEach((node) => {
         const link = document.createElement("a");
         link.href = node.href || "#";
@@ -185,9 +193,11 @@
           refreshState();
         });
 
-        list.appendChild(link);
+        fragment.appendChild(link);
         nodeElements.set(node.id, link);
       });
+
+      list.appendChild(fragment);
     }
 
     function refreshState() {
@@ -205,7 +215,7 @@
 
       if (!node) {
         details.innerHTML = `
-          <p class="rei-kicker"><span></span>Signal Detail</p>
+          <p class="rei-kicker"><span></span>Selection Details</p>
           <h3>Awaiting selection</h3>
           <p>No visible node is active.</p>
         `;
@@ -214,7 +224,7 @@
 
       const kicker = document.createElement("p");
       kicker.className = "rei-kicker";
-      kicker.innerHTML = "<span></span>Signal Detail";
+      kicker.innerHTML = "<span></span>Selection Details";
 
       const title = document.createElement("h3");
       title.textContent = node.type === "page" ? node.title : node.name;
@@ -265,6 +275,8 @@
         return;
       }
 
+      const fragment = document.createDocumentFragment();
+
       items.forEach((node) => {
         const link = document.createElement("a");
         link.href = node.href;
@@ -276,8 +288,10 @@
         summary.className = "rei-memory__result-summary";
         summary.textContent = node.summary || `${node.sectionTitle} · ${formatDate(node.lastmod)}`;
         link.append(title, summary);
-        resultsList.appendChild(link);
+        fragment.appendChild(link);
       });
+
+      resultsList.appendChild(fragment);
     }
 
     function scheduleDraw(activeId = state.activeId || currentView?.defaultId || state.pinnedId) {
@@ -503,11 +517,14 @@
   }
 
   function scoreRelatedPages(page, graph) {
+    const categoryIds = new Set(page.categoryIds);
+    const tagIds = new Set(page.tagIds);
+
     return graph.pages
       .filter((candidate) => candidate.id !== page.id)
       .map((candidate) => {
-        const sharedCategories = candidate.categoryIds.filter((id) => page.categoryIds.includes(id)).length;
-        const sharedTags = candidate.tagIds.filter((id) => page.tagIds.includes(id)).length;
+        const sharedCategories = candidate.categoryIds.filter((id) => categoryIds.has(id)).length;
+        const sharedTags = candidate.tagIds.filter((id) => tagIds.has(id)).length;
         const sameSection = candidate.section === page.section ? 1 : 0;
         return { candidate, score: sharedCategories * 2 + sharedTags * 3 + sameSection };
       })
@@ -605,10 +622,6 @@
     if (!value) return "";
     const date = new Date(`${value}T00:00:00`);
     if (Number.isNaN(date.getTime())) return value;
-    return new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).format(date);
+    return dateFormatter.format(date);
   }
 })();
