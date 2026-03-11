@@ -1,5 +1,6 @@
 {{ define "main" }}
   {{- $summary := .Description | default .Summary | plainify | default (truncate 220 (.Plain | plainify)) -}}
+  {{- $aiTested := index .Params "ai-tested" -}}
   {{- $cover := partial "cover-data.html" . -}}
   {{- $hasToc := and (.Params.toc | default false) (gt (len (findRE "<li" .TableOfContents)) 0) -}}
   {{- $pageLabelSingular := "Entry" -}}
@@ -13,8 +14,6 @@
       <header class="rei-dossier">
         <div class="rei-dossier__band">
           <span>{{ .Section | default "Entry" | title }}</span>
-          <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-          <span>{{ .ReadingTime }} min read</span>
         </div>
         <h1 class="rei-single__title">{{ .Title }}</h1>
         {{- with $summary -}}
@@ -44,35 +43,57 @@
           {{ if $hasToc }}
             {{ partial "toc.html" . }}
           {{ end }}
-          {{ partial "recent-feed.html" (dict
-            "page" .
-            "title" (printf "Recent in %s" (.Section | title))
-            "limit" 5
-            "pages" (where .Site.RegularPages "Section" .Section)
-          ) }}
+          {{ if ne .Section "posts" }}
+            {{ partial "recent-feed.html" (dict
+              "page" .
+              "title" (printf "Recent in %s" (.Section | title))
+              "limit" 5
+              "pages" (where .Site.RegularPages "Section" .Section)
+            ) }}
+          {{ end }}
         </aside>
 
         <div class="rei-reading__body">
           <div class="rei-prose">
+            {{ if .Params.ai }}
+              <aside class="rei-notice rei-notice--warning" role="note">
+                <div class="rei-notice__marker" aria-hidden="true"></div>
+                <div class="rei-notice__body">
+                  <strong class="rei-notice__title">AI-Generated Content</strong>
+                  <div class="rei-notice__content">This PowerShell script and description are AI-generated. Please review for completeness and accuracy.</div>
+                </div>
+              </aside>
+              {{ with $aiTested }}
+                <aside class="rei-notice rei-notice--info" role="note">
+                  <div class="rei-notice__marker" aria-hidden="true"></div>
+                  <div class="rei-notice__body">
+                    <strong class="rei-notice__title">AI Script Last Tested</strong>
+                    <div class="rei-notice__content">This PowerShell script was last tested successfully on <time datetime="{{ time.Format "2006-01-02" . }}">{{ time.Format "Jan 2, 2006" . }}</time>.</div>
+                  </div>
+                </aside>
+              {{ end }}
+            {{ end }}
             {{ .Content }}
           </div>
 
-          <nav class="rei-adjacent" aria-label="Adjacent entries">
-            {{- with .NextInSection -}}
-              <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
-                <small>Next in {{ .Section | title }}</small>
-                <strong>{{ .Title }}</strong>
-              </a>
-            {{- end -}}
-            {{- with .PrevInSection -}}
-              <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
-                <small>Previous in {{ .Section | title }}</small>
-                <strong>{{ .Title }}</strong>
-              </a>
-            {{- end -}}
-          </nav>
+          {{ if ne .Section "posts" }}
+            <nav class="rei-adjacent" aria-label="Adjacent entries">
+              {{- with .NextInSection -}}
+                <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
+                  <small>Next in {{ .Section | title }}</small>
+                  <strong>{{ .Title }}</strong>
+                </a>
+              {{- end -}}
+              {{- with .PrevInSection -}}
+                <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
+                  <small>Previous in {{ .Section | title }}</small>
+                  <strong>{{ .Title }}</strong>
+                </a>
+              {{- end -}}
+            </nav>
 
-          {{ partial "related-content.html" . }}
+            {{ partial "related-content.html" . }}
+          {{ end }}
         </div>
       </div>
     </article>
@@ -83,6 +104,7 @@
       "summary" "This relationship map centers on the current entry and highlights connected categories and tags."
       "focusKind" "page"
       "focusValue" .RelPermalink
+      "defaultQuery" .Title
       "pageLabelSingular" $pageLabelSingular
       "pageLabelPlural" $pageLabelPlural
     ) }}

@@ -1045,9 +1045,11 @@ button {
 }
 
 .rei-notice {
+  --notice-line: rgba(195, 58, 69, 0.82);
+  --notice-fill: rgba(195, 58, 69, 0.08);
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 0;
   padding: 1rem 1.1rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
@@ -1063,19 +1065,22 @@ button {
 }
 
 .rei-notice--warning {
-  border-color: rgba(181, 61, 76, 0.18);
-  background: rgba(181, 61, 76, 0.08);
+  --notice-line: rgba(181, 61, 76, 0.9);
+  --notice-fill: rgba(181, 61, 76, 0.12);
+  border-color: rgba(181, 61, 76, 0.24);
 }
 
 .rei-notice--info {
-  border-color: rgba(63, 111, 186, 0.2);
-  background: rgba(63, 111, 186, 0.08);
+  --notice-line: rgba(63, 111, 186, 0.9);
+  --notice-fill: rgba(63, 111, 186, 0.12);
+  border-color: rgba(63, 111, 186, 0.24);
 }
 
 .rei-notice--danger,
 .rei-notice--error {
-  border-color: rgba(181, 61, 76, 0.28);
-  background: rgba(181, 61, 76, 0.12);
+  --notice-line: rgba(181, 61, 76, 0.96);
+  --notice-fill: rgba(181, 61, 76, 0.14);
+  border-color: rgba(181, 61, 76, 0.3);
 }
 
 .rei-memory__shell {
@@ -2159,18 +2164,14 @@ background:
 .rei-notice {
   border-radius: var(--radius-md);
   background:
-    linear-gradient(90deg, rgba(195, 58, 69, 0.28), rgba(195, 58, 69, 0)) 1rem 1rem / 2.2rem 1px no-repeat,
+    linear-gradient(90deg, var(--notice-line), transparent) 1rem 1rem / 4rem 2px no-repeat,
+    linear-gradient(180deg, var(--notice-fill), rgba(255, 255, 255, 0)) 0 0 / 100% 100% no-repeat,
     linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(242, 247, 255, 0.84));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
 .rei-notice__marker {
-  align-self: start;
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: var(--signal);
-  box-shadow: 0 0 0 0.24rem rgba(195, 58, 69, 0.1);
+  display: none;
 }
 
 .rei-memory__stage {
