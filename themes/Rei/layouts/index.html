@@ -1,14 +1,6 @@
 {{ define "main" }}
   {{- $byLastmod := .Site.RegularPages.ByLastmod.Reverse -}}
   {{- $recent := first 5 $byLastmod -}}
-  {{- $postsPreview := first 3 (where $byLastmod "Section" "posts") -}}
-  {{- $promptsPreview := first 3 (where $byLastmod "Section" "prompts") -}}
-  {{- $archivePreview := first 3 (where $byLastmod "Section" "archive") -}}
-  {{- $sectionCards := slice
-    (dict "title" "Posts" "path" ("/posts/" | relURL) "count" (len (where .Site.RegularPages "Section" "posts")) "summary" "Practical technical writeups covering scripts, diagnostics, PowerShell workflows, and automation tasks." "preview" $postsPreview)
-    (dict "title" "Prompts" "path" ("/prompts/" | relURL) "count" (len (where .Site.RegularPages "Section" "prompts")) "summary" "Implementation briefs, theme specifications, and design guidance kept as reusable reference material." "preview" $promptsPreview)
-    (dict "title" "Archive" "path" ("/archive/" | relURL) "count" (len (where .Site.RegularPages "Section" "archive")) "summary" "Older material preserved for reference, with the same categories, tags, and browsing tools as the rest of the site." "preview" $archivePreview)
-  -}}
   <main class="rei-page rei-home" id="content">
     <section class="rei-chamber rei-chamber--solo">
       <div class="rei-chamber__lead">
@@ -18,8 +10,10 @@
           {{ .Site.Params.description | default "Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log." }}
         </p>
         <div class="rei-button-row">
-          <a class="rei-button rei-button--primary" href="{{ "/posts/" | relURL }}">Read the log</a>
-          <a class="rei-button" href="#memory-field">Open memory field</a>
+          <a class="rei-button rei-button--primary" href="#memory-field">Memory Field</a>
+          <a class="rei-button" href="#recent-updates">Recent Updates</a>
+          <a class="rei-button" href="#top-categories">Top Categories</a>
+          <a class="rei-button" href="#common-tags">Common Tags</a>
         </div>
         <div class="rei-stat-strip" aria-label="Site overview">
           <div class="rei-stat">
@@ -38,42 +32,18 @@
       </div>
     </section>
 
-    <section class="rei-section">
-      <div class="rei-section__head">
-        <div>
-          <p class="rei-kicker"><span></span>Main Sections</p>
-          <h2 class="rei-section__title">Three stable routes</h2>
-          <p class="rei-section__summary">Start with the section that matches the kind of material you want to read.</p>
-        </div>
-      </div>
-      <div class="rei-lanes">
-        {{- range $sectionCards -}}
-          <article class="rei-lane">
-            <div class="rei-lane__header">
-              <div>
-                <p class="rei-kicker"><span></span>{{ .title }}</p>
-                <h3><a href="{{ .path }}">{{ .title }}</a></h3>
-              </div>
-              <div class="rei-lane__count">
-                <span>Entries</span>
-                <strong>{{ .count }}</strong>
-              </div>
-            </div>
-            <p class="rei-lane__summary">{{ .summary }}</p>
-            <ul class="rei-lane__list">
-              {{- range .preview -}}
-                <li>
-                  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                  <span>{{ .Lastmod.Format "Jan 2, 2006" }}</span>
-                </li>
-              {{- end -}}
-            </ul>
-          </article>
-        {{- end -}}
-      </div>
-    </section>
+    {{ partial "memory-field.html" (dict
+      "page" .
+      "id" "memory-field"
+      "title" "Memory Field"
+      "summary" "Use the relationship map to follow connections between categories, tags, and entries without leaving normal browsing."
+      "focusKind" "section"
+      "focusValue" "posts"
+      "pageLabelSingular" "Post"
+      "pageLabelPlural" "Posts"
+    ) }}
 
-    <section class="rei-section">
+    <section class="rei-section" id="recent-updates">
       <div class="rei-section__head">
         <div>
           <p class="rei-kicker"><span></span>Recent Updates</p>
@@ -89,7 +59,7 @@
     </section>
 
     <section class="rei-section rei-index-panels">
-      <section class="rei-index-panel">
+      <section class="rei-index-panel" id="top-categories">
         <div class="rei-section__head">
           <div>
             <p class="rei-kicker"><span></span>Top Categories</p>
@@ -105,7 +75,7 @@
           {{- end -}}
         </ol>
       </section>
-      <section class="rei-index-panel">
+      <section class="rei-index-panel" id="common-tags">
         <div class="rei-section__head">
           <div>
             <p class="rei-kicker"><span></span>Common Tags</p>
@@ -122,16 +92,5 @@
         </ol>
       </section>
     </section>
-
-    {{ partial "memory-field.html" (dict
-      "page" .
-      "id" "memory-field"
-      "title" "Memory Field"
-      "summary" "Use the relationship map to follow connections between categories, tags, and entries without leaving normal browsing."
-      "focusKind" "section"
-      "focusValue" "posts"
-      "pageLabelSingular" "Post"
-      "pageLabelPlural" "Posts"
-    ) }}
   </main>
 {{ end }}

@@ -1,0 +1,9 @@
+{{- $file := .Get "file" | default (.Get 0) -}}
+{{- $description := trim .Inner " \r\n\t" -}}
+{{- partial "download-resource.html" (dict
+  "page" .Page
+  "file" $file
+  "title" (.Get "title")
+  "label" (.Get "label")
+  "description" $description
+) -}}

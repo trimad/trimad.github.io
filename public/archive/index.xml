@@ -40,7 +40,7 @@
       <link>http://localhost:1313/archive/2018-04-23-uva-572/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2018-04-23-uva-572/</guid>
-      <description>Although BFS and DFS were recommended solutions to the problem, I saw an opportunity to solve this problem using Disjoint Sets. The virtual judge run time was 0.050s.</description>
+      <description>Although BFS and DFS were recommended solutions to the problem, I saw an&#xA;opportunity to solve this problem using Disjoint Sets. The&#xA;virtual judge run time was 0.050s.</description>
     </item>
     <item>
       <title>UVa Online Judge Challenge &#34;1112&#34;</title>
@@ -54,49 +54,49 @@
       <link>http://localhost:1313/archive/2017-11-09-uva-10550/</link>
       <pubDate>Thu, 09 Nov 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-11-09-uva-10550/</guid>
-      <description>&amp;ldquo;Now that you’re back to school for another term, you need to remember how to work the combination lock on your locker. A common design is that of the Master Brand, shown at right. The lock has a dial with 40 calibration marks numbered 0 to 39. A combination consists of 3 of these numbers; for example: 15-25-8. To open the lock, the following steps are taken&amp;hellip;&amp;rdquo;</description>
+      <description>&amp;ldquo;Now that you’re back to school for another term, you need to&#xA;remember how to work the combination lock on your locker. A&#xA;common design is that of the Master Brand, shown at right. The&#xA;lock has a dial with 40 calibration marks numbered 0 to 39. A&#xA;combination consists of 3 of these numbers; for example: 15-25-8.&#xA;To open the lock, the following steps are taken&amp;hellip;&amp;rdquo;</description>
     </item>
     <item>
       <title>UVa Online Judge Challenge &#34;272&#34;</title>
       <link>http://localhost:1313/archive/2017-10-17-uva-272/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-10-17-uva-272/</guid>
-      <description>&amp;ldquo;TEX is a typesetting language developed by Donald Knuth. It takes source text together with a few typesetting instructions and produces, one hopes, a beautiful document. Beautiful documents use&amp;hellip;&amp;rdquo;</description>
+      <description>&amp;ldquo;TEX is a typesetting language developed by Donald Knuth. It takes source text together with a few&#xA;typesetting instructions and produces, one hopes, a beautiful document. Beautiful documents use&amp;hellip;&amp;rdquo;</description>
     </item>
     <item>
       <title>UVa Online Judge Challenge &#34;100&#34;</title>
       <link>http://localhost:1313/archive/2017-10-05-uva-100/</link>
       <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-10-05-uva-100/</guid>
-      <description>&amp;ldquo;Problems in Computer Science are often classified as belonging to a certain class of problems (e.g., NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose classification is not known for all possible inputs. Consider the following algorithm&amp;hellip;&amp;rdquo;</description>
+      <description>&amp;ldquo;Problems in Computer Science are often classified as belonging to a certain class of problems (e.g.,&#xA;NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose&#xA;classification is not known for all possible inputs.&#xA;Consider the following algorithm&amp;hellip;&amp;rdquo;</description>
     </item>
     <item>
       <title>UVa Online Judge Challenge &#34;10110&#34;</title>
       <link>http://localhost:1313/archive/2017-10-05-uva-10110/</link>
       <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-10-05-uva-10110/</guid>
-      <description>&amp;ldquo;There is man named ”mabu” for switching on-off light in our University. He switches on-off the lights in a corridor. Every bulb has its own toggle switch. That is, if it is pressed then the bulb turns on. Another press will turn it off. To save power consumption (or may be he is mad or something else) he does a peculiar thing. If in a corridor there is n bulbs, he walks along the corridor back and forth n times and in i-th walk he toggles only the switches whose serial is divisable by i. He does not press any switch when coming back to his initial position. A i-th walk is defined as going down the corridor (while doing the peculiar thing) and coming back again. Now you have to determine what is the final condition of the last bulb. Is it on or off?&amp;rdquo;</description>
+      <description>&amp;ldquo;There is man named ”mabu” for switching on-off light in our University. He switches on-off the lights&#xA;in a corridor. Every bulb has its own toggle switch. That is, if it is pressed then the bulb turns on.&#xA;Another press will turn it off. To save power consumption (or may be he is mad or something else)&#xA;he does a peculiar thing. If in a corridor there is n bulbs, he walks along the corridor back and forth&#xA;n times and in i-th walk he toggles only the switches whose serial is divisable by i. He does not press&#xA;any switch when coming back to his initial position. A i-th walk is defined as going down the corridor&#xA;(while doing the peculiar thing) and coming back again. Now you have to determine what is the final&#xA;condition of the last bulb. Is it on or off?&amp;rdquo;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Parking&#34;</title>
       <link>http://localhost:1313/archive/2017-09-15-kattis-parking2/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-09-15-kattis-parking2/</guid>
-      <description>&amp;ldquo;When shopping on Long Street, Michael usually parks his car at some random location, and then walks to the stores he needs. Can you help Michael choose a place to park which minimises the distance he needs to walk on his shopping round? Long Street is a straight line, where all positions are integer. You pay for parking in a specific slot, which is an integer position on Long Street. Michael does not want to pay for more than one parking though. He is very strong, and does not mind carrying all the bags around.&amp;rdquo;</description>
+      <description>&amp;ldquo;When shopping on Long Street, Michael usually parks his car at some random location, and then walks to the stores he needs. Can you help Michael choose a place to park which minimises the distance he needs to walk on his shopping round?&#xA;Long Street is a straight line, where all positions are integer. You pay for parking in a specific slot, which is an integer position on Long Street. Michael does not want to pay for more than one parking though. He is very strong, and does not mind carrying all the bags around.&amp;rdquo;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Sum of Others&#34;</title>
       <link>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</guid>
-      <description>&lt;p&gt;&amp;ldquo;Every day, your job requires you to add up long lists of integers, like the following:&lt;/p&gt;&#xA;&lt;p&gt;3 + 2 + -4 + 8 + 3 + -6 + 1 + 4 + 6 + -1 + -6 = 10&lt;/p&gt;&#xA;&lt;p&gt;That is, a sum of positive and negative integers, followed by an equals sign, followed by a single integer. To save yourself some time, you normally leave out the and signs as you write down your work, so the previous example would be&amp;hellip;&amp;rdquo;&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;&amp;ldquo;Every day, your job requires you to add up long lists of integers, like the following:&lt;/p&gt;&#xA;&lt;p&gt;3 + 2 + -4 + 8 + 3 + -6 + 1 + 4 + 6 + -1 + -6 = 10&lt;/p&gt;&#xA;&lt;p&gt;That is, a sum of positive and negative integers, followed by an equals sign, followed by a single integer. To save yourself some time, you normally leave out the&#xA;and&#xA;signs as you write down your work, so the previous example would be&amp;hellip;&amp;rdquo;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>UVa Online Judge Challenge &#34;11172&#34;</title>
       <link>http://localhost:1313/archive/2017-08-24-uva-11172/</link>
       <pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-08-24-uva-11172/</guid>
-      <description>&amp;ldquo;Some operators checks about the relationship between two values and these operators are called relational operators. Given two numerical values your job is just to find out the relationship between them that is (i) First one is greater than the second (ii) First one is less than the second or (iii) First and second one is equal.&amp;rdquo;</description>
+      <description>&amp;ldquo;Some operators checks about the relationship between two values and these operators are called relational operators. Given two numerical values your job is just to find out the relationship between them&#xA;that is (i) First one is greater than the second (ii) First one is less than the second or (iii) First and&#xA;second one is equal.&amp;rdquo;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Line Them Up&#34;</title>

@@ -60,15 +60,15 @@
                 <div class="rei-notice__marker" aria-hidden="true"></div>
                 <div class="rei-notice__body">
                   <strong class="rei-notice__title">AI-Generated Content</strong>
-                  <div class="rei-notice__content">This PowerShell script and description are AI-generated. Please review for completeness and accuracy.</div>
+                  <div class="rei-notice__content">This post includes AI-generated content. Please review for completeness and accuracy.</div>
                 </div>
               </aside>
               {{ with $aiTested }}
                 <aside class="rei-notice rei-notice--info" role="note">
                   <div class="rei-notice__marker" aria-hidden="true"></div>
                   <div class="rei-notice__body">
-                    <strong class="rei-notice__title">AI Script Last Tested</strong>
-                    <div class="rei-notice__content">This PowerShell script was last tested successfully on <time datetime="{{ time.Format "2006-01-02" . }}">{{ time.Format "Jan 2, 2006" . }}</time>.</div>
+                    <strong class="rei-notice__title">Script Last Tested</strong>
+                    <div class="rei-notice__content">This script was last tested successfully on <time datetime="{{ time.Format "2006-01-02" . }}">{{ time.Format "Jan 2, 2006" . }}</time>.</div>
                   </div>
                 </aside>
               {{ end }}

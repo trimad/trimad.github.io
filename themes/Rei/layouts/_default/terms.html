@@ -2,19 +2,24 @@
   {{- $page := . -}}
   {{- $terms := .Data.Terms.ByCount -}}
   {{- $description := .Description | default (printf "Browse %s and open the entries connected to each term." (.Title | lower)) -}}
+  {{- $sectionButtons := slice
+    (dict "title" .Title "href" "#term-directory")
+    (dict "title" "Memory Field" "href" "#memory-field" "primary" true)
+  -}}
   <main class="rei-page rei-page--terms" id="content">
     {{ partial "page-intro.html" (dict
       "page" $page
       "kicker" "Browse Terms"
       "title" .Title
       "summary" $description
+      "buttons" $sectionButtons
       "stats" (slice
         (dict "label" "Terms" "value" (len $terms))
         (dict "label" "Entries" "value" (len .Site.RegularPages))
       )
     ) }}
 
-    <section class="rei-ledger-shell">
+    <section class="rei-ledger-shell" id="term-directory">
       <section class="rei-panel rei-panel--filter" data-filter-root>
         <div class="rei-filter">
           <label class="rei-filter__label" for="term-filter">Filter terms</label>

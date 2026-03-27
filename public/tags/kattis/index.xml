@@ -20,14 +20,14 @@
       <link>http://localhost:1313/archive/2017-09-15-kattis-parking2/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-09-15-kattis-parking2/</guid>
-      <description>&amp;ldquo;When shopping on Long Street, Michael usually parks his car at some random location, and then walks to the stores he needs. Can you help Michael choose a place to park which minimises the distance he needs to walk on his shopping round? Long Street is a straight line, where all positions are integer. You pay for parking in a specific slot, which is an integer position on Long Street. Michael does not want to pay for more than one parking though. He is very strong, and does not mind carrying all the bags around.&amp;rdquo;</description>
+      <description>&amp;ldquo;When shopping on Long Street, Michael usually parks his car at some random location, and then walks to the stores he needs. Can you help Michael choose a place to park which minimises the distance he needs to walk on his shopping round?&#xA;Long Street is a straight line, where all positions are integer. You pay for parking in a specific slot, which is an integer position on Long Street. Michael does not want to pay for more than one parking though. He is very strong, and does not mind carrying all the bags around.&amp;rdquo;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Sum of Others&#34;</title>
       <link>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</guid>
-      <description>&lt;p&gt;&amp;ldquo;Every day, your job requires you to add up long lists of integers, like the following:&lt;/p&gt;&#xA;&lt;p&gt;3 + 2 + -4 + 8 + 3 + -6 + 1 + 4 + 6 + -1 + -6 = 10&lt;/p&gt;&#xA;&lt;p&gt;That is, a sum of positive and negative integers, followed by an equals sign, followed by a single integer. To save yourself some time, you normally leave out the and signs as you write down your work, so the previous example would be&amp;hellip;&amp;rdquo;&lt;/p&gt;&#xA;</description>
+      <description>&lt;p&gt;&amp;ldquo;Every day, your job requires you to add up long lists of integers, like the following:&lt;/p&gt;&#xA;&lt;p&gt;3 + 2 + -4 + 8 + 3 + -6 + 1 + 4 + 6 + -1 + -6 = 10&lt;/p&gt;&#xA;&lt;p&gt;That is, a sum of positive and negative integers, followed by an equals sign, followed by a single integer. To save yourself some time, you normally leave out the&#xA;and&#xA;signs as you write down your work, so the previous example would be&amp;hellip;&amp;rdquo;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Line Them Up&#34;</title>

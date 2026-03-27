@@ -1,6 +1,6 @@
 ---
-ai: false
-ai-tested:
+ai: 
+ai-tested: 
 author: "Tristan Madden"
 categories:
   - "Category"

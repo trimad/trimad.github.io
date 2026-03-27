@@ -29,12 +29,22 @@
   {{- $pageLabelSingular = "Post" -}}
   {{- $pageLabelPlural = "Posts" -}}
 {{- end -}}
+{{- $sectionButtons := slice -}}
+{{- if and (eq $page.Kind "section") (in (slice "posts" "prompts" "archive") $page.Section) -}}
+  {{- $sectionButtons = slice
+    (dict "title" $page.Title "href" "#collection-entries")
+    (dict "title" "Recently Modified" "href" "#recently-modified")
+    (dict "title" "Adjacent Collections" "href" "#adjacent-collections")
+    (dict "title" "Memory Field" "href" "#memory-field" "primary" true)
+  -}}
+{{- end -}}
 <main class="rei-page rei-page--collection" id="content">
   {{ partial "page-intro.html" (dict
     "page" $page
     "kicker" (cond (eq $page.Kind "term") "Term Archive" "Section Archive")
     "title" $page.Title
     "summary" $summary
+    "buttons" $sectionButtons
     "stats" (slice
       (dict "label" "Entries" "value" (len $pages))
       (dict "label" "Categories" "value" (len $page.Site.Taxonomies.categories))
@@ -42,7 +52,7 @@
     )
   ) }}
 
-  <section class="rei-ledger-shell rei-ledger-shell--collection">
+  <section class="rei-ledger-shell rei-ledger-shell--collection" id="collection-entries">
     <section class="rei-panel rei-panel--filter" data-filter-root>
       <div class="rei-filter">
         <label class="rei-filter__label" for="collection-filter">Filter visible entries</label>
@@ -70,10 +80,10 @@
   </section>
 
   <section class="rei-section rei-index-panels">
-    <section class="rei-index-panel">
+    <section class="rei-index-panel" id="recently-modified">
       {{ partial "recent-feed.html" (dict "page" $page "title" "Recently modified" "limit" 6 "pages" $pages) }}
     </section>
-    <section class="rei-index-panel">
+    <section class="rei-index-panel" id="adjacent-collections">
       <div class="rei-section__head">
         <div>
           <p class="rei-kicker"><span></span>More to Browse</p>

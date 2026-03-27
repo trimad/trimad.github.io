@@ -1,0 +1,48 @@
+{{- $page := .page -}}
+{{- $file := .file | default "" -}}
+{{- $title := .title | default "Download" -}}
+{{- $label := .label | default "" -}}
+{{- $description := .description | default "" -}}
+{{- $resource := false -}}
+{{- $pagePath := "" -}}
+
+{{- with $page -}}
+  {{- $pagePath = .RelPermalink -}}
+  {{- with .File -}}
+    {{- $pagePath = .Path -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and $page $file -}}
+  {{- with $page.Resources.GetMatch $file -}}
+    {{- $resource = . -}}
+  {{- else -}}
+    {{- with $page.Resources.GetMatch (printf "*%s*" $file) -}}
+      {{- $resource = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $resource -}}
+  {{- warnf "download-resource: could not find page resource %q for %s" $file $pagePath -}}
+{{- else -}}
+  {{- $resolvedLabel := $label -}}
+  {{- if not $resolvedLabel -}}
+    {{- $resolvedLabel = printf "Download %s" $resource.Name -}}
+  {{- end -}}
+  <aside class="rei-notice rei-notice--info" role="note">
+    <div class="rei-notice__marker" aria-hidden="true"></div>
+    <div class="rei-notice__body">
+      <strong class="rei-notice__title">{{ $title }}</strong>
+      <div class="rei-notice__content">
+        {{- with $description -}}
+          {{ $page.RenderString (dict "display" "block") . }}
+        {{- end -}}
+        <div class="rei-button-row">
+          <a class="rei-button rei-button--primary" href="{{ $resource.RelPermalink }}" download>{{ $resolvedLabel }}</a>
+        </div>
+        <p><strong>File:</strong> <code>{{ $resource.Name }}</code></p>
+      </div>
+    </div>
+  </aside>
+{{- end -}}
