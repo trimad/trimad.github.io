@@ -320,7 +320,7 @@
       <link>http://localhost:1313/posts/2023-05-08-keycode-event-test/</link>
       <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2023-05-08-keycode-event-test/</guid>
-      <description>This diagnostic tool allows you to type into a text area and logs keyboard events, providing valuable information such as key codes, key names, and modifier keys (Alt, Ctrl, Shift, Meta). As you interact with the text area, the captured event data will be displayed in real-time. This can be particularly useful for debugging and understanding the nuances of keyboard events in your application.</description>
+      <description>This diagnostic tool lets you type, paste, compose text, and click inside a text area to log keyboard, text input, composition, and mouse click events. It includes filter toggles, a clear-log button, and detailed metadata such as key codes, input types, button states, pointer offsets, timestamps, and modifier keys.</description>
     </item>
     <item>
       <title>Deep Floyd IF</title>
