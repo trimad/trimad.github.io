@@ -1,0 +1,30 @@
+{{- $inputID := .inputID | default "collection-filter" -}}
+{{- $label := .label | default "Filter entries on this page" -}}
+{{- $title := .title | default "Refine this page" -}}
+{{- $summary := .summary | default "Search the items already loaded on this page." -}}
+{{- $placeholder := .placeholder | default "Search entries" -}}
+{{- $count := .count | default 0 -}}
+{{- $meta := .meta | default "entries shown" -}}
+{{- $eyebrow := .eyebrow | default "Collection filter" -}}
+{{- $summaryID := printf "%s-summary" $inputID -}}
+<section class="rei-panel rei-panel--filter" data-filter-root>
+  <div class="rei-filter rei-filter--listing">
+    <div class="rei-filter__header">
+      <div class="rei-filter__copy">
+        <p class="rei-filter__eyebrow">{{ $eyebrow }}</p>
+        <h2 class="rei-filter__title">{{ $title }}</h2>
+        <p class="rei-filter__summary" id="{{ $summaryID }}">{{ $summary }}</p>
+      </div>
+      <p class="rei-filter__meta" aria-live="polite">
+        <strong data-filter-count>{{ $count }}</strong>
+        <span>{{ $meta }}</span>
+      </p>
+    </div>
+    <label class="sr-only" for="{{ $inputID }}">{{ $label }}</label>
+    <div class="rei-filter__control">
+      <span class="rei-filter__icon" aria-hidden="true"></span>
+      <input id="{{ $inputID }}" type="search" placeholder="{{ $placeholder }}" data-filter-input aria-describedby="{{ $summaryID }}">
+      <button class="rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
+    </div>
+  </div>
+</section>

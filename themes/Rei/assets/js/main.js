@@ -59,6 +59,7 @@
 
       if (count) count.textContent = String(visible);
       if (clear) clear.hidden = query.length === 0;
+      root.classList.toggle("is-filtering", query.length > 0);
     };
 
     input.addEventListener("input", update);

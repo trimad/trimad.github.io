@@ -53,16 +53,16 @@
   ) }}
 
   <section class="rei-ledger-shell rei-ledger-shell--collection" id="collection-entries">
-    <section class="rei-panel rei-panel--filter" data-filter-root>
-      <div class="rei-filter">
-        <label class="rei-filter__label" for="collection-filter">Filter visible entries</label>
-        <div class="rei-filter__control">
-          <input id="collection-filter" type="search" placeholder="Filter by title, summary, tag, or category" data-filter-input>
-          <button class="rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
-        </div>
-        <p class="rei-filter__meta"><span data-filter-count>{{ len $paginator.Pages }}</span> entries on this page</p>
-      </div>
-    </section>
+    {{ partial "filter-panel.html" (dict
+      "inputID" "collection-filter"
+      "label" "Search entries on this page"
+      "eyebrow" "Collection filter"
+      "title" "Refine this page"
+      "summary" "Narrow the entries already loaded here by title, summary, category, or tag."
+      "placeholder" "Search titles, summaries, categories, or tags"
+      "count" (len $paginator.Pages)
+      "meta" "entries shown"
+    ) }}
 
     {{- if gt (len $paginator.Pages) 0 -}}
       <div class="rei-ledger">

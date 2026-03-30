@@ -20,16 +20,16 @@
     ) }}
 
     <section class="rei-ledger-shell" id="term-directory">
-      <section class="rei-panel rei-panel--filter" data-filter-root>
-        <div class="rei-filter">
-          <label class="rei-filter__label" for="term-filter">Filter terms</label>
-          <div class="rei-filter__control">
-            <input id="term-filter" type="search" placeholder="Filter by term name" data-filter-input>
-            <button class="rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
-          </div>
-          <p class="rei-filter__meta"><span data-filter-count>{{ len $terms }}</span> terms visible</p>
-        </div>
-      </section>
+      {{ partial "filter-panel.html" (dict
+        "inputID" "term-filter"
+        "label" "Search terms in this directory"
+        "eyebrow" "Term filter"
+        "title" "Refine the directory"
+        "summary" "Trim the taxonomy list before opening a category or tag archive."
+        "placeholder" "Search term names"
+        "count" (len $terms)
+        "meta" "terms shown"
+      ) }}
 
       {{- if gt (len $terms) 0 -}}
         <div class="rei-term-ledger">

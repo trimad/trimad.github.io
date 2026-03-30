@@ -251,12 +251,10 @@
         });
       }
 
-      const primary = document.createElement("a");
-      primary.className = "rei-button rei-button--primary";
-      primary.href = node.href || "#";
-      primary.textContent = node.type === "page" ? `Open ${state.pageLabelSingular.toLowerCase()}` : "Open term";
-
-      details.append(kicker, title, copy, links, primary);
+      details.append(kicker, title, copy);
+      if (links.childElementCount > 0) {
+        details.appendChild(links);
+      }
     }
 
     function renderResultsPanel(items, query) {

@@ -11,7 +11,7 @@
 <meta property="og:description" content="Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="http://localhost:1313/tags/graphs/">
-<meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="http://localhost:1313/css/main.min.3a55704889805f0f010a3856d14488b968b8929c7da0e3efd4b440a867598763.css">
+<meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="http://localhost:1313/css/main.min.223f77f6e1902f89af4ea756946b7a841868456b8f7eb5e118fc9176059c11a3.css">
 
   </head>
   <body class="rei-body rei-kind-term rei-section-tags">
@@ -55,17 +55,29 @@
         </div></div></header>
 
 
-  <section class="rei-ledger-shell rei-ledger-shell--collection">
+  <section class="rei-ledger-shell rei-ledger-shell--collection" id="collection-entries">
     <section class="rei-panel rei-panel--filter" data-filter-root>
-      <div class="rei-filter">
-        <label class="rei-filter__label" for="collection-filter">Filter visible entries</label>
-        <div class="rei-filter__control">
-          <input id="collection-filter" type="search" placeholder="Filter by title, summary, tag, or category" data-filter-input>
-          <button class="rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
-        </div>
-        <p class="rei-filter__meta"><span data-filter-count>1</span> entries on this page</p>
+  <div class="rei-filter rei-filter--listing">
+    <div class="rei-filter__header">
+      <div class="rei-filter__copy">
+        <p class="rei-filter__eyebrow">Collection filter</p>
+        <h2 class="rei-filter__title">Refine this page</h2>
+        <p class="rei-filter__summary" id="collection-filter-summary">Narrow the entries already loaded here by title, summary, category, or tag.</p>
       </div>
-    </section><div class="rei-ledger"><article class="rei-entry" data-filter-item data-filter-text="python networkx library for network graph visualization a comprehensive guide to creating visually appealing network graphs with python&amp;rsquo;s networkx library, including node positioning, custom coloring, edge labeling, and group visualization with ellipses. posts python graphs data-visualization network-analysis">
+      <p class="rei-filter__meta" aria-live="polite">
+        <strong data-filter-count>1</strong>
+        <span>entries shown</span>
+      </p>
+    </div>
+    <label class="sr-only" for="collection-filter">Search entries on this page</label>
+    <div class="rei-filter__control">
+      <span class="rei-filter__icon" aria-hidden="true"></span>
+      <input id="collection-filter" type="search" placeholder="Search titles, summaries, categories, or tags" data-filter-input aria-describedby="collection-filter-summary">
+      <button class="rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
+    </div>
+  </div>
+</section>
+<div class="rei-ledger"><article class="rei-entry" data-filter-item data-filter-text="python networkx library for network graph visualization a comprehensive guide to creating visually appealing network graphs with python&amp;rsquo;s networkx library, including node positioning, custom coloring, edge labeling, and group visualization with ellipses. posts python graphs data-visualization network-analysis">
   <a class="rei-entry__link" href="http://localhost:1313/posts/2023-08-15-networkx/">
     <div class="rei-entry__meta">
       <span>Posts</span>
@@ -94,7 +106,7 @@
       </section>
 
   <section class="rei-section rei-index-panels">
-    <section class="rei-index-panel">
+    <section class="rei-index-panel" id="recently-modified">
       <aside class="rei-panel rei-panel--aside" aria-label="Recently modified">
   <div class="rei-panel__head">
     <p class="rei-kicker"><span></span>Recent Updates</p>
@@ -107,7 +119,7 @@
         </li></ul></aside>
 
     </section>
-    <section class="rei-index-panel">
+    <section class="rei-index-panel" id="adjacent-collections">
       <div class="rei-section__head">
         <div>
           <p class="rei-kicker"><span></span>More to Browse</p>
@@ -232,5 +244,5 @@
   </div>
 </footer>
 
-    </div><script src="http://localhost:1313/js/main.min.3d70e633616d442c6fee734e88a677236e18fb4b8876e5118d5647e6eeefc8d7.js" defer></script><script src="http://localhost:1313/js/memory-field.min.17f93044245e03ecc2f03211e86018085988d45d0c56212bbd026fe02892978a.js" defer></script></body>
+    </div><script src="http://localhost:1313/js/main.min.9ec5b6a8abb9c014a199859531b6cfba5fe725b0084f00aa10ca876996fce3c2.js" defer></script><script src="http://localhost:1313/js/memory-field.min.a317b8d6734f2c593ab6b389e10ef3d0af579959c7c7c76642c0b350385f05f7.js" defer></script></body>
 </html>
