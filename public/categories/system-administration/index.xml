@@ -6,8 +6,15 @@
     <description>Recent content in System Administration on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 30 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/system-administration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KillRMM 128</title>
+      <link>http://localhost:1313/posts/2026-03-30-killrmm-128/</link>
+      <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2026-03-30-killrmm-128/</guid>
+      <description>Download KillRMM Build 128, a legacy batch file for removing the Datto RMM agent from a Windows endpoint.</description>
+    </item>
     <item>
       <title>Troubleshoot Crashing Apps with ProcDump &amp; WinDbg</title>
       <link>http://localhost:1313/posts/2025-05-02-procdump-and-windbg/</link>
