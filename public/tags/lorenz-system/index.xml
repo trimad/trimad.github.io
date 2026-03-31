@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lorenz-System on Ghost Graph</title>
-    <link>http://localhost:1313/tags/lorenz-system/</link>
+    <link>https://trimad.github.io/tags/lorenz-system/</link>
     <description>Recent content in Lorenz-System on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/lorenz-system/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/lorenz-system/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lorenz Doll</title>
-      <link>http://localhost:1313/posts/2018-11-21-lorenz-doll/</link>
+      <link>https://trimad.github.io/posts/2018-11-21-lorenz-doll/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-11-21-lorenz-doll/</guid>
+      <guid>https://trimad.github.io/posts/2018-11-21-lorenz-doll/</guid>
       <description>A Processing visualization where each pixel of an image is transformed into a Lorenz System, with the system&amp;rsquo;s velocity mapped to the original pixel&amp;rsquo;s brightness values.</description>
     </item>
   </channel>

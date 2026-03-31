@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Optimization on Ghost Graph</title>
-    <link>http://localhost:1313/tags/optimization/</link>
+    <link>https://trimad.github.io/tags/optimization/</link>
     <description>Recent content in Optimization on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automated Batch Image Compression with Python</title>
-      <link>http://localhost:1313/posts/2024-07-30-batch-compress-images/</link>
+      <link>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-07-30-batch-compress-images/</guid>
+      <guid>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</guid>
       <description>A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library).</description>
     </item>
     <item>
       <title>Comparing Java Distance Functions</title>
-      <link>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</link>
+      <link>https://trimad.github.io/posts/2018-04-17-comparing-java-distance-functions/</link>
       <pubDate>Tue, 17 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-17-comparing-java-distance-functions/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-17-comparing-java-distance-functions/</guid>
       <description>A Java program that compares various distance calculation methods, including Manhattan, Euclidean, and Chebyshev distances, and visualizes their differences using Processing.</description>
     </item>
     <item>
       <title>Faster Java String Inputs</title>
-      <link>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</link>
+      <link>https://trimad.github.io/posts/2018-04-11-java-turbo-reader/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-11-java-turbo-reader/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-11-java-turbo-reader/</guid>
       <description>A high-performance Java input reader class optimized for programming contests, providing fast integer and double parsing with automatic tokenization and buffering options.</description>
     </item>
     <item>
       <title>AT&amp;T Hackathon</title>
-      <link>http://localhost:1313/posts/2018-03-12-att-hackathon/</link>
+      <link>https://trimad.github.io/posts/2018-03-12-att-hackathon/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-03-12-att-hackathon/</guid>
+      <guid>https://trimad.github.io/posts/2018-03-12-att-hackathon/</guid>
       <description>A reflection on participating in the AT&amp;amp;T Hackathon, focusing on Android game development, optimization techniques, and rapid prototyping of 3D scene building functions.</description>
     </item>
   </channel>

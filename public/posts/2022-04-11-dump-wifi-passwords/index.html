@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PowerShell Script to Export WiFi Network Credentials | Ghost Graph</title>
 <meta name="description" content="A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.">
 <meta name="theme-color" content="#e2ebf5">
-<link rel="canonical" href="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/"><meta property="og:site_name" content="Ghost Graph">
+<link rel="canonical" href="https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/"><meta property="og:site_name" content="Ghost Graph">
 <meta property="og:title" content="PowerShell Script to Export WiFi Network Credentials | Ghost Graph">
 <meta property="og:description" content="A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/">
-<meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/thumbnail.png">
-  <meta name="twitter:image" content="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/thumbnail.png"><meta property="article:published_time" content="2022-04-11T00:00:00Z">
-  <meta property="article:modified_time" content="2026-01-15T16:04:39-05:00"><link rel="stylesheet" href="http://localhost:1313/css/main.min.223f77f6e1902f89af4ea756946b7a841868456b8f7eb5e118fc9176059c11a3.css">
+<meta property="og:url" content="https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/">
+<meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/thumbnail.png">
+  <meta name="twitter:image" content="https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/thumbnail.png"><meta property="article:published_time" content="2022-04-11T00:00:00Z">
+  <meta property="article:modified_time" content="2026-01-15T16:04:39-05:00"><link rel="stylesheet" href="https://trimad.github.io/css/main.min.e37a131f6a3efd1622c2760378a82007714ff46605302bc78f3afdff93592578.css">
 
   </head>
   <body class="rei-body rei-kind-page rei-section-posts">
@@ -23,11 +23,11 @@
       <div class="rei-shell__grid" aria-hidden="true"></div>
       <header class="rei-header">
   <div class="rei-header__inner">
-    <a class="rei-brand" href="http://localhost:1313/" aria-label="Ghost Graph">
+    <a class="rei-brand" href="https://trimad.github.io/" aria-label="Ghost Graph">
       <span class="rei-brand__mark" aria-hidden="true"></span>
       <span class="rei-brand__meta">
         <strong>Ghost Graph</strong>
-        <small>Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log.</small>
+        <small>Technical notes, prompts, diagnostics, and archived material.</small>
       </span>
     </a>
 
@@ -38,7 +38,7 @@
       <span class="sr-only">Toggle navigation</span>
     </button>
 
-    <nav class="rei-nav" id="site-navigation" aria-label="Primary navigation" data-nav><a class="" href="http://localhost:1313/">Home</a><a class="is-active" href="http://localhost:1313/posts/">Posts</a><a class="" href="http://localhost:1313/prompts/">Prompts</a><a class="" href="http://localhost:1313/archive/">Archive</a><a class="" href="http://localhost:1313/categories/">Categories</a><a class="" href="http://localhost:1313/tags/">Tags</a></nav>
+    <nav class="rei-nav" id="site-navigation" aria-label="Primary navigation" data-nav><a class="" href="https://trimad.github.io/">Home</a><a class="is-active" href="https://trimad.github.io/posts/">Posts</a><a class="" href="https://trimad.github.io/prompts/">Prompts</a><a class="" href="https://trimad.github.io/archive/">Archive</a><a class="" href="https://trimad.github.io/categories/">Categories</a><a class="" href="https://trimad.github.io/tags/">Tags</a></nav>
   </div>
 </header>
 
@@ -48,16 +48,16 @@
         <div class="rei-dossier__band">
           <span>Posts</span>
         </div>
-        <h1 class="rei-single__title">PowerShell Script to Export WiFi Network Credentials</h1><p class="rei-single__summary">A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.</p><div class="rei-taxonomy" aria-label="Taxonomies"><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/powershell/">PowerShell</a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/windows/">Windows</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/netsh/">#netsh</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/wifi/">#wifi</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/passwords/">#passwords</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/security/">#security</a></div>
+        <h1 class="rei-single__title">PowerShell Script to Export WiFi Network Credentials</h1><p class="rei-single__summary">A PowerShell script that automates the extraction of stored WiFi network credentials using netsh commands, exporting SSIDs and passwords to a CSV file for easy management and reporting.</p><div class="rei-taxonomy" aria-label="Taxonomies"><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/powershell/">PowerShell</a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/windows/">Windows</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/netsh/">#netsh</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/wifi/">#wifi</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/passwords/">#passwords</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/security/">#security</a></div>
       </header><figure class="rei-banner">
           <img
-  src="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/thumbnail.png"
+  src="https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/thumbnail.png"
   alt="PowerShell Script to Export WiFi Network Credentials"
   loading="eager"
   decoding="async"
   width="512"
   height="512"
-  srcset="http://localhost:1313/posts/2022-04-11-dump-wifi-passwords/thumbnail.png 512w"
+  srcset="https://trimad.github.io/posts/2022-04-11-dump-wifi-passwords/thumbnail.png 512w"
   sizes="(max-width: 72rem) 100vw, 74rem" fetchpriority="high">
 
         </figure><div class="rei-reading">
@@ -198,8 +198,8 @@
           <h3 class="rei-panel__title">JavaScript is disabled</h3>
         </div>
         <p class="rei-panel__note">Browse recent entries and high-frequency taxonomy routes below.</p>
-        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/powershell/">PowerShell <span>36</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/java/">Java <span>29</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/python/">Python <span>20</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/javascript/">JavaScript <span>17</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/system-administration/">System Administration <span>16</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/windows/">Windows <span>12</span></a></div>
-        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/automation/">#Automation</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/coding-challenge/">#Coding Challenge</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/p5js/">#P5js</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/animation/">#Animation</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/processing/">#Processing</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/system-administration/">#System-Administration</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/image-processing/">#Image-Processing</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/interactive/">#Interactive</a></div>
+        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/powershell/">PowerShell <span>36</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/java/">Java <span>29</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/python/">Python <span>20</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/javascript/">JavaScript <span>17</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/system-administration/">System Administration <span>16</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/windows/">Windows <span>12</span></a></div>
+        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/automation/">#Automation</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/coding-challenge/">#Coding Challenge</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/p5js/">#P5js</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/animation/">#Animation</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/processing/">#Processing</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/system-administration/">#System-Administration</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/image-processing/">#Image-Processing</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/interactive/">#Interactive</a></div>
       </section>
     </div>
   </noscript>
@@ -215,7 +215,7 @@
     <div>
       <p class="rei-kicker"><span></span>Site Summary</p>
       <p class="rei-footer__copy">
-        Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log.
+        Technical notes, prompts, diagnostics, and archived material.
       </p>
     </div>
     <div class="rei-footer__meta">
@@ -233,5 +233,5 @@
   </div>
 </footer>
 
-    </div><script src="http://localhost:1313/js/main.min.9ec5b6a8abb9c014a199859531b6cfba5fe725b0084f00aa10ca876996fce3c2.js" defer></script><script src="http://localhost:1313/js/memory-field.min.a317b8d6734f2c593ab6b389e10ef3d0af579959c7c7c76642c0b350385f05f7.js" defer></script></body>
+    </div><script src="https://trimad.github.io/js/main.min.9ec5b6a8abb9c014a199859531b6cfba5fe725b0084f00aa10ca876996fce3c2.js" defer></script><script src="https://trimad.github.io/js/memory-field.min.a317b8d6734f2c593ab6b389e10ef3d0af579959c7c7c76642c0b350385f05f7.js" defer></script></body>
 </html>

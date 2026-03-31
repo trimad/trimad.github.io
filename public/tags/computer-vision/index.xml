@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Computer-Vision on Ghost Graph</title>
-    <link>http://localhost:1313/tags/computer-vision/</link>
+    <link>https://trimad.github.io/tags/computer-vision/</link>
     <description>Recent content in Computer-Vision on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/computer-vision/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Window Monitoring with Machine Vision</title>
-      <link>http://localhost:1313/posts/2024-03-25-window-watcher/</link>
+      <link>https://trimad.github.io/posts/2024-03-25-window-watcher/</link>
       <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-03-25-window-watcher/</guid>
+      <guid>https://trimad.github.io/posts/2024-03-25-window-watcher/</guid>
       <description>A guide to setting up a window monitoring system using the Moondream2 machine vision model for real-time window content analysis.</description>
     </item>
     <item>
       <title>3D Photo Inpainting with Python and PyTorch</title>
-      <link>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</link>
+      <link>https://trimad.github.io/posts/2023-05-12-3d-photo-inpainting/</link>
       <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-12-3d-photo-inpainting/</guid>
       <description>A comprehensive guide to setting up and using 3D Photo Inpainting on Windows, including Miniconda environment setup, dependency installation, and usage instructions.</description>
     </item>
     <item>
       <title>MiDaS Depth Estimation Guide</title>
-      <link>http://localhost:1313/posts/2023-02-06-midas/</link>
+      <link>https://trimad.github.io/posts/2023-02-06-midas/</link>
       <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-06-midas/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-06-midas/</guid>
       <description>&lt;h3&gt;&lt;a href=&#34;https://github.com/isl-org/MiDaS&#34;&gt;GitHub Repository&lt;/a&gt;&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;During installation, I ran into an issue where the CUDA package wasn&amp;rsquo;t found. Had to modify environment.yaml to:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;name: midas-py310&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;channels:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pytorch&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - defaults&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dependencies:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - nvidia::cuda-toolkit&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;11.7.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - python&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;3.10.8&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pytorch::pytorch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.13.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - torchvision&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;0.14.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;22.3.1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - numpy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1.23.4&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - pip:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - opencv-python&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;4.6.0.66&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - imutils&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.5.4&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - timm&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.6.12&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - einops&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0.6.0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Commands that were helpful for troubleshooting CUDA:&lt;/p&gt;</description>
     </item>
   </channel>

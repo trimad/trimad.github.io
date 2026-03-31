@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>N-Central on Ghost Graph</title>
-    <link>http://localhost:1313/tags/n-central/</link>
+    <link>https://trimad.github.io/tags/n-central/</link>
     <description>Recent content in N-Central on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Jan 2026 10:57:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/n-central/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/n-central/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Troubleshooting N-Central Take Control</title>
-      <link>http://localhost:1313/archive/2024-01-02-take-control/</link>
+      <link>https://trimad.github.io/archive/2024-01-02-take-control/</link>
       <pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2024-01-02-take-control/</guid>
+      <guid>https://trimad.github.io/archive/2024-01-02-take-control/</guid>
       <description>Steps to take when N-Central&amp;rsquo;s Take Control remote access feature isn&amp;rsquo;t working, including how to restart the necessary services.</description>
     </item>
   </channel>

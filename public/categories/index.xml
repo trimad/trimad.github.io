@@ -2,171 +2,171 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Ghost Graph</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>https://trimad.github.io/categories/</link>
     <description>Recent content in Categories on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Mar 2026 22:12:56 -0400</lastBuildDate>
+    <atom:link href="https://trimad.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>System Administration</title>
-      <link>http://localhost:1313/categories/system-administration/</link>
+      <link>https://trimad.github.io/categories/system-administration/</link>
       <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/system-administration/</guid>
+      <guid>https://trimad.github.io/categories/system-administration/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/categories/python/</link>
+      <link>https://trimad.github.io/categories/python/</link>
       <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/python/</guid>
+      <guid>https://trimad.github.io/categories/python/</guid>
       <description></description>
     </item>
     <item>
       <title>PowerShell</title>
-      <link>http://localhost:1313/categories/powershell/</link>
+      <link>https://trimad.github.io/categories/powershell/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/powershell/</guid>
+      <guid>https://trimad.github.io/categories/powershell/</guid>
       <description></description>
     </item>
     <item>
       <title>Active Directory</title>
-      <link>http://localhost:1313/categories/active-directory/</link>
+      <link>https://trimad.github.io/categories/active-directory/</link>
       <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/active-directory/</guid>
+      <guid>https://trimad.github.io/categories/active-directory/</guid>
       <description></description>
     </item>
     <item>
       <title>Visualization</title>
-      <link>http://localhost:1313/categories/visualization/</link>
+      <link>https://trimad.github.io/categories/visualization/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/visualization/</guid>
+      <guid>https://trimad.github.io/categories/visualization/</guid>
       <description></description>
     </item>
     <item>
       <title>Microsoft 365</title>
-      <link>http://localhost:1313/categories/microsoft-365/</link>
+      <link>https://trimad.github.io/categories/microsoft-365/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/microsoft-365/</guid>
+      <guid>https://trimad.github.io/categories/microsoft-365/</guid>
       <description></description>
     </item>
     <item>
       <title>Troubleshooting</title>
-      <link>http://localhost:1313/categories/troubleshooting/</link>
+      <link>https://trimad.github.io/categories/troubleshooting/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/troubleshooting/</guid>
+      <guid>https://trimad.github.io/categories/troubleshooting/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows</title>
-      <link>http://localhost:1313/categories/windows/</link>
+      <link>https://trimad.github.io/categories/windows/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/windows/</guid>
+      <guid>https://trimad.github.io/categories/windows/</guid>
       <description></description>
     </item>
     <item>
       <title>Microsoft Teams</title>
-      <link>http://localhost:1313/categories/microsoft-teams/</link>
+      <link>https://trimad.github.io/categories/microsoft-teams/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/microsoft-teams/</guid>
+      <guid>https://trimad.github.io/categories/microsoft-teams/</guid>
       <description></description>
     </item>
     <item>
       <title>Networking</title>
-      <link>http://localhost:1313/categories/networking/</link>
+      <link>https://trimad.github.io/categories/networking/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/networking/</guid>
+      <guid>https://trimad.github.io/categories/networking/</guid>
       <description></description>
     </item>
     <item>
       <title>Web Administration</title>
-      <link>http://localhost:1313/categories/web-administration/</link>
+      <link>https://trimad.github.io/categories/web-administration/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/web-administration/</guid>
+      <guid>https://trimad.github.io/categories/web-administration/</guid>
       <description></description>
     </item>
     <item>
       <title>Image Processing</title>
-      <link>http://localhost:1313/categories/image-processing/</link>
+      <link>https://trimad.github.io/categories/image-processing/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/image-processing/</guid>
+      <guid>https://trimad.github.io/categories/image-processing/</guid>
       <description></description>
     </item>
     <item>
       <title>Security</title>
-      <link>http://localhost:1313/categories/security/</link>
+      <link>https://trimad.github.io/categories/security/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/security/</guid>
+      <guid>https://trimad.github.io/categories/security/</guid>
       <description></description>
     </item>
     <item>
       <title>AI</title>
-      <link>http://localhost:1313/categories/ai/</link>
+      <link>https://trimad.github.io/categories/ai/</link>
       <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/ai/</guid>
+      <guid>https://trimad.github.io/categories/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Shell</title>
-      <link>http://localhost:1313/categories/shell/</link>
+      <link>https://trimad.github.io/categories/shell/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/shell/</guid>
+      <guid>https://trimad.github.io/categories/shell/</guid>
       <description></description>
     </item>
     <item>
       <title>JavaScript</title>
-      <link>http://localhost:1313/categories/javascript/</link>
+      <link>https://trimad.github.io/categories/javascript/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/javascript/</guid>
+      <guid>https://trimad.github.io/categories/javascript/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine Learning</title>
-      <link>http://localhost:1313/categories/machine-learning/</link>
+      <link>https://trimad.github.io/categories/machine-learning/</link>
       <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/machine-learning/</guid>
+      <guid>https://trimad.github.io/categories/machine-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Azure AD</title>
-      <link>http://localhost:1313/categories/azure-ad/</link>
+      <link>https://trimad.github.io/categories/azure-ad/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/azure-ad/</guid>
+      <guid>https://trimad.github.io/categories/azure-ad/</guid>
       <description></description>
     </item>
     <item>
       <title>C#</title>
-      <link>http://localhost:1313/categories/c%23/</link>
+      <link>https://trimad.github.io/categories/c%23/</link>
       <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/c%23/</guid>
+      <guid>https://trimad.github.io/categories/c%23/</guid>
       <description></description>
     </item>
     <item>
       <title>CMD</title>
-      <link>http://localhost:1313/categories/cmd/</link>
+      <link>https://trimad.github.io/categories/cmd/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/cmd/</guid>
+      <guid>https://trimad.github.io/categories/cmd/</guid>
       <description></description>
     </item>
     <item>
       <title>Java</title>
-      <link>http://localhost:1313/categories/java/</link>
+      <link>https://trimad.github.io/categories/java/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/java/</guid>
+      <guid>https://trimad.github.io/categories/java/</guid>
       <description></description>
     </item>
     <item>
       <title>C&#43;&#43;</title>
-      <link>http://localhost:1313/categories/c&#43;&#43;/</link>
+      <link>https://trimad.github.io/categories/c&#43;&#43;/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/c&#43;&#43;/</guid>
+      <guid>https://trimad.github.io/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     <item>
       <title>Assembly</title>
-      <link>http://localhost:1313/categories/assembly/</link>
+      <link>https://trimad.github.io/categories/assembly/</link>
       <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/assembly/</guid>
+      <guid>https://trimad.github.io/categories/assembly/</guid>
       <description></description>
     </item>
   </channel>

@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Active-Directory on Ghost Graph</title>
-    <link>http://localhost:1313/tags/active-directory/</link>
+    <link>https://trimad.github.io/tags/active-directory/</link>
     <description>Recent content in Active-Directory on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 11 Mar 2026 16:51:08 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/active-directory/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/active-directory/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Query Domain Controllers For Lockouts And Failed Logons In PowerShell 5.1</title>
-      <link>http://localhost:1313/posts/2026-03-11-query-domain-controllers-for-lockouts/</link>
+      <link>https://trimad.github.io/posts/2026-03-11-query-domain-controllers-for-lockouts/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2026-03-11-query-domain-controllers-for-lockouts/</guid>
+      <guid>https://trimad.github.io/posts/2026-03-11-query-domain-controllers-for-lockouts/</guid>
       <description>Query multiple domain controllers for lockouts and failed logons in PowerShell 5.1, then troubleshoot repeated account lockouts using cached credentials, mapped drives, and Kerberos tickets.</description>
     </item>
     <item>
       <title>Search Domain GPOs for Any Text String with PowerShell</title>
-      <link>http://localhost:1313/posts/2025-09-26-search-domain-gpos/</link>
+      <link>https://trimad.github.io/posts/2025-09-26-search-domain-gpos/</link>
       <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-09-26-search-domain-gpos/</guid>
+      <guid>https://trimad.github.io/posts/2025-09-26-search-domain-gpos/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;When troubleshooting domain policy behavior, one of the most common challenges is identifying &lt;strong&gt;which Group Policy Object (GPO) contains a specific setting, keyword, or registry reference&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;In environments with dozens or hundreds of GPOs, manually inspecting&#xA;each policy in the &lt;strong&gt;Group Policy Management Console (GPMC)&lt;/strong&gt; can be&#xA;time-consuming.&lt;/p&gt;&#xA;&lt;p&gt;This PowerShell pattern automates the process by:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Exporting each GPO configuration as XML&lt;/li&gt;&#xA;&lt;li&gt;Searching each report for target text&lt;/li&gt;&#xA;&lt;li&gt;Reporting which GPOs contain a match&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The script below uses the Remote Desktop policy text as an example&#xA;search target, but you can replace it with any string relevant to your&#xA;environment.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Troubleshooting Group Policy Objects (GPOs)</title>
-      <link>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</link>
+      <link>https://trimad.github.io/posts/2024-05-31-troubleshooting-group-policy/</link>
       <pubDate>Fri, 31 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</guid>
+      <guid>https://trimad.github.io/posts/2024-05-31-troubleshooting-group-policy/</guid>
       <description>A collection of useful commands and steps for troubleshooting Group Policy Objects (GPOs) in a Windows Active Directory environment.</description>
     </item>
     <item>
       <title>Active Directory User Lockout and Password Report</title>
-      <link>http://localhost:1313/posts/2024-05-30-user-lockout-report/</link>
+      <link>https://trimad.github.io/posts/2024-05-30-user-lockout-report/</link>
       <pubDate>Thu, 30 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-05-30-user-lockout-report/</guid>
+      <guid>https://trimad.github.io/posts/2024-05-30-user-lockout-report/</guid>
       <description>A PowerShell script that generates an HTML diagnostics report for user lockouts in Active Directory, including password age, expiration details, and account status.</description>
     </item>
     <item>
       <title>Join a Workstation to Active Directory with Shell and PowerShell</title>
-      <link>http://localhost:1313/posts/2023-07-13-join-active-directory/</link>
+      <link>https://trimad.github.io/posts/2023-07-13-join-active-directory/</link>
       <pubDate>Thu, 13 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-07-13-join-active-directory/</guid>
+      <guid>https://trimad.github.io/posts/2023-07-13-join-active-directory/</guid>
       <description>A comparison of efficient one-liner commands in both Shell and PowerShell for joining workstations to Active Directory domains with proper credential handling and automatic restart functionality.</description>
     </item>
     <item>
       <title>Windows ACL Management with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-05-02-acl/</link>
+      <link>https://trimad.github.io/posts/2023-05-02-acl/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-02-acl/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-02-acl/</guid>
       <description>A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions.</description>
     </item>
     <item>
       <title>Managing Global Address List (GAL) Visibility with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</link>
+      <link>https://trimad.github.io/posts/2023-04-05-hiding-users-from-gal/</link>
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</guid>
+      <guid>https://trimad.github.io/posts/2023-04-05-hiding-users-from-gal/</guid>
       <description>A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute.</description>
     </item>
   </channel>

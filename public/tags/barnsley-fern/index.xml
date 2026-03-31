@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Barnsley-Fern on Ghost Graph</title>
-    <link>http://localhost:1313/tags/barnsley-fern/</link>
+    <link>https://trimad.github.io/tags/barnsley-fern/</link>
     <description>Recent content in Barnsley-Fern on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/barnsley-fern/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/barnsley-fern/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Barnsley Fern</title>
-      <link>http://localhost:1313/posts/2018-06-28-barnsley-fern/</link>
+      <link>https://trimad.github.io/posts/2018-06-28-barnsley-fern/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
+      <guid>https://trimad.github.io/posts/2018-06-28-barnsley-fern/</guid>
       <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
     </item>
   </channel>

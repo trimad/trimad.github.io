@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kattis on Ghost Graph</title>
-    <link>http://localhost:1313/tags/kattis/</link>
+    <link>https://trimad.github.io/tags/kattis/</link>
     <description>Recent content in Kattis on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 02 May 2025 11:58:43 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/kattis/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/kattis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kattis Challenge &#34;Grid&#34;</title>
-      <link>http://localhost:1313/archive/2018-04-20-kattis-grid/</link>
+      <link>https://trimad.github.io/archive/2018-04-20-kattis-grid/</link>
       <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2018-04-20-kattis-grid/</guid>
+      <guid>https://trimad.github.io/archive/2018-04-20-kattis-grid/</guid>
       <description>Solved using a non-recursive version of BFS. Runs in pretty good time.</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Parking&#34;</title>
-      <link>http://localhost:1313/archive/2017-09-15-kattis-parking2/</link>
+      <link>https://trimad.github.io/archive/2017-09-15-kattis-parking2/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2017-09-15-kattis-parking2/</guid>
+      <guid>https://trimad.github.io/archive/2017-09-15-kattis-parking2/</guid>
       <description>&amp;ldquo;When shopping on Long Street, Michael usually parks his car at some random location, and then walks to the stores he needs. Can you help Michael choose a place to park which minimises the distance he needs to walk on his shopping round? Long Street is a straight line, where all positions are integer. You pay for parking in a specific slot, which is an integer position on Long Street. Michael does not want to pay for more than one parking though. He is very strong, and does not mind carrying all the bags around.&amp;rdquo;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Sum of Others&#34;</title>
-      <link>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</link>
+      <link>https://trimad.github.io/archive/2017-09-15-kattis-sum-of-others/</link>
       <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2017-09-15-kattis-sum-of-others/</guid>
+      <guid>https://trimad.github.io/archive/2017-09-15-kattis-sum-of-others/</guid>
       <description>&lt;p&gt;&amp;ldquo;Every day, your job requires you to add up long lists of integers, like the following:&lt;/p&gt;&#xA;&lt;p&gt;3 + 2 + -4 + 8 + 3 + -6 + 1 + 4 + 6 + -1 + -6 = 10&lt;/p&gt;&#xA;&lt;p&gt;That is, a sum of positive and negative integers, followed by an equals sign, followed by a single integer. To save yourself some time, you normally leave out the and signs as you write down your work, so the previous example would be&amp;hellip;&amp;rdquo;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Line Them Up&#34;</title>
-      <link>http://localhost:1313/archive/2017-08-18-kattis-line-them-up/</link>
+      <link>https://trimad.github.io/archive/2017-08-18-kattis-line-them-up/</link>
       <pubDate>Fri, 18 Aug 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2017-08-18-kattis-line-them-up/</guid>
+      <guid>https://trimad.github.io/archive/2017-08-18-kattis-line-them-up/</guid>
       <description>&amp;ldquo;An eccentric coach asks players on the team to line up alphabetically at the start of practice. The coach does not tell the players whether they need to line up in increasing or decreasing order, so they guess. If they guess wrong, the coach makes them run laps before practice. Given a list of names, you are to determine if the list is in increasing alphabetical order, decreasing alphabetical order or neither.&amp;rdquo;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;Server&#34;</title>
-      <link>http://localhost:1313/archive/2017-08-18-kattis-server/</link>
+      <link>https://trimad.github.io/archive/2017-08-18-kattis-server/</link>
       <pubDate>Fri, 18 Aug 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2017-08-18-kattis-server/</guid>
+      <guid>https://trimad.github.io/archive/2017-08-18-kattis-server/</guid>
       <description>&amp;ldquo;You are in charge of a server that needs to run some submitted tasks on a first-come, first-served basis. Each day, you can dedicate the server to run these tasks for at most minutes. Given the time each task takes, you want to know how many of them will be finished today.&amp;rdquo;</description>
     </item>
     <item>
       <title>Kattis Challenge &#34;A Different Problem&#34;</title>
-      <link>http://localhost:1313/archive/2017-08-15-kattis-different/</link>
+      <link>https://trimad.github.io/archive/2017-08-15-kattis-different/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2017-08-15-kattis-different/</guid>
+      <guid>https://trimad.github.io/archive/2017-08-15-kattis-different/</guid>
       <description>&amp;ldquo;Write a program that computes the difference between non-negative integers.&amp;rdquo;</description>
     </item>
   </channel>

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Team-Management | Ghost Graph</title>
-<meta name="description" content="Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log.">
+<meta name="description" content="Technical notes, prompts, diagnostics, and archived material.">
 <meta name="theme-color" content="#e2ebf5">
-<link rel="canonical" href="http://localhost:1313/tags/team-management/"><link rel="alternate" type="application/rss&#43;xml" href="http://localhost:1313/tags/team-management/index.xml" title="Ghost Graph"><meta property="og:site_name" content="Ghost Graph">
+<link rel="canonical" href="https://trimad.github.io/tags/team-management/"><link rel="alternate" type="application/rss&#43;xml" href="https://trimad.github.io/tags/team-management/index.xml" title="Ghost Graph"><meta property="og:site_name" content="Ghost Graph">
 <meta property="og:title" content="Team-Management | Ghost Graph">
-<meta property="og:description" content="Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log.">
+<meta property="og:description" content="Technical notes, prompts, diagnostics, and archived material.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="http://localhost:1313/tags/team-management/">
-<meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="http://localhost:1313/css/main.min.223f77f6e1902f89af4ea756946b7a841868456b8f7eb5e118fc9176059c11a3.css">
+<meta property="og:url" content="https://trimad.github.io/tags/team-management/">
+<meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="https://trimad.github.io/css/main.min.e37a131f6a3efd1622c2760378a82007714ff46605302bc78f3afdff93592578.css">
 
   </head>
   <body class="rei-body rei-kind-term rei-section-tags">
@@ -21,11 +21,11 @@
       <div class="rei-shell__grid" aria-hidden="true"></div>
       <header class="rei-header">
   <div class="rei-header__inner">
-    <a class="rei-brand" href="http://localhost:1313/" aria-label="Ghost Graph">
+    <a class="rei-brand" href="https://trimad.github.io/" aria-label="Ghost Graph">
       <span class="rei-brand__mark" aria-hidden="true"></span>
       <span class="rei-brand__meta">
         <strong>Ghost Graph</strong>
-        <small>Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log.</small>
+        <small>Technical notes, prompts, diagnostics, and archived material.</small>
       </span>
     </a>
 
@@ -36,7 +36,7 @@
       <span class="sr-only">Toggle navigation</span>
     </button>
 
-    <nav class="rei-nav" id="site-navigation" aria-label="Primary navigation" data-nav><a class="" href="http://localhost:1313/">Home</a><a class="" href="http://localhost:1313/posts/">Posts</a><a class="" href="http://localhost:1313/prompts/">Prompts</a><a class="" href="http://localhost:1313/archive/">Archive</a><a class="" href="http://localhost:1313/categories/">Categories</a><a class="is-active" href="http://localhost:1313/tags/">Tags</a></nav>
+    <nav class="rei-nav" id="site-navigation" aria-label="Primary navigation" data-nav><a class="" href="https://trimad.github.io/">Home</a><a class="" href="https://trimad.github.io/posts/">Posts</a><a class="" href="https://trimad.github.io/prompts/">Prompts</a><a class="" href="https://trimad.github.io/archive/">Archive</a><a class="" href="https://trimad.github.io/categories/">Categories</a><a class="is-active" href="https://trimad.github.io/tags/">Tags</a></nav>
   </div>
 </header>
 
@@ -79,7 +79,7 @@
 </section>
 <div class="rei-ledger"><article class="rei-entry" data-filter-item data-filter-text="microsoft teams powershell management guide powershell scripts for microsoft teams stuff.
 get all owners of all teams and team channels## documentation: https://learn.microsoft.com/en-us/powershell/module/teams/?view=teams-ps # run the following command to install the latest powershellget: install-module -name powershellget -force -allowclobber # install the teams powershell module. install-module -name microsoftteams -force -allowclobber # to start working with microsoft teams powershell module, sign in with your azure credentials. connect-microsoftteams $user =read-host -prompt &amp;#39;input the user name&amp;#39; $teams = get-team -user $user $teammemberships=@() $teamchannels=@() $teamchannelmemberships=@() $i = 1 $teammemberships = foreach ($team in $teams) { $groupid = $team.groupid get-teamuser -groupid $groupid | select-object *,@{name=&amp;#34;groupid&amp;#34;;expression={$groupid}} $channels = get-teamallchannel -groupid $groupid | select-object *,@{name=&amp;#34;groupid&amp;#34;;expression={$groupid}} $teamchannels &#43;= $channels $teamchannelmemberships &#43;= foreach ($channel in $channels) { $channeldisplayname = $channel.displayname get-teamchanneluser -groupid $groupid -displayname $channeldisplayname | select-object *,@{name=&amp;#34;groupid&amp;#34;;expression={$groupid}} } $percent = [math]::round((100 * $i) / $teams.length) write-progress -activity &amp;#34;search in progress&amp;#34; -status &amp;#34;$percent% complete&amp;#34; $i&#43;&#43; } $teams | export-csv -path &amp;#34;teams.csv&amp;#34; -notypeinformation $teammemberships | export-csv -path &amp;#34;team-memberships.csv&amp;#34; -notypeinformation $teamchannels | export-csv -path &amp;#34;team-channels.csv&amp;#34; -notypeinformation $teamchannelmemberships | export-csv -path &amp;#34;team-channel-memberships.csv&amp;#34; -notypeinformation  posts powershell microsoft 365 microsoft teams collaboration team-management automation team-ownership">
-  <a class="rei-entry__link" href="http://localhost:1313/posts/2023-02-23-microsoftteams/">
+  <a class="rei-entry__link" href="https://trimad.github.io/posts/2023-02-23-microsoftteams/">
     <div class="rei-entry__meta">
       <span>Posts</span>
       <time datetime="2023-02-23">Feb 23, 2023</time>
@@ -92,13 +92,13 @@ Get all owners of all teams and team channels## Documentation: https://learn.mi
 
     <div class="rei-entry__media"><figure class="rei-entry__thumb">
           <img
-  src="http://localhost:1313/posts/2023-02-23-microsoftteams/thumbnail_hu17817018059460374236.png"
+  src="https://trimad.github.io/posts/2023-02-23-microsoftteams/thumbnail_hu17817018059460374236.png"
   alt="Microsoft Teams PowerShell Management Guide"
   loading="lazy"
   decoding="async"
   width="480"
   height="480"
-  srcset="http://localhost:1313/posts/2023-02-23-microsoftteams/thumbnail_hu18073446605650589740.png 320w, http://localhost:1313/posts/2023-02-23-microsoftteams/thumbnail_hu17817018059460374236.png 480w, http://localhost:1313/posts/2023-02-23-microsoftteams/thumbnail.png 512w"
+  srcset="https://trimad.github.io/posts/2023-02-23-microsoftteams/thumbnail_hu18073446605650589740.png 320w, https://trimad.github.io/posts/2023-02-23-microsoftteams/thumbnail_hu17817018059460374236.png 480w, https://trimad.github.io/posts/2023-02-23-microsoftteams/thumbnail.png 512w"
   sizes="(max-width: 52rem) 100vw, 11rem">
 
         </figure></div>
@@ -114,7 +114,7 @@ Get all owners of all teams and team channels## Documentation: https://learn.mi
     <p class="rei-kicker"><span></span>Recent Updates</p>
     <h2 class="rei-panel__title">Recently modified</h2>
   </div><ul class="rei-feed"><li>
-          <a href="http://localhost:1313/posts/2023-02-23-microsoftteams/">
+          <a href="https://trimad.github.io/posts/2023-02-23-microsoftteams/">
             <strong>Microsoft Teams PowerShell Management Guide</strong>
             <span>Posts · Dec 12, 2025</span>
           </a>
@@ -129,11 +129,11 @@ Get all owners of all teams and team channels## Documentation: https://learn.mi
         </div>
       </div>
       <ol class="rei-ranking">
-        <li><a href="http://localhost:1313/posts/">Posts</a><span>110</span></li>
-        <li><a href="http://localhost:1313/prompts/">Prompts</a><span>2</span></li>
-        <li><a href="http://localhost:1313/archive/">Archive</a><span>16</span></li>
-        <li><a href="http://localhost:1313/categories/">Categories</a><span>23</span></li>
-        <li><a href="http://localhost:1313/tags/">Tags</a><span>195</span></li>
+        <li><a href="https://trimad.github.io/posts/">Posts</a><span>110</span></li>
+        <li><a href="https://trimad.github.io/prompts/">Prompts</a><span>2</span></li>
+        <li><a href="https://trimad.github.io/archive/">Archive</a><span>16</span></li>
+        <li><a href="https://trimad.github.io/categories/">Categories</a><span>23</span></li>
+        <li><a href="https://trimad.github.io/tags/">Tags</a><span>195</span></li>
       </ol>
     </section>
   </section>
@@ -210,8 +210,8 @@ Get all owners of all teams and team channels## Documentation: https://learn.mi
           <h3 class="rei-panel__title">JavaScript is disabled</h3>
         </div>
         <p class="rei-panel__note">Browse recent entries and high-frequency taxonomy routes below.</p>
-        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/powershell/">PowerShell <span>36</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/java/">Java <span>29</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/python/">Python <span>20</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/javascript/">JavaScript <span>17</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/system-administration/">System Administration <span>16</span></a><a class="rei-pill rei-pill--category" href="http://localhost:1313/categories/windows/">Windows <span>12</span></a></div>
-        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/automation/">#Automation</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/coding-challenge/">#Coding Challenge</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/p5js/">#P5js</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/animation/">#Animation</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/processing/">#Processing</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/system-administration/">#System-Administration</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/image-processing/">#Image-Processing</a><a class="rei-pill rei-pill--tag" href="http://localhost:1313/tags/interactive/">#Interactive</a></div>
+        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/powershell/">PowerShell <span>36</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/java/">Java <span>29</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/python/">Python <span>20</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/javascript/">JavaScript <span>17</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/system-administration/">System Administration <span>16</span></a><a class="rei-pill rei-pill--category" href="https://trimad.github.io/categories/windows/">Windows <span>12</span></a></div>
+        <div class="rei-chip-cloud"><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/automation/">#Automation</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/coding-challenge/">#Coding Challenge</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/p5js/">#P5js</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/animation/">#Animation</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/processing/">#Processing</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/system-administration/">#System-Administration</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/image-processing/">#Image-Processing</a><a class="rei-pill rei-pill--tag" href="https://trimad.github.io/tags/interactive/">#Interactive</a></div>
       </section>
     </div>
   </noscript>
@@ -228,7 +228,7 @@ Get all owners of all teams and team channels## Documentation: https://learn.mi
     <div>
       <p class="rei-kicker"><span></span>Site Summary</p>
       <p class="rei-footer__copy">
-        Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log.
+        Technical notes, prompts, diagnostics, and archived material.
       </p>
     </div>
     <div class="rei-footer__meta">
@@ -246,5 +246,5 @@ Get all owners of all teams and team channels## Documentation: https://learn.mi
   </div>
 </footer>
 
-    </div><script src="http://localhost:1313/js/main.min.9ec5b6a8abb9c014a199859531b6cfba5fe725b0084f00aa10ca876996fce3c2.js" defer></script><script src="http://localhost:1313/js/memory-field.min.a317b8d6734f2c593ab6b389e10ef3d0af579959c7c7c76642c0b350385f05f7.js" defer></script></body>
+    </div><script src="https://trimad.github.io/js/main.min.9ec5b6a8abb9c014a199859531b6cfba5fe725b0084f00aa10ca876996fce3c2.js" defer></script><script src="https://trimad.github.io/js/memory-field.min.a317b8d6734f2c593ab6b389e10ef3d0af579959c7c7c76642c0b350385f05f7.js" defer></script></body>
 </html>

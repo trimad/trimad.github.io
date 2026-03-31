@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Image Processing on Ghost Graph</title>
-    <link>http://localhost:1313/categories/image-processing/</link>
+    <link>https://trimad.github.io/categories/image-processing/</link>
     <description>Recent content in Image Processing on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/image-processing/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/categories/image-processing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automated Batch Image Compression with Python</title>
-      <link>http://localhost:1313/posts/2024-07-30-batch-compress-images/</link>
+      <link>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-07-30-batch-compress-images/</guid>
+      <guid>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</guid>
       <description>A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library).</description>
     </item>
     <item>
       <title>3D Photo Inpainting with Python and PyTorch</title>
-      <link>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</link>
+      <link>https://trimad.github.io/posts/2023-05-12-3d-photo-inpainting/</link>
       <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-12-3d-photo-inpainting/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-12-3d-photo-inpainting/</guid>
       <description>A comprehensive guide to setting up and using 3D Photo Inpainting on Windows, including Miniconda environment setup, dependency installation, and usage instructions.</description>
     </item>
   </channel>

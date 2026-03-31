@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AI on Ghost Graph</title>
-    <link>http://localhost:1313/tags/ai/</link>
+    <link>https://trimad.github.io/tags/ai/</link>
     <description>Recent content in AI on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deep Floyd IF</title>
-      <link>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</link>
+      <link>https://trimad.github.io/posts/2023-05-03-deep-floyd-if/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-03-deep-floyd-if/</guid>
       <description>My tentative work flow for running Deep Floyd IF locally for image generation.</description>
     </item>
     <item>
       <title>Frame Interpolation Large Motion (FILM)</title>
-      <link>http://localhost:1313/posts/2023-02-05-film/</link>
+      <link>https://trimad.github.io/posts/2023-02-05-film/</link>
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-05-film/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-05-film/</guid>
       <description>A comprehensive guide to setting up and using Google&amp;rsquo;s Frame Interpolation Large Motion (FILM) TensorFlow implementation, enabling the creation of smooth animations by generating intermediate frames between existing images using deep learning techniques.</description>
     </item>
   </channel>

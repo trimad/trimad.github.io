@@ -2,129 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JavaScript on Ghost Graph</title>
-    <link>http://localhost:1313/categories/javascript/</link>
+    <link>https://trimad.github.io/categories/javascript/</link>
     <description>Recent content in JavaScript on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 27 Mar 2026 13:11:28 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gmail Photo Downloader</title>
-      <link>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</link>
+      <link>https://trimad.github.io/posts/2023-09-11-picture-auto-downloader/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</guid>
+      <guid>https://trimad.github.io/posts/2023-09-11-picture-auto-downloader/</guid>
       <description>A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder.</description>
     </item>
     <item>
       <title>Disco Ball</title>
-      <link>http://localhost:1313/posts/2023-08-24-disco-ball/</link>
+      <link>https://trimad.github.io/posts/2023-08-24-disco-ball/</link>
       <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-08-24-disco-ball/</guid>
+      <guid>https://trimad.github.io/posts/2023-08-24-disco-ball/</guid>
       <description>A JavaScript implementation using p5.js to generate a black and white disco ball visualization.</description>
     </item>
     <item>
       <title>Yahoo Finance API via RapidAPI</title>
-      <link>http://localhost:1313/posts/2023-05-11-rapidapi/</link>
+      <link>https://trimad.github.io/posts/2023-05-11-rapidapi/</link>
       <pubDate>Thu, 11 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-11-rapidapi/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-11-rapidapi/</guid>
       <description>This program loads comma-separated stock symbols from a file named &lt;code&gt;symbols.txt&lt;/code&gt; and then queries the Yahoo Finance API using a RapidAPI endpoint. It retrieves prices for every 60 minutes on a max time window.</description>
     </item>
     <item>
       <title>Key Event Tester</title>
-      <link>http://localhost:1313/posts/2023-05-08-keycode-event-test/</link>
+      <link>https://trimad.github.io/posts/2023-05-08-keycode-event-test/</link>
       <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-08-keycode-event-test/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-08-keycode-event-test/</guid>
       <description>This diagnostic tool lets you type, paste, compose text, and click inside a text area to log keyboard, text input, composition, and mouse click events. It includes filter toggles, a clear-log button, and detailed metadata such as key codes, input types, button states, pointer offsets, timestamps, and modifier keys.</description>
     </item>
     <item>
       <title>Random Password Generator</title>
-      <link>http://localhost:1313/posts/2023-03-22-random-password-generator/</link>
+      <link>https://trimad.github.io/posts/2023-03-22-random-password-generator/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-22-random-password-generator/</guid>
+      <guid>https://trimad.github.io/posts/2023-03-22-random-password-generator/</guid>
       <description>A client-side JavaScript tool that generates secure random passwords with three complexity levels: special characters, alphanumeric, and alphabetic only. Passwords automatically refresh on page load.</description>
     </item>
     <item>
       <title>Archimedean Spiral</title>
-      <link>http://localhost:1313/posts/2022-05-04-archimedean-spiral/</link>
+      <link>https://trimad.github.io/posts/2022-05-04-archimedean-spiral/</link>
       <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-05-04-archimedean-spiral/</guid>
+      <guid>https://trimad.github.io/posts/2022-05-04-archimedean-spiral/</guid>
       <description>An interactive p5.js sketch that generates Archimedean spirals using polar coordinates, with the ability to export SVG files for physical fabrication.</description>
     </item>
     <item>
       <title>Daily Donation Report</title>
-      <link>http://localhost:1313/posts/2019-08-25-daily-donation-report/</link>
+      <link>https://trimad.github.io/posts/2019-08-25-daily-donation-report/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-25-daily-donation-report/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-25-daily-donation-report/</guid>
       <description>A Google Apps Script that automates the collection and distribution of Google Forms data by aggregating submissions, converting them to XLSX format, and sending formatted HTML email reports.</description>
     </item>
     <item>
       <title>Fridge Magnet Simulator</title>
-      <link>http://localhost:1313/posts/2018-11-16-fridge-magnet-simulator/</link>
+      <link>https://trimad.github.io/posts/2018-11-16-fridge-magnet-simulator/</link>
       <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-11-16-fridge-magnet-simulator/</guid>
+      <guid>https://trimad.github.io/posts/2018-11-16-fridge-magnet-simulator/</guid>
       <description>An interactive p5.js simulation recreating a collection of fridge magnets with realistic physics, allowing users to drag and arrange virtual magnets on a digital refrigerator.</description>
     </item>
     <item>
       <title>Orbiting Pixels Utility</title>
-      <link>http://localhost:1313/posts/2018-11-12-orbiting-pixels-utility/</link>
+      <link>https://trimad.github.io/posts/2018-11-12-orbiting-pixels-utility/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-11-12-orbiting-pixels-utility/</guid>
+      <guid>https://trimad.github.io/posts/2018-11-12-orbiting-pixels-utility/</guid>
       <description>A p5.js interactive visualization that transforms images into dynamic grids of orbiting objects, where each object&amp;rsquo;s rotation phase and characteristics are mapped to pixel brightness values.</description>
     </item>
     <item>
       <title>Ulam Spiral</title>
-      <link>http://localhost:1313/posts/2018-05-17-ulam-sprial/</link>
+      <link>https://trimad.github.io/posts/2018-05-17-ulam-sprial/</link>
       <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-05-17-ulam-sprial/</guid>
+      <guid>https://trimad.github.io/posts/2018-05-17-ulam-sprial/</guid>
       <description>An interactive p5.js implementation of the Ulam Spiral, featuring adjustable grid size, animation controls, and the ability to search for diagonal prime number patterns in the spiral.</description>
     </item>
     <item>
       <title>Collatz Conjecture &#43; Unit Circle</title>
-      <link>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</link>
+      <link>https://trimad.github.io/posts/2018-04-09-collatz-conjecture-unit-circle/</link>
       <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-09-collatz-conjecture-unit-circle/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-09-collatz-conjecture-unit-circle/</guid>
       <description>A Processing visualization of the Collatz Conjecture mapped onto a unit circle, creating 360 distinct branches with 1-degree turns, featuring an interactive exploration of number paths.</description>
     </item>
     <item>
       <title>Merge Sort using WEBGL</title>
-      <link>http://localhost:1313/posts/2018-02-05-merge-sort/</link>
+      <link>https://trimad.github.io/posts/2018-02-05-merge-sort/</link>
       <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-02-05-merge-sort/</guid>
+      <guid>https://trimad.github.io/posts/2018-02-05-merge-sort/</guid>
       <description>An interactive 3D visualization of the Merge Sort algorithm using p5.js and WEBGL, featuring step-by-step animation with camera controls and real-time sorting visualization.</description>
     </item>
     <item>
       <title>10PRINT Image Filter</title>
-      <link>http://localhost:1313/posts/2018-01-31-10print-image-filter/</link>
+      <link>https://trimad.github.io/posts/2018-01-31-10print-image-filter/</link>
       <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-01-31-10print-image-filter/</guid>
+      <guid>https://trimad.github.io/posts/2018-01-31-10print-image-filter/</guid>
       <description>An interactive p5.js implementation of the classic 10PRINT algorithm, offering customizable image filtering with options for both precise and hand-drawn style maze patterns.</description>
     </item>
     <item>
       <title>Insertion Sort using WEBGL</title>
-      <link>http://localhost:1313/posts/2018-01-28-insertion-sort/</link>
+      <link>https://trimad.github.io/posts/2018-01-28-insertion-sort/</link>
       <pubDate>Sun, 28 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-01-28-insertion-sort/</guid>
+      <guid>https://trimad.github.io/posts/2018-01-28-insertion-sort/</guid>
       <description>An interactive 3D visualization of the Insertion Sort algorithm using p5.js and WEBGL, featuring real-time sorting animation with camera controls and step-by-step progression.</description>
     </item>
     <item>
       <title>Juno Cam Image Processing</title>
-      <link>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</link>
+      <link>https://trimad.github.io/posts/2017-11-12-juno-cam-image-processing/</link>
       <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2017-11-12-juno-cam-image-processing/</guid>
+      <guid>https://trimad.github.io/posts/2017-11-12-juno-cam-image-processing/</guid>
       <description>A Java program that reconstructs and processes raw image data from NASA&amp;rsquo;s Juno spacecraft&amp;rsquo;s pushframe camera, combining multiple filter strips to create high-resolution composite images of Jupiter.</description>
     </item>
     <item>
       <title>Simple Perlin Noise Map</title>
-      <link>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</link>
+      <link>https://trimad.github.io/posts/2017-07-16-simple-2d-perlin-noise/</link>
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2017-07-16-simple-2d-perlin-noise/</guid>
+      <guid>https://trimad.github.io/posts/2017-07-16-simple-2d-perlin-noise/</guid>
       <description>An interactive p5.js sketch that generates 2D terrain using Perlin noise, with different colors representing water, sand, and grass based on elevation values.</description>
     </item>
     <item>
       <title>Interactive Array Visualization</title>
-      <link>http://localhost:1313/posts/2016-12-13-arrays/</link>
+      <link>https://trimad.github.io/posts/2016-12-13-arrays/</link>
       <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2016-12-13-arrays/</guid>
+      <guid>https://trimad.github.io/posts/2016-12-13-arrays/</guid>
       <description>An interactive p5.js visualization demonstrating arrays of objects, allowing users to explore array manipulation through a graphical interface.</description>
     </item>
   </channel>

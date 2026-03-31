@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Api on Ghost Graph</title>
-    <link>http://localhost:1313/tags/api/</link>
+    <link>https://trimad.github.io/tags/api/</link>
     <description>Recent content in Api on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/api/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Export Successful Sign-ins With Microsoft Graph</title>
-      <link>http://localhost:1313/posts/2025-12-03-export-successful-sign-ins-with-microsoft-graph/</link>
+      <link>https://trimad.github.io/posts/2025-12-03-export-successful-sign-ins-with-microsoft-graph/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-12-03-export-successful-sign-ins-with-microsoft-graph/</guid>
+      <guid>https://trimad.github.io/posts/2025-12-03-export-successful-sign-ins-with-microsoft-graph/</guid>
       <description>Audit successful Entra ID sign-ins per verified domain with optional city/state filters using Microsoft Graph PowerShell.</description>
     </item>
     <item>
       <title>Export Conditional Access Policies With Microsoft Graph</title>
-      <link>http://localhost:1313/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/</link>
+      <link>https://trimad.github.io/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/</link>
       <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/</guid>
+      <guid>https://trimad.github.io/posts/2025-11-06-export-conditional-access-policies-with-microsoft-graph/</guid>
       <description>A clean PowerShell approach to export Azure AD Conditional Access policies using the Microsoft Graph SDK.</description>
     </item>
     <item>
       <title>Local AI API: Image-to-Text, Text-to-Speech, and LLM APIs</title>
-      <link>http://localhost:1313/posts/2024-02-05-local-ai-api/</link>
+      <link>https://trimad.github.io/posts/2024-02-05-local-ai-api/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-02-05-local-ai-api/</guid>
+      <guid>https://trimad.github.io/posts/2024-02-05-local-ai-api/</guid>
       <description>A practical collection of Python Flask API implementations for running various AI models locally, including image-to-text using Moondream, text-to-speech with Coqui TTS, and text generation via local LLMs with OpenAI-compatible interfaces.</description>
     </item>
     <item>
       <title>NVIDIA Maxine Windows Audio Effects SDK</title>
-      <link>http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</link>
+      <link>https://trimad.github.io/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</link>
       <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</guid>
+      <guid>https://trimad.github.io/posts/2022-04-20-using-the-nvidia-maxine-audio-effects-sdk-demo/</guid>
       <description>A step-by-step workflow for cleaning poor audio recordings using NVIDIA Maxine Windows Audio Effects SDK with different sample rate configurations.</description>
     </item>
   </channel>

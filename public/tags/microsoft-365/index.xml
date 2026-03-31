@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Microsoft-365 on Ghost Graph</title>
-    <link>http://localhost:1313/tags/microsoft-365/</link>
+    <link>https://trimad.github.io/tags/microsoft-365/</link>
     <description>Recent content in Microsoft-365 on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/microsoft-365/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/microsoft-365/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Export Shared Mailbox Delegates from Exchange Online (and Why PowerShell ISE Breaks It)</title>
-      <link>http://localhost:1313/posts/2026-01-09-export-shared-mailbox-delegates/</link>
+      <link>https://trimad.github.io/posts/2026-01-09-export-shared-mailbox-delegates/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2026-01-09-export-shared-mailbox-delegates/</guid>
+      <guid>https://trimad.github.io/posts/2026-01-09-export-shared-mailbox-delegates/</guid>
       <description>&lt;h2 id=&#34;the-problem&#34;&gt;The problem&lt;/h2&gt;&#xA;&lt;p&gt;I needed a &lt;strong&gt;single, reliable export&lt;/strong&gt; of all &lt;strong&gt;Shared Mailboxes&lt;/strong&gt; in Exchange Online and &lt;strong&gt;who can access them&lt;/strong&gt;, specifically:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Full Access&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Send As&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Send on Behalf&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This is deceptively annoying in Exchange Online because those permissions live in &lt;strong&gt;three different places&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Permission Type&lt;/th&gt;&#xA;          &lt;th&gt;Where it lives&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Full Access&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;Get-MailboxPermission&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Send As&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;Get-RecipientPermission&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Send on Behalf&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;GrantSendOnBehalfTo&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;On top of that, I’m running &lt;strong&gt;Windows PowerShell 5.1&lt;/strong&gt;, not PowerShell 7, and I routinely work out of &lt;strong&gt;PowerShell ISE&lt;/strong&gt;.&lt;/p&gt;</description>
     </item>
   </channel>

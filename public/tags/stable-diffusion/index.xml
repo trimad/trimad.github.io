@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Stable-Diffusion on Ghost Graph</title>
-    <link>http://localhost:1313/tags/stable-diffusion/</link>
+    <link>https://trimad.github.io/tags/stable-diffusion/</link>
     <description>Recent content in Stable-Diffusion on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deforum Cheat Sheet</title>
-      <link>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</link>
+      <link>https://trimad.github.io/posts/2023-05-24-deforum-cheat-sheet/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-24-deforum-cheat-sheet/</guid>
       <description>This is a cheat sheet of animations showing what the various 3D translation and rotation settings do in Deforum Stable Diffusion.</description>
     </item>
     <item>
       <title>Stable Diffusion Scripts</title>
-      <link>http://localhost:1313/posts/2023-02-05-stable-diffusion/</link>
+      <link>https://trimad.github.io/posts/2023-02-05-stable-diffusion/</link>
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-05-stable-diffusion/</guid>
       <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
     </item>
   </channel>

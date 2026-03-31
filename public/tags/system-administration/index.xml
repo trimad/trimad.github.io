@@ -2,87 +2,87 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>System-Administration on Ghost Graph</title>
-    <link>http://localhost:1313/tags/system-administration/</link>
+    <link>https://trimad.github.io/tags/system-administration/</link>
     <description>Recent content in System-Administration on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Jan 2026 10:57:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/system-administration/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/system-administration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Managing Microsoft Office Versions with OfficeC2RClient</title>
-      <link>http://localhost:1313/posts/2024-09-10-officec2rclient/</link>
+      <link>https://trimad.github.io/posts/2024-09-10-officec2rclient/</link>
       <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-09-10-officec2rclient/</guid>
+      <guid>https://trimad.github.io/posts/2024-09-10-officec2rclient/</guid>
       <description>A comprehensive guide to managing Microsoft 365 versions using OfficeC2RClient, including checking current builds, consulting version history, and rolling back or updating Office installations.</description>
     </item>
     <item>
       <title>Complete DNS Records Reference Guide</title>
-      <link>http://localhost:1313/posts/2024-06-06-dns-records/</link>
+      <link>https://trimad.github.io/posts/2024-06-06-dns-records/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-06-dns-records/</guid>
       <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
     </item>
     <item>
       <title>Troubleshooting Group Policy Objects (GPOs)</title>
-      <link>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</link>
+      <link>https://trimad.github.io/posts/2024-05-31-troubleshooting-group-policy/</link>
       <pubDate>Fri, 31 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-05-31-troubleshooting-group-policy/</guid>
+      <guid>https://trimad.github.io/posts/2024-05-31-troubleshooting-group-policy/</guid>
       <description>A collection of useful commands and steps for troubleshooting Group Policy Objects (GPOs) in a Windows Active Directory environment.</description>
     </item>
     <item>
       <title>Remote and Local DNS Configuration Guide</title>
-      <link>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</link>
+      <link>https://trimad.github.io/posts/2024-03-21-change-dns-remotely/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</guid>
+      <guid>https://trimad.github.io/posts/2024-03-21-change-dns-remotely/</guid>
       <description>Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management using WMIC and PowerShell.</description>
     </item>
     <item>
       <title>Troubleshooting N-Central Take Control</title>
-      <link>http://localhost:1313/archive/2024-01-02-take-control/</link>
+      <link>https://trimad.github.io/archive/2024-01-02-take-control/</link>
       <pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2024-01-02-take-control/</guid>
+      <guid>https://trimad.github.io/archive/2024-01-02-take-control/</guid>
       <description>Steps to take when N-Central&amp;rsquo;s Take Control remote access feature isn&amp;rsquo;t working, including how to restart the necessary services.</description>
     </item>
     <item>
       <title>PSWindowsUpdate: Managing Windows Updates with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-10-10-pswindowsupdate/</link>
+      <link>https://trimad.github.io/posts/2023-10-10-pswindowsupdate/</link>
       <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-10-10-pswindowsupdate/</guid>
+      <guid>https://trimad.github.io/posts/2023-10-10-pswindowsupdate/</guid>
       <description>Install Windows Updates with the PSWindowsUpdate PowerShell module.</description>
     </item>
     <item>
       <title>Windows ACL Management with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-05-02-acl/</link>
+      <link>https://trimad.github.io/posts/2023-05-02-acl/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-02-acl/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-02-acl/</guid>
       <description>A comprehensive collection of PowerShell scripts for managing Windows Access Control Lists (ACLs), including permission enumeration, modification, and analysis tools with detailed permission descriptions.</description>
     </item>
     <item>
       <title>Managing Global Address List (GAL) Visibility with PowerShell</title>
-      <link>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</link>
+      <link>https://trimad.github.io/posts/2023-04-05-hiding-users-from-gal/</link>
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-04-05-hiding-users-from-gal/</guid>
+      <guid>https://trimad.github.io/posts/2023-04-05-hiding-users-from-gal/</guid>
       <description>A comprehensive guide to managing user visibility in the Global Address List (GAL) using PowerShell, covering both on-premises Active Directory and Exchange Online environments with detailed scripts for checking and modifying the msExchHideFromAddressLists attribute.</description>
     </item>
     <item>
       <title>Windows Defender Firewall Management Guide</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
+      <link>https://trimad.github.io/posts/2023-03-03-windows-defender-firewall/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
+      <guid>https://trimad.github.io/posts/2023-03-03-windows-defender-firewall/</guid>
       <description>A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding.</description>
     </item>
     <item>
       <title>Managing Windows User Accounts with net user Command</title>
-      <link>http://localhost:1313/posts/2023-02-21-net-user/</link>
+      <link>https://trimad.github.io/posts/2023-02-21-net-user/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-21-net-user/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-21-net-user/</guid>
       <description>&lt;p&gt;The &amp;ldquo;net user&amp;rdquo; command is a Command Prompt (Shell) command used to manage user accounts on a Windows operating system. It can be used to create, modify, or delete user accounts, as well as to change passwords and manage group memberships.&lt;/p&gt;&#xA;&lt;h2 id=&#34;syntax&#34;&gt;Syntax&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;password | *&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; /ADD &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DELETE&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/DOMAIN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/TIMES:&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;times | ALL&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net user username &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/ACTIVE: &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;YES | NO&lt;span style=&#34;color:#f92672&#34;&gt;}]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;add-a-user&#34;&gt;Add a user&lt;/h2&gt;&#xA;&lt;p&gt;To add a new user account:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Managing Exchange Online Auto-Expanding Archives with PowerShell</title>
-      <link>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</link>
+      <link>https://trimad.github.io/posts/2021-07-06-manage-auto-expanding-archives/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</guid>
+      <guid>https://trimad.github.io/posts/2021-07-06-manage-auto-expanding-archives/</guid>
       <description>A comprehensive collection of PowerShell scripts for managing Exchange Online auto-expanding archives, including monitoring, configuration, and reporting tools using the ExchangeOnlineManagement module.</description>
     </item>
   </channel>

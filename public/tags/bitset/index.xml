@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bitset on Ghost Graph</title>
-    <link>http://localhost:1313/tags/bitset/</link>
+    <link>https://trimad.github.io/tags/bitset/</link>
     <description>Recent content in Bitset on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 02 May 2025 11:58:43 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/bitset/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/bitset/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>UVa Online Judge Challenge &#34;10305&#34;</title>
-      <link>http://localhost:1313/archive/2018-04-26-uva-10305/</link>
+      <link>https://trimad.github.io/archive/2018-04-26-uva-10305/</link>
       <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archive/2018-04-26-uva-10305/</guid>
+      <guid>https://trimad.github.io/archive/2018-04-26-uva-10305/</guid>
       <description>This problem presents a DAG and the solution requires implementing a topological sort. I noticed that a topological sort can be implemented using only boolean arrays so I used this as an opportunity to finally get around to using Java&amp;rsquo;s BitSet class. The virtual judge run time was 0.050s.</description>
     </item>
   </channel>

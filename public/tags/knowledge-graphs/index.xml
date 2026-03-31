@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knowledge-Graphs on Ghost Graph</title>
-    <link>http://localhost:1313/tags/knowledge-graphs/</link>
+    <link>https://trimad.github.io/tags/knowledge-graphs/</link>
     <description>Recent content in Knowledge-Graphs on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/knowledge-graphs/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/knowledge-graphs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Generating Knowledge Graphs with LLMs and PyVis</title>
-      <link>http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/</link>
+      <link>https://trimad.github.io/posts/2023-12-14-pyvis-knowledge-graphs/</link>
       <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-12-14-pyvis-knowledge-graphs/</guid>
+      <guid>https://trimad.github.io/posts/2023-12-14-pyvis-knowledge-graphs/</guid>
       <description>An experimental approach to extracting structured knowledge graphs from literary text using Mistral-7B LLM, demonstrated with the opening passage of The Hobbit and visualized as connected node-edge relationships.</description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Printers on Ghost Graph</title>
-    <link>http://localhost:1313/tags/printers/</link>
+    <link>https://trimad.github.io/tags/printers/</link>
     <description>Recent content in Printers on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/printers/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/printers/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>net use</title>
-      <link>http://localhost:1313/posts/2023-04-13-net-use/</link>
+      <link>https://trimad.github.io/posts/2023-04-13-net-use/</link>
       <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-04-13-net-use/</guid>
+      <guid>https://trimad.github.io/posts/2023-04-13-net-use/</guid>
       <description>Connects a computer to or disconnects a computer from a shared resource, or displays information about computer connections. The command also controls persistent net connections. Used without parameters, net use retrieves a list of network connections.</description>
     </item>
   </channel>

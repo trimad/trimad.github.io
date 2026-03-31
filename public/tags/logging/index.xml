@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Logging on Ghost Graph</title>
-    <link>http://localhost:1313/tags/logging/</link>
+    <link>https://trimad.github.io/tags/logging/</link>
     <description>Recent content in Logging on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/logging/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/logging/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automated IIS Application Pool Restart with PowerShell</title>
-      <link>http://localhost:1313/posts/2024-10-16-restart-iis-application/</link>
+      <link>https://trimad.github.io/posts/2024-10-16-restart-iis-application/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-10-16-restart-iis-application/</guid>
+      <guid>https://trimad.github.io/posts/2024-10-16-restart-iis-application/</guid>
       <description>A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling.</description>
     </item>
     <item>
       <title>Window Monitoring with Machine Vision</title>
-      <link>http://localhost:1313/posts/2024-03-25-window-watcher/</link>
+      <link>https://trimad.github.io/posts/2024-03-25-window-watcher/</link>
       <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-03-25-window-watcher/</guid>
+      <guid>https://trimad.github.io/posts/2024-03-25-window-watcher/</guid>
       <description>A guide to setting up a window monitoring system using the Moondream2 machine vision model for real-time window content analysis.</description>
     </item>
   </channel>

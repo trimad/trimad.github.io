@@ -20,7 +20,7 @@ enableGitInfo = true
   term = ["HTML", "RSS"]
 
 [params]
-  description = "Technical notes, prompts, diagnostics, and archive material arranged as a quiet future log."
+  description = "Technical notes, prompts, diagnostics, and archived material."
   # Add other site-wide parameters here
 
 # Enable robots.txt and sitemap generation (usually enabled by default)

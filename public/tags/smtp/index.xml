@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Smtp on Ghost Graph</title>
-    <link>http://localhost:1313/tags/smtp/</link>
+    <link>https://trimad.github.io/tags/smtp/</link>
     <description>Recent content in Smtp on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/smtp/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/smtp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Test SMTP</title>
-      <link>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</link>
+      <link>https://trimad.github.io/posts/2025-07-03-smtp-test-with-powershell/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</guid>
+      <guid>https://trimad.github.io/posts/2025-07-03-smtp-test-with-powershell/</guid>
       <description>PowerShell scripts for testing SMTP, with and without authentication.</description>
     </item>
     <item>
       <title>Remote Reboot With SMTP Status</title>
-      <link>http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/</link>
+      <link>https://trimad.github.io/posts/2019-08-28-remote-reboot-with-smtp-status/</link>
       <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-28-remote-reboot-with-smtp-status/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-28-remote-reboot-with-smtp-status/</guid>
       <description>A PowerShell script that remotely reboots a specified computer and sends an email notification about the reboot status using SMTP.</description>
     </item>
   </channel>

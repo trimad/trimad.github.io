@@ -135,6 +135,23 @@ button {
   outline-offset: 3px;
 }
 
+@keyframes rei-nav-eye-blink {
+  0%,
+  42%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  48%,
+  52% {
+    transform: scaleY(0.08);
+  }
+
+  58% {
+    transform: scaleY(1);
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1801,6 +1818,7 @@ a {
   border: 1px solid rgba(5, 8, 14, 0.62);
   border-radius: 100% / 76%;
   clip-path: polygon(0 50%, 8% 30%, 18% 15%, 50% 6%, 82% 15%, 92% 30%, 100% 50%, 92% 70%, 82% 85%, 50% 94%, 18% 85%, 8% 70%);
+  transform-origin: center 52%;
   background:
     radial-gradient(ellipse at 37% 27%, rgba(255, 255, 255, 0.99) 0 0.16rem, transparent 0.17rem),
     radial-gradient(ellipse at 66% 62%, rgba(255, 255, 255, 0.96) 0 0.082rem, transparent 0.092rem),
@@ -1816,6 +1834,11 @@ a {
     inset 0 0.11rem 0 rgba(0, 0, 0, 0.14),
     0 0 0 1px rgba(255, 255, 255, 0.42),
     0 0.08rem 0.22rem rgba(10, 20, 34, 0.08);
+}
+
+.rei-nav a:hover::before,
+.rei-nav a:focus-visible::before {
+  animation: rei-nav-eye-blink 1000ms ease-in-out 1;
 }
 
 .rei-kicker span,
@@ -2598,5 +2621,10 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .rei-nav a:hover::before,
+  .rei-nav a:focus-visible::before {
+    animation-duration: 1000ms !important;
   }
 }

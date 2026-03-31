@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windows-Defender on Ghost Graph</title>
-    <link>http://localhost:1313/tags/windows-defender/</link>
+    <link>https://trimad.github.io/tags/windows-defender/</link>
     <description>Recent content in Windows-Defender on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/windows-defender/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/windows-defender/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows Defender Firewall Management Guide</title>
-      <link>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</link>
+      <link>https://trimad.github.io/posts/2023-03-03-windows-defender-firewall/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-03-03-windows-defender-firewall/</guid>
+      <guid>https://trimad.github.io/posts/2023-03-03-windows-defender-firewall/</guid>
       <description>A comprehensive guide to managing Windows Defender Firewall via command line, covering firewall state management, program exceptions, Remote Desktop configuration, and port forwarding.</description>
     </item>
   </channel>

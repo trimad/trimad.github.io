@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Networking on Ghost Graph</title>
-    <link>http://localhost:1313/categories/networking/</link>
+    <link>https://trimad.github.io/categories/networking/</link>
     <description>Recent content in Networking on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/networking/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/categories/networking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>UDM Parameters for Google Search</title>
-      <link>http://localhost:1313/posts/2025-06-17-udm-arguments/</link>
+      <link>https://trimad.github.io/posts/2025-06-17-udm-arguments/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-06-17-udm-arguments/</guid>
+      <guid>https://trimad.github.io/posts/2025-06-17-udm-arguments/</guid>
       <description>Detailed guide to Google Search UDM (Universal Display Mode) parameters, each with descriptions and example searches.</description>
     </item>
     <item>
       <title>How to Find Your Public IP Address</title>
-      <link>http://localhost:1313/posts/2024-06-24-get-public-ip/</link>
+      <link>https://trimad.github.io/posts/2024-06-24-get-public-ip/</link>
       <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-24-get-public-ip/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-24-get-public-ip/</guid>
       <description>A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions.</description>
     </item>
     <item>
       <title>Complete DNS Records Reference Guide</title>
-      <link>http://localhost:1313/posts/2024-06-06-dns-records/</link>
+      <link>https://trimad.github.io/posts/2024-06-06-dns-records/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-06-dns-records/</guid>
       <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
     </item>
     <item>
       <title>Remote and Local DNS Configuration Guide</title>
-      <link>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</link>
+      <link>https://trimad.github.io/posts/2024-03-21-change-dns-remotely/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-03-21-change-dns-remotely/</guid>
+      <guid>https://trimad.github.io/posts/2024-03-21-change-dns-remotely/</guid>
       <description>Comprehensive guide on changing DNS settings remotely and locally, with a focus on network troubleshooting and management using WMIC and PowerShell.</description>
     </item>
   </channel>

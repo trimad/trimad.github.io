@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C# on Ghost Graph</title>
-    <link>http://localhost:1313/categories/c%23/</link>
+    <link>https://trimad.github.io/categories/c%23/</link>
     <description>Recent content in C# on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/c%23/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/categories/c%23/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Logistic Map</title>
-      <link>http://localhost:1313/posts/2022-05-14-logistic-map/</link>
+      <link>https://trimad.github.io/posts/2022-05-14-logistic-map/</link>
       <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-05-14-logistic-map/</guid>
+      <guid>https://trimad.github.io/posts/2022-05-14-logistic-map/</guid>
       <description>A C# implementation of the logistic map that visualizes how this simple mathematical model produces complex chaotic behavior when modeling population growth under resource constraints.</description>
     </item>
     <item>
       <title>Buddhabrot</title>
-      <link>http://localhost:1313/posts/2019-08-25-buddhabrot/</link>
+      <link>https://trimad.github.io/posts/2019-08-25-buddhabrot/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-25-buddhabrot/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-25-buddhabrot/</guid>
       <description>An implementation of the Buddhabrot fractal rendering technique, which visualizes escape-time trajectories of points outside the Mandelbrot set, creating intricate patterns that resemble a seated Buddha figure.</description>
     </item>
   </channel>

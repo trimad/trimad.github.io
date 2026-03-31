@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sid on Ghost Graph</title>
-    <link>http://localhost:1313/tags/sid/</link>
+    <link>https://trimad.github.io/tags/sid/</link>
     <description>Recent content in Sid on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/sid/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/sid/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mapping Network Drives Using PowerShell and SID</title>
-      <link>http://localhost:1313/posts/2023-07-20-mapped-drives/</link>
+      <link>https://trimad.github.io/posts/2023-07-20-mapped-drives/</link>
       <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-07-20-mapped-drives/</guid>
+      <guid>https://trimad.github.io/posts/2023-07-20-mapped-drives/</guid>
       <description>This blog post discusses a PowerShell script that can map a network drive using a Security Identifier (SID), even without being logged in as that user.</description>
     </item>
   </channel>

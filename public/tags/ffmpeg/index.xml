@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ffmpeg on Ghost Graph</title>
-    <link>http://localhost:1313/tags/ffmpeg/</link>
+    <link>https://trimad.github.io/tags/ffmpeg/</link>
     <description>Recent content in Ffmpeg on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Jan 2026 10:57:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Videos as Teams Backgrounds</title>
-      <link>http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/</link>
+      <link>https://trimad.github.io/posts/2025-07-02-videos-as-teams-backgrounds/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/</guid>
+      <guid>https://trimad.github.io/posts/2025-07-02-videos-as-teams-backgrounds/</guid>
       <description>How to turn any YouTube video into your Microsoft Teams background.</description>
     </item>
     <item>
       <title>FFmpeg Command Reference</title>
-      <link>http://localhost:1313/posts/2022-01-27-ffmpeg/</link>
+      <link>https://trimad.github.io/posts/2022-01-27-ffmpeg/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-01-27-ffmpeg/</guid>
+      <guid>https://trimad.github.io/posts/2022-01-27-ffmpeg/</guid>
       <description>A comprehensive reference guide to FFmpeg commands and filters, covering audio/video processing, screen recording, format conversion, and advanced filtering techniques with detailed parameter explanations and practical examples.</description>
     </item>
   </channel>

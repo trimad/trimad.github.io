@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Youtube-Dl on Ghost Graph</title>
-    <link>http://localhost:1313/tags/youtube-dl/</link>
+    <link>https://trimad.github.io/tags/youtube-dl/</link>
     <description>Recent content in Youtube-Dl on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/youtube-dl/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/youtube-dl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Download YouTube Videos</title>
-      <link>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</link>
+      <link>https://trimad.github.io/posts/2022-04-16-downloading-youtube-videos/</link>
       <pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</guid>
+      <guid>https://trimad.github.io/posts/2022-04-16-downloading-youtube-videos/</guid>
       <description>A guide to downloading YouTube videos and audio using yt-dlp and youtube-dl command-line tools, including various options for format selection and quality settings.</description>
     </item>
   </channel>

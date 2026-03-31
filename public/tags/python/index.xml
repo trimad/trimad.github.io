@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Ghost Graph</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>https://trimad.github.io/tags/python/</link>
     <description>Recent content in Python on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 27 Mar 2026 16:36:46 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Convert Markdown To PDF With Python</title>
-      <link>http://localhost:1313/posts/2026-03-27-markdown-to-pdf/</link>
+      <link>https://trimad.github.io/posts/2026-03-27-markdown-to-pdf/</link>
       <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2026-03-27-markdown-to-pdf/</guid>
+      <guid>https://trimad.github.io/posts/2026-03-27-markdown-to-pdf/</guid>
       <description>Convert a Markdown file into a styled PDF with Python and an installed Chrome or Edge browser, while preserving the source filename and suppressing browser-added headers and footers.</description>
     </item>
   </channel>

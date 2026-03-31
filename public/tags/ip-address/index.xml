@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ip-Address on Ghost Graph</title>
-    <link>http://localhost:1313/tags/ip-address/</link>
+    <link>https://trimad.github.io/tags/ip-address/</link>
     <description>Recent content in Ip-Address on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/ip-address/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/ip-address/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Find Your Public IP Address</title>
-      <link>http://localhost:1313/posts/2024-06-24-get-public-ip/</link>
+      <link>https://trimad.github.io/posts/2024-06-24-get-public-ip/</link>
       <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-24-get-public-ip/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-24-get-public-ip/</guid>
       <description>A collection of methods to retrieve your public IP address using command-line tools like nslookup, curl, and PowerShell, as well as web-based solutions.</description>
     </item>
   </channel>

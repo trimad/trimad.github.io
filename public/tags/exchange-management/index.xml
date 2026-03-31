@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Exchange-Management on Ghost Graph</title>
-    <link>http://localhost:1313/tags/exchange-management/</link>
+    <link>https://trimad.github.io/tags/exchange-management/</link>
     <description>Recent content in Exchange-Management on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/exchange-management/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/exchange-management/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Managing Exchange Online Auto-Expanding Archives with PowerShell</title>
-      <link>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</link>
+      <link>https://trimad.github.io/posts/2021-07-06-manage-auto-expanding-archives/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2021-07-06-manage-auto-expanding-archives/</guid>
+      <guid>https://trimad.github.io/posts/2021-07-06-manage-auto-expanding-archives/</guid>
       <description>A comprehensive collection of PowerShell scripts for managing Exchange Online auto-expanding archives, including monitoring, configuration, and reporting tools using the ExchangeOnlineManagement module.</description>
     </item>
   </channel>

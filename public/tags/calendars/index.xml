@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Calendars on Ghost Graph</title>
-    <link>http://localhost:1313/tags/calendars/</link>
+    <link>https://trimad.github.io/tags/calendars/</link>
     <description>Recent content in Calendars on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/calendars/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/calendars/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Managing Exchange Calendars</title>
-      <link>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</link>
+      <link>https://trimad.github.io/posts/2021-09-16-manage-exchange-online-calendars/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2021-09-16-manage-exchange-online-calendars/</guid>
+      <guid>https://trimad.github.io/posts/2021-09-16-manage-exchange-online-calendars/</guid>
       <description>A collection of PowerShell scripts using ExchangeOnlineManagement module to manage calendar permissions in Exchange Online, including bulk operations for granting, modifying, and viewing access rights across multiple mailboxes.</description>
     </item>
   </channel>

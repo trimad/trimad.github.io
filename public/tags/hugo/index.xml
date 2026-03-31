@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on Ghost Graph</title>
-    <link>http://localhost:1313/tags/hugo/</link>
+    <link>https://trimad.github.io/tags/hugo/</link>
     <description>Recent content in Hugo on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 10 Mar 2026 09:27:01 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rei Theme Implementation Specification</title>
-      <link>http://localhost:1313/prompts/2026-01-28-generative-guidelines-for-rei-theme/</link>
+      <link>https://trimad.github.io/prompts/2026-01-28-generative-guidelines-for-rei-theme/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/prompts/2026-01-28-generative-guidelines-for-rei-theme/</guid>
+      <guid>https://trimad.github.io/prompts/2026-01-28-generative-guidelines-for-rei-theme/</guid>
       <description>&lt;h2 id=&#34;purpose&#34;&gt;Purpose&lt;/h2&gt;&#xA;&lt;p&gt;This document is the implementation-grade source of truth for &lt;code&gt;themes/Rei&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Rei is not a mood board and not a fan-art exercise. It is a complete Hugo theme for a technical personal publication that should feel cold, quiet, precise, elegant, and emotionally restrained while remaining highly readable and production-safe.&lt;/p&gt;&#xA;&lt;p&gt;When atmospheric styling conflicts with readability, accessibility, maintainability, or Hugo compatibility, the practical choice wins.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;repository-reality&#34;&gt;Repository Reality&lt;/h2&gt;&#xA;&lt;p&gt;The current repository is a Hugo site with:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ghost Graph Theme Implementation Specification</title>
-      <link>http://localhost:1313/prompts/2026-01-15-ghost-in-the-shell-theme-generative-guidelines/</link>
+      <link>https://trimad.github.io/prompts/2026-01-15-ghost-in-the-shell-theme-generative-guidelines/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/prompts/2026-01-15-ghost-in-the-shell-theme-generative-guidelines/</guid>
+      <guid>https://trimad.github.io/prompts/2026-01-15-ghost-in-the-shell-theme-generative-guidelines/</guid>
       <description>&lt;h2 id=&#34;purpose&#34;&gt;Purpose&lt;/h2&gt;&#xA;&lt;p&gt;This document is the implementation-grade specification for the Hugo theme at &lt;code&gt;themes/Ghost Graph&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;It replaces the earlier assumption that the site should be only a full-screen graph application. The actual repository is a content-driven Hugo blog with long-form posts, prompts, archive material, categories, and tags. The graph remains a signature feature, but it is now one part of a complete publication system.&lt;/p&gt;&#xA;&lt;p&gt;When design, accessibility, performance, maintainability, or repo reality conflicts with older guidance, this specification wins.&lt;/p&gt;</description>
     </item>
   </channel>

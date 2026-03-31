@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lan on Ghost Graph</title>
-    <link>http://localhost:1313/tags/lan/</link>
+    <link>https://trimad.github.io/tags/lan/</link>
     <description>Recent content in Lan on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Dec 2025 17:02:56 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/lan/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/lan/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Graphing a LAN with PyVis</title>
-      <link>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</link>
+      <link>https://trimad.github.io/posts/2023-12-28-pyvis-graphing-lan/</link>
       <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-12-28-pyvis-graphing-lan/</guid>
+      <guid>https://trimad.github.io/posts/2023-12-28-pyvis-graphing-lan/</guid>
       <description>A guide to visualizing Local Area Network (LAN) topologies using Python and pyvis for interactive network graphs.</description>
     </item>
   </channel>

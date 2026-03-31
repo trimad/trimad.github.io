@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Email on Ghost Graph</title>
-    <link>http://localhost:1313/tags/email/</link>
+    <link>https://trimad.github.io/tags/email/</link>
     <description>Recent content in Email on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Jan 2026 10:57:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/email/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/email/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Get DNS Records with PowerShell</title>
-      <link>http://localhost:1313/posts/2026-01-27-get-dns-records/</link>
+      <link>https://trimad.github.io/posts/2026-01-27-get-dns-records/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2026-01-27-get-dns-records/</guid>
-      <description>&lt;h1 id=&#34;the-script&#34;&gt;The Script&lt;/h1&gt;&#xA;&lt;aside class=&#34;rei-notice rei-notice--warning&#34; role=&#34;note&#34;&gt;&#xA;  &lt;div class=&#34;rei-notice__marker&#34; aria-hidden=&#34;true&#34;&gt;&lt;/div&gt;&#xA;  &lt;div class=&#34;rei-notice__body&#34;&gt;&#xA;    &lt;strong class=&#34;rei-notice__title&#34;&gt;AI-Generated Content&lt;/strong&gt;&#xA;    &lt;div class=&#34;rei-notice__content&#34;&gt;This PowerShell script and description are AI-generated. Please review for completeness and accuracy.&lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;&lt;/aside&gt;&#xA;&#xA;&lt;p&gt;This PowerShell script builds a DNS “inventory” report for a given domain by querying common records (A/AAAA/NS/SOA/MX/TXT/CNAME/CAA), email-security records (DMARC, SPF, DKIM across many selectors, BIMI, MTA-STS, TLS-RPT), common hostnames (autodiscover/mail/smtp/etc.), and related SRV records. It safely wraps Resolve-DnsName to normalize results (ok/missing/error/unsupported), flattens TXT values to extract things like the SPF/DMARC strings, and recursively expands SPF include:/redirect= chains up to a max depth while avoiding loops. If CAA lookups aren’t supported by the local Resolve-DnsName, it falls back to nslookup -type=caa, and it also resolves MX/apex IPs and performs PTR lookups for those IPs. Finally, it writes everything as JSON to C:\Temp&amp;lt;domain&amp;gt;.json and prints the saved path.&lt;/p&gt;</description>
+      <guid>https://trimad.github.io/posts/2026-01-27-get-dns-records/</guid>
+      <description>&lt;h1 id=&#34;the-script&#34;&gt;The Script&lt;/h1&gt;&#xA;&lt;aside class=&#34;rei-notice rei-notice--warning&#34; role=&#34;note&#34;&gt;&#xD;&#xA;  &lt;div class=&#34;rei-notice__marker&#34; aria-hidden=&#34;true&#34;&gt;&lt;/div&gt;&#xD;&#xA;  &lt;div class=&#34;rei-notice__body&#34;&gt;&#xD;&#xA;    &lt;strong class=&#34;rei-notice__title&#34;&gt;AI-Generated Content&lt;/strong&gt;&#xD;&#xA;    &lt;div class=&#34;rei-notice__content&#34;&gt;This PowerShell script and description are AI-generated. Please review for completeness and accuracy.&lt;/div&gt;&#xD;&#xA;  &lt;/div&gt;&#xD;&#xA;&lt;/aside&gt;&#xD;&#xA;&#xA;&lt;p&gt;This PowerShell script builds a DNS “inventory” report for a given domain by querying common records (A/AAAA/NS/SOA/MX/TXT/CNAME/CAA), email-security records (DMARC, SPF, DKIM across many selectors, BIMI, MTA-STS, TLS-RPT), common hostnames (autodiscover/mail/smtp/etc.), and related SRV records. It safely wraps Resolve-DnsName to normalize results (ok/missing/error/unsupported), flattens TXT values to extract things like the SPF/DMARC strings, and recursively expands SPF include:/redirect= chains up to a max depth while avoiding loops. If CAA lookups aren’t supported by the local Resolve-DnsName, it falls back to nslookup -type=caa, and it also resolves MX/apex IPs and performs PTR lookups for those IPs. Finally, it writes everything as JSON to C:\Temp&amp;lt;domain&amp;gt;.json and prints the saved path.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Test SMTP</title>
-      <link>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</link>
+      <link>https://trimad.github.io/posts/2025-07-03-smtp-test-with-powershell/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-07-03-smtp-test-with-powershell/</guid>
+      <guid>https://trimad.github.io/posts/2025-07-03-smtp-test-with-powershell/</guid>
       <description>PowerShell scripts for testing SMTP, with and without authentication.</description>
     </item>
     <item>
       <title>Complete DNS Records Reference Guide</title>
-      <link>http://localhost:1313/posts/2024-06-06-dns-records/</link>
+      <link>https://trimad.github.io/posts/2024-06-06-dns-records/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-06-dns-records/</guid>
+      <guid>https://trimad.github.io/posts/2024-06-06-dns-records/</guid>
       <description>A comprehensive reference guide for DNS record types and configurations, including DMARC, SPF, DKIM, MX, and other essential DNS records with examples and best practices.</description>
     </item>
     <item>
       <title>Gmail Photo Downloader</title>
-      <link>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</link>
+      <link>https://trimad.github.io/posts/2023-09-11-picture-auto-downloader/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-09-11-picture-auto-downloader/</guid>
+      <guid>https://trimad.github.io/posts/2023-09-11-picture-auto-downloader/</guid>
       <description>A Google Apps Script that automatically downloads embedded images from specific emails and organizes them into a Google Drive folder.</description>
     </item>
   </channel>

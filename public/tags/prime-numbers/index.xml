@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Prime-Numbers on Ghost Graph</title>
-    <link>http://localhost:1313/tags/prime-numbers/</link>
+    <link>https://trimad.github.io/tags/prime-numbers/</link>
     <description>Recent content in Prime-Numbers on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/prime-numbers/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/prime-numbers/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ulam Spiral</title>
-      <link>http://localhost:1313/posts/2018-05-17-ulam-sprial/</link>
+      <link>https://trimad.github.io/posts/2018-05-17-ulam-sprial/</link>
       <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-05-17-ulam-sprial/</guid>
+      <guid>https://trimad.github.io/posts/2018-05-17-ulam-sprial/</guid>
       <description>An interactive p5.js implementation of the Ulam Spiral, featuring adjustable grid size, animation controls, and the ability to search for diagonal prime number patterns in the spiral.</description>
     </item>
     <item>
       <title>Basic Prime Checker, C&#43;&#43;</title>
-      <link>http://localhost:1313/posts/2018-03-24-basic-prime-checker/</link>
+      <link>https://trimad.github.io/posts/2018-03-24-basic-prime-checker/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-03-24-basic-prime-checker/</guid>
+      <guid>https://trimad.github.io/posts/2018-03-24-basic-prime-checker/</guid>
       <description>A C++ program that efficiently checks for prime numbers using optimized division tests and square root-based factorization.</description>
     </item>
     <item>
       <title>Sieve of Eratosthenes</title>
-      <link>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</link>
+      <link>https://trimad.github.io/posts/2017-10-17-sieve-of-eratosthenes/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2017-10-17-sieve-of-eratosthenes/</guid>
+      <guid>https://trimad.github.io/posts/2017-10-17-sieve-of-eratosthenes/</guid>
       <description>An x86 MASM implementation of the Sieve of Eratosthenes algorithm that finds and counts prime numbers up to a given value n, translated from Java to assembly language.</description>
     </item>
   </channel>

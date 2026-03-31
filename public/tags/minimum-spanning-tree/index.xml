@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Minimum-Spanning-Tree on Ghost Graph</title>
-    <link>http://localhost:1313/tags/minimum-spanning-tree/</link>
+    <link>https://trimad.github.io/tags/minimum-spanning-tree/</link>
     <description>Recent content in Minimum-Spanning-Tree on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/minimum-spanning-tree/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/minimum-spanning-tree/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kruskal&#39;s Algorithm Visualized With Processing</title>
-      <link>http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/</link>
+      <link>https://trimad.github.io/posts/2018-04-11-kruskal-algorithm-processing/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-11-kruskal-algorithm-processing/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-11-kruskal-algorithm-processing/</guid>
       <description>A Processing implementation of Kruskal&amp;rsquo;s algorithm for finding minimum spanning trees in weighted graphs, demonstrating the O(E log E) greedy approach to network optimization.</description>
     </item>
     <item>
       <title>Minimum Spanning Tree Visualized</title>
-      <link>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</link>
+      <link>https://trimad.github.io/posts/2018-04-07-minimum-spanning-tree-visualized/</link>
       <pubDate>Sat, 07 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-07-minimum-spanning-tree-visualized/</guid>
+      <guid>https://trimad.github.io/posts/2018-04-07-minimum-spanning-tree-visualized/</guid>
       <description>A Processing visualization of Prim&amp;rsquo;s Algorithm creating a minimum spanning tree on procedurally generated terrain using Perlin noise height maps and orthographic projection.</description>
     </item>
   </channel>

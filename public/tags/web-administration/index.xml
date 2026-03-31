@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Web-Administration on Ghost Graph</title>
-    <link>http://localhost:1313/tags/web-administration/</link>
+    <link>https://trimad.github.io/tags/web-administration/</link>
     <description>Recent content in Web-Administration on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Jan 2026 12:29:24 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/web-administration/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/web-administration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automated IIS Application Pool Restart with PowerShell</title>
-      <link>http://localhost:1313/posts/2024-10-16-restart-iis-application/</link>
+      <link>https://trimad.github.io/posts/2024-10-16-restart-iis-application/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-10-16-restart-iis-application/</guid>
+      <guid>https://trimad.github.io/posts/2024-10-16-restart-iis-application/</guid>
       <description>A PowerShell script for safely restarting IIS application pools with comprehensive logging, including pre and post-restart process details and error handling.</description>
     </item>
   </channel>

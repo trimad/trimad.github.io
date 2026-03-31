@@ -2,1375 +2,1375 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Ghost Graph</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://trimad.github.io/tags/</link>
     <description>Recent content in Tags on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Mar 2026 22:12:56 -0400</lastBuildDate>
+    <atom:link href="https://trimad.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bat</title>
-      <link>http://localhost:1313/tags/bat/</link>
+      <link>https://trimad.github.io/tags/bat/</link>
       <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/bat/</guid>
+      <guid>https://trimad.github.io/tags/bat/</guid>
       <description></description>
     </item>
     <item>
       <title>Datto</title>
-      <link>http://localhost:1313/tags/datto/</link>
+      <link>https://trimad.github.io/tags/datto/</link>
       <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/datto/</guid>
+      <guid>https://trimad.github.io/tags/datto/</guid>
       <description></description>
     </item>
     <item>
       <title>RMM</title>
-      <link>http://localhost:1313/tags/rmm/</link>
+      <link>https://trimad.github.io/tags/rmm/</link>
       <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/rmm/</guid>
+      <guid>https://trimad.github.io/tags/rmm/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows</title>
-      <link>http://localhost:1313/tags/windows/</link>
+      <link>https://trimad.github.io/tags/windows/</link>
       <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/windows/</guid>
+      <guid>https://trimad.github.io/tags/windows/</guid>
       <description></description>
     </item>
     <item>
       <title>Automation</title>
-      <link>http://localhost:1313/tags/automation/</link>
+      <link>https://trimad.github.io/tags/automation/</link>
       <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/automation/</guid>
+      <guid>https://trimad.github.io/tags/automation/</guid>
       <description></description>
     </item>
     <item>
       <title>Markdown</title>
-      <link>http://localhost:1313/tags/markdown/</link>
+      <link>https://trimad.github.io/tags/markdown/</link>
       <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/markdown/</guid>
+      <guid>https://trimad.github.io/tags/markdown/</guid>
       <description></description>
     </item>
     <item>
       <title>Pdf</title>
-      <link>http://localhost:1313/tags/pdf/</link>
+      <link>https://trimad.github.io/tags/pdf/</link>
       <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/pdf/</guid>
+      <guid>https://trimad.github.io/tags/pdf/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/tags/python/</link>
+      <link>https://trimad.github.io/tags/python/</link>
       <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/python/</guid>
+      <guid>https://trimad.github.io/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Account-Lockout</title>
-      <link>http://localhost:1313/tags/account-lockout/</link>
+      <link>https://trimad.github.io/tags/account-lockout/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/account-lockout/</guid>
+      <guid>https://trimad.github.io/tags/account-lockout/</guid>
       <description></description>
     </item>
     <item>
       <title>Active-Directory</title>
-      <link>http://localhost:1313/tags/active-directory/</link>
+      <link>https://trimad.github.io/tags/active-directory/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/active-directory/</guid>
+      <guid>https://trimad.github.io/tags/active-directory/</guid>
       <description></description>
     </item>
     <item>
       <title>Domain-Controllers</title>
-      <link>http://localhost:1313/tags/domain-controllers/</link>
+      <link>https://trimad.github.io/tags/domain-controllers/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/domain-controllers/</guid>
+      <guid>https://trimad.github.io/tags/domain-controllers/</guid>
       <description></description>
     </item>
     <item>
       <title>Powershell</title>
-      <link>http://localhost:1313/tags/powershell/</link>
+      <link>https://trimad.github.io/tags/powershell/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/powershell/</guid>
+      <guid>https://trimad.github.io/tags/powershell/</guid>
       <description></description>
     </item>
     <item>
       <title>Security-Events</title>
-      <link>http://localhost:1313/tags/security-events/</link>
+      <link>https://trimad.github.io/tags/security-events/</link>
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/security-events/</guid>
+      <guid>https://trimad.github.io/tags/security-events/</guid>
       <description></description>
     </item>
     <item>
       <title>Gpo</title>
-      <link>http://localhost:1313/tags/gpo/</link>
+      <link>https://trimad.github.io/tags/gpo/</link>
       <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/gpo/</guid>
+      <guid>https://trimad.github.io/tags/gpo/</guid>
       <description></description>
     </item>
     <item>
       <title>Group-Policy</title>
-      <link>http://localhost:1313/tags/group-policy/</link>
+      <link>https://trimad.github.io/tags/group-policy/</link>
       <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/group-policy/</guid>
+      <guid>https://trimad.github.io/tags/group-policy/</guid>
       <description></description>
     </item>
     <item>
       <title>Sysadmin</title>
-      <link>http://localhost:1313/tags/sysadmin/</link>
+      <link>https://trimad.github.io/tags/sysadmin/</link>
       <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/sysadmin/</guid>
+      <guid>https://trimad.github.io/tags/sysadmin/</guid>
       <description></description>
     </item>
     <item>
       <title>ActiveDirectory</title>
-      <link>http://localhost:1313/tags/activedirectory/</link>
+      <link>https://trimad.github.io/tags/activedirectory/</link>
       <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/activedirectory/</guid>
+      <guid>https://trimad.github.io/tags/activedirectory/</guid>
       <description></description>
     </item>
     <item>
       <title>ADUC</title>
-      <link>http://localhost:1313/tags/aduc/</link>
+      <link>https://trimad.github.io/tags/aduc/</link>
       <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/aduc/</guid>
+      <guid>https://trimad.github.io/tags/aduc/</guid>
       <description></description>
     </item>
     <item>
       <title>DomainController</title>
-      <link>http://localhost:1313/tags/domaincontroller/</link>
+      <link>https://trimad.github.io/tags/domaincontroller/</link>
       <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/domaincontroller/</guid>
+      <guid>https://trimad.github.io/tags/domaincontroller/</guid>
       <description></description>
     </item>
     <item>
       <title>IncidentResponse</title>
-      <link>http://localhost:1313/tags/incidentresponse/</link>
+      <link>https://trimad.github.io/tags/incidentresponse/</link>
       <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/incidentresponse/</guid>
+      <guid>https://trimad.github.io/tags/incidentresponse/</guid>
       <description></description>
     </item>
     <item>
       <title>PasswordReset</title>
-      <link>http://localhost:1313/tags/passwordreset/</link>
+      <link>https://trimad.github.io/tags/passwordreset/</link>
       <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/passwordreset/</guid>
+      <guid>https://trimad.github.io/tags/passwordreset/</guid>
       <description></description>
     </item>
     <item>
       <title>Security</title>
-      <link>http://localhost:1313/tags/security/</link>
+      <link>https://trimad.github.io/tags/security/</link>
       <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/security/</guid>
+      <guid>https://trimad.github.io/tags/security/</guid>
       <description></description>
     </item>
     <item>
       <title>Accessibility</title>
-      <link>http://localhost:1313/tags/accessibility/</link>
+      <link>https://trimad.github.io/tags/accessibility/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/accessibility/</guid>
+      <guid>https://trimad.github.io/tags/accessibility/</guid>
       <description></description>
     </item>
     <item>
       <title>Design-System</title>
-      <link>http://localhost:1313/tags/design-system/</link>
+      <link>https://trimad.github.io/tags/design-system/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/design-system/</guid>
+      <guid>https://trimad.github.io/tags/design-system/</guid>
       <description></description>
     </item>
     <item>
       <title>Hugo</title>
-      <link>http://localhost:1313/tags/hugo/</link>
+      <link>https://trimad.github.io/tags/hugo/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/hugo/</guid>
+      <guid>https://trimad.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     <item>
       <title>Minimalism</title>
-      <link>http://localhost:1313/tags/minimalism/</link>
+      <link>https://trimad.github.io/tags/minimalism/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/minimalism/</guid>
+      <guid>https://trimad.github.io/tags/minimalism/</guid>
       <description></description>
     </item>
     <item>
       <title>Performance</title>
-      <link>http://localhost:1313/tags/performance/</link>
+      <link>https://trimad.github.io/tags/performance/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/performance/</guid>
+      <guid>https://trimad.github.io/tags/performance/</guid>
       <description></description>
     </item>
     <item>
       <title>Theme</title>
-      <link>http://localhost:1313/tags/theme/</link>
+      <link>https://trimad.github.io/tags/theme/</link>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/theme/</guid>
+      <guid>https://trimad.github.io/tags/theme/</guid>
       <description></description>
     </item>
     <item>
       <title>Dmarc</title>
-      <link>http://localhost:1313/tags/dmarc/</link>
+      <link>https://trimad.github.io/tags/dmarc/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/dmarc/</guid>
+      <guid>https://trimad.github.io/tags/dmarc/</guid>
       <description></description>
     </item>
     <item>
       <title>Dns</title>
-      <link>http://localhost:1313/tags/dns/</link>
+      <link>https://trimad.github.io/tags/dns/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/dns/</guid>
+      <guid>https://trimad.github.io/tags/dns/</guid>
       <description></description>
     </item>
     <item>
       <title>Email</title>
-      <link>http://localhost:1313/tags/email/</link>
+      <link>https://trimad.github.io/tags/email/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/email/</guid>
+      <guid>https://trimad.github.io/tags/email/</guid>
       <description></description>
     </item>
     <item>
       <title>Mx</title>
-      <link>http://localhost:1313/tags/mx/</link>
+      <link>https://trimad.github.io/tags/mx/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/mx/</guid>
+      <guid>https://trimad.github.io/tags/mx/</guid>
       <description></description>
     </item>
     <item>
       <title>Nslookup</title>
-      <link>http://localhost:1313/tags/nslookup/</link>
+      <link>https://trimad.github.io/tags/nslookup/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/nslookup/</guid>
+      <guid>https://trimad.github.io/tags/nslookup/</guid>
       <description></description>
     </item>
     <item>
       <title>Spf</title>
-      <link>http://localhost:1313/tags/spf/</link>
+      <link>https://trimad.github.io/tags/spf/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/spf/</guid>
+      <guid>https://trimad.github.io/tags/spf/</guid>
       <description></description>
     </item>
     <item>
       <title>Graph</title>
-      <link>http://localhost:1313/tags/graph/</link>
+      <link>https://trimad.github.io/tags/graph/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/graph/</guid>
+      <guid>https://trimad.github.io/tags/graph/</guid>
       <description></description>
     </item>
     <item>
       <title>Entra-Id</title>
-      <link>http://localhost:1313/tags/entra-id/</link>
+      <link>https://trimad.github.io/tags/entra-id/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/entra-id/</guid>
+      <guid>https://trimad.github.io/tags/entra-id/</guid>
       <description></description>
     </item>
     <item>
       <title>Exchange</title>
-      <link>http://localhost:1313/tags/exchange/</link>
+      <link>https://trimad.github.io/tags/exchange/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/exchange/</guid>
+      <guid>https://trimad.github.io/tags/exchange/</guid>
       <description></description>
     </item>
     <item>
       <title>Exchange-Online</title>
-      <link>http://localhost:1313/tags/exchange-online/</link>
+      <link>https://trimad.github.io/tags/exchange-online/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/exchange-online/</guid>
+      <guid>https://trimad.github.io/tags/exchange-online/</guid>
       <description></description>
     </item>
     <item>
       <title>M365</title>
-      <link>http://localhost:1313/tags/m365/</link>
+      <link>https://trimad.github.io/tags/m365/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/m365/</guid>
+      <guid>https://trimad.github.io/tags/m365/</guid>
       <description></description>
     </item>
     <item>
       <title>Microsoft-365</title>
-      <link>http://localhost:1313/tags/microsoft-365/</link>
+      <link>https://trimad.github.io/tags/microsoft-365/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/microsoft-365/</guid>
+      <guid>https://trimad.github.io/tags/microsoft-365/</guid>
       <description></description>
     </item>
     <item>
       <title>Microsoft-Graph</title>
-      <link>http://localhost:1313/tags/microsoft-graph/</link>
+      <link>https://trimad.github.io/tags/microsoft-graph/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/microsoft-graph/</guid>
+      <guid>https://trimad.github.io/tags/microsoft-graph/</guid>
       <description></description>
     </item>
     <item>
       <title>Api</title>
-      <link>http://localhost:1313/tags/api/</link>
+      <link>https://trimad.github.io/tags/api/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/api/</guid>
+      <guid>https://trimad.github.io/tags/api/</guid>
       <description></description>
     </item>
     <item>
       <title>Cmd</title>
-      <link>http://localhost:1313/tags/cmd/</link>
+      <link>https://trimad.github.io/tags/cmd/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/cmd/</guid>
+      <guid>https://trimad.github.io/tags/cmd/</guid>
       <description></description>
     </item>
     <item>
       <title>Entra</title>
-      <link>http://localhost:1313/tags/entra/</link>
+      <link>https://trimad.github.io/tags/entra/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/entra/</guid>
+      <guid>https://trimad.github.io/tags/entra/</guid>
       <description></description>
     </item>
     <item>
       <title>Profiles</title>
-      <link>http://localhost:1313/tags/profiles/</link>
+      <link>https://trimad.github.io/tags/profiles/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/profiles/</guid>
+      <guid>https://trimad.github.io/tags/profiles/</guid>
       <description></description>
     </item>
     <item>
       <title>Signin</title>
-      <link>http://localhost:1313/tags/signin/</link>
+      <link>https://trimad.github.io/tags/signin/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/signin/</guid>
+      <guid>https://trimad.github.io/tags/signin/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows11</title>
-      <link>http://localhost:1313/tags/windows11/</link>
+      <link>https://trimad.github.io/tags/windows11/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/windows11/</guid>
+      <guid>https://trimad.github.io/tags/windows11/</guid>
       <description></description>
     </item>
     <item>
       <title>Wmic</title>
-      <link>http://localhost:1313/tags/wmic/</link>
+      <link>https://trimad.github.io/tags/wmic/</link>
       <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/wmic/</guid>
+      <guid>https://trimad.github.io/tags/wmic/</guid>
       <description></description>
     </item>
     <item>
       <title>Azure</title>
-      <link>http://localhost:1313/tags/azure/</link>
+      <link>https://trimad.github.io/tags/azure/</link>
       <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/azure/</guid>
+      <guid>https://trimad.github.io/tags/azure/</guid>
       <description></description>
     </item>
     <item>
       <title>Conditional-Access</title>
-      <link>http://localhost:1313/tags/conditional-access/</link>
+      <link>https://trimad.github.io/tags/conditional-access/</link>
       <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/conditional-access/</guid>
+      <guid>https://trimad.github.io/tags/conditional-access/</guid>
       <description></description>
     </item>
     <item>
       <title>Ffmpeg</title>
-      <link>http://localhost:1313/tags/ffmpeg/</link>
+      <link>https://trimad.github.io/tags/ffmpeg/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ffmpeg/</guid>
+      <guid>https://trimad.github.io/tags/ffmpeg/</guid>
       <description></description>
     </item>
     <item>
       <title>Smtp</title>
-      <link>http://localhost:1313/tags/smtp/</link>
+      <link>https://trimad.github.io/tags/smtp/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/smtp/</guid>
+      <guid>https://trimad.github.io/tags/smtp/</guid>
       <description></description>
     </item>
     <item>
       <title>Spoofing</title>
-      <link>http://localhost:1313/tags/spoofing/</link>
+      <link>https://trimad.github.io/tags/spoofing/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/spoofing/</guid>
+      <guid>https://trimad.github.io/tags/spoofing/</guid>
       <description></description>
     </item>
     <item>
       <title>Yt-Dlp</title>
-      <link>http://localhost:1313/tags/yt-dlp/</link>
+      <link>https://trimad.github.io/tags/yt-dlp/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/yt-dlp/</guid>
+      <guid>https://trimad.github.io/tags/yt-dlp/</guid>
       <description></description>
     </item>
     <item>
       <title>Udm</title>
-      <link>http://localhost:1313/tags/udm/</link>
+      <link>https://trimad.github.io/tags/udm/</link>
       <pubDate>Wed, 18 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/udm/</guid>
+      <guid>https://trimad.github.io/tags/udm/</guid>
       <description></description>
     </item>
     <item>
       <title>Sysinternals</title>
-      <link>http://localhost:1313/tags/sysinternals/</link>
+      <link>https://trimad.github.io/tags/sysinternals/</link>
       <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/sysinternals/</guid>
+      <guid>https://trimad.github.io/tags/sysinternals/</guid>
       <description></description>
     </item>
     <item>
       <title>Troubleshooting</title>
-      <link>http://localhost:1313/tags/troubleshooting/</link>
+      <link>https://trimad.github.io/tags/troubleshooting/</link>
       <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/troubleshooting/</guid>
+      <guid>https://trimad.github.io/tags/troubleshooting/</guid>
       <description></description>
     </item>
     <item>
       <title>Windbg</title>
-      <link>http://localhost:1313/tags/windbg/</link>
+      <link>https://trimad.github.io/tags/windbg/</link>
       <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/windbg/</guid>
+      <guid>https://trimad.github.io/tags/windbg/</guid>
       <description></description>
     </item>
     <item>
       <title>Iis</title>
-      <link>http://localhost:1313/tags/iis/</link>
+      <link>https://trimad.github.io/tags/iis/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/iis/</guid>
+      <guid>https://trimad.github.io/tags/iis/</guid>
       <description></description>
     </item>
     <item>
       <title>Logging</title>
-      <link>http://localhost:1313/tags/logging/</link>
+      <link>https://trimad.github.io/tags/logging/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/logging/</guid>
+      <guid>https://trimad.github.io/tags/logging/</guid>
       <description></description>
     </item>
     <item>
       <title>Web-Administration</title>
-      <link>http://localhost:1313/tags/web-administration/</link>
+      <link>https://trimad.github.io/tags/web-administration/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/web-administration/</guid>
+      <guid>https://trimad.github.io/tags/web-administration/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows-Server</title>
-      <link>http://localhost:1313/tags/windows-server/</link>
+      <link>https://trimad.github.io/tags/windows-server/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/windows-server/</guid>
+      <guid>https://trimad.github.io/tags/windows-server/</guid>
       <description></description>
     </item>
     <item>
       <title>Officec2rclient</title>
-      <link>http://localhost:1313/tags/officec2rclient/</link>
+      <link>https://trimad.github.io/tags/officec2rclient/</link>
       <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/officec2rclient/</guid>
+      <guid>https://trimad.github.io/tags/officec2rclient/</guid>
       <description></description>
     </item>
     <item>
       <title>System-Administration</title>
-      <link>http://localhost:1313/tags/system-administration/</link>
+      <link>https://trimad.github.io/tags/system-administration/</link>
       <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/system-administration/</guid>
+      <guid>https://trimad.github.io/tags/system-administration/</guid>
       <description></description>
     </item>
     <item>
       <title>Version-Management</title>
-      <link>http://localhost:1313/tags/version-management/</link>
+      <link>https://trimad.github.io/tags/version-management/</link>
       <pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/version-management/</guid>
+      <guid>https://trimad.github.io/tags/version-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Batch-Processing</title>
-      <link>http://localhost:1313/tags/batch-processing/</link>
+      <link>https://trimad.github.io/tags/batch-processing/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/batch-processing/</guid>
+      <guid>https://trimad.github.io/tags/batch-processing/</guid>
       <description></description>
     </item>
     <item>
       <title>Image-Processing</title>
-      <link>http://localhost:1313/tags/image-processing/</link>
+      <link>https://trimad.github.io/tags/image-processing/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/image-processing/</guid>
+      <guid>https://trimad.github.io/tags/image-processing/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimization</title>
-      <link>http://localhost:1313/tags/optimization/</link>
+      <link>https://trimad.github.io/tags/optimization/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/optimization/</guid>
+      <guid>https://trimad.github.io/tags/optimization/</guid>
       <description></description>
     </item>
     <item>
       <title>Pil</title>
-      <link>http://localhost:1313/tags/pil/</link>
+      <link>https://trimad.github.io/tags/pil/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/pil/</guid>
+      <guid>https://trimad.github.io/tags/pil/</guid>
       <description></description>
     </item>
     <item>
       <title>Pillow</title>
-      <link>http://localhost:1313/tags/pillow/</link>
+      <link>https://trimad.github.io/tags/pillow/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/pillow/</guid>
+      <guid>https://trimad.github.io/tags/pillow/</guid>
       <description></description>
     </item>
     <item>
       <title>Curl</title>
-      <link>http://localhost:1313/tags/curl/</link>
+      <link>https://trimad.github.io/tags/curl/</link>
       <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/curl/</guid>
+      <guid>https://trimad.github.io/tags/curl/</guid>
       <description></description>
     </item>
     <item>
       <title>Ip-Address</title>
-      <link>http://localhost:1313/tags/ip-address/</link>
+      <link>https://trimad.github.io/tags/ip-address/</link>
       <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ip-address/</guid>
+      <guid>https://trimad.github.io/tags/ip-address/</guid>
       <description></description>
     </item>
     <item>
       <title>Shell</title>
-      <link>http://localhost:1313/tags/shell/</link>
+      <link>https://trimad.github.io/tags/shell/</link>
       <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/shell/</guid>
+      <guid>https://trimad.github.io/tags/shell/</guid>
       <description></description>
     </item>
     <item>
       <title>Domain-Management</title>
-      <link>http://localhost:1313/tags/domain-management/</link>
+      <link>https://trimad.github.io/tags/domain-management/</link>
       <pubDate>Thu, 06 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/domain-management/</guid>
+      <guid>https://trimad.github.io/tags/domain-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Data-Visualization</title>
-      <link>http://localhost:1313/tags/data-visualization/</link>
+      <link>https://trimad.github.io/tags/data-visualization/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/data-visualization/</guid>
+      <guid>https://trimad.github.io/tags/data-visualization/</guid>
       <description></description>
     </item>
     <item>
       <title>Permissions</title>
-      <link>http://localhost:1313/tags/permissions/</link>
+      <link>https://trimad.github.io/tags/permissions/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/permissions/</guid>
+      <guid>https://trimad.github.io/tags/permissions/</guid>
       <description></description>
     </item>
     <item>
       <title>Reporting</title>
-      <link>http://localhost:1313/tags/reporting/</link>
+      <link>https://trimad.github.io/tags/reporting/</link>
       <pubDate>Thu, 30 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/reporting/</guid>
+      <guid>https://trimad.github.io/tags/reporting/</guid>
       <description></description>
     </item>
     <item>
       <title>User-Management</title>
-      <link>http://localhost:1313/tags/user-management/</link>
+      <link>https://trimad.github.io/tags/user-management/</link>
       <pubDate>Thu, 30 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/user-management/</guid>
+      <guid>https://trimad.github.io/tags/user-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Computer-Vision</title>
-      <link>http://localhost:1313/tags/computer-vision/</link>
+      <link>https://trimad.github.io/tags/computer-vision/</link>
       <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/computer-vision/</guid>
+      <guid>https://trimad.github.io/tags/computer-vision/</guid>
       <description></description>
     </item>
     <item>
       <title>Moondream</title>
-      <link>http://localhost:1313/tags/moondream/</link>
+      <link>https://trimad.github.io/tags/moondream/</link>
       <pubDate>Mon, 25 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/moondream/</guid>
+      <guid>https://trimad.github.io/tags/moondream/</guid>
       <description></description>
     </item>
     <item>
       <title>Command-Line</title>
-      <link>http://localhost:1313/tags/command-line/</link>
+      <link>https://trimad.github.io/tags/command-line/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/command-line/</guid>
+      <guid>https://trimad.github.io/tags/command-line/</guid>
       <description></description>
     </item>
     <item>
       <title>Networking</title>
-      <link>http://localhost:1313/tags/networking/</link>
+      <link>https://trimad.github.io/tags/networking/</link>
       <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/networking/</guid>
+      <guid>https://trimad.github.io/tags/networking/</guid>
       <description></description>
     </item>
     <item>
       <title>Flask</title>
-      <link>http://localhost:1313/tags/flask/</link>
+      <link>https://trimad.github.io/tags/flask/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/flask/</guid>
+      <guid>https://trimad.github.io/tags/flask/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
-      <link>http://localhost:1313/tags/machine-learning/</link>
+      <link>https://trimad.github.io/tags/machine-learning/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/machine-learning/</guid>
+      <guid>https://trimad.github.io/tags/machine-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>N-Central</title>
-      <link>http://localhost:1313/tags/n-central/</link>
+      <link>https://trimad.github.io/tags/n-central/</link>
       <pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/n-central/</guid>
+      <guid>https://trimad.github.io/tags/n-central/</guid>
       <description></description>
     </item>
     <item>
       <title>Remote-Access</title>
-      <link>http://localhost:1313/tags/remote-access/</link>
+      <link>https://trimad.github.io/tags/remote-access/</link>
       <pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/remote-access/</guid>
+      <guid>https://trimad.github.io/tags/remote-access/</guid>
       <description></description>
     </item>
     <item>
       <title>File-System</title>
-      <link>http://localhost:1313/tags/file-system/</link>
+      <link>https://trimad.github.io/tags/file-system/</link>
       <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/file-system/</guid>
+      <guid>https://trimad.github.io/tags/file-system/</guid>
       <description></description>
     </item>
     <item>
       <title>Lan</title>
-      <link>http://localhost:1313/tags/lan/</link>
+      <link>https://trimad.github.io/tags/lan/</link>
       <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/lan/</guid>
+      <guid>https://trimad.github.io/tags/lan/</guid>
       <description></description>
     </item>
     <item>
       <title>Knowledge-Graphs</title>
-      <link>http://localhost:1313/tags/knowledge-graphs/</link>
+      <link>https://trimad.github.io/tags/knowledge-graphs/</link>
       <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/knowledge-graphs/</guid>
+      <guid>https://trimad.github.io/tags/knowledge-graphs/</guid>
       <description></description>
     </item>
     <item>
       <title>Llm</title>
-      <link>http://localhost:1313/tags/llm/</link>
+      <link>https://trimad.github.io/tags/llm/</link>
       <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/llm/</guid>
+      <guid>https://trimad.github.io/tags/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Mistral-7b</title>
-      <link>http://localhost:1313/tags/mistral-7b/</link>
+      <link>https://trimad.github.io/tags/mistral-7b/</link>
       <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/mistral-7b/</guid>
+      <guid>https://trimad.github.io/tags/mistral-7b/</guid>
       <description></description>
     </item>
     <item>
       <title>Nlp</title>
-      <link>http://localhost:1313/tags/nlp/</link>
+      <link>https://trimad.github.io/tags/nlp/</link>
       <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/nlp/</guid>
+      <guid>https://trimad.github.io/tags/nlp/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows-Update</title>
-      <link>http://localhost:1313/tags/windows-update/</link>
+      <link>https://trimad.github.io/tags/windows-update/</link>
       <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/windows-update/</guid>
+      <guid>https://trimad.github.io/tags/windows-update/</guid>
       <description></description>
     </item>
     <item>
       <title>Google-Apps-Script</title>
-      <link>http://localhost:1313/tags/google-apps-script/</link>
+      <link>https://trimad.github.io/tags/google-apps-script/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/google-apps-script/</guid>
+      <guid>https://trimad.github.io/tags/google-apps-script/</guid>
       <description></description>
     </item>
     <item>
       <title>Creative-Coding</title>
-      <link>http://localhost:1313/tags/creative-coding/</link>
+      <link>https://trimad.github.io/tags/creative-coding/</link>
       <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/creative-coding/</guid>
+      <guid>https://trimad.github.io/tags/creative-coding/</guid>
       <description></description>
     </item>
     <item>
       <title>P5js</title>
-      <link>http://localhost:1313/tags/p5js/</link>
+      <link>https://trimad.github.io/tags/p5js/</link>
       <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/p5js/</guid>
+      <guid>https://trimad.github.io/tags/p5js/</guid>
       <description></description>
     </item>
     <item>
       <title>Graphs</title>
-      <link>http://localhost:1313/tags/graphs/</link>
+      <link>https://trimad.github.io/tags/graphs/</link>
       <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/graphs/</guid>
+      <guid>https://trimad.github.io/tags/graphs/</guid>
       <description></description>
     </item>
     <item>
       <title>Network-Analysis</title>
-      <link>http://localhost:1313/tags/network-analysis/</link>
+      <link>https://trimad.github.io/tags/network-analysis/</link>
       <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/network-analysis/</guid>
+      <guid>https://trimad.github.io/tags/network-analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>Network-Drives</title>
-      <link>http://localhost:1313/tags/network-drives/</link>
+      <link>https://trimad.github.io/tags/network-drives/</link>
       <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/network-drives/</guid>
+      <guid>https://trimad.github.io/tags/network-drives/</guid>
       <description></description>
     </item>
     <item>
       <title>Registry-Modification</title>
-      <link>http://localhost:1313/tags/registry-modification/</link>
+      <link>https://trimad.github.io/tags/registry-modification/</link>
       <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/registry-modification/</guid>
+      <guid>https://trimad.github.io/tags/registry-modification/</guid>
       <description></description>
     </item>
     <item>
       <title>Sid</title>
-      <link>http://localhost:1313/tags/sid/</link>
+      <link>https://trimad.github.io/tags/sid/</link>
       <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/sid/</guid>
+      <guid>https://trimad.github.io/tags/sid/</guid>
       <description></description>
     </item>
     <item>
       <title>Programming</title>
-      <link>http://localhost:1313/tags/programming/</link>
+      <link>https://trimad.github.io/tags/programming/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/programming/</guid>
+      <guid>https://trimad.github.io/tags/programming/</guid>
       <description></description>
     </item>
     <item>
       <title>Python-Script</title>
-      <link>http://localhost:1313/tags/python-script/</link>
+      <link>https://trimad.github.io/tags/python-script/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/python-script/</guid>
+      <guid>https://trimad.github.io/tags/python-script/</guid>
       <description></description>
     </item>
     <item>
       <title>Qr-Code</title>
-      <link>http://localhost:1313/tags/qr-code/</link>
+      <link>https://trimad.github.io/tags/qr-code/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/qr-code/</guid>
+      <guid>https://trimad.github.io/tags/qr-code/</guid>
       <description></description>
     </item>
     <item>
       <title>Animation</title>
-      <link>http://localhost:1313/tags/animation/</link>
+      <link>https://trimad.github.io/tags/animation/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/animation/</guid>
+      <guid>https://trimad.github.io/tags/animation/</guid>
       <description></description>
     </item>
     <item>
       <title>Stable-Diffusion</title>
-      <link>http://localhost:1313/tags/stable-diffusion/</link>
+      <link>https://trimad.github.io/tags/stable-diffusion/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/stable-diffusion/</guid>
+      <guid>https://trimad.github.io/tags/stable-diffusion/</guid>
       <description></description>
     </item>
     <item>
       <title>Video</title>
-      <link>http://localhost:1313/tags/video/</link>
+      <link>https://trimad.github.io/tags/video/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/video/</guid>
+      <guid>https://trimad.github.io/tags/video/</guid>
       <description></description>
     </item>
     <item>
       <title>3d-Modeling</title>
-      <link>http://localhost:1313/tags/3d-modeling/</link>
+      <link>https://trimad.github.io/tags/3d-modeling/</link>
       <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/3d-modeling/</guid>
+      <guid>https://trimad.github.io/tags/3d-modeling/</guid>
       <description></description>
     </item>
     <item>
       <title>Photo-Editing</title>
-      <link>http://localhost:1313/tags/photo-editing/</link>
+      <link>https://trimad.github.io/tags/photo-editing/</link>
       <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/photo-editing/</guid>
+      <guid>https://trimad.github.io/tags/photo-editing/</guid>
       <description></description>
     </item>
     <item>
       <title>Nodejs</title>
-      <link>http://localhost:1313/tags/nodejs/</link>
+      <link>https://trimad.github.io/tags/nodejs/</link>
       <pubDate>Thu, 11 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/nodejs/</guid>
+      <guid>https://trimad.github.io/tags/nodejs/</guid>
       <description></description>
     </item>
     <item>
       <title>Debugging</title>
-      <link>http://localhost:1313/tags/debugging/</link>
+      <link>https://trimad.github.io/tags/debugging/</link>
       <pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/debugging/</guid>
+      <guid>https://trimad.github.io/tags/debugging/</guid>
       <description></description>
     </item>
     <item>
       <title>AI</title>
-      <link>http://localhost:1313/tags/ai/</link>
+      <link>https://trimad.github.io/tags/ai/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ai/</guid>
+      <guid>https://trimad.github.io/tags/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Net</title>
-      <link>http://localhost:1313/tags/net/</link>
+      <link>https://trimad.github.io/tags/net/</link>
       <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/net/</guid>
+      <guid>https://trimad.github.io/tags/net/</guid>
       <description></description>
     </item>
     <item>
       <title>Printers</title>
-      <link>http://localhost:1313/tags/printers/</link>
+      <link>https://trimad.github.io/tags/printers/</link>
       <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/printers/</guid>
+      <guid>https://trimad.github.io/tags/printers/</guid>
       <description></description>
     </item>
     <item>
       <title>Directory-Services</title>
-      <link>http://localhost:1313/tags/directory-services/</link>
+      <link>https://trimad.github.io/tags/directory-services/</link>
       <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/directory-services/</guid>
+      <guid>https://trimad.github.io/tags/directory-services/</guid>
       <description></description>
     </item>
     <item>
       <title>Password-Generator</title>
-      <link>http://localhost:1313/tags/password-generator/</link>
+      <link>https://trimad.github.io/tags/password-generator/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/password-generator/</guid>
+      <guid>https://trimad.github.io/tags/password-generator/</guid>
       <description></description>
     </item>
     <item>
       <title>Web-Development</title>
-      <link>http://localhost:1313/tags/web-development/</link>
+      <link>https://trimad.github.io/tags/web-development/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/web-development/</guid>
+      <guid>https://trimad.github.io/tags/web-development/</guid>
       <description></description>
     </item>
     <item>
       <title>Netsh</title>
-      <link>http://localhost:1313/tags/netsh/</link>
+      <link>https://trimad.github.io/tags/netsh/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/netsh/</guid>
+      <guid>https://trimad.github.io/tags/netsh/</guid>
       <description></description>
     </item>
     <item>
       <title>Network-Security</title>
-      <link>http://localhost:1313/tags/network-security/</link>
+      <link>https://trimad.github.io/tags/network-security/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/network-security/</guid>
+      <guid>https://trimad.github.io/tags/network-security/</guid>
       <description></description>
     </item>
     <item>
       <title>Windows-Defender</title>
-      <link>http://localhost:1313/tags/windows-defender/</link>
+      <link>https://trimad.github.io/tags/windows-defender/</link>
       <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/windows-defender/</guid>
+      <guid>https://trimad.github.io/tags/windows-defender/</guid>
       <description></description>
     </item>
     <item>
       <title>Audio</title>
-      <link>http://localhost:1313/tags/audio/</link>
+      <link>https://trimad.github.io/tags/audio/</link>
       <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/audio/</guid>
+      <guid>https://trimad.github.io/tags/audio/</guid>
       <description></description>
     </item>
     <item>
       <title>Cuda</title>
-      <link>http://localhost:1313/tags/cuda/</link>
+      <link>https://trimad.github.io/tags/cuda/</link>
       <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/cuda/</guid>
+      <guid>https://trimad.github.io/tags/cuda/</guid>
       <description></description>
     </item>
     <item>
       <title>Openai</title>
-      <link>http://localhost:1313/tags/openai/</link>
+      <link>https://trimad.github.io/tags/openai/</link>
       <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/openai/</guid>
+      <guid>https://trimad.github.io/tags/openai/</guid>
       <description></description>
     </item>
     <item>
       <title>Collaboration</title>
-      <link>http://localhost:1313/tags/collaboration/</link>
+      <link>https://trimad.github.io/tags/collaboration/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/collaboration/</guid>
+      <guid>https://trimad.github.io/tags/collaboration/</guid>
       <description></description>
     </item>
     <item>
       <title>Passwords</title>
-      <link>http://localhost:1313/tags/passwords/</link>
+      <link>https://trimad.github.io/tags/passwords/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/passwords/</guid>
+      <guid>https://trimad.github.io/tags/passwords/</guid>
       <description></description>
     </item>
     <item>
       <title>Team-Management</title>
-      <link>http://localhost:1313/tags/team-management/</link>
+      <link>https://trimad.github.io/tags/team-management/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/team-management/</guid>
+      <guid>https://trimad.github.io/tags/team-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Team-Ownership</title>
-      <link>http://localhost:1313/tags/team-ownership/</link>
+      <link>https://trimad.github.io/tags/team-ownership/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/team-ownership/</guid>
+      <guid>https://trimad.github.io/tags/team-ownership/</guid>
       <description></description>
     </item>
     <item>
       <title>Account Management</title>
-      <link>http://localhost:1313/tags/account-management/</link>
+      <link>https://trimad.github.io/tags/account-management/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/account-management/</guid>
+      <guid>https://trimad.github.io/tags/account-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Group Management</title>
-      <link>http://localhost:1313/tags/group-management/</link>
+      <link>https://trimad.github.io/tags/group-management/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/group-management/</guid>
+      <guid>https://trimad.github.io/tags/group-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Password Management</title>
-      <link>http://localhost:1313/tags/password-management/</link>
+      <link>https://trimad.github.io/tags/password-management/</link>
       <pubDate>Wed, 22 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/password-management/</guid>
+      <guid>https://trimad.github.io/tags/password-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Device-Management</title>
-      <link>http://localhost:1313/tags/device-management/</link>
+      <link>https://trimad.github.io/tags/device-management/</link>
       <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/device-management/</guid>
+      <guid>https://trimad.github.io/tags/device-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Drivers</title>
-      <link>http://localhost:1313/tags/drivers/</link>
+      <link>https://trimad.github.io/tags/drivers/</link>
       <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/drivers/</guid>
+      <guid>https://trimad.github.io/tags/drivers/</guid>
       <description></description>
     </item>
     <item>
       <title>Hardware</title>
-      <link>http://localhost:1313/tags/hardware/</link>
+      <link>https://trimad.github.io/tags/hardware/</link>
       <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/hardware/</guid>
+      <guid>https://trimad.github.io/tags/hardware/</guid>
       <description></description>
     </item>
     <item>
       <title>Decoding</title>
-      <link>http://localhost:1313/tags/decoding/</link>
+      <link>https://trimad.github.io/tags/decoding/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/decoding/</guid>
+      <guid>https://trimad.github.io/tags/decoding/</guid>
       <description></description>
     </item>
     <item>
       <title>Email-Security</title>
-      <link>http://localhost:1313/tags/email-security/</link>
+      <link>https://trimad.github.io/tags/email-security/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/email-security/</guid>
+      <guid>https://trimad.github.io/tags/email-security/</guid>
       <description></description>
     </item>
     <item>
       <title>Hex-Encoding</title>
-      <link>http://localhost:1313/tags/hex-encoding/</link>
+      <link>https://trimad.github.io/tags/hex-encoding/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/hex-encoding/</guid>
+      <guid>https://trimad.github.io/tags/hex-encoding/</guid>
       <description></description>
     </item>
     <item>
       <title>Obfuscation</title>
-      <link>http://localhost:1313/tags/obfuscation/</link>
+      <link>https://trimad.github.io/tags/obfuscation/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/obfuscation/</guid>
+      <guid>https://trimad.github.io/tags/obfuscation/</guid>
       <description></description>
     </item>
     <item>
       <title>Phishing</title>
-      <link>http://localhost:1313/tags/phishing/</link>
+      <link>https://trimad.github.io/tags/phishing/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/phishing/</guid>
+      <guid>https://trimad.github.io/tags/phishing/</guid>
       <description></description>
     </item>
     <item>
       <title>Uri-Encoding</title>
-      <link>http://localhost:1313/tags/uri-encoding/</link>
+      <link>https://trimad.github.io/tags/uri-encoding/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/uri-encoding/</guid>
+      <guid>https://trimad.github.io/tags/uri-encoding/</guid>
       <description></description>
     </item>
     <item>
       <title>Ad-Sync</title>
-      <link>http://localhost:1313/tags/ad-sync/</link>
+      <link>https://trimad.github.io/tags/ad-sync/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ad-sync/</guid>
+      <guid>https://trimad.github.io/tags/ad-sync/</guid>
       <description></description>
     </item>
     <item>
       <title>Azure-Ad-Connect</title>
-      <link>http://localhost:1313/tags/azure-ad-connect/</link>
+      <link>https://trimad.github.io/tags/azure-ad-connect/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/azure-ad-connect/</guid>
+      <guid>https://trimad.github.io/tags/azure-ad-connect/</guid>
       <description></description>
     </item>
     <item>
       <title>Domain-Controller</title>
-      <link>http://localhost:1313/tags/domain-controller/</link>
+      <link>https://trimad.github.io/tags/domain-controller/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/domain-controller/</guid>
+      <guid>https://trimad.github.io/tags/domain-controller/</guid>
       <description></description>
     </item>
     <item>
       <title>Synchronization</title>
-      <link>http://localhost:1313/tags/synchronization/</link>
+      <link>https://trimad.github.io/tags/synchronization/</link>
       <pubDate>Thu, 09 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/synchronization/</guid>
+      <guid>https://trimad.github.io/tags/synchronization/</guid>
       <description></description>
     </item>
     <item>
       <title>Hacked-Accounts</title>
-      <link>http://localhost:1313/tags/hacked-accounts/</link>
+      <link>https://trimad.github.io/tags/hacked-accounts/</link>
       <pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/hacked-accounts/</guid>
+      <guid>https://trimad.github.io/tags/hacked-accounts/</guid>
       <description></description>
     </item>
     <item>
       <title>Installation</title>
-      <link>http://localhost:1313/tags/installation/</link>
+      <link>https://trimad.github.io/tags/installation/</link>
       <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/installation/</guid>
+      <guid>https://trimad.github.io/tags/installation/</guid>
       <description></description>
     </item>
     <item>
       <title>Midas</title>
-      <link>http://localhost:1313/tags/midas/</link>
+      <link>https://trimad.github.io/tags/midas/</link>
       <pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/midas/</guid>
+      <guid>https://trimad.github.io/tags/midas/</guid>
       <description></description>
     </item>
     <item>
       <title>Tensorflow</title>
-      <link>http://localhost:1313/tags/tensorflow/</link>
+      <link>https://trimad.github.io/tags/tensorflow/</link>
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/tensorflow/</guid>
+      <guid>https://trimad.github.io/tags/tensorflow/</guid>
       <description></description>
     </item>
     <item>
       <title>Systeminfo</title>
-      <link>http://localhost:1313/tags/systeminfo/</link>
+      <link>https://trimad.github.io/tags/systeminfo/</link>
       <pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/systeminfo/</guid>
+      <guid>https://trimad.github.io/tags/systeminfo/</guid>
       <description></description>
     </item>
     <item>
       <title>Time</title>
-      <link>http://localhost:1313/tags/time/</link>
+      <link>https://trimad.github.io/tags/time/</link>
       <pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/time/</guid>
+      <guid>https://trimad.github.io/tags/time/</guid>
       <description></description>
     </item>
     <item>
       <title>Download</title>
-      <link>http://localhost:1313/tags/download/</link>
+      <link>https://trimad.github.io/tags/download/</link>
       <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/download/</guid>
+      <guid>https://trimad.github.io/tags/download/</guid>
       <description></description>
     </item>
     <item>
       <title>Fractal</title>
-      <link>http://localhost:1313/tags/fractal/</link>
+      <link>https://trimad.github.io/tags/fractal/</link>
       <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/fractal/</guid>
+      <guid>https://trimad.github.io/tags/fractal/</guid>
       <description></description>
     </item>
     <item>
       <title>Interactive</title>
-      <link>http://localhost:1313/tags/interactive/</link>
+      <link>https://trimad.github.io/tags/interactive/</link>
       <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/interactive/</guid>
+      <guid>https://trimad.github.io/tags/interactive/</guid>
       <description></description>
     </item>
     <item>
       <title>Spiral</title>
-      <link>http://localhost:1313/tags/spiral/</link>
+      <link>https://trimad.github.io/tags/spiral/</link>
       <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/spiral/</guid>
+      <guid>https://trimad.github.io/tags/spiral/</guid>
       <description></description>
     </item>
     <item>
       <title>Sound</title>
-      <link>http://localhost:1313/tags/sound/</link>
+      <link>https://trimad.github.io/tags/sound/</link>
       <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/sound/</guid>
+      <guid>https://trimad.github.io/tags/sound/</guid>
       <description></description>
     </item>
     <item>
       <title>Youtube-Dl</title>
-      <link>http://localhost:1313/tags/youtube-dl/</link>
+      <link>https://trimad.github.io/tags/youtube-dl/</link>
       <pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/youtube-dl/</guid>
+      <guid>https://trimad.github.io/tags/youtube-dl/</guid>
       <description></description>
     </item>
     <item>
       <title>Wifi</title>
-      <link>http://localhost:1313/tags/wifi/</link>
+      <link>https://trimad.github.io/tags/wifi/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/wifi/</guid>
+      <guid>https://trimad.github.io/tags/wifi/</guid>
       <description></description>
     </item>
     <item>
       <title>Vbscript</title>
-      <link>http://localhost:1313/tags/vbscript/</link>
+      <link>https://trimad.github.io/tags/vbscript/</link>
       <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/vbscript/</guid>
+      <guid>https://trimad.github.io/tags/vbscript/</guid>
       <description></description>
     </item>
     <item>
       <title>Reports</title>
-      <link>http://localhost:1313/tags/reports/</link>
+      <link>https://trimad.github.io/tags/reports/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/reports/</guid>
+      <guid>https://trimad.github.io/tags/reports/</guid>
       <description></description>
     </item>
     <item>
       <title>Calendars</title>
-      <link>http://localhost:1313/tags/calendars/</link>
+      <link>https://trimad.github.io/tags/calendars/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/calendars/</guid>
+      <guid>https://trimad.github.io/tags/calendars/</guid>
       <description></description>
     </item>
     <item>
       <title>Domain</title>
-      <link>http://localhost:1313/tags/domain/</link>
+      <link>https://trimad.github.io/tags/domain/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/domain/</guid>
+      <guid>https://trimad.github.io/tags/domain/</guid>
       <description></description>
     </item>
     <item>
       <title>Email-Management</title>
-      <link>http://localhost:1313/tags/email-management/</link>
+      <link>https://trimad.github.io/tags/email-management/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/email-management/</guid>
+      <guid>https://trimad.github.io/tags/email-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Exchange-Management</title>
-      <link>http://localhost:1313/tags/exchange-management/</link>
+      <link>https://trimad.github.io/tags/exchange-management/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/exchange-management/</guid>
+      <guid>https://trimad.github.io/tags/exchange-management/</guid>
       <description></description>
     </item>
     <item>
       <title>Processing</title>
-      <link>http://localhost:1313/tags/processing/</link>
+      <link>https://trimad.github.io/tags/processing/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/processing/</guid>
+      <guid>https://trimad.github.io/tags/processing/</guid>
       <description></description>
     </item>
     <item>
       <title>Visualization</title>
-      <link>http://localhost:1313/tags/visualization/</link>
+      <link>https://trimad.github.io/tags/visualization/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/visualization/</guid>
+      <guid>https://trimad.github.io/tags/visualization/</guid>
       <description></description>
     </item>
     <item>
       <title>Reference</title>
-      <link>http://localhost:1313/tags/reference/</link>
+      <link>https://trimad.github.io/tags/reference/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/reference/</guid>
+      <guid>https://trimad.github.io/tags/reference/</guid>
       <description></description>
     </item>
     <item>
       <title>Settings</title>
-      <link>http://localhost:1313/tags/settings/</link>
+      <link>https://trimad.github.io/tags/settings/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/settings/</guid>
+      <guid>https://trimad.github.io/tags/settings/</guid>
       <description></description>
     </item>
     <item>
       <title>Uri</title>
-      <link>http://localhost:1313/tags/uri/</link>
+      <link>https://trimad.github.io/tags/uri/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/uri/</guid>
+      <guid>https://trimad.github.io/tags/uri/</guid>
       <description></description>
     </item>
     <item>
       <title>Buddhabrot</title>
-      <link>http://localhost:1313/tags/buddhabrot/</link>
+      <link>https://trimad.github.io/tags/buddhabrot/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/buddhabrot/</guid>
+      <guid>https://trimad.github.io/tags/buddhabrot/</guid>
       <description></description>
     </item>
     <item>
       <title>Open-Simplex-Noise</title>
-      <link>http://localhost:1313/tags/open-simplex-noise/</link>
+      <link>https://trimad.github.io/tags/open-simplex-noise/</link>
       <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/open-simplex-noise/</guid>
+      <guid>https://trimad.github.io/tags/open-simplex-noise/</guid>
       <description></description>
     </item>
     <item>
       <title>Robocopy</title>
-      <link>http://localhost:1313/tags/robocopy/</link>
+      <link>https://trimad.github.io/tags/robocopy/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/robocopy/</guid>
+      <guid>https://trimad.github.io/tags/robocopy/</guid>
       <description></description>
     </item>
     <item>
       <title>Lorenz-System</title>
-      <link>http://localhost:1313/tags/lorenz-system/</link>
+      <link>https://trimad.github.io/tags/lorenz-system/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/lorenz-system/</guid>
+      <guid>https://trimad.github.io/tags/lorenz-system/</guid>
       <description></description>
     </item>
     <item>
       <title>Barnsley-Fern</title>
-      <link>http://localhost:1313/tags/barnsley-fern/</link>
+      <link>https://trimad.github.io/tags/barnsley-fern/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/barnsley-fern/</guid>
+      <guid>https://trimad.github.io/tags/barnsley-fern/</guid>
       <description></description>
     </item>
     <item>
       <title>Prime-Numbers</title>
-      <link>http://localhost:1313/tags/prime-numbers/</link>
+      <link>https://trimad.github.io/tags/prime-numbers/</link>
       <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/prime-numbers/</guid>
+      <guid>https://trimad.github.io/tags/prime-numbers/</guid>
       <description></description>
     </item>
     <item>
       <title>Bipartite Graph</title>
-      <link>http://localhost:1313/tags/bipartite-graph/</link>
+      <link>https://trimad.github.io/tags/bipartite-graph/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/bipartite-graph/</guid>
+      <guid>https://trimad.github.io/tags/bipartite-graph/</guid>
       <description></description>
     </item>
     <item>
       <title>Coding Challenge</title>
-      <link>http://localhost:1313/tags/coding-challenge/</link>
+      <link>https://trimad.github.io/tags/coding-challenge/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/coding-challenge/</guid>
+      <guid>https://trimad.github.io/tags/coding-challenge/</guid>
       <description></description>
     </item>
     <item>
       <title>Maximum Flow</title>
-      <link>http://localhost:1313/tags/maximum-flow/</link>
+      <link>https://trimad.github.io/tags/maximum-flow/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/maximum-flow/</guid>
+      <guid>https://trimad.github.io/tags/maximum-flow/</guid>
       <description></description>
     </item>
     <item>
       <title>Uva</title>
-      <link>http://localhost:1313/tags/uva/</link>
+      <link>https://trimad.github.io/tags/uva/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/uva/</guid>
+      <guid>https://trimad.github.io/tags/uva/</guid>
       <description></description>
     </item>
     <item>
       <title>Kattis</title>
-      <link>http://localhost:1313/tags/kattis/</link>
+      <link>https://trimad.github.io/tags/kattis/</link>
       <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/kattis/</guid>
+      <guid>https://trimad.github.io/tags/kattis/</guid>
       <description></description>
     </item>
     <item>
       <title>Bitset</title>
-      <link>http://localhost:1313/tags/bitset/</link>
+      <link>https://trimad.github.io/tags/bitset/</link>
       <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/bitset/</guid>
+      <guid>https://trimad.github.io/tags/bitset/</guid>
       <description></description>
     </item>
     <item>
       <title>Dag</title>
-      <link>http://localhost:1313/tags/dag/</link>
+      <link>https://trimad.github.io/tags/dag/</link>
       <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/dag/</guid>
+      <guid>https://trimad.github.io/tags/dag/</guid>
       <description></description>
     </item>
     <item>
       <title>Directed Acyclic Graph</title>
-      <link>http://localhost:1313/tags/directed-acyclic-graph/</link>
+      <link>https://trimad.github.io/tags/directed-acyclic-graph/</link>
       <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/directed-acyclic-graph/</guid>
+      <guid>https://trimad.github.io/tags/directed-acyclic-graph/</guid>
       <description></description>
     </item>
     <item>
       <title>Topological Sort</title>
-      <link>http://localhost:1313/tags/topological-sort/</link>
+      <link>https://trimad.github.io/tags/topological-sort/</link>
       <pubDate>Thu, 26 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/topological-sort/</guid>
+      <guid>https://trimad.github.io/tags/topological-sort/</guid>
       <description></description>
     </item>
     <item>
       <title>Disjoint Set</title>
-      <link>http://localhost:1313/tags/disjoint-set/</link>
+      <link>https://trimad.github.io/tags/disjoint-set/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/disjoint-set/</guid>
+      <guid>https://trimad.github.io/tags/disjoint-set/</guid>
       <description></description>
     </item>
     <item>
       <title>Kruskal</title>
-      <link>http://localhost:1313/tags/kruskal/</link>
+      <link>https://trimad.github.io/tags/kruskal/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/kruskal/</guid>
+      <guid>https://trimad.github.io/tags/kruskal/</guid>
       <description></description>
     </item>
     <item>
       <title>Minimum-Spanning-Tree</title>
-      <link>http://localhost:1313/tags/minimum-spanning-tree/</link>
+      <link>https://trimad.github.io/tags/minimum-spanning-tree/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/minimum-spanning-tree/</guid>
+      <guid>https://trimad.github.io/tags/minimum-spanning-tree/</guid>
       <description></description>
     </item>
     <item>
       <title>3n-Plus-1</title>
-      <link>http://localhost:1313/tags/3n-plus-1/</link>
+      <link>https://trimad.github.io/tags/3n-plus-1/</link>
       <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/3n-plus-1/</guid>
+      <guid>https://trimad.github.io/tags/3n-plus-1/</guid>
       <description></description>
     </item>
     <item>
       <title>Android</title>
-      <link>http://localhost:1313/tags/android/</link>
+      <link>https://trimad.github.io/tags/android/</link>
       <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/android/</guid>
+      <guid>https://trimad.github.io/tags/android/</guid>
       <description></description>
     </item>
     <item>
       <title>Merge-Sort</title>
-      <link>http://localhost:1313/tags/merge-sort/</link>
+      <link>https://trimad.github.io/tags/merge-sort/</link>
       <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/merge-sort/</guid>
+      <guid>https://trimad.github.io/tags/merge-sort/</guid>
       <description></description>
     </item>
     <item>
       <title>Sorting</title>
-      <link>http://localhost:1313/tags/sorting/</link>
+      <link>https://trimad.github.io/tags/sorting/</link>
       <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/sorting/</guid>
+      <guid>https://trimad.github.io/tags/sorting/</guid>
       <description></description>
     </item>
     <item>
       <title>10print</title>
-      <link>http://localhost:1313/tags/10print/</link>
+      <link>https://trimad.github.io/tags/10print/</link>
       <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/10print/</guid>
+      <guid>https://trimad.github.io/tags/10print/</guid>
       <description></description>
     </item>
     <item>
       <title>Insertion-Sort</title>
-      <link>http://localhost:1313/tags/insertion-sort/</link>
+      <link>https://trimad.github.io/tags/insertion-sort/</link>
       <pubDate>Sun, 28 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/insertion-sort/</guid>
+      <guid>https://trimad.github.io/tags/insertion-sort/</guid>
       <description></description>
     </item>
     <item>
       <title>Perlin-Noise</title>
-      <link>http://localhost:1313/tags/perlin-noise/</link>
+      <link>https://trimad.github.io/tags/perlin-noise/</link>
       <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/perlin-noise/</guid>
+      <guid>https://trimad.github.io/tags/perlin-noise/</guid>
       <description></description>
     </item>
     <item>
       <title>MASM</title>
-      <link>http://localhost:1313/tags/masm/</link>
+      <link>https://trimad.github.io/tags/masm/</link>
       <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/masm/</guid>
+      <guid>https://trimad.github.io/tags/masm/</guid>
       <description></description>
     </item>
     <item>
       <title>Fibonacci</title>
-      <link>http://localhost:1313/tags/fibonacci/</link>
+      <link>https://trimad.github.io/tags/fibonacci/</link>
       <pubDate>Sat, 07 Oct 2017 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/fibonacci/</guid>
+      <guid>https://trimad.github.io/tags/fibonacci/</guid>
       <description></description>
     </item>
     <item>
       <title>Arrays</title>
-      <link>http://localhost:1313/tags/arrays/</link>
+      <link>https://trimad.github.io/tags/arrays/</link>
       <pubDate>Tue, 13 Dec 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/arrays/</guid>
+      <guid>https://trimad.github.io/tags/arrays/</guid>
       <description></description>
     </item>
   </channel>

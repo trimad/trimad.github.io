@@ -2,73 +2,73 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Image-Processing on Ghost Graph</title>
-    <link>http://localhost:1313/tags/image-processing/</link>
+    <link>https://trimad.github.io/tags/image-processing/</link>
     <description>Recent content in Image-Processing on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Jan 2026 16:04:39 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/image-processing/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/image-processing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automated Batch Image Compression with Python</title>
-      <link>http://localhost:1313/posts/2024-07-30-batch-compress-images/</link>
+      <link>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-07-30-batch-compress-images/</guid>
+      <guid>https://trimad.github.io/posts/2024-07-30-batch-compress-images/</guid>
       <description>A Python script that automatically compresses PNG images by gradually reducing quality and color depth until a target file size is reached, using PIL (Python Imaging Library).</description>
     </item>
     <item>
       <title>QR Code Generator with Python</title>
-      <link>http://localhost:1313/posts/2023-06-24-qr/</link>
+      <link>https://trimad.github.io/posts/2023-06-24-qr/</link>
       <pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-06-24-qr/</guid>
+      <guid>https://trimad.github.io/posts/2023-06-24-qr/</guid>
       <description>A Python script using the qrcode library to generate customizable QR codes with error correction, including options for masking specific areas of the code.</description>
     </item>
     <item>
       <title>Deforum Cheat Sheet</title>
-      <link>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</link>
+      <link>https://trimad.github.io/posts/2023-05-24-deforum-cheat-sheet/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-24-deforum-cheat-sheet/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-24-deforum-cheat-sheet/</guid>
       <description>This is a cheat sheet of animations showing what the various 3D translation and rotation settings do in Deforum Stable Diffusion.</description>
     </item>
     <item>
       <title>Deep Floyd IF</title>
-      <link>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</link>
+      <link>https://trimad.github.io/posts/2023-05-03-deep-floyd-if/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-05-03-deep-floyd-if/</guid>
+      <guid>https://trimad.github.io/posts/2023-05-03-deep-floyd-if/</guid>
       <description>My tentative work flow for running Deep Floyd IF locally for image generation.</description>
     </item>
     <item>
       <title>Stable Diffusion Scripts</title>
-      <link>http://localhost:1313/posts/2023-02-05-stable-diffusion/</link>
+      <link>https://trimad.github.io/posts/2023-02-05-stable-diffusion/</link>
       <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2023-02-05-stable-diffusion/</guid>
+      <guid>https://trimad.github.io/posts/2023-02-05-stable-diffusion/</guid>
       <description>A comprehensive collection of utility scripts for automating image processing tasks with Stable Diffusion outputs, including batch file renaming, color grading, pixel art conversion, and video processing tools.</description>
     </item>
     <item>
       <title>Buddhabrot</title>
-      <link>http://localhost:1313/posts/2019-08-25-buddhabrot/</link>
+      <link>https://trimad.github.io/posts/2019-08-25-buddhabrot/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-25-buddhabrot/</guid>
+      <guid>https://trimad.github.io/posts/2019-08-25-buddhabrot/</guid>
       <description>An implementation of the Buddhabrot fractal rendering technique, which visualizes escape-time trajectories of points outside the Mandelbrot set, creating intricate patterns that resemble a seated Buddha figure.</description>
     </item>
     <item>
       <title>Lorenz Doll</title>
-      <link>http://localhost:1313/posts/2018-11-21-lorenz-doll/</link>
+      <link>https://trimad.github.io/posts/2018-11-21-lorenz-doll/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-11-21-lorenz-doll/</guid>
+      <guid>https://trimad.github.io/posts/2018-11-21-lorenz-doll/</guid>
       <description>A Processing visualization where each pixel of an image is transformed into a Lorenz System, with the system&amp;rsquo;s velocity mapped to the original pixel&amp;rsquo;s brightness values.</description>
     </item>
     <item>
       <title>Barnsley Fern</title>
-      <link>http://localhost:1313/posts/2018-06-28-barnsley-fern/</link>
+      <link>https://trimad.github.io/posts/2018-06-28-barnsley-fern/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-06-28-barnsley-fern/</guid>
+      <guid>https://trimad.github.io/posts/2018-06-28-barnsley-fern/</guid>
       <description>A Processing implementation of the Barnsley Fern fractal, demonstrating iterative geometric transformations to create a self-similar fern-like pattern with applications in computer graphics and chaos theory.</description>
     </item>
     <item>
       <title>Open Simplex Noise</title>
-      <link>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</link>
+      <link>https://trimad.github.io/posts/2018-01-02-open-simplex-noise/</link>
       <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-01-02-open-simplex-noise/</guid>
+      <guid>https://trimad.github.io/posts/2018-01-02-open-simplex-noise/</guid>
       <description>A Processing implementation exploring 4D Simplex Noise to create smooth, organic looping animations through a 2D grid of pixel objects with variable noise scaling.</description>
     </item>
   </channel>

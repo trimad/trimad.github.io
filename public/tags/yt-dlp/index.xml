@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Yt-Dlp on Ghost Graph</title>
-    <link>http://localhost:1313/tags/yt-dlp/</link>
+    <link>https://trimad.github.io/tags/yt-dlp/</link>
     <description>Recent content in Yt-Dlp on Ghost Graph</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 11 Dec 2025 13:07:57 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/yt-dlp/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://trimad.github.io/tags/yt-dlp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Videos as Teams Backgrounds</title>
-      <link>http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/</link>
+      <link>https://trimad.github.io/posts/2025-07-02-videos-as-teams-backgrounds/</link>
       <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2025-07-02-videos-as-teams-backgrounds/</guid>
+      <guid>https://trimad.github.io/posts/2025-07-02-videos-as-teams-backgrounds/</guid>
       <description>How to turn any YouTube video into your Microsoft Teams background.</description>
     </item>
     <item>
       <title>Download YouTube Videos</title>
-      <link>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</link>
+      <link>https://trimad.github.io/posts/2022-04-16-downloading-youtube-videos/</link>
       <pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-04-16-downloading-youtube-videos/</guid>
+      <guid>https://trimad.github.io/posts/2022-04-16-downloading-youtube-videos/</guid>
       <description>A guide to downloading YouTube videos and audio using yt-dlp and youtube-dl command-line tools, including various options for format selection and quality settings.</description>
     </item>
   </channel>
