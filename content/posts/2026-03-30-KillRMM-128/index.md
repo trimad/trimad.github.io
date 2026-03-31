@@ -21,7 +21,7 @@ Run it locally on the target machine with administrative rights. The script is i
 
 ## Download
 
-{{< download-resource file="KillRMM-128.bat" title="Batch File" label="Download KillRMM-128.bat" >}}
+{{< download-resource file="KillRMM-128.zip" title="Batch File" label="Download KillRMM-128.bat" >}}
 This page bundles the exact `.bat` file described here, so the download button points directly to the page resource.
 {{< /download-resource >}}
 
