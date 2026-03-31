@@ -1,0 +1,94 @@
+{{- $page := .page -}}
+{{- $destination := .destination | default "" -}}
+{{- $alt := .alt | default "" -}}
+{{- $title := .title | default "" -}}
+{{- $classValue := .class | default "" -}}
+{{- $loading := .loading | default "lazy" -}}
+{{- $decoding := .decoding | default "async" -}}
+{{- $fetchPriority := .fetchPriority | default "" -}}
+{{- $sizes := .sizes | default "100vw" -}}
+{{- $widths := .widths | default (slice 480 720 960 1280 1600) -}}
+{{- $defaultWidth := .defaultWidth | default 960 -}}
+{{- $attributes := .attributes | default dict -}}
+{{- $destination = trim $destination " " -}}
+{{- if $destination -}}
+  {{- with index $attributes "class" -}}
+    {{- if $classValue -}}
+      {{- $classValue = printf "%s %s" $classValue . -}}
+    {{- else -}}
+      {{- $classValue = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $classValue = trim (replaceRE "\\s+" " " $classValue) " " -}}
+  {{- $id := index $attributes "id" | default "" -}}
+  {{- $src := "" -}}
+  {{- $resource := false -}}
+  {{- $lowerDestination := lower $destination -}}
+  {{- $isRemote := or (hasPrefix $lowerDestination "http://") (hasPrefix $lowerDestination "https://") (hasPrefix $lowerDestination "//") (hasPrefix $lowerDestination "data:") -}}
+  {{- if and (not $isRemote) $page -}}
+    {{- with $page.Resources.GetMatch $destination -}}
+      {{- $resource = . -}}
+    {{- else -}}
+      {{- $base := path.Base $destination -}}
+      {{- with $page.Resources.GetMatch (printf "*%s*" $base) -}}
+        {{- $resource = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if and (not $resource) (not $isRemote) -}}
+    {{- $globalPath := replaceRE "^/" "" $destination -}}
+    {{- with resources.Get $globalPath -}}
+      {{- $resource = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $resource -}}
+    {{- $src = $resource.RelPermalink -}}
+  {{- else if $isRemote -}}
+    {{- $src = $destination | safeURL -}}
+  {{- else if hasPrefix $destination "/" -}}
+    {{- $src = $destination | relURL -}}
+  {{- else -}}
+    {{- $src = $destination | safeURL -}}
+  {{- end -}}
+  {{- if $src -}}
+    {{- $reserved := dict "alt" true "class" true "decoding" true "fetchpriority" true "height" true "id" true "loading" true "sizes" true "src" true "srcset" true "title" true "width" true -}}
+    {{- $processable := false -}}
+    {{- if $resource -}}
+      {{- $processable = and (eq $resource.ResourceType "image") (not (in (slice "gif" "svg+xml") $resource.MediaType.SubType)) -}}
+    {{- end -}}
+    {{- $image := $resource -}}
+    {{- $srcset := slice -}}
+    {{- if and $resource (eq $resource.ResourceType "image") -}}
+      {{- if $processable -}}
+        {{- range $widths -}}
+          {{- if lt . $resource.Width -}}
+            {{- $variant := $resource.Resize (printf "%dx" .) -}}
+            {{- $srcset = $srcset | append (printf "%s %dw" $variant.RelPermalink $variant.Width) -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $srcset = $srcset | append (printf "%s %dw" $resource.RelPermalink $resource.Width) -}}
+        {{- if gt $defaultWidth $resource.Width -}}
+          {{- $defaultWidth = $resource.Width -}}
+        {{- end -}}
+        {{- if lt $defaultWidth $resource.Width -}}
+          {{- $image = $resource.Resize (printf "%dx" $defaultWidth) -}}
+        {{- end -}}
+        {{- $src = $image.RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+    <img
+      src="{{ $src }}"
+      alt="{{ $alt }}"
+      {{- with $title }} title="{{ . }}"{{ end }}
+      {{- with $classValue }} class="{{ . }}"{{ end }}
+      {{- with $id }} id="{{ . }}"{{ end }}
+      loading="{{ $loading }}"
+      decoding="{{ $decoding }}"
+      {{- if and $image (eq $image.ResourceType "image") }} width="{{ $image.Width }}" height="{{ $image.Height }}"{{ end }}
+      {{- if gt (len $srcset) 0 }} srcset="{{ delimit $srcset ", " }}" sizes="{{ $sizes }}"{{ end }}
+      {{- with $fetchPriority }} fetchpriority="{{ . }}"{{ end }}
+      {{- range $key, $value := $attributes }}
+        {{- if not (index $reserved $key) }} {{ printf "%s=%q" $key $value | safeHTMLAttr }}{{ end -}}
+      {{- end -}}>
+  {{- end -}}
+{{- end -}}

@@ -12,13 +12,13 @@ usePageBundles: true
 
 _k-means clustering_ is a method of vector quantization, originally from signal processing, that aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean (cluster centers or cluster centroid), serving as a prototype of the cluster. This results in a partitioning of the data space into Voronoi cells.
 
-{{< figure src="ZWxy72b.gif" alt="K=2" >}}
+![K=2](ZWxy72b.gif)
 
-{{< figure src="YM1LT77.gif" alt="K=3" >}}
+![K=3](YM1LT77.gif)
 
-{{< figure src="2a4rs4L.gif" alt="K=4" >}}
+![K=4](2a4rs4L.gif)
 
-{{< figure src="IY8X6gJ.gif" alt="K=5" >}}
+![K=5](IY8X6gJ.gif)
 
 GitHub repository: https://github.com/Trimad/k-means-clustering
 

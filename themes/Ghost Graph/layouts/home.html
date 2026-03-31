@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ .Scratch.Set "showGraph" true }}
+{{ .Store.Set "showGraph" true }}
 {{- $allPages := .Site.RegularPages -}}
 {{- $recent := first 6 (sort $allPages "Lastmod" "desc") -}}
 {{- $latest := first 1 (sort $allPages "Lastmod" "desc") -}}

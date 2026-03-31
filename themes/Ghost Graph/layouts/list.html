@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ .Scratch.Set "showGraph" true }}
+{{ .Store.Set "showGraph" true }}
 {{- $isTerm := eq .Kind "term" -}}
 {{- $pages := .Pages -}}
 {{- if eq .Kind "section" -}}

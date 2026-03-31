@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ .Scratch.Set "showGraph" true }}
+{{ .Store.Set "showGraph" true }}
 {{- $terms := .Data.Terms.ByCount -}}
 {{- $count := len $terms -}}
 {{- $summary := .Description | default (printf "Browse %s as a first-class index, then open the atlas to see how they connect across the site." (lower .Title)) -}}

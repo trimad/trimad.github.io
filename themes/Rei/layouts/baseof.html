@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+<html lang="{{ .Site.Language.Locale | default "en-US" }}">
   <head>
     {{ partial "head.html" . }}
   </head>
@@ -14,7 +14,7 @@
     </div>
     {{- $mainJs := resources.Get "js/main.js" | minify | fingerprint -}}
     <script src="{{ $mainJs.RelPermalink }}" defer></script>
-    {{- if .Scratch.Get "hasMemoryField" -}}
+    {{- if .Store.Get "hasMemoryField" -}}
       {{- $memoryJs := resources.Get "js/memory-field.js" | minify | fingerprint -}}
       <script src="{{ $memoryJs.RelPermalink }}" defer></script>
     {{- end -}}

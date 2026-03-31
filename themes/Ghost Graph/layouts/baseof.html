@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+<html lang="{{ .Site.Language.Locale | default "en-US" }}">
   <head>
     {{ partial "head.html" . }}
   </head>
@@ -10,7 +10,7 @@
       {{ block "main" . }}{{ end }}
       {{ partial "site-footer.html" . }}
     </div>
-    {{- if .Scratch.Get "showGraph" -}}
+    {{- if .Store.Get "showGraph" -}}
       {{ partial "dag-data.html" . }}
       <script src="https://cdn.jsdelivr.net/npm/force-graph"></script>
       {{- $js := resources.Get "js/dag.js" | minify | fingerprint -}}

@@ -32,7 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.145.0
+      HUGO_VERSION: 0.159.1
       HUGO_ENVIRONMENT: production
       TZ: America/Los_Angeles
     steps:
@@ -66,6 +66,7 @@ jobs:
           hugo \
             --gc \
             --minify \
+            --panicOnWarning \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
             --cacheDir "${{ runner.temp }}/hugo_cache"
       - name: Cache Save

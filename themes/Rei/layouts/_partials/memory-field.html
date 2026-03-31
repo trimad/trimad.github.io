@@ -1,5 +1,5 @@
 {{- $page := .page | default . -}}
-{{- $page.Scratch.Set "hasMemoryField" true -}}
+{{- $page.Store.Set "hasMemoryField" true -}}
 {{- $id := .id | default "memory-field" -}}
 {{- $title := .title | default "Memory Field" -}}
 {{- $summary := .summary | default "A relationship map connecting categories, tags, and entries." -}}

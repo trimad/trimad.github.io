@@ -1,0 +1,35 @@
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- $caption := .Get "caption" | default (trim .Inner " \r\n\t") | default (.Get "title") -}}
+{{- $title := .Get "title" | default "" -}}
+{{- $alt := .Get "alt" | default $caption | default "" -}}
+{{- $class := .Get "class" | default "" -}}
+{{- $link := .Get "link" | default "" -}}
+{{- $attr := .Get "attr" | default "" -}}
+{{- $attrLink := .Get "attrlink" | default "" -}}
+{{- if $src -}}
+  <figure{{ with $class }} class="{{ . }}"{{ end }}>
+    {{- if $link }}<a href="{{ $link | safeURL }}">{{ end -}}
+    {{- partial "media/image.html" (dict
+      "page" .Page
+      "destination" $src
+      "alt" $alt
+      "title" $title
+      "loading" "lazy"
+      "decoding" "async"
+    ) -}}
+    {{- if $link }}</a>{{ end -}}
+    {{- if or $caption $attr -}}
+      <figcaption>
+        {{- with $caption }}{{ . | $.Page.RenderString }}{{ end -}}
+        {{- with $attr -}}
+          {{- if $caption }} <span class="figure-attribution-separator">·</span> {{ end -}}
+          {{- if $attrLink -}}
+            <a href="{{ $attrLink | safeURL }}">{{ . }}</a>
+          {{- else -}}
+            {{ . }}
+          {{- end -}}
+        {{- end -}}
+      </figcaption>
+    {{- end -}}
+  </figure>
+{{- end -}}

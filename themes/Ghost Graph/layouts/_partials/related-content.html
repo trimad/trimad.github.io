@@ -1,0 +1,24 @@
+{{- $opts := dict "document" . "indices" (slice "tags" "categories" "keywords") -}}
+{{- $related := .Site.RegularPages.Related $opts -}}
+{{- $related = where $related "RelPermalink" "ne" .RelPermalink -}}
+{{- if gt (len $related) 0 -}}
+  {{- $related = first 4 $related -}}
+{{- else if .Section -}}
+  {{- $related = first 4 (sort (where (where .Site.RegularPages "RelPermalink" "ne" .RelPermalink) "Section" .Section) "Lastmod" "desc") -}}
+{{- end -}}
+{{- if gt (len $related) 0 -}}
+  <section class="sv-section">
+    <div class="sv-section-heading">
+      <div>
+        <div class="sv-kicker">Connected Reading</div>
+        <h2 class="sv-section-title">Related signals</h2>
+        <p class="sv-section-summary">Ranked from shared tags, categories, and keywords, with recent section entries used as a fallback.</p>
+      </div>
+    </div>
+    <div class="sv-card-grid sv-card-grid--related">
+      {{- range $related -}}
+        {{ partial "article-card.html" (dict "page" .) }}
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}

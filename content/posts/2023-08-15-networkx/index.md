@@ -193,5 +193,5 @@ plt.show()
 }
 ```
 ## Graph Output
-{{< figure src="graph.png" >}}
+![](graph.png)
 

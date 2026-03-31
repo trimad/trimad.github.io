@@ -1,5 +1,5 @@
 baseURL = 'https://trimad.github.io'
-languageCode = 'en-us'
+locale = 'en-US'
 title = 'Ghost Graph'
 
 theme = "Rei"
@@ -8,6 +8,39 @@ relativeURLs = false
 canonifyURLs = true
 
 enableGitInfo = true
+
+[module]
+  [module.hugoVersion]
+    min = "0.159.1"
+
+[related]
+  includeNewer = true
+  threshold = 25
+  toLower = true
+  [[related.indices]]
+    name = "tags"
+    type = "basic"
+    applyFilter = false
+    cardinalityThreshold = 0
+    pattern = ""
+    toLower = true
+    weight = 100
+  [[related.indices]]
+    name = "categories"
+    type = "basic"
+    applyFilter = false
+    cardinalityThreshold = 0
+    pattern = ""
+    toLower = true
+    weight = 80
+  [[related.indices]]
+    name = "keywords"
+    type = "basic"
+    applyFilter = false
+    cardinalityThreshold = 0
+    pattern = ""
+    toLower = true
+    weight = 40
 
 [taxonomies]
   category = "categories"
@@ -28,6 +61,11 @@ enableRobotsTXT = true
 
 [markup]
   [markup.goldmark]
+    [markup.goldmark.parser]
+      wrapStandAloneImageWithinParagraph = false
+      [markup.goldmark.parser.attribute]
+        title = true
+        block = true
     [markup.goldmark.renderer]
       unsafe = true
   [markup.tableOfContents]
