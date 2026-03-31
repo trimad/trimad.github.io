@@ -1,2 +1,5 @@
-public/
-.codex-build/
+/public/
+/resources/_gen/
+/.hugo_build.lock
+/.codex-temp/
+/.codex-build/
