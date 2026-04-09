@@ -1,6 +1,7 @@
 {{ define "main" }}
-  {{- $byLastmod := .Site.RegularPages.ByLastmod.Reverse -}}
-  {{- $recent := first 5 $byLastmod -}}
+  {{- $posts := where .Site.RegularPages "Section" "eq" "posts" -}}
+  {{- $recentCreated := first 10 ($posts.ByDate.Reverse) -}}
+  {{- $recentUpdated := first 10 ($posts.ByLastmod.Reverse) -}}
   <main class="rei-page rei-home" id="content">
     <section class="rei-chamber rei-chamber--solo">
       <div class="rei-chamber__lead">
@@ -10,10 +11,9 @@
           {{ .Site.Params.description | default "Technical notes, prompts, diagnostics, and archived material." }}
         </p>
         <div class="rei-button-row">
+          <a class="rei-button" href="#recently-created">Recently Created</a>
+          <a class="rei-button" href="#recently-updated">Recently Updated</a>
           <a class="rei-button rei-button--primary" href="#memory-field">Memory Field</a>
-          <a class="rei-button" href="#recent-updates">Recent Updates</a>
-          <a class="rei-button" href="#top-categories">Top Categories</a>
-          <a class="rei-button" href="#common-tags">Common Tags</a>
         </div>
         <div class="rei-stat-strip" aria-label="Site overview">
           <div class="rei-stat">
@@ -32,6 +32,43 @@
       </div>
     </section>
 
+    <section class="rei-section rei-index-panels">
+      <section class="rei-index-panel" id="recently-created">
+        <div class="rei-section__head">
+          <div>
+            <p class="rei-kicker"><span></span>Recently Created</p>
+            <h2 class="rei-section__title">Latest posts created</h2>
+            <p class="rei-section__summary">The 10 most recently created posts, sorted by each post's publish date.</p>
+          </div>
+        </div>
+        <ol class="rei-ranking">
+          {{- range $recentCreated -}}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+            </li>
+          {{- end -}}
+        </ol>
+      </section>
+      <section class="rei-index-panel" id="recently-updated">
+        <div class="rei-section__head">
+          <div>
+            <p class="rei-kicker"><span></span>Recently Updated</p>
+            <h2 class="rei-section__title">Latest revisions across posts</h2>
+            <p class="rei-section__summary">The 10 most recently updated posts, sorted by each post's last modification date.</p>
+          </div>
+        </div>
+        <ol class="rei-ranking">
+          {{- range $recentUpdated -}}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              <span>{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+            </li>
+          {{- end -}}
+        </ol>
+      </section>
+    </section>
+
     {{ partial "memory-field.html" (dict
       "page" .
       "id" "memory-field"
@@ -42,55 +79,5 @@
       "pageLabelSingular" "Post"
       "pageLabelPlural" "Posts"
     ) }}
-
-    <section class="rei-section" id="recent-updates">
-      <div class="rei-section__head">
-        <div>
-          <p class="rei-kicker"><span></span>Recent Updates</p>
-          <h2 class="rei-section__title">Fresh material across the archive</h2>
-          <p class="rei-section__summary">Latest updates from across posts, prompts, and archived material.</p>
-        </div>
-      </div>
-      <div class="rei-ledger">
-        {{- range $recent -}}
-          {{ partial "article-card.html" (dict "page" . "compact" false) }}
-        {{- end -}}
-      </div>
-    </section>
-
-    <section class="rei-section rei-index-panels">
-      <section class="rei-index-panel" id="top-categories">
-        <div class="rei-section__head">
-          <div>
-            <p class="rei-kicker"><span></span>Top Categories</p>
-            <h2 class="rei-section__title">Dominant categories</h2>
-          </div>
-        </div>
-        <ol class="rei-ranking">
-          {{- range first 8 .Site.Taxonomies.categories.ByCount -}}
-            <li>
-              <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
-              <span>{{ .Count }}</span>
-            </li>
-          {{- end -}}
-        </ol>
-      </section>
-      <section class="rei-index-panel" id="common-tags">
-        <div class="rei-section__head">
-          <div>
-            <p class="rei-kicker"><span></span>Common Tags</p>
-            <h2 class="rei-section__title">Frequent signals</h2>
-          </div>
-        </div>
-        <ol class="rei-ranking">
-          {{- range first 10 .Site.Taxonomies.tags.ByCount -}}
-            <li>
-              <a href="{{ .Page.RelPermalink }}">#{{ .Page.Title }}</a>
-              <span>{{ .Count }}</span>
-            </li>
-          {{- end -}}
-        </ol>
-      </section>
-    </section>
   </main>
 {{ end }}

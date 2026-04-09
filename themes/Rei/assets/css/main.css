@@ -69,6 +69,7 @@
   --reading-width: min(44rem, 100%);
   --fast: 140ms ease;
   --base: 240ms ease;
+  --nav-eye-blink-duration: 800ms;
 }
 
 *,
@@ -944,6 +945,12 @@ button {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.55);
+}
+
+.rei-prose img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
 }
 
 .rei-prose figcaption {
@@ -1838,7 +1845,7 @@ a {
 
 .rei-nav a:hover::before,
 .rei-nav a:focus-visible::before {
-  animation: rei-nav-eye-blink 1000ms ease-in-out 1;
+  animation: rei-nav-eye-blink var(--nav-eye-blink-duration) ease-in-out 1;
 }
 
 .rei-kicker span,
@@ -2625,6 +2632,6 @@ a {
 
   .rei-nav a:hover::before,
   .rei-nav a:focus-visible::before {
-    animation-duration: 1000ms !important;
+    animation-duration: var(--nav-eye-blink-duration) !important;
   }
 }

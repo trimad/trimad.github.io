@@ -1,61 +1,61 @@
 ---
-title: "Search Domain GPOs for Any Text String with PowerShell"
+author: "Tristan Madden"
+categories:
+  - "PowerShell"
+  - "Active Directory"
 date: 2026-03-05
-description: "A PowerShell approach for searching every Group Policy Object in an Active Directory domain for any string or setting reference."
-tags: ["powershell", "group-policy", "active-directory", "gpo", "sysadmin"]
-categories: ["PowerShell", "Active Directory"]
 draft: false
+summary: "Search every Group Policy Object in an Active Directory domain for a setting name, registry path, or other text string with PowerShell, and optionally export all GPO XML reports for offline review."
+tags:
+  - "powershell"
+  - "group-policy"
+  - "active-directory"
+  - "gpo"
+  - "sysadmin"
+title: "Search Domain GPOs for Any Text String with PowerShell"
+toc: true
+usePageBundles: true
 ---
 
 ## Overview
 
-When troubleshooting domain policy behavior, one of the most common challenges is identifying **which Group Policy Object (GPO) contains a specific setting, keyword, or registry reference**.
+When troubleshooting domain policy behavior, one of the most frustrating steps is figuring out which Group Policy Object (GPO) contains a specific setting, registry reference, or text string.
 
-In environments with dozens or hundreds of GPOs, manually inspecting
-each policy in the **Group Policy Management Console (GPMC)** can be
-time-consuming.
+In domains with dozens or hundreds of GPOs, checking each policy manually in Group Policy Management Console (`gpmc.msc`) is slow. This post includes two PowerShell scripts to speed that up:
 
-This PowerShell pattern automates the process by:
-
--   Exporting each GPO configuration as XML
--   Searching each report for target text
--   Reporting which GPOs contain a match
-
-The script below uses the Remote Desktop policy text as an example
-search target, but you can replace it with any string relevant to your
-environment.
-
-------------------------------------------------------------------------
+- `Search-Domain-GPOs.ps1` exports each GPO to XML, searches the report for your target text, and prints matching GPOs.
+- `Export-Domain-GPO-Xml.ps1` exports every GPO in the domain to XML files so you can review them offline.
 
 ## Requirements
 
--   PowerShell running on a domain-joined system
--   The **GroupPolicy** PowerShell module
--   Permissions to read Group Policy Objects in the domain
-
-The module is normally installed with:
-
--   RSAT
--   Domain controllers
--   Administrative workstations
-
-------------------------------------------------------------------------
+- PowerShell on a domain-joined system
+- The `GroupPolicy` PowerShell module
+- Permission to read GPOs in the domain
+- RSAT, a domain controller, or another administrative workstation with Group Policy tools installed
 
 ## Key Capabilities
 
--   Searches **every GPO in the domain**
--   Supports searching for **any setting name, keyword, or registry
-    reference**
--   Works against both **Administrative Template settings and registry
-    policy entries** present in XML reports
--   Provides a quick way to find candidate GPOs before deeper
-    precedence analysis
+- Searches every GPO in the current domain for a setting name, keyword, or registry reference
+- Lets you match either friendly policy text or registry path/value combinations
+- Exports every GPO to XML for offline review or archival
+- Sanitizes GPO display names when writing XML files to disk
+- Helps you identify candidate GPOs before doing deeper precedence analysis
 
-------------------------------------------------------------------------
+## Download
 
-## The Script
+{{< download-resource file="Search-Domain-GPOs.ps1" title="Search Script" label="Download Search-Domain-GPOs.ps1" >}}
+This script generates a temporary XML report for each GPO, searches the report for your target text, and prints the GPOs that contain a match.
+{{< /download-resource >}}
 
-``` powershell
+{{< download-resource file="Export-Domain-GPO-Xml.ps1" title="Export Script" label="Download Export-Domain-GPO-Xml.ps1" >}}
+This companion script exports every GPO in the current domain to XML files under `C:\Temp\GPO_XML_Exports`.
+{{< /download-resource >}}
+
+## The Scripts
+
+### Search Domain GPOs For Text
+
+```powershell
 # Import the Group Policy module (usually loads automatically, but good practice)
 Import-Module GroupPolicy
 
@@ -100,51 +100,95 @@ foreach ($gpo in $allGPOs) {
 Write-Host "Search complete."
 ```
 
-------------------------------------------------------------------------
+### Export All Domain GPOs To XML
+
+```powershell
+Import-Module GroupPolicy
+
+# Output folder for all XML reports
+$ExportPath = "C:\Temp\GPO_XML_Exports"
+
+# Create folder if it does not exist
+if (-not (Test-Path -Path $ExportPath)) {
+    New-Item -Path $ExportPath -ItemType Directory -Force | Out-Null
+}
+
+# Get all GPOs in the current domain
+$AllGPOs = Get-GPO -All
+
+Write-Host "Exporting $($AllGPOs.Count) GPO(s) to XML..." -ForegroundColor Cyan
+
+foreach ($GPO in $AllGPOs) {
+    try {
+        # Sanitize display name for filename safety
+        $SafeName = $GPO.DisplayName -replace '[\\/:*?"<>|]', '_'
+
+        # Build output file path
+        $ReportPath = Join-Path $ExportPath "$SafeName - $($GPO.Id).xml"
+
+        # Export GPO report as XML
+        Get-GPOReport -Guid $GPO.Id -ReportType Xml -Path $ReportPath -ErrorAction Stop
+
+        Write-Host "Exported: $($GPO.DisplayName)" -ForegroundColor Green
+    }
+    catch {
+        Write-Warning "Failed to export GPO: $($GPO.DisplayName) (ID: $($GPO.Id)) - $($_.Exception.Message)"
+    }
+}
+
+Write-Host "Done. XML reports saved to: $ExportPath" -ForegroundColor Cyan
+```
 
 ## How to Use
 
-1.  Open **PowerShell** on a domain-joined administrative workstation.
-2.  Paste the script into the console or save it as a `.ps1` file.
-3.  Replace `$settingName` (and optionally `$registryKeyPath` /
-    `$registryValueName`) with the text you need to find.
-4.  Run the script with permissions to read domain GPOs.
-5.  Review the output to identify which policies contain matches.
+### Search For A Setting Or String
 
-Once the GPO name is identified, open **Group Policy Management Console
-(`gpmc.msc`)** to review the configuration and link scope.
+1. Download `Search-Domain-GPOs.ps1` to a domain-joined administrative workstation.
+2. Edit `$settingName` to the policy text you want to find.
+3. Optionally set `$registryKeyPath` and `$registryValueName` if you want to search for a related registry-backed policy.
+4. Run the script:
 
-------------------------------------------------------------------------
+```powershell
+.\Search-Domain-GPOs.ps1
+```
+
+5. Review the matching GPO names, then open `gpmc.msc` to inspect the policy configuration and link scope.
+
+### Export Every GPO To XML
+
+1. Download `Export-Domain-GPO-Xml.ps1`.
+2. Change `$ExportPath` if you want the XML files written somewhere other than `C:\Temp\GPO_XML_Exports`.
+3. Run the script:
+
+```powershell
+.\Export-Domain-GPO-Xml.ps1
+```
+
+4. Open the exported XML files to review settings offline or search them with your own tooling.
 
 ## Example Output
 
-    Searching all GPOs for text target(s)...
+### Search Script
 
-    Found in GPO: Default Domain Policy (ID: 31b2f340-016d-11d2-945f-00c04fb984f9)
-    Found in GPO: Workstation RDP Policy (ID: 8c1a5c4e-6a2e-4c8c-9d9a-7e7eaa2c8f51)
+```text
+Searching all GPOs for text target(s)...
+Found in GPO: Default Domain Policy (ID: 31b2f340-016d-11d2-945f-00c04fb984f9)
+Found in GPO: Workstation RDP Policy (ID: 8c1a5c4e-6a2e-4c8c-9d9a-7e7eaa2c8f51)
+Search complete.
+```
 
-    Search complete.
+### Export Script
 
-------------------------------------------------------------------------
+```text
+Exporting 42 GPO(s) to XML...
+Exported: Default Domain Policy
+Exported: Workstation RDP Policy
+Done. XML reports saved to: C:\Temp\GPO_XML_Exports
+```
 
 ## Notes
 
--   The script performs **text matching against the XML report**, rather
-    than parsing the XML structure directly.
--   This is an **example implementation** of a broader technique:
-    searching exported GPO XML for target strings.
--   It identifies **which GPOs contain matching text**, but does not
-    determine which policy ultimately wins through Group Policy
-    precedence.
--   To determine which policy applies to a specific machine, you can
-    run:
-
-```cmd
-gpresult /r
-```
-or open:
-
-    rsop.msc
-
--   In environments with many GPOs, the script may take several minutes
-    because it generates a report for each policy.
+- The search script performs text matching against GPO XML reports instead of parsing the XML structure directly.
+- A match tells you which GPO contains the text, but it does not tell you which policy wins after Group Policy precedence is evaluated.
+- To confirm effective policy on a specific machine, run `gpresult /r` or open `rsop.msc`.
+- In large environments, both scripts can take several minutes because they generate a report for every GPO.
