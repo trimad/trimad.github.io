@@ -1,9 +1,9 @@
 ---
 title: "Rei Theme Implementation Specification"
 date: 2026-01-28
-lastmod: 2026-03-09
-description: "Living design and engineering specification for the Rei Hugo theme: a cold, quiet, clinically restrained publication system for technical writing."
-tags: [hugo, theme, design-system, accessibility, performance, minimalism]
+lastmod: 2026-04-09
+description: "Living design and engineering specification for the current Rei Hugo theme: a cold editorial archive built from chambers, ledgers, dossiers, and restrained interface signals."
+tags: [hugo, theme, design-system, accessibility, performance, editorial]
 categories: [Visualization]
 draft: false
 toc: true
@@ -13,9 +13,9 @@ toc: true
 
 This document is the implementation-grade source of truth for `themes/Rei`.
 
-Rei is not a mood board and not a fan-art exercise. It is a complete Hugo theme for a technical personal publication that should feel cold, quiet, precise, elegant, and emotionally restrained while remaining highly readable and production-safe.
+It should describe the shipped theme accurately enough that a future refresh can preserve the same product, visual language, and technical constraints without reverse-engineering the current CSS and layouts from scratch.
 
-When atmospheric styling conflicts with readability, accessibility, maintainability, or Hugo compatibility, the practical choice wins.
+If the implementation changes materially, update this document in the same pass. A stale prompt is a defect.
 
 ---
 
@@ -27,288 +27,137 @@ The current repository is a Hugo site with:
 - prompt/spec documents in `content/prompts`
 - older reference material in `content/archive`
 - taxonomy browsing through `categories` and `tags`
-- page bundle thumbnails for some content
+- page bundles with optional thumbnail or cover media
 - optional `toc`
-- legacy shortcode usage for `notice`, `rawhtml`, and `powershell-environment-report`
+- optional `ai` and `ai-tested` front matter on posts
+- shortcode usage for `notice`, `rawhtml`, and `powershell-environment-report`
 
-There are no site-level layout overrides outside the theme directory at the time of writing. `themes/Rei` should therefore be self-contained and portable.
+At the time of writing there are no site-level layout overrides outside `themes/Rei`. The theme should remain self-contained and portable.
 
 ---
 
-## Theme Concept and Philosophy
+## Current Theme Identity
 
-### Core identity
+Rei now ships as a cold editorial control system, not a generic blog skin and not a product-marketing layout.
 
-Rei should feel like:
+Core product nouns:
 
-- a white test chamber
-- a sterile archive interface
-- a quiet research terminal
-- a memory log stored inside a clinical future system
+- chamber
+- ledger
+- dossier
+- signal rail
+- memory field
 
-Rei must not feel like:
+Emotional targets:
 
-- anime fan art
-- franchise imitation
-- a neon cyberpunk dashboard
-- a generic blue-accent blog clone
-- an over-frosted glass UI demo
-
-### Emotional targets
-
-The shipped theme should evoke:
-
-- stillness
-- cold light
-- restrained fragility
-- controlled distance
-- synthetic humanity
+- white lab stillness
 - clinical order
-
-The shipped theme should avoid:
-
-- loud spectacle
-- playful warmth
-- ornamental clutter
-- high-energy motion
-- ironic or novelty styling
-
-### Implementation posture
-
-The theme should be:
-
-- original in markup, component system, and styling
-- Hugo-native and understandable
-- CSS-first where possible
-- lightly enhanced with JavaScript, never dependent on it for core browsing
-
-### Explicit clean-slate rule
-
-Rei must not preserve the prior theme's page architecture under new colors.
-
-Rejected carry-overs include:
-
-- the same hero plus side-panel homepage shell
-- the same card-grid-first collection browsing pattern
-- the same article-plus-rail arrangement with only token renaming
-- the same discovery feature framing with only aesthetic restyling
-
-If a template can be described as "Ghost Graph, but colder," it fails the spec.
-
----
-
-## Design System
-
-## 1. Color System
-
-Use semantic CSS variables defined centrally in the main stylesheet.
-
-Required tokens:
-
-- `--bg`: main page field
-- `--bg-elevated`: raised page shell
-- `--bg-panel`: standard panel surface
-- `--bg-panel-strong`: denser surface for code, cards, or emphasis
-- `--bg-deep`: deep framing background
-- `--line`: default divider
-- `--line-strong`: emphasized divider
-- `--text`: primary foreground
-- `--text-soft`: secondary foreground
-- `--text-faint`: tertiary foreground
-- `--accent`: primary Rei blue
-- `--accent-strong`: focused signal blue
-- `--accent-soft`: pale blue wash
-- `--signal`: restrained red
-- `--signal-soft`: low-saturation red wash
-- `--success`: reserved status green-blue
-- `--shadow`: cool ambient shadow
-- `--glow`: rare blue bloom
-
-Palette rules:
-
-- blue and white dominate large surfaces
-- black or blue-black provides depth and framing
-- red is sparse and semantically meaningful
-- text contrast must remain strong enough for long technical reading
-- gradients are allowed only when they support atmosphere without reducing clarity
-
-### Base palette direction
-
-- background: ice white with a blue cast
-- shell framing: ink blue-black
-- panels: translucent white-blue surfaces
-- primary accent: desaturated laboratory blue
-- signal accent: disciplined crimson
-
-## 2. Typography
-
-### Type roles
-
-- UI and headings: technical or geometric sans
-- body copy: calm, literary serif
-- code and metadata: crisp monospace
-
-### Practical implementation decision
-
-The first shipped version should vendor local webfonts instead of depending on runtime third-party font CDNs.
-
-Role split:
-
-- Sans: `Sora`
-- Serif: `Newsreader`
-- Mono: `IBM Plex Mono`
-
-Rules:
-
-- headings should feel composed, not loud
-- display text should be controlled and slightly architectural
-- prose should optimize for reading comfort before visual novelty
-- metadata may use light uppercase tracking sparingly
-- monospace should be used for diagnostics, chips, timestamps, and code
-
-## 3. Spacing and Layout
-
-Spacing must follow a predictable scale and create strong negative space.
-
-Required behavior:
-
-- compact spacing for metadata clusters and controls
-- moderate spacing for cards and panels
-- generous spacing between sections
-- comfortable vertical rhythm in long-form prose
-
-Layout rules:
-
-- pages should sit inside a stable shell with wide margins on desktop
-- reading width should remain intentionally narrow enough for comfort
-- homepage and list pages can use wider grids than article prose
-- mobile layouts must collapse cleanly without relying on tiny text
-
-## 4. Shape, Borders, and Depth
-
-Required language:
-
-- medium outer radii
-- sharper internal separators
-- thin rules instead of thick frames
-- cool, soft shadows used sparingly
-- layered borders and subtle inset treatments preferred over heavy elevation
+- quiet technical precision
+- restrained fragility
+- archival distance
 
 Avoid:
 
-- bubbly consumer-app shapes
-- thick glassmorphism blur everywhere
-- deep shadow stacks
+- neon cyberpunk spectacle
+- warm lifestyle editorial styling
+- over-frosted glass UI
+- generic SaaS feature-page structure
+- loud franchise mimicry
 
-## 5. Component Language
-
-Panels and cards should feel like fabricated instrument housings or sterile trays:
-
-- pale surfaces
-- precise edge treatment
-- quiet metadata
-- clear content hierarchy
-- occasional translucent overlays used with restraint
-
-Links should feel editorial first, chrome second.
-
-Buttons should be:
-
-- compact
-- deliberate
-- blue-forward for primary actions
-- low-noise for secondary actions
-- red only for destructive or high-significance moments
-
-Inputs should resemble calm lab-console controls with unmistakable focus states.
+Rei should feel like a sterile archive interface for technical writing, with atmosphere carried by structure, typography, linework, and restraint rather than by decorative effects.
 
 ---
 
-## Visual Motifs
+## Visual System
+
+## 1. Color
+
+Use centralized semantic CSS variables in `themes/Rei/assets/css/main.css`.
+
+Palette behavior:
+
+- page field: icy blue-white
+- shell depth: ink blue-black
+- standard surfaces: cool white-blue panels with subtle overlays
+- primary accent: steel or laboratory blue
+- signal accent: restrained crimson
+- structure: blue-gray linework and seams
+
+Rules:
+
+- most components should read as blue/neutral first
+- red is a signal, not a wash applied to every surface
+- gradients may support atmosphere, but text contrast and clarity win
+- depth should come from tone, inset highlights, and light shadow, not heavy dark stacking
+
+## 2. Typography
+
+Local fonts are part of the shipped product:
+
+- UI and headings: `Sora`
+- summaries and long-form prose: `Newsreader`
+- code and metadata: `IBM Plex Mono`
+
+Rules:
+
+- headings should feel composed and architectural, not loud
+- the serif is allowed outside article prose when summaries need more texture and calm
+- mono uppercase is reserved for labels, stats, dates, chips, buttons, and filter UI
+- excessive tracking or all-caps saturation should be treated as a bug
+
+## 3. Spacing and Rhythm
+
+The theme depends on consistent negative space.
+
+Required behavior:
+
+- panel padding should use a shared clamp-based rhythm
+- ledger rows need enough air to scan quickly
+- article prose should remain narrower than index or archive surfaces
+- mobile layouts must collapse cleanly without relying on tiny text
+
+## 4. Shape and Depth
+
+Rei uses:
+
+- large outer radii
+- medium inner radii
+- pill controls
+- thin rules
+- inset highlights
+- restrained shadows
+- seam-like decorative traces on major surfaces
+
+Avoid:
+
+- bubbly consumer-app geometry
+- thick borders
+- plush, dark, stacked shadows
+
+---
+
+## Signature Motifs
 
 Allowed motifs:
 
-- fine structural linework
-- chamber seams
-- reflection-like surface gradients
-- subtle blue bloom in controlled moments
-- sparse red locator markers
-- quiet interface labels
+- faint structural grid under the shell
+- cool surface reflections
+- micro-band accents near the top edge of major panels
+- slim vertical seam lights inside larger chambers
+- optical or ocular cues in the header and navigation, provided they stay quiet and precise
+- evidence-banner framing for page media
 
 Forbidden motifs:
 
 - franchise symbols
 - character art
-- loud anime cues
-- exaggerated scanline overlays across prose
-- maximal hologram styling
+- loud scanline overlays across prose
+- repeated crimson bars on every component
+- playful gadget clutter
 
 ---
 
-## Functional Product Decisions
-
-These decisions turn vague aspiration into specific implementation guidance.
-
-## 1. Discovery Surface
-
-The legacy graph idea is retained, but the implementation should change.
-
-Rei should ship an original **memory field**:
-
-- a deterministic, column-based relationship map
-- categories, tags, and entries rendered as structured nodes
-- search and lightweight filtering provided through small JavaScript
-- SVG connectors used for visual relationships
-- the initial view may ship with a seeded query such as `Rei` when needed to keep the client-side stage bounded on larger sites
-- conventional navigation always remains the primary browsing method
-
-The memory field is intentionally **not** a physics simulation and **not** a flashy canvas demo.
-
-Why:
-
-- lower complexity
-- better readability
-- easier accessibility
-- more consistent art direction
-- less dependency risk
-
-## 2. Collection Filtering
-
-Collection pages should provide lightweight client-side filtering over the cards already rendered by Hugo.
-
-Scope:
-
-- title
-- summary/description
-- tags
-- categories
-- section label
-
-This is collection filtering, not full-site full-text search. A true index-backed search can be deferred.
-
-## 3. Code UX
-
-Code blocks should gain:
-
-- consistent framing
-- language/header treatment where available
-- copy button added progressively with JavaScript
-- accessible copy labels and status feedback
-- copy actions that capture only code content, never button labels or other UI text
-
-## 4. Related Content
-
-Single pages should expose discoverability through:
-
-- adjacent navigation within a section
-- related items chosen from shared tags, categories, and section context
-- a small memory field block beneath the article
-
----
-
-## Page-Level Layout Patterns
-
-## 1. Global Shell
+## Global Shell
 
 Required:
 
@@ -316,269 +165,226 @@ Required:
 - sticky header
 - main landmark
 - footer
-- stable background system
-- consistent content width behavior
+- fixed atmospheric veil and grid
+- stable content-width behavior
 
-The shell should feel like a contained lab environment rather than a blank white browser window.
+Header behavior:
 
-## 2. Homepage
+- brand mark, site title, and short site description on the left
+- compact primary navigation on the right
+- active routes should be visually marked and expose `aria-current`
+- mobile navigation must toggle cleanly without JavaScript dependency for basic linking
 
-Required sections:
+Footer behavior:
 
-- hero with title, summary, and primary routes
-- system state panel showing site scope and latest update
-- recent content grid
-- section route cards for posts, prompts, and archive
-- taxonomy highlight panels
-- memory field block
-
-The homepage should read like a calm control room, not a product landing page.
-
-## 3. Section and Taxonomy Term Pages
-
-Required:
-
-- page intro with title, summary, and content count
-- lightweight filter control
-- card grid for entries
-- pagination
-- empty state
-- recent updates support
-- memory field block beneath normal browsing
-
-## 4. Taxonomy Index Pages
-
-Required:
-
-- term cards
-- per-term count
-- latest connected item where possible
-- clear no-content fallback
-- relation to the memory field without making it dominant
-
-## 5. Single Content Pages
-
-Required:
-
-- title block with metadata
-- optional responsive hero/feature image if available from page resources
-- taxonomy pills
-- table of contents when enabled
-- highly readable prose
-- styled figures, tables, code, footnotes, and blockquotes
-- section-adjacent navigation
-- related content
-- memory field block
-
-Single pages are the primary product and must privilege reading comfort.
+- short site summary
+- compact site metrics
+- no oversized promotional close
 
 ---
 
-## Content Element Rules
+## Page Patterns
 
-The theme must visibly improve the following:
+## 1. Homepage
 
-- paragraphs and headings
+The current homepage is intentionally restrained.
+
+Required sections:
+
+- a full-width chamber lead with title, summary, and overview stats
+- anchor buttons into the page rather than marketing CTAs
+- one panel for recently created posts
+- one panel for recently updated posts
+- memory field block beneath normal browsing
+
+The homepage should feel like an index console, not a product launch page.
+
+## 2. Section Archives and Taxonomy Term Archives
+
+These pages share a common collection shell:
+
+- page intro with kicker, title, summary, buttons, and stats
+- filter panel above content
+- vertical ledger of entry rows
+- recently modified panel
+- adjacent collections panel
+- memory field block beneath the archive
+
+Do not collapse these pages into a generic card grid. The ledger is a defining pattern.
+
+Entry rows should preserve a three-part rhythm:
+
+- metadata rail
+- body copy
+- thumbnail or placeholder block
+
+## 3. Taxonomy Index Pages
+
+Taxonomy index pages act as directories, not article grids.
+
+Required:
+
+- page intro
+- filter panel
+- stacked term rows
+- per-term count
+- latest connected entry where available
+- clear empty state
+- memory field block beneath the directory
+
+## 4. Single Content Pages
+
+Single pages are the primary reading product.
+
+Required structure:
+
+- dossier header with section band, title, summary, and taxonomy pills
+- optional wide banner image sourced from page bundle media
+- two-column reading layout with signal rail on the left and prose on the right
+- metadata cluster in the rail
+- TOC in the rail when enabled and meaningful
+- recent feed in the rail for non-post sections
+- memory field centered on the current entry beneath the article
+
+Current product rule:
+
+- posts omit adjacent navigation and related-content panels
+- non-post sections may render adjacent navigation and related entries beneath prose
+
+Any deliberate change to that behavior should update this document.
+
+---
+
+## Component Inventory
+
+Required shared components in the current theme:
+
+- site header
+- site footer
+- page intro
+- filter panel
+- ledger entry row
+- term directory row
+- metadata cluster
+- taxonomy pills
+- TOC panel
+- recent feed
+- pagination
+- empty state
+- related entries section
+- notice block
+- cover/banner media treatment
+- memory field
+
+Implementation preference:
+
+- repeated UI lives in partials
+- CSS variables drive shared tokens
+- JavaScript stays small and narrowly scoped
+
+---
+
+## Content Styling Rules
+
+The theme must visibly improve:
+
+- headings and paragraphs
 - lists
 - inline code and code blocks
 - blockquotes
 - tables
 - figures and captions
 - footnotes and backreferences
-- horizontal rules
-- notices/admonitions
+- notices
 - embedded video or raw HTML content
 
 Rules:
 
+- prose should remain calm, high-contrast, and comfortable for long technical reading
+- summaries outside the main article may borrow the serif when it improves texture and hierarchy
+- code blocks should read like dark instrument trays
+- copy buttons should remain progressive enhancement only
+- blockquotes should feel archival, not ornamental
 - tables must scroll safely on narrow screens
-- captions must be distinct from body text
-- blockquotes should feel archival and restrained, not decorative
-- footnotes should be clearly separated and easy to return from
+- figures, tables, iframes, and video should sit inside framed surfaces
 - notices must not rely on color alone
 
 ---
 
-## Component Inventory
-
-Required shared components:
-
-- site header
-- site footer
-- page intro
-- article card
-- metadata cluster
-- taxonomy pill group
-- collection filter
-- pagination
-- empty state
-- recent updates panel
-- related content panel
-- memory field
-- notice/callout block
-- code block copy affordance
-- optional cover media treatment
-
-Preferred implementation:
-
-- repeated markup in partials
-- CSS variables for shared tokens
-- very small JavaScript modules
-
----
-
-## Interaction Rules
+## Interaction and Motion
 
 Interaction tone:
 
-- quiet
 - deliberate
 - low-amplitude
-- never theatrical
+- editorial before app-like
 
 Requirements:
 
 - hover is never the only cue
 - focus states must be obvious
-- cards must remain large click targets
-- navigation must work without JavaScript
-- sticky elements must not hide anchor targets
-- filters must degrade gracefully
+- row links remain generous click targets
+- collection filters act only on already-rendered content
+- the memory field remains secondary to normal navigation
 
----
+Motion rules:
 
-## Motion Rules
-
-Allowed motion:
-
-- slow fades
-- subtle opacity shifts
-- slight elevation or translation
-- restrained panel-state transitions
-
-Disallowed motion:
-
-- looping ambient animation in reading areas
-- large parallax
-- springy overshoot
-- animation that interferes with scanning or selection
-
-Implementation rules:
-
+- allow small hover lifts and opacity shifts
+- no ambient looping effects in reading zones
+- no large parallax or theatrical transitions
 - honor `prefers-reduced-motion`
-- keep durations short and consistent
-- remove motion if it hurts clarity or performance
 
 ---
 
-## Accessibility Requirements
+## Accessibility and Performance
 
 Required:
 
 - visible skip link
 - semantic landmarks
-- strong contrast
-- coherent heading hierarchy
-- accessible nav toggle on mobile
-- clear keyboard focus styles
-- touch-friendly targets
+- keyboard-usable mobile nav
+- labelled filters
+- labelled memory field controls
+- strong text contrast
 - reduced-motion support
-- accessible filter controls
-- notices whose meaning is not color-only
+- touch-friendly targets
 
-Single-page requirements:
-
-- TOC remains navigable
-- copy buttons expose accessible text
-- figure captions remain readable
-- footnote references and return links remain clear
-
-Memory field requirements:
-
-- useful static fallback content exists without JavaScript
-- the enhanced interface is keyboard accessible
-- search and filters are labelled
-- relationship highlighting cannot be the only way information is conveyed
-
----
-
-## Performance Guardrails
-
-Required:
+Performance guardrails:
 
 - no client-side framework
-- no heavy graph library
-- no runtime dependency on remote JS CDNs
-- local fonts preferred
-- CSS-first presentation
-- progressive enhancement only where justified
-- reading pages remain fast if JavaScript fails
-
-Preferred:
-
-- Hugo asset pipeline for fingerprinted CSS and JS
-- limited font weights
-- bounded JS scope per feature
-- responsive cover-image derivatives generated at build time where page resources allow
+- no runtime remote assets
+- local fonts only
+- JavaScript enhances navigation, filtering, code copy, and the memory field only
+- normal reading and browsing must still work if JavaScript fails
 
 ---
 
-## Hugo Implementation Guidance
+## Hugo Implementation Map
 
-## Theme file map
-
-The first production implementation should include, at minimum:
+The current production implementation lives in:
 
 - `themes/Rei/theme.toml`
 - `themes/Rei/assets/css/main.css`
 - `themes/Rei/assets/js/main.js`
 - `themes/Rei/assets/js/memory-field.js`
-- `themes/Rei/layouts/_default/baseof.html`
-- `themes/Rei/layouts/_default/list.html`
-- `themes/Rei/layouts/_default/single.html`
-- `themes/Rei/layouts/_default/taxonomy.html`
-- `themes/Rei/layouts/_default/terms.html`
-- `themes/Rei/layouts/index.html`
-- shared partials for metadata, cards, pagination, related content, and memory field
+- `themes/Rei/layouts/baseof.html`
+- `themes/Rei/layouts/home.html`
+- `themes/Rei/layouts/list.html`
+- `themes/Rei/layouts/page.html`
+- `themes/Rei/layouts/taxonomy.html`
+- `themes/Rei/layouts/_partials/*.html`
 - shortcode compatibility files for `notice`, `rawhtml`, and `powershell-environment-report`
 
-## Template strategy
-
-Prefer:
+Template strategy:
 
 - one global base template
-- one shared list-shell approach for sections and term pages
-- one terms template for taxonomy indexes
-- partial-driven repeated UI
-
-Avoid:
-
-- section-specific one-off template forks unless required
-- duplicated card markup
-- JavaScript-only navigation logic
-
-## Asset strategy
-
-Prefer:
-
-- a single main stylesheet organized by tokens, shell, components, prose, and responsive rules
-- small JS files split by responsibility
-- responsive page-bundle image handling with explicit dimensions to reduce layout shift
-- no external runtime script dependency for the memory field
-
-## Data and fallback strategy
-
-The memory field should be driven by Hugo-rendered JSON embedded in the page.
-
-Fallback behavior:
-
-- if JavaScript is unavailable, users still see curated links for top categories, top tags, and recent entries
-- if a page lacks tags, categories, or thumbnails, cards and metadata must still render intentionally
-- because the memory-field payload is site-wide, Hugo may cache its rendered JSON across pages during the build
+- dedicated top-level templates for home, lists, pages, and taxonomies
+- partial-driven shared UI
+- page-bundle cover handling through reusable media partials
 
 ---
 
-## Content Modeling and Front Matter Assumptions
+## Front Matter and Content Assumptions
 
 Observed current fields:
 
@@ -591,13 +397,15 @@ Observed current fields:
 - `tags`
 - `toc`
 - `thumbnail`
+- `ai`
+- `ai-tested`
 
 Rules:
 
-- description falls back to summary, then to a trimmed plain-text excerpt
+- description falls back to summary, then to trimmed plain text
 - thumbnails should prefer page resources when possible
-- missing metadata must never collapse layout quality
-- multi-category and multi-tag entries should remain visually tidy
+- missing media, tags, or categories must not collapse the layout
+- `ai` and `ai-tested` should render as notices only when present
 - TOC should render only when enabled and meaningful
 
 Shortcode compatibility required:
@@ -606,9 +414,20 @@ Shortcode compatibility required:
 - `rawhtml`
 - `powershell-environment-report`
 
-The `notice` shortcode must support both named and positional usage already present in this repository.
+---
 
-New front matter should remain optional. If later additions such as `featured`, `hero`, or `series` are introduced, the theme must treat them as enhancements rather than requirements.
+## Engineering Guidance
+
+When extending Rei:
+
+- keep the theme self-contained in `themes/Rei`
+- preserve the chamber, ledger, dossier, and signal-rail vocabulary
+- update this prompt whenever those product patterns change
+- prefer tokens and shared partials over one-off styling
+- keep JavaScript bounded and replaceable
+- when editing `main.css`, consolidate conflicting rules instead of stacking another contradictory refinement layer
+
+Rei should continue to look deliberate because the system is disciplined, not because the stylesheet keeps accreting overrides.
 
 ---
 
@@ -616,43 +435,24 @@ New front matter should remain optional. If later additions such as `featured`, 
 
 Rei is acceptable only if all of the following are true:
 
-1. This document remains a real implementation specification, not a vague prompt.
-2. `themes/Rei` is a complete Hugo theme authored as a clean-slate original implementation.
-3. The visual system is recognizably cold, restrained, and Rei-inspired without using copyrighted franchise assets.
-4. Blue and white dominate, black frames depth, and red remains sparse and meaningful.
-5. Home, section, term, taxonomy index, and single pages all share one coherent system.
-6. Prose elements, code blocks, tables, figures, notices, and footnotes are materially improved.
-7. Conventional browsing works cleanly without JavaScript.
-8. The memory field works as a secondary discovery layer with a quieter presentation than the old graph concept.
-9. Mobile responsiveness, focus behavior, and reduced-motion support are solid.
-10. The site builds successfully with Hugo.
-
----
-
-## Deferred Roadmap
-
-High-value follow-up work:
-
-- optional local full-text search
-- featured-content front matter
-- better taxonomy summaries stored in data files
-- series navigation once content uses it
-
-Lower-priority exploration:
-
-- alternate dark variant if it preserves Rei identity
-- richer section-specific hero copy
-- persisted memory-field state across navigations
+1. This document accurately describes the current theme rather than an older design intent.
+2. The visual system reads as cold, editorial, and clinically restrained.
+3. Chambers, ledgers, dossiers, signal rails, and the memory field remain coherent across page types.
+4. Most accents are blue or neutral, with red kept sparse and meaningful.
+5. Section and term browsing still feel purposeful without relying on the memory field.
+6. Single pages privilege reading comfort first.
+7. Accessibility and reduced-motion behavior remain solid.
+8. The site builds successfully with Hugo.
 
 ---
 
 ## Decision Rule
 
-When extending Rei:
+When forced to choose:
 
-- choose restraint over spectacle
-- choose readability over atmosphere when forced to pick
-- choose system consistency over clever one-offs
-- choose Hugo-native durability over frontend novelty
+- choose readability over atmosphere
+- choose restraint over novelty
+- choose consistency over one-off cleverness
+- choose maintainability over accumulated CSS drift
 
-If a decision makes the theme look more sci-fi but reduces clarity, maintainability, accessibility, or trust, reject it.
+If a change makes the site feel more sci-fi but less trustworthy, less readable, or less maintainable, reject it.

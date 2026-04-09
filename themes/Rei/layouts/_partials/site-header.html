@@ -26,7 +26,7 @@
     <nav class="rei-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
       {{- range $nav -}}
         {{- $isActive := or (eq $.RelPermalink .href) (and (ne .href ("/" | relURL)) (hasPrefix $.RelPermalink .href)) -}}
-        <a class="{{ if $isActive }}is-active{{ end }}" href="{{ .href }}">{{ .label }}</a>
+        <a class="{{ if $isActive }}is-active{{ end }}" href="{{ .href }}"{{ if $isActive }} aria-current="page"{{ end }}>{{ .label }}</a>
       {{- end -}}
     </nav>
   </div>
