@@ -1,0 +1,104 @@
+<#
+.SYNOPSIS
+Collects inbox rules from all mailboxes across all accepted domains
+and exports them to a formatted JSON file.
+
+.DESCRIPTION
+This script connects to Exchange Online, enumerates all accepted domains,
+retrieves all mailboxes for each, and exports their inbox rules to
+FilteredInboxRules.json for review or auditing.
+#>
+
+Write-Host "`n=== Exchange Online Inbox Rule Collector ===`n" -ForegroundColor Cyan
+
+# --- STEP 1: Connect to Exchange Online ---
+try {
+    Write-Host "Connecting to Exchange Online..." -ForegroundColor Yellow
+    Connect-ExchangeOnline -ErrorAction Stop
+    Write-Host "[OK] Connected successfully.`n" -ForegroundColor Green
+} catch {
+    Write-Host "[ERROR] Failed to connect to Exchange Online: $_" -ForegroundColor Red
+    exit
+}
+
+# --- STEP 2: Get all accepted domains ---
+Write-Host "Retrieving accepted domains..." -ForegroundColor Yellow
+$acceptedDomains = Get-AcceptedDomain | Select-Object DomainName, DomainType, Default
+
+if (-not $acceptedDomains) {
+    Write-Host "[ERROR] No accepted domains found. Exiting." -ForegroundColor Red
+    Disconnect-ExchangeOnline -Confirm:$false
+    exit
+}
+
+Write-Host "`n=== Accepted Domains ===" -ForegroundColor Cyan
+$acceptedDomains | Format-Table DomainName, DomainType, Default
+$domainPattern = ($acceptedDomains | ForEach-Object {
+    [regex]::Escape($_.DomainName.ToString())
+}) -join '|'
+
+# --- STEP 3: Gather all mailboxes in valid domains ---
+Write-Host "`nEnumerating mailboxes..." -ForegroundColor Yellow
+$mailboxes = @(Get-Mailbox -ResultSize Unlimited | Where-Object {
+    $_.PrimarySmtpAddress.ToString() -match "@($domainPattern)$"
+})
+
+if (-not $mailboxes) {
+    Write-Host "[ERROR] No mailboxes found for the accepted domains." -ForegroundColor Red
+    Disconnect-ExchangeOnline -Confirm:$false
+    exit
+}
+
+Write-Host ("Found {0} mailboxes across {1} accepted domains.`n" -f $mailboxes.Count, $acceptedDomains.Count) -ForegroundColor Green
+
+# --- STEP 4: Collect inbox rules ---
+$allRules = @()
+$counter = 1
+
+foreach ($mbx in $mailboxes) {
+    Write-Host ("[{0}/{1}] Checking rules for {2}..." -f $counter, $mailboxes.Count, $mbx.PrimarySmtpAddress) -ForegroundColor Cyan
+    $counter++
+
+    try {
+        $rules = Get-InboxRule -Mailbox $mbx.PrimarySmtpAddress -ErrorAction Stop
+        foreach ($rule in $rules) {
+            $filtered = [PSCustomObject]@{
+                Mailbox               = $mbx.PrimarySmtpAddress.ToString()
+                Name                  = $rule.Name
+                Enabled               = $rule.Enabled
+                Priority              = $rule.Priority
+                Description           = $rule.Description
+                From                  = ($rule.From | ForEach-Object { $_.Address }) -join ', '
+                FromAddressContains   = ($rule.FromAddressContainsWords -join ', ')
+                SubjectContains       = ($rule.SubjectContainsWords -join ', ')
+                SubjectOrBodyContains = ($rule.SubjectOrBodyContainsWords -join ', ')
+                SentTo                = ($rule.SentTo | ForEach-Object { $_.Address }) -join ', '
+                MoveToFolder          = $rule.MoveToFolder
+                MarkAsRead            = $rule.MarkAsRead
+                ForwardTo             = ($rule.ForwardTo | ForEach-Object { $_.Address }) -join ', '
+                RedirectTo            = ($rule.RedirectTo | ForEach-Object { $_.Address }) -join ', '
+                StopProcessingRules   = $rule.StopProcessingRules
+            }
+            $allRules += $filtered
+        }
+    } catch {
+        Write-Warning "Failed to retrieve rules for $($mbx.PrimarySmtpAddress): $_"
+    }
+}
+
+# --- STEP 5: Export results to JSON ---
+$outputFile = Join-Path (Get-Location) "FilteredInboxRules.json"
+if ($allRules.Count -eq 0) {
+    Write-Warning "No inbox rules were found for any mailbox."
+    "[]" | Out-File -FilePath $outputFile -Encoding utf8
+} else {
+    $allRules | ConvertTo-Json -Depth 5 | Out-File -FilePath $outputFile -Encoding utf8
+    Write-Host ("`n[OK] Exported {0} inbox rules to {1}" -f $allRules.Count, $outputFile) -ForegroundColor Green
+}
+
+# --- STEP 6: Open the file automatically ---
+Start-Process $outputFile
+
+# --- STEP 7: Clean up session ---
+Disconnect-ExchangeOnline -Confirm:$false
+Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan

@@ -1,51 +1,67 @@
-﻿---
-author: Tristan Madden
-categories: [PowerShell]
+---
+ai: true
+ai-tested: 2026-04-10
+author: "Tristan Madden"
+categories:
+  - "PowerShell"
+  - "Microsoft 365"
 date: 2025-07-30
 draft: false
-tags: ["exchange-online"]
+summary: "Audit Exchange Online inbox rules with two PowerShell scripts: one exports rules across the tenant and the other targets a single mailbox for incident response."
+tags:
+  - "powershell"
+  - "exchange-online"
+  - "microsoft-365"
+  - "inbox-rules"
 title: "Export Exchange Inbox Rules with Exchange Online PowerShell"
-summary: "Two companion PowerShell scripts: one for auditing inbox rules across an entire tenant, and another for inspecting rules for a single mailbox - perfect for threat hunting, compliance, and incident response."
-usePageBundles: true
 toc: true
+usePageBundles: true
 ---
 
-{{< notice type="warning" title="AI-Generated Content" >}}
-This PowerShell script and description are AI-generated. Please review for completeness and accuracy.
-{{< /notice >}}
+## Overview
 
-{{< notice type="info" title="AI-Generated Content" >}}
-This script was last tested and verified to work by a human on 1/26/2026. 
-{{< /notice >}}
+Inbox rules are one of the simplest ways for an attacker to hide or redirect mail after compromising a Microsoft 365 account. A suspicious rule can silently forward messages, move alerts out of sight, or stop later rules from running.
 
-# Exchange Online Inbox Rule Auditing
+This post includes two companion Exchange Online PowerShell scripts. One collects inbox rules across the tenant for broad hunting or compliance review. The other focuses on a single mailbox, which is usually the faster option during incident response.
 
-Monitoring inbox rules is one of the most effective ways to detect compromised accounts in Microsoft 365. Attackers commonly create forwarding or redirect rules to exfiltrate mail or hide activity.
+## Requirements
 
-This post provides **two complementary PowerShell scripts**:
-
-1. **Tenant-wide inbox rule collector** - audits every mailbox across all accepted domains  
-2. **Single-user inbox rule collector** - ideal for incident response and targeted investigations  
-
-Both scripts export results into clean JSON files suitable for SOC review or automated detection pipelines.
-
----
-
-# Query All Users (Organization-Wide)
-
-This script enumerates all accepted domains, collects inbox rules from every mailbox in the tenant, and exports a unified JSON report. It's ideal for scheduled audits, compromise assessment, or large-scale security reviews.
+- PowerShell with the `ExchangeOnlineManagement` module available
+- An account that can connect to Exchange Online and read mailbox inbox rules
+- Permission to run `Get-AcceptedDomain`, `Get-Mailbox`, and `Get-InboxRule`
+- Local permission to write JSON files to disk
+- Network access to Microsoft 365
 
 ## Key Capabilities
 
-- **Domain-aware enumeration** - Automatically detects all accepted domains in the tenant  
-- **Mailbox filtering** - Only scans relevant SMTP domains  
-- **Color-coded progress output** - Useful for long-running audits  
-- **Graceful error handling** - Skips inaccessible mailboxes  
-- **Structured JSON output** - Saves as `FilteredInboxRules.json` and opens automatically  
+- Exports inbox rules to structured JSON for review or downstream automation
+- Supports both tenant-wide collection and single-mailbox triage
+- Surfaces common investigation fields such as `ForwardTo`, `RedirectTo`, `MoveToFolder`, and `StopProcessingRules`
+- Continues past individual mailbox errors instead of aborting the whole run
+- Opens the exported JSON automatically when the script finishes
 
----
+## Choose the Right Script
 
-## Script: Query All Users
+| Use case | Script | Output |
+| --- | --- | --- |
+| Scheduled audit, threat hunting, or tenant-wide review | `Export-Exchange-Inbox-Rules-All-Mailboxes.ps1` | `FilteredInboxRules.json` |
+| One-user investigation or incident-response triage | `Export-Exchange-Inbox-Rules-Single-Mailbox.ps1` | `SingleMailboxInboxRules.json` |
+
+## Download
+
+{{< download-resource file="Export-Exchange-Inbox-Rules-All-Mailboxes.ps1" title="Tenant Audit Script" label="Download Export-Exchange-Inbox-Rules-All-Mailboxes.ps1" >}}
+Use this version when you want to enumerate mailboxes across the tenant, collect every inbox rule you can access, and export the results into a single JSON file.
+{{< /download-resource >}}
+
+{{< download-resource file="Export-Exchange-Inbox-Rules-Single-Mailbox.ps1" title="Single Mailbox Script" label="Download Export-Exchange-Inbox-Rules-Single-Mailbox.ps1" >}}
+Use this version when you need a faster, narrower audit for one mailbox during a phishing investigation, suspected compromise review, or targeted mailbox validation.
+{{< /download-resource >}}
+
+## Tenant-Wide Audit
+
+This script enumerates accepted domains, filters mailboxes to those domains, and exports every inbox rule it can retrieve into one JSON document. It is the better choice when you need broad visibility and do not want to inspect mailboxes one by one.
+
+### Script
 
 ```powershell
 <#
@@ -83,13 +99,15 @@ if (-not $acceptedDomains) {
 
 Write-Host "`n=== Accepted Domains ===" -ForegroundColor Cyan
 $acceptedDomains | Format-Table DomainName, DomainType, Default
-$domainPattern = ($acceptedDomains.DomainName -join '|')
+$domainPattern = ($acceptedDomains | ForEach-Object {
+    [regex]::Escape($_.DomainName.ToString())
+}) -join '|'
 
 # --- STEP 3: Gather all mailboxes in valid domains ---
 Write-Host "`nEnumerating mailboxes..." -ForegroundColor Yellow
-$mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {
-    $_.PrimarySmtpAddress -match "@($domainPattern)$"
-}
+$mailboxes = @(Get-Mailbox -ResultSize Unlimited | Where-Object {
+    $_.PrimarySmtpAddress.ToString() -match "@($domainPattern)$"
+})
 
 if (-not $mailboxes) {
     Write-Host "[ERROR] No mailboxes found for the accepted domains." -ForegroundColor Red
@@ -111,7 +129,7 @@ foreach ($mbx in $mailboxes) {
         $rules = Get-InboxRule -Mailbox $mbx.PrimarySmtpAddress -ErrorAction Stop
         foreach ($rule in $rules) {
             $filtered = [PSCustomObject]@{
-                Mailbox               = $mbx.PrimarySmtpAddress
+                Mailbox               = $mbx.PrimarySmtpAddress.ToString()
                 Name                  = $rule.Name
                 Enabled               = $rule.Enabled
                 Priority              = $rule.Priority
@@ -150,23 +168,57 @@ Start-Process $outputFile
 # --- STEP 7: Clean up session ---
 Disconnect-ExchangeOnline -Confirm:$false
 Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan
-
 ```
 
-# Query a Single User (Targeted Audit)
+### How to Use
 
-This companion script focuses on **one mailbox at a time**.
+1. Install the Exchange Online module if needed:
 
-## Key Capabilities
+```powershell
+Install-Module ExchangeOnlineManagement
+```
 
-- Mailbox validation - Confirms the mailbox exists before running any queries
-- Targeted rule inspection - Retrieves inbox rules for only one specified mailbox
-- Ideal for incident response - Quickly exposes forwarding, redirect, or exfiltration rules linked to suspicious activity
-- Lightweight execution - Much faster than tenant-wide enumeration; minimal data collection
-- Structured JSON export - Outputs to `SingleMailboxInboxRules.json` for easy sharing, auditing, or investigation
-- Safe error handling - Gracefully handles missing mailboxes or permission issues without halting your session
+2. Run the script:
 
-## Script: Query a Single User
+```powershell
+.\Export-Exchange-Inbox-Rules-All-Mailboxes.ps1
+```
+
+3. Authenticate to Exchange Online when prompted.
+4. Review `FilteredInboxRules.json` after the script opens it automatically.
+
+### Example Output
+
+```text
+=== Exchange Online Inbox Rule Collector ===
+
+Connecting to Exchange Online...
+[OK] Connected successfully.
+
+Retrieving accepted domains...
+
+=== Accepted Domains ===
+DomainName                DomainType    Default
+----------                ----------    -------
+contoso.com               Authoritative True
+contoso.onmicrosoft.com   InternalRelay False
+
+Found 428 mailboxes across 2 accepted domains.
+
+[1/428] Checking rules for alice@contoso.com...
+[2/428] Checking rules for bob@contoso.com...
+...
+
+[OK] Exported 137 inbox rules to C:\Audit\FilteredInboxRules.json
+
+Session disconnected. All done!
+```
+
+## Single Mailbox Audit
+
+This companion script asks for one mailbox, validates that it exists, and then exports only that mailbox's rules. It is better for triage when you already know which account you care about and want the shortest path to the answer.
+
+### Script
 
 ```powershell
 <#
@@ -218,7 +270,7 @@ try {
 
     foreach ($rule in $inboxRules) {
         $rules += [PSCustomObject]@{
-            Mailbox               = $mbx.PrimarySmtpAddress
+            Mailbox               = $mbx.PrimarySmtpAddress.ToString()
             Name                  = $rule.Name
             Enabled               = $rule.Enabled
             Priority              = $rule.Priority
@@ -258,4 +310,40 @@ Disconnect-ExchangeOnline -Confirm:$false
 Write-Host "`nSession disconnected. All done!`n" -ForegroundColor Cyan
 ```
 
+### How to Use
 
+1. Run the script:
+
+```powershell
+.\Export-Exchange-Inbox-Rules-Single-Mailbox.ps1
+```
+
+2. Enter the mailbox UPN or SMTP address when prompted.
+3. Authenticate to Exchange Online if you are not already connected.
+4. Review `SingleMailboxInboxRules.json` after the script opens it automatically.
+
+### Example Output
+
+```text
+=== Single Mailbox Inbox Rule Collector ===
+
+Enter the mailbox (UPN or SMTP address): user@contoso.com
+Connecting to Exchange Online...
+[OK] Connected successfully.
+
+Mailbox found: user@contoso.com
+
+Retrieving inbox rules for user@contoso.com...
+
+[OK] Exported 3 inbox rules to C:\Audit\SingleMailboxInboxRules.json
+
+Session disconnected. All done!
+```
+
+## Notes
+
+- If the Exchange Online module is not installed, run `Install-Module ExchangeOnlineManagement` from an elevated PowerShell session first.
+- The tenant-wide script skips mailboxes it cannot query and writes a warning instead of stopping the entire run.
+- If a mailbox has no inbox rules, the script still writes a valid empty JSON array.
+- Pay close attention to `ForwardTo`, `RedirectTo`, `MoveToFolder`, `MarkAsRead`, and `StopProcessingRules` during review because those settings are often useful during compromise investigations.
+- The tenant-wide script is slower in large environments because it queries every matching mailbox sequentially.
