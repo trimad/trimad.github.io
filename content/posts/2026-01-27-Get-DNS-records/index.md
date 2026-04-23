@@ -15,7 +15,26 @@ tags:
   - spf
 title: "Get DNS Records with PowerShell"
 toc: true
+usePageBundles: true
 ---
+
+# Download
+
+{{< download-resource file="Get-DNS-Records.ps1" title="PowerShell Script" label="Download Get-DNS-Records.ps1" >}}
+This post bundles the exact PowerShell script described below as a page resource, so the download link points directly to the script in this post folder.
+{{< /download-resource >}}
+
+Run it from PowerShell with the domain passed on the command line:
+
+```powershell
+.\Get-DNS-Records.ps1 -Domain contoso.com
+```
+
+The domain can also be passed positionally:
+
+```powershell
+.\Get-DNS-Records.ps1 contoso.com
+```
 
 # The Script
 {{< notice type="warning" title="AI-Generated Content" >}}
@@ -26,7 +45,12 @@ This PowerShell script and description are AI-generated. Please review for compl
 This PowerShell script builds a DNS “inventory” report for a given domain by querying common records (A/AAAA/NS/SOA/MX/TXT/CNAME/CAA), email-security records (DMARC, SPF, DKIM across many selectors, BIMI, MTA-STS, TLS-RPT), common hostnames (autodiscover/mail/smtp/etc.), and related SRV records. It safely wraps Resolve-DnsName to normalize results (ok/missing/error/unsupported), flattens TXT values to extract things like the SPF/DMARC strings, and recursively expands SPF include:/redirect= chains up to a max depth while avoiding loops. If CAA lookups aren’t supported by the local Resolve-DnsName, it falls back to nslookup -type=caa, and it also resolves MX/apex IPs and performs PTR lookups for those IPs. Finally, it writes everything as JSON to C:\Temp\<domain>.json and prints the saved path.
 
 ```powershell
-$Domain = "domain.com"
+[CmdletBinding()]
+param(
+  [Parameter(Mandatory=$true, Position=0, HelpMessage="Enter the domain to query, such as contoso.com.")]
+  [ValidateNotNullOrEmpty()]
+  [string]$Domain
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
@@ -241,7 +265,11 @@ $DkimSelectors = @(
 
 # -------------------- build report --------------------
 
-$Domain = $Domain.ToLower()
+if ([string]::IsNullOrWhiteSpace($Domain)) {
+  throw "Domain cannot be blank."
+}
+
+$Domain = $Domain.Trim().TrimEnd(".").ToLowerInvariant()
 
 $report = [ordered]@{
   meta = [ordered]@{

@@ -72,9 +72,9 @@
   --panel-padding-tight: clamp(1rem, 1.6vw, 1.35rem);
   --panel-padding-loose: clamp(1.6rem, 2.4vw, 2.35rem);
   --measure-summary: 58ch;
-  --tracking-ui: 0.16em;
-  --tracking-meta: 0.12em;
-  --tracking-kicker: 0.2em;
+  --tracking-ui: 0.13em;
+  --tracking-meta: 0.1em;
+  --tracking-kicker: 0.16em;
   --fast: 140ms ease;
   --base: 240ms ease;
   --nav-eye-blink-duration: 800ms;
@@ -698,7 +698,7 @@ button {
   font-size: 0.88em;
 }
 
-.rei-prose pre,
+.rei-prose > pre,
 .rei-prose .highlight {
   position: relative;
   overflow: auto;
@@ -708,19 +708,35 @@ button {
   box-shadow: 0 16px 36px rgba(10, 18, 33, 0.12);
 }
 
+.rei-prose .highlight pre,
+.rei-prose > pre {
+  margin: 0;
+  font-size: clamp(0.86rem, 0.16vw + 0.83rem, 0.94rem);
+  line-height: 1.58;
+}
+
+.rei-prose .highlight pre {
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+}
+
 .rei-prose pre code {
   display: block;
-  padding: 1.2rem 1.35rem;
+  padding: 0.95rem 1.1rem 1rem;
   color: rgba(244, 248, 255, 0.92);
   background: transparent;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .rei-code-copy {
   position: absolute;
-  top: 0.8rem;
-  right: 0.8rem;
+  top: 0.65rem;
+  right: 0.65rem;
   z-index: 2;
-  padding: 0.45rem 0.75rem;
+  padding: 0.35rem 0.58rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
@@ -1614,7 +1630,8 @@ a {
 
 .rei-brand__meta strong {
   font-size: 0.84rem;
-  font-weight: 560;
+  font-weight: 540;
+  font-variation-settings: "wght" 540;
   letter-spacing: var(--tracking-kicker);
   text-transform: uppercase;
 }
@@ -1780,9 +1797,9 @@ a {
 .rei-prose h3,
 .rei-prose h4 {
   color: #081525;
-  font-weight: 560;
-  font-variation-settings: "wght" 560;
-  letter-spacing: -0.045em;
+  font-weight: 540;
+  font-variation-settings: "wght" 540;
+  letter-spacing: -0.038em;
   text-wrap: balance;
 }
 
@@ -1807,17 +1824,21 @@ a {
   max-width: 48ch;
   color: rgba(6, 16, 27, 0.82);
   font-family: var(--font-serif);
-  font-size: clamp(1.14rem, 1.5vw, 1.34rem);
-  line-height: 1.72;
+  font-size: clamp(1.12rem, 1.35vw, 1.3rem);
+  line-height: 1.68;
   letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 18, "wght" 420;
 }
 
 .rei-section__summary,
 .rei-footer__copy {
   font-family: var(--font-serif);
-  font-size: 1.03rem;
-  line-height: 1.72;
+  font-size: 1.01rem;
+  line-height: 1.68;
   letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 16, "wght" 415;
 }
 
 .rei-button {
@@ -1954,7 +1975,7 @@ a {
   color: var(--accent-strong);
 }
 
-.rei-prose pre,
+.rei-prose > pre,
 .rei-prose .highlight {
   border-color: rgba(107, 155, 216, 0.22);
   border-radius: 1rem;
@@ -1968,7 +1989,7 @@ a {
   border-color: rgba(107, 155, 216, 0.22);
   background: rgba(255, 255, 255, 0.08);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.72;
@@ -2063,9 +2084,9 @@ a {
   color: #081525;
   font-family: var(--font-ui);
   font-size: clamp(1.15rem, 1.9vw, 1.45rem);
-  font-weight: 560;
-  font-variation-settings: "wght" 560;
-  letter-spacing: -0.04em;
+  font-weight: 540;
+  font-variation-settings: "wght" 540;
+  letter-spacing: -0.032em;
   line-height: 1.08;
   text-wrap: balance;
 }
@@ -2074,8 +2095,12 @@ a {
   max-width: 58ch;
   margin: 0;
   color: var(--text-soft);
-  font-size: 0.96rem;
-  line-height: 1.6;
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  line-height: 1.58;
+  letter-spacing: -0.008em;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 16, "wght" 415;
 }
 
 .rei-filter--listing .rei-filter__meta {
@@ -2308,6 +2333,44 @@ a {
 
 .rei-footer__inner::before {
   display: none;
+}
+
+.rei-page--single .rei-single__summary {
+  max-width: 54ch;
+  font-size: clamp(1.02rem, 0.5vw + 0.96rem, 1.16rem);
+  line-height: 1.6;
+}
+
+.rei-page--single .rei-reading__body .rei-prose {
+  font-size: clamp(1rem, 0.36vw + 0.95rem, 1.1rem);
+  line-height: 1.72;
+  font-variation-settings: "opsz" 18, "wght" 430;
+}
+
+.rei-page--single .rei-reading__body .rei-prose h1,
+.rei-page--single .rei-reading__body .rei-prose h2,
+.rei-page--single .rei-reading__body .rei-prose h3,
+.rei-page--single .rei-reading__body .rei-prose h4 {
+  margin: 2rem 0 0.85rem;
+}
+
+.rei-page--single .rei-reading__body .rei-prose p,
+.rei-page--single .rei-reading__body .rei-prose ul,
+.rei-page--single .rei-reading__body .rei-prose ol,
+.rei-page--single .rei-reading__body .rei-prose blockquote,
+.rei-page--single .rei-reading__body .rei-prose pre,
+.rei-page--single .rei-reading__body .rei-prose table,
+.rei-page--single .rei-reading__body .rei-prose figure {
+  margin: 1rem 0;
+}
+
+.rei-page--single .rei-reading__body .rei-prose li + li {
+  margin-top: 0.3rem;
+}
+
+.rei-page--single .rei-reading__body .rei-prose blockquote,
+.rei-page--single .rei-reading__body .rei-prose figcaption {
+  line-height: 1.66;
 }
 
 @media (max-width: 72rem) {
