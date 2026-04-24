@@ -6,13 +6,35 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --font-ui: "Sora", "Aptos", "Segoe UI", sans-serif;
-  --font-serif: "Sora", "Aptos", "Segoe UI", sans-serif;
-  --font-mono: "Sora", "Aptos", "Segoe UI", sans-serif;
-  --font-title: "Times New Roman", Times, serif;
-  --title-scale-x: 0.79;
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Code", monospace;
   --bg: #e8f2fb;
   --bg-elevated: rgba(248, 252, 255, 0.88);
   --bg-panel: rgba(253, 254, 255, 0.78);
@@ -59,11 +81,12 @@
   --panel-padding-tight: clamp(1rem, 1.6vw, 1.35rem);
   --panel-padding-loose: clamp(1.6rem, 2.4vw, 2.35rem);
   --measure-summary: 58ch;
-  --tracking-ui: 0;
-  --tracking-meta: 0;
-  --tracking-kicker: 0;
+  --tracking-ui: 0.13em;
+  --tracking-meta: 0.1em;
+  --tracking-kicker: 0.16em;
   --fast: 140ms ease;
   --base: 240ms ease;
+  --nav-eye-blink-duration: 620ms;
 }
 
 *,
@@ -106,37 +129,6 @@ a {
   transition: color var(--fast), border-color var(--fast), background-color var(--fast), transform var(--fast), box-shadow var(--fast), opacity var(--fast);
 }
 
-.rei-prose a[href],
-.rei-toc a[href],
-.rei-notice a[href],
-.rei-panel__note a[href],
-.rei-footer a[href] {
-  border-radius: 0.48rem;
-  padding-inline: 0.18rem;
-  margin-inline: -0.18rem;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-  color: var(--accent-strong);
-  font-weight: 600;
-  text-decoration-color: rgba(46, 93, 164, 0.34);
-}
-
-.rei-prose a[href]:hover,
-.rei-prose a[href]:focus-visible,
-.rei-toc a[href]:hover,
-.rei-toc a[href]:focus-visible,
-.rei-notice a[href]:hover,
-.rei-notice a[href]:focus-visible,
-.rei-panel__note a[href]:hover,
-.rei-panel__note a[href]:focus-visible,
-.rei-footer a[href]:hover,
-.rei-footer a[href]:focus-visible {
-  background: linear-gradient(180deg, rgba(235, 243, 255, 0.96), rgba(223, 235, 251, 0.98));
-  box-shadow: 0 0 0 1px rgba(46, 93, 164, 0.08), var(--glow);
-  color: #204b8e;
-  text-decoration-color: transparent;
-}
-
 button,
 input,
 textarea,
@@ -148,10 +140,6 @@ input,
 textarea,
 select {
   color: var(--text);
-}
-
-input[type="checkbox"] {
-  accent-color: var(--accent-strong);
 }
 
 button {
@@ -166,6 +154,63 @@ button {
 :focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
+}
+
+@keyframes rei-nav-eye-blink {
+  0%,
+  36%,
+  100% {
+    filter: none;
+    transform: scaleY(1);
+  }
+
+  45% {
+    transform: scaleY(0.72);
+  }
+
+  50%,
+  54% {
+    filter: brightness(0.92) contrast(1.08);
+    transform: scaleY(0.16);
+  }
+
+  63% {
+    transform: scaleY(1.06);
+  }
+
+  72% {
+    transform: scaleY(0.96);
+  }
+}
+
+@keyframes rei-nav-eye-lid {
+  0%,
+  36%,
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) scaleY(0);
+  }
+
+  45% {
+    opacity: 0.74;
+    transform: translateY(-50%) scaleY(0.58);
+  }
+
+  50%,
+  54% {
+    opacity: 0.96;
+    transform: translateY(-50%) scaleY(1);
+  }
+
+  63% {
+    opacity: 0.3;
+    transform: translateY(-50%) scaleY(0.18);
+  }
+
+  72% {
+    opacity: 0;
+    transform: translateY(-50%) scaleY(0);
+  }
 }
 
 .sr-only {
@@ -323,6 +368,7 @@ button {
 
 .rei-nav a::before,
 .rei-kicker span,
+.rei-memory__results-label::before,
 .rei-notice__marker {
   content: "";
   display: inline-block;
@@ -440,24 +486,6 @@ button {
 .rei-hero__summary + .rei-button-row,
 .rei-page-intro__summary + .rei-button-row {
   margin-top: 1.15rem;
-}
-
-.rei-chamber__actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1rem 1.25rem;
-  margin-top: 1.15rem;
-}
-
-.rei-chamber__actions .rei-button-row,
-.rei-chamber__actions .rei-stat-strip {
-  margin-top: 0;
-}
-
-.rei-chamber__actions .rei-stat-strip {
-  justify-content: flex-end;
 }
 
 .rei-button {
@@ -583,7 +611,8 @@ button {
   line-height: 1.2;
 }
 
-.rei-feed a {
+.rei-feed a,
+.rei-memory__results-list a {
   display: block;
   padding: 0.95rem 1rem;
   border: 1px solid var(--line);
@@ -592,7 +621,8 @@ button {
   text-decoration: none;
 }
 
-.rei-feed a:hover {
+.rei-feed a:hover,
+.rei-memory__results-list a:hover {
   box-shadow: 0 14px 30px rgba(9, 17, 31, 0.08);
 }
 
@@ -663,7 +693,9 @@ button {
 .rei-prose h3,
 .rei-prose h4 {
   margin: 2.4rem 0 1rem;
+  font-family: var(--font-ui);
   line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
 .rei-prose h2 {
@@ -908,22 +940,10 @@ button {
 }
 
 .rei-filter__clear {
-  --rei-clear-seam-layer: linear-gradient(118deg, transparent 0 68%, rgba(255, 210, 216, 0.24) 68.2% 69%, transparent 69.2%);
-  min-height: 2.4rem;
-  padding: 0.62rem 0.95rem;
-  border: 1px solid rgba(189, 32, 54, 0.34);
-  border-radius: var(--radius-pill);
-  background:
-    var(--rei-clear-seam-layer),
-    linear-gradient(180deg, rgba(189, 32, 54, 0.96), rgba(139, 24, 39, 0.98));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 12px 22px rgba(139, 24, 39, 0.16);
-  color: white;
-  font-size: 0.72rem;
-  font-weight: 650;
-  letter-spacing: var(--tracking-ui);
-  text-transform: uppercase;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .rei-notice {
@@ -936,10 +956,6 @@ button {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.68);
-}
-
-.rei-notice + .rei-notice {
-  margin-top: var(--space-3);
 }
 
 .rei-notice__title {
@@ -1010,7 +1026,7 @@ button {
 }
 
 .rei-memory__controls {
-  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.32fr);
+  grid-template-columns: minmax(22rem, 1.3fr) auto;
   align-items: start;
 }
 
@@ -1019,70 +1035,16 @@ button {
 }
 
 .rei-memory__toolbar .rei-filter__control {
-  position: relative;
-  isolation: isolate;
   width: 100%;
-  max-width: none;
-  min-height: 3.45rem;
-  padding: 0.42rem 0.72rem 0.42rem 3.2rem;
-  border: 1px solid rgba(46, 93, 164, 0.22);
-  border-radius: var(--radius-pill);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(237, 246, 255, 0.96));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.42),
-    0 16px 32px rgba(46, 93, 164, 0.11);
+  max-width: 42rem;
+  padding-inline: 0.8rem;
 }
 
-.rei-memory__toolbar .rei-filter__control::before,
-.rei-memory__toolbar .rei-filter__control::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-
-.rei-memory__toolbar .rei-filter__control::before {
-  left: 1.08rem;
-  top: 50%;
-  width: 0.9rem;
-  height: 0.9rem;
-  border: 2px solid rgba(50, 107, 168, 0.82);
-  border-radius: 999px;
-  box-shadow: 0 0 0 0.28rem rgba(141, 191, 230, 0.16);
-  transform: translateY(-58%);
-}
-
-.rei-memory__toolbar .rei-filter__control::after {
-  left: 1.8rem;
-  top: 50%;
-  width: 0.72rem;
-  height: 2px;
-  border-radius: 999px;
-  background: rgba(50, 107, 168, 0.82);
-  transform: translateY(0.24rem) rotate(45deg);
-  transform-origin: left center;
-}
-
-.rei-memory__toolbar .rei-filter__control:focus-within {
-  border-color: rgba(50, 107, 168, 0.45);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.52),
-    0 0 0 3px rgba(141, 191, 230, 0.2),
-    0 18px 36px rgba(46, 93, 164, 0.15);
-}
-
-.rei-memory__toolbar .rei-filter__control input {
-  flex: 1 1 auto;
-  width: 100%;
+.rei-memory__toolbar .rei-filter input {
   min-width: 18rem;
-  min-height: 2.45rem;
-  color: #071727;
-  font-size: 1rem;
-  font-weight: 520;
 }
 
-.rei-memory__toolbar .rei-filter__control input::placeholder {
+.rei-memory__toolbar .rei-filter input::placeholder {
   color: rgba(7, 17, 27, 0.58);
   opacity: 1;
 }
@@ -1191,9 +1153,6 @@ button {
 }
 
 .rei-memory__details {
-  position: sticky;
-  top: 6.75rem;
-  align-self: start;
   padding: 1.1rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
@@ -1209,6 +1168,43 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+}
+
+.rei-memory__results-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.rei-memory__result {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.rei-memory__result-title {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.rei-memory__result-summary {
+  display: block;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.rei-memory__results-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 0.9rem;
+  color: var(--text-faint);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .rei-memory__path {
@@ -1541,7 +1537,6 @@ button {
 }
 
 .rei-dossier__band {
-  display: none;
   flex-wrap: wrap;
   margin-bottom: 1rem;
   color: var(--text-faint);
@@ -1584,14 +1579,6 @@ button {
   align-items: start;
 }
 
-.rei-reading .rei-panel {
-  --rei-surface-signal-layer: none;
-}
-
-.rei-reading .rei-kicker span {
-  display: none;
-}
-
 .rei-signal-rail {
   display: grid;
   gap: 1rem;
@@ -1610,7 +1597,7 @@ button {
   width: var(--reading-width);
 }
 
-/* Identity refinement: Rei Ayanami translated into porcelain fields, powder-blue traces, and sparse red signals. */
+/* Inherited clinical base layer, superseded below by the Asuka command-interface identity layer. */
 body {
   background:
     linear-gradient(128deg, var(--rei-eye-soft), transparent 16rem),
@@ -1702,48 +1689,58 @@ a {
 }
 
 .rei-brand__mark {
-  display: inline-grid;
+  display: inline-block;
   flex: 0 0 auto;
   position: relative;
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 2.1rem;
+  height: 2.1rem;
   overflow: visible;
-  place-items: center;
-  border: 1px solid rgba(18, 41, 82, 0.1);
-  border-radius: var(--radius-pill);
+  font-size: 0;
   background:
-    linear-gradient(118deg, transparent 0 64%, rgba(159, 201, 234, 0.18) 64.2% 70%, transparent 70.2%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(238, 246, 255, 0.94));
+    radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.98) 0 0.15rem, transparent 0.17rem),
+    radial-gradient(circle at 50% 53%, #110608 0 0.18rem, transparent 0.19rem),
+    radial-gradient(circle at 50% 53%, var(--rei-eye) 0 0.44rem, #831427 0.5rem 0.58rem, transparent 0.6rem),
+    radial-gradient(ellipse at 50% 54%, rgba(255, 255, 255, 0.98) 0 58%, #dfeaf6 78%, rgba(113, 156, 198, 0.62) 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 0.35rem 0.8rem rgba(10, 20, 38, 0.08);
-  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
-  font-size: 1.45rem;
-  line-height: 1;
-  clip-path: none;
-  filter: none;
+    inset 0 0.12rem 0 rgba(255, 255, 255, 0.72),
+    inset 0 -0.2rem 0.32rem rgba(68, 100, 134, 0.16),
+    0 0 0 1px rgba(88, 130, 176, 0.26),
+    0 0.35rem 0.8rem rgba(10, 20, 38, 0.18);
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.46)) drop-shadow(0 10px 18px rgba(12, 26, 48, 0.16));
   transform: translateY(0.02rem);
 }
 
 .rei-brand__mark::before,
 .rei-brand__mark::after {
-  position: relative;
+  content: "";
+  position: absolute;
   pointer-events: none;
 }
 
 .rei-brand__mark::before {
-  content: "🧬";
-  width: auto;
-  height: auto;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  opacity: 1;
-  transform: none;
+  inset: -0.2rem -0.28rem auto auto;
+  width: 1.22rem;
+  height: 2.28rem;
+  border-radius: 58% 42% 64% 36% / 20% 18% 82% 80%;
+  background:
+    linear-gradient(112deg, rgba(255, 255, 255, 0.38), transparent 28%),
+    linear-gradient(180deg, rgba(159, 201, 234, 0.88), rgba(95, 147, 195, 0.24));
+  clip-path: polygon(18% 0, 82% 10%, 100% 42%, 56% 100%, 22% 74%, 0 32%);
+  opacity: 0.76;
+  transform: rotate(10deg);
 }
 
 .rei-brand__mark::after {
-  display: none;
+  left: 0.25rem;
+  right: 0.25rem;
+  top: 0.48rem;
+  height: 0.12rem;
+  border-radius: 999px;
+  background: rgba(15, 24, 38, 0.52);
+  transform: rotate(-8deg);
+  box-shadow:
+    0 0.78rem 0 rgba(255, 255, 255, 0.62),
+    0 0 0.5rem rgba(189, 32, 54, 0.14);
 }
 
 .rei-brand__meta strong {
@@ -1763,12 +1760,11 @@ a {
 }
 
 .rei-nav a {
-  --rei-nav-seam-layer: linear-gradient(118deg, transparent 0 68%, rgba(209, 223, 238, 0.58) 68.2% 69%, transparent 69.2%);
   padding: 0.74rem 0.92rem;
   border: 1px solid rgba(26, 44, 68, 0.12);
   border-radius: var(--radius-pill);
   background:
-    var(--rei-nav-seam-layer),
+    linear-gradient(90deg, rgba(107, 155, 216, 0.16), rgba(107, 155, 216, 0) 32%) 0.95rem 0.82rem / 1.9rem 1px no-repeat,
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 248, 255, 0.9));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.72),
@@ -1779,37 +1775,65 @@ a {
   text-transform: uppercase;
 }
 
-.rei-nav a:nth-child(2n) {
-  --rei-nav-seam-layer: linear-gradient(64deg, transparent 0 28%, rgba(209, 223, 238, 0.54) 28.2% 29%, transparent 29.2%);
-}
-
-.rei-nav a:nth-child(3n) {
-  --rei-nav-seam-layer: linear-gradient(141deg, transparent 0 76%, rgba(209, 223, 238, 0.5) 76.2% 77%, transparent 77.2%);
-}
-
 .rei-nav a::before {
-  content: "🩹";
   flex: 0 0 auto;
-  display: inline-grid;
-  width: 1.35rem;
-  height: 1.35rem;
-  place-items: center;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  clip-path: none;
-  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
-  font-size: 1.02rem;
-  line-height: 1;
-  transform: none;
+  width: 1.34rem;
+  height: 0.74rem;
+  border: 1px solid rgba(5, 8, 14, 0.62);
+  border-radius: 100% / 76%;
+  clip-path: polygon(0 50%, 8% 30%, 18% 15%, 50% 6%, 82% 15%, 92% 30%, 100% 50%, 92% 70%, 82% 85%, 50% 94%, 18% 85%, 8% 70%);
+  transform-origin: center 52%;
+  background:
+    radial-gradient(ellipse at 37% 27%, rgba(255, 255, 255, 0.99) 0 0.16rem, transparent 0.17rem),
+    radial-gradient(ellipse at 66% 62%, rgba(255, 255, 255, 0.96) 0 0.082rem, transparent 0.092rem),
+    radial-gradient(circle at 72% 72%, rgba(255, 255, 255, 0.98) 0 0.033rem, transparent 0.043rem),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0 13%, rgba(0, 0, 0, 0.42) 18%, rgba(255, 255, 255, 0) 26%),
+    radial-gradient(circle at 50% 52%, rgba(5, 6, 9, 1) 0 0.11rem, transparent 0.12rem),
+    radial-gradient(circle at 50% 52%, transparent 0 0.19rem, rgba(12, 5, 5, 0.98) 0.22rem 0.31rem, transparent 0.32rem),
+    radial-gradient(circle at 50% 52%, rgba(223, 85, 91, 0.82) 0 0.14rem, var(--rei-eye) 0.21rem, rgba(111, 20, 29, 0.94) 0.27rem, transparent 0.28rem),
+    radial-gradient(ellipse at 50% 52%, rgba(255, 255, 255, 1) 0 69%, rgba(244, 247, 251, 1) 87%, rgba(228, 235, 244, 1) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    inset 0 0.11rem 0 rgba(0, 0, 0, 0.14),
+    0 0 0 1px rgba(255, 255, 255, 0.42),
+    0 0.08rem 0.22rem rgba(10, 20, 34, 0.08);
 }
 
 .rei-nav a::after {
-  display: none;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.92rem;
+  z-index: 1;
+  width: 1.34rem;
+  height: 0.74rem;
+  border-radius: 100% / 76%;
+  clip-path: polygon(0 50%, 8% 30%, 18% 15%, 50% 6%, 82% 15%, 92% 30%, 100% 50%, 92% 70%, 82% 85%, 50% 94%, 18% 85%, 8% 70%);
+  background:
+    linear-gradient(180deg, rgba(251, 253, 255, 0.98), rgba(222, 235, 248, 0.98)),
+    linear-gradient(90deg, rgba(159, 201, 234, 0.2), transparent);
+  box-shadow:
+    inset 0 0.09rem 0 rgba(255, 255, 255, 0.8),
+    inset 0 -0.08rem 0 rgba(20, 48, 86, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) scaleY(0);
+  transform-origin: center 50%;
 }
 
-.rei-kicker span {
+.rei-nav a:hover::before,
+.rei-nav a:focus-visible::before {
+  animation: rei-nav-eye-blink var(--nav-eye-blink-duration) ease-in-out 1;
+}
+
+.rei-nav a:hover::after,
+.rei-nav a:focus-visible::after {
+  animation: rei-nav-eye-lid var(--nav-eye-blink-duration) ease-in-out 1;
+}
+
+.rei-kicker span,
+.rei-memory__results-label::before {
   width: 0.8rem;
   height: 0.14rem;
   border-radius: 999px;
@@ -1818,12 +1842,13 @@ a {
 }
 
 .rei-nav a:hover,
-.rei-nav a:focus-visible,
 .rei-nav a.is-active {
   color: var(--accent-strong);
-  border-color: rgba(46, 93, 164, 0.3);
-  background: linear-gradient(180deg, rgba(235, 243, 255, 0.96), rgba(223, 235, 251, 0.98));
-  box-shadow: 0 0 0 1px rgba(46, 93, 164, 0.08), var(--glow);
+  border-color: rgba(46, 93, 164, 0.22);
+  background:
+    linear-gradient(90deg, rgba(107, 155, 216, 0.22), rgba(107, 155, 216, 0) 34%) 0.95rem 0.82rem / 2rem 1px no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 248, 255, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 10px 24px rgba(7, 14, 26, 0.06);
 }
 
 .rei-nav-toggle {
@@ -1846,87 +1871,52 @@ a {
 .rei-index-panel,
 .rei-dossier,
 .rei-ledger-shell {
-  --rei-surface-signal-layer: linear-gradient(90deg, var(--rei-eye-soft), rgba(189, 32, 54, 0)) 1.35rem 1.15rem / 3.4rem 1px no-repeat;
-  --rei-surface-seam-layer: linear-gradient(111deg, transparent 0 63%, var(--rei-bandage) 63.15% 63.6%, transparent 63.75% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at top right, rgba(255, 255, 255, 0.94), transparent 21rem);
-  --rei-surface-base-layer: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(242, 248, 255, 0.94));
-  --rei-surface-wash-layer: linear-gradient(135deg, rgba(159, 201, 234, 0.12), transparent 62%);
   position: relative;
   overflow: hidden;
   border-color: rgba(255, 255, 255, 0.78);
   background:
-    var(--rei-surface-signal-layer),
-    var(--rei-surface-seam-layer),
-    var(--rei-surface-light-layer),
-    var(--rei-surface-base-layer),
-    var(--rei-surface-wash-layer);
+    linear-gradient(90deg, var(--rei-eye-soft), rgba(189, 32, 54, 0)) 1.35rem 1.15rem / 3.4rem 1px no-repeat,
+    linear-gradient(111deg, transparent 0 63%, var(--rei-bandage) 63.15% 63.6%, transparent 63.75% 100%),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.94), transparent 21rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(242, 248, 255, 0.94)),
+    linear-gradient(135deg, rgba(159, 201, 234, 0.12), transparent 62%);
   box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
-.rei-page-intro__copy {
-  --rei-surface-seam-layer: linear-gradient(118deg, transparent 0 58%, rgba(209, 223, 238, 0.56) 58.2% 58.85%, transparent 59.05% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 86% 12%, rgba(255, 255, 255, 0.94), transparent 22rem);
-  --rei-surface-wash-layer: linear-gradient(151deg, rgba(159, 201, 234, 0.11), transparent 57%);
+.rei-page-intro__copy::before,
+.rei-panel::before,
+.rei-chamber__lead::before,
+.rei-index-panel::before,
+.rei-dossier::before,
+.rei-ledger-shell::before,
+.rei-memory__shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), transparent 18%),
+    linear-gradient(104deg, transparent 0 76%, rgba(159, 201, 234, 0.14) 76.2% 79%, transparent 79.2%);
+  opacity: 0.72;
+  pointer-events: none;
 }
 
-.rei-chamber__lead {
-  --rei-surface-signal-layer: none;
-  --rei-surface-seam-layer: linear-gradient(72deg, transparent 0 69%, rgba(209, 223, 238, 0.5) 69.25% 70%, transparent 70.25% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 72% 8%, rgba(255, 255, 255, 0.94), transparent 19rem);
-  --rei-surface-wash-layer: linear-gradient(24deg, rgba(159, 201, 234, 0.12), transparent 48%);
-}
-
-.rei-index-panel {
-  --rei-surface-signal-layer: none;
-  --rei-surface-seam-layer: linear-gradient(132deg, transparent 0 76%, rgba(209, 223, 238, 0.48) 76.15% 76.8%, transparent 77% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.86), transparent 17rem);
-  --rei-surface-wash-layer: linear-gradient(207deg, rgba(159, 201, 234, 0.1), transparent 54%);
-}
-
-.rei-index-panel:nth-child(even) {
-  --rei-surface-seam-layer: linear-gradient(63deg, transparent 0 23%, rgba(209, 223, 238, 0.46) 23.2% 23.8%, transparent 24% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.88), transparent 18rem);
-  --rei-surface-wash-layer: linear-gradient(318deg, rgba(159, 201, 234, 0.1), transparent 56%);
-}
-
-.rei-index-panel:nth-child(3n) {
-  --rei-surface-seam-layer: linear-gradient(28deg, transparent 0 34%, rgba(209, 223, 238, 0.46) 34.2% 34.85%, transparent 35% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 34% 8%, rgba(255, 255, 255, 0.86), transparent 18rem);
-  --rei-surface-wash-layer: linear-gradient(73deg, rgba(159, 201, 234, 0.1), transparent 58%);
-}
-
-.rei-index-panel:nth-child(4n) {
-  --rei-surface-seam-layer: linear-gradient(158deg, transparent 0 17%, rgba(209, 223, 238, 0.44) 17.2% 17.8%, transparent 18% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 68% 0%, rgba(255, 255, 255, 0.88), transparent 19rem);
-  --rei-surface-wash-layer: linear-gradient(242deg, rgba(159, 201, 234, 0.1), transparent 56%);
-}
-
-.rei-dossier {
-  --rei-surface-signal-layer: none;
-  --rei-surface-seam-layer: linear-gradient(36deg, transparent 0 71%, rgba(209, 223, 238, 0.48) 71.2% 71.9%, transparent 72.1% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 78% 4%, rgba(255, 255, 255, 0.92), transparent 20rem);
-  --rei-surface-wash-layer: linear-gradient(160deg, rgba(159, 201, 234, 0.1), transparent 52%);
-}
-
-.rei-ledger-shell {
-  --rei-surface-seam-layer: linear-gradient(154deg, transparent 0 82%, rgba(209, 223, 238, 0.44) 82.15% 82.7%, transparent 82.9% 100%);
-  --rei-surface-light-layer: radial-gradient(circle at 90% 16%, rgba(255, 255, 255, 0.9), transparent 20rem);
-  --rei-surface-wash-layer: linear-gradient(54deg, rgba(159, 201, 234, 0.1), transparent 58%);
-}
-
-.rei-memory__shell {
-  --rei-surface-signal-layer: none;
-  --rei-surface-seam-layer: none;
-  --rei-surface-wash-layer: none;
-}
-
-.rei-memory__frame {
-  overflow: visible;
-}
-
-.rei-memory__layout .rei-memory__column header {
-  --rei-micro-line-layer: none;
-  --rei-micro-seam-layer: none;
+.rei-page-intro__copy::after,
+.rei-panel::after,
+.rei-chamber__lead::after,
+.rei-index-panel::after,
+.rei-dossier::after,
+.rei-ledger-shell::after,
+.rei-memory__shell::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1px;
+  height: 3.5rem;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(159, 201, 234, 0.46), transparent);
+  pointer-events: none;
 }
 
 .rei-page-intro__copy > *,
@@ -1959,38 +1949,10 @@ a {
 }
 
 .rei-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
   margin-bottom: 1.15rem;
-  color: var(--text-faint);
-  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: var(--tracking-kicker);
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.rei-kicker span {
-  content: "";
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 2.65rem;
-  height: 0.42rem;
-  border-radius: 72% 28% 64% 36% / 58% 34% 66% 42%;
-  background:
-    radial-gradient(ellipse at 14% 54%, rgba(106, 5, 18, 0.98) 0 0.23rem, transparent 0.25rem),
-    radial-gradient(ellipse at 36% 42%, rgba(189, 32, 54, 0.92) 0 0.19rem, transparent 0.21rem),
-    radial-gradient(ellipse at 63% 59%, rgba(139, 24, 39, 0.68) 0 0.12rem, transparent 0.14rem),
-    linear-gradient(94deg, rgba(189, 32, 54, 0.95) 0 0.62rem, rgba(189, 32, 54, 0.72) 0.62rem 1.6rem, rgba(189, 32, 54, 0.16) 2.18rem, rgba(189, 32, 54, 0) 100%);
-  box-shadow:
-    0.22rem 0.18rem 0 -0.13rem rgba(106, 5, 18, 0.72),
-    0.72rem 0.24rem 0 -0.16rem rgba(189, 32, 54, 0.48),
-    1.18rem 0.12rem 0 -0.13rem rgba(139, 24, 39, 0.42),
-    0 0.06rem 0.14rem rgba(106, 5, 18, 0.24);
-  clip-path: polygon(0 42%, 11% 17%, 26% 22%, 38% 9%, 54% 28%, 72% 20%, 100% 48%, 78% 63%, 62% 54%, 47% 76%, 31% 60%, 18% 82%, 8% 62%);
-  opacity: 0.94;
 }
 
 .rei-hero__title,
@@ -1998,7 +1960,6 @@ a {
 .rei-single__title,
 .rei-panel__title,
 .rei-section__title,
-.rei-filter__title,
 .rei-memory__details h3,
 .rei-empty h2,
 .rei-index-panel h2,
@@ -2008,21 +1969,28 @@ a {
 .rei-prose h2,
 .rei-prose h3,
 .rei-prose h4 {
-  display: block;
   color: #081525;
-  font-family: var(--font-title);
-  font-weight: 700;
-  font-stretch: condensed;
-  font-variation-settings: normal;
-  letter-spacing: 0;
-  transform: scaleX(var(--title-scale-x));
-  transform-origin: left center;
+  font-weight: 540;
+  font-variation-settings: "wght" 540;
+  letter-spacing: -0.038em;
   text-wrap: balance;
 }
 
 .rei-hero__title {
   max-width: 10ch;
   position: relative;
+}
+
+.rei-hero__title::after {
+  content: "";
+  display: block;
+  width: min(8rem, 42vw);
+  height: 0.42rem;
+  margin-top: 1rem;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, var(--rei-eye) 0 0.42rem, transparent 0.42rem 0.78rem, rgba(159, 201, 234, 0.72), transparent);
+  opacity: 0.82;
 }
 
 .rei-hero__summary,
@@ -2060,27 +2028,18 @@ a {
 }
 
 .rei-button {
-  --rei-button-seam-layer: linear-gradient(118deg, transparent 0 68%, rgba(209, 223, 238, 0.58) 68.2% 69%, transparent 69.2%);
   min-height: 3.05rem;
   padding: 0.9rem 1.25rem;
   border-color: var(--line-strong);
   border-radius: var(--radius-pill);
   background:
-    var(--rei-button-seam-layer),
+    linear-gradient(90deg, rgba(107, 155, 216, 0.28), rgba(107, 155, 216, 0)) 1rem 0.82rem / 1.9rem 1px no-repeat,
     linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(242, 247, 255, 0.92));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
   font-size: 0.76rem;
   font-weight: 650;
   letter-spacing: var(--tracking-ui);
   text-transform: uppercase;
-}
-
-.rei-button-row .rei-button:nth-child(2n) {
-  --rei-button-seam-layer: linear-gradient(66deg, transparent 0 31%, rgba(209, 223, 238, 0.54) 31.2% 32%, transparent 32.2%);
-}
-
-.rei-button-row .rei-button:nth-child(3n) {
-  --rei-button-seam-layer: linear-gradient(142deg, transparent 0 76%, rgba(209, 223, 238, 0.52) 76.2% 77%, transparent 77.2%);
 }
 
 .rei-button:hover {
@@ -2090,7 +2049,7 @@ a {
 .rei-button--primary {
   border-color: rgba(46, 93, 164, 0.28);
   background:
-    var(--rei-button-seam-layer),
+    linear-gradient(90deg, rgba(189, 32, 54, 0.58), rgba(189, 32, 54, 0) 26%) 1rem 0.82rem / 2.2rem 1px no-repeat,
     linear-gradient(180deg, #9fc9ea 0%, #5e91c2 58%, #326ba8 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 18px 28px rgba(46, 93, 164, 0.22);
 }
@@ -2101,40 +2060,13 @@ a {
 .rei-memory__column header,
 .rei-footer__meta div,
 .rei-term-row__meta {
-  --rei-micro-line-layer: linear-gradient(90deg, rgba(159, 201, 234, 0.2), rgba(159, 201, 234, 0)) 1rem 0.95rem / 1.8rem 1px no-repeat;
-  --rei-micro-seam-layer: linear-gradient(106deg, transparent 0 70%, var(--rei-bandage) 70.2% 71%, transparent 71.2%);
-  --rei-micro-base-layer: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(242, 247, 255, 0.86));
   border-color: rgba(18, 41, 82, 0.1);
   border-radius: var(--radius-sm);
   background:
-    var(--rei-micro-line-layer),
-    var(--rei-micro-seam-layer),
-    var(--rei-micro-base-layer);
+    linear-gradient(90deg, rgba(159, 201, 234, 0.2), rgba(159, 201, 234, 0)) 1rem 0.95rem / 1.8rem 1px no-repeat,
+    linear-gradient(106deg, transparent 0 70%, var(--rei-bandage) 70.2% 71%, transparent 71.2%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(242, 247, 255, 0.86));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.76);
-}
-
-.rei-stat:nth-child(2),
-.rei-page-intro__stat:nth-child(2),
-.rei-footer__meta div:nth-child(2),
-.rei-meta__item:nth-child(2),
-.rei-term-row:nth-child(3n + 2) .rei-term-row__meta {
-  --rei-micro-line-layer: linear-gradient(24deg, rgba(159, 201, 234, 0.18), rgba(159, 201, 234, 0)) 0.85rem 0.85rem / 1.45rem 1px no-repeat;
-  --rei-micro-seam-layer: linear-gradient(72deg, transparent 0 38%, rgba(209, 223, 238, 0.52) 38.2% 39%, transparent 39.2%);
-}
-
-.rei-stat:nth-child(3),
-.rei-page-intro__stat:nth-child(3),
-.rei-footer__meta div:nth-child(3),
-.rei-meta__item:nth-child(3n),
-.rei-term-row:nth-child(3n) .rei-term-row__meta {
-  --rei-micro-line-layer: linear-gradient(146deg, rgba(159, 201, 234, 0.18), rgba(159, 201, 234, 0)) right 0.95rem top 1rem / 1.7rem 1px no-repeat;
-  --rei-micro-seam-layer: linear-gradient(151deg, transparent 0 79%, rgba(209, 223, 238, 0.5) 79.2% 80%, transparent 80.2%);
-}
-
-.rei-meta__item:nth-child(4n),
-.rei-term-row:nth-child(4n) .rei-term-row__meta {
-  --rei-micro-line-layer: linear-gradient(63deg, rgba(159, 201, 234, 0.17), rgba(159, 201, 234, 0)) 1.1rem 1.95rem / 1.35rem 1px no-repeat;
-  --rei-micro-seam-layer: linear-gradient(35deg, transparent 0 58%, rgba(209, 223, 238, 0.48) 58.2% 59%, transparent 59.2%);
 }
 
 .rei-stat strong,
@@ -2146,50 +2078,26 @@ a {
 }
 
 .rei-feed a,
+.rei-memory__results-list a,
 .rei-ranking li,
 .rei-term-row a,
 .rei-adjacent__item {
-  --rei-row-line-layer: linear-gradient(90deg, rgba(159, 201, 234, 0.16), rgba(159, 201, 234, 0)) 1rem 1rem / 1.6rem 1px no-repeat;
-  --rei-row-seam-layer: linear-gradient(112deg, transparent 0 82%, rgba(209, 223, 238, 0.5) 82.2% 82.7%, transparent 83%);
-  --rei-row-base-layer: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(242, 247, 255, 0.84));
   border-color: rgba(18, 41, 82, 0.1);
   border-radius: var(--radius-md);
   background:
-    var(--rei-row-line-layer),
-    var(--rei-row-seam-layer),
-    var(--rei-row-base-layer);
+    linear-gradient(90deg, rgba(159, 201, 234, 0.16), rgba(159, 201, 234, 0)) 1rem 1rem / 1.6rem 1px no-repeat,
+    linear-gradient(112deg, transparent 0 82%, rgba(209, 223, 238, 0.5) 82.2% 82.7%, transparent 83%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(242, 247, 255, 0.84));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.76);
 }
 
-.rei-ranking li:nth-child(3n + 2),
-.rei-feed li:nth-child(3n + 2) a,
-.rei-term-row:nth-child(3n + 2) a,
-.rei-adjacent__item:nth-child(3n + 2) {
-  --rei-row-line-layer: linear-gradient(28deg, rgba(159, 201, 234, 0.15), rgba(159, 201, 234, 0)) 1.15rem 0.95rem / 1.35rem 1px no-repeat;
-  --rei-row-seam-layer: linear-gradient(67deg, transparent 0 18%, rgba(209, 223, 238, 0.46) 18.2% 18.8%, transparent 19%);
-}
-
-.rei-ranking li:nth-child(3n),
-.rei-feed li:nth-child(3n) a,
-.rei-term-row:nth-child(3n) a,
-.rei-adjacent__item:nth-child(3n) {
-  --rei-row-line-layer: linear-gradient(153deg, rgba(159, 201, 234, 0.15), rgba(159, 201, 234, 0)) right 1rem top 1rem / 1.45rem 1px no-repeat;
-  --rei-row-seam-layer: linear-gradient(144deg, transparent 0 72%, rgba(209, 223, 238, 0.48) 72.2% 72.8%, transparent 73%);
-}
-
-.rei-term-row:nth-child(4n) a,
-.rei-adjacent__item:nth-child(4n) {
-  --rei-row-line-layer: linear-gradient(61deg, rgba(159, 201, 234, 0.14), rgba(159, 201, 234, 0)) 1rem calc(100% - 0.95rem) / 1.5rem 1px no-repeat;
-  --rei-row-seam-layer: linear-gradient(31deg, transparent 0 49%, rgba(209, 223, 238, 0.44) 49.2% 49.8%, transparent 50%);
-}
-
 .rei-feed a:hover,
+.rei-memory__results-list a:hover,
 .rei-ranking li:hover,
 .rei-term-row a:hover,
 .rei-adjacent__item:hover {
-  border-color: rgba(46, 93, 164, 0.3);
-  background: linear-gradient(180deg, rgba(235, 243, 255, 0.96), rgba(223, 235, 251, 0.98));
-  box-shadow: 0 0 0 1px rgba(46, 93, 164, 0.08), var(--glow);
+  border-color: rgba(46, 93, 164, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78), 0 14px 30px rgba(7, 14, 26, 0.08);
 }
 
 .rei-entry__placeholder,
@@ -2213,6 +2121,7 @@ a {
   opacity: 0.5;
 }
 
+.rei-entry__placeholder::after,
 .rei-banner::after {
   content: "";
   position: absolute;
@@ -2278,7 +2187,9 @@ a {
 .rei-prose .highlight {
   border-color: rgba(107, 155, 216, 0.22);
   border-radius: 1rem;
-  background: linear-gradient(180deg, rgba(9, 15, 27, 0.98), rgba(14, 22, 38, 0.98));
+  background:
+    linear-gradient(90deg, rgba(244, 77, 89, 0.5), rgba(244, 77, 89, 0) 28%) 1rem 0.95rem / 3rem 1px no-repeat,
+    linear-gradient(180deg, rgba(9, 15, 27, 0.98), rgba(14, 22, 38, 0.98));
   box-shadow: 0 16px 36px rgba(10, 18, 33, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
@@ -2317,28 +2228,13 @@ a {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
-.rei-button.rei-filter__clear {
-  --rei-clear-seam-layer: linear-gradient(118deg, transparent 0 68%, rgba(255, 210, 216, 0.24) 68.2% 69%, transparent 69.2%);
-  min-height: 2.4rem;
-  padding: 0.62rem 0.95rem;
-  border-color: rgba(189, 32, 54, 0.34);
-  background:
-    var(--rei-clear-seam-layer),
-    linear-gradient(180deg, rgba(189, 32, 54, 0.96), rgba(139, 24, 39, 0.98));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 12px 22px rgba(139, 24, 39, 0.16);
-  color: white;
-}
-
-.rei-button.rei-filter__clear:hover {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 14px 26px rgba(139, 24, 39, 0.2);
+.rei-filter__clear {
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(242, 247, 255, 0.95));
 }
 
 .rei-filter input::placeholder,
-.rei-memory__toolbar .rei-filter__control input::placeholder {
+.rei-memory__toolbar .rei-filter input::placeholder {
   color: rgba(6, 16, 27, 0.44);
 }
 
@@ -2394,7 +2290,11 @@ a {
 .rei-filter__title {
   margin: 0;
   color: #081525;
+  font-family: var(--font-ui);
   font-size: clamp(1.15rem, 1.9vw, 1.45rem);
+  font-weight: 540;
+  font-variation-settings: "wght" 540;
+  letter-spacing: -0.032em;
   line-height: 1.08;
   text-wrap: balance;
 }
@@ -2496,6 +2396,11 @@ a {
 .rei-filter--listing .rei-filter__clear {
   min-height: 2.4rem;
   padding: 0.62rem 0.95rem;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .rei-panel--filter.is-filtering .rei-filter--listing .rei-filter__control {
@@ -2510,6 +2415,7 @@ a {
 .rei-notice {
   border-radius: var(--radius-md);
   background:
+    linear-gradient(90deg, var(--notice-line), transparent) 1rem 1rem / 4rem 2px no-repeat,
     linear-gradient(180deg, var(--notice-fill), rgba(255, 255, 255, 0)) 0 0 / 100% 100% no-repeat,
     linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(242, 247, 255, 0.84));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
@@ -2524,15 +2430,25 @@ a {
   overflow: hidden;
   border-radius: var(--radius-md);
   background:
-    repeating-linear-gradient(0deg, rgba(189, 51, 69, 0.16) 0 1px, transparent 1px 2.5rem),
-    repeating-linear-gradient(90deg, rgba(189, 51, 69, 0.16) 0 1px, transparent 1px 2.5rem),
-    repeating-linear-gradient(0deg, rgba(189, 51, 69, 0.075) 0 1px, transparent 1px 0.5rem),
-    repeating-linear-gradient(90deg, rgba(189, 51, 69, 0.075) 0 1px, transparent 1px 0.5rem),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 253, 255, 0.98));
+    linear-gradient(90deg, var(--rei-eye-soft), rgba(189, 32, 54, 0)) 1rem 1rem / 3rem 1px no-repeat,
+    linear-gradient(116deg, transparent 0 68%, rgba(209, 223, 238, 0.5) 68.2% 68.7%, transparent 69%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(239, 245, 252, 0.9)),
+    linear-gradient(135deg, rgba(159, 201, 234, 0.14), transparent 52%);
 }
 
 .rei-memory__stage::before {
-  display: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(16, 36, 72, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 36, 72, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(189, 32, 54, 0.16), rgba(189, 32, 54, 0));
+  background-size: 1.25rem 1.25rem, 1.25rem 1.25rem, 1px 100%;
+  background-position: 0 0, 0 0, right 1rem top;
+  background-repeat: repeat, repeat, no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 .rei-memory-node {
@@ -2546,36 +2462,27 @@ a {
 .rei-memory-node:hover,
 .rei-memory-node:focus-visible {
   border-color: rgba(46, 93, 164, 0.3);
-  background: linear-gradient(180deg, rgba(235, 243, 255, 0.96), rgba(223, 235, 251, 0.98));
+  background:
+    linear-gradient(112deg, transparent 0 72%, rgba(159, 201, 234, 0.18) 72.2% 75%, transparent 75.2%),
+    linear-gradient(180deg, rgba(235, 243, 255, 0.96), rgba(223, 235, 251, 0.98));
   box-shadow: 0 0 0 1px rgba(46, 93, 164, 0.08), var(--glow);
-}
-
-.rei-memory-node--more,
-.rei-memory-node--more:hover {
-  pointer-events: none;
-  border-color: rgba(18, 41, 82, 0.08);
-  border-style: dashed;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(239, 245, 252, 0.74));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  color: var(--text-faint);
-}
-
-.rei-memory-node--more strong {
-  font-size: 1.28rem;
-  line-height: 1;
 }
 
 .rei-memory-node--category.is-active,
 .rei-memory-node--category:hover,
 .rei-memory-node--category:focus-visible {
   border-color: rgba(195, 58, 69, 0.28);
-  background: linear-gradient(180deg, rgba(255, 244, 246, 0.96), rgba(249, 233, 237, 0.98));
+  background:
+    linear-gradient(90deg, var(--rei-eye-soft), transparent 36%) 1rem 0.85rem / 2.2rem 1px no-repeat,
+    linear-gradient(180deg, rgba(255, 244, 246, 0.96), rgba(249, 233, 237, 0.98));
 }
 
 .rei-memory__details {
   border-color: rgba(18, 41, 82, 0.1);
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(242, 247, 255, 0.84));
+  background:
+    linear-gradient(90deg, rgba(107, 155, 216, 0.12), rgba(107, 155, 216, 0)) 1rem 1rem / 2.4rem 1px no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(242, 247, 255, 0.84));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
@@ -2616,7 +2523,6 @@ a {
 }
 
 .rei-panel--toc {
-  --rei-surface-signal-layer: none;
   position: sticky;
   top: 6.75rem;
 }
@@ -2628,8 +2534,8 @@ a {
 
 .rei-entry__link:hover,
 .rei-entry__link:focus-visible {
-  background: linear-gradient(180deg, rgba(235, 243, 255, 0.96), rgba(223, 235, 251, 0.98));
-  box-shadow: 0 0 0 1px rgba(46, 93, 164, 0.08), var(--glow);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.68), rgba(243, 248, 255, 0.88));
+  box-shadow: inset 0 0 0 1px rgba(46, 93, 164, 0.1), 0 10px 22px rgba(7, 14, 26, 0.05);
 }
 
 .rei-footer__inner {
@@ -2680,9 +2586,596 @@ a {
   line-height: 1.66;
 }
 
-.rei-shell,
-.rei-shell * {
-  letter-spacing: 0;
+/* Asuka identity layer: high-alert red command panels, amber synchronization, and angular pilot-console structure. */
+:root {
+  --bg: #fff3ee;
+  --bg-elevated: rgba(255, 250, 246, 0.9);
+  --bg-panel: rgba(255, 251, 247, 0.84);
+  --bg-panel-strong: rgba(255, 246, 239, 0.96);
+  --bg-deep: #160707;
+  --line: rgba(87, 25, 21, 0.16);
+  --line-strong: rgba(103, 28, 22, 0.34);
+  --text: #170c0a;
+  --text-soft: rgba(23, 12, 10, 0.76);
+  --text-faint: rgba(45, 20, 16, 0.56);
+  --accent: #f34532;
+  --accent-strong: #ba241b;
+  --accent-soft: rgba(243, 69, 50, 0.13);
+  --signal: #ffb000;
+  --signal-soft: rgba(255, 176, 0, 0.15);
+  --success: #147d69;
+  --asuka-red: #f34532;
+  --asuka-red-deep: #9f1d17;
+  --asuka-red-black: #2a0908;
+  --asuka-orange: #ff6a1f;
+  --asuka-amber: #ffb000;
+  --asuka-cream: #fff7f0;
+  --asuka-white: #fffefd;
+  --asuka-charcoal: #170c0a;
+  --asuka-line: rgba(126, 32, 22, 0.22);
+  --asuka-shadow: 0 26px 54px rgba(71, 14, 9, 0.16);
+  --asuka-heat-glow: 0 0 38px rgba(243, 69, 50, 0.24);
+  --shadow: var(--asuka-shadow);
+  --glow: var(--asuka-heat-glow);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 7px;
+  --radius-pill: 10px;
+}
+
+.asuka-body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 176, 0, 0.18), transparent 20rem),
+    radial-gradient(circle at 88% 16%, rgba(243, 69, 50, 0.18), transparent 28rem),
+    linear-gradient(132deg, rgba(243, 69, 50, 0.12), transparent 18rem),
+    linear-gradient(180deg, #fffefd 0%, #fff1e8 43%, #f6d6ca 100%);
+  color: var(--text);
+}
+
+.asuka-body :focus-visible {
+  outline: 2px solid var(--asuka-amber);
+  box-shadow: 0 0 0 0.24rem rgba(243, 69, 50, 0.22);
+}
+
+.asuka-body ::selection {
+  background: rgba(243, 69, 50, 0.24);
+  color: var(--text);
+}
+
+.asuka-body .rei-shell__veil {
+  background:
+    radial-gradient(circle at 86% 10%, rgba(255, 255, 255, 0.72), transparent 20rem),
+    radial-gradient(circle at 12% 34%, rgba(255, 176, 0, 0.16), transparent 24rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 58%);
+}
+
+.asuka-body .rei-shell__veil::before {
+  top: clamp(4.5rem, 9vw, 8rem);
+  right: clamp(-1rem, 4vw, 5rem);
+  width: clamp(11rem, 26vw, 24rem);
+  height: clamp(14rem, 30vw, 29rem);
+  border-radius: 0;
+  background:
+    linear-gradient(118deg, rgba(255, 176, 0, 0.52), transparent 32%),
+    linear-gradient(136deg, rgba(243, 69, 50, 0.46), rgba(243, 69, 50, 0.08) 62%, transparent);
+  clip-path: polygon(28% 0, 100% 0, 78% 100%, 0 72%);
+  opacity: 0.5;
+  transform: rotate(-4deg);
+}
+
+.asuka-body .rei-shell__veil::after {
+  left: clamp(0.5rem, 5vw, 5.5rem);
+  bottom: clamp(2.5rem, 7vw, 6rem);
+  width: clamp(12rem, 34vw, 32rem);
+  height: 0.9rem;
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(135deg, rgba(23, 12, 10, 0.28) 0 0.45rem, rgba(255, 176, 0, 0.44) 0.45rem 0.9rem),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.52), transparent);
+  opacity: 0.5;
+  transform: rotate(-6deg);
+}
+
+.asuka-body .rei-shell__grid {
+  opacity: 0.54;
+  background-image:
+    linear-gradient(rgba(103, 28, 22, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 28, 22, 0.06) 1px, transparent 1px),
+    linear-gradient(120deg, transparent 0 48%, rgba(243, 69, 50, 0.08) 48.1% 48.35%, transparent 48.5%);
+  background-size: 2.65rem 2.65rem, 2.65rem 2.65rem, 12rem 12rem;
+  background-position: 0 0, 0 0, center top;
+}
+
+.asuka-body .rei-header {
+  background:
+    linear-gradient(90deg, rgba(255, 176, 0, 0.22), transparent 28%) 0 100% / 100% 2px no-repeat,
+    linear-gradient(180deg, rgba(34, 10, 8, 0.94), rgba(22, 7, 7, 0.88));
+  border-bottom-color: rgba(255, 176, 0, 0.24);
+  box-shadow: 0 14px 28px rgba(38, 7, 5, 0.22);
+}
+
+.asuka-body .rei-header::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 176, 0, 0.75) 16%, rgba(243, 69, 50, 0.82) 46%, transparent);
+}
+
+.asuka-body .rei-brand__mark {
+  border-radius: 24% 48% 28% 48% / 28% 38% 30% 42%;
+  background:
+    radial-gradient(circle at 42% 38%, rgba(255, 255, 255, 0.96) 0 0.12rem, transparent 0.13rem),
+    radial-gradient(circle at 52% 53%, #1f0807 0 0.18rem, transparent 0.19rem),
+    radial-gradient(circle at 52% 53%, var(--asuka-amber) 0 0.35rem, var(--asuka-orange) 0.44rem 0.52rem, transparent 0.54rem),
+    linear-gradient(135deg, #ff6048 0%, #d7271d 48%, #73120f 100%);
+  clip-path: polygon(50% 0, 92% 18%, 100% 62%, 68% 100%, 22% 88%, 0 36%);
+  box-shadow:
+    inset 0 0.12rem 0 rgba(255, 255, 255, 0.42),
+    inset -0.2rem -0.24rem 0.36rem rgba(64, 8, 6, 0.46),
+    0 0 0 1px rgba(255, 176, 0, 0.34),
+    0 0.55rem 1rem rgba(44, 7, 5, 0.32);
+}
+
+.asuka-body .rei-brand__mark::before {
+  inset: -0.28rem auto auto -0.22rem;
+  width: 1.35rem;
+  height: 2.36rem;
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 176, 0, 0.78), rgba(255, 106, 31, 0.2)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.36), transparent);
+  clip-path: polygon(0 8%, 100% 0, 70% 100%, 12% 78%);
+  opacity: 0.8;
+  transform: rotate(-12deg);
+}
+
+.asuka-body .rei-brand__mark::after {
+  left: 0.26rem;
+  right: 0.24rem;
+  top: 0.62rem;
+  height: 0.14rem;
+  background: rgba(255, 247, 239, 0.76);
+  box-shadow:
+    0 0.48rem 0 rgba(58, 10, 8, 0.72),
+    0 0 0.58rem rgba(255, 176, 0, 0.32);
+  transform: rotate(-14deg);
+}
+
+.asuka-body .rei-brand__meta strong {
+  color: var(--asuka-white);
+}
+
+.asuka-body .rei-brand__meta small {
+  color: rgba(255, 247, 239, 0.64);
+}
+
+.asuka-body .rei-nav a {
+  border-color: rgba(255, 176, 0, 0.18);
+  background:
+    linear-gradient(118deg, rgba(243, 69, 50, 0.22), transparent 42%) 0 0 / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(57, 12, 10, 0.98), rgba(30, 8, 8, 0.98));
+  color: rgba(255, 247, 239, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0.12rem 0.24rem rgba(0, 0, 0, 0.16);
+}
+
+.asuka-body .rei-nav a::before {
+  border-color: rgba(255, 176, 0, 0.5);
+  background:
+    radial-gradient(ellipse at 36% 28%, rgba(255, 255, 255, 0.95) 0 0.14rem, transparent 0.15rem),
+    radial-gradient(circle at 50% 52%, rgba(22, 7, 7, 1) 0 0.1rem, transparent 0.11rem),
+    radial-gradient(circle at 50% 52%, var(--asuka-amber) 0 0.15rem, var(--asuka-orange) 0.23rem, var(--asuka-red) 0.29rem, transparent 0.3rem),
+    radial-gradient(ellipse at 50% 52%, rgba(255, 249, 239, 1) 0 68%, rgba(255, 206, 148, 0.92) 84%, rgba(243, 69, 50, 0.76) 100%);
+  box-shadow:
+    inset 0 0.1rem 0 rgba(255, 255, 255, 0.42),
+    inset 0 -0.11rem 0 rgba(88, 17, 13, 0.24),
+    0 0 0 1px rgba(255, 176, 0, 0.2),
+    0 0.08rem 0.26rem rgba(0, 0, 0, 0.22);
+}
+
+.asuka-body .rei-nav a::after {
+  background:
+    linear-gradient(180deg, rgba(255, 247, 239, 0.98), rgba(255, 176, 0, 0.94)),
+    linear-gradient(90deg, rgba(243, 69, 50, 0.2), transparent);
+}
+
+.asuka-body .rei-nav a:hover,
+.asuka-body .rei-nav a.is-active {
+  color: var(--asuka-white);
+  border-color: rgba(255, 176, 0, 0.45);
+  background:
+    linear-gradient(118deg, rgba(255, 176, 0, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(143, 29, 20, 0.98), rgba(74, 14, 11, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 12px 24px rgba(76, 12, 8, 0.24);
+}
+
+.asuka-body .rei-page-intro__copy,
+.asuka-body .rei-panel,
+.asuka-body .rei-memory__shell,
+.asuka-body .rei-empty,
+.asuka-body .rei-chamber__lead,
+.asuka-body .rei-index-panel,
+.asuka-body .rei-dossier,
+.asuka-body .rei-ledger-shell {
+  border-color: rgba(255, 255, 255, 0.86);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(118deg, transparent 0 64%, rgba(243, 69, 50, 0.18) 64.2% 70%, transparent 70.2%),
+    linear-gradient(90deg, rgba(243, 69, 50, 0.72), transparent 28%) 1.1rem 1rem / 4.6rem 3px no-repeat,
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.95), transparent 18rem),
+    linear-gradient(180deg, rgba(255, 254, 253, 0.9), rgba(255, 242, 232, 0.96));
+  box-shadow: var(--asuka-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+.asuka-body .rei-page-intro__copy::before,
+.asuka-body .rei-panel::before,
+.asuka-body .rei-chamber__lead::before,
+.asuka-body .rei-index-panel::before,
+.asuka-body .rei-dossier::before,
+.asuka-body .rei-ledger-shell::before,
+.asuka-body .rei-memory__shell::before {
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 176, 0, 0.18) 0 0.32rem, transparent 0.32rem 0.82rem) right top / 7rem 7rem no-repeat,
+    linear-gradient(112deg, transparent 0 78%, rgba(43, 9, 8, 0.08) 78.2% 79%, transparent 79.2%);
+  opacity: 0.9;
+}
+
+.asuka-body .rei-page-intro__copy::after,
+.asuka-body .rei-panel::after,
+.asuka-body .rei-chamber__lead::after,
+.asuka-body .rei-index-panel::after,
+.asuka-body .rei-dossier::after,
+.asuka-body .rei-ledger-shell::after,
+.asuka-body .rei-memory__shell::after {
+  width: 3px;
+  background: linear-gradient(180deg, var(--asuka-amber), rgba(255, 176, 0, 0));
+}
+
+.asuka-body .rei-kicker {
+  color: rgba(92, 26, 18, 0.72);
+}
+
+.asuka-body .rei-kicker span,
+.asuka-body .rei-memory__results-label::before {
+  width: 1.05rem;
+  height: 0.2rem;
+  border-radius: 0;
+  background: linear-gradient(90deg, var(--asuka-red), var(--asuka-amber));
+}
+
+.asuka-body .rei-hero__title,
+.asuka-body .rei-page-intro__title,
+.asuka-body .rei-single__title,
+.asuka-body .rei-panel__title,
+.asuka-body .rei-section__title,
+.asuka-body .rei-memory__details h3,
+.asuka-body .rei-empty h2,
+.asuka-body .rei-index-panel h2,
+.asuka-body .rei-entry__body h3,
+.asuka-body .rei-term-row__body h2 {
+  color: var(--asuka-charcoal);
+  font-weight: 690;
+  font-variation-settings: "wght" 690;
+  letter-spacing: -0.045em;
+}
+
+.asuka-body .rei-hero__title::after {
+  height: 0.55rem;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, var(--asuka-red) 0 1.4rem, transparent 1.4rem 1.82rem, var(--asuka-amber) 1.82rem 2.8rem, transparent 2.8rem),
+    linear-gradient(90deg, rgba(243, 69, 50, 0.72), transparent);
+}
+
+.asuka-body .rei-hero__summary,
+.asuka-body .rei-page-intro__summary,
+.asuka-body .rei-single__summary {
+  color: rgba(23, 12, 10, 0.84);
+  font-variation-settings: "opsz" 18, "wght" 450;
+}
+
+.asuka-body .rei-button {
+  border-color: rgba(122, 31, 23, 0.26);
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(118deg, rgba(255, 176, 0, 0.16), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 239, 228, 0.98));
+  color: var(--asuka-charcoal);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+.asuka-body .rei-button:hover {
+  border-color: rgba(243, 69, 50, 0.36);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88), 0 12px 24px rgba(103, 18, 12, 0.16);
+}
+
+.asuka-body .rei-button--primary {
+  border-color: rgba(133, 22, 15, 0.42);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 176, 0, 0.3) 0 0.32rem, transparent 0.32rem 0.82rem) right center / 4.6rem 100% no-repeat,
+    linear-gradient(180deg, #ff6048 0%, var(--asuka-red) 46%, var(--asuka-red-deep) 100%);
+  color: var(--asuka-white);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 18px 30px rgba(159, 29, 23, 0.24);
+}
+
+.asuka-body .rei-stat,
+.asuka-body .rei-page-intro__stat,
+.asuka-body .rei-meta__item,
+.asuka-body .rei-memory__column header,
+.asuka-body .rei-footer__meta div,
+.asuka-body .rei-term-row__meta {
+  border-color: rgba(126, 32, 22, 0.16);
+  background:
+    linear-gradient(90deg, rgba(243, 69, 50, 0.18), transparent) 0.9rem 0.82rem / 2.2rem 2px no-repeat,
+    linear-gradient(112deg, transparent 0 78%, rgba(255, 176, 0, 0.17) 78.2% 86%, transparent 86.2%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 239, 228, 0.92));
+}
+
+.asuka-body .rei-stat strong,
+.asuka-body .rei-page-intro__stat strong,
+.asuka-body .rei-meta__item strong,
+.asuka-body .rei-footer__meta strong,
+.asuka-body .rei-term-row__meta strong {
+  color: var(--asuka-red-deep);
+}
+
+.asuka-body .rei-entry__link {
+  border-top-color: rgba(126, 32, 22, 0.18);
+}
+
+.asuka-body .rei-entry__link::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.22rem;
+  background: linear-gradient(180deg, var(--asuka-red), var(--asuka-amber));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--fast), transform var(--fast);
+}
+
+.asuka-body .rei-entry__link:hover::before,
+.asuka-body .rei-entry__link:focus-visible::before {
+  opacity: 1;
+  transform: translateX(-0.35rem);
+}
+
+.asuka-body .rei-feed a,
+.asuka-body .rei-memory__results-list a,
+.asuka-body .rei-ranking li,
+.asuka-body .rei-term-row a,
+.asuka-body .rei-adjacent__item {
+  border-color: rgba(126, 32, 22, 0.14);
+  background:
+    linear-gradient(90deg, rgba(243, 69, 50, 0.16), transparent) 0.9rem 0.95rem / 2rem 2px no-repeat,
+    linear-gradient(112deg, transparent 0 84%, rgba(255, 176, 0, 0.13) 84.2% 90%, transparent 90.2%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 241, 232, 0.9));
+}
+
+.asuka-body .rei-feed a:hover,
+.asuka-body .rei-memory__results-list a:hover,
+.asuka-body .rei-ranking li:hover,
+.asuka-body .rei-term-row a:hover,
+.asuka-body .rei-adjacent__item:hover {
+  border-color: rgba(243, 69, 50, 0.34);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82), 0 14px 28px rgba(103, 18, 12, 0.14);
+}
+
+.asuka-body .rei-pill {
+  border-radius: var(--radius-sm);
+  border-color: rgba(126, 32, 22, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 239, 228, 0.92));
+}
+
+.asuka-body .rei-pill--category {
+  border-color: rgba(243, 69, 50, 0.28);
+  background: linear-gradient(180deg, rgba(255, 235, 229, 0.94), rgba(255, 220, 209, 0.96));
+  color: var(--asuka-red-deep);
+}
+
+.asuka-body .rei-pill--tag {
+  border-color: rgba(255, 176, 0, 0.42);
+  background: linear-gradient(180deg, rgba(255, 248, 220, 0.95), rgba(255, 236, 178, 0.96));
+  color: #6a3b00;
+}
+
+.asuka-body .rei-entry__placeholder,
+.asuka-body .rei-banner {
+  border-radius: var(--radius-md);
+  background:
+    repeating-linear-gradient(135deg, rgba(23, 12, 10, 0.18) 0 0.44rem, rgba(255, 176, 0, 0.28) 0.44rem 0.88rem) right top / 6rem 6rem no-repeat,
+    linear-gradient(118deg, rgba(243, 69, 50, 0.7), transparent 42%),
+    linear-gradient(180deg, rgba(42, 9, 8, 0.96), rgba(91, 16, 11, 0.92));
+}
+
+.asuka-body .rei-entry__placeholder::before,
+.asuka-body .rei-banner::before {
+  background-image:
+    linear-gradient(rgba(255, 176, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 176, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(243, 69, 50, 0.58), rgba(243, 69, 50, 0));
+}
+
+.asuka-body .rei-entry__placeholder::after,
+.asuka-body .rei-banner::after {
+  border-color: rgba(255, 176, 0, 0.44);
+  background:
+    radial-gradient(circle at 50% 53%, rgba(22, 7, 7, 0.95) 0 0.11rem, transparent 0.12rem),
+    radial-gradient(circle at 50% 53%, rgba(255, 176, 0, 0.9) 0 0.24rem, transparent 0.25rem),
+    radial-gradient(ellipse at 50% 53%, rgba(255, 248, 232, 0.9) 0 62%, rgba(243, 69, 50, 0.76) 100%);
+}
+
+.asuka-body .rei-prose :not(pre) > code,
+.asuka-body .rei-prose kbd {
+  border-color: rgba(243, 69, 50, 0.18);
+  background: linear-gradient(180deg, rgba(255, 239, 228, 0.84), rgba(255, 220, 209, 0.72));
+  color: var(--asuka-red-deep);
+}
+
+.asuka-body .rei-prose > pre,
+.asuka-body .rei-prose .highlight {
+  border-color: rgba(255, 176, 0, 0.24);
+  background:
+    linear-gradient(90deg, rgba(255, 176, 0, 0.62), transparent 34%) 1rem 0.95rem / 4rem 2px no-repeat,
+    repeating-linear-gradient(135deg, rgba(243, 69, 50, 0.11) 0 0.35rem, transparent 0.35rem 0.9rem) right top / 6rem 6rem no-repeat,
+    linear-gradient(180deg, rgba(23, 8, 8, 0.98), rgba(36, 10, 9, 0.98));
+  box-shadow: 0 16px 34px rgba(48, 9, 7, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.asuka-body .rei-prose blockquote {
+  background:
+    linear-gradient(90deg, rgba(243, 69, 50, 0.12), transparent),
+    linear-gradient(180deg, rgba(255, 250, 246, 0.86), rgba(255, 239, 228, 0.92));
+  box-shadow: inset 3px 0 0 var(--asuka-red), inset 0 0 0 1px rgba(126, 32, 22, 0.12);
+}
+
+.asuka-body .rei-prose figure,
+.asuka-body .rei-prose table,
+.asuka-body .rei-prose iframe,
+.asuka-body .rei-prose video {
+  border-color: rgba(126, 32, 22, 0.15);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 240, 230, 0.94));
+}
+
+.asuka-body .rei-notice {
+  background:
+    linear-gradient(90deg, var(--notice-line), transparent) 1rem 1rem / 4.4rem 3px no-repeat,
+    linear-gradient(118deg, rgba(255, 176, 0, 0.12), transparent 38%),
+    linear-gradient(180deg, var(--notice-fill), rgba(255, 255, 255, 0)) 0 0 / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 239, 228, 0.9));
+}
+
+.asuka-body .rei-notice--info {
+  --notice-line: rgba(255, 176, 0, 0.95);
+  --notice-fill: rgba(255, 176, 0, 0.12);
+  border-color: rgba(255, 176, 0, 0.28);
+}
+
+.asuka-body .rei-memory__frame .rei-memory__shell {
+  background: none;
+}
+
+.asuka-body .rei-memory__stage {
+  border-color: rgba(255, 176, 0, 0.22);
+  background:
+    linear-gradient(90deg, rgba(255, 176, 0, 0.6), transparent) 1rem 1rem / 4rem 2px no-repeat,
+    repeating-linear-gradient(135deg, rgba(255, 176, 0, 0.08) 0 0.34rem, transparent 0.34rem 0.92rem) right top / 8rem 8rem no-repeat,
+    linear-gradient(180deg, rgba(36, 9, 8, 0.96), rgba(18, 6, 6, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 34px rgba(50, 9, 7, 0.18);
+}
+
+.asuka-body .rei-memory__stage::before {
+  background-image:
+    linear-gradient(rgba(255, 176, 0, 0.065) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 176, 0, 0.065) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(243, 69, 50, 0.38), rgba(243, 69, 50, 0));
+}
+
+.asuka-body .rei-memory__column header {
+  color: var(--asuka-white);
+  border-color: rgba(255, 176, 0, 0.2);
+  background:
+    linear-gradient(90deg, rgba(243, 69, 50, 0.28), transparent) 0.85rem 0.9rem / 2rem 2px no-repeat,
+    linear-gradient(180deg, rgba(58, 13, 11, 0.92), rgba(32, 8, 8, 0.94));
+}
+
+.asuka-body .rei-memory__column header span {
+  color: rgba(255, 238, 221, 0.66);
+}
+
+.asuka-body .rei-memory__column header strong {
+  color: var(--asuka-amber);
+}
+
+.asuka-body .rei-memory-node {
+  border-color: rgba(255, 176, 0, 0.15);
+  background:
+    linear-gradient(112deg, transparent 0 72%, rgba(255, 176, 0, 0.12) 72.2% 80%, transparent 80.2%),
+    linear-gradient(180deg, rgba(255, 250, 246, 0.92), rgba(255, 232, 219, 0.94));
+}
+
+.asuka-body .rei-memory-node.is-active,
+.asuka-body .rei-memory-node:hover,
+.asuka-body .rei-memory-node:focus-visible {
+  border-color: rgba(255, 176, 0, 0.52);
+  background:
+    linear-gradient(90deg, rgba(255, 176, 0, 0.3), transparent) 0.85rem 0.8rem / 2.2rem 2px no-repeat,
+    linear-gradient(180deg, rgba(255, 249, 238, 0.98), rgba(255, 220, 205, 0.98));
+  box-shadow: 0 0 0 1px rgba(255, 176, 0, 0.16), 0 0 34px rgba(243, 69, 50, 0.26);
+}
+
+.asuka-body .rei-memory-node--category.is-active,
+.asuka-body .rei-memory-node--category:hover,
+.asuka-body .rei-memory-node--category:focus-visible {
+  border-color: rgba(243, 69, 50, 0.46);
+  background:
+    linear-gradient(90deg, rgba(243, 69, 50, 0.32), transparent) 0.85rem 0.8rem / 2.2rem 2px no-repeat,
+    linear-gradient(180deg, rgba(255, 238, 232, 0.98), rgba(255, 212, 199, 0.98));
+}
+
+.asuka-body .rei-memory__details {
+  color: var(--asuka-white);
+  border-color: rgba(255, 176, 0, 0.22);
+  background:
+    linear-gradient(90deg, rgba(255, 176, 0, 0.28), transparent) 1rem 1rem / 2.8rem 2px no-repeat,
+    linear-gradient(180deg, rgba(44, 10, 9, 0.94), rgba(23, 7, 7, 0.96));
+}
+
+.asuka-body .rei-memory__details .rei-kicker,
+.asuka-body .rei-memory__details p {
+  color: rgba(255, 238, 221, 0.72);
+}
+
+.asuka-body .rei-memory__path {
+  stroke: rgba(255, 176, 0, 0.22);
+}
+
+.asuka-body .rei-memory__path.is-active {
+  stroke: rgba(243, 69, 50, 0.72);
+}
+
+.asuka-body .rei-filter__control,
+.asuka-body .rei-filter--listing .rei-filter__control {
+  border-color: rgba(126, 32, 22, 0.18);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(90deg, rgba(255, 176, 0, 0.18), transparent) 0.95rem 0.95rem / 2.1rem 2px no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 230, 0.96));
+}
+
+.asuka-body .rei-filter--listing .rei-filter__icon {
+  background: linear-gradient(180deg, rgba(243, 69, 50, 0.24), rgba(255, 176, 0, 0.14));
+}
+
+.asuka-body .rei-filter--listing .rei-filter__icon::before {
+  border-color: var(--asuka-red-deep);
+}
+
+.asuka-body .rei-filter--listing .rei-filter__icon::after {
+  background: var(--asuka-red-deep);
+}
+
+.asuka-body .rei-footer__shell {
+  border-color: rgba(255, 176, 0, 0.18);
+  background:
+    linear-gradient(118deg, rgba(243, 69, 50, 0.22), transparent 48%),
+    linear-gradient(180deg, rgba(39, 10, 9, 0.96), rgba(22, 7, 7, 0.96));
+}
+
+.asuka-body .rei-footer__copy,
+.asuka-body .rei-footer .rei-kicker {
+  color: rgba(255, 238, 221, 0.72);
+}
+
+.asuka-body .rei-footer__meta div {
+  color: var(--asuka-white);
+  border-color: rgba(255, 176, 0, 0.18);
+  background:
+    linear-gradient(90deg, rgba(255, 176, 0, 0.18), transparent) 0.8rem 0.8rem / 1.7rem 2px no-repeat,
+    linear-gradient(180deg, rgba(70, 14, 11, 0.84), rgba(38, 9, 8, 0.88));
+}
+
+@media (max-width: 52rem) {
+  .asuka-body .rei-nav {
+    border-color: rgba(255, 176, 0, 0.22);
+    background: linear-gradient(180deg, rgba(34, 10, 8, 0.98), rgba(20, 7, 7, 0.98));
+  }
 }
 
 @media (max-width: 72rem) {
@@ -2696,10 +3189,6 @@ a {
   .rei-page-intro,
   .rei-footer__inner {
     grid-template-columns: 1fr;
-  }
-
-  .rei-memory__details {
-    position: static;
   }
 
   .rei-panel--toc {
@@ -2745,23 +3234,6 @@ a {
     display: flex;
   }
 
-  .no-js .rei-nav {
-    position: static;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .no-js .rei-nav-toggle {
-    display: none;
-  }
-
   .rei-memory__stage,
   .rei-index-panels {
     grid-template-columns: 1fr;
@@ -2784,7 +3256,7 @@ a {
     max-width: none;
   }
 
-  .rei-memory__toolbar .rei-filter__control input {
+  .rei-memory__toolbar .rei-filter input {
     min-width: 0;
   }
 
@@ -2822,5 +3294,15 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .rei-nav a:hover::before,
+  .rei-nav a:focus-visible::before {
+    animation: rei-nav-eye-blink var(--nav-eye-blink-duration) ease-in-out 1 !important;
+  }
+
+  .rei-nav a:hover::after,
+  .rei-nav a:focus-visible::after {
+    animation: rei-nav-eye-lid var(--nav-eye-blink-duration) ease-in-out 1 !important;
   }
 }

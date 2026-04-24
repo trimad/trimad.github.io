@@ -1,0 +1,33 @@
+{{- $nav := slice
+  (dict "label" "Home" "href" ("/" | relURL))
+  (dict "label" "Posts" "href" ("/posts/" | relURL))
+  (dict "label" "Prompts" "href" ("/prompts/" | relURL))
+  (dict "label" "Archive" "href" ("/archive/" | relURL))
+  (dict "label" "Categories" "href" ("/categories/" | relURL))
+  (dict "label" "Tags" "href" ("/tags/" | relURL))
+-}}
+<header class="rei-header">
+  <div class="rei-header__inner">
+    <a class="rei-brand" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }}">
+      <span class="rei-brand__mark" aria-hidden="true"></span>
+      <span class="rei-brand__meta">
+        <strong>{{ .Site.Title }}</strong>
+        <small>{{ .Site.Params.description | default "Technical notes, prompts, diagnostics, and archived material." }}</small>
+      </span>
+    </a>
+
+    <button class="rei-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" data-nav-toggle>
+      <span class="rei-nav-toggle__line"></span>
+      <span class="rei-nav-toggle__line"></span>
+      <span class="rei-nav-toggle__line"></span>
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+
+    <nav class="rei-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
+      {{- range $nav -}}
+        {{- $isActive := or (eq $.RelPermalink .href) (and (ne .href ("/" | relURL)) (hasPrefix $.RelPermalink .href)) -}}
+        <a class="{{ if $isActive }}is-active{{ end }}" href="{{ .href }}"{{ if $isActive }} aria-current="page"{{ end }}>{{ .label }}</a>
+      {{- end -}}
+    </nav>
+  </div>
+</header>

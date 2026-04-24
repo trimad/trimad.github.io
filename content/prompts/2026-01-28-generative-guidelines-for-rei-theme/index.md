@@ -1,9 +1,9 @@
 ---
 title: "Rei Theme Implementation Specification"
 date: 2026-01-28
-lastmod: 2026-04-09
-description: "Living design and engineering specification for the current Rei Hugo theme: a cold editorial archive built from chambers, ledgers, dossiers, and restrained interface signals."
-tags: [hugo, theme, design-system, accessibility, performance, editorial]
+lastmod: 2026-04-24
+description: "Implementation-grade design and engineering specification for the Rei Hugo theme: a cold editorial archive built from chambers, ledgers, dossiers, signal rails, and restrained Rei Ayanami-inspired interface cues."
+tags: [hugo, theme, design-system, accessibility, performance, editorial, character-translation]
 categories: [Visualization]
 draft: false
 toc: true
@@ -11,42 +11,64 @@ toc: true
 
 ## Purpose
 
-This document is the implementation-grade source of truth for `themes/Rei`.
+This document is the source of truth for `themes/Rei` and for the site-level decision to use Rei as the default Hugo theme.
 
-It should describe the shipped theme accurately enough that a future refresh can preserve the same product, visual language, and technical constraints without reverse-engineering the current CSS and layouts from scratch.
+It should be accurate enough for a future implementation pass to preserve the shipped product without reverse-engineering the layouts, CSS, and JavaScript from scratch. If Rei changes materially, update this guide in the same pass. A stale implementation prompt is a defect.
 
-If the implementation changes materially, update this document in the same pass. A stale prompt is a defect.
+## Operating Contract
 
----
+Rei is a technical archive interface, not a generic blog skin, marketing homepage, or literal character tribute.
 
-## Repository Reality
+The theme must:
 
-The current repository is a Hugo site with:
+- keep `theme = "Rei"` in `hugo.toml`
+- remain self-contained under `themes/Rei`
+- support normal browsing without JavaScript
+- use local fonts and local assets only
+- prioritize long-form reading comfort over atmosphere
+- keep the memory field secondary to standard navigation
+- treat red as a sparse signal, not a general accent wash
 
-- long-form posts in `content/posts`
-- prompt/spec documents in `content/prompts`
-- older reference material in `content/archive`
-- taxonomy browsing through `categories` and `tags`
-- page bundles with optional thumbnail or cover media
-- optional `toc`
-- optional `ai` and `ai-tested` front matter on posts
-- shortcode usage for `notice`, `rawhtml`, and `powershell-environment-report`
-
-At the time of writing there are no site-level layout overrides outside `themes/Rei`. The theme should remain self-contained and portable.
-
----
-
-## Current Theme Identity
-
-Rei now ships as a cold editorial control system, not a generic blog skin and not a product-marketing layout.
-
-Core product nouns:
+The implementation vocabulary is:
 
 - chamber
 - ledger
 - dossier
 - signal rail
 - memory field
+
+These nouns should map to real page patterns and class names, not only to visual flavor.
+
+## Repository Reality
+
+The site is a Hugo archive with:
+
+- long-form technical posts in `content/posts`
+- prompt and design documents in `content/prompts`
+- older reference material in `content/archive`
+- category and tag taxonomies
+- page bundles with optional thumbnail or cover media
+- optional `toc`
+- optional `ai` and `ai-tested` front matter on posts
+- shortcode usage for `notice`, `rawhtml`, and `powershell-environment-report`
+
+The Rei production surface currently lives in:
+
+- `themes/Rei/theme.toml`
+- `themes/Rei/assets/css/main.css`
+- `themes/Rei/assets/js/main.js`
+- `themes/Rei/assets/js/memory-field.js`
+- `themes/Rei/layouts/baseof.html`
+- `themes/Rei/layouts/home.html`
+- `themes/Rei/layouts/list.html`
+- `themes/Rei/layouts/page.html`
+- `themes/Rei/layouts/taxonomy.html`
+- `themes/Rei/layouts/_partials/*.html`
+- shortcode compatibility files in `themes/Rei/layouts/_shortcodes`
+
+## Theme Identity
+
+Rei should feel like a sterile archive maintained by a quiet observer.
 
 Emotional targets:
 
@@ -55,86 +77,84 @@ Emotional targets:
 - quiet technical precision
 - restrained fragility
 - archival distance
+- porcelain calm
+- unreadable interiority
+
+Character translation:
+
+- Rei Ayanami is translated through abstract interface traits, not literal depiction.
+- Pale porcelain fields, blue-white atmosphere, and powder-blue traces suggest hair, stillness, and cold light.
+- Crimson belongs to eye-like signals, warnings, focus rings, and selected relationships.
+- Bandage-like seams, capsule framing, and white suit-panel geometry may shape large surfaces.
+- The theme should carry quiet asymmetry: one precise red cue, one blue seam, one offset panel trace.
 
 Avoid:
 
+- literal character art, franchise symbols, plugsuit replicas, or logos
 - neon cyberpunk spectacle
+- orange mecha-industrial palettes
 - warm lifestyle editorial styling
-- over-frosted glass UI
-- generic SaaS feature-page structure
-- loud franchise mimicry
-
-Rei should feel like a sterile archive interface for technical writing, with atmosphere carried by structure, typography, linework, and restraint rather than by decorative effects.
-
----
+- generic SaaS feature-page composition
+- decorative clutter around reading zones
+- repeated crimson bars on every component
 
 ## Visual System
 
-## 1. Color
+### Color
 
-Use centralized semantic CSS variables in `themes/Rei/assets/css/main.css`.
+Color tokens live in `themes/Rei/assets/css/main.css`.
 
 Palette behavior:
 
-- page field: icy blue-white
-- shell depth: ink blue-black
+- page field: icy blue-white and porcelain
+- shell depth: ink blue-black only where contrast needs it
 - standard surfaces: cool white-blue panels with subtle overlays
-- primary accent: steel or laboratory blue
+- primary accent: powder, steel, or laboratory blue
 - signal accent: restrained crimson
-- structure: blue-gray linework and seams
+- structure: blue-gray linework and seam traces
 
 Rules:
 
-- most components should read as blue/neutral first
-- red is a signal, not a wash applied to every surface
-- gradients may support atmosphere, but text contrast and clarity win
-- depth should come from tone, inset highlights, and light shadow, not heavy dark stacking
+- most components should read blue or neutral before red appears
+- red should behave like an eye, alarm, or selected relationship
+- depth should come from tone, inset highlights, and light shadow
+- gradients may support atmosphere, but text contrast wins
 
-## 2. Typography
+### Typography
 
-Local fonts are part of the shipped product:
+Local fonts are part of the product:
 
 - UI and headings: `Sora`
-- summaries and long-form prose: `Newsreader`
+- summaries and prose: `Newsreader`
 - code and metadata: `IBM Plex Mono`
 
 Rules:
 
-- headings should feel composed and architectural, not loud
-- the serif is allowed outside article prose when summaries need more texture and calm
-- mono uppercase is reserved for labels, stats, dates, chips, buttons, and filter UI
-- excessive tracking or all-caps saturation should be treated as a bug
+- headings should feel composed and architectural
+- prose should stay calm, readable, and narrower than archive layouts
+- metadata may be uppercase, but spacing must remain restrained
+- negative letter spacing and excessive tracking should be treated as drift
+- code blocks should read like dark instrument trays
 
-## 3. Spacing and Rhythm
-
-The theme depends on consistent negative space.
-
-Required behavior:
-
-- panel padding should use a shared clamp-based rhythm
-- ledger rows need enough air to scan quickly
-- article prose should remain narrower than index or archive surfaces
-- mobile layouts must collapse cleanly without relying on tiny text
-
-## 4. Shape and Depth
+### Shape and Depth
 
 Rei uses:
 
 - large outer radii
 - medium inner radii
-- pill controls
+- pill and capsule controls
 - thin rules
 - inset highlights
 - restrained shadows
-- seam-like decorative traces on major surfaces
+- seam-like traces on major panels
+- ovoid ocular marks only when they stay precise and quiet
 
 Avoid:
 
-- bubbly consumer-app geometry
 - thick borders
-- plush, dark, stacked shadows
-
----
+- plush stacked shadows
+- bubbly consumer-app geometry
+- heavy glass effects
 
 ## Signature Motifs
 
@@ -142,20 +162,22 @@ Allowed motifs:
 
 - faint structural grid under the shell
 - cool surface reflections
-- micro-band accents near the top edge of major panels
+- micro-band accents near panel edges
 - slim vertical seam lights inside larger chambers
-- optical or ocular cues in the header and navigation, provided they stay quiet and precise
+- symbolic clinical glyphs in compact chrome, currently DNA for the brand mark and a pill for navigation links
+- static optical cues in selected media placeholders only
 - evidence-banner framing for page media
+- powder-blue veil shapes that read as hairline traces
+- bandage seams and sterile suit-panel cuts on large surfaces
 
 Forbidden motifs:
 
-- franchise symbols
-- character art
+- character portraits
+- franchise emblems
 - loud scanline overlays across prose
-- repeated crimson bars on every component
-- playful gadget clutter
-
----
+- animated ocular gimmicks, including blinking navigation eyes
+- ambient animation in reading zones
+- decorative effects that obscure hierarchy
 
 ## Global Shell
 
@@ -163,6 +185,7 @@ Required:
 
 - skip link
 - sticky header
+- primary navigation
 - main landmark
 - footer
 - fixed atmospheric veil and grid
@@ -170,47 +193,46 @@ Required:
 
 Header behavior:
 
-- brand mark, site title, and short site description on the left
+- brand mark, site title, and site description on the left
 - compact primary navigation on the right
-- active routes should be visually marked and expose `aria-current`
-- mobile navigation must toggle cleanly without JavaScript dependency for basic linking
+- active routes expose `aria-current`
+- mobile navigation uses JavaScript enhancement, but basic navigation remains visible when JavaScript fails
 
 Footer behavior:
 
 - short site summary
 - compact site metrics
+- last-updated signal when content exists
 - no oversized promotional close
-
----
 
 ## Page Patterns
 
-## 1. Homepage
+### Homepage
 
-The current homepage is intentionally restrained.
+The homepage is an index console.
 
 Required sections:
 
-- a full-width chamber lead with title, summary, and overview stats
-- anchor buttons into the page rather than marketing CTAs
-- one panel for recently created posts
-- one panel for recently updated posts
-- memory field block beneath normal browsing
+- chamber lead with site title, summary, and overview stats
+- anchor buttons into the page
+- recently created posts panel
+- recently updated posts panel
+- memory field beneath normal browsing
 
-The homepage should feel like an index console, not a product launch page.
+Do not convert the homepage into a landing page.
 
-## 2. Section Archives and Taxonomy Term Archives
+### Section and Term Archives
 
-These pages share a common collection shell:
+Section archives and taxonomy term archives share the collection shell.
+
+Required:
 
 - page intro with kicker, title, summary, buttons, and stats
-- filter panel above content
+- filter panel above the visible collection
 - vertical ledger of entry rows
 - recently modified panel
 - adjacent collections panel
-- memory field block beneath the archive
-
-Do not collapse these pages into a generic card grid. The ledger is a defining pattern.
+- memory field beneath the archive
 
 Entry rows should preserve a three-part rhythm:
 
@@ -218,9 +240,11 @@ Entry rows should preserve a three-part rhythm:
 - body copy
 - thumbnail or placeholder block
 
-## 3. Taxonomy Index Pages
+Do not collapse archive pages into a generic card grid.
 
-Taxonomy index pages act as directories, not article grids.
+### Taxonomy Indexes
+
+Taxonomy index pages are directories.
 
 Required:
 
@@ -230,17 +254,19 @@ Required:
 - per-term count
 - latest connected entry where available
 - clear empty state
-- memory field block beneath the directory
+- memory field beneath the directory
 
-## 4. Single Content Pages
+### Single Pages
 
 Single pages are the primary reading product.
 
-Required structure:
+Required:
 
 - dossier header with section band, title, summary, and taxonomy pills
 - optional wide banner image sourced from page bundle media
-- two-column reading layout with signal rail on the left and prose on the right
+- two-column reading layout
+- signal rail on the left
+- prose on the right
 - metadata cluster in the rail
 - TOC in the rail when enabled and meaningful
 - recent feed in the rail for non-post sections
@@ -251,13 +277,9 @@ Current product rule:
 - posts omit adjacent navigation and related-content panels
 - non-post sections may render adjacent navigation and related entries beneath prose
 
-Any deliberate change to that behavior should update this document.
-
----
-
 ## Component Inventory
 
-Required shared components in the current theme:
+Required shared components:
 
 - site header
 - site footer
@@ -273,7 +295,7 @@ Required shared components in the current theme:
 - empty state
 - related entries section
 - notice block
-- cover/banner media treatment
+- cover and banner media treatment
 - memory field
 
 Implementation preference:
@@ -281,15 +303,14 @@ Implementation preference:
 - repeated UI lives in partials
 - CSS variables drive shared tokens
 - JavaScript stays small and narrowly scoped
+- avoid adding contradictory CSS refinement layers
 
----
+## Content Styling
 
-## Content Styling Rules
-
-The theme must visibly improve:
+The theme must handle:
 
 - headings and paragraphs
-- lists
+- ordered and unordered lists
 - inline code and code blocks
 - blockquotes
 - tables
@@ -300,16 +321,12 @@ The theme must visibly improve:
 
 Rules:
 
-- prose should remain calm, high-contrast, and comfortable for long technical reading
-- summaries outside the main article may borrow the serif when it improves texture and hierarchy
-- code blocks should read like dark instrument trays
-- copy buttons should remain progressive enhancement only
+- prose should remain high-contrast and comfortable for technical reading
+- code blocks must scroll safely and expose copy controls only as enhancement
 - blockquotes should feel archival, not ornamental
 - tables must scroll safely on narrow screens
 - figures, tables, iframes, and video should sit inside framed surfaces
 - notices must not rely on color alone
-
----
 
 ## Interaction and Motion
 
@@ -322,71 +339,62 @@ Interaction tone:
 Requirements:
 
 - hover is never the only cue
-- focus states must be obvious
-- row links remain generous click targets
+- focus states are obvious
+- ledger rows remain generous click targets
 - collection filters act only on already-rendered content
-- the memory field remains secondary to normal navigation
+- copy buttons and memory-field behavior are progressive enhancements
+- decorative eye motifs remain static rather than animated when used outside the brand and primary navigation
 
-Motion rules:
+Allowed motion:
 
-- allow small hover lifts and opacity shifts
-- no ambient looping effects in reading zones
-- no large parallax or theatrical transitions
-- honor `prefers-reduced-motion`
+- small hover lifts
+- opacity shifts
+- subtle shadow or opacity changes when motion is allowed
 
----
+Forbidden motion:
 
-## Accessibility and Performance
+- ambient loops in reading zones
+- large parallax
+- theatrical page transitions
+- blinking eye animation in any motion mode
+- forced animation in reduced-motion mode
+
+## Accessibility and Resilience
 
 Required:
 
 - visible skip link
 - semantic landmarks
-- keyboard-usable mobile nav
+- keyboard-usable mobile navigation
+- navigation remains reachable without JavaScript
 - labelled filters
-- labelled memory field controls
+- labelled memory-field controls
 - strong text contrast
 - reduced-motion support
 - touch-friendly targets
+- readable layout at narrow widths
 
-Performance guardrails:
+Failure behavior:
+
+- if JavaScript fails, primary navigation remains visible
+- if filtering JavaScript fails, archive entries remain visible
+- if memory-field JavaScript fails, normal browsing still works
+- if media is missing, placeholders preserve the ledger rhythm
+
+## Performance Guardrails
+
+Required:
 
 - no client-side framework
 - no runtime remote assets
 - local fonts only
-- JavaScript enhances navigation, filtering, code copy, and the memory field only
-- normal reading and browsing must still work if JavaScript fails
+- bounded JavaScript for navigation, filtering, code copy, and memory field
+- no decorative asset that blocks reading
+- no implementation that requires JavaScript for basic page discovery
 
----
+## Front Matter Assumptions
 
-## Hugo Implementation Map
-
-The current production implementation lives in:
-
-- `themes/Rei/theme.toml`
-- `themes/Rei/assets/css/main.css`
-- `themes/Rei/assets/js/main.js`
-- `themes/Rei/assets/js/memory-field.js`
-- `themes/Rei/layouts/baseof.html`
-- `themes/Rei/layouts/home.html`
-- `themes/Rei/layouts/list.html`
-- `themes/Rei/layouts/page.html`
-- `themes/Rei/layouts/taxonomy.html`
-- `themes/Rei/layouts/_partials/*.html`
-- shortcode compatibility files for `notice`, `rawhtml`, and `powershell-environment-report`
-
-Template strategy:
-
-- one global base template
-- dedicated top-level templates for home, lists, pages, and taxonomies
-- partial-driven shared UI
-- page-bundle cover handling through reusable media partials
-
----
-
-## Front Matter and Content Assumptions
-
-Observed current fields:
+Observed fields:
 
 - `title`
 - `date`
@@ -402,11 +410,11 @@ Observed current fields:
 
 Rules:
 
-- description falls back to summary, then to trimmed plain text
-- thumbnails should prefer page resources when possible
+- description falls back to summary, then trimmed plain text
+- thumbnails should prefer page resources
 - missing media, tags, or categories must not collapse the layout
-- `ai` and `ai-tested` should render as notices only when present
-- TOC should render only when enabled and meaningful
+- `ai` and `ai-tested` render notices only when present
+- TOC renders only when enabled and meaningful
 
 Shortcode compatibility required:
 
@@ -414,37 +422,35 @@ Shortcode compatibility required:
 - `rawhtml`
 - `powershell-environment-report`
 
----
-
 ## Engineering Guidance
 
 When extending Rei:
 
 - keep the theme self-contained in `themes/Rei`
-- preserve the chamber, ledger, dossier, and signal-rail vocabulary
-- update this prompt whenever those product patterns change
+- preserve chamber, ledger, dossier, signal rail, and memory field patterns
+- update this guide whenever those product patterns change
 - prefer tokens and shared partials over one-off styling
 - keep JavaScript bounded and replaceable
-- when editing `main.css`, consolidate conflicting rules instead of stacking another contradictory refinement layer
+- consolidate conflicting CSS instead of stacking another override
+- verify with `hugo` after layout or CSS changes
 
-Rei should continue to look deliberate because the system is disciplined, not because the stylesheet keeps accreting overrides.
-
----
+Rei should look deliberate because the system is disciplined, not because the stylesheet keeps accreting exceptions.
 
 ## Acceptance Criteria
 
 Rei is acceptable only if all of the following are true:
 
-1. This document accurately describes the current theme rather than an older design intent.
-2. The visual system reads as cold, editorial, and clinically restrained.
-3. Chambers, ledgers, dossiers, signal rails, and the memory field remain coherent across page types.
-4. Most accents are blue or neutral, with red kept sparse and meaningful.
-5. Section and term browsing still feel purposeful without relying on the memory field.
-6. Single pages privilege reading comfort first.
-7. Accessibility and reduced-motion behavior remain solid.
-8. The site builds successfully with Hugo.
-
----
+1. `hugo.toml` points to `theme = "Rei"`.
+2. This document accurately describes the current theme.
+3. The visual system reads as cold, editorial, and clinically restrained.
+4. Chambers, ledgers, dossiers, signal rails, and the memory field remain coherent across page types.
+5. Most accents are blue or neutral, with red kept sparse and meaningful.
+6. Rei Ayanami cues are visible through porcelain whites, powder-blue traces, red ocular signals, bandage seams, and quiet asymmetry without literal character art.
+7. Section and term browsing still feel purposeful without relying on the memory field.
+8. Single pages privilege reading comfort first.
+9. Navigation, filters, and reading still work when JavaScript fails.
+10. Accessibility and reduced-motion behavior remain solid.
+11. The site builds successfully with Hugo.
 
 ## Decision Rule
 

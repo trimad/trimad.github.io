@@ -1,0 +1,31 @@
+{{- $page := .page -}}
+{{- $file := .file | default "" -}}
+{{- $title := .title | default "Download Payload" -}}
+{{- $label := .label | default "" -}}
+{{- $description := .description | default "" -}}
+{{- $resource := false -}}
+{{- if and $page $file -}}
+  {{- with $page.Resources.GetMatch $file -}}
+    {{- $resource = . -}}
+  {{- else -}}
+    {{- with $page.Resources.GetMatch (printf "*%s*" $file) -}}
+      {{- $resource = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $resource -}}
+  {{- $resolvedLabel := $label | default (printf "Download %s" $resource.Name) -}}
+  <aside class="nerv-download" role="note">
+    <div class="nerv-download__label">{{ $title }}</div>
+    <div class="nerv-download__body">
+      {{- with $description -}}
+        {{ $page.RenderString (dict "display" "block") . }}
+      {{- end -}}
+      <a class="nerv-button nerv-button--primary" href="{{ $resource.RelPermalink }}" download>{{ $resolvedLabel }}</a>
+      <p><strong>File:</strong> <code>{{ $resource.Name }}</code></p>
+    </div>
+  </aside>
+{{- else -}}
+  {{- warnf "download-resource: could not find page resource %q" $file -}}
+{{- end -}}
+

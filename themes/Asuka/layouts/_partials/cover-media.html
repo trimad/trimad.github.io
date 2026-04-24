@@ -1,0 +1,48 @@
+{{- $page := .page | default . -}}
+{{- $data := partial "cover-resource.html" $page -}}
+{{- $src := $data.src -}}
+{{- $resource := $data.resource -}}
+{{- if $src -}}
+  {{- $class := .class | default "" -}}
+  {{- $alt := .alt | default $page.Title -}}
+  {{- $loading := .loading | default "lazy" -}}
+  {{- $decoding := .decoding | default "async" -}}
+  {{- $fetchPriority := .fetchPriority | default "" -}}
+  {{- $sizes := .sizes | default "100vw" -}}
+  {{- $widths := .widths | default (slice 480 720 960 1280) -}}
+  {{- $processable := false -}}
+  {{- if $resource -}}
+    {{- $processable = and (eq $resource.ResourceType "image") (not (in (slice "gif" "svg+xml") $resource.MediaType.SubType)) -}}
+  {{- end -}}
+  {{- if not $processable -}}
+    <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="{{ $decoding }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }}>
+  {{- else -}}
+    {{- $srcset := slice -}}
+    {{- range $widths -}}
+      {{- if lt . $resource.Width -}}
+        {{- $variant := $resource.Resize (printf "%dx" .) -}}
+        {{- $srcset = $srcset | append (printf "%s %dw" $variant.RelPermalink $variant.Width) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" $resource.RelPermalink $resource.Width) -}}
+    {{- $defaultWidth := .defaultWidth | default $resource.Width -}}
+    {{- if gt $defaultWidth $resource.Width -}}
+      {{- $defaultWidth = $resource.Width -}}
+    {{- end -}}
+    {{- $image := $resource -}}
+    {{- if lt $defaultWidth $resource.Width -}}
+      {{- $image = $resource.Resize (printf "%dx" $defaultWidth) -}}
+    {{- end -}}
+    <img
+      src="{{ $image.RelPermalink }}"
+      alt="{{ $alt }}"
+      {{- with $class }} class="{{ . }}"{{ end }}
+      loading="{{ $loading }}"
+      decoding="{{ $decoding }}"
+      width="{{ $image.Width }}"
+      height="{{ $image.Height }}"
+      srcset="{{ delimit $srcset ", " }}"
+      sizes="{{ $sizes }}"
+      {{- with $fetchPriority }} fetchpriority="{{ . }}"{{ end }}>
+  {{- end -}}
+{{- end -}}

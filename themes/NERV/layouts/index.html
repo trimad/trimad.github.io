@@ -1,0 +1,46 @@
+{{ define "main" }}
+  {{- $allPages := where site.RegularPages "Kind" "page" -}}
+  {{- $pages := $allPages.ByDate.Reverse -}}
+  {{- $paginator := .Paginate $pages 10 -}}
+  <section class="ops-banner">
+    <div class="nerv-wrap ops-banner__inner">
+      <div class="ops-banner__copy">
+        <div class="status-label">System Index</div>
+        <h1>{{ site.Title | default "NERV" }}</h1>
+        <p>{{ site.Params.description | default "Technical notes, prompts, diagnostics, and archived material." }}</p>
+      </div>
+      <div class="ops-banner__readout" aria-label="Site content totals">
+        <div><strong>{{ len (where site.RegularPages "Section" "posts") }}</strong><span>Posts</span></div>
+        <div><strong>{{ len (where site.RegularPages "Section" "prompts") }}</strong><span>Prompts</span></div>
+        <div><strong>{{ len site.Taxonomies.categories }}</strong><span>Categories</span></div>
+        <div><strong>{{ len site.Taxonomies.tags }}</strong><span>Tags</span></div>
+      </div>
+    </div>
+  </section>
+
+  {{ partial "psychographic-display.html" (dict
+    "page" .
+    "id" "psychographic-display"
+    "title" "Psychographic Display"
+    "summary" "Active relationship field for posts, categories, and tags."
+    "focusKind" "section"
+    "focusValue" "posts"
+    "pageLabelSingular" "Post"
+    "pageLabelPlural" "Posts"
+  ) }}
+
+  <section class="nerv-wrap content-grid content-grid--feed">
+    <div class="feed-column">
+      <div class="section-heading">
+        <span>Latest Dispatches</span>
+        <small>{{ len $pages }} total records</small>
+      </div>
+      <div class="command-list">
+        {{- range $index, $page := $paginator.Pages -}}
+          {{ partial "post-card.html" (dict "page" $page "index" (add $index 1)) }}
+        {{- end -}}
+      </div>
+      {{ partial "pagination.html" $paginator }}
+    </div>
+  </section>
+{{ end }}

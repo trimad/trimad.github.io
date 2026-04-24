@@ -1,0 +1,16 @@
+{{- $page := . -}}
+<div class="entry-meta" aria-label="Page metadata">
+  {{- if not $page.Date.IsZero -}}
+    <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "2006-01-02" }}</time>
+  {{- end -}}
+  {{- with $page.Params.author -}}
+    <span>{{ . }}</span>
+  {{- end -}}
+  {{- if $page.ReadingTime -}}
+    <span>{{ $page.ReadingTime }} min read</span>
+  {{- end -}}
+  {{- with $page.Section -}}
+    <span>{{ . | title }}</span>
+  {{- end -}}
+</div>
+

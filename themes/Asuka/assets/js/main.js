@@ -1,7 +1,4 @@
 (() => {
-  document.documentElement.classList.remove("no-js");
-  document.documentElement.classList.add("js");
-
   const navToggle = document.querySelector("[data-nav-toggle]");
   const nav = document.querySelector("[data-nav]");
 

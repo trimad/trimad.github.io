@@ -1,0 +1,44 @@
+{{- $page := . -}}
+{{- $thumbnail := $page.Params.thumbnail | default "" -}}
+{{- $src := "" -}}
+{{- $resource := false -}}
+{{- if $thumbnail -}}
+  {{- with $page.Resources.GetMatch $thumbnail -}}
+    {{- $resource = . -}}
+  {{- else -}}
+    {{- with $page.Resources.GetMatch (printf "*%s*" $thumbnail) -}}
+      {{- $resource = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if and (not $resource) (not $src) -}}
+  {{- with $page.Resources.GetMatch "thumbnail*" -}}
+    {{- $resource = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if and (not $resource) (not $src) -}}
+  {{- with $page.Resources.GetMatch "cover*" -}}
+    {{- $resource = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if and (not $resource) (not $src) -}}
+  {{- with $page.Resources.GetMatch "hero*" -}}
+    {{- $resource = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if and (not $resource) (not $src) -}}
+  {{- with $page.Resources.GetMatch "feature*" -}}
+    {{- $resource = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $resource -}}
+  {{- $src = $resource.RelPermalink -}}
+{{- end -}}
+{{- if and (not $src) $thumbnail -}}
+  {{- if hasPrefix $thumbnail "/" -}}
+    {{- $src = $thumbnail | relURL -}}
+  {{- else -}}
+    {{- $src = printf "%s%s" $page.RelPermalink $thumbnail -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "src" $src "resource" $resource) -}}

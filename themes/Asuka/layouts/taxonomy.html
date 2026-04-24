@@ -1,0 +1,56 @@
+{{ define "main" }}
+  {{- $page := . -}}
+  {{- $terms := .Data.Terms.ByCount -}}
+  {{- $description := .Description | default (printf "Browse %s and open the entries connected to each term." (.Title | lower)) -}}
+  {{- $sectionButtons := slice
+    (dict "title" .Title "href" "#term-directory")
+    (dict "title" "Memory Field" "href" "#memory-field" "primary" true)
+  -}}
+  <main class="rei-page rei-page--terms" id="content">
+    {{ partial "page-intro.html" (dict
+      "page" $page
+      "kicker" "Browse Terms"
+      "title" .Title
+      "summary" $description
+      "buttons" $sectionButtons
+      "stats" (slice
+        (dict "label" "Terms" "value" (len $terms))
+        (dict "label" "Entries" "value" (len .Site.RegularPages))
+      )
+    ) }}
+
+    <section class="rei-ledger-shell" id="term-directory">
+      {{ partial "filter-panel.html" (dict
+        "inputID" "term-filter"
+        "label" "Search terms in this directory"
+        "eyebrow" "Term filter"
+        "title" "Refine the directory"
+        "summary" "Trim the taxonomy list before opening a category or tag archive."
+        "placeholder" "Search term names"
+        "count" (len $terms)
+        "meta" "terms shown"
+      ) }}
+
+      {{- if gt (len $terms) 0 -}}
+        <div class="rei-term-ledger">
+          {{- range $terms -}}
+            {{ partial "term-card.html" (dict "term" . "taxonomy" $page.Data.Plural) }}
+          {{- end -}}
+        </div>
+      {{- else -}}
+        {{ partial "empty-state.html" (dict
+          "title" "No taxonomy terms yet"
+          "summary" "No terms have been created yet. Add tags or categories to content and they will appear here."
+        ) }}
+      {{- end -}}
+    </section>
+
+    {{ partial "memory-field.html" (dict
+      "page" .
+      "title" "Memory Field"
+      "summary" "Use the relationship map to see how terms connect across the site."
+      "focusKind" ""
+      "focusValue" ""
+    ) }}
+  </main>
+{{ end }}

@@ -1,0 +1,112 @@
+{{- $page := .page | default . -}}
+{{- $pages := $page.RegularPagesRecursive -}}
+{{- if eq $page.Kind "term" -}}
+  {{- $pages = $page.Pages -}}
+{{- end -}}
+{{- $pages = $pages.ByDate.Reverse -}}
+{{- $paginator := $page.Paginate $pages 12 -}}
+{{- $summary := $page.Description | default $page.Summary | plainify -}}
+{{- if not $summary -}}
+  {{- if eq $page.Kind "term" -}}
+    {{- $summary = printf "Entries connected to %q, gathered in one place for quick browsing." $page.Title -}}
+  {{- else -}}
+    {{- $summary = printf "Browse %s with filtering, metadata, and links to related material." ($page.Title | lower) -}}
+  {{- end -}}
+{{- end -}}
+{{- $focusKind := "section" -}}
+{{- $focusValue := $page.Section -}}
+{{- $pageLabelSingular := "Entry" -}}
+{{- $pageLabelPlural := "Entries" -}}
+{{- if eq $page.Kind "term" -}}
+  {{- if eq $page.Data.Plural "categories" -}}
+    {{- $focusKind = "category" -}}
+  {{- else if eq $page.Data.Plural "tags" -}}
+    {{- $focusKind = "tag" -}}
+  {{- end -}}
+  {{- $focusValue = $page.Title | urlize -}}
+{{- end -}}
+{{- if and (eq $focusKind "section") (eq $focusValue "posts") -}}
+  {{- $pageLabelSingular = "Post" -}}
+  {{- $pageLabelPlural = "Posts" -}}
+{{- end -}}
+{{- $sectionButtons := slice -}}
+{{- if and (eq $page.Kind "section") (in (slice "posts" "prompts" "archive") $page.Section) -}}
+  {{- $sectionButtons = slice
+    (dict "title" $page.Title "href" "#collection-entries")
+    (dict "title" "Recently Modified" "href" "#recently-modified")
+    (dict "title" "Adjacent Collections" "href" "#adjacent-collections")
+    (dict "title" "Memory Field" "href" "#memory-field" "primary" true)
+  -}}
+{{- end -}}
+<main class="rei-page rei-page--collection" id="content">
+  {{ partial "page-intro.html" (dict
+    "page" $page
+    "kicker" (cond (eq $page.Kind "term") "Term Archive" "Section Archive")
+    "title" $page.Title
+    "summary" $summary
+    "buttons" $sectionButtons
+    "stats" (slice
+      (dict "label" "Entries" "value" (len $pages))
+      (dict "label" "Categories" "value" (len $page.Site.Taxonomies.categories))
+      (dict "label" "Tags" "value" (len $page.Site.Taxonomies.tags))
+    )
+  ) }}
+
+  <section class="rei-ledger-shell rei-ledger-shell--collection" id="collection-entries">
+    {{ partial "filter-panel.html" (dict
+      "inputID" "collection-filter"
+      "label" "Search entries on this page"
+      "eyebrow" "Collection filter"
+      "title" "Refine this page"
+      "summary" "Narrow the entries already loaded here by title, summary, category, or tag."
+      "placeholder" "Search titles, summaries, categories, or tags"
+      "count" (len $paginator.Pages)
+      "meta" "entries shown"
+    ) }}
+
+    {{- if gt (len $paginator.Pages) 0 -}}
+      <div class="rei-ledger">
+        {{- range $paginator.Pages -}}
+          {{ partial "article-card.html" (dict "page" . "compact" false) }}
+        {{- end -}}
+      </div>
+      {{ partial "pagination.html" (dict "Paginator" $paginator) }}
+    {{- else -}}
+      {{ partial "empty-state.html" (dict
+        "title" "No entries found"
+        "summary" "No entries have been published here yet."
+      ) }}
+    {{- end -}}
+  </section>
+
+  <section class="rei-section rei-index-panels">
+    <section class="rei-index-panel" id="recently-modified">
+      {{ partial "recent-feed.html" (dict "page" $page "title" "Recently modified" "limit" 6 "pages" $pages) }}
+    </section>
+    <section class="rei-index-panel" id="adjacent-collections">
+      <div class="rei-section__head">
+        <div>
+          <p class="rei-kicker"><span></span>More to Browse</p>
+          <h2 class="rei-section__title">Adjacent collections</h2>
+        </div>
+      </div>
+      <ol class="rei-ranking">
+        <li><a href="{{ "/posts/" | relURL }}">Posts</a><span>{{ len (where $page.Site.RegularPages "Section" "posts") }}</span></li>
+        <li><a href="{{ "/prompts/" | relURL }}">Prompts</a><span>{{ len (where $page.Site.RegularPages "Section" "prompts") }}</span></li>
+        <li><a href="{{ "/archive/" | relURL }}">Archive</a><span>{{ len (where $page.Site.RegularPages "Section" "archive") }}</span></li>
+        <li><a href="{{ "/categories/" | relURL }}">Categories</a><span>{{ len $page.Site.Taxonomies.categories }}</span></li>
+        <li><a href="{{ "/tags/" | relURL }}">Tags</a><span>{{ len $page.Site.Taxonomies.tags }}</span></li>
+      </ol>
+    </section>
+  </section>
+
+  {{ partial "memory-field.html" (dict
+    "page" $page
+    "title" "Memory Field"
+    "summary" "Use the Memory Field to follow synchronized categories, tags, and entries beyond the current list."
+    "focusKind" $focusKind
+    "focusValue" $focusValue
+    "pageLabelSingular" $pageLabelSingular
+    "pageLabelPlural" $pageLabelPlural
+  ) }}
+</main>

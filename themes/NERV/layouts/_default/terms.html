@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <section class="nerv-wrap list-header">
+    <div class="status-label">Signal Index</div>
+    <h1>{{ .Title }}</h1>
+    {{- with .Description -}}
+      <p>{{ . }}</p>
+    {{- end -}}
+  </section>
+
+  {{ partial "psychographic-display.html" (dict
+    "page" .
+    "title" "Psychographic Display"
+    "summary" "Relationship field across all indexed terms and entries."
+    "focusKind" ""
+    "focusValue" ""
+  ) }}
+
+  <section class="nerv-wrap terms-grid" aria-label="{{ .Title }}">
+    {{- range .Data.Terms.Alphabetical -}}
+      <a class="term-tile" href="{{ .Page.RelPermalink }}">
+        <span>{{ .Page.LinkTitle }}</span>
+        <strong>{{ .Count }}</strong>
+      </a>
+    {{- end -}}
+  </section>
+{{ end }}

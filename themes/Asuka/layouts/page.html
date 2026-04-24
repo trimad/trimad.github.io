@@ -1,0 +1,112 @@
+{{ define "main" }}
+  {{- $summary := .Description | default .Summary | plainify | default (truncate 220 (.Plain | plainify)) -}}
+  {{- $aiTested := index .Params "ai-tested" -}}
+  {{- $cover := partial "cover-data.html" . -}}
+  {{- $hasToc := and (.Params.toc | default false) (gt (len (findRE "<li" .TableOfContents)) 0) -}}
+  {{- $pageLabelSingular := "Entry" -}}
+  {{- $pageLabelPlural := "Entries" -}}
+  {{- if eq .Section "posts" -}}
+    {{- $pageLabelSingular = "Post" -}}
+    {{- $pageLabelPlural = "Posts" -}}
+  {{- end -}}
+  <main class="rei-page rei-page--single" id="content">
+    <article class="rei-single">
+      <header class="rei-dossier">
+        <div class="rei-dossier__band">
+          <span>{{ .Section | default "Entry" | title }}</span>
+        </div>
+        <h1 class="rei-single__title">{{ .Title }}</h1>
+        {{- with $summary -}}
+          <p class="rei-single__summary">{{ . }}</p>
+        {{- end -}}
+        {{ partial "taxonomy-pills.html" (dict "page" . "showLabel" false) }}
+      </header>
+
+      {{- with $cover -}}
+        <figure class="rei-banner">
+          {{ partial "cover-media.html" (dict
+            "page" $
+            "alt" $.Title
+            "loading" "eager"
+            "decoding" "async"
+            "fetchPriority" "high"
+            "defaultWidth" 1280
+            "sizes" "(max-width: 72rem) 100vw, 74rem"
+            "widths" (slice 720 960 1280 1600)
+          ) }}
+        </figure>
+      {{- end -}}
+
+      <div class="rei-reading">
+        <aside class="rei-signal-rail">
+          {{ partial "metadata-cluster.html" . }}
+          {{ if $hasToc }}
+            {{ partial "toc.html" . }}
+          {{ end }}
+          {{ if ne .Section "posts" }}
+            {{ partial "recent-feed.html" (dict
+              "page" .
+              "title" (printf "Recent in %s" (.Section | title))
+              "limit" 5
+              "pages" (where .Site.RegularPages "Section" .Section)
+            ) }}
+          {{ end }}
+        </aside>
+
+        <div class="rei-reading__body">
+          <div class="rei-prose">
+            {{ if .Params.ai }}
+              <aside class="rei-notice rei-notice--warning" role="note">
+                <div class="rei-notice__marker" aria-hidden="true"></div>
+                <div class="rei-notice__body">
+                  <strong class="rei-notice__title">AI-Generated Content</strong>
+                  <div class="rei-notice__content">This post includes AI-generated content. Please review for completeness and accuracy.</div>
+                </div>
+              </aside>
+              {{ with $aiTested }}
+                <aside class="rei-notice rei-notice--info" role="note">
+                  <div class="rei-notice__marker" aria-hidden="true"></div>
+                  <div class="rei-notice__body">
+                    <strong class="rei-notice__title">Script Last Tested</strong>
+                    <div class="rei-notice__content">This script was last tested successfully on <time datetime="{{ time.Format "2006-01-02" . }}">{{ time.Format "Jan 2, 2006" . }}</time>.</div>
+                  </div>
+                </aside>
+              {{ end }}
+            {{ end }}
+            {{ .Content }}
+          </div>
+
+          {{ if ne .Section "posts" }}
+            <nav class="rei-adjacent" aria-label="Adjacent entries">
+              {{- with .NextInSection -}}
+                <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
+                  <small>Next in {{ .Section | title }}</small>
+                  <strong>{{ .Title }}</strong>
+                </a>
+              {{- end -}}
+              {{- with .PrevInSection -}}
+                <a class="rei-adjacent__item" href="{{ .RelPermalink }}">
+                  <small>Previous in {{ .Section | title }}</small>
+                  <strong>{{ .Title }}</strong>
+                </a>
+              {{- end -}}
+            </nav>
+
+            {{ partial "related-content.html" . }}
+          {{ end }}
+        </div>
+      </div>
+    </article>
+
+    {{ partial "memory-field.html" (dict
+      "page" .
+      "title" "Connected Memory"
+      "summary" "The Memory Field centers on the current entry and highlights synchronized categories and tags."
+      "focusKind" "page"
+      "focusValue" .RelPermalink
+      "defaultQuery" .Title
+      "pageLabelSingular" $pageLabelSingular
+      "pageLabelPlural" $pageLabelPlural
+    ) }}
+  </main>
+{{ end }}

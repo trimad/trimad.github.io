@@ -1,0 +1,16 @@
+{{- if gt .TotalPages 1 -}}
+  <nav class="pager" aria-label="Pagination">
+    {{- with .Prev -}}
+      <a class="pager__link" href="{{ .URL }}">Previous</a>
+    {{- else -}}
+      <span class="pager__link pager__link--disabled">Previous</span>
+    {{- end -}}
+    <span class="pager__status">Page {{ .PageNumber }} / {{ .TotalPages }}</span>
+    {{- with .Next -}}
+      <a class="pager__link" href="{{ .URL }}">Next</a>
+    {{- else -}}
+      <span class="pager__link pager__link--disabled">Next</span>
+    {{- end -}}
+  </nav>
+{{- end -}}
+

@@ -1,0 +1,59 @@
+{{ define "main" }}
+  {{- $pages := where .Pages "Kind" "page" -}}
+  {{- if eq (len $pages) 0 -}}
+    {{- $pages = .RegularPages -}}
+  {{- end -}}
+  {{- $paginator := .Paginate ($pages.ByDate.Reverse) 12 -}}
+  {{- $focusKind := "section" -}}
+  {{- $focusValue := .Section -}}
+  {{- $pageLabelSingular := "Entry" -}}
+  {{- $pageLabelPlural := "Entries" -}}
+  {{- if eq .Kind "term" -}}
+    {{- if eq .Data.Plural "categories" -}}
+      {{- $focusKind = "category" -}}
+    {{- else if eq .Data.Plural "tags" -}}
+      {{- $focusKind = "tag" -}}
+    {{- end -}}
+    {{- $focusValue = .Title | urlize -}}
+  {{- end -}}
+  {{- if and (eq $focusKind "section") (eq $focusValue "posts") -}}
+    {{- $pageLabelSingular = "Post" -}}
+    {{- $pageLabelPlural = "Posts" -}}
+  {{- end -}}
+  <section class="nerv-wrap list-header">
+    <div class="status-label">{{ .Kind | title }}</div>
+    <h1>{{ .Title }}</h1>
+    {{- with .Description -}}
+      <p>{{ . }}</p>
+    {{- end -}}
+    {{- with .Content -}}
+      <div class="list-header__content prose">{{ . }}</div>
+    {{- end -}}
+  </section>
+
+  {{ partial "psychographic-display.html" (dict
+    "page" .
+    "title" "Psychographic Display"
+    "summary" "Relationship field for this index and its connected signals."
+    "focusKind" $focusKind
+    "focusValue" $focusValue
+    "pageLabelSingular" $pageLabelSingular
+    "pageLabelPlural" $pageLabelPlural
+  ) }}
+
+  <section class="nerv-wrap">
+    {{- if gt (len $paginator.Pages) 0 -}}
+      <div class="command-list">
+        {{- range $index, $page := $paginator.Pages -}}
+          {{ partial "post-card.html" (dict "page" $page "index" (add $index 1)) }}
+        {{- end -}}
+      </div>
+      {{ partial "pagination.html" $paginator }}
+    {{- else -}}
+      <div class="empty-state">
+        <strong>No records indexed.</strong>
+        <p>This section has no published pages.</p>
+      </div>
+    {{- end -}}
+  </section>
+{{ end }}

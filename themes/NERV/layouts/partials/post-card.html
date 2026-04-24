@@ -1,0 +1,33 @@
+{{- $page := .page -}}
+{{- $index := .index | default 1 -}}
+{{- $summary := $page.Description | default $page.Summary -}}
+{{- $thumb := false -}}
+{{- with $page.Resources.GetMatch "thumbnail*" -}}
+  {{- if eq .ResourceType "image" -}}
+    {{- $thumb = . -}}
+  {{- end -}}
+{{- end -}}
+<article class="command-entry">
+  <div class="command-entry__index" aria-hidden="true">{{ printf "%02d" $index }}</div>
+  <div class="command-entry__body">
+    <div class="command-entry__signal">{{ $page.Section | default $page.Type | default "log" | upper }}</div>
+    <h2 class="command-entry__title">
+      <a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a>
+    </h2>
+    {{ partial "metadata.html" $page }}
+    {{- with $summary -}}
+      <p class="command-entry__summary">{{ . | plainify | truncate 190 }}</p>
+    {{- end -}}
+    {{ partial "taxonomy-links.html" $page }}
+  </div>
+  {{- if $thumb -}}
+    <a class="command-entry__thumb" href="{{ $page.RelPermalink }}" aria-label="Open {{ $page.LinkTitle }}">
+      {{ partial "media/image.html" (dict "page" $page "destination" $thumb.Name "alt" "" "class" "command-entry__image") }}
+    </a>
+  {{- else -}}
+    <div class="command-entry__scope" aria-hidden="true">
+      <span>TRACE</span>
+    </div>
+  {{- end -}}
+</article>
+

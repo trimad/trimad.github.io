@@ -1,0 +1,29 @@
+{{- $latest := index (.Site.RegularPages.ByLastmod.Reverse) 0 -}}
+<footer class="rei-footer">
+  <div class="rei-index-panel rei-footer__shell">
+    <div class="rei-footer__inner">
+      <div>
+        <p class="rei-kicker"><span></span>Site Summary</p>
+        <p class="rei-footer__copy">
+          {{ .Site.Params.description | default "Technical notes, prompts, diagnostics, and archived material." }}
+        </p>
+      </div>
+      <div class="rei-footer__meta">
+        <div>
+          <span>Entries</span>
+          <strong>{{ len .Site.RegularPages }}</strong>
+        </div>
+        <div>
+          <span>Taxonomies</span>
+          <strong>{{ add (len .Site.Taxonomies.categories) (len .Site.Taxonomies.tags) }}</strong>
+        </div>
+        {{- with $latest -}}
+          <div>
+            <span>Last update</span>
+            <strong>{{ .Lastmod.Format "Jan 2, 2006" }}</strong>
+          </div>
+        {{- end -}}
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,12 @@
+name = "NERV"
+license = "MIT"
+licenselink = ""
+description = "A high-contrast tactical command-interface Hugo theme for technical writing."
+homepage = ""
+demosite = ""
+tags = ["blog", "technical", "dark", "responsive", "tactical"]
+features = ["responsive", "taxonomies", "shortcodes", "psychographic-display"]
+min_version = "0.159.1"
+
+[author]
+  name = "Tristan Madden"

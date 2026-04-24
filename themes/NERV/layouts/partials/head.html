@@ -1,0 +1,27 @@
+{{- $siteTitle := site.Title | default "NERV" -}}
+{{- $pageTitle := cond .IsHome $siteTitle (printf "%s | %s" .Title $siteTitle) -}}
+{{- $description := .Description | default .Summary | default site.Params.description | default "Technical notes and operational records." -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>{{ $pageTitle }}</title>
+<meta name="description" content="{{ $description | plainify | htmlEscape }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ $siteTitle }}">
+{{- end }}
+<meta property="og:title" content="{{ $pageTitle }}">
+<meta property="og:description" content="{{ $description | plainify | htmlEscape }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta name="twitter:card" content="summary">
+{{- $css := resources.Get "css/nerv.css" -}}
+{{- if $css -}}
+  {{- if hugo.IsProduction -}}
+    {{- $css = $css | minify | fingerprint -}}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+  {{- else -}}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{- end -}}
+{{- end }}
+

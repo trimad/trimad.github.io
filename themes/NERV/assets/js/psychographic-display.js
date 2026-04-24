@@ -4,17 +4,19 @@
     day: "numeric",
     year: "numeric",
   });
-  const maxVisibleNodes = 10;
+  const visibleNodeLimit = 10;
 
-  document.querySelectorAll("[data-memory-field]").forEach((root) => {
-    const dataEl = root.querySelector("[data-memory-field-data]");
-    const stage = root.querySelector("[data-memory-stage]");
-    const linksSvg = root.querySelector("[data-memory-links]");
-    const details = root.querySelector("[data-memory-details]");
-    const search = root.querySelector("[data-memory-search]");
-    const clear = root.querySelector("[data-memory-clear]");
+  document.querySelectorAll("[data-psychographic-display]").forEach((root) => {
+    const dataEl = root.querySelector("[data-psychographic-data]");
+    const stage = root.querySelector("[data-psych-stage]");
+    const linksSvg = root.querySelector("[data-psych-links]");
+    const details = root.querySelector("[data-psych-details]");
+    const results = root.querySelector("[data-psych-results]");
+    const resultsList = root.querySelector("[data-psych-results-list]");
+    const search = root.querySelector("[data-psych-search]");
+    const clear = root.querySelector("[data-psych-clear]");
 
-    if (!dataEl || !stage || !linksSvg || !details || !search) {
+    if (!dataEl || !stage || !linksSvg || !details || !results || !resultsList || !search) {
       return;
     }
 
@@ -35,21 +37,21 @@
     const graph = buildGraph(payload);
     const elements = {
       columns: {
-        category: root.querySelector('[data-memory-column="category"]'),
-        tag: root.querySelector('[data-memory-column="tag"]'),
-        page: root.querySelector('[data-memory-column="page"]'),
+        category: root.querySelector('[data-psych-column="category"]'),
+        tag: root.querySelector('[data-psych-column="tag"]'),
+        page: root.querySelector('[data-psych-column="page"]'),
       },
       lists: {
-        category: root.querySelector('[data-memory-list="category"]'),
-        tag: root.querySelector('[data-memory-list="tag"]'),
-        page: root.querySelector('[data-memory-list="page"]'),
+        category: root.querySelector('[data-psych-list="category"]'),
+        tag: root.querySelector('[data-psych-list="tag"]'),
+        page: root.querySelector('[data-psych-list="page"]'),
       },
       counts: {
-        category: root.querySelector('[data-memory-count="category"]'),
-        tag: root.querySelector('[data-memory-count="tag"]'),
-        page: root.querySelector('[data-memory-count="page"]'),
+        category: root.querySelector('[data-psych-count="category"]'),
+        tag: root.querySelector('[data-psych-count="tag"]'),
+        page: root.querySelector('[data-psych-count="page"]'),
       },
-      toggles: Array.from(root.querySelectorAll("[data-memory-toggle]")),
+      toggles: Array.from(root.querySelectorAll("[data-psych-toggle]")),
     };
 
     const state = {
@@ -82,7 +84,7 @@
 
     elements.toggles.forEach((toggle) => {
       toggle.addEventListener("change", () => {
-        const type = String(toggle.dataset.memoryToggle || "");
+        const type = String(toggle.dataset.psychToggle || "");
         if (type === "categories") state.visibility.category = toggle.checked;
         if (type === "tags") state.visibility.tag = toggle.checked;
         if (type === "pages") state.visibility.page = toggle.checked;
@@ -128,23 +130,23 @@
     render();
 
     function render() {
-      currentView = buildView(graph, state);
+      currentView = limitView(buildView(graph, state), state.query);
       nodeElements = new Map();
 
-      renderColumn("category", currentView.categories);
-      renderColumn("tag", currentView.tags);
-      renderColumn("page", currentView.pages);
-      const preferredActive = currentView.defaultId || state.pinnedId;
-      const firstVisibleId = nodeElements.keys().next().value || null;
-      const fallbackActive = preferredActive && nodeElements.has(preferredActive) ? preferredActive : firstVisibleId;
-      if (!state.activeId || !nodeElements.has(state.activeId)) {
+      renderColumn("category", currentView.categories, currentView.overflow?.category || 0);
+      renderColumn("tag", currentView.tags, currentView.overflow?.tag || 0);
+      renderColumn("page", currentView.pages, currentView.overflow?.page || 0);
+      renderResultsPanel(currentView.results, state.query);
+
+      const fallbackActive = currentView.defaultId || state.pinnedId;
+      if (!nodeExistsInView(currentView, state.activeId)) {
         state.activeId = fallbackActive;
       }
 
       refreshState();
     }
 
-    function renderColumn(type, items) {
+    function renderColumn(type, items, overflow = 0) {
       const column = elements.columns[type];
       const list = elements.lists[type];
       const count = elements.counts[type];
@@ -153,19 +155,16 @@
       const visible = state.visibility[type];
       column.classList.toggle("is-hidden", !visible);
       list.innerHTML = "";
-      count.textContent = visible ? String(items.length) : "0";
+      count.textContent = visible ? `${items.length}${overflow > 0 ? "+" : ""}` : "0";
       if (!visible) return;
 
       const fragment = document.createDocumentFragment();
 
-      const visibleItems = items.slice(0, maxVisibleNodes);
-      const hiddenCount = Math.max(items.length - visibleItems.length, 0);
-
-      visibleItems.forEach((node) => {
+      items.forEach((node) => {
         const link = document.createElement("a");
         link.href = node.href || "#";
-        link.className = `rei-memory-node rei-memory-node--${node.type}`;
-        link.dataset.memoryNode = node.id;
+        link.className = `nerv-psych-node nerv-psych-node--${node.type}`;
+        link.dataset.psychNode = node.id;
 
         const content = document.createElement("div");
         const label = document.createElement("small");
@@ -199,23 +198,21 @@
         nodeElements.set(node.id, link);
       });
 
-      if (hiddenCount > 0) {
-        const hiddenType = type === "page" ? state.pageLabelPlural.toLowerCase() : type === "category" ? "categories" : "tags";
+      if (overflow > 0) {
         const more = document.createElement("div");
-        more.className = `rei-memory-node rei-memory-node--${type} rei-memory-node--more`;
-        more.setAttribute("aria-label", `${hiddenCount} more ${hiddenType} not shown`);
+        const typeLabel =
+          type === "category" ? "categories" : type === "tag" ? "tags" : state.pageLabelPlural.toLowerCase();
+        more.className = "nerv-psych__more";
+        more.setAttribute("aria-label", `${overflow} additional ${typeLabel} hidden. Use search to narrow the display.`);
 
-        const content = document.createElement("div");
-        const label = document.createElement("small");
-        const title = document.createElement("strong");
-        const meta = document.createElement("span");
+        const dots = document.createElement("span");
+        dots.setAttribute("aria-hidden", "true");
+        dots.textContent = "...";
 
-        label.textContent = "More";
-        title.textContent = "...";
-        meta.textContent = `+${hiddenCount}`;
+        const label = document.createElement("strong");
+        label.textContent = `+${overflow} more`;
 
-        content.append(label, title);
-        more.append(content, meta);
+        more.append(dots, label);
         fragment.appendChild(more);
       }
 
@@ -237,26 +234,26 @@
 
       if (!node) {
         details.innerHTML = `
-          <p class="rei-kicker"><span></span>Selection Details</p>
-          <h3>Awaiting selection</h3>
-          <p>No visible node is active.</p>
+          <p class="status-label"><span></span>Psychographic Focus</p>
+          <h3>Awaiting signal</h3>
+          <p>No visible signal is active.</p>
         `;
         return;
       }
 
       const kicker = document.createElement("p");
-      kicker.className = "rei-kicker";
-      kicker.innerHTML = "<span></span>Selection Details";
+      kicker.className = "status-label";
+      kicker.innerHTML = "<span></span>Psychographic Focus";
 
       const title = document.createElement("h3");
       title.textContent = node.type === "page" ? node.title : node.name;
 
       const copy = document.createElement("p");
       const links = document.createElement("div");
-      links.className = "rei-memory__details-links";
+      links.className = "nerv-psych__details-links";
 
       if (node.type === "page") {
-        copy.textContent = node.summary || `No summary available for this ${state.pageLabelSingular.toLowerCase()}.`;
+        copy.textContent = node.summary || `No synopsis available for this ${state.pageLabelSingular.toLowerCase()}.`;
         node.categoryIds.forEach((id) => {
           const related = graph.categoriesById.get(id);
           if (related) links.appendChild(makeDetailLink(related.href, related.name, "category"));
@@ -267,7 +264,7 @@
         });
       } else {
         const connectedPages = pickPagesForNode(node, graph, 4);
-        copy.textContent = `${node.count || connectedPages.length} connected entr${connectedPages.length === 1 ? "y" : "ies"} in the archive.`;
+        copy.textContent = `${node.count || connectedPages.length} linked entr${connectedPages.length === 1 ? "y" : "ies"} in the archive.`;
         connectedPages.forEach((pageNode) => {
           links.appendChild(makeDetailLink(pageNode.href, pageNode.title, "page"));
         });
@@ -277,6 +274,41 @@
       if (links.childElementCount > 0) {
         details.appendChild(links);
       }
+    }
+
+    function renderResultsPanel(items, query) {
+      resultsList.innerHTML = "";
+
+      if (!query) {
+        results.hidden = true;
+        return;
+      }
+
+      results.hidden = false;
+      if (!items.length) {
+        const empty = document.createElement("p");
+        empty.textContent = `No matching ${state.pageLabelPlural.toLowerCase()} found.`;
+        resultsList.appendChild(empty);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      items.forEach((node) => {
+        const link = document.createElement("a");
+        link.href = node.href;
+        link.className = "nerv-psych__result";
+        const title = document.createElement("strong");
+        title.className = "nerv-psych__result-title";
+        title.textContent = node.title;
+        const summary = document.createElement("span");
+        summary.className = "nerv-psych__result-summary";
+        summary.textContent = node.summary || `${node.sectionTitle} · ${formatDate(node.lastmod)}`;
+        link.append(title, summary);
+        fragment.appendChild(link);
+      });
+
+      resultsList.appendChild(fragment);
     }
 
     function scheduleDraw(activeId = state.activeId || currentView?.defaultId || state.pinnedId) {
@@ -307,7 +339,7 @@
         if (!source || !target) return;
 
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("class", `rei-memory__path${link.source === activeId || link.target === activeId ? " is-active" : ""}`);
+        path.setAttribute("class", `nerv-psych__path${link.source === activeId || link.target === activeId ? " is-active" : ""}`);
         path.setAttribute("d", curveBetween(source, target));
         linksSvg.appendChild(path);
       });
@@ -382,14 +414,45 @@
     return buildDefaultView(graph);
   }
 
+  function limitView(view, query) {
+    if (query) {
+      return {
+        ...view,
+        overflow: { category: 0, tag: 0, page: 0 },
+      };
+    }
+
+    const categories = view.categories || [];
+    const tags = view.tags || [];
+    const pages = view.pages || [];
+    const limited = {
+      ...view,
+      categories: categories.slice(0, visibleNodeLimit),
+      tags: tags.slice(0, visibleNodeLimit),
+      pages: pages.slice(0, visibleNodeLimit),
+      overflow: {
+        category: Math.max(categories.length - visibleNodeLimit, 0),
+        tag: Math.max(tags.length - visibleNodeLimit, 0),
+        page: Math.max(pages.length - visibleNodeLimit, 0),
+      },
+    };
+
+    if (!nodeExistsInView(limited, limited.defaultId)) {
+      limited.defaultId = limited.pages[0]?.id || limited.categories[0]?.id || limited.tags[0]?.id || null;
+    }
+
+    return limited;
+  }
+
   function buildDefaultView(graph) {
-    const categories = graph.categories.slice(0, 7);
-    const tags = graph.tags.slice(0, 10);
-    const pages = graph.pages.slice(0, 10);
+    const categories = graph.categories;
+    const tags = graph.tags;
+    const pages = graph.pages;
     return {
       categories,
       tags,
       pages,
+      results: [],
       defaultId: pages[0]?.id || categories[0]?.id || tags[0]?.id || null,
     };
   }
@@ -401,13 +464,13 @@
     if (node.type === "category") {
       const pages = pickLatestPages(node.pageIds, graph, 12);
       const tags = collectTagsFromPages(pages, graph, 12);
-      return { categories: [node], tags, pages, defaultId: node.id };
+      return { categories: [node], tags, pages, results: [], defaultId: node.id };
     }
 
     if (node.type === "tag") {
       const pages = pickLatestPages(node.pageIds, graph, 12);
       const categories = collectCategoriesFromPages(pages, graph, 8);
-      return { categories, tags: [node], pages, defaultId: node.id };
+      return { categories, tags: [node], pages, results: [], defaultId: node.id };
     }
 
     const pages = [node, ...scoreRelatedPages(node, graph).slice(0, 8)];
@@ -415,6 +478,7 @@
       categories: collectCategoriesFromPages(pages, graph, 8),
       tags: collectTagsFromPages(pages, graph, 12),
       pages,
+      results: [],
       defaultId: node.id,
     };
   }
@@ -428,6 +492,7 @@
       categories,
       tags,
       pages,
+      results: [],
       defaultId: pages[0]?.id || categories[0]?.id || tags[0]?.id || null,
     };
   }
@@ -453,6 +518,7 @@
       categories,
       tags,
       pages,
+      results: matchedPages.slice(0, 8),
       defaultId: matchedPages[0]?.id || matchedCategories[0]?.id || matchedTags[0]?.id || null,
     };
   }
@@ -567,7 +633,7 @@
   function makeDetailLink(href, label, type) {
     const link = document.createElement("a");
     link.href = href;
-    link.className = `rei-pill rei-pill--${type === "category" ? "category" : type === "tag" ? "tag" : "page"}`;
+    link.className = `nerv-psych-chip nerv-psych-chip--${type === "category" ? "category" : type === "tag" ? "tag" : "page"}`;
     link.textContent = label;
     return link;
   }
@@ -580,6 +646,11 @@
   function getNode(graph, id) {
     if (!id) return null;
     return graph.pagesById.get(id) || graph.categoriesById.get(id) || graph.tagsById.get(id) || null;
+  }
+
+  function nodeExistsInView(view, id) {
+    if (!id || !view) return false;
+    return [...view.categories, ...view.tags, ...view.pages].some((node) => node.id === id);
   }
 
   function uniqueNodes(nodes) {

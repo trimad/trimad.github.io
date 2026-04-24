@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html class="no-js" lang="{{ .Site.Language.Locale | default "en-US" }}">
+<html lang="{{ .Site.Language.Locale | default "en-US" }}">
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body class="rei-body rei-kind-{{ .Kind }}{{ with .Section }} rei-section-{{ . | urlize }}{{ else }} rei-section-home{{ end }}">
+  <body class="rei-body asuka-body rei-kind-{{ .Kind }}{{ with .Section }} rei-section-{{ . | urlize }}{{ else }} rei-section-home{{ end }}">
     <a class="rei-skip-link" href="#content">Skip to content</a>
     <div class="rei-shell">
       <div class="rei-shell__veil" aria-hidden="true"></div>
       <div class="rei-shell__grid" aria-hidden="true"></div>
       {{ partial "site-header.html" . }}
       {{ block "main" . }}{{ end }}
-      {{- if not (or .IsHome (eq .Section "posts")) -}}
-        {{ partial "site-footer.html" . }}
-      {{- end -}}
+      {{ partial "site-footer.html" . }}
     </div>
     {{- $mainJs := resources.Get "js/main.js" | minify | fingerprint -}}
     <script src="{{ $mainJs.RelPermalink }}" defer></script>

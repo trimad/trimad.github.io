@@ -1,7 +1,7 @@
 name = "Rei"
 license = "MIT"
 licenselink = "https://opensource.org/licenses/MIT"
-description = "A cold, restrained Hugo theme for technical writing, quiet archives, and clinical discovery."
+description = "A cold, restrained Hugo theme for technical writing, quiet archives, and Rei Ayanami-inspired clinical discovery."
 homepage = "https://trimad.github.io/"
 tags = ["blog", "minimal", "technical", "editorial", "accessible"]
 features = ["responsive", "taxonomy", "reading", "discovery"]

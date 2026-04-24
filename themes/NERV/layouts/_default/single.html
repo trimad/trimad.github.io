@@ -1,0 +1,45 @@
+{{ define "main" }}
+  <article class="nerv-wrap article-shell">
+    <header class="article-header">
+      <div class="status-label">{{ .Section | default .Kind | upper }} Report</div>
+      <h1>{{ .Title }}</h1>
+      {{ partial "metadata.html" . }}
+      {{- with .Description -}}
+        <p class="article-header__description">{{ . }}</p>
+      {{- end -}}
+      {{ partial "taxonomy-links.html" . }}
+    </header>
+
+    <div class="article-layout">
+      {{ partial "toc.html" . }}
+      <div class="article-content prose">
+        {{ .Content }}
+      </div>
+    </div>
+
+    {{ partial "psychographic-display.html" (dict
+      "page" .
+      "title" "Connected Psychograph"
+      "summary" "Relationship field centered on this report."
+      "focusKind" "page"
+      "focusValue" .RelPermalink
+      "pageLabelSingular" (cond (eq .Section "posts") "Post" "Entry")
+      "pageLabelPlural" (cond (eq .Section "posts") "Posts" "Entries")
+    ) }}
+
+    <footer class="article-footer">
+      {{- with .PrevInSection -}}
+        <a class="article-nav article-nav--prev" href="{{ .RelPermalink }}">
+          <span>Previous</span>
+          <strong>{{ .LinkTitle }}</strong>
+        </a>
+      {{- end -}}
+      {{- with .NextInSection -}}
+        <a class="article-nav article-nav--next" href="{{ .RelPermalink }}">
+          <span>Next</span>
+          <strong>{{ .LinkTitle }}</strong>
+        </a>
+      {{- end -}}
+    </footer>
+  </article>
+{{ end }}

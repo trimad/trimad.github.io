@@ -1,0 +1,31 @@
+{{- $page := .page | default . -}}
+{{- $title := .title | default "Recently modified" -}}
+{{- $limit := .limit | default 6 -}}
+{{- $pages := .pages -}}
+{{- if not $pages -}}
+  {{- $pages = $page.Site.RegularPages -}}
+{{- end -}}
+{{- if $page.IsPage -}}
+  {{- $pages = where $pages "RelPermalink" "ne" $page.RelPermalink -}}
+{{- end -}}
+{{- $recent := first $limit (sort $pages "Lastmod" "desc") -}}
+<aside class="rei-panel rei-panel--aside" aria-label="{{ $title }}">
+  <div class="rei-panel__head">
+    <p class="rei-kicker"><span></span>Recent Updates</p>
+    <h2 class="rei-panel__title">{{ $title }}</h2>
+  </div>
+  {{- if gt (len $recent) 0 -}}
+    <ul class="rei-feed">
+      {{- range $recent -}}
+        <li>
+          <a href="{{ .RelPermalink }}">
+            <strong>{{ .Title }}</strong>
+            <span>{{ .Section | title }} · {{ .Lastmod.Format "Jan 2, 2006" }}</span>
+          </a>
+        </li>
+      {{- end -}}
+    </ul>
+  {{- else -}}
+    <p class="rei-panel__note">No recent updates available.</p>
+  {{- end -}}
+</aside>

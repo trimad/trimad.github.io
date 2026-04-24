@@ -1,0 +1,17 @@
+{{- $file := "" -}}
+{{- $title := "" -}}
+{{- $label := "" -}}
+{{- if .IsNamedParams -}}
+  {{- $file = .Get "file" | default "" -}}
+  {{- $title = .Get "title" | default "" -}}
+  {{- $label = .Get "label" | default "" -}}
+{{- else if ge (len .Params) 1 -}}
+  {{- $file = .Get 0 -}}
+{{- end -}}
+{{- partial "download-resource.html" (dict
+  "page" .Page
+  "file" $file
+  "title" $title
+  "label" $label
+  "description" (trim .Inner " \r\n\t")
+) -}}

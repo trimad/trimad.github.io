@@ -1,0 +1,26 @@
+{{- $lang := site.Language.LanguageCode | default site.Language.Lang | default "en" -}}
+<!doctype html>
+<html lang="{{ $lang }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="nerv-kind-{{ .Kind }}{{ with .Section }} nerv-section-{{ . | urlize }}{{ end }}">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    {{ partial "header.html" . }}
+    <main id="main" class="site-main">
+    {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+    {{- if .Store.Get "hasPsychographicDisplay" -}}
+      {{- $psychJs := resources.Get "js/psychographic-display.js" -}}
+      {{- if $psychJs -}}
+        {{- if hugo.IsProduction -}}
+          {{- $psychJs = $psychJs | minify | fingerprint -}}
+          <script src="{{ $psychJs.RelPermalink }}" integrity="{{ $psychJs.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        {{- else -}}
+          <script src="{{ $psychJs.RelPermalink }}" defer></script>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </body>
+</html>

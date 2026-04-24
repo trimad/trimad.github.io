@@ -2,40 +2,31 @@
   {{- $posts := where .Site.RegularPages "Section" "eq" "posts" -}}
   {{- $recentCreated := first 10 ($posts.ByDate.Reverse) -}}
   {{- $recentUpdated := first 10 ($posts.ByLastmod.Reverse) -}}
-  {{- $latest := index (.Site.RegularPages.ByLastmod.Reverse) 0 -}}
   <main class="rei-page rei-home" id="content">
     <section class="rei-chamber rei-chamber--solo">
       <div class="rei-chamber__lead">
-        <p class="rei-kicker"><span></span>Site Overview</p>
+        <p class="rei-kicker"><span></span>Command Deck</p>
         <h1 class="rei-hero__title">{{ .Site.Title }}</h1>
         <p class="rei-hero__summary">
           {{ .Site.Params.description | default "Technical notes, prompts, diagnostics, and archived material." }}
         </p>
-        <div class="rei-chamber__actions">
-          <div class="rei-button-row">
-            <a class="rei-button" href="#recently-created">Recently Created</a>
-            <a class="rei-button" href="#recently-updated">Recently Updated</a>
-            <a class="rei-button rei-button--primary" href="#memory-field">Memory Field</a>
+        <div class="rei-button-row">
+          <a class="rei-button" href="#recently-created">Latest Entries</a>
+          <a class="rei-button" href="#recently-updated">Latest Revisions</a>
+          <a class="rei-button rei-button--primary" href="#memory-field">Memory Field</a>
+        </div>
+        <div class="rei-stat-strip" aria-label="Site overview">
+          <div class="rei-stat">
+            <span>Entries</span>
+            <strong>{{ len .Site.RegularPages }}</strong>
           </div>
-          <div class="rei-stat-strip" aria-label="Site overview">
-            <div class="rei-stat">
-              <span>Entries</span>
-              <strong>{{ len .Site.RegularPages }}</strong>
-            </div>
-            <div class="rei-stat">
-              <span>Categories</span>
-              <strong>{{ len .Site.Taxonomies.categories }}</strong>
-            </div>
-            <div class="rei-stat">
-              <span>Tags</span>
-              <strong>{{ len .Site.Taxonomies.tags }}</strong>
-            </div>
-            {{- with $latest -}}
-              <div class="rei-stat">
-                <span>Last Update</span>
-                <strong>{{ .Lastmod.Format "Jan 2, 2006" }}</strong>
-              </div>
-            {{- end -}}
+          <div class="rei-stat">
+            <span>Categories</span>
+            <strong>{{ len .Site.Taxonomies.categories }}</strong>
+          </div>
+          <div class="rei-stat">
+            <span>Tags</span>
+            <strong>{{ len .Site.Taxonomies.tags }}</strong>
           </div>
         </div>
       </div>
@@ -45,9 +36,9 @@
       <section class="rei-index-panel" id="recently-created">
         <div class="rei-section__head">
           <div>
-            <p class="rei-kicker"><span></span>Recently Created</p>
-            <h3 class="rei-section__title">Latest posts created</h3>
-            <p class="rei-section__summary">The 10 most recently created posts, sorted by each post's publish date.</p>
+            <p class="rei-kicker"><span></span>Launch Order</p>
+            <h2 class="rei-section__title">Latest posts created</h2>
+            <p class="rei-section__summary">The 10 newest posts in the ledger, sorted by each post's publish date.</p>
           </div>
         </div>
         <ol class="rei-ranking">
@@ -62,8 +53,8 @@
       <section class="rei-index-panel" id="recently-updated">
         <div class="rei-section__head">
           <div>
-            <p class="rei-kicker"><span></span>Recently Updated</p>
-            <h3 class="rei-section__title">Latest revisions across posts</h3>
+            <p class="rei-kicker"><span></span>Sync Revisions</p>
+            <h2 class="rei-section__title">Latest revisions across posts</h2>
             <p class="rei-section__summary">The 10 most recently updated posts, sorted by each post's last modification date.</p>
           </div>
         </div>
@@ -82,10 +73,9 @@
       "page" .
       "id" "memory-field"
       "title" "Memory Field"
-      "summary" "Use the relationship map to follow connections between categories, tags, and entries without leaving normal browsing."
+      "summary" "Use the Memory Field to follow connections between categories, tags, and entries without leaving normal browsing."
       "focusKind" "section"
       "focusValue" "posts"
-      "defaultQuery" ""
       "pageLabelSingular" "Post"
       "pageLabelPlural" "Posts"
     ) }}

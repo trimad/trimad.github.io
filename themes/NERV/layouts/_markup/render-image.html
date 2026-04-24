@@ -1,0 +1,16 @@
+{{- $image := partial "media/image.html" (dict
+  "page" .Page
+  "destination" .Destination
+  "alt" .PlainText
+  "loading" "lazy"
+  "decoding" "async"
+) -}}
+{{- if .IsBlock -}}
+  <figure>
+    {{ $image }}
+    {{- with .Title }}<figcaption>{{ . }}</figcaption>{{ end -}}
+  </figure>
+{{- else -}}
+  {{ $image }}
+{{- end -}}
+

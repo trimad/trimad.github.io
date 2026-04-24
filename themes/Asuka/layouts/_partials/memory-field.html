@@ -7,16 +7,13 @@
 {{- $focusValue := .focusValue | default "" -}}
 {{- $pageLabelSingular := .pageLabelSingular | default "Entry" -}}
 {{- $pageLabelPlural := .pageLabelPlural | default "Entries" -}}
-{{- $defaultQuery := "Rei" -}}
-{{- if isset . "defaultQuery" -}}
-  {{- $defaultQuery = .defaultQuery -}}
-{{- end -}}
+{{- $defaultQuery := .defaultQuery | default "Asuka" -}}
 <section class="rei-section rei-memory" id="{{ $id }}" data-memory-field data-focus-kind="{{ $focusKind }}" data-focus-value="{{ $focusValue }}" data-page-label-singular="{{ $pageLabelSingular }}" data-page-label-plural="{{ $pageLabelPlural }}" data-default-query="{{ $defaultQuery }}">
   <div class="rei-index-panel rei-memory__frame">
     <div class="rei-section__head">
       <div>
-        <p class="rei-kicker"><span></span>Relationship Map</p>
-        <h3 class="rei-section__title">{{ $title }}</h3>
+        <p class="rei-kicker"><span></span>Synchronization Field</p>
+        <h2 class="rei-section__title">{{ $title }}</h2>
         <p class="rei-section__summary">{{ $summary }}</p>
       </div>
     </div>
@@ -27,7 +24,7 @@
         <div class="rei-memory__controls">
           <div class="rei-filter__control">
             <input id="{{ $id }}-search" type="search" placeholder="Search {{ lower $pageLabelPlural }}, categories, or tags" data-memory-search>
-            <button class="rei-button rei-filter__clear" type="button" data-memory-clear hidden>Clear</button>
+            <button class="rei-filter__clear" type="button" data-memory-clear hidden>Clear</button>
           </div>
           <div class="rei-memory__toggles" aria-label="Visible node types">
             <label><input type="checkbox" data-memory-toggle="categories" checked> Categories</label>
@@ -68,6 +65,11 @@
           <h3>Awaiting selection</h3>
           <p>Hover or focus a node to inspect its relationships. Search narrows the chamber without replacing normal navigation.</p>
         </aside>
+      </div>
+
+      <div class="rei-memory__results" data-memory-results hidden>
+        <p class="rei-memory__results-label">Matching {{ lower $pageLabelPlural }}</p>
+        <div class="rei-memory__results-list" data-memory-results-list></div>
       </div>
     </div>
 

@@ -1,0 +1,12 @@
+name = "Asuka"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A red-forward Hugo theme for technical writing, combat ledgers, pilot dossiers, and Asuka Langley Soryu-inspired command discovery."
+homepage = "https://trimad.github.io/"
+tags = ["blog", "technical", "editorial", "accessible", "high-contrast"]
+features = ["responsive", "taxonomy", "reading", "memory-field", "discovery"]
+min_version = "0.121.0"
+
+[author]
+  name = "OpenAI Codex"
+  homepage = "https://openai.com/"

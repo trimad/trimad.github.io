@@ -1,0 +1,20 @@
+{{- $type := "info" -}}
+{{- $title := "" -}}
+{{- if .IsNamedParams -}}
+  {{- $type = .Get "type" | default $type -}}
+  {{- $title = .Get "title" | default "" -}}
+{{- else -}}
+  {{- if ge (len .Params) 1 -}}{{- $type = .Get 0 -}}{{- end -}}
+  {{- if ge (len .Params) 2 -}}{{- $title = .Get 1 -}}{{- end -}}
+{{- end -}}
+{{- $type = lower $type -}}
+{{- $labels := dict "info" "INFO" "warning" "WARNING" "danger" "DANGER" "error" "ERROR" "success" "SUCCESS" -}}
+{{- $title = $title | default (index $labels $type) | default "NOTICE" -}}
+<aside class="nerv-notice nerv-notice--{{ $type }}" role="note">
+  <div class="nerv-notice__label">{{ $title }}</div>
+  <div class="nerv-notice__body">
+    {{- with trim .Inner " \r\n\t" -}}
+      {{ $.Page.RenderString (dict "display" "block") . }}
+    {{- end -}}
+  </div>
+</aside>

@@ -1,0 +1,7 @@
+{{- if and (.Param "toc") (findRE "<li" .TableOfContents) -}}
+  <aside class="toc-panel" aria-label="Table of contents">
+    <div class="toc-panel__label">Trace Map</div>
+    {{ .TableOfContents }}
+  </aside>
+{{- end -}}
+

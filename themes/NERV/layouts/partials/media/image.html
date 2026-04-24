@@ -1,0 +1,33 @@
+{{- $page := .page -}}
+{{- $destination := trim (.destination | default "") " \r\n\t" -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $loading := .loading | default "lazy" -}}
+{{- $decoding := .decoding | default "async" -}}
+{{- $resource := false -}}
+{{- $src := "" -}}
+{{- if $destination -}}
+  {{- $lower := lower $destination -}}
+  {{- $remote := or (hasPrefix $lower "http://") (hasPrefix $lower "https://") (hasPrefix $lower "//") (hasPrefix $lower "data:") -}}
+  {{- if and (not $remote) $page -}}
+    {{- with $page.Resources.GetMatch $destination -}}
+      {{- $resource = . -}}
+    {{- else -}}
+      {{- with $page.Resources.GetMatch (printf "*%s*" (path.Base $destination)) -}}
+        {{- $resource = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $resource -}}
+    {{- $src = $resource.RelPermalink -}}
+  {{- else if $remote -}}
+    {{- $src = $destination | safeURL -}}
+  {{- else if hasPrefix $destination "/" -}}
+    {{- $src = $destination | relURL -}}
+  {{- else -}}
+    {{- $src = $destination | safeURL -}}
+  {{- end -}}
+  {{- if $src -}}
+    <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="{{ $decoding }}"{{ if and $resource (eq $resource.ResourceType "image") }} width="{{ $resource.Width }}" height="{{ $resource.Height }}"{{ end }}>
+  {{- end -}}
+{{- end -}}

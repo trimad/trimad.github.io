@@ -1,0 +1,95 @@
+{{- $page := .page | default . -}}
+{{- $page.Store.Set "hasPsychographicDisplay" true -}}
+{{- $id := .id | default "psychographic-display" -}}
+{{- $title := .title | default "Psychographic Display" -}}
+{{- $summary := .summary | default "Relationship field between categories, tags, and entries." -}}
+{{- $focusKind := .focusKind | default "" -}}
+{{- $focusValue := .focusValue | default "" -}}
+{{- $pageLabelSingular := .pageLabelSingular | default "Entry" -}}
+{{- $pageLabelPlural := .pageLabelPlural | default "Entries" -}}
+{{- $defaultQuery := .defaultQuery | default "" -}}
+<section class="nerv-wrap nerv-psych" id="{{ $id }}" data-psychographic-display data-focus-kind="{{ $focusKind }}" data-focus-value="{{ $focusValue }}" data-page-label-singular="{{ $pageLabelSingular }}" data-page-label-plural="{{ $pageLabelPlural }}" data-default-query="{{ $defaultQuery }}">
+  <div class="nerv-psych__frame">
+    <header class="nerv-psych__head">
+      <div>
+        <div class="status-label">Psychographic Display</div>
+        <h2>{{ $title }}</h2>
+        <p>{{ $summary }}</p>
+      </div>
+      <div class="nerv-psych__sync" aria-hidden="true">
+        <span>SYNC</span>
+        <strong>00</strong>
+      </div>
+    </header>
+
+    <div class="nerv-psych__toolbar">
+      <label class="nerv-psych__label" for="{{ $id }}-search">Signal search</label>
+      <div class="nerv-psych__controls">
+        <div class="nerv-psych__search">
+          <input id="{{ $id }}-search" type="search" placeholder="Search {{ lower $pageLabelPlural }}, categories, or tags" data-psych-search>
+          <button type="button" data-psych-clear hidden>Clear</button>
+        </div>
+        <div class="nerv-psych__toggles" aria-label="Visible signal types">
+          <label><input type="checkbox" data-psych-toggle="categories" checked> Categories</label>
+          <label><input type="checkbox" data-psych-toggle="tags" checked> Tags</label>
+          <label><input type="checkbox" data-psych-toggle="pages" checked> {{ $pageLabelPlural }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="nerv-psych__layout">
+      <div class="nerv-psych__stage" data-psych-stage>
+        <svg class="nerv-psych__links" aria-hidden="true" data-psych-links></svg>
+        <section class="nerv-psych__column" data-psych-column="category">
+          <header>
+            <span>Categories</span>
+            <strong data-psych-count="category">0</strong>
+          </header>
+          <div class="nerv-psych__list" data-psych-list="category"></div>
+        </section>
+        <section class="nerv-psych__column" data-psych-column="tag">
+          <header>
+            <span>Tags</span>
+            <strong data-psych-count="tag">0</strong>
+          </header>
+          <div class="nerv-psych__list" data-psych-list="tag"></div>
+        </section>
+        <section class="nerv-psych__column" data-psych-column="page">
+          <header>
+            <span>{{ $pageLabelPlural }}</span>
+            <strong data-psych-count="page">0</strong>
+          </header>
+          <div class="nerv-psych__list" data-psych-list="page"></div>
+        </section>
+      </div>
+
+      <aside class="nerv-psych__details" data-psych-details aria-live="polite">
+        <div class="status-label">Psychographic Focus</div>
+        <h3>Awaiting signal</h3>
+        <p>No visible signal is active.</p>
+      </aside>
+    </div>
+
+    <div class="nerv-psych__results" data-psych-results hidden>
+      <p class="nerv-psych__results-label">Matching {{ lower $pageLabelPlural }}</p>
+      <div class="nerv-psych__results-list" data-psych-results-list></div>
+    </div>
+
+    <noscript>
+      <div class="nerv-psych__fallback">
+        <strong>Static Signal Index</strong>
+        <div class="taxonomy-strip">
+          {{- range first 6 $page.Site.Taxonomies.categories.ByCount -}}
+            <a class="taxonomy-chip taxonomy-chip--category" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} {{ .Count }}</a>
+          {{- end -}}
+          {{- range first 8 $page.Site.Taxonomies.tags.ByCount -}}
+            <a class="taxonomy-chip" href="{{ .Page.RelPermalink }}">#{{ .Page.Title }}</a>
+          {{- end -}}
+        </div>
+      </div>
+    </noscript>
+  </div>
+
+  {{ partialCached "psychographic-display-data.html" (dict "site" $page.Site) $page.Site.BaseURL $page.Site.Language.Lang }}
+</section>
+

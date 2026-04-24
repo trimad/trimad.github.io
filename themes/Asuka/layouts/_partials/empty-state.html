@@ -1,0 +1,8 @@
+<section class="rei-empty">
+  <p class="rei-kicker"><span></span>Nothing Here Yet</p>
+  <h2>{{ .title }}</h2>
+  <p>{{ .summary }}</p>
+  {{- with .href -}}
+    <a class="rei-button rei-button--primary" href="{{ . }}">{{ $.label | default "Return home" }}</a>
+  {{- end -}}
+</section>

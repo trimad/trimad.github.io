@@ -1,0 +1,14 @@
+{{- $page := . -}}
+{{- $categories := $page.GetTerms "categories" -}}
+{{- $tags := $page.GetTerms "tags" -}}
+{{- if or $categories $tags -}}
+  <div class="taxonomy-strip" aria-label="Taxonomies">
+    {{- range $categories -}}
+      <a class="taxonomy-chip taxonomy-chip--category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    {{- end -}}
+    {{- range $tags -}}
+      <a class="taxonomy-chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    {{- end -}}
+  </div>
+{{- end -}}
+

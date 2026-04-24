@@ -4,17 +4,18 @@
     day: "numeric",
     year: "numeric",
   });
-  const maxVisibleNodes = 10;
 
   document.querySelectorAll("[data-memory-field]").forEach((root) => {
     const dataEl = root.querySelector("[data-memory-field-data]");
     const stage = root.querySelector("[data-memory-stage]");
     const linksSvg = root.querySelector("[data-memory-links]");
     const details = root.querySelector("[data-memory-details]");
+    const results = root.querySelector("[data-memory-results]");
+    const resultsList = root.querySelector("[data-memory-results-list]");
     const search = root.querySelector("[data-memory-search]");
     const clear = root.querySelector("[data-memory-clear]");
 
-    if (!dataEl || !stage || !linksSvg || !details || !search) {
+    if (!dataEl || !stage || !linksSvg || !details || !results || !resultsList || !search) {
       return;
     }
 
@@ -134,10 +135,10 @@
       renderColumn("category", currentView.categories);
       renderColumn("tag", currentView.tags);
       renderColumn("page", currentView.pages);
-      const preferredActive = currentView.defaultId || state.pinnedId;
-      const firstVisibleId = nodeElements.keys().next().value || null;
-      const fallbackActive = preferredActive && nodeElements.has(preferredActive) ? preferredActive : firstVisibleId;
-      if (!state.activeId || !nodeElements.has(state.activeId)) {
+      renderResultsPanel(currentView.results, state.query);
+
+      const fallbackActive = currentView.defaultId || state.pinnedId;
+      if (!nodeExistsInView(currentView, state.activeId)) {
         state.activeId = fallbackActive;
       }
 
@@ -158,10 +159,7 @@
 
       const fragment = document.createDocumentFragment();
 
-      const visibleItems = items.slice(0, maxVisibleNodes);
-      const hiddenCount = Math.max(items.length - visibleItems.length, 0);
-
-      visibleItems.forEach((node) => {
+      items.forEach((node) => {
         const link = document.createElement("a");
         link.href = node.href || "#";
         link.className = `rei-memory-node rei-memory-node--${node.type}`;
@@ -198,26 +196,6 @@
         fragment.appendChild(link);
         nodeElements.set(node.id, link);
       });
-
-      if (hiddenCount > 0) {
-        const hiddenType = type === "page" ? state.pageLabelPlural.toLowerCase() : type === "category" ? "categories" : "tags";
-        const more = document.createElement("div");
-        more.className = `rei-memory-node rei-memory-node--${type} rei-memory-node--more`;
-        more.setAttribute("aria-label", `${hiddenCount} more ${hiddenType} not shown`);
-
-        const content = document.createElement("div");
-        const label = document.createElement("small");
-        const title = document.createElement("strong");
-        const meta = document.createElement("span");
-
-        label.textContent = "More";
-        title.textContent = "...";
-        meta.textContent = `+${hiddenCount}`;
-
-        content.append(label, title);
-        more.append(content, meta);
-        fragment.appendChild(more);
-      }
 
       list.appendChild(fragment);
     }
@@ -277,6 +255,41 @@
       if (links.childElementCount > 0) {
         details.appendChild(links);
       }
+    }
+
+    function renderResultsPanel(items, query) {
+      resultsList.innerHTML = "";
+
+      if (!query) {
+        results.hidden = true;
+        return;
+      }
+
+      results.hidden = false;
+      if (!items.length) {
+        const empty = document.createElement("p");
+        empty.textContent = `No matching ${state.pageLabelPlural.toLowerCase()} found.`;
+        resultsList.appendChild(empty);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      items.forEach((node) => {
+        const link = document.createElement("a");
+        link.href = node.href;
+        link.className = "rei-memory__result";
+        const title = document.createElement("strong");
+        title.className = "rei-memory__result-title";
+        title.textContent = node.title;
+        const summary = document.createElement("span");
+        summary.className = "rei-memory__result-summary";
+        summary.textContent = node.summary || `${node.sectionTitle} · ${formatDate(node.lastmod)}`;
+        link.append(title, summary);
+        fragment.appendChild(link);
+      });
+
+      resultsList.appendChild(fragment);
     }
 
     function scheduleDraw(activeId = state.activeId || currentView?.defaultId || state.pinnedId) {
@@ -390,6 +403,7 @@
       categories,
       tags,
       pages,
+      results: [],
       defaultId: pages[0]?.id || categories[0]?.id || tags[0]?.id || null,
     };
   }
@@ -401,13 +415,13 @@
     if (node.type === "category") {
       const pages = pickLatestPages(node.pageIds, graph, 12);
       const tags = collectTagsFromPages(pages, graph, 12);
-      return { categories: [node], tags, pages, defaultId: node.id };
+      return { categories: [node], tags, pages, results: [], defaultId: node.id };
     }
 
     if (node.type === "tag") {
       const pages = pickLatestPages(node.pageIds, graph, 12);
       const categories = collectCategoriesFromPages(pages, graph, 8);
-      return { categories, tags: [node], pages, defaultId: node.id };
+      return { categories, tags: [node], pages, results: [], defaultId: node.id };
     }
 
     const pages = [node, ...scoreRelatedPages(node, graph).slice(0, 8)];
@@ -415,6 +429,7 @@
       categories: collectCategoriesFromPages(pages, graph, 8),
       tags: collectTagsFromPages(pages, graph, 12),
       pages,
+      results: [],
       defaultId: node.id,
     };
   }
@@ -428,6 +443,7 @@
       categories,
       tags,
       pages,
+      results: [],
       defaultId: pages[0]?.id || categories[0]?.id || tags[0]?.id || null,
     };
   }
@@ -453,6 +469,7 @@
       categories,
       tags,
       pages,
+      results: matchedPages.slice(0, 8),
       defaultId: matchedPages[0]?.id || matchedCategories[0]?.id || matchedTags[0]?.id || null,
     };
   }
@@ -580,6 +597,11 @@
   function getNode(graph, id) {
     if (!id) return null;
     return graph.pagesById.get(id) || graph.categoriesById.get(id) || graph.tagsById.get(id) || null;
+  }
+
+  function nodeExistsInView(view, id) {
+    if (!id || !view) return false;
+    return [...view.categories, ...view.tags, ...view.pages].some((node) => node.id === id);
   }
 
   function uniqueNodes(nodes) {
