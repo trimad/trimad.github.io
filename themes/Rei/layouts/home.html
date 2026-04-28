@@ -1,7 +1,5 @@
 {{ define "main" }}
   {{- $posts := where .Site.RegularPages "Section" "eq" "posts" -}}
-  {{- $recentCreated := first 10 ($posts.ByDate.Reverse) -}}
-  {{- $recentUpdated := first 10 ($posts.ByLastmod.Reverse) -}}
   {{- $latest := index (.Site.RegularPages.ByLastmod.Reverse) 0 -}}
   <main class="rei-page rei-home" id="content">
     <section class="rei-chamber rei-chamber--solo">
@@ -41,42 +39,11 @@
       </div>
     </section>
 
-    <section class="rei-section rei-index-panels">
-      <section class="rei-index-panel" id="recently-created">
-        <div class="rei-section__head">
-          <div>
-            <p class="rei-kicker"><span></span>Recently Created</p>
-            <h3 class="rei-section__title">Latest posts created</h3>
-            <p class="rei-section__summary">The 10 most recently created posts, sorted by each post's publish date.</p>
-          </div>
-        </div>
-        <ol class="rei-ranking">
-          {{- range $recentCreated -}}
-            <li>
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-              <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-            </li>
-          {{- end -}}
-        </ol>
-      </section>
-      <section class="rei-index-panel" id="recently-updated">
-        <div class="rei-section__head">
-          <div>
-            <p class="rei-kicker"><span></span>Recently Updated</p>
-            <h3 class="rei-section__title">Latest revisions across posts</h3>
-            <p class="rei-section__summary">The 10 most recently updated posts, sorted by each post's last modification date.</p>
-          </div>
-        </div>
-        <ol class="rei-ranking">
-          {{- range $recentUpdated -}}
-            <li>
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-              <span>{{ .Lastmod.Format "Jan 2, 2006" }}</span>
-            </li>
-          {{- end -}}
-        </ol>
-      </section>
-    </section>
+    {{ partial "recent-index-panels.html" (dict
+      "pages" $posts
+      "labelSingular" "post"
+      "labelPlural" "posts"
+    ) }}
 
     {{ partial "memory-field.html" (dict
       "page" .

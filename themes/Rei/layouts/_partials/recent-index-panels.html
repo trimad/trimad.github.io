@@ -1,0 +1,51 @@
+{{- $pages := .pages | default (slice) -}}
+{{- $limit := .limit | default 10 -}}
+{{- $labelSingular := .labelSingular | default "entry" | lower -}}
+{{- $labelPlural := .labelPlural | default "entries" | lower -}}
+{{- $createdTitle := .createdTitle | default (printf "Latest %s created" $labelPlural) -}}
+{{- $updatedTitle := .updatedTitle | default (printf "Latest revisions across %s" $labelPlural) -}}
+{{- $createdSummary := .createdSummary | default (printf "The %d most recently created %s, sorted by each %s's publish date." $limit $labelPlural $labelSingular) -}}
+{{- $updatedSummary := .updatedSummary | default (printf "The %d most recently updated %s, sorted by each %s's last modification date." $limit $labelPlural $labelSingular) -}}
+{{- $recentCreated := first $limit (sort $pages "Date" "desc") -}}
+{{- $recentUpdated := first $limit (sort $pages "Lastmod" "desc") -}}
+
+<section class="rei-section rei-index-panels">
+  <section class="rei-index-panel" id="recently-created">
+    <div class="rei-section__head">
+      <div>
+        <p class="rei-kicker"><span></span>Recently Created</p>
+        <h3 class="rei-section__title">{{ $createdTitle }}</h3>
+        <p class="rei-section__summary">{{ $createdSummary }}</p>
+      </div>
+    </div>
+    <ol class="rei-ranking">
+      {{- range $recentCreated -}}
+        <li>
+          <a href="{{ .RelPermalink }}">
+            <span class="rei-ranking__label">{{ .Title }}</span>
+            <span class="rei-ranking__meta">{{ .Date.Format "Jan 2, 2006" }}</span>
+          </a>
+        </li>
+      {{- end -}}
+    </ol>
+  </section>
+  <section class="rei-index-panel" id="recently-updated">
+    <div class="rei-section__head">
+      <div>
+        <p class="rei-kicker"><span></span>Recently Updated</p>
+        <h3 class="rei-section__title">{{ $updatedTitle }}</h3>
+        <p class="rei-section__summary">{{ $updatedSummary }}</p>
+      </div>
+    </div>
+    <ol class="rei-ranking">
+      {{- range $recentUpdated -}}
+        <li>
+          <a href="{{ .RelPermalink }}">
+            <span class="rei-ranking__label">{{ .Title }}</span>
+            <span class="rei-ranking__meta">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+          </a>
+        </li>
+      {{- end -}}
+    </ol>
+  </section>
+</section>

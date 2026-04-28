@@ -29,12 +29,21 @@
   {{- $pageLabelSingular = "Post" -}}
   {{- $pageLabelPlural = "Posts" -}}
 {{- end -}}
+{{- $recentLabelSingular := $pageLabelSingular -}}
+{{- $recentLabelPlural := $pageLabelPlural -}}
+{{- if and (eq $page.Kind "section") (eq $page.Section "prompts") -}}
+  {{- $recentLabelSingular = "Prompt" -}}
+  {{- $recentLabelPlural = "Prompts" -}}
+{{- else if and (eq $page.Kind "section") (eq $page.Section "archive") -}}
+  {{- $recentLabelSingular = "Archive entry" -}}
+  {{- $recentLabelPlural = "Archive entries" -}}
+{{- end -}}
 {{- $sectionButtons := slice -}}
 {{- if and (eq $page.Kind "section") (in (slice "posts" "prompts" "archive") $page.Section) -}}
   {{- $sectionButtons = slice
     (dict "title" $page.Title "href" "#collection-entries")
-    (dict "title" "Recently Modified" "href" "#recently-modified")
-    (dict "title" "Adjacent Collections" "href" "#adjacent-collections")
+    (dict "title" "Recently Created" "href" "#recently-created")
+    (dict "title" "Recently Updated" "href" "#recently-updated")
     (dict "title" "Memory Field" "href" "#memory-field" "primary" true)
   -}}
 {{- end -}}
@@ -79,26 +88,11 @@
     {{- end -}}
   </section>
 
-  <section class="rei-section rei-index-panels">
-    <section class="rei-index-panel" id="recently-modified">
-      {{ partial "recent-feed.html" (dict "page" $page "title" "Recently modified" "limit" 6 "pages" $pages) }}
-    </section>
-    <section class="rei-index-panel" id="adjacent-collections">
-      <div class="rei-section__head">
-        <div>
-          <p class="rei-kicker"><span></span>More to Browse</p>
-          <h2 class="rei-section__title">Adjacent collections</h2>
-        </div>
-      </div>
-      <ol class="rei-ranking">
-        <li><a href="{{ "/posts/" | relURL }}">Posts</a><span>{{ len (where $page.Site.RegularPages "Section" "posts") }}</span></li>
-        <li><a href="{{ "/prompts/" | relURL }}">Prompts</a><span>{{ len (where $page.Site.RegularPages "Section" "prompts") }}</span></li>
-        <li><a href="{{ "/archive/" | relURL }}">Archive</a><span>{{ len (where $page.Site.RegularPages "Section" "archive") }}</span></li>
-        <li><a href="{{ "/categories/" | relURL }}">Categories</a><span>{{ len $page.Site.Taxonomies.categories }}</span></li>
-        <li><a href="{{ "/tags/" | relURL }}">Tags</a><span>{{ len $page.Site.Taxonomies.tags }}</span></li>
-      </ol>
-    </section>
-  </section>
+  {{ partial "recent-index-panels.html" (dict
+    "pages" $pages
+    "labelSingular" $recentLabelSingular
+    "labelPlural" $recentLabelPlural
+  ) }}
 
   {{ partial "memory-field.html" (dict
     "page" $page

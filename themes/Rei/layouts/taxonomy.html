@@ -1,42 +1,25 @@
 {{ define "main" }}
-  {{- $page := . -}}
   {{- $terms := .Data.Terms.ByCount -}}
-  {{- $description := .Description | default (printf "Browse %s and open the entries connected to each term." (.Title | lower)) -}}
-  {{- $sectionButtons := slice
-    (dict "title" .Title "href" "#term-directory")
-    (dict "title" "Memory Field" "href" "#memory-field" "primary" true)
-  -}}
   <main class="rei-page rei-page--terms" id="content">
-    {{ partial "page-intro.html" (dict
-      "page" $page
-      "kicker" "Browse Terms"
-      "title" .Title
-      "summary" $description
-      "buttons" $sectionButtons
-      "stats" (slice
-        (dict "label" "Terms" "value" (len $terms))
-        (dict "label" "Entries" "value" (len .Site.RegularPages))
-      )
-    ) }}
-
-    <section class="rei-ledger-shell" id="term-directory">
-      {{ partial "filter-panel.html" (dict
-        "inputID" "term-filter"
-        "label" "Search terms in this directory"
-        "eyebrow" "Term filter"
-        "title" "Refine the directory"
-        "summary" "Trim the taxonomy list before opening a category or tag archive."
-        "placeholder" "Search term names"
-        "count" (len $terms)
-        "meta" "terms shown"
-      ) }}
-
-      {{- if gt (len $terms) 0 -}}
-        <div class="rei-term-ledger">
-          {{- range $terms -}}
-            {{ partial "term-card.html" (dict "term" . "taxonomy" $page.Data.Plural) }}
-          {{- end -}}
+    <section class="rei-section rei-index-panel" id="term-directory" aria-labelledby="term-directory-title">
+      <div class="rei-section__head">
+        <div>
+          <p class="rei-kicker"><span></span>Directory</p>
+          <h1 class="rei-section__title" id="term-directory-title">{{ .Title }}</h1>
         </div>
+      </div>
+      {{- if gt (len $terms) 0 -}}
+        <ol class="rei-ranking">
+          {{- range $terms -}}
+            {{- $entryLabel := cond (eq .Count 1) "entry" "entries" -}}
+            <li>
+              <a href="{{ .Page.RelPermalink }}">
+                <span class="rei-ranking__label">{{ .Page.Title }}</span>
+                <span class="rei-ranking__meta">{{ .Count }} {{ $entryLabel }}</span>
+              </a>
+            </li>
+          {{- end -}}
+        </ol>
       {{- else -}}
         {{ partial "empty-state.html" (dict
           "title" "No taxonomy terms yet"
@@ -44,13 +27,5 @@
         ) }}
       {{- end -}}
     </section>
-
-    {{ partial "memory-field.html" (dict
-      "page" .
-      "title" "Memory Field"
-      "summary" "Use the relationship map to see how terms connect across the site."
-      "focusKind" ""
-      "focusValue" ""
-    ) }}
   </main>
 {{ end }}
