@@ -2467,6 +2467,13 @@ a {
   display: none;
 }
 
+.rei-memory {
+  --memory-neutral-rgb: 18, 41, 82;
+  --memory-category-rgb: 189, 32, 54;
+  --memory-tag-rgb: 50, 107, 168;
+  --memory-page-rgb: 41, 124, 123;
+}
+
 .rei-memory__stage {
   position: relative;
   overflow: hidden;
@@ -2484,22 +2491,52 @@ a {
 }
 
 .rei-memory-node {
-  border-color: rgba(18, 41, 82, 0.08);
+  --memory-node-rgb: var(--memory-neutral-rgb);
+  --memory-node-shadow-rgb: var(--memory-node-rgb);
+  border-color: rgba(var(--memory-node-rgb), 0.16);
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(244, 248, 255, 0.9));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background:
+    linear-gradient(115deg, rgba(var(--memory-node-rgb), 0.12), rgba(var(--memory-node-rgb), 0) 42%) 0.65rem 0.7rem / 2.35rem 1px no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(244, 248, 255, 0.92)),
+    linear-gradient(135deg, rgba(var(--memory-node-rgb), 0.09), rgba(var(--memory-node-rgb), 0.03));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.34);
+}
+
+.rei-memory-node--category {
+  --memory-node-rgb: var(--memory-category-rgb);
+}
+
+.rei-memory-node--tag {
+  --memory-node-rgb: var(--memory-tag-rgb);
+}
+
+.rei-memory-node--page {
+  --memory-node-rgb: var(--memory-page-rgb);
+}
+
+.rei-memory-node small,
+.rei-memory-node > span {
+  color: rgba(var(--memory-node-rgb), 0.72);
 }
 
 .rei-memory-node.is-active,
 .rei-memory-node:hover,
 .rei-memory-node:focus-visible {
-  border-color: rgba(46, 93, 164, 0.3);
-  background: linear-gradient(180deg, rgba(235, 243, 255, 0.96), rgba(223, 235, 251, 0.98));
-  box-shadow: 0 0 0 1px rgba(46, 93, 164, 0.08), var(--glow);
+  border-color: rgba(var(--memory-node-rgb), 0.42);
+  background:
+    linear-gradient(115deg, rgba(var(--memory-node-rgb), 0.24), rgba(var(--memory-node-rgb), 0) 44%) 0.65rem 0.7rem / 2.8rem 1px no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(var(--memory-node-rgb), 0.12)),
+    linear-gradient(135deg, rgba(var(--memory-node-rgb), 0.16), rgba(var(--memory-node-rgb), 0.06));
+  box-shadow:
+    0 0 0 1px rgba(var(--memory-node-rgb), 0.1),
+    0 18px 36px rgba(var(--memory-node-shadow-rgb), 0.16);
 }
 
 .rei-memory-node--more,
 .rei-memory-node--more:hover {
+  --memory-node-rgb: var(--memory-neutral-rgb);
   pointer-events: none;
   border-color: rgba(18, 41, 82, 0.08);
   border-style: dashed;
@@ -2513,11 +2550,9 @@ a {
   line-height: 1;
 }
 
-.rei-memory-node--category.is-active,
-.rei-memory-node--category:hover,
-.rei-memory-node--category:focus-visible {
-  border-color: rgba(195, 58, 69, 0.28);
-  background: linear-gradient(180deg, rgba(255, 244, 246, 0.96), rgba(249, 233, 237, 0.98));
+.rei-memory-node--more small,
+.rei-memory-node--more > span {
+  color: var(--text-faint);
 }
 
 .rei-memory__details {
@@ -2528,11 +2563,30 @@ a {
 }
 
 .rei-memory__path {
-  stroke: rgba(46, 93, 164, 0.18);
+  --memory-link-rgb: var(--memory-neutral-rgb);
+  fill: none;
+  stroke: rgba(var(--memory-link-rgb), 0.16);
+  stroke-linecap: round;
+  stroke-width: 1.45;
+  transition: stroke var(--fast), stroke-width var(--fast), opacity var(--fast);
+  vector-effect: non-scaling-stroke;
+}
+
+.rei-memory__path--category-tag {
+  --memory-link-rgb: var(--memory-category-rgb);
+}
+
+.rei-memory__path--tag-page {
+  --memory-link-rgb: var(--memory-tag-rgb);
+}
+
+.rei-memory__path--category-page {
+  --memory-link-rgb: var(--memory-category-rgb);
 }
 
 .rei-memory__path.is-active {
-  stroke: rgba(46, 93, 164, 0.44);
+  stroke: rgba(var(--memory-link-rgb), 0.58);
+  stroke-width: 2.35;
 }
 
 .rei-banner {

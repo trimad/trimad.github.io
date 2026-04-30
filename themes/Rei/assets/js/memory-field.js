@@ -292,6 +292,7 @@
       linksSvg.innerHTML = "";
 
       const stageRect = stage.getBoundingClientRect();
+      const activeNode = getNode(graph, activeId);
       const positions = new Map();
       nodeElements.forEach((element, id) => {
         const rect = element.getBoundingClientRect();
@@ -307,7 +308,19 @@
         if (!source || !target) return;
 
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("class", `rei-memory__path${link.source === activeId || link.target === activeId ? " is-active" : ""}`);
+        const sourceType = getNode(graph, link.source)?.type || "unknown";
+        const targetType = getNode(graph, link.target)?.type || "unknown";
+        const isActive = isActiveLink(link, activeNode);
+        path.setAttribute(
+          "class",
+          [
+            "rei-memory__path",
+            `rei-memory__path--${sourceType}-${targetType}`,
+            isActive ? "is-active" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")
+        );
         path.setAttribute("d", curveBetween(source, target));
         linksSvg.appendChild(path);
       });
@@ -557,6 +570,21 @@
       if (!visibility.page && pageIds.has(link.target)) return false;
       return true;
     });
+  }
+
+  function isActiveLink(link, activeNode) {
+    if (!activeNode) return false;
+    if (link.source === activeNode.id || link.target === activeNode.id) return true;
+
+    if (activeNode.type === "page") {
+      return activeNode.categoryIds.includes(link.source) && activeNode.tagIds.includes(link.target);
+    }
+
+    if (activeNode.type === "category") {
+      return activeNode.tagIds.has(link.source) && activeNode.pageIds.has(link.target);
+    }
+
+    return false;
   }
 
   function pickPagesForNode(node, graph, limit) {
