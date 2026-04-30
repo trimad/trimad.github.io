@@ -164,7 +164,7 @@ Allowed motifs:
 - cool surface reflections
 - micro-band accents near panel edges
 - slim vertical seam lights inside larger chambers
-- symbolic clinical glyphs in compact chrome, currently DNA for the brand mark and a pill for navigation links
+- abstract Rei-inspired clinical glyphs, currently an unframed black sphere mark for the brand; navigation links use pill framing
 - static optical cues in selected media placeholders only
 - evidence-banner framing for page media
 - powder-blue veil shapes that read as hairline traces

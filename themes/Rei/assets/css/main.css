@@ -1710,48 +1710,24 @@ a {
 }
 
 .rei-brand__mark {
-  display: inline-grid;
+  display: inline-block;
   flex: 0 0 auto;
-  position: relative;
-  width: 2.35rem;
-  height: 2.35rem;
-  overflow: visible;
-  place-items: center;
-  border: 1px solid rgba(18, 41, 82, 0.1);
-  border-radius: var(--radius-pill);
+  width: 3.2rem;
+  height: 3.2rem;
+  overflow: hidden;
+  border-radius: 50%;
   background:
-    linear-gradient(118deg, transparent 0 64%, rgba(159, 201, 234, 0.18) 64.2% 70%, transparent 70.2%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(238, 246, 255, 0.94));
+    radial-gradient(circle at 29% 24%, rgba(255, 255, 255, 0.42) 0 0.18rem, rgba(178, 198, 224, 0.12) 0.55rem, transparent 1.05rem),
+    radial-gradient(circle at 36% 30%, #3f4051 0, #171923 28%, #07080d 56%, #000 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 0.35rem 0.8rem rgba(10, 20, 38, 0.08);
-  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
-  font-size: 1.45rem;
-  line-height: 1;
-  clip-path: none;
-  filter: none;
+    inset 0.18rem 0.16rem 0.28rem rgba(255, 255, 255, 0.13),
+    inset -0.62rem -0.72rem 0.86rem rgba(0, 0, 0, 0.86),
+    inset 0.34rem 0.48rem 0.8rem rgba(115, 142, 176, 0.08),
+    0 0.45rem 0.82rem rgba(7, 14, 26, 0.22);
+  filter:
+    drop-shadow(0 0 0.12rem rgba(238, 18, 27, 0.12))
+    drop-shadow(0 0.45rem 0.7rem rgba(7, 14, 26, 0.2));
   transform: translateY(0.02rem);
-}
-
-.rei-brand__mark::before,
-.rei-brand__mark::after {
-  position: relative;
-  pointer-events: none;
-}
-
-.rei-brand__mark::before {
-  content: "👻";
-  width: auto;
-  height: auto;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  opacity: 1;
-  transform: none;
-}
-
-.rei-brand__mark::after {
-  display: none;
 }
 
 .rei-brand__meta strong {
