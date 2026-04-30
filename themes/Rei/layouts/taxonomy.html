@@ -1,10 +1,16 @@
 {{ define "main" }}
   {{- $terms := .Data.Terms.ByCount -}}
+  {{- $directoryKicker := "Term Directory" -}}
+  {{- if eq .Data.Plural "categories" -}}
+    {{- $directoryKicker = "Category Directory" -}}
+  {{- else if eq .Data.Plural "tags" -}}
+    {{- $directoryKicker = "Tag Directory" -}}
+  {{- end -}}
   <main class="rei-page rei-page--terms" id="content">
     <section class="rei-section rei-index-panel" id="term-directory" aria-labelledby="term-directory-title">
       <div class="rei-section__head">
         <div>
-          <p class="rei-kicker"><span></span>Directory</p>
+          <p class="rei-kicker"><span></span>{{ $directoryKicker }}</p>
           <h1 class="rei-section__title" id="term-directory-title">{{ .Title }}</h1>
         </div>
       </div>

@@ -47,10 +47,32 @@
     (dict "title" "Memory Field" "href" "#memory-field" "primary" true)
   -}}
 {{- end -}}
+{{- $introKicker := "Collection Index" -}}
+{{- if eq $page.Kind "term" -}}
+  {{- if eq $page.Data.Plural "categories" -}}
+    {{- $introKicker = "Category Archive" -}}
+  {{- else if eq $page.Data.Plural "tags" -}}
+    {{- $introKicker = "Tag Archive" -}}
+  {{- else -}}
+    {{- $introKicker = "Term Archive" -}}
+  {{- end -}}
+{{- else if eq $page.Kind "section" -}}
+  {{- if eq $page.Section "posts" -}}
+    {{- $introKicker = "Post Index" -}}
+  {{- else if eq $page.Section "prompts" -}}
+    {{- $introKicker = "Prompt Library" -}}
+  {{- else if eq $page.Section "archive" -}}
+    {{- $introKicker = "Archive Index" -}}
+  {{- else if eq $page.Section "category" -}}
+    {{- $introKicker = "Category Index" -}}
+  {{- else -}}
+    {{- $introKicker = "Section Index" -}}
+  {{- end -}}
+{{- end -}}
 <main class="rei-page rei-page--collection" id="content">
   {{ partial "page-intro.html" (dict
     "page" $page
-    "kicker" (cond (eq $page.Kind "term") "Term Archive" "Section Archive")
+    "kicker" $introKicker
     "title" $page.Title
     "summary" $summary
     "buttons" $sectionButtons
