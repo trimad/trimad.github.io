@@ -1,6 +1,21 @@
 {{- $page := .page -}}
 {{- $title := .title | default $page.Title -}}
-{{- $summary := .summary | default $page.Description | default $page.Summary | plainify -}}
+{{- $summary := .summary | default $page.Description | default $page.Summary | plainify | strings.TrimSpace -}}
+{{- $invalidSummaries := slice "n/a" "na" "none" "null" "-" -}}
+{{- if or (not $summary) (in $invalidSummaries (lower $summary)) -}}
+  {{- $summary = .fallbackSummary | default "" | plainify | strings.TrimSpace -}}
+{{- end -}}
+{{- if not $summary -}}
+  {{- if eq $page.Kind "term" -}}
+    {{- $summary = printf "Entries connected to %q, gathered in one place for quick browsing." $page.Title -}}
+  {{- else if eq $page.Kind "taxonomy" -}}
+    {{- $summary = printf "Browse %s across the site and follow them into related entries." ($page.Title | lower) -}}
+  {{- else if $page.Title -}}
+    {{- $summary = printf "Browse %s with filtering, metadata, and links to related material." ($page.Title | lower) -}}
+  {{- else -}}
+    {{- $summary = $page.Site.Params.description | default "Technical notes, prompts, diagnostics, and archived material." -}}
+  {{- end -}}
+{{- end -}}
 {{- $stats := .stats | default (slice) -}}
 {{- $buttons := .buttons | default (slice) -}}
 <header class="rei-page-intro">
@@ -12,26 +27,30 @@
     {{- with $summary -}}
       <p class="rei-page-intro__summary">{{ . }}</p>
     {{- end -}}
-    {{- if gt (len $buttons) 0 -}}
-      <div class="rei-button-row" aria-label="Page section navigation">
-        {{- range $buttons -}}
-          {{- $buttonClass := "rei-button" -}}
-          {{- if .primary -}}
-            {{- $buttonClass = "rei-button rei-button--primary" -}}
-          {{- end -}}
-          <a class="{{ $buttonClass }}" href="{{ .href }}">{{ .title }}</a>
+    {{- if or (gt (len $buttons) 0) (gt (len $stats) 0) -}}
+      <div class="rei-page-intro__actions">
+        {{- if gt (len $buttons) 0 -}}
+          <div class="rei-button-row" aria-label="Page section navigation">
+            {{- range $buttons -}}
+              {{- $buttonClass := "rei-button" -}}
+              {{- if .primary -}}
+                {{- $buttonClass = "rei-button rei-button--primary" -}}
+              {{- end -}}
+              <a class="{{ $buttonClass }}" href="{{ .href }}">{{ .title }}</a>
+            {{- end -}}
+          </div>
+        {{- end -}}
+        {{- if gt (len $stats) 0 -}}
+          <div class="rei-page-intro__stats rei-stat-strip" aria-label="Page metrics">
+            {{- range $stats -}}
+              <div class="rei-page-intro__stat rei-stat">
+                <span>{{ .label }}</span>
+                <strong>{{ .value }}</strong>
+              </div>
+            {{- end -}}
+          </div>
         {{- end -}}
       </div>
     {{- end -}}
   </div>
-  {{- if gt (len $stats) 0 -}}
-    <div class="rei-page-intro__stats" aria-label="Page metrics">
-      {{- range $stats -}}
-        <div class="rei-page-intro__stat">
-          <span>{{ .label }}</span>
-          <strong>{{ .value }}</strong>
-        </div>
-      {{- end -}}
-    </div>
-  {{- end -}}
 </header>

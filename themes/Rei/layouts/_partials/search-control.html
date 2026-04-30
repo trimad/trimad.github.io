@@ -1,0 +1,18 @@
+{{- $id := .id | default "search" -}}
+{{- $class := .class | default "" -}}
+{{- $placeholder := .placeholder | default "Search" -}}
+{{- $inputData := .inputData | default "" -}}
+{{- $clearData := .clearData | default "" -}}
+{{- $describedBy := .describedBy | default "" -}}
+{{- $clearLabel := .clearLabel | default "Clear" -}}
+{{- $inputDataAttr := "" -}}
+{{- $clearDataAttr := "" -}}
+{{- with $inputData }}{{- $inputDataAttr = printf "data-%s" . -}}{{- end -}}
+{{- with $clearData }}{{- $clearDataAttr = printf "data-%s" . -}}{{- end -}}
+<div class="rei-search rei-filter__control{{ with $class }} {{ . }}{{ end }}">
+  <span class="rei-search__icon rei-filter__icon" aria-hidden="true"></span>
+  <input class="rei-search__input" id="{{ $id }}" type="search" placeholder="{{ $placeholder }}"{{ with $inputDataAttr }} {{ . | safeHTMLAttr }}{{ end }}{{ with $describedBy }} aria-describedby="{{ . }}"{{ end }}>
+  {{- with $clearDataAttr }}
+    <button class="rei-button rei-search__clear rei-filter__clear" type="button" {{ . | safeHTMLAttr }} hidden>{{ $clearLabel }}</button>
+  {{- end }}
+</div>

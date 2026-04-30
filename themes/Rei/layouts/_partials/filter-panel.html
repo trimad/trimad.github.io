@@ -21,10 +21,12 @@
       </p>
     </div>
     <label class="sr-only" for="{{ $inputID }}">{{ $label }}</label>
-    <div class="rei-filter__control">
-      <span class="rei-filter__icon" aria-hidden="true"></span>
-      <input id="{{ $inputID }}" type="search" placeholder="{{ $placeholder }}" data-filter-input aria-describedby="{{ $summaryID }}">
-      <button class="rei-button rei-filter__clear" type="button" data-filter-clear hidden>Clear</button>
-    </div>
+    {{ partial "search-control.html" (dict
+      "id" $inputID
+      "placeholder" $placeholder
+      "inputData" "filter-input"
+      "clearData" "filter-clear"
+      "describedBy" $summaryID
+    ) }}
   </div>
 </section>
