@@ -59,7 +59,7 @@
   --layout-gutter: var(--layout-gap);
   --layout-section-gap: var(--layout-gap);
   --layout-panel-gap: clamp(0.85rem, 1.5vw, 1rem);
-  --content-width: min(76rem, calc(100vw - var(--layout-gutter) - var(--layout-gutter)));
+  --content-width: min(90rem, calc(100vw - var(--layout-gutter) - var(--layout-gutter)));
   --reading-width: min(45rem, 100%);
   --panel-padding: clamp(1rem, 1.55vw, 1.45rem);
   --panel-padding-tight: clamp(0.78rem, 1.25vw, 1.05rem);

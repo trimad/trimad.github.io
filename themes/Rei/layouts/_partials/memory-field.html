@@ -7,6 +7,10 @@
 {{- $focusValue := .focusValue | default "" -}}
 {{- $pageLabelSingular := .pageLabelSingular | default "Entry" -}}
 {{- $pageLabelPlural := .pageLabelPlural | default "Entries" -}}
+{{- $memoryPages := $page.Site.RegularPages -}}
+{{- if isset . "pages" -}}
+  {{- $memoryPages = .pages -}}
+{{- end -}}
 {{- $defaultQuery := "Rei" -}}
 {{- if isset . "defaultQuery" -}}
   {{- $defaultQuery = .defaultQuery -}}
@@ -97,5 +101,5 @@
     </noscript>
   </div>
 
-  {{ partialCached "memory-field-data.html" (dict "site" $page.Site) $page.Site.BaseURL $page.Site.Language.Lang }}
+  {{ partial "memory-field-data.html" (dict "site" $page.Site "pages" $memoryPages) }}
 </section>

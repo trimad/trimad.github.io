@@ -1,6 +1,14 @@
 {{- $site := .site | default (.page.Site) -}}
+{{- $sourcePages := $site.RegularPages -}}
+{{- if isset . "pages" -}}
+  {{- $sourcePages = .pages -}}
+{{- end -}}
+{{- $sourcePageIDs := slice -}}
+{{- range $sourcePages -}}
+  {{- $sourcePageIDs = $sourcePageIDs | append .RelPermalink -}}
+{{- end -}}
 {{- $pages := slice -}}
-{{- range $site.RegularPages -}}
+{{- range $sourcePages -}}
   {{- $summary := .Description | default .Summary | plainify | default (truncate 180 (.Plain | plainify)) -}}
   {{- $categories := slice -}}
   {{- range (.Params.categories | default (slice)) -}}
@@ -26,23 +34,39 @@
 {{- end -}}
 {{- $categories := slice -}}
 {{- range $term, $taxonomy := $site.Taxonomies.categories -}}
-  {{- $categories = $categories | append (dict
-    "id" (printf "category:%s" ($term | urlize))
-    "key" ($term | urlize)
-    "name" $term
-    "href" (printf "/categories/%s/" ($term | urlize) | relURL)
-    "count" (len $taxonomy.Pages)
-  ) -}}
+  {{- $count := 0 -}}
+  {{- range $taxonomy.Pages -}}
+    {{- if in $sourcePageIDs .RelPermalink -}}
+      {{- $count = add $count 1 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt $count 0 -}}
+    {{- $categories = $categories | append (dict
+      "id" (printf "category:%s" ($term | urlize))
+      "key" ($term | urlize)
+      "name" $term
+      "href" (printf "/categories/%s/" ($term | urlize) | relURL)
+      "count" $count
+    ) -}}
+  {{- end -}}
 {{- end -}}
 {{- $tags := slice -}}
 {{- range $term, $taxonomy := $site.Taxonomies.tags -}}
-  {{- $tags = $tags | append (dict
-    "id" (printf "tag:%s" ($term | urlize))
-    "key" ($term | urlize)
-    "name" $term
-    "href" (printf "/tags/%s/" ($term | urlize) | relURL)
-    "count" (len $taxonomy.Pages)
-  ) -}}
+  {{- $count := 0 -}}
+  {{- range $taxonomy.Pages -}}
+    {{- if in $sourcePageIDs .RelPermalink -}}
+      {{- $count = add $count 1 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt $count 0 -}}
+    {{- $tags = $tags | append (dict
+      "id" (printf "tag:%s" ($term | urlize))
+      "key" ($term | urlize)
+      "name" $term
+      "href" (printf "/tags/%s/" ($term | urlize) | relURL)
+      "count" $count
+    ) -}}
+  {{- end -}}
 {{- end -}}
 {{- $payload := dict
   "site" (dict "title" $site.Title)

@@ -15,6 +15,7 @@
 {{- end -}}
 {{- $focusKind := "section" -}}
 {{- $focusValue := $page.Section -}}
+{{- $defaultQuery := "Rei" -}}
 {{- $pageLabelSingular := "Entry" -}}
 {{- $pageLabelPlural := "Entries" -}}
 {{- if eq $page.Kind "term" -}}
@@ -28,6 +29,15 @@
 {{- if and (eq $focusKind "section") (eq $focusValue "posts") -}}
   {{- $pageLabelSingular = "Post" -}}
   {{- $pageLabelPlural = "Posts" -}}
+  {{- $defaultQuery = "" -}}
+{{- else if and (eq $focusKind "section") (eq $focusValue "prompts") -}}
+  {{- $pageLabelSingular = "Prompt" -}}
+  {{- $pageLabelPlural = "Prompts" -}}
+  {{- $defaultQuery = "" -}}
+{{- else if and (eq $focusKind "section") (eq $focusValue "archive") -}}
+  {{- $pageLabelSingular = "Archived Entry" -}}
+  {{- $pageLabelPlural = "Archived Entries" -}}
+  {{- $defaultQuery = "" -}}
 {{- end -}}
 {{- $recentLabelSingular := $pageLabelSingular -}}
 {{- $recentLabelPlural := $pageLabelPlural -}}
@@ -122,7 +132,9 @@
     "summary" "Use the relationship map to follow related categories, tags, and entries beyond the current list."
     "focusKind" $focusKind
     "focusValue" $focusValue
+    "defaultQuery" $defaultQuery
     "pageLabelSingular" $pageLabelSingular
     "pageLabelPlural" $pageLabelPlural
+    "pages" $pages
   ) }}
 </main>

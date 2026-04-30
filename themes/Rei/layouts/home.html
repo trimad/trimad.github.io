@@ -1,5 +1,6 @@
 {{ define "main" }}
   {{- $posts := where .Site.RegularPages "Section" "eq" "posts" -}}
+  {{- $memoryPages := where .Site.RegularPages "Section" "in" (slice "posts" "prompts" "archive") -}}
   {{- $latest := index (.Site.RegularPages.ByLastmod.Reverse) 0 -}}
   <main class="rei-page rei-home" id="content">
     <section class="rei-chamber rei-chamber--solo">
@@ -50,11 +51,11 @@
       "id" "memory-field"
       "title" "Memory Field"
       "summary" "Use the relationship map to follow connections between categories, tags, and entries without leaving normal browsing."
-      "focusKind" "section"
-      "focusValue" "posts"
+      "focusKind" "all"
       "defaultQuery" ""
-      "pageLabelSingular" "Post"
-      "pageLabelPlural" "Posts"
+      "pageLabelSingular" "Entry"
+      "pageLabelPlural" "Entries"
+      "pages" $memoryPages
     ) }}
   </main>
 {{ end }}

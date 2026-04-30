@@ -386,6 +386,9 @@
     if (state.query) {
       return buildSearchView(graph, state.query);
     }
+    if (state.focusKind === "all") {
+      return buildAllView(graph);
+    }
     if (state.focusKind === "section" && state.focusValue) {
       return buildSectionView(graph, state.focusValue);
     }
@@ -393,6 +396,19 @@
       return buildFocusedView(graph, state.pinnedId);
     }
     return buildDefaultView(graph);
+  }
+
+  function buildAllView(graph) {
+    const pages = graph.pages;
+    const categories = collectCategoriesFromPages(pages, graph);
+    const tags = collectTagsFromPages(pages, graph);
+
+    return {
+      categories,
+      tags,
+      pages,
+      defaultId: pages[0]?.id || categories[0]?.id || tags[0]?.id || null,
+    };
   }
 
   function buildDefaultView(graph) {
