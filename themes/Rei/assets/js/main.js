@@ -77,6 +77,102 @@
     update();
   });
 
+  document.querySelectorAll("[data-rei-toc-progress]").forEach((panel) => {
+    const segmentHost = panel.querySelector("[data-rei-toc-segments]");
+    const links = Array.from(panel.querySelectorAll(".rei-toc a[href^='#']"));
+
+    if (!segmentHost || links.length === 0) return;
+
+    const entries = links
+      .map((link) => {
+        const heading = getHeadingFromLink(link);
+        if (!heading) return null;
+        return { link, heading };
+      })
+      .filter(Boolean);
+
+    if (entries.length === 0) return;
+
+    segmentHost.replaceChildren();
+    segmentHost.style.setProperty("--toc-count", String(entries.length));
+    panel.classList.add("is-progress-aware");
+
+    entries.forEach((entry, index) => {
+      const label = document.createElement("span");
+      label.className = "rei-toc__label";
+      while (entry.link.firstChild) label.appendChild(entry.link.firstChild);
+      entry.link.appendChild(label);
+
+      const count = document.createElement("span");
+      count.className = "rei-toc__count";
+      count.textContent = `${index + 1}/${entries.length}`;
+      entry.link.appendChild(count);
+
+      const segment = document.createElement("span");
+      segment.className = "rei-toc__segment";
+      segmentHost.appendChild(segment);
+      entry.segment = segment;
+    });
+
+    let frame = 0;
+    let activeIndex = -1;
+
+    const update = () => {
+      frame = 0;
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.35, 220);
+      const positions = entries.map((entry) => entry.heading.getBoundingClientRect().top + window.scrollY);
+      const lastEntry = entries[entries.length - 1];
+      const article = lastEntry.heading.closest(".rei-prose");
+      const articleBottom = article
+        ? article.getBoundingClientRect().bottom + window.scrollY
+        : document.documentElement.scrollHeight;
+
+      let nextIndex = 0;
+      for (let index = 0; index < positions.length; index += 1) {
+        if (positions[index] <= marker) nextIndex = index;
+      }
+
+      const sectionStart = positions[nextIndex];
+      const sectionEnd = positions[nextIndex + 1] || articleBottom;
+      const sectionLength = Math.max(sectionEnd - sectionStart, 1);
+      const sectionProgress = clamp((marker - sectionStart) / sectionLength, 0, 1);
+
+      if (nextIndex !== activeIndex) activeIndex = nextIndex;
+
+      entries.forEach((entry, index) => {
+        const complete = index < activeIndex;
+        const active = index === activeIndex;
+        const fill = complete ? 1 : active ? sectionProgress : 0;
+
+        entry.link.classList.toggle("is-complete", complete);
+        entry.link.classList.toggle("is-active", active);
+        entry.segment.classList.toggle("is-complete", complete);
+        entry.segment.classList.toggle("is-active", active);
+        entry.segment.style.setProperty("--segment-fill", String(fill));
+
+        if (active) {
+          entry.link.setAttribute("aria-current", "location");
+        } else {
+          entry.link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const scheduleUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("load", scheduleUpdate, { once: true });
+    entries.forEach((entry) => {
+      entry.link.addEventListener("click", () => window.setTimeout(scheduleUpdate, 80));
+    });
+
+    update();
+  });
+
   const codeBlocks = Array.from(document.querySelectorAll(".highlight, pre")).filter(
     (block) => !(block.matches("pre") && block.parentElement?.classList.contains("highlight"))
   );
@@ -151,5 +247,23 @@
     textarea.select();
     document.execCommand("copy");
     textarea.remove();
+  }
+
+  function getHeadingFromLink(link) {
+    const hash = link.hash || link.getAttribute("href");
+    if (!hash || !hash.startsWith("#")) return null;
+
+    let id = hash.slice(1);
+    try {
+      id = decodeURIComponent(id);
+    } catch {
+      return null;
+    }
+
+    return document.getElementById(id);
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
   }
 })();

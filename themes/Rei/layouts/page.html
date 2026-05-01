@@ -19,6 +19,7 @@
         {{- with $summary -}}
           <p class="rei-single__summary">{{ . }}</p>
         {{- end -}}
+        {{ partial "metadata-cluster.html" . }}
         {{ partial "taxonomy-pills.html" (dict "page" . "showLabel" false) }}
       </header>
 
@@ -37,21 +38,12 @@
         </figure>
       {{- end -}}
 
-      <div class="rei-reading">
-        <aside class="rei-signal-rail">
-          {{ partial "metadata-cluster.html" . }}
-          {{ if $hasToc }}
+      <div class="rei-reading{{ if not $hasToc }} rei-reading--solo{{ end }}">
+        {{ if $hasToc }}
+          <aside class="rei-signal-rail">
             {{ partial "toc.html" . }}
-          {{ end }}
-          {{ if ne .Section "posts" }}
-            {{ partial "recent-feed.html" (dict
-              "page" .
-              "title" (printf "Recent in %s" (.Section | title))
-              "limit" 5
-              "pages" (where .Site.RegularPages "Section" .Section)
-            ) }}
-          {{ end }}
-        </aside>
+          </aside>
+        {{ end }}
 
         <div class="rei-reading__body">
           <div class="rei-prose">

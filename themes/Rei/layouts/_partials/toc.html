@@ -1,9 +1,10 @@
-<aside class="rei-panel rei-panel--toc" aria-label="Table of contents">
+<aside class="rei-panel rei-panel--toc" aria-label="Reading progress and table of contents" data-rei-toc-progress>
   <div class="rei-panel__head">
     <p class="rei-kicker"><span></span>Contents</p>
     <h2 class="rei-panel__title">On this page</h2>
   </div>
-  <div class="rei-toc">
+  <div class="rei-toc" data-rei-toc>
+    <div class="rei-toc__segments" data-rei-toc-segments aria-hidden="true"></div>
     {{ .TableOfContents }}
   </div>
 </aside>
