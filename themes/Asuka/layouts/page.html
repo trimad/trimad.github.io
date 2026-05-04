@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{- $summary := .Description | default .Summary | plainify | default (truncate 220 (.Plain | plainify)) -}}
-  {{- $aiTested := index .Params "ai-tested" -}}
+  {{- $aiTested := index .Params "ai-tested-date" -}}
   {{- $cover := partial "cover-data.html" . -}}
   {{- $hasToc := and (.Params.toc | default false) (gt (len (findRE "<li" .TableOfContents)) 0) -}}
   {{- $pageLabelSingular := "Entry" -}}

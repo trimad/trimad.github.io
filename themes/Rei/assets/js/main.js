@@ -93,8 +93,11 @@
 
     if (entries.length === 0) return;
 
+    const primaryEntries = entries.filter((entry) => entry.heading.tagName === "H2");
+    const segmentEntries = entries.length > 18 && primaryEntries.length > 1 ? primaryEntries : entries;
+
     segmentHost.replaceChildren();
-    segmentHost.style.setProperty("--toc-count", String(entries.length));
+    segmentHost.style.setProperty("--toc-count", String(segmentEntries.length));
     panel.classList.add("is-progress-aware");
 
     entries.forEach((entry, index) => {
@@ -107,7 +110,9 @@
       count.className = "rei-toc__count";
       count.textContent = `${index + 1}/${entries.length}`;
       entry.link.appendChild(count);
+    });
 
+    segmentEntries.forEach((entry) => {
       const segment = document.createElement("span");
       segment.className = "rei-toc__segment";
       segmentHost.appendChild(segment);
@@ -132,29 +137,41 @@
         if (positions[index] <= marker) nextIndex = index;
       }
 
-      const sectionStart = positions[nextIndex];
-      const sectionEnd = positions[nextIndex + 1] || articleBottom;
-      const sectionLength = Math.max(sectionEnd - sectionStart, 1);
-      const sectionProgress = clamp((marker - sectionStart) / sectionLength, 0, 1);
-
       if (nextIndex !== activeIndex) activeIndex = nextIndex;
+
+      const segmentPositions = segmentEntries.map((entry) => entry.heading.getBoundingClientRect().top + window.scrollY);
+      let activeSegmentIndex = 0;
+      for (let index = 0; index < segmentPositions.length; index += 1) {
+        if (segmentPositions[index] <= marker) activeSegmentIndex = index;
+      }
+
+      const segmentStart = segmentPositions[activeSegmentIndex];
+      const segmentEnd = segmentPositions[activeSegmentIndex + 1] || articleBottom;
+      const segmentLength = Math.max(segmentEnd - segmentStart, 1);
+      const segmentProgress = clamp((marker - segmentStart) / segmentLength, 0, 1);
 
       entries.forEach((entry, index) => {
         const complete = index < activeIndex;
         const active = index === activeIndex;
-        const fill = complete ? 1 : active ? sectionProgress : 0;
 
         entry.link.classList.toggle("is-complete", complete);
         entry.link.classList.toggle("is-active", active);
-        entry.segment.classList.toggle("is-complete", complete);
-        entry.segment.classList.toggle("is-active", active);
-        entry.segment.style.setProperty("--segment-fill", String(fill));
 
         if (active) {
           entry.link.setAttribute("aria-current", "location");
         } else {
           entry.link.removeAttribute("aria-current");
         }
+      });
+
+      segmentEntries.forEach((entry, index) => {
+        const complete = index < activeSegmentIndex;
+        const active = index === activeSegmentIndex;
+        const fill = complete ? 1 : active ? segmentProgress : 0;
+
+        entry.segment.classList.toggle("is-complete", complete);
+        entry.segment.classList.toggle("is-active", active);
+        entry.segment.style.setProperty("--segment-fill", String(fill));
       });
     };
 

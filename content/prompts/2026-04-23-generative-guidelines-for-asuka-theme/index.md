@@ -29,7 +29,7 @@ The current repository is a Hugo site with:
 - taxonomy browsing through `categories` and `tags`
 - page bundles with optional thumbnail or cover media
 - optional `toc`
-- optional `ai` and `ai-tested` front matter on posts
+- optional `ai` and `ai-tested-date` front matter on posts
 - shortcode usage for `notice`, `rawhtml`, and `powershell-environment-report`
 
 The theme should remain self-contained and portable under `themes/Asuka`, while still styling existing shared shortcode markup that uses the established `rei-` class vocabulary.
@@ -416,14 +416,14 @@ Observed current fields:
 - `toc`
 - `thumbnail`
 - `ai`
-- `ai-tested`
+- `ai-tested-date`
 
 Rules:
 
 - description falls back to summary, then to trimmed plain text
 - thumbnails should prefer page resources when possible
 - missing media, tags, or categories must not collapse the layout
-- `ai` and `ai-tested` should render as notices only when present
+- `ai` and `ai-tested-date` should render as notices only when present
 - TOC should render only when enabled and meaningful
 
 Shortcode compatibility required:

@@ -1,6 +1,6 @@
 ---
 ai: true
-ai-tested: 2026-03-27
+ai-tested-date: 2026-03-27
 author: "Tristan Madden"
 categories:
   - "Python"

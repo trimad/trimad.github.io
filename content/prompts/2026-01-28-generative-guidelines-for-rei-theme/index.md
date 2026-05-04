@@ -49,7 +49,7 @@ The site is a Hugo archive with:
 - category and tag taxonomies
 - page bundles with optional thumbnail or cover media
 - optional `toc`
-- optional `ai` and `ai-tested` front matter on posts
+- optional `ai` and `ai-tested-date` front matter on posts
 - shortcode usage for `notice`, `rawhtml`, and `powershell-environment-report`
 
 The Rei production surface currently lives in:
@@ -406,14 +406,14 @@ Observed fields:
 - `toc`
 - `thumbnail`
 - `ai`
-- `ai-tested`
+- `ai-tested-date`
 
 Rules:
 
 - description falls back to summary, then trimmed plain text
 - thumbnails should prefer page resources
 - missing media, tags, or categories must not collapse the layout
-- `ai` and `ai-tested` render notices only when present
+- `ai` and `ai-tested-date` render notices only when present
 - TOC renders only when enabled and meaningful
 
 Shortcode compatibility required:

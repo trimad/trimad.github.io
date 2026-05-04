@@ -1,6 +1,6 @@
 ---
 ai: true
-ai-tested: 2026-03-11
+ai-tested-date: 2026-03-11
 author: "Tristan Madden"
 categories:
   - "PowerShell"
