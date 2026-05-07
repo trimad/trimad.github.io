@@ -1,6 +1,6 @@
 ---
 ai: true
-ai-tested-date: 2026-05-04
+ai-tested-date: 2026-05-07
 author: "Tristan Madden"
 categories:
   - "System Administration"
@@ -13,7 +13,7 @@ tags:
   - "networking"
   - "nslookup"
   - "troubleshooting"
-title: "Nslookup"
+title: "nslookup"
 toc: true
 usePageBundles: true
 ---
@@ -23,6 +23,8 @@ usePageBundles: true
 `nslookup` is a built-in Windows command-line tool for querying DNS. It can look up hostnames, reverse lookup IP addresses, query specific DNS record types, test against a specific DNS server, and run in an interactive mode for repeated DNS checks.
 
 It is useful when you need to confirm whether a DNS problem is local to one resolver, verify records after a DNS change, check mail records, or compare public DNS answers against an internal DNS server.
+
+This guide is organized around the command list shown by `help` inside interactive `nslookup`. The examples appear in the same order as the built-in help output.
 
 ## Requirements
 
@@ -40,7 +42,7 @@ nslookup [-option ...] host
 nslookup [-option ...] host server
 ```
 
-The most common form is:
+The most common one-shot lookup is:
 
 ```cmd
 nslookup example.com
@@ -48,142 +50,43 @@ nslookup example.com
 
 That asks your default DNS resolver for records related to `example.com`.
 
+To enter interactive mode, run:
+
+```cmd
+nslookup
+```
+
 To enter interactive mode while immediately selecting a DNS server:
 
 ```cmd
 nslookup - 8.8.8.8
 ```
 
-## One-Shot Lookups
+Interactive examples below use the `>` prompt shown by `nslookup`.
 
-Use one-shot mode when you only need one answer.
-
-### Look Up a Hostname
-
-```cmd
-nslookup www.example.com
-```
-
-This returns the DNS server used and the answer for `www.example.com`.
-
-### Use a Specific DNS Server
-
-```cmd
-nslookup www.example.com 8.8.8.8
-```
-
-This sends the query to Google DNS instead of your default DNS server.
-
-Other common public resolvers:
-
-```cmd
-nslookup www.example.com 1.1.1.1
-nslookup www.example.com 9.9.9.9
-```
-
-### Query a Specific Record Type
-
-```cmd
-nslookup -type=mx example.com
-```
-
-`-type=mx` asks for mail exchanger records.
-
-Common DNS record types:
-
-| Type | Purpose | Example |
-| --- | --- | --- |
-| `A` | IPv4 address | `nslookup -type=a example.com` |
-| `AAAA` | IPv6 address | `nslookup -type=aaaa example.com` |
-| `A+AAAA` | IPv4 and IPv6 addresses | `nslookup -type=a+aaaa example.com` |
-| `CNAME` | Alias record | `nslookup -type=cname www.example.com` |
-| `MX` | Mail servers | `nslookup -type=mx example.com` |
-| `NS` | Authoritative name servers | `nslookup -type=ns example.com` |
-| `PTR` | Reverse lookup record | `nslookup -type=ptr 8.8.8.8` |
-| `SOA` | Start of authority | `nslookup -type=soa example.com` |
-| `SRV` | Service locator record | `nslookup -type=srv _sip._tls.example.com` |
-| `TXT` | Text records, including SPF, DKIM, and DMARC | `nslookup -type=txt example.com` |
-| `ANY` | Request many record types | `nslookup -type=any example.com` |
-
-`ANY` queries are often filtered or minimized by public DNS services. Query the specific record type when you need reliable results.
-
-### Reverse Lookup an IP Address
-
-```cmd
-nslookup 8.8.8.8
-```
-
-For IPv4 addresses, `nslookup` automatically performs a reverse lookup and asks for the matching `PTR` record.
-
-### Query a DMARC Record
-
-```cmd
-nslookup -type=txt _dmarc.example.com
-```
-
-DMARC records are stored as TXT records under `_dmarc`.
-
-### Query a DKIM Record
-
-```cmd
-nslookup -type=txt selector1._domainkey.example.com
-```
-
-Replace `selector1` with the selector used by the mail platform.
-
-### Query a Microsoft 365 Autodiscover Record
-
-```cmd
-nslookup -type=cname autodiscover.example.com
-```
-
-For some tenants, Autodiscover may also use SRV records:
-
-```cmd
-nslookup -type=srv _autodiscover._tcp.example.com
-```
-
-## Interactive Mode
-
-Run `nslookup` with no arguments to enter interactive mode:
-
-```cmd
-nslookup
-```
-
-You will see a `>` prompt. From there, you can run multiple DNS queries without restarting the command.
-
-Example session:
-
-```text
-C:\>nslookup
-Default Server:  dns.example.local
-Address:  192.168.1.10
-
-> set type=mx
-> example.com
-> set type=txt
-> _dmarc.example.com
-> server 8.8.8.8
-> example.com
-> exit
-```
-
-## Interactive Commands
+## Help Order Examples
 
 ### `NAME`
 
-Query a name using the current DNS server and current options.
+Print information about host or domain `NAME` using the current default DNS server.
 
 ```text
 > www.example.com
 ```
 
-If `type` is set to `A`, this asks for IPv4 records. If `type` is set to `MX`, this asks for mail records.
+If the query type is set to `A`, this asks for IPv4 records. If the query type is set to `MX`, this asks for mail exchanger records.
+
+Reverse lookups also work from the same prompt:
+
+```text
+> 8.8.8.8
+```
+
+For an IPv4 address, `nslookup` asks for the matching `PTR` record.
 
 ### `NAME1 NAME2`
 
-Query `NAME1` using `NAME2` as the DNS server.
+Print information about `NAME1`, but use `NAME2` as the DNS server for that query.
 
 ```text
 > www.example.com 8.8.8.8
@@ -195,23 +98,325 @@ This is the interactive equivalent of:
 nslookup www.example.com 8.8.8.8
 ```
 
+You can use a DNS server hostname instead of an IP address:
+
+```text
+> www.example.com dns.google
+```
+
 ### `help` or `?`
 
-Show the built-in command list.
+Show the built-in list of common interactive commands.
 
 ```text
 > help
 ```
 
-or:
+The short form is:
 
 ```text
 > ?
 ```
 
+### `set OPTION`
+
+Set an interactive `nslookup` option. Most of these options can also be used in one-shot mode with a leading dash.
+
+For example, this interactive command:
+
+```text
+> set type=mx
+> example.com
+```
+
+is similar to this one-shot command:
+
+```cmd
+nslookup -type=mx example.com
+```
+
+#### `set all`
+
+Print current options, the current default DNS server, and the current host.
+
+```text
+> set all
+```
+
+Use this when you are several commands into an interactive session and need to confirm the active server, query type, timeout, retry count, and other options.
+
+#### `set debug` and `set nodebug`
+
+Enable or disable debug output.
+
+```text
+> set debug
+> www.example.com
+> set nodebug
+```
+
+Debug output shows more detail about the DNS request and response.
+
+One-shot example:
+
+```cmd
+nslookup -debug www.example.com
+```
+
+#### `set d2` and `set nod2`
+
+Enable or disable exhaustive debug output.
+
+```text
+> set d2
+> www.example.com
+> set nod2
+```
+
+Use `d2` when normal debug output is not enough. It is very verbose.
+
+One-shot example:
+
+```cmd
+nslookup -d2 www.example.com
+```
+
+#### `set defname` and `set nodefname`
+
+Enable or disable appending the default domain name to single-label queries.
+
+```text
+> set domain=example.com
+> set defname
+> server01
+```
+
+With `defname` enabled, a query like `server01` can be tried as `server01.example.com`.
+
+Disable it with:
+
+```text
+> set nodefname
+```
+
+#### `set recurse` and `set norecurse`
+
+Enable or disable recursive queries.
+
+```text
+> set recurse
+> www.example.com
+```
+
+Disable recursion with:
+
+```text
+> set norecurse
+> www.example.com
+```
+
+`norecurse` is useful when testing whether a DNS server is authoritative for a record instead of asking it to resolve the full answer recursively.
+
+#### `set search` and `set nosearch`
+
+Enable or disable use of the DNS search list.
+
+```text
+> set srchlist=corp.example.com/example.com
+> set search
+> server01
+```
+
+With `search` enabled, `nslookup` can try the configured suffixes for a short name.
+
+Disable search list expansion with:
+
+```text
+> set nosearch
+```
+
+#### `set vc` and `set novc`
+
+Enable or disable use of a virtual circuit. In practice, this means TCP instead of the usual UDP DNS query.
+
+```text
+> set vc
+> example.com
+```
+
+Disable it with:
+
+```text
+> set novc
+```
+
+Use `vc` when troubleshooting large DNS responses, truncation, or TCP/53 firewall behavior.
+
+One-shot example:
+
+```cmd
+nslookup -vc -type=txt example.com
+```
+
+#### `set domain=NAME`
+
+Set the default domain name.
+
+```text
+> set domain=example.com
+> server01
+```
+
+This is commonly used with `set defname` or `set search` so that short names can be expanded with a DNS suffix.
+
+#### `set srchlist=N1[/N2/.../N6]`
+
+Set the domain search list. Up to six domains can be listed, separated by forward slashes.
+
+```text
+> set srchlist=corp.example.com/example.com
+> server01
+```
+
+That lets a short name like `server01` be tried with the configured suffixes.
+
+#### `set root=NAME`
+
+Set the root server used by the `root` command.
+
+```text
+> set root=a.root-servers.net
+> root
+```
+
+This does not immediately query a record. It changes which DNS server `nslookup` switches to when you run `root`.
+
+#### `set retry=X`
+
+Set the number of retries.
+
+```text
+> set retry=3
+> www.example.com
+```
+
+One-shot example:
+
+```cmd
+nslookup -retry=3 www.example.com
+```
+
+Use this when testing a DNS server across a slow VPN, unreliable WAN path, or busy resolver.
+
+#### `set timeout=X`
+
+Set the initial timeout in seconds.
+
+```text
+> set timeout=10
+> www.example.com
+```
+
+One-shot example:
+
+```cmd
+nslookup -timeout=10 www.example.com
+```
+
+#### `set type=X`
+
+Set the DNS record type to query.
+
+```text
+> set type=mx
+> example.com
+```
+
+Common DNS record types:
+
+| Type | Purpose | Example |
+| --- | --- | --- |
+| `A` | IPv4 address | `set type=a` |
+| `AAAA` | IPv6 address | `set type=aaaa` |
+| `A+AAAA` | IPv4 and IPv6 addresses | `set type=a+aaaa` |
+| `CNAME` | Alias record | `set type=cname` |
+| `MX` | Mail servers | `set type=mx` |
+| `NS` | Authoritative name servers | `set type=ns` |
+| `PTR` | Reverse lookup record | `set type=ptr` |
+| `SOA` | Start of authority | `set type=soa` |
+| `SRV` | Service locator record | `set type=srv` |
+| `TXT` | Text records, including SPF, DKIM, and DMARC | `set type=txt` |
+| `ANY` | Request many record types | `set type=any` |
+
+One-shot examples:
+
+```cmd
+nslookup -type=mx example.com
+nslookup -type=txt _dmarc.example.com
+nslookup -type=srv _sip._tls.example.com
+```
+
+`ANY` queries are often filtered or minimized by public DNS services. Query the specific record type when you need reliable results.
+
+#### `set querytype=X`
+
+Set the DNS query type. `querytype` does the same thing as `type`.
+
+```text
+> set querytype=ns
+> example.com
+```
+
+One-shot example:
+
+```cmd
+nslookup -querytype=ns example.com
+```
+
+#### `set class=X`
+
+Set the DNS query class.
+
+```text
+> set class=IN
+> example.com
+```
+
+Common classes:
+
+| Class | Purpose |
+| --- | --- |
+| `IN` | Internet DNS class; this is the normal default |
+| `ANY` | Request any class |
+
+Most everyday DNS troubleshooting uses `IN`.
+
+#### `set msxfr` and `set nomsxfr`
+
+Enable or disable Microsoft fast zone transfer.
+
+```text
+> set msxfr
+> ls -d example.local
+> set nomsxfr
+```
+
+This only matters for zone transfer testing, and only when the DNS server allows the transfer.
+
+#### `set ixfrver=X`
+
+Set the current version to use in an incremental zone transfer request.
+
+```text
+> set ixfrver=2026050401
+> ls -d example.local
+```
+
+This is for advanced DNS zone transfer troubleshooting. It is not needed for normal record lookups.
+
 ### `server NAME`
 
-Change the default DNS server by asking the current DNS server to resolve the new server name.
+Set the default DNS server to `NAME`, using the current default server to resolve `NAME` if needed.
 
 ```text
 > server 8.8.8.8
@@ -223,9 +428,16 @@ You can use an IP address or a hostname:
 > server dns.google
 ```
 
+After changing the server, later `NAME` queries use that DNS server:
+
+```text
+> server 1.1.1.1
+> www.example.com
+```
+
 ### `lserver NAME`
 
-Change the default DNS server by asking the original DNS server to resolve the new server name.
+Set the default DNS server to `NAME`, using the initial DNS server to resolve `NAME` if needed.
 
 ```text
 > lserver 1.1.1.1
@@ -235,59 +447,73 @@ This is useful if the current server is broken but the original resolver can sti
 
 ### `root`
 
-Change the current default DNS server to the configured root server.
+Set the current default DNS server to the configured root server.
 
 ```text
 > root
 ```
 
-The root server can be changed with `set root=NAME`.
+The root server can be changed first:
 
-### `ls DOMAIN`
+```text
+> set root=a.root-servers.net
+> root
+```
+
+### `ls [opt] DOMAIN [> FILE]`
 
 List records in a DNS domain.
 
 ```text
-> ls example.com
+> ls example.local
 ```
 
 This attempts a DNS zone transfer. Most public domains and well-configured internal zones block zone transfers except from approved servers, so `ls` commonly fails with a refused or failed transfer message.
 
-### `ls -a DOMAIN`
+Write the output to a file with:
+
+```text
+> ls example.local > dns-zone.txt
+```
+
+#### `ls -a DOMAIN`
 
 List canonical names and aliases in a domain.
 
 ```text
-> ls -a example.com
+> ls -a example.local
 ```
 
-### `ls -d DOMAIN`
+This is useful when reviewing host aliases in a zone that allows transfers.
+
+#### `ls -d DOMAIN`
 
 List all records in a domain.
 
 ```text
-> ls -d example.com
+> ls -d example.local
 ```
 
-### `ls -t TYPE DOMAIN`
+Use this when you need a broader zone listing instead of only address records.
 
-List only records of a specific type from a domain.
+#### `ls -t TYPE DOMAIN`
+
+List only records of the given DNS record type.
 
 ```text
-> ls -t MX example.com
+> ls -t MX example.local
 ```
 
-### `ls DOMAIN > FILE`
-
-Write `ls` output to a file.
+Other examples:
 
 ```text
-> ls -d example.com > dns-zone.txt
+> ls -t NS example.local
+> ls -t CNAME example.local
 ```
 
 ### `view FILE`
 
-Sort and view an output file created by `ls`.
+Sort an `ls` output file and view it with `pg`.
 
 ```text
 > view dns-zone.txt
@@ -306,268 +532,6 @@ Exit interactive mode.
 ```text
 > exit
 ```
-
-## Set Options
-
-Use `set OPTION` in interactive mode. The same options can usually be passed in one-shot mode with a leading dash, such as `nslookup -type=mx example.com`.
-
-### `set all`
-
-Print the current options, current DNS server, and current host.
-
-```text
-> set all
-```
-
-### `set debug` and `set nodebug`
-
-Enable or disable debug output.
-
-```text
-> set debug
-> www.example.com
-> set nodebug
-```
-
-Debug output shows more detail about the DNS request and response.
-
-One-shot example:
-
-```cmd
-nslookup -debug www.example.com
-```
-
-### `set d2` and `set nod2`
-
-Enable or disable exhaustive debug output.
-
-```text
-> set d2
-> www.example.com
-> set nod2
-```
-
-Use this when normal debug output is not enough. It is verbose.
-
-One-shot example:
-
-```cmd
-nslookup -d2 www.example.com
-```
-
-### `set defname` and `set nodefname`
-
-Enable or disable appending the default domain name to single-label queries.
-
-```text
-> set domain=example.com
-> set defname
-> server01
-```
-
-With `defname` enabled, a query like `server01` can be tried as `server01.example.com`.
-
-Disable it:
-
-```text
-> set nodefname
-```
-
-### `set recurse` and `set norecurse`
-
-Enable or disable recursive queries.
-
-```text
-> set recurse
-> www.example.com
-```
-
-Disable recursion:
-
-```text
-> set norecurse
-> www.example.com
-```
-
-`norecurse` is useful when testing whether a DNS server is authoritative for a record instead of asking it to resolve the full answer recursively.
-
-### `set search` and `set nosearch`
-
-Enable or disable use of the DNS search list.
-
-```text
-> set search
-> intranet
-```
-
-Disable search list expansion:
-
-```text
-> set nosearch
-```
-
-### `set vc` and `set novc`
-
-Enable or disable use of a virtual circuit. In practice, this means TCP instead of the usual UDP DNS query.
-
-```text
-> set vc
-> example.com
-```
-
-Disable it:
-
-```text
-> set novc
-```
-
-Use `vc` when troubleshooting large DNS responses, truncation, or TCP/53 firewall behavior.
-
-### `set domain=NAME`
-
-Set the default domain name.
-
-```text
-> set domain=example.com
-> server01
-```
-
-### `set srchlist=N1[/N2/.../N6]`
-
-Set the domain search list. Up to six domains can be listed, separated by forward slashes.
-
-```text
-> set srchlist=corp.example.com/example.com
-> server01
-```
-
-That lets a short name like `server01` be tried with the configured suffixes.
-
-### `set root=NAME`
-
-Set the root server used by the `root` command.
-
-```text
-> set root=a.root-servers.net
-> root
-```
-
-### `set retry=X`
-
-Set the number of retries.
-
-```text
-> set retry=3
-> www.example.com
-```
-
-One-shot example:
-
-```cmd
-nslookup -retry=3 www.example.com
-```
-
-### `set timeout=X`
-
-Set the initial timeout in seconds.
-
-```text
-> set timeout=10
-> www.example.com
-```
-
-One-shot example:
-
-```cmd
-nslookup -timeout=10 www.example.com
-```
-
-### `set type=X`
-
-Set the DNS record type to query.
-
-```text
-> set type=mx
-> example.com
-```
-
-Other examples:
-
-```text
-> set type=txt
-> example.com
-> set type=soa
-> example.com
-> set type=srv
-> _sip._tls.example.com
-```
-
-One-shot example:
-
-```cmd
-nslookup -type=txt example.com
-```
-
-### `set querytype=X`
-
-`querytype` does the same thing as `type`.
-
-```text
-> set querytype=ns
-> example.com
-```
-
-One-shot example:
-
-```cmd
-nslookup -querytype=ns example.com
-```
-
-### `set class=X`
-
-Set the DNS query class.
-
-```text
-> set class=IN
-> example.com
-```
-
-Common classes:
-
-| Class | Purpose |
-| --- | --- |
-| `IN` | Internet DNS class; this is the normal default |
-| `ANY` | Request any class |
-
-Most everyday DNS troubleshooting uses `IN`.
-
-### `set msxfr` and `set nomsxfr`
-
-Enable or disable Microsoft fast zone transfer.
-
-```text
-> set msxfr
-> ls -d example.local
-```
-
-Disable it:
-
-```text
-> set nomsxfr
-```
-
-This only matters for zone transfer testing and only when the server allows the transfer.
-
-### `set ixfrver=X`
-
-Set the current version to use in an incremental zone transfer request.
-
-```text
-> set ixfrver=2026050401
-> ls -d example.local
-```
-
-This is for advanced DNS zone transfer troubleshooting. It is not needed for normal record lookups.
 
 ## Practical Troubleshooting Examples
 
@@ -605,29 +569,14 @@ nslookup -type=txt _dmarc.example.com
 
 These commands check MX, SPF, and DMARC records.
 
-### Check a Service Record
+### Check Microsoft 365 Autodiscover
 
 ```cmd
-nslookup -type=srv _sip._tls.example.com
+nslookup -type=cname autodiscover.example.com
+nslookup -type=srv _autodiscover._tcp.example.com
 ```
 
-SRV records are commonly used by collaboration, voice, directory, and autodiscovery services.
-
-### Force TCP for DNS
-
-```cmd
-nslookup -vc -type=txt example.com
-```
-
-This helps test whether DNS over TCP/53 is allowed through the network path.
-
-### Increase Timeout for a Slow Resolver
-
-```cmd
-nslookup -timeout=10 -retry=3 example.com
-```
-
-Use this when testing a DNS server across a slow VPN or unreliable WAN path.
+Some tenants use CNAME records, while others may also depend on SRV records.
 
 ## Example Output
 
