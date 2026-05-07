@@ -1,0 +1,20 @@
+{{- $site := .site -}}
+<div class="rei-memory__fallback">
+  <section class="rei-panel">
+    <div class="rei-panel__head">
+      <p class="rei-kicker"><span></span>Basic Browse</p>
+      <h3 class="rei-panel__title">JavaScript is disabled</h3>
+    </div>
+    <p class="rei-panel__note">Browse recent entries and high-frequency taxonomy routes below.</p>
+    <div class="rei-chip-cloud">
+      {{- range first 6 $site.Taxonomies.categories.ByCount -}}
+        <a class="rei-pill rei-pill--category" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span>{{ .Count }}</span></a>
+      {{- end -}}
+    </div>
+    <div class="rei-chip-cloud">
+      {{- range first 8 $site.Taxonomies.tags.ByCount -}}
+        <a class="rei-pill rei-pill--tag" href="{{ .Page.RelPermalink }}">#{{ .Page.Title }}</a>
+      {{- end -}}
+    </div>
+  </section>
+</div>

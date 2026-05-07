@@ -1,3 +1,8 @@
+{{- $wordCount := .RawContent | countwords -}}
+{{- $readingTime := div (add $wordCount 212) 213 -}}
+{{- if lt $readingTime 1 -}}
+  {{- $readingTime = 1 -}}
+{{- end -}}
 <div class="rei-meta" aria-label="Entry metadata">
   <div class="rei-meta__item">
     <span>Published</span>
@@ -9,10 +14,10 @@
   </div>
   <div class="rei-meta__item">
     <span>Reading time</span>
-    <strong>{{ .ReadingTime }} min</strong>
+    <strong>{{ $readingTime }} min</strong>
   </div>
   <div class="rei-meta__item">
     <span>Words</span>
-    <strong>{{ .WordCount }}</strong>
+    <strong>{{ $wordCount }}</strong>
   </div>
 </div>

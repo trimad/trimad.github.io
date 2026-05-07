@@ -1,11 +1,19 @@
 {{- $page := .page | default . -}}
-{{- $pages := $page.RegularPagesRecursive -}}
+{{- $pages := slice -}}
 {{- if eq $page.Kind "term" -}}
   {{- $pages = $page.Pages -}}
+{{- else -}}
+  {{- $pages = $page.RegularPagesRecursive -}}
 {{- end -}}
 {{- $pages = $pages.ByDate.Reverse -}}
 {{- $paginator := $page.Paginate $pages 12 -}}
-{{- $summary := $page.Description | default $page.Summary | plainify -}}
+{{- $isFirstPaginatorPage := eq $paginator.PageNumber 1 -}}
+{{- $contextSections := slice "posts" "prompts" "archive" -}}
+{{- $showCollectionContext := and $isFirstPaginatorPage (eq $page.Kind "section") (in $contextSections $page.Section) -}}
+{{- $summary := $page.Description -}}
+{{- if and (not $summary) (ne $page.Kind "term") -}}
+  {{- $summary = $page.Summary | plainify -}}
+{{- end -}}
 {{- if not $summary -}}
   {{- if eq $page.Kind "term" -}}
     {{- $summary = printf "Entries connected to %q, gathered in one place for quick browsing." $page.Title -}}
@@ -18,26 +26,24 @@
 {{- $defaultQuery := "Rei" -}}
 {{- $pageLabelSingular := "Entry" -}}
 {{- $pageLabelPlural := "Entries" -}}
-{{- if eq $page.Kind "term" -}}
-  {{- if eq $page.Data.Plural "categories" -}}
-    {{- $focusKind = "category" -}}
-  {{- else if eq $page.Data.Plural "tags" -}}
-    {{- $focusKind = "tag" -}}
+{{- if $showCollectionContext -}}
+  {{- if eq $focusValue "posts" -}}
+    {{- $pageLabelSingular = "Post" -}}
+    {{- $pageLabelPlural = "Posts" -}}
+    {{- $defaultQuery = "" -}}
+  {{- else if eq $focusValue "prompts" -}}
+    {{- $pageLabelSingular = "Prompt" -}}
+    {{- $pageLabelPlural = "Prompts" -}}
+    {{- $defaultQuery = "" -}}
+  {{- else if eq $focusValue "archive" -}}
+    {{- $pageLabelSingular = "Archived Entry" -}}
+    {{- $pageLabelPlural = "Archived Entries" -}}
+    {{- $defaultQuery = "" -}}
   {{- end -}}
-  {{- $focusValue = $page.Title | urlize -}}
 {{- end -}}
-{{- if and (eq $focusKind "section") (eq $focusValue "posts") -}}
-  {{- $pageLabelSingular = "Post" -}}
-  {{- $pageLabelPlural = "Posts" -}}
-  {{- $defaultQuery = "" -}}
-{{- else if and (eq $focusKind "section") (eq $focusValue "prompts") -}}
-  {{- $pageLabelSingular = "Prompt" -}}
-  {{- $pageLabelPlural = "Prompts" -}}
-  {{- $defaultQuery = "" -}}
-{{- else if and (eq $focusKind "section") (eq $focusValue "archive") -}}
-  {{- $pageLabelSingular = "Archived Entry" -}}
-  {{- $pageLabelPlural = "Archived Entries" -}}
-  {{- $defaultQuery = "" -}}
+{{- $memoryDataCacheKey := "" -}}
+{{- if $showCollectionContext -}}
+  {{- $memoryDataCacheKey = printf "memory:all:%s" ($page.Site.Language.Lang | default "") -}}
 {{- end -}}
 {{- $recentLabelSingular := $pageLabelSingular -}}
 {{- $recentLabelPlural := $pageLabelPlural -}}
@@ -49,7 +55,7 @@
   {{- $recentLabelPlural = "Archive entries" -}}
 {{- end -}}
 {{- $sectionButtons := slice -}}
-{{- if and (eq $page.Kind "section") (in (slice "posts" "prompts" "archive") $page.Section) -}}
+{{- if and $isFirstPaginatorPage (eq $page.Kind "section") (in (slice "posts" "prompts" "archive") $page.Section) -}}
   {{- $sectionButtons = slice
     (dict "title" $page.Title "href" "#collection-entries")
     (dict "title" "Recently Created" "href" "#recently-created")
@@ -94,7 +100,7 @@
   ) }}
 
   <section class="rei-ledger-shell rei-ledger-shell--collection" id="collection-entries">
-    {{ partial "filter-panel.html" (dict
+    {{ partialCached "filter-panel.html" (dict
       "inputID" "collection-filter"
       "label" "Search entries on this page"
       "eyebrow" "Collection filter"
@@ -103,12 +109,12 @@
       "placeholder" "Search titles, summaries, categories, or tags"
       "count" (len $paginator.Pages)
       "meta" "entries shown"
-    ) }}
+    ) "collection-filter" (len $paginator.Pages) ($page.Site.Language.Lang | default "") }}
 
     {{- if gt (len $paginator.Pages) 0 -}}
       <div class="rei-ledger">
         {{- range $paginator.Pages -}}
-          {{ partial "article-card.html" (dict "page" . "compact" false) }}
+          {{ partialCached "article-card.html" (dict "page" . "compact" false) .RelPermalink "full" (.Site.Language.Lang | default "") }}
         {{- end -}}
       </div>
       {{ partial "pagination.html" (dict "Paginator" $paginator) }}
@@ -120,21 +126,23 @@
     {{- end -}}
   </section>
 
-  {{ partial "recent-index-panels.html" (dict
-    "pages" $pages
-    "labelSingular" $recentLabelSingular
-    "labelPlural" $recentLabelPlural
-  ) }}
+  {{- if $showCollectionContext -}}
+    {{ partialCached "recent-index-panels.html" (dict
+      "pages" $pages
+      "labelSingular" $recentLabelSingular
+      "labelPlural" $recentLabelPlural
+    ) $page.RelPermalink $recentLabelSingular $recentLabelPlural ($page.Site.Language.Lang | default "") }}
 
-  {{ partial "memory-field.html" (dict
-    "page" $page
-    "title" "Memory Field"
-    "summary" "Use the relationship map to follow related categories, tags, and entries beyond the current list."
-    "focusKind" $focusKind
-    "focusValue" $focusValue
-    "defaultQuery" $defaultQuery
-    "pageLabelSingular" $pageLabelSingular
-    "pageLabelPlural" $pageLabelPlural
-    "pages" $pages
-  ) }}
+    {{ partial "memory-field.html" (dict
+      "page" $page
+      "title" "Memory Field"
+      "summary" "Use the relationship map to follow related categories, tags, and entries beyond the current list."
+      "focusKind" $focusKind
+      "focusValue" $focusValue
+      "defaultQuery" $defaultQuery
+      "pageLabelSingular" $pageLabelSingular
+      "pageLabelPlural" $pageLabelPlural
+      "dataCacheKey" $memoryDataCacheKey
+    ) }}
+  {{- end -}}
 </main>

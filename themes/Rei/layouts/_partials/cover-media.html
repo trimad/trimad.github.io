@@ -1,5 +1,6 @@
 {{- $page := .page | default . -}}
-{{- $data := partial "cover-resource.html" $page -}}
+{{- $cacheKey := printf "%s|%s" ($page.Site.Language.Lang | default "") $page.RelPermalink -}}
+{{- $data := partialCached "cover-resource.html" $page $cacheKey -}}
 {{- $src := $data.src -}}
 {{- $resource := $data.resource -}}
 {{- if $src -}}

@@ -1,3 +1,4 @@
-{{- with partial "cover-resource.html" . -}}
+{{- $cacheKey := printf "%s|%s" (.Site.Language.Lang | default "") .RelPermalink -}}
+{{- with partialCached "cover-resource.html" . $cacheKey -}}
   {{- .src -}}
 {{- end -}}

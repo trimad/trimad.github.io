@@ -17,7 +17,7 @@
     </div>
     <div class="rei-ledger rei-ledger--related">
       {{- range $related -}}
-        {{ partial "article-card.html" (dict "page" . "compact" true) }}
+        {{ partialCached "article-card.html" (dict "page" . "compact" true) .RelPermalink "compact" (.Site.Language.Lang | default "") }}
       {{- end -}}
     </div>
   </section>

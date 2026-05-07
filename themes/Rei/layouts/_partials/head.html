@@ -1,6 +1,9 @@
 {{- $title := cond .IsHome .Site.Title (printf "%s | %s" .Title .Site.Title) -}}
-{{- $description := .Description | default .Summary | plainify | default .Site.Params.description | default .Site.Title -}}
-{{- $cover := partial "cover-data.html" . -}}
+{{- $description := (.Description | default (.Params.summary | default .Site.Params.description) | default .Site.Title) | plainify -}}
+{{- $cover := "" -}}
+{{- if .IsPage -}}
+  {{- $cover = partial "cover-data.html" . -}}
+{{- end -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ $title }}</title>
@@ -24,5 +27,4 @@
   <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
   <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
 {{- end -}}
-{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ partialCached "stylesheet.html" . .Site.BaseURL (.Site.Language.Lang | default "") }}

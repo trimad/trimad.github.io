@@ -1,6 +1,6 @@
 {{- $page := .page | default . -}}
 {{- $compact := .compact | default false -}}
-{{- $summary := $page.Description | default $page.Summary | plainify | default (truncate 150 ($page.Plain | plainify)) -}}
+{{- $summary := ($page.Description | default ($page.Params.summary | default "")) | plainify -}}
 {{- $cover := partial "cover-data.html" $page -}}
 {{- $categories := $page.Params.categories | default (slice) -}}
 {{- $tags := $page.Params.tags | default (slice) -}}
@@ -45,7 +45,10 @@
         </figure>
       {{- else -}}
         <div class="rei-entry__placeholder" aria-hidden="true">
-          <span>{{ $page.ReadingTime }} min</span>
+          {{- $wordCount := $page.RawContent | countwords -}}
+          {{- $readingTime := div (add $wordCount 212) 213 -}}
+          {{- if lt $readingTime 1 -}}{{- $readingTime = 1 -}}{{- end -}}
+          <span>{{ $readingTime }} min</span>
         </div>
       {{- end -}}
     </div>

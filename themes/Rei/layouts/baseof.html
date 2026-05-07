@@ -11,14 +11,12 @@
       {{ partial "site-header.html" . }}
       {{ block "main" . }}{{ end }}
       {{- if not (or .IsHome (eq .Section "posts")) -}}
-        {{ partial "site-footer.html" . }}
+        {{ partialCached "site-footer.html" . .Site.BaseURL (.Site.Language.Lang | default "") }}
       {{- end -}}
     </div>
-    {{- $mainJs := resources.Get "js/main.js" | minify | fingerprint -}}
-    <script src="{{ $mainJs.RelPermalink }}" defer></script>
+    {{ partialCached "main-script.html" . .Site.BaseURL (.Site.Language.Lang | default "") }}
     {{- if .Store.Get "hasMemoryField" -}}
-      {{- $memoryJs := resources.Get "js/memory-field.js" | minify | fingerprint -}}
-      <script src="{{ $memoryJs.RelPermalink }}" defer></script>
+      {{ partialCached "memory-field-script.html" . .Site.BaseURL (.Site.Language.Lang | default "") }}
     {{- end -}}
   </body>
 </html>

@@ -1,0 +1,2 @@
+{{- $memoryJs := resources.Get "js/memory-field.js" | minify | fingerprint -}}
+<script src="{{ $memoryJs.RelPermalink }}" defer></script>

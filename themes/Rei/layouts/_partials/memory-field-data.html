@@ -9,7 +9,7 @@
 {{- end -}}
 {{- $pages := slice -}}
 {{- range $sourcePages -}}
-  {{- $summary := .Description | default .Summary | plainify | default (truncate 180 (.Plain | plainify)) -}}
+  {{- $summary := (.Description | default (.Params.summary | default "")) | plainify -}}
   {{- $categories := slice -}}
   {{- range (.Params.categories | default (slice)) -}}
     {{- $categories = $categories | append (dict "key" (. | urlize) "name" .) -}}
@@ -26,7 +26,6 @@
     "sectionTitle" (.Section | title)
     "date" (.Date.Format "2006-01-02")
     "lastmod" (.Lastmod.Format "2006-01-02")
-    "readingTime" .ReadingTime
     "summary" $summary
     "categories" $categories
     "tags" $tags
@@ -69,10 +68,12 @@
   {{- end -}}
 {{- end -}}
 {{- $payload := dict
-  "site" (dict "title" $site.Title)
   "pages" $pages
   "categories" $categories
   "tags" $tags
 -}}
 {{- $payloadJSON := $payload | jsonify -}}
-<script type="application/json" data-memory-field-data>{{ $payloadJSON | safeJS }}</script>
+{{- $resourceKey := .key | default (printf "memory:%s:%d" ($site.Language.Lang | default "") (len $sourcePages)) -}}
+{{- $resourcePath := printf "memory-field/%s.json" ($resourceKey | urlize) -}}
+{{- $resource := resources.FromString $resourcePath $payloadJSON -}}
+<script type="application/json" data-memory-field-data data-memory-field-src="{{ $resource.RelPermalink }}"></script>

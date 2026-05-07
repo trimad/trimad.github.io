@@ -1,6 +1,5 @@
 {{ define "main" }}
   {{- $posts := where .Site.RegularPages "Section" "eq" "posts" -}}
-  {{- $memoryPages := where .Site.RegularPages "Section" "in" (slice "posts" "prompts" "archive") -}}
   {{- $latest := index (.Site.RegularPages.ByLastmod.Reverse) 0 -}}
   <main class="rei-page rei-home" id="content">
     <section class="rei-chamber rei-chamber--solo">
@@ -40,11 +39,11 @@
       </div>
     </section>
 
-    {{ partial "recent-index-panels.html" (dict
+    {{ partialCached "recent-index-panels.html" (dict
       "pages" $posts
       "labelSingular" "post"
       "labelPlural" "posts"
-    ) }}
+    ) "home-posts" (.Site.Language.Lang | default "") }}
 
     {{ partial "memory-field.html" (dict
       "page" .
@@ -55,7 +54,7 @@
       "defaultQuery" ""
       "pageLabelSingular" "Entry"
       "pageLabelPlural" "Entries"
-      "pages" $memoryPages
+      "dataCacheKey" (printf "memory:all:%s" (.Site.Language.Lang | default ""))
     ) }}
   </main>
 {{ end }}

@@ -7,6 +7,10 @@
   const maxVisibleNodes = 10;
 
   document.querySelectorAll("[data-memory-field]").forEach((root) => {
+    initMemoryField(root);
+  });
+
+  async function initMemoryField(root) {
     const dataEl = root.querySelector("[data-memory-field-data]");
     const stage = root.querySelector("[data-memory-stage]");
     const linksSvg = root.querySelector("[data-memory-links]");
@@ -18,16 +22,7 @@
       return;
     }
 
-    let payload;
-    try {
-      payload = JSON.parse(dataEl.textContent || "{}");
-      if (typeof payload === "string") {
-        payload = JSON.parse(payload);
-      }
-    } catch {
-      return;
-    }
-
+    const payload = await loadPayload(dataEl);
     if (!payload || typeof payload !== "object") {
       return;
     }
@@ -325,7 +320,30 @@
         linksSvg.appendChild(path);
       });
     }
-  });
+  }
+
+  async function loadPayload(dataEl) {
+    const src = dataEl.dataset.memoryFieldSrc;
+    if (src) {
+      try {
+        const response = await fetch(src, { credentials: "same-origin" });
+        if (!response.ok) return null;
+        return await response.json();
+      } catch {
+        return null;
+      }
+    }
+
+    try {
+      let payload = JSON.parse(dataEl.textContent || "{}");
+      if (typeof payload === "string") {
+        payload = JSON.parse(payload);
+      }
+      return payload;
+    } catch {
+      return null;
+    }
+  }
 
   function buildGraph(payload) {
     const categoriesById = new Map(
@@ -384,7 +402,7 @@
 
   function buildView(graph, state) {
     if (state.query) {
-      return buildSearchView(graph, state.query);
+      return buildSearchView(graph, state.query, state);
     }
     if (state.focusKind === "all") {
       return buildAllView(graph);
@@ -450,8 +468,8 @@
 
   function buildSectionView(graph, section) {
     const pages = graph.pages.filter((page) => page.section === section);
-    const categories = collectCategoriesFromPages(pages, graph);
-    const tags = collectTagsFromPages(pages, graph);
+    const categories = collectCategoriesFromPages(pages, graph, undefined, true);
+    const tags = collectTagsFromPages(pages, graph, undefined, true);
 
     return {
       categories,
@@ -461,10 +479,16 @@
     };
   }
 
-  function buildSearchView(graph, query) {
-    const matchedPages = graph.pages.filter((page) => page.searchText.includes(query)).slice(0, 12);
-    const matchedCategories = graph.categories.filter((node) => node.searchText.includes(query)).slice(0, 4);
-    const matchedTags = graph.tags.filter((node) => node.searchText.includes(query)).slice(0, 6);
+  function buildSearchView(graph, query, state) {
+    const scopedPages =
+      state?.focusKind === "section" && state.focusValue ? graph.pages.filter((page) => page.section === state.focusValue) : graph.pages;
+    const scopedCategories =
+      state?.focusKind === "section" && state.focusValue ? collectCategoriesFromPages(scopedPages, graph, undefined, true) : graph.categories;
+    const scopedTags =
+      state?.focusKind === "section" && state.focusValue ? collectTagsFromPages(scopedPages, graph, undefined, true) : graph.tags;
+    const matchedPages = scopedPages.filter((page) => page.searchText.includes(query)).slice(0, 12);
+    const matchedCategories = scopedCategories.filter((node) => node.searchText.includes(query)).slice(0, 4);
+    const matchedTags = scopedTags.filter((node) => node.searchText.includes(query)).slice(0, 6);
 
     const pageMap = new Map(matchedPages.map((page) => [page.id, page]));
     matchedCategories.forEach((node) => {
@@ -475,8 +499,8 @@
     });
 
     const pages = [...pageMap.values()].sort(sortByDateDesc).slice(0, 12);
-    const categories = uniqueNodes([...matchedCategories, ...collectCategoriesFromPages(pages, graph, 12)]).slice(0, 10);
-    const tags = uniqueNodes([...matchedTags, ...collectTagsFromPages(pages, graph, 14)]).slice(0, 12);
+    const categories = uniqueNodes([...matchedCategories, ...collectCategoriesFromPages(pages, graph, 12, state?.focusKind === "section")]).slice(0, 10);
+    const tags = uniqueNodes([...matchedTags, ...collectTagsFromPages(pages, graph, 14, state?.focusKind === "section")]).slice(0, 12);
 
     return {
       categories,
@@ -502,27 +526,35 @@
       .slice(0, limit);
   }
 
-  function collectCategoriesFromPages(pages, graph, limit) {
+  function collectCategoriesFromPages(pages, graph, limit, scopedCount = false) {
     const items = new Map();
+    const counts = new Map();
     pages.forEach((page) => {
       page.categoryIds.forEach((id) => {
         const node = graph.categoriesById.get(id);
-        if (node) items.set(id, node);
+        if (node) {
+          items.set(id, node);
+          counts.set(id, (counts.get(id) || 0) + 1);
+        }
       });
     });
-    const sorted = sortByCountName([...items.values()]);
+    const sorted = sortByCountName([...items].map(([id, node]) => (scopedCount ? { ...node, count: counts.get(id) || 0 } : node)));
     return Number.isFinite(limit) ? sorted.slice(0, limit) : sorted;
   }
 
-  function collectTagsFromPages(pages, graph, limit) {
+  function collectTagsFromPages(pages, graph, limit, scopedCount = false) {
     const items = new Map();
+    const counts = new Map();
     pages.forEach((page) => {
       page.tagIds.forEach((id) => {
         const node = graph.tagsById.get(id);
-        if (node) items.set(id, node);
+        if (node) {
+          items.set(id, node);
+          counts.set(id, (counts.get(id) || 0) + 1);
+        }
       });
     });
-    const sorted = sortByCountName([...items.values()]);
+    const sorted = sortByCountName([...items].map(([id, node]) => (scopedCount ? { ...node, count: counts.get(id) || 0 } : node)));
     return Number.isFinite(limit) ? sorted.slice(0, limit) : sorted;
   }
 

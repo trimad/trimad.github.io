@@ -1,0 +1,71 @@
+{{- $site := .site -}}
+{{- $id := .id -}}
+{{- $title := .title -}}
+{{- $summary := .summary -}}
+{{- $pageLabelPlural := .pageLabelPlural -}}
+<div class="rei-index-panel rei-memory__frame">
+  <div class="rei-section__head">
+    <div>
+      <p class="rei-kicker"><span></span>Relationship Map</p>
+      <h3 class="rei-section__title">{{ $title }}</h3>
+      <p class="rei-section__summary">{{ $summary }}</p>
+    </div>
+  </div>
+
+  <div class="rei-memory__shell">
+    <div class="rei-memory__toolbar">
+      <label class="rei-filter__label" for="{{ $id }}-search">Search memory field</label>
+      <div class="rei-memory__controls">
+        {{ partialCached "search-control.html" (dict
+          "id" (printf "%s-search" $id)
+          "class" "rei-search--memory"
+          "placeholder" (printf "Search %s, categories, or tags" (lower $pageLabelPlural))
+          "inputData" "memory-search"
+          "clearData" "memory-clear"
+        ) $id $pageLabelPlural "memory-search" "memory-clear" }}
+        <div class="rei-memory__toggles" aria-label="Visible node types">
+          <label><input type="checkbox" data-memory-toggle="categories" checked> Categories</label>
+          <label><input type="checkbox" data-memory-toggle="tags" checked> Tags</label>
+          <label><input type="checkbox" data-memory-toggle="pages" checked>{{ $pageLabelPlural }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="rei-memory__layout">
+      <div class="rei-memory__stage" data-memory-stage>
+        <svg class="rei-memory__links" aria-hidden="true" data-memory-links></svg>
+        <section class="rei-memory__column" data-memory-column="category">
+          <header>
+            <span>Categories</span>
+            <strong data-memory-count="category">0</strong>
+          </header>
+          <div class="rei-memory__list" data-memory-list="category"></div>
+        </section>
+        <section class="rei-memory__column" data-memory-column="tag">
+          <header>
+            <span>Tags</span>
+            <strong data-memory-count="tag">0</strong>
+          </header>
+          <div class="rei-memory__list" data-memory-list="tag"></div>
+        </section>
+        <section class="rei-memory__column" data-memory-column="page">
+          <header>
+            <span>{{ $pageLabelPlural }}</span>
+            <strong data-memory-count="page">0</strong>
+          </header>
+          <div class="rei-memory__list" data-memory-list="page"></div>
+        </section>
+      </div>
+
+      <aside class="rei-memory__details" data-memory-details aria-live="polite">
+        <p class="rei-kicker"><span></span>Selection Details</p>
+        <h3>Awaiting selection</h3>
+        <p>Hover or focus a node to inspect its relationships. Search narrows the chamber without replacing normal navigation.</p>
+      </aside>
+    </div>
+  </div>
+
+  <noscript>
+    {{ partialCached "memory-field-noscript.html" (dict "site" $site) $site.BaseURL ($site.Language.Lang | default "") }}
+  </noscript>
+</div>
