@@ -247,7 +247,7 @@ Install-Module ExchangeOnlineManagement
 3. Edit the mailbox placeholder in the script:
 
 ```powershell
-$Mailbox = "user@contoso.com"
+$Mailbox = "mailbox@domain.com"
 ```
 
 4. Adjust the date range if the default last seven days is not enough:
@@ -274,7 +274,7 @@ or:
 7. Review the exported CSV in the script folder. The generated name uses the mailbox and date range:
 
 ```text
-user@contoso.com-2026-05-07-2026-05-14.csv
+mailbox@domain.com-2026-05-07-2026-05-14.csv
 ```
 
 ## Example Output
@@ -283,7 +283,7 @@ The console output for the performed-by script looks like this after the export 
 
 ```text
 Searching audit log batch... Current count: 0
-Export complete: C:\Audit\user@contoso.com-2026-05-07-2026-05-14.csv
+Export complete: C:\Audit\mailbox@domain.com-2026-05-07-2026-05-14.csv
 Results found before filtering: 42
 Results found after filtering: 8
 
