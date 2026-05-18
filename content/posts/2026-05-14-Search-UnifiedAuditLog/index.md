@@ -29,7 +29,7 @@ When investigating mailbox activity in Microsoft 365, it helps to separate two r
 
 These two PowerShell scripts search the Unified Audit Log from both directions. `Search-UnifiedAuditLog-operations-performed-by.ps1` uses `-UserIds` to find operations performed by a mailbox identity. `Search-UnifiedAuditLog-operations-performed-to.ps1` uses `-ObjectIds` to find operations performed to or against the mailbox object.
 
-Both scripts connect to Exchange Online, search the last seven days by default, collect large audit result sets in batches, parse the `AuditData` JSON payload, and export the results to CSV in the same folder as the script.
+Both scripts connect to Exchange Online, collect large audit result sets in batches, parse the `AuditData` JSON payload, and export the results to CSV in the same folder as the script. Both scripts accept the mailbox as a required parameter. The performed-by script searches the last seven days by default, and the performed-to script searches the last 90 days by default.
 
 ## Requirements
 
@@ -44,12 +44,14 @@ Both scripts connect to Exchange Online, search the last seven days by default, 
 
 - Searches mailbox audit activity by actor with `-UserIds`
 - Searches mailbox audit activity by target object with `-ObjectIds`
+- Accepts the mailbox as a required argument in both scripts
 - Uses a unique `SessionId` and `ReturnLargeSet` for paged audit log retrieval
 - Requests up to 5,000 records per batch
 - Parses `AuditData` JSON into review-friendly CSV columns
-- Preserves the original raw audit payload in `RawAuditData`
+- Preserves the original raw audit payload in the CSV
 - Sorts exported events by time
 - Prints result counts after export
+- Uses filesystem-safe export names
 - Groups remaining operations in the performed-by script after filtering noisy events
 
 ## Download
@@ -68,18 +70,23 @@ Use this script when you want to know what actions were performed to or against 
 
 `Search-UnifiedAuditLog-operations-performed-by.ps1` is the actor-focused script. It answers, "What did this mailbox identity do?"
 
-The important line is the `Search-UnifiedAuditLog` call with `-UserIds $Mailbox`. After the events are parsed, the script filters out `FileAccessed` and `MailItemsAccessed` so the CSV focuses on less noisy operations. You can add or remove operations in `$ExcludedOperations` if your investigation needs a different level of detail.
+The important line is the `Search-UnifiedAuditLog` call with `-UserIds $Mailbox`. This version accepts the mailbox identity as a required positional parameter and uses a filesystem-safe mailbox name for the export file. After the events are parsed, the script filters out `FileAccessed` and `MailItemsAccessed` so the CSV focuses on less noisy operations. You can add or remove operations in `$ExcludedOperations` if your investigation needs a different level of detail.
 
 ```powershell
+param(
+    [Parameter(Mandatory = $true, Position = 0)]
+    [ValidateNotNullOrEmpty()]
+    [string]$Mailbox
+)
+
 Import-Module ExchangeOnlineManagement -ErrorAction Stop
 Connect-ExchangeOnline -ErrorAction Stop
-
-$Mailbox = "mailbox@domain.com"
 
 $StartDate = (Get-Date).AddDays(-7)
 $EndDate   = Get-Date
 
-$ExportPath = Join-Path $PSScriptRoot "$Mailbox-$($StartDate.ToString('yyyy-MM-dd'))-$($EndDate.ToString('yyyy-MM-dd')).csv"
+$SafeMailboxName = $Mailbox -replace '[^a-zA-Z0-9._-]', '_'
+$ExportPath = Join-Path $PSScriptRoot "$SafeMailboxName-$($StartDate.ToString('yyyy-MM-dd'))-$($EndDate.ToString('yyyy-MM-dd')).csv"
 
 $SessionId = "PerformedByMailboxAudit_$([guid]::NewGuid().ToString())"
 
@@ -163,20 +170,26 @@ $FilteredResults |
 
 `Search-UnifiedAuditLog-operations-performed-to.ps1` is the target-focused script. It answers, "What happened to this mailbox or object?"
 
-The important line is the `Search-UnifiedAuditLog` call with `-ObjectIds $Mailbox`. This version does not filter operations after parsing, so the exported CSV keeps every returned audit event for the object within the selected date range.
+The important line is the `Search-UnifiedAuditLog` call with `-ObjectIds $Mailbox`. This version accepts the mailbox or object ID as a required positional parameter, searches the last 90 days, and writes a UTF-8 CSV using a filesystem-safe mailbox name. It does not filter operations after parsing, so the exported CSV keeps every returned audit event for the object within the selected date range.
 
 ```powershell
+param(
+    [Parameter(Mandatory = $true, Position = 0)]
+    [ValidateNotNullOrEmpty()]
+    [string]$Mailbox
+)
+
 Import-Module ExchangeOnlineManagement -ErrorAction Stop
+
 Connect-ExchangeOnline -ErrorAction Stop
 
-$Mailbox = "mailbox@domain.com"
-
-$StartDate = (Get-Date).AddDays(-7)
+$StartDate = (Get-Date).AddDays(-90)
 $EndDate   = Get-Date
 
-$ExportPath = Join-Path $PSScriptRoot "$Mailbox-$($StartDate.ToString('yyyy-MM-dd'))-$($EndDate.ToString('yyyy-MM-dd')).csv"
+$SafeMailboxName = $Mailbox -replace '[^a-zA-Z0-9._-]', '_'
+$ExportPath = Join-Path $PSScriptRoot "$SafeMailboxName-AllOperationsPerformedTo-Last90Days.csv"
 
-$SessionId = "BackgroundchecksMailboxAudit_$([guid]::NewGuid().ToString())"
+$SessionId = "AuditSearch_$([guid]::NewGuid().ToString())"
 
 $AllResults = @()
 
@@ -189,46 +202,32 @@ do {
         -ObjectIds $Mailbox `
         -SessionId $SessionId `
         -SessionCommand ReturnLargeSet `
-        -ResultSize 5000
+        -ResultSize 5000 `
+        -ErrorAction Stop
 
     if ($Batch) {
         $AllResults += $Batch
     }
 
-} while ($Batch.Count -gt 0)
+} while ($Batch.Count -eq 5000)
 
 $ParsedResults = $AllResults | ForEach-Object {
     $AuditData = $_.AuditData | ConvertFrom-Json
 
-    $Parameters = if ($AuditData.Parameters) {
-        ($AuditData.Parameters | ForEach-Object {
-            "$($_.Name)=$($_.Value)"
-        }) -join "; "
-    } else {
-        ""
-    }
-
     [PSCustomObject]@{
-        Time            = $_.CreationDate
-        Operation       = $_.Operations
-        Actor           = $_.UserIds
-        Workload        = $AuditData.Workload
-        RecordType      = $AuditData.RecordType
-        ObjectId        = $AuditData.ObjectId
-        MailboxOwnerUPN = $AuditData.MailboxOwnerUPN
-        MailboxGuid     = $AuditData.MailboxGuid
-        ClientIP        = $AuditData.ClientIP
-        UserAgent       = $AuditData.UserAgent
-        LogonType       = $AuditData.LogonType
-        ResultStatus    = $AuditData.ResultStatus
-        Parameters      = $Parameters
-        RawAuditData    = $_.AuditData
+        CreationDate = $_.CreationDate
+        Operation    = $_.Operations
+        UserIds      = $_.UserIds
+        ObjectId     = $AuditData.ObjectId
+        Workload     = $_.Workload
+        ResultStatus = $_.ResultStatus
+        AuditData    = $_.AuditData
     }
 }
 
 $ParsedResults |
-    Sort-Object Time |
-    Export-Csv $ExportPath -NoTypeInformation
+    Sort-Object CreationDate |
+    Export-Csv -Path $ExportPath -NoTypeInformation -Encoding UTF8
 
 Write-Host "Export complete: $ExportPath"
 Write-Host "Results found: $($ParsedResults.Count)"
@@ -244,13 +243,19 @@ Install-Module ExchangeOnlineManagement
 
 2. Download the script that matches the question you are asking.
 
-3. Edit the mailbox placeholder in the script:
+3. Pass the mailbox identity or object ID when you run the script.
 
 ```powershell
-$Mailbox = "mailbox@domain.com"
+.\Search-UnifiedAuditLog-operations-performed-by.ps1 mailbox@domain.com
 ```
 
-4. Adjust the date range if the default last seven days is not enough:
+or:
+
+```powershell
+.\Search-UnifiedAuditLog-operations-performed-to.ps1 mailbox@domain.com
+```
+
+4. Adjust the date range if the default window is not enough. The performed-by script uses seven days by default, and the performed-to script uses 90 days by default:
 
 ```powershell
 $StartDate = (Get-Date).AddDays(-30)
@@ -260,21 +265,27 @@ $EndDate   = Get-Date
 5. Run the script from PowerShell:
 
 ```powershell
-.\Search-UnifiedAuditLog-operations-performed-by.ps1
+.\Search-UnifiedAuditLog-operations-performed-by.ps1 mailbox@domain.com
 ```
 
-or:
+or, for the performed-to script:
 
 ```powershell
-.\Search-UnifiedAuditLog-operations-performed-to.ps1
+.\Search-UnifiedAuditLog-operations-performed-to.ps1 mailbox@domain.com
 ```
 
 6. Authenticate to Exchange Online when prompted.
 
-7. Review the exported CSV in the script folder. The generated name uses the mailbox and date range:
+7. Review the exported CSV in the script folder. The performed-by script generated name uses a filesystem-safe mailbox value and date range:
 
 ```text
-mailbox@domain.com-2026-05-07-2026-05-14.csv
+mailbox_domain.com-2026-05-07-2026-05-14.csv
+```
+
+The performed-to script generated name uses a filesystem-safe mailbox value and a fixed last-90-days suffix:
+
+```text
+mailbox_domain.com-AllOperationsPerformedTo-Last90Days.csv
 ```
 
 ## Example Output
@@ -283,7 +294,7 @@ The console output for the performed-by script looks like this after the export 
 
 ```text
 Searching audit log batch... Current count: 0
-Export complete: C:\Audit\mailbox@domain.com-2026-05-07-2026-05-14.csv
+Export complete: C:\Audit\mailbox_domain.com-2026-05-07-2026-05-14.csv
 Results found before filtering: 42
 Results found after filtering: 8
 
@@ -298,10 +309,16 @@ Count Name
     1 HardDelete
 ```
 
-The CSV includes columns like these:
+The performed-by CSV includes columns like these:
 
 ```text
 Time,Operation,Actor,Workload,RecordType,ObjectId,MailboxOwnerUPN,MailboxGuid,ClientIP,UserAgent,LogonType,ResultStatus,Parameters,RawAuditData
+```
+
+The performed-to CSV includes columns like these:
+
+```text
+CreationDate,Operation,UserIds,ObjectId,Workload,ResultStatus,AuditData
 ```
 
 ## Notes
@@ -313,3 +330,15 @@ Time,Operation,Actor,Workload,RecordType,ObjectId,MailboxOwnerUPN,MailboxGuid,Cl
 - `Search-UnifiedAuditLog` availability depends on Microsoft 365 audit retention, licensing, permissions, and whether auditing was enabled during the period being investigated.
 - Large tenants and broad date ranges can return many events. Start with a narrow window, then expand if needed.
 - `MailItemsAccessed` and `FileAccessed` can be high-volume operations. The performed-by script excludes them by default, but you can remove them from `$ExcludedOperations` if you need the full activity set.
+
+## Change Log
+
+### 2026-05-18
+
+- Updated `Search-UnifiedAuditLog-operations-performed-by.ps1` to accept `Mailbox` as a required parameter instead of requiring the script file to be edited.
+- Added a filesystem-safe export name to the performed-by script while keeping its date-range suffix.
+- Updated `Search-UnifiedAuditLog-operations-performed-to.ps1` to accept `Mailbox` as a required parameter instead of requiring the script file to be edited.
+- Changed the performed-to default search window from seven days to 90 days.
+- Added a filesystem-safe export name ending in `AllOperationsPerformedTo-Last90Days.csv`.
+- Simplified the performed-to CSV columns to `CreationDate`, `Operation`, `UserIds`, `ObjectId`, `Workload`, `ResultStatus`, and `AuditData`.
+- Added `-ErrorAction Stop` to the performed-to `Search-UnifiedAuditLog` call and exports the CSV with UTF-8 encoding.

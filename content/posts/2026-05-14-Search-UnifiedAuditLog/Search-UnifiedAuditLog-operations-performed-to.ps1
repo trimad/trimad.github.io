@@ -1,14 +1,20 @@
+param(
+    [Parameter(Mandatory = $true, Position = 0)]
+    [ValidateNotNullOrEmpty()]
+    [string]$Mailbox
+)
+
 Import-Module ExchangeOnlineManagement -ErrorAction Stop
+
 Connect-ExchangeOnline -ErrorAction Stop
 
-$Mailbox = "mailbox@domain.com"
-
-$StartDate = (Get-Date).AddDays(-7)
+$StartDate = (Get-Date).AddDays(-90)
 $EndDate   = Get-Date
 
-$ExportPath = Join-Path $PSScriptRoot "$Mailbox-$($StartDate.ToString('yyyy-MM-dd'))-$($EndDate.ToString('yyyy-MM-dd')).csv"
+$SafeMailboxName = $Mailbox -replace '[^a-zA-Z0-9._-]', '_'
+$ExportPath = Join-Path $PSScriptRoot "$SafeMailboxName-AllOperationsPerformedTo-Last90Days.csv"
 
-$SessionId = "BackgroundchecksMailboxAudit_$([guid]::NewGuid().ToString())"
+$SessionId = "AuditSearch_$([guid]::NewGuid().ToString())"
 
 $AllResults = @()
 
@@ -21,46 +27,32 @@ do {
         -ObjectIds $Mailbox `
         -SessionId $SessionId `
         -SessionCommand ReturnLargeSet `
-        -ResultSize 5000
+        -ResultSize 5000 `
+        -ErrorAction Stop
 
     if ($Batch) {
         $AllResults += $Batch
     }
 
-} while ($Batch.Count -gt 0)
+} while ($Batch.Count -eq 5000)
 
 $ParsedResults = $AllResults | ForEach-Object {
     $AuditData = $_.AuditData | ConvertFrom-Json
 
-    $Parameters = if ($AuditData.Parameters) {
-        ($AuditData.Parameters | ForEach-Object {
-            "$($_.Name)=$($_.Value)"
-        }) -join "; "
-    } else {
-        ""
-    }
-
     [PSCustomObject]@{
-        Time            = $_.CreationDate
-        Operation       = $_.Operations
-        Actor           = $_.UserIds
-        Workload        = $AuditData.Workload
-        RecordType      = $AuditData.RecordType
-        ObjectId        = $AuditData.ObjectId
-        MailboxOwnerUPN = $AuditData.MailboxOwnerUPN
-        MailboxGuid     = $AuditData.MailboxGuid
-        ClientIP        = $AuditData.ClientIP
-        UserAgent       = $AuditData.UserAgent
-        LogonType       = $AuditData.LogonType
-        ResultStatus    = $AuditData.ResultStatus
-        Parameters      = $Parameters
-        RawAuditData    = $_.AuditData
+        CreationDate = $_.CreationDate
+        Operation    = $_.Operations
+        UserIds      = $_.UserIds
+        ObjectId     = $AuditData.ObjectId
+        Workload     = $_.Workload
+        ResultStatus = $_.ResultStatus
+        AuditData    = $_.AuditData
     }
 }
 
 $ParsedResults |
-    Sort-Object Time |
-    Export-Csv $ExportPath -NoTypeInformation
+    Sort-Object CreationDate |
+    Export-Csv -Path $ExportPath -NoTypeInformation -Encoding UTF8
 
 Write-Host "Export complete: $ExportPath"
 Write-Host "Results found: $($ParsedResults.Count)"

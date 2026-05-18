@@ -1,12 +1,17 @@
+param(
+    [Parameter(Mandatory = $true, Position = 0)]
+    [ValidateNotNullOrEmpty()]
+    [string]$Mailbox
+)
+
 Import-Module ExchangeOnlineManagement -ErrorAction Stop
 Connect-ExchangeOnline -ErrorAction Stop
-
-$Mailbox = "mailbox@domain.com"
 
 $StartDate = (Get-Date).AddDays(-7)
 $EndDate   = Get-Date
 
-$ExportPath = Join-Path $PSScriptRoot "$Mailbox-$($StartDate.ToString('yyyy-MM-dd'))-$($EndDate.ToString('yyyy-MM-dd')).csv"
+$SafeMailboxName = $Mailbox -replace '[^a-zA-Z0-9._-]', '_'
+$ExportPath = Join-Path $PSScriptRoot "$SafeMailboxName-$($StartDate.ToString('yyyy-MM-dd'))-$($EndDate.ToString('yyyy-MM-dd')).csv"
 
 $SessionId = "PerformedByMailboxAudit_$([guid]::NewGuid().ToString())"
 
