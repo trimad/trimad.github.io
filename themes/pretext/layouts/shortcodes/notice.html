@@ -1,0 +1,13 @@
+{{- $type := .Get "type" | default (.Get 0) | default "note" -}}
+{{- $title := .Get "title" | default (.Get 1) | default ($type | title) -}}
+{{- $role := "note" -}}
+{{- if or (eq $type "danger") (eq $type "error") -}}
+  {{- $role = "alert" -}}
+{{- end -}}
+<aside class="rei-notice rei-notice--{{ $type | urlize }}" role="{{ $role }}">
+  <div class="rei-notice__marker" aria-hidden="true"></div>
+  <div class="rei-notice__body">
+    <strong class="rei-notice__title">{{ $title }}</strong>
+    <div class="rei-notice__content">{{ .Inner | markdownify }}</div>
+  </div>
+</aside>

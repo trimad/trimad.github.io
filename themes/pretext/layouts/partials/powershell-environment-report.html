@@ -1,0 +1,57 @@
+{{- $code := `$ErrorActionPreference = 'Stop'
+
+function Get-SafeValue {
+    param(
+        [Parameter(Mandatory)] [scriptblock] $Script,
+        $Fallback = $null
+    )
+
+    try {
+        & $Script
+    } catch {
+        $Fallback
+    }
+}
+
+$report = [ordered]@{
+    Timestamp = (Get-Date).ToString('o')
+    PowerShell = [ordered]@{
+        Edition    = Get-SafeValue { $PSVersionTable.PSEdition }
+        Version    = Get-SafeValue { $PSVersionTable.PSVersion.ToString() }
+        GitCommit  = Get-SafeValue { $PSVersionTable.GitCommitId }
+    }
+    Host = [ordered]@{
+        Name        = Get-SafeValue { $Host.Name }
+        Version     = Get-SafeValue { $Host.Version.ToString() }
+        Interactive = Get-SafeValue { [bool] $Host.UI } $false
+    }
+    Session = [ordered]@{
+        LanguageMode    = Get-SafeValue { $ExecutionContext.SessionState.LanguageMode.ToString() }
+        CurrentLocation = Get-SafeValue { (Get-Location).Path }
+        ExecutionPolicy = Get-SafeValue {
+            Get-ExecutionPolicy -List |
+                Sort-Object Scope |
+                ForEach-Object {
+                    [ordered]@{
+                        Scope  = $_.Scope.ToString()
+                        Policy = $_.ExecutionPolicy.ToString()
+                    }
+                }
+        } @()
+    }
+    Modules = Get-SafeValue {
+        Get-Module |
+            Sort-Object Name |
+            ForEach-Object {
+                [ordered]@{
+                    Name    = $_.Name
+                    Version = Get-SafeValue { $_.Version.ToString() }
+                    Path    = $_.Path
+                }
+            }
+    } @()
+}
+
+$report | ConvertTo-Json -Depth 6
+` -}}
+{{ highlight $code "powershell" "" }}

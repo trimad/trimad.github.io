@@ -1,0 +1,49 @@
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $payload := slice -}}
+{{- range $posts -}}
+  {{- $payload = $payload | append (dict
+    "title" .Title
+    "url" .RelPermalink
+    "date" (.Date.Format "2006-01-02")
+    "text" .Plain
+    "summary" (.Summary | plainify)
+    "tags" (.Params.tags | default (slice))
+  ) -}}
+{{- end -}}
+<section id="wall-stage" class="wall-stage{{ if not .IsHome }} wall-stage--ambient{{ end }}" aria-labelledby="wall-title">
+  {{- if .IsHome -}}
+  <div class="wall-copy">
+    <p class="eyebrow">Pretext archive wall</p>
+    <h1 id="wall-title">Every post, treated as a living field of text.</h1>
+    <p>Search narrows the corpus. Drag the search lens and the canvas text reflows around it.</p>
+  </div>
+  {{- else -}}
+  <h2 id="wall-title" class="surface-title">Pretext archive surface</h2>
+  {{- end -}}
+  <canvas id="post-wall" aria-hidden="true"></canvas>
+  <script id="post-wall-data" type="application/json">{{ $payload | jsonify | safeJS }}</script>
+</section>
+<div id="pretext-control-layer" class="pretext-control-layer{{ if not .IsHome }} pretext-control-layer--ambient{{ end }}" aria-hidden="false">
+  <aside id="article-toc" class="surface-panel article-toc" aria-label="Page sections" hidden>
+    <div class="surface-panel__grip toc-grip" aria-hidden="true"></div>
+    <p class="toc-label">Sections</p>
+    <div id="toc-progress" class="toc-progress" aria-hidden="true"></div>
+    <nav id="toc-sections" class="toc-sections" aria-label="Page table of contents"></nav>
+  </aside>
+  <form id="search-lens" class="surface-panel search-lens" role="search" autocomplete="off">
+    <div class="surface-panel__grip search-grip" aria-hidden="true"></div>
+    <label for="wall-search">Search all posts</label>
+    <input id="wall-search" name="q" type="search" placeholder="type to carve the wall…" spellcheck="false">
+    <output id="wall-count" for="wall-search">{{ len $posts }} posts</output>
+    <div id="result-menu" class="result-menu" role="listbox" aria-label="Matching posts" hidden></div>
+  </form>
+</div>
+<script type="module" src="{{ "js/pretext-wall.js" | relURL }}"></script>
+<noscript>
+  <section class="post-list-fallback">
+    <h2>Posts</h2>
+    <ul>
+      {{ range $posts }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+    </ul>
+  </section>
+</noscript>
