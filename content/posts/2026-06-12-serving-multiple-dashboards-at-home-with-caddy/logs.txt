@@ -1,0 +1,179 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Hermes> ssh root@192.168.8.1
+The authenticity of host '192.168.8.1 (192.168.8.1)' can't be established.
+ED25519 key fingerprint is SHA256:Fh8t3Zv73ehylCZzmLb0/eYZkXxqYg1UEsNYjtkvjcI.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.8.1' (ED25519) to the list of known hosts.
+root@192.168.8.1's password:
+Permission denied, please try again.
+root@192.168.8.1's password:
+
+
+BusyBox v1.36.1 (2025-11-20 06:38:10 UTC) built-in shell (ash)
+
+     MM           NM                    MMMMMMM          M       M
+   $MMMMM        MMMMM                MMMMMMMMMMM      MMM     MMM
+  MMMMMMMM     MM MMMMM.              MMMMM:MMMMMM:   MMMM   MMMMM
+MMMM= MMMMMM  MMM   MMMM       MMMMM   MMMM  MMMMMM   MMMM  MMMMM'
+MMMM=  MMMMM MMMM    MM       MMMMM    MMMM    MMMM   MMMMNMMMMM
+MMMM=   MMMM  MMMMM          MMMMM     MMMM    MMMM   MMMMMMMM
+MMMM=   MMMM   MMMMMM       MMMMM      MMMM    MMMM   MMMMMMMMM
+MMMM=   MMMM     MMMMM,    NMMMMMMMM   MMMM    MMMM   MMMMMMMMMMM
+MMMM=   MMMM      MMMMMM   MMMMMMMM    MMMM    MMMM   MMMM  MMMMMM
+MMMM=   MMMM   MM    MMMM    MMMM      MMMM    MMMM   MMMM    MMMM
+MMMM$ ,MMMMM  MMMMM  MMMM    MMM       MMMM   MMMMM   MMMM    MMMM
+  MMMMMMM:      MMMMMMM     M         MMMMMMMMMMMM  MMMMMMM MMMMMMM
+    MMMMMM       MMMMN     M           MMMMMMMMM      MMMM    MMMM
+     MMMM          M                    MMMMMMM        M       M
+       M
+ ---------------------------------------------------------------
+   For those about to rock... OpenWrt 23.05-SNAPSHOT,
+ ---------------------------------------------------------------
+root@GL-BE9300:~# config domain
+-ash: config: not found
+root@GL-BE9300:~# vi /etc/config/dhcp
+root@GL-BE9300:~# uci add dhcp domain
+cfg0af37d
+root@GL-BE9300:~# uci set dhcp.@domain[-1].name='mealplanner.home'
+root@GL-BE9300:~# uci set dhcp.@domain[-1].ip='192.168.8.172'
+root@GL-BE9300:~# uci commit dhcp
+root@GL-BE9300:~# /etc/init.d/dnsmasq restart
+root@GL-BE9300:~# uci show dhcp | grep mealplanner.home
+dhcp.@domain[2].name='mealplanner.home'
+root@GL-BE9300:~# uci delete dhcp.@domain[-1]
+root@GL-BE9300:~# uci add dhcp domain
+cfg0bf37d
+root@GL-BE9300:~# uci set dhcp.@domain[-1].name='mealplanner.local'
+root@GL-BE9300:~# uci set dhcp.@domain[-1].ip='192.168.8.172'
+root@GL-BE9300:~# uci commit dhcp
+root@GL-BE9300:~# /etc/init.d/dnsmasq restart
+root@GL-BE9300:~# uci show dhcp | grep mealplanner
+dhcp.@domain[2].name='mealplanner.local'
+root@GL-BE9300:~# nslookup mealplanner.local 192.168.8.1
+Server:         192.168.8.1
+Address:        192.168.8.1:53
+
+Name:   mealplanner.local
+Address: 192.168.8.172
+
+Non-authoritative answer:
+
+root@GL-BE9300:~# uci show dhcp | grep mealplanner
+dhcp.@domain[2].name='mealplanner.local'
+root@GL-BE9300:~# nslookup mealplanner.local 192.168.8.1
+Server:         192.168.8.1
+Address:        192.168.8.1:53
+
+Name:   mealplanner.local
+Address: 192.168.8.172
+
+Non-authoritative answer:
+
+root@GL-BE9300:~# uci show dhcp | grep mealplanner
+dhcp.@domain[2].name='mealplanner.local'
+root@GL-BE9300:~# uci delete dhcp.@domain[2]
+add dhcp domain
+uci set dhcp.@domain[-1].name='mealplanner.home.arpa'
+uci set dhcp.@domain[-1].ip='192.168.8.172'
+
+uci commit dhcp
+/etc/init.d/dnsmasq restartroot@GL-BE9300:~#
+root@GL-BE9300:~# uci add dhcp domain
+cfg0bf37d
+root@GL-BE9300:~# uci set dhcp.@domain[-1].name='mealplanner.home.arpa'
+root@GL-BE9300:~# uci set dhcp.@domain[-1].ip='192.168.8.172'
+root@GL-BE9300:~#
+root@GL-BE9300:~# uci commit dhcp
+root@GL-BE9300:~# /etc/init.d/dnsmasq restart
+root@GL-BE9300:~# uci show dhcp | grep mealplanner
+192.168.8.1dhcp.@domain[2].name='mealplanner.home.arpa'
+root@GL-BE9300:~# nslookup mealplanner.home.arpa 192.168.8.1
+Server:         192.168.8.1
+Address:        192.168.8.1:53
+
+Name:   mealplanner.home.arpa
+Address: 192.168.8.172
+
+Non-authoritative answer:
+
+root@GL-BE9300:~# uci add dhcp domain
+me.arpa'
+uci set dhcp.@domain[-1].ip='192.168.8.cfg0bf37d
+root@GL-BE9300:~# uci set dhcp.@domain[-1].name='flashcards.home.arpa'
+root@GL-BE9300:~# uci set dhcp.@domain[-1].ip='192.168.8.172'
+root@GL-BE9300:~# uci commit dhcp
+root@GL-BE9300:~# /etc/init.d/dnsmasq restart
+root@GL-BE9300:~# uci show dhcp | grep flashcards
+dhcp.@domain[3].name='flashcards.home.arpa'
+root@GL-BE9300:~# uci show dhcp
+dhcp.@dnsmasq[0]=dnsmasq
+dhcp.@dnsmasq[0].domainneeded='1'
+dhcp.@dnsmasq[0].filterwin2k='0'
+dhcp.@dnsmasq[0].localise_queries='1'
+dhcp.@dnsmasq[0].rebind_protection='0'
+dhcp.@dnsmasq[0].rebind_localhost='1'
+dhcp.@dnsmasq[0].local='/lan/'
+dhcp.@dnsmasq[0].domain='lan'
+dhcp.@dnsmasq[0].expandhosts='1'
+dhcp.@dnsmasq[0].nonegcache='0'
+dhcp.@dnsmasq[0].cachesize='1000'
+dhcp.@dnsmasq[0].authoritative='1'
+dhcp.@dnsmasq[0].readethers='1'
+dhcp.@dnsmasq[0].leasefile='/tmp/dhcp.leases'
+dhcp.@dnsmasq[0].resolvfile='/tmp/resolv.conf.d/resolv.conf.auto'
+dhcp.@dnsmasq[0].nonwildcard='1'
+dhcp.@dnsmasq[0].localservice='1'
+dhcp.@dnsmasq[0].ednspacket_max='1232'
+dhcp.@dnsmasq[0].filter_aaaa='1'
+dhcp.@dnsmasq[0].filter_a='0'
+dhcp.@dnsmasq[0].confdir='/tmp/dnsmasq.d'
+dhcp.lan=dhcp
+dhcp.lan.interface='lan'
+dhcp.lan.start='100'
+dhcp.lan.limit='150'
+dhcp.lan.leasetime='12h'
+dhcp.lan.dhcpv4='server'
+dhcp.lan.dhcpv6='disabled'
+dhcp.lan.ra='disabled'
+dhcp.lan.ra_slaac='1'
+dhcp.lan.force='1'
+dhcp.wan=dhcp
+dhcp.wan.interface='wan'
+dhcp.wan.ignore='1'
+dhcp.guest=dhcp
+dhcp.guest.interface='guest'
+dhcp.guest.start='100'
+dhcp.guest.limit='150'
+dhcp.guest.leasetime='12h'
+dhcp.guest.dhcpv6='disabled'
+dhcp.guest.ra='disabled'
+dhcp.odhcpd=odhcpd
+dhcp.odhcpd.maindhcp='0'
+dhcp.odhcpd.leasefile='/tmp/hosts/odhcpd'
+dhcp.odhcpd.leasetrigger='/usr/sbin/odhcpd-update'
+dhcp.odhcpd.loglevel='4'
+dhcp.@domain[0]=domain
+dhcp.@domain[0].name='console.gl-inet.com'
+dhcp.@domain[0].ip='192.168.8.1'
+dhcp.@domain[1]=domain
+dhcp.@domain[1].name='console.gl-inet.com'
+dhcp.@domain[1].ip='::ffff:192.168.8.1'
+dhcp.secondwan=dhcp
+dhcp.secondwan.interface='secondwan'
+dhcp.secondwan.ignore='1'
+dhcp.@host[0]=host
+dhcp.@host[0].mac='70:70:FC:07:63:6C'
+dhcp.@host[0].ip='192.168.8.172'
+dhcp.@host[0].tag='Hermes'
+dhcp.@domain[2]=domain
+dhcp.@domain[2].name='mealplanner.home.arpa'
+dhcp.@domain[2].ip='192.168.8.172'
+dhcp.@domain[3]=domain
+dhcp.@domain[3].name='flashcards.home.arpa'
+dhcp.@domain[3].ip='192.168.8.172'
+root@GL-BE9300:~#
