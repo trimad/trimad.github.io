@@ -2,7 +2,7 @@ baseURL = 'https://trimad.github.io'
 locale = 'en-US'
 title = 'Ghost Graph'
 
-theme = "pretext"
+theme = "Rei"
 
 relativeURLs = false
 canonifyURLs = true
