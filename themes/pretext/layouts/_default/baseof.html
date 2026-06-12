@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+    {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
+    <link rel="stylesheet" href="{{ "css/pretext.css" | relURL }}">
+    {{ block "head_extra" . }}{{ end }}
+  </head>
+  <body class="pretext-site{{ if .IsHome }} pretext-home{{ end }}">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="site-title" href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} aria-current="page"{{ end }}>Home</a>
+        {{ range sort .Site.Sections "Title" }}
+          <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ .Title | default (.Section | title) }}</a>
+        {{ end }}
+        {{ with .Site.GetPage "taxonomy" "categories" }}
+          <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ .Title | default "Categories" }}</a>
+        {{ end }}
+        {{ with .Site.GetPage "taxonomy" "tags" }}
+          <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ .Title | default "Tags" }}</a>
+        {{ end }}
+      </nav>
+    </header>
+    <main id="main">
+      {{ partial "pretext-surface.html" . }}
+      <div class="page-content-shell">
+        {{ block "main" . }}{{ end }}
+      </div>
+    </main>
+    <footer class="site-footer">
+      <span>Built with Hugo and @chenglou/pretext.</span>
+    </footer>
+    <script src="{{ "js/surface-transition.js" | relURL }}" defer></script>
+  </body>
+</html>

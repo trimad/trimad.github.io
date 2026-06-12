@@ -1,0 +1,10 @@
+{{ $file := .Get "file" }}
+{{ $title := .Get "title" | default $file }}
+{{ $label := .Get "label" | default (printf "Download %s" $title) }}
+{{ $description := .Inner | markdownify }}
+{{ with .Page.Resources.GetMatch $file }}
+  <a class="download-resource" href="{{ .RelPermalink }}" download>{{ $label }}</a>
+{{ else }}
+  <span class="download-resource missing">{{ $label }}</span>
+{{ end }}
+{{ with $description }}<div class="download-resource-description">{{ . }}</div>{{ end }}

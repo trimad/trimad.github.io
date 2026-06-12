@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="content-list">
+  <header class="content-header">
+    <p class="eyebrow">Index</p>
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div class="card-grid">
+    {{ range .Pages }}
+      <article class="post-card">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+        <p>{{ .Summary | plainify }}</p>
+      </article>
+    {{ else }}
+      <p>No entries yet.</p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

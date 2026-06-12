@@ -1,0 +1,12 @@
+name = "pretext"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A ground-up Hugo theme built around @chenglou/pretext text measurement and flow."
+homepage = "https://trimad.github.io/"
+tags = ["blog", "typography", "interactive", "pretext", "canvas"]
+features = ["interactive-search", "canvas-text-wall", "pretext-layout"]
+min_version = "0.123.0"
+
+[author]
+  name = "Praxis"
+  homepage = "https://trimad.github.io/"
