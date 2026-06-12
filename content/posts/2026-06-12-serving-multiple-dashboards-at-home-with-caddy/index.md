@@ -1,6 +1,6 @@
 ---
-ai: true
-ai-tested-date: 2026-06-12
+ai: false
+ai-tested-date:
 author: "Tristan Madden"
 categories:
   - "Home Lab"
